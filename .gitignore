@@ -1,0 +1,7 @@
+node_modules/
+dist/
+tools/car-kit/
+tools/car-kit.zip
+tools/screenshots/
+tools/bruno-research/
+*.log

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="theme-color" content="#ecece6" />
+    <title>CarWars — Driving lab</title>
+  </head>
+  <body>
+    <canvas id="scene" aria-label="Площадка для управления машиной"></canvas>
+    <header class="topbar">
+      <div class="brand"><span class="brand-icon">↗</span><span>CARWARS<small>DRIVING LAB / 001</small></span></div>
+      <div class="status"><i></i><span>СВОБОДНАЯ ЕЗДА</span></div>
+      <button id="settings-button" class="icon-button" aria-label="Настройки физики" aria-expanded="false">⚙</button>
+    </header>
+    <aside class="intro">
+      <span class="eyebrow">ПОЧУВСТВУЙ МАССУ</span>
+      <h1>Улицы ждут.<br>Почувствуй инерцию.</h1>
+      <p>Процедурный район и живой поток машин.<br>Коснись и тяни — это джойстик.</p>
+      <div class="specs"><span>1 600 <small>кг</small></span><span>AWD</span><span>ARCADE</span></div>
+    </aside>
+    <section id="settings" class="panel" hidden>
+      <div class="panel-title">Характер машины <button id="close-settings" aria-label="Закрыть">×</button></div>
+      <label>Подвеска <output id="softness-value">Средняя</output><input id="softness" type="range" min="0" max="1" step="0.01" value="0.45" /></label>
+      <label>Сцепление <output id="grip-value">1.18</output><input id="grip" type="range" min="0.55" max="1.25" step="0.01" value="1.18" /></label>
+      <label>Мощность <output id="power-value">100%</output><input id="power" type="range" min="0.5" max="1.6" step="0.01" value="1" /></label>
+      <label>Графика <select id="quality"><option value="high">Высокая</option><option value="low">Лёгкая</option></select></label>
+      <label class="check"><input id="trails" type="checkbox" checked /> Следы шин</label>
+      <button id="reset-tuning" class="text-button">Вернуть базовую настройку</button>
+      <p class="note">Вдохновлено GTA IV. Параметры — авторское приближение, а не оригинальные формулы Rockstar.</p>
+    </section>
+    <div id="load-status" role="status">Загрузка машины…</div>
+    <button id="retry-load" hidden>Повторить загрузку</button>
+    <pre id="performance" hidden></pre>
+    <div id="touch-marker"><span></span></div>
+    <div class="bottom">
+      <div class="drive-state"><span id="drive-status">ГОТОВ К ПОЕЗДКЕ</span><p id="hint">Тяни от точки касания в нужную сторону</p><div id="damage-status" class="damage-status"><span id="damage-label">ИСПРАВНА</span><span id="damage-value">0%</span><i><b id="damage-bar"></b></i></div><div class="keys"><kbd>W A S D</kbd><span>ехать</span><kbd>SPACE</kbd><span>ручник</span><kbd>R</kbd><span>сброс</span></div></div>
+      <div class="speed"><div><span id="speed-value">0</span><small>км/ч</small></div><div class="speed-track"><i id="speed-bar"></i></div><span id="gear">N</span><small class="gear-label">ПЕРЕДАЧА</small></div>
+      <button id="reset" class="reset-button" title="Вернуть машину (R)"><span>↺</span> Заново</button>
+    </div>
+    <footer>THREE.JS + CANNON-ES <span>•</span> МОДЕЛЬ: KENNEY / CC0</footer>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
