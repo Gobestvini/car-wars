@@ -1,0 +1,189 @@
+{
+  "environment": {
+    "browser": "Microsoft Edge via Playwright",
+    "headless": true,
+    "renderer": "SwiftShader software WebGL",
+    "cpuThrottle": "CDP 4x (then reset to 1x)",
+    "deviceScaleFactor": 1,
+    "device": "desktop surrogate; no physical mobile device"
+  },
+  "shortMs": 10000,
+  "longMs": 60000,
+  "results": [
+    {
+      "label": "low-0",
+      "fps": 34.439386679444176,
+      "p95FrameMs": 52.399999999999636,
+      "p95PhysicsMs": 15.899999998509884,
+      "p95RenderMs": 11,
+      "aiMsP95": 0.20000000298023224,
+      "npcPrepareMsP95": 0,
+      "worldStepMsP95": 0.8000000044703484,
+      "droppedSeconds": 0,
+      "physical": 0,
+      "logical": 0,
+      "visible": 0,
+      "bodies": 198,
+      "resourcesBefore": {
+        "geometries": 21,
+        "textures": 2,
+        "programs": 10
+      },
+      "resourcesAfter": {
+        "geometries": 21,
+        "textures": 2,
+        "programs": 10
+      }
+    },
+    {
+      "label": "low-6",
+      "fps": 32.471425145871635,
+      "p95FrameMs": 58.399999999999636,
+      "p95PhysicsMs": 31.299999997019768,
+      "p95RenderMs": 13.699999995529652,
+      "aiMsP95": 8.600000001490116,
+      "npcPrepareMsP95": 0,
+      "worldStepMsP95": 2.2999999970197678,
+      "droppedSeconds": 0.009000000000000785,
+      "physical": 0,
+      "logical": 6,
+      "visible": 0,
+      "bodies": 198,
+      "resourcesBefore": {
+        "geometries": 21,
+        "textures": 2,
+        "programs": 10
+      },
+      "resourcesAfter": {
+        "geometries": 21,
+        "textures": 2,
+        "programs": 10
+      }
+    },
+    {
+      "label": "low-30",
+      "fps": 32.2703113135915,
+      "p95FrameMs": 54.100000000000364,
+      "p95PhysicsMs": 33.69999999552965,
+      "p95RenderMs": 11,
+      "aiMsP95": 11.899999998509884,
+      "npcPrepareMsP95": 0.8999999985098839,
+      "worldStepMsP95": 1.6000000014901161,
+      "droppedSeconds": 0.03816666666666757,
+      "physical": 2,
+      "logical": 28,
+      "visible": 2,
+      "bodies": 200,
+      "resourcesBefore": {
+        "geometries": 25,
+        "textures": 2,
+        "programs": 10
+      },
+      "resourcesAfter": {
+        "geometries": 25,
+        "textures": 2,
+        "programs": 10
+      }
+    },
+    {
+      "label": "low-60",
+      "fps": 23.60934013388588,
+      "p95FrameMs": 66.59999999999854,
+      "p95PhysicsMs": 46.80000000447035,
+      "p95RenderMs": 14.100000001490116,
+      "aiMsP95": 12.200000002980232,
+      "npcPrepareMsP95": 2.3000000044703484,
+      "worldStepMsP95": 1.8000000044703484,
+      "droppedSeconds": 0.12996666666666723,
+      "physical": 7,
+      "logical": 53,
+      "visible": 5,
+      "bodies": 205,
+      "resourcesBefore": {
+        "geometries": 25,
+        "textures": 2,
+        "programs": 10
+      },
+      "resourcesAfter": {
+        "geometries": 25,
+        "textures": 2,
+        "programs": 10
+      }
+    },
+    {
+      "label": "low-300",
+      "fps": 7.673755755316816,
+      "p95FrameMs": 195.90000000000146,
+      "p95PhysicsMs": 184.69999999552965,
+      "p95RenderMs": 16.700000002980232,
+      "aiMsP95": 72.70000000298023,
+      "npcPrepareMsP95": 4.5,
+      "worldStepMsP95": 2.899999998509884,
+      "droppedSeconds": 4.079866666666664,
+      "physical": 27,
+      "logical": 273,
+      "visible": 8,
+      "bodies": 225,
+      "resourcesBefore": {
+        "geometries": 25,
+        "textures": 2,
+        "programs": 10
+      },
+      "resourcesAfter": {
+        "geometries": 25,
+        "textures": 2,
+        "programs": 10
+      }
+    },
+    {
+      "label": "high-60",
+      "fps": 26.299273781417174,
+      "p95FrameMs": 54.19999999999891,
+      "p95PhysicsMs": 41.599999994039536,
+      "p95RenderMs": 11.800000004470348,
+      "aiMsP95": 17.69999999552965,
+      "npcPrepareMsP95": 1.3999999985098839,
+      "worldStepMsP95": 1.1999999955296516,
+      "droppedSeconds": 0.017800000000001037,
+      "physical": 7,
+      "logical": 53,
+      "visible": 5,
+      "bodies": 205,
+      "resourcesBefore": {
+        "geometries": 25,
+        "textures": 2,
+        "programs": 10
+      },
+      "resourcesAfter": {
+        "geometries": 25,
+        "textures": 2,
+        "programs": 10
+      }
+    },
+    {
+      "label": "low-60-long",
+      "fps": 26.14411757354595,
+      "p95FrameMs": 58.70000000000073,
+      "p95PhysicsMs": 43,
+      "p95RenderMs": 10.200000002980232,
+      "aiMsP95": 13.600000001490116,
+      "npcPrepareMsP95": 2.2000000029802322,
+      "worldStepMsP95": 1.2000000029802322,
+      "droppedSeconds": 0.11906666666666932,
+      "physical": 4,
+      "logical": 56,
+      "visible": 3,
+      "bodies": 202,
+      "resourcesBefore": {
+        "geometries": 25,
+        "textures": 2,
+        "programs": 10
+      },
+      "resourcesAfter": {
+        "geometries": 25,
+        "textures": 2,
+        "programs": 10
+      }
+    }
+  ]
+}

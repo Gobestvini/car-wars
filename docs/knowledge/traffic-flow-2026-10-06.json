@@ -4,29 +4,28 @@
       "width": 1440,
       "height": 900
     },
-    "duration": 180.2666666666602,
+    "duration": 180.5916666666601,
     "windows": [
       {
-        "time": 68.46666666666707,
+        "time": 68.68333333333374,
         "active": 60,
-        "moving": 29,
-        "minimumTravel": 89.99880863089062
+        "moving": 34,
+        "minimumTravel": 100.77091841666638
       },
       {
-        "time": 128.70000000000084,
+        "time": 129.13333333333412,
         "active": 60,
-        "moving": 39,
-        "minimumTravel": 54.46017685735536
+        "moving": 43,
+        "minimumTravel": 103.48234962117283
       },
       {
-        "time": 188.28333333332688,
+        "time": 189.25833333332676,
         "active": 60,
-        "moving": 39,
-        "minimumTravel": 107.15509776365087,
-        "duration": 59.58333333332604
+        "moving": 37,
+        "minimumTravel": 120.95506294449387
       }
     ],
-    "minimumMoving": 18,
+    "minimumMoving": 20,
     "maximumStillTime": 0,
     "visible": 54,
     "camera": [
@@ -34,7 +33,7 @@
       300,
       -21.87360102321904
     ],
-    "colors": 2581,
+    "colors": 3825,
     "errors": []
   },
   {
@@ -45,21 +44,21 @@
     "duration": 60.45000000000038,
     "windows": [
       {
-        "time": 66.73333333333372,
+        "time": 66.40833333333372,
         "active": 60,
-        "moving": 32,
-        "minimumTravel": 90.39473935495494
+        "moving": 33,
+        "minimumTravel": 104.54995671588168
       }
     ],
-    "minimumMoving": 18,
+    "minimumMoving": 25,
     "maximumStillTime": 0,
-    "visible": 27,
+    "visible": 23,
     "camera": [
       15.440426256283063,
       300,
       -21.873937196400995
     ],
-    "colors": 1312,
+    "colors": 2130,
     "errors": []
   }
 ]
