@@ -5,37 +5,37 @@ export function createSettings(container, initialValues, handlers) {
   const pane = new Pane({ container });
   const tuning = pane.addFolder({ title: 'Автомобиль', expanded: true });
   tuning.addBinding(values, 'softness', { label: 'Подвеска', min: 0, max: 1, step: 0.01 })
-    .on('change', () => handlers.onTuning(values));
+    .on('change', event => { values.softness = event.value; handlers.onTuning(values); });
   tuning.addBinding(values, 'grip', { label: 'Сцепление', min: 0.55, max: 1.8, step: 0.01 })
-    .on('change', () => handlers.onTuning(values));
+    .on('change', event => { values.grip = event.value; handlers.onTuning(values); });
   tuning.addBinding(values, 'power', { label: 'Мощность', min: 0.5, max: 1.6, step: 0.01 })
-    .on('change', () => handlers.onTuning(values));
+    .on('change', event => { values.power = event.value; handlers.onTuning(values); });
   tuning.addButton({ title: 'Базовые настройки' }).on('click', () => handlers.onResetTuning(values, pane));
 
   const graphics = pane.addFolder({ title: 'Графика', expanded: true });
   graphics.addBinding(values, 'quality', { label: 'Качество', options: { Высокая: 'Высокая', 'Лёгкая': 'Лёгкая' } })
-    .on('change', () => handlers.onQuality(values.quality));
+    .on('change', event => { values.quality = event.value; handlers.onQuality(event.value); });
   graphics.addBinding(values, 'trails', { label: 'Следы шин' })
-    .on('change', () => handlers.onTrails(values.trails));
+    .on('change', event => { values.trails = event.value; handlers.onTrails(event.value); });
 
   const cityFolder = pane.addFolder({ title: 'Город', expanded: false });
   cityFolder.addBinding(values, 'roadWidth', { label: 'Ширина дорог, м', min: 12, max: 30, step: 1 })
-    .on('change', event => { if (event.last) handlers.onRoadWidth(values.roadWidth); });
+    .on('change', event => { values.roadWidth = event.value; if (event.last) handlers.onRoadWidth(event.value); });
 
   const trafficFolder = pane.addFolder({ title: 'Трафик', expanded: false });
   trafficFolder.addBinding(values, 'trafficCount', { label: 'Машины', min: 0, max: 300, step: 1 })
-    .on('change', event => { if (event.last) handlers.onTrafficCount(values.trafficCount); });
+    .on('change', event => { values.trafficCount = event.value; if (event.last) handlers.onTrafficCount(event.value); });
   trafficFolder.addBinding(values, 'trafficActual', { label: 'Активно', readonly: true, step: 1 });
   trafficFolder.addBinding(values, 'trafficPendingReason', { label: 'Очередь', readonly: true });
 
   if (values.debugMode) {
     const debug = pane.addFolder({ title: 'Камера debug', expanded: true });
     debug.addBinding(values, 'cameraMode', { label: 'Режим', options: { Машина: 'follow', Свободная: 'free' } })
-      .on('change', () => handlers.onCameraMode(values.cameraMode));
+      .on('change', event => { values.cameraMode = event.value; handlers.onCameraMode(event.value); });
     debug.addBinding(values, 'cameraSpeed', { label: 'Скорость, м/с', min: 2, max: 50, step: 1 })
-      .on('change', () => handlers.onCameraSpeed(values.cameraSpeed));
+      .on('change', event => { values.cameraSpeed = event.value; handlers.onCameraSpeed(event.value); });
     debug.addBinding(values, 'drawDistance', { label: 'Дальность, м', min: 100, max: 1000, step: 10 })
-      .on('change', () => handlers.onDrawDistance(values.drawDistance));
+      .on('change', event => { values.drawDistance = event.value; handlers.onDrawDistance(event.value); });
     debug.addButton({ title: 'Записать дефолты' }).on('click', () => handlers.onSaveDefaults(values));
     debug.addButton({ title: 'Заводские дефолты' }).on('click', handlers.onClearDefaults);
     debug.addBinding(values, 'defaultsStatus', { label: 'Сохранение', readonly: true });

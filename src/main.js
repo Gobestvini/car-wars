@@ -14,9 +14,11 @@ import { updateShadowCoverage } from './shadow-coverage.js';
 import { createTraffic } from './traffic.js';
 import { createTrafficSignals } from './traffic-signals.js';
 import { CarDeformation } from './car-deformation.js';
+import { CarDamageEffects } from './car-damage-effects.js';
 import { createSettings } from './settings.js';
 import { clearSettingsDefaults, readSettingsDefaults, saveSettingsDefaults } from './settings-defaults.js';
 import './style.css';
+import packageInfo from '../package.json';
 
 const $ = id => document.getElementById(id);
 const debug = location.hash === '#debug' || new URLSearchParams(location.search).has('debug');
@@ -100,6 +102,8 @@ const spawnObstaclesForPlan = plan => [...plan.buildings.map(building => ({ x: b
 let trafficSpawnObstacles = spawnObstaclesForPlan(cityPlan);
 
 const car = new THREE.Group(); scene.add(car);
+const damageEffects = new CarDamageEffects(scene);
+const damagePreview = debug ? Number(new URLSearchParams(location.search).get('damagePreview') || 0) : 0;
 const traffic = createTraffic(scene, THREE, savedDefaults.trafficCount, cityPlan.roadNetwork, cityPlan.roadWidth, trafficSpawnObstacles);
 traffic.attachPhysics(sim);
 let trafficSignals = createTrafficSignals(cityPlan.roadNetwork);
@@ -163,6 +167,7 @@ async function loadCar() {
     // Compile while the loading indicator is visible, before accepting movement.
     $('load-status').textContent = 'Подготовка сцены…';
     sim.reset();
+    if (Number.isFinite(damagePreview)) sim.damage = Math.max(0, Math.min(1, damagePreview));
     // The wheel test preset starts with the same direct 18 m/s side impact as its physics test.
     if (damageTestType === 'wheel') sim.body.velocity.set(-16.2, 0, -7.83);
     car.position.copy(sim.body.position);
@@ -275,6 +280,7 @@ function getInput() {
 
 function reset() {
   releasePointer(); keys.clear(); sim.reset(); traffic.reset(); driveDirection = 1;
+  damageEffects.reset();
   bodyDeformation?.restore();
   follow.set(0, 0, 0);
   cameraDistanceScale = 1;
@@ -506,9 +512,10 @@ function frame(now) {
   });
   if (cameraMode === 'free') moveFreeCamera(dt);
   updateCamera(dt);
-  cityState.updateSignals(trafficSignals, traffic.simulationTime(), camera.position);
+  cityState.updateSignals(trafficSignals, traffic.simulationTime());
   traffic.render(alpha, camera);
   buildingOcclusion.update(camera, car, dt);
+  damageEffects.update({ damage: sim.damage, car, camera, dt, quality });
   tracks.prepareRender();
   const renderStart = performance.now();
   renderer.render(scene, camera);
@@ -527,6 +534,7 @@ function frame(now) {
 requestAnimationFrame(frame);
 // Read-only diagnostics for browser smoke tests and future handling comparisons.
 window.carLab = {
+  version: packageInfo.version,
   performance: () => ({ ...metrics, dpr: renderer.getPixelRatio(), droppedSeconds: stepper.droppedSeconds, trailSegments: tracks.count }),
   trafficPerformance: () => traffic.performance(),
   resources: () => ({ ...renderer.info.memory, programs: renderer.info.programs?.length ?? 0 }),
@@ -549,6 +557,9 @@ window.carLab = {
         carLengthPx: Math.hypot((nose.x - tail.x) * innerWidth / 2, (nose.y - tail.y) * innerHeight / 2) };
     } }),
   telemetry: () => sim.telemetry(), get modelReady() { return modelReady; }, get tuning() { return { ...sim.tuning }; },
+  damageEffects: () => damageEffects.snapshot(),
+  buildingVisibility: () => buildingEntries.map(entry => ({ id: entry.id, bounds: entry.bounds, opacity: entry.opacity,
+    proximity: Boolean(entry.nearCar), gap: entry.carGap, occluded: Boolean(entry.wasOccluded), proxy: Boolean(entry.proxy) })),
   city: () => ({ seed: cityPlan.seed, buildings: cityPlan.buildings.length, landmarks: cityPlan.landmarks.length, bounds: cityPlan.bounds, roadWidth: cityPlan.roadWidth, roads: cityPlan.roads, roadNetwork: cityPlan.roadNetwork, hasBuildingWindows: false,
     fadedBuildings: buildingEntries.filter(entry => entry.opacity < 0.999).length }),
   roadMarkings: () => cityState.roadMarkings(),
@@ -565,6 +576,7 @@ window.carLab = {
   signals: () => ({ controlled: trafficSignals.controlled.size, approaches: cityState.signalApproaches.length,
     visible: cityState.signalApproaches.filter(approach => approach.signalVisible).length,
     phase: trafficSignals.phase('-25:-25', '-75:-25', traffic.simulationTime()) }),
+  signalApproaches: () => cityState.signalApproaches.map(approach => ({ ...approach })),
   stopLines: () => cityState.signalApproaches.map(({ nodeId, fromId, forwardX, forwardZ, stopX, stopZ,
     stopDistance, stopLineLength, stopLineThickness }) => ({ nodeId, fromId, forwardX, forwardZ, x: stopX, z: stopZ,
     distance: stopDistance, length: stopLineLength, thickness: stopLineThickness })),

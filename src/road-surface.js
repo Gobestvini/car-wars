@@ -45,3 +45,23 @@ export function createRoadSurfacePositions(rectangles, y = 0.005) {
   }
   return new Float32Array(positions);
 }
+
+/** The difference between expanded streets and asphalt forms disjoint sidewalk tiles. */
+export function createSidewalkRectangles(roadCenters, bounds, roadWidth, sidewalkWidth, plaza = null) {
+  const outer = createRoadSurfaceRectangles(roadCenters, bounds, roadWidth + 2 * sidewalkWidth);
+  const roads = createRoadSurfaceRectangles(roadCenters, bounds, roadWidth, plaza);
+  let tiles = outer;
+  for (const road of roads) {
+    tiles = tiles.flatMap(tile => {
+      const x0 = Math.max(tile.minX, road.minX), x1 = Math.min(tile.maxX, road.maxX);
+      const z0 = Math.max(tile.minZ, road.minZ), z1 = Math.min(tile.maxZ, road.maxZ);
+      if (x0 >= x1 || z0 >= z1) return [tile];
+      return [
+        { ...tile, maxX: x0 }, { ...tile, minX: x1 },
+        { minX: x0, maxX: x1, minZ: tile.minZ, maxZ: z0 },
+        { minX: x0, maxX: x1, minZ: z1, maxZ: tile.maxZ },
+      ].filter(part => part.maxX - part.minX > 1e-8 && part.maxZ - part.minZ > 1e-8);
+    });
+  }
+  return tiles;
+}

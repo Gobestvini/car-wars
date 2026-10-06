@@ -1,5 +1,23 @@
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
+export const BUILDING_FADE = Object.freeze({ minimum: .22, close: 2, enter: 6, exit: 8 });
+
+export function distanceToBuildingXZ(point, bounds) {
+  const dx = point.x - clamp(point.x, bounds.min.x, bounds.max.x);
+  const dz = point.z - clamp(point.z, bounds.min.z, bounds.max.z);
+  return Math.hypot(dx, dz);
+}
+
+export function proximityVisibility(gap, wasNear = false) {
+  const near = gap < (wasNear ? BUILDING_FADE.exit : BUILDING_FADE.enter);
+  const t = clamp((gap - BUILDING_FADE.close) / (BUILDING_FADE.enter - BUILDING_FADE.close), 0, 1);
+  return { near, opacity: near ? BUILDING_FADE.minimum + (1 - BUILDING_FADE.minimum) * t * t * (3 - 2 * t) : 1 };
+}
+
+export function smoothBuildingOpacity(current, target, dt) {
+  return current + (target - current) * (1 - Math.exp(-Math.max(0, dt) / (target < current ? .18 : .3)));
+}
+
 export function segmentIntersectsAabb(start, end, bounds) {
   let minimum = 0;
   let maximum = 1;
@@ -99,6 +117,11 @@ export class BuildingOcclusion {
       targets.push({ x: center.x + right.x * side * .64 + forward.x * nose * 1.65,
         y: center.y, z: center.z + right.z * side * .64 + forward.z * nose * 1.65 });
     }
+    // Sample the four footprint corners too: fade before the 4.45m body reaches a wall.
+    for (const side of [-1, 1]) for (const nose of [-1, 1]) {
+      targets.push({ x: center.x + right.x * side * .9 + forward.x * nose * 2.225,
+        y: center.y, z: center.z + right.z * side * .9 + forward.z * nose * 2.225 });
+    }
     const cameraPoint = { x: camera.position.x, y: camera.position.y, z: camera.position.z };
     const blocked = occludedBuildingIds(this.entries, cameraPoint, targets);
     for (const entry of this.entries) {
@@ -108,12 +131,15 @@ export class BuildingOcclusion {
         entry.clearTime += Math.max(0, dt);
         if (entry.clearTime >= .12) entry.wasOccluded = false;
       }
-      const hidden = hit || Boolean(entry.wasOccluded);
+      entry.carGap = Math.min(...targets.map(target => distanceToBuildingXZ(target, entry.bounds)));
+      const proximity = proximityVisibility(entry.carGap, entry.nearCar);
+      entry.nearCar = proximity.near;
+      const occlusionTarget = hit || entry.wasOccluded ? BUILDING_FADE.minimum : 1;
+      const target = Math.min(occlusionTarget, proximity.opacity);
+      const hidden = target < 1;
       if (hidden && !entry.proxy) this.startProxy(entry, entry.caps);
       if (!entry.proxy && !hidden) continue;
-      const target = hidden ? .22 : 1;
-      const duration = hidden ? .18 : .3;
-      entry.opacity += (target - entry.opacity) * (1 - Math.exp(-Math.max(0, dt) / duration));
+      entry.opacity = smoothBuildingOpacity(entry.opacity, target, dt);
       if (entry.proxyMaterial) {
         entry.proxyMaterial.opacity = entry.opacity;
         entry.proxy.children.slice(1).forEach(child => { child.material.opacity = entry.opacity; });

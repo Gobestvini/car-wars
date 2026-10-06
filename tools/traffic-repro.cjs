@@ -3,6 +3,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const baseUrl = process.env.CARWARS_BASE_URL || 'http://localhost:5173/';
+const traceFile = process.env.TRAFFIC_TRACE_FILE || 'docs/knowledge/traffic-repro-2026-10-06.json';
 
 async function capture(page, label) {
   return page.evaluate(label => {
@@ -33,7 +34,8 @@ async function capture(page, label) {
     const vehicles = ai.map((car, i) => ({ id: car.id, state: car.state, reason: car.reason, waitReason: car.waitReason,
       noProgressTime: car.noProgressTime, logical: car.logical, x: cars[i].x, z: cars[i].z,
       heading: cars[i].heading, speed: cars[i].speed, route: car.route, segment: car.segment,
-      signal: car.signal, reservationNode: car.reservationNode, reservationAge: car.reservationAge }));
+      signal: car.signal, reservationNode: car.reservationNode, reservationAge: car.reservationAge,
+      blocker: car.blocker, progressAlong: car.progressAlong, reevaluations: car.reevaluations, maneuver: car.maneuver }));
     return { label, simulationTime: window.carLab.trafficClock(), status: window.carLab.trafficStatus(),
       stoppedCount: stopped.length, unexplainedNearZero: stopped.filter(car => car.speed < 0.05 && !car.reason).length,
       stoppedExamples: stopped.filter(car => car.speed < 0.05).slice(0, 10), overlapPairs: overlaps, vehicles };
@@ -68,8 +70,8 @@ async function capture(page, label) {
     await page.waitForTimeout(1000);
     trace.push(await capture(page, 'reset-300-after-1s'));
     assert.deepEqual(errors, []);
-    await fs.writeFile('docs/knowledge/traffic-repro-2026-10-06.json', JSON.stringify({ capturedAt: new Date().toISOString(), errors, trace }, null, 2));
-    console.log(JSON.stringify({ errors, traceFile: 'docs/knowledge/traffic-repro-2026-10-06.json',
+    await fs.writeFile(traceFile, JSON.stringify({ capturedAt: new Date().toISOString(), errors, trace }, null, 2));
+    console.log(JSON.stringify({ errors, traceFile,
       overlapPairs: trace.map(({ label, overlapPairs }) => ({ label, count: overlapPairs.length, examples: overlapPairs.slice(0, 8) })),
       stationary: trace.map(({ label, simulationTime, stoppedCount, unexplainedNearZero, stoppedExamples }) =>
         ({ label, simulationTime, count: stoppedCount, unexplainedNearZero, examples: stoppedExamples.slice(0, 8) })) }, null, 2));

@@ -10,7 +10,7 @@ export function createRoadGraph(network, laneOffset = 2.8) {
     const dx = b.x - a.x, dz = b.z - a.z;
     const length = Math.hypot(dx, dz);
     const forwardX = dx / length, forwardZ = dz / length;
-    const rightX = forwardZ, rightZ = -forwardX;
+    const rightX = -forwardZ, rightZ = forwardX;
     const routeEdge = { from, to, length, heading: Math.atan2(forwardX, forwardZ),
       start: { x: a.x + rightX * laneOffset, z: a.z + rightZ * laneOffset },
       end: { x: b.x + rightX * laneOffset, z: b.z + rightZ * laneOffset } };
@@ -22,15 +22,16 @@ export function createRoadGraph(network, laneOffset = 2.8) {
 }
 
 /** Deterministic shortest path over oriented street segments. */
-export function findRoadRoute(graph, startId, goalId) {
+export function findRoadRoute(graph, startId, goalId, excludedNodes = new Set()) {
   if (!graph.nodes.has(startId) || !graph.nodes.has(goalId)) return null;
+  if (excludedNodes.has(startId) || excludedNodes.has(goalId)) return null;
   if (startId === goalId) return [startId];
   const queue = [startId], previous = new Map([[startId, null]]);
   for (let head = 0; head < queue.length; head++) {
     const current = queue[head];
     if (current === goalId) break;
     for (const edge of graph.adjacency.get(current) || []) {
-      if (previous.has(edge.to)) continue;
+      if (previous.has(edge.to) || excludedNodes.has(edge.to)) continue;
       previous.set(edge.to, current);
       queue.push(edge.to);
     }
@@ -78,7 +79,7 @@ export function turnDirection(graph, beforeId, nodeId, afterId) {
   const bx = after.x - node.x, bz = after.z - node.z;
   const cross = ax * bz - az * bx;
   if (Math.abs(cross) < 1e-6) return 'straight';
-  return cross > 0 ? 'left' : 'right';
+  return cross > 0 ? 'right' : 'left';
 }
 
 export function nearestRoadNode(graph, position) {

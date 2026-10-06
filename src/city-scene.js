@@ -1,8 +1,9 @@
 import * as THREE from 'three';
 import { BuildingOcclusion } from './building-occlusion.js';
 import { createRoadMarkings } from './road-markings.js';
-import { createRoadSurfacePositions, createRoadSurfaceRectangles } from './road-surface.js';
-import { getSignalPosition, getStopLineLayout, isSignalFacingCamera } from './signal-layout.js';
+import { createRoadSurfacePositions, createRoadSurfaceRectangles, createSidewalkRectangles } from './road-surface.js';
+import { getSignalPosition, getStopLineLayout } from './signal-layout.js';
+import { createSignalGlow } from './signal-glow.js';
 
 export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const group = new THREE.Group();
@@ -35,21 +36,18 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   roadSurface.name = 'Road surface';
   roadSurface.receiveShadow = true;
   group.add(roadSurface);
-  const segmentLength = plan.blockPitch - plan.roadWidth;
-  for (const x of plan.roads) for (let i = 0; i < plan.roads.length - 1; i++) {
-    const middle = (plan.roads[i] + plan.roads[i + 1]) / 2;
-    for (const side of [-1, 1]) plane(plan.sidewalkWidth, segmentLength, sidewalkMaterial,
-      x + side * (plan.roadWidth / 2 + plan.sidewalkWidth / 2), middle, 0.055);
-  }
-  for (const z of plan.roads) for (let i = 0; i < plan.roads.length - 1; i++) {
-    const middle = (plan.roads[i] + plan.roads[i + 1]) / 2;
-    for (const side of [-1, 1]) plane(segmentLength, plan.sidewalkWidth, sidewalkMaterial,
-      middle, z + side * (plan.roadWidth / 2 + plan.sidewalkWidth / 2), 0.055);
-  }
+  const sidewalkRects = createSidewalkRectangles(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth,
+    { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan });
+  const sidewalkGeometry = new THREE.BufferGeometry();
+  sidewalkGeometry.setAttribute('position', new THREE.BufferAttribute(createRoadSurfacePositions(sidewalkRects, 0.055), 3));
+  sidewalkGeometry.computeVertexNormals();
+  const sidewalk = new THREE.Mesh(sidewalkGeometry, sidewalkMaterial);
+  sidewalk.name = 'Sidewalk surface'; sidewalk.receiveShadow = true; group.add(sidewalk);
   const marks = createRoadMarkings(plan.roads, plan.bounds, plan.roadWidth);
   const dashGeometry = new THREE.BoxGeometry(0.16, 0.025, 2.2);
   const dashMaterial = new THREE.MeshStandardMaterial({ color: '#d6cdb4', roughness: 1 });
   const dashes = new THREE.InstancedMesh(dashGeometry, dashMaterial, marks.length);
+  dashes.receiveShadow = true;
   const matrix = new THREE.Matrix4();
   const position = new THREE.Vector3();
   const rotation = new THREE.Quaternion();
@@ -72,7 +70,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
     const degree = plan.roadNetwork.edges.reduce((count, item) => count + Number(item.from === nodeId || item.to === nodeId), 0);
     if (!node || !from || degree < 4) continue;
     const dx = node.x - from.x, dz = node.z - from.z, length = Math.hypot(dx, dz);
-    const forwardX = dx / length, forwardZ = dz / length, rightX = forwardZ, rightZ = -forwardX;
+    const forwardX = dx / length, forwardZ = dz / length, rightX = -forwardZ, rightZ = forwardX;
     const stopLine = getStopLineLayout(node, { forwardX, forwardZ, rightX, rightZ }, plan.roadWidth);
     const signalPosition = getSignalPosition(node, { forwardX, forwardZ, rightX, rightZ }, plan.roadWidth, plan.sidewalkWidth);
     approaches.push({ nodeId, fromId, forwardX, forwardZ, rightX, rightZ, stopX: stopLine.x, stopZ: stopLine.z,
@@ -88,6 +86,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const bulbs = new THREE.InstancedMesh(bulbGeometry, new THREE.MeshBasicMaterial({ color: '#ffffff' }), approaches.length * 3);
   const stopLines = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 0.035, 1),
     new THREE.MeshStandardMaterial({ color: '#e9e4d1', roughness: 1 }), approaches.length);
+  stopLines.receiveShadow = true;
   const visualMatrix = new THREE.Matrix4(), visualPosition = new THREE.Vector3(), visualRotation = new THREE.Quaternion();
   const visualScale = new THREE.Vector3(1, 1, 1);
   const lightColors = { red: new THREE.Color('#f34f45'), yellow: new THREE.Color('#ffc34a'), green: new THREE.Color('#51d28b'), off: new THREE.Color('#393737') };
@@ -112,12 +111,8 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
     stopLines.setMatrixAt(index, visualMatrix);
     visualScale.set(1, 1, 1);
   });
-  const poleMatrices = approaches.map((_, index) => { const value = new THREE.Matrix4(); poles.getMatrixAt(index, value); return value; });
-  const housingMatrices = approaches.map((_, index) => { const value = new THREE.Matrix4(); housings.getMatrixAt(index, value); return value; });
-  const bulbMatrices = approaches.map((_, index) => Array.from({ length: 3 }, (_, lamp) => {
-    const value = new THREE.Matrix4(); bulbs.getMatrixAt(index * 3 + lamp, value); return value;
-  }));
-  group.add(poles, housings, bulbs, stopLines);
+  const signalGlow = createSignalGlow(approaches, plan.roadWidth);
+  group.add(poles, housings, bulbs, stopLines, signalGlow);
 
   const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
   const buildingMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.88 });
@@ -175,34 +170,19 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   }
 
   return {
-    group, entries, buildings, marks, dashes, occlusion, staticBodies, signalApproaches: approaches,
-    updateSignals(controller, time, cameraPosition) {
+    group, entries, buildings, marks, dashes, stopLines, signalGlow, occlusion, staticBodies, signalApproaches: approaches,
+    updateSignals(controller, time) {
       for (let i = 0; i < approaches.length; i++) {
         const approach = approaches[i];
-        const visible = isSignalFacingCamera(approach, cameraPosition, approach.signalVisible);
-        if (visible !== approach.signalVisible) {
-          approach.signalVisible = visible;
-          const hiddenMatrix = base => {
-            if (visible) return base;
-            base.decompose(visualPosition, visualRotation, visualScale);
-            return visualMatrix.compose(visualPosition, visualRotation, visualScale.set(0, 0, 0));
-          };
-          for (const [mesh, index, base] of [[poles, i, poleMatrices[i]], [housings, i, housingMatrices[i]]]) {
-            mesh.setMatrixAt(index, hiddenMatrix(base));
-            mesh.instanceMatrix.needsUpdate = true;
-          }
-          for (let lamp = 0; lamp < 3; lamp++) {
-            const index = i * 3 + lamp;
-            bulbs.setMatrixAt(index, hiddenMatrix(bulbMatrices[i][lamp]));
-            bulbs.instanceMatrix.needsUpdate = true;
-          }
-        }
         const { color } = controller.phase(approach.nodeId, approach.fromId, time);
+        approach.color = color;
+        signalGlow.setColorAt(i, lightColors[color] || lightColors.off);
         const active = color === 'green' ? 2 : color === 'yellow' ? 1 : color === 'red' ? 0 : -1;
         for (let lamp = 0; lamp < 3; lamp++) bulbs.setColorAt(i * 3 + lamp,
           lightColors[lamp === active ? ['red', 'yellow', 'green'][lamp] : 'off']);
       }
       bulbs.instanceColor.needsUpdate = true;
+      signalGlow.instanceColor.needsUpdate = true;
     },
     dispose() {
       occlusion.dispose();

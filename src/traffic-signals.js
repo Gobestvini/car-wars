@@ -1,4 +1,4 @@
-export const SIGNAL_TIMING = Object.freeze({ green: 8, yellow: 2, allRed: 1 });
+export const SIGNAL_TIMING = Object.freeze({ green: 16, yellow: 2, allRed: 1 });
 export const SIGNAL_PERIOD = (SIGNAL_TIMING.green + SIGNAL_TIMING.yellow + SIGNAL_TIMING.allRed) * 2;
 
 const stableOffset = id => {

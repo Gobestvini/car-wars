@@ -30,7 +30,7 @@ test('traffic waits at a controlled red signal before reserving the intersection
   const state = traffic.states[0];
   state.ai.fromNode = '-25:25'; state.ai.targetNode = '25:25';
   state.ai.route = ['-25:25', '25:25', '25:75']; state.ai.routeIndex = 1;
-  state.simulation.body.position.set(12, 0.96, 20);
+  state.simulation.body.position.set(12, 0.96, 25 + plan.roadWidth / 4);
   state.simulation.body.quaternion.setFromEuler(0, Math.PI / 2, 0);
   state.simulation.body.velocity.setZero(); state.simulation.body.aabbNeedsUpdate = true;
   traffic.setSignalController({ phase: () => ({ color: 'red', controlled: true, canEnter: false }) });
@@ -51,7 +51,7 @@ test('red signal stops the NPC front bumper before its stop plane and green rele
   traffic.attachPhysics(simulation);
   const state = traffic.states[0];
   const stopX = 25 - (plan.roadWidth / 2 + 1.5);
-  const laneZ = 25 - plan.roadWidth / 4;
+  const laneZ = 25 + plan.roadWidth / 4;
   state.ai.fromNode = '-25:25'; state.ai.targetNode = '25:25';
   state.ai.route = ['-25:25', '25:25', '25:75']; state.ai.routeIndex = 1;
   state.simulation.body.position.set(6, 0.96, laneZ);
@@ -77,7 +77,7 @@ test('red signal does not stop an NPC whose front bumper has entered the junctio
   const traffic = createTraffic(new THREE.Scene(), THREE, 1, plan.roadNetwork, plan.roadWidth);
   traffic.attachPhysics(simulation);
   const state = traffic.states[0];
-  const laneZ = 25 - plan.roadWidth / 4;
+  const laneZ = 25 + plan.roadWidth / 4;
   state.ai.fromNode = '-25:25'; state.ai.targetNode = '25:25';
   state.ai.route = ['-25:25', '25:25', '25:75']; state.ai.routeIndex = 1;
   state.simulation.body.position.set(15, 0.96, laneZ);

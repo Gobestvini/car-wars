@@ -39,10 +39,10 @@ const baseUrl = process.env.CARWARS_BASE_URL || 'http://localhost:5173/';
     assert.equal(resetTraffic.length, 60, 'Reset should restore the selected traffic count');
     assert.ok(resetTraffic.every((car, index) => Math.hypot(car.x - resetTrafficAI[index].spawn.x, car.z - resetTrafficAI[index].spawn.z) < 1.5),
       'Reset should return NPCs to their seeded road spawns');
-    await desktop.locator('#settings-controls select').selectOption('Лёгкая');
+    await desktop.locator('#settings-controls select').first().selectOption('Лёгкая');
     assert.equal(await desktop.evaluate(() => window.carLab.performance().dpr), 1);
-    await desktop.locator('#settings-controls select').selectOption('Высокая');
-    await desktop.locator('#close-settings').click();
+    await desktop.locator('#settings-controls select').first().selectOption('Высокая');
+    await desktop.keyboard.press('Escape');
     await desktop.close();
 
     for (const [direction, key, minimumSpeed, maximumSpeed] of [['side', 'KeyW', 3, 8], ['rear', 'KeyS', 8, 12]]) {

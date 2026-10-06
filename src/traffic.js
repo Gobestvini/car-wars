@@ -1,11 +1,13 @@
 import { ROAD_WIDTH, createCityPlan } from './city-generator.js';
 import { CarSimulation, STEP } from './vehicle.js';
-import { chooseRoadGoal, createRoadGraph, createSeededRandom, findRoadRoute, headingError, laneTarget, nearestRoadNode, turnDirection } from './traffic-ai.js';
+import { chooseRoadGoal, createRoadGraph, createSeededRandom, findRoadRoute, laneTarget } from './traffic-ai.js';
 import { createTrafficSignals } from './traffic-signals.js';
 import { getStopLineLayout } from './signal-layout.js';
-import { createTrafficSpawnSlots, isTrafficSpawnSafe } from './traffic-spawn.js';
+import { createTrafficSpawnSlots, isTrafficSpawnSafe, footprintsOverlap } from './traffic-spawn.js';
+import { corridorFootprints, driveControl, edgeProgress, followingLimit, occupiesJunction, planPassing, projectedExtent, sweptPathIsSafe, trackProgress } from './traffic-planner.js';
+import { escapeRoute, hiddenFromPlayer, TRAFFIC_EVASION } from './traffic-evasion.js';
+import { junctionMovement, movementsConflict, pathProgress, pathTarget, yieldsToOncoming } from './traffic-junction.js';
 
-const wrap = angle => Math.atan2(Math.sin(angle), Math.cos(angle));
 const headingOf = q => Math.atan2(2 * (q.x * q.z + q.w * q.y), 1 - 2 * (q.x * q.x + q.y * q.y));
 const now = () => globalThis.performance?.now?.() ?? Date.now();
 
@@ -49,6 +51,18 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
   const profile = { aiMs: 0, playerPrepareMs: 0, npcPrepareMs: 0, prepareMs: 0,
     worldStepMs: 0, postMs: 0, aiTicks: 0, aiDecisions: 0 };
   const reservations = new Map();
+  const movementCache = new Map();
+  const reservationFor = ai => {
+    const first = reservations.get(ai.reservationNode);
+    return first?.id === ai.id ? first : reservations.get(`${ai.reservationNode}|${ai.id}`);
+  };
+  const movementFor = (edge, next) => {
+    const outgoing = graph.adjacency.get(edge.to)?.find(item => item.to === next);
+    if (!outgoing) return null;
+    const key = `${edge.from}>${edge.to}>${next}`;
+    if (!movementCache.has(key)) movementCache.set(key, junctionMovement(edge, outgoing, graph.nodes.get(edge.to), roadWidth));
+    return movementCache.get(key);
+  };
   let visibleCount = 0;
   const visibilityFrustum = new THREE.Frustum();
   const visibilityMatrix = new THREE.Matrix4();
@@ -74,10 +88,10 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
     return playerOccupancy;
   };
 
-  const nearbyOccupants = (candidate, cells = occupancy) => {
+  const nearbyOccupants = (candidate, cells = occupancy, radius = 2) => {
     const bx = Math.floor(candidate.x / cellSize), bz = Math.floor(candidate.z / cellSize), found = [];
     // Include full braking/headway distance for any vehicle at the game's speed cap.
-    for (let x = bx - 2; x <= bx + 2; x++) for (let z = bz - 2; z <= bz + 2; z++) {
+    for (let x = bx - radius; x <= bx + radius; x++) for (let z = bz - radius; z <= bz + radius; z++) {
       for (const item of cells.get(x * 1024 + z) || []) found.push(item);
     }
     return found;
@@ -114,8 +128,10 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
 
   const chooseRoute = (ai, at) => {
     ai.previousGoal = ai.goalId;
-    ai.goalId = chooseRoadGoal(graph, at, ai.random, ai.previousGoal);
-    ai.route = ai.goalId ? findRoadRoute(graph, at, ai.goalId) : [at];
+    const continuation = ai.continuation?.at === at ? ai.continuation : null;
+    ai.goalId = continuation?.goal || chooseRoadGoal(graph, at, ai.random, ai.previousGoal);
+    ai.route = continuation?.route || (ai.goalId ? findRoadRoute(graph, at, ai.goalId) : [at]);
+    ai.continuation = null;
     if (ai.goalId) ai.goalHistory.push(ai.goalId);
     if (ai.goalHistory.length > 16) ai.goalHistory.shift();
     ai.routeIndex = ai.route.length > 1 ? 1 : 0;
@@ -132,10 +148,16 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
     if (ai.goalHistory.length > 16) ai.goalHistory.shift();
     ai.routeIndex = 0; ai.fromNode = edge.from; ai.targetNode = edge.to;
     ai.state = 'following'; ai.reservationNode = null; ai.maneuver = null; ai.noProgressTime = 0; ai.waitReason = null;
+    ai.progressEdge = null; ai.progressElapsed = 0; ai.requestNode = null; ai.requestedAt = null;
+    ai.cooldownUntil = 0; ai.nextCorridorCheck = 0; ai.reevaluations = 0;
+    ai.continuation = null;
+    ai.targetSpeed = null;
+    ai.nextExitReplan = 0; ai.exitReplans = 0;
   };
 
   const releaseReservation = ai => {
     if (ai.reservationNode && reservations.get(ai.reservationNode)?.id === ai.id) reservations.delete(ai.reservationNode);
+    reservations.delete(`${ai.reservationNode}|${ai.id}`);
     ai.reservationNode = null;
   };
 
@@ -156,6 +178,11 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
       spawnEdge: { from: edge.from, to: edge.to }, spawnFraction: t, simulation, mesh, ai, logical: false,
       occupancyItem: { id, x, z, heading, vx: 0, vz: 0, state: null },
       renderQuaternion: new THREE.Quaternion(), currentQuaternion: new THREE.Quaternion() };
+    simulation.body.addEventListener('collide', event => {
+      if (event.body === physics.body && Math.abs(event.contact.getImpactVelocityAlongNormal()) >= TRAFFIC_EVASION.impactSpeed) {
+        ai.playerImpactPending = true;
+      }
+    });
     state.occupancyItem.state = state;
     states.push(state); simulations.push(simulation); cars.push(mesh); syncState(state);
     return state;
@@ -243,20 +270,24 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
     const player = physics.body.position;
     buildOccupancy();
     const touching = new Set();
+    const physicalBodies = new Map(states.filter(state => !state.logical).map(state => [state.simulation.body, state]));
     for (const contact of physics.world.contacts) {
-      for (const state of states) {
-        if (!state.logical && (contact.bi === state.simulation.body || contact.bj === state.simulation.body)) touching.add(state);
-      }
+      if (contact.bi === physics.ground || contact.bj === physics.ground) continue;
+      const a = physicalBodies.get(contact.bi), b = physicalBodies.get(contact.bj);
+      if (a) touching.add(a);
+      if (b) touching.add(b);
     }
     for (const state of states) {
       const distance = Math.hypot(state.x - player.x, state.z - player.z);
       const candidate = { x: state.x, z: state.z, heading: headingOf(state.simulation.body.quaternion),
         vx: state.simulation.body.velocity.x, vz: state.simulation.body.velocity.z };
       const neighbors = nearbyOccupants(candidate).filter(other => other.id !== state.id);
-      const nearPhysical = neighbors.some(other => other.state && !other.state.logical);
-      const physicallyClear = isTrafficSpawnSafe(candidate, neighbors, spawnObstacles, 0);
-      if (!state.logical && distance > 45 && !state.ai.maneuver && !touching.has(state)) setLogical(state, true);
-      else if (state.logical && (distance < 30 || nearPhysical) && physicallyClear) setLogical(state, false);
+      const nearPhysical = neighbors.some(other => other.state && physicalBodies.has(other.state.simulation.body)
+        && Math.hypot(other.x - player.x, other.z - player.z) < 45
+        && Math.hypot(other.x - candidate.x, other.z - candidate.z) < 10);
+      if (!state.logical && distance > 45 && !nearPhysical && !state.ai.maneuver && !touching.has(state)) setLogical(state, true);
+      else if (state.logical && (distance < 30 || nearPhysical)
+        && isTrafficSpawnSafe(candidate, neighbors, spawnObstacles, 0)) setLogical(state, false);
     }
   };
 
@@ -265,10 +296,17 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
       if (!state.logical) continue;
       const body = state.simulation.body, control = state.ai.control;
       body.previousPosition.copy(body.position); body.previousQuaternion.copy(body.quaternion);
-      const yaw = headingOf(body.quaternion) + control.steer * 0.9 * dt;
+      const currentSpeed = body.velocity.x * Math.sin(headingOf(body.quaternion)) + body.velocity.z * Math.cos(headingOf(body.quaternion));
+      const lock = 0.95 / (1 + Math.abs(currentSpeed) * 0.016);
+      const yawRate = reservationFor(state.ai)?.movement && !state.ai.maneuver
+        ? currentSpeed * Math.tan(control.steer * lock) / 2.3
+        : control.steer * 1.6 * Math.sign(currentSpeed);
+      const yaw = headingOf(body.quaternion) + yawRate * dt;
       const forwardX = Math.sin(yaw), forwardZ = Math.cos(yaw);
       let speed = body.velocity.x * forwardX + body.velocity.z * forwardZ;
-      speed = Math.max(0, Math.min(8.5, speed + (control.throttle * 3.4 - control.brake * 7 - 0.16) * dt));
+      const acceleration = control.throttle * (state.ai.evasion ? 4.8 : 3.4) - Math.sign(speed) * (control.brake * 7 + 0.16);
+      const nextSpeed = clamp(speed + acceleration * dt, -2.5, state.ai.evasion ? TRAFFIC_EVASION.speed + 0.5 : 8.5);
+      speed = control.brake && Math.sign(nextSpeed) !== Math.sign(speed) ? 0 : nextSpeed;
       body.velocity.set(forwardX * speed, 0, forwardZ * speed);
       body.position.x += body.velocity.x * dt; body.position.z += body.velocity.z * dt; body.position.y = 0.96;
       body.quaternion.setFromEuler(0, yaw, 0); body.aabbNeedsUpdate = true;
@@ -276,192 +314,339 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
     }
   };
 
-  const leaderSpeedLimit = (state, cells, forwardX, forwardZ) => {
-    let limit = Infinity, blocker = null;
-    const body = state.simulation.body;
-    const bx = Math.floor(body.position.x / cellSize), bz = Math.floor(body.position.z / cellSize);
-    for (let x = bx - 2; x <= bx + 2; x++) for (let z = bz - 2; z <= bz + 2; z++) {
-      for (const other of cells.get(x * 1024 + z) || []) {
-        if (other.id === state.id) continue;
-        const dx = other.x - body.position.x, dz = other.z - body.position.z;
-        const ahead = dx * forwardX + dz * forwardZ;
-        const lateral = Math.abs(dx * forwardZ - dz * forwardX);
-        if (ahead <= 0 || ahead > 22 || lateral > 2.2) continue;
-        const safeGap = Math.max(0, ahead - 6.2);
-        const leadSpeed = Math.max(0, other.vx * forwardX + other.vz * forwardZ);
-        const speedLimit = Math.sqrt(leadSpeed ** 2 + 2 * 5.5 * safeGap);
-        if (speedLimit < limit) { limit = speedLimit; blocker = other; }
-      }
-    }
-    return { limit, blocker };
-  };
+  const routeEdge = ai => graph.adjacency.get(ai.fromNode)?.find(edge => edge.to === ai.targetNode);
 
-  const passingOffset = (state, cells, forwardX, forwardZ, blocker, toNode) => {
-    if (!blocker || toNode < 22) return null;
-    const body = state.simulation.body;
-    const rightX = forwardZ, rightZ = -forwardX;
-    const lane = graph.laneOffset, roadEdge = roadWidth / 2 - 1.5;
-    const candidates = [Math.min(2.6, roadEdge - lane), -Math.min(2.6, lane - 1.5), -2 * lane];
-    for (const offset of candidates) {
-      if (Math.abs(offset) < 1.5 || lane + offset > roadEdge || lane + offset < -roadEdge) continue;
-      let clear = true;
-      for (const bucket of cells.values()) for (const other of bucket) {
-        if (other.id === state.id || other === blocker) continue;
-        const dx = other.x - body.position.x, dz = other.z - body.position.z;
-        const ahead = dx * forwardX + dz * forwardZ;
-        if (ahead < -3 || ahead > 22) continue;
-        const lateral = dx * rightX + dz * rightZ;
-        const transition = Math.max(0, Math.min(1, (ahead + 3) / 7));
-        if (Math.abs(lateral - offset * transition) < 2.5) { clear = false; break; }
-      }
-      if (clear) return { offset, blocker: blocker.id };
+  const replanAtNearest = state => {
+    const ai = state.ai, body = state.simulation.body;
+    let nearest = null, best = Infinity;
+    for (const edge of graph.directed) {
+      const along = clamp(edgeProgress(body.position, edge), 0, edge.length);
+      const x = edge.start.x + Math.sin(edge.heading) * along, z = edge.start.z + Math.cos(edge.heading) * along;
+      const cost = Math.hypot(body.position.x - x, body.position.z - z)
+        + 4 * (1 - Math.cos(edge.heading - headingOf(body.quaternion)));
+      if (cost < best) { best = cost; nearest = edge; }
     }
-    return null;
-  };
-
-  const replanAtNearest = (state, previousGoal = state.ai.goalId) => {
-    const ai = state.ai;
-    releaseReservation(ai);
-    const nearest = nearestRoadNode(graph, state.simulation.body.position);
-    ai.previousGoal = previousGoal;
-    ai.goalId = chooseRoadGoal(graph, nearest, ai.random, ai.previousGoal);
-    ai.route = ai.goalId ? findRoadRoute(graph, nearest, ai.goalId) : [nearest];
-    ai.routeIndex = ai.route.length > 1 ? 1 : 0; ai.fromNode = nearest;
-    ai.targetNode = ai.route.length > 1 ? ai.route[ai.routeIndex] : null;
-    ai.state = ai.targetNode ? 'following' : 'arrived-replan';
-    ai.stuckTime = 0;
-    ai.noProgressTime = 0; ai.maneuver = null; ai.waitReason = null; ai.recoveryTime = 0;
+    if (!nearest) { ai.targetNode = null; ai.state = 'no-path'; ai.waitReason = 'no-path'; return; }
+    const held = ai.reservationNode, reserve = reservationFor(ai);
+    if (!reserve?.entered) releaseReservation(ai);
+    const reevaluations = (ai.reevaluations || 0) + 1;
+    startOnEdge(ai, nearest);
+    if (reserve?.entered) ai.reservationNode = held;
+    ai.reevaluations = reevaluations;
   };
 
   const updateControllers = dt => {
     aiTime += dt;
     updateLod();
-    const occupancy = buildOccupancy();
+    const cells = buildOccupancy();
+    const plans = [], byId = new Map();
+    // Route changes do not move bodies. Every hazard uses this tick's occupancy snapshot.
     for (const state of states) {
-      const ai = state.ai, body = state.simulation.body;
-      const yaw = headingOf(body.quaternion);
-      const forwardX = Math.sin(yaw), forwardZ = Math.cos(yaw);
-      const rightX = forwardZ, rightZ = -forwardX;
-      const signedSpeed = body.velocity.x * forwardX + body.velocity.z * forwardZ;
-      if (!ai.targetNode) chooseRoute(ai, nearestRoadNode(graph, body.position));
-      let target = laneTarget(graph, ai.fromNode, ai.targetNode, 1);
-      if (!target) { replanAtNearest(state); target = laneTarget(graph, ai.fromNode, ai.targetNode, 1); }
-      if (!target) { ai.control = { steer: 0, throttle: 0, brake: 1 }; ai.state = 'arrived-replan'; continue; }
-
-      let dx = target.x - body.position.x, dz = target.z - body.position.z;
-      let distance = Math.hypot(dx, dz);
-      if (distance < 4) {
-        const arrived = ai.targetNode;
-        ai.fromNode = arrived;
-        ai.routeIndex++;
-        releaseReservation(ai);
-        if (ai.routeIndex >= ai.route.length - 1) {
-          ai.completedGoals++;
-          ai.state = 'arrived-replan';
-          chooseRoute(ai, arrived);
-        } else {
-          ai.targetNode = ai.route[ai.routeIndex];
-        }
-        target = laneTarget(graph, ai.fromNode, ai.targetNode, 1);
-        if (!target) { replanAtNearest(state); target = laneTarget(graph, ai.fromNode, ai.targetNode, 1); }
-        if (!target) { ai.control = { steer: 0, throttle: 0, brake: 1 }; continue; }
-        dx = target.x - body.position.x; dz = target.z - body.position.z; distance = Math.hypot(dx, dz);
+      const ai = state.ai, car = state.occupancyItem;
+      if (!ai.targetNode) replanAtNearest(state);
+      let edge = routeEdge(ai);
+      if (!edge) { replanAtNearest(state); edge = routeEdge(ai); }
+      if (ai.playerImpactPending) {
+        ai.playerImpactPending = false;
+        ai.evasion = { startedAt: aiTime, lastImpactAt: aiTime, nextReplanAt: aiTime };
       }
+      if (ai.evasion && edge) {
+        const evasion = ai.evasion, distance = Math.hypot(car.x - playerOccupancy.x, car.z - playerOccupancy.z);
+        const elapsed = aiTime - evasion.lastImpactAt;
+        if (elapsed >= TRAFFIC_EVASION.maximumDuration || elapsed >= TRAFFIC_EVASION.minimumDuration
+          && (distance > 120 || distance > TRAFFIC_EVASION.safeDistance && hiddenFromPlayer(car, playerOccupancy, spawnObstacles))) {
+          ai.evasion = null;
+        } else if (aiTime >= evasion.nextReplanAt && !reservationFor(ai)) {
+          const route = escapeRoute(graph, edge, playerOccupancy, spawnObstacles);
+          if (route) { ai.route = route; ai.routeIndex = 0; ai.goalId = route.at(-1); ai.continuation = null; }
+          evasion.nextReplanAt = aiTime + TRAFFIC_EVASION.replanInterval;
+        }
+      }
+      if (edge && ai.routeIndex === ai.route.length - 1 && !ai.continuation
+        && edge.length - edgeProgress(car, edge) < roadWidth / 2 + 14) {
+        const goal = chooseRoadGoal(graph, edge.to, ai.random, ai.goalId);
+        if (goal) ai.continuation = { at: edge.to, goal, route: findRoadRoute(graph, edge.to, goal) };
+      }
+      const crossing = reservationFor(ai)?.movement;
+      const onExit = crossing?.nodeId === ai.targetNode && pathProgress(car, crossing) >= crossing.points.at(-1).distance / 2;
+      if (edge && (onExit || Math.hypot(car.x - edge.end.x, car.z - edge.end.z) < 4 || edgeProgress(car, edge) > edge.length + 3)) {
+        ai.fromNode = ai.targetNode; ai.routeIndex++;
+        ai.progressEdge = null;
+        if (ai.routeIndex >= ai.route.length) {
+          ai.completedGoals++; chooseRoute(ai, ai.fromNode);
+        } else ai.targetNode = ai.route[ai.routeIndex];
+        edge = routeEdge(ai);
+      }
+      const plan = { state, ai, car, edge, node: graph.nodes.get(ai.targetNode), waitReason: null };
+      if (edge) plan.movement = movementFor(edge, ai.route[ai.routeIndex + 1] ?? ai.continuation?.route[1]);
+      plans.push(plan); byId.set(state.id, plan);
+    }
 
-      const node = graph.nodes.get(ai.targetNode);
-      const toNode = node ? Math.hypot(node.x - body.position.x, node.z - body.position.z) : Infinity;
-      let yielding = false;
-      const signal = signalController.phase(ai.targetNode, ai.fromNode, aiTime);
-      const stopLine = node ? getStopLineLayout(node, { forwardX, forwardZ, rightX, rightZ }, roadWidth) : null;
-      const signedStopDistance = stopLine
-        ? (node.x - body.position.x) * forwardX + (node.z - body.position.z) * forwardZ - stopLine.distanceFromNode
-        : Infinity;
-      const halfVehicleLength = 2.08;
-      const brakingDistance = signedSpeed > 0 ? signedSpeed * signedSpeed / (2 * 5.5) : 0;
-      const frontHasNotPassedLine = signedStopDistance > halfVehicleLength;
-      const inRedBrakingZone = signedStopDistance <= Math.max(brakingDistance + halfVehicleLength + 1,
-        roadWidth / 2 + 8 - stopLine?.distanceFromNode);
-      const yellowStopDistance = brakingDistance + halfVehicleLength + 1;
-      const stopForSignal = signal.controlled && frontHasNotPassedLine
-        && (signal.color === 'red' && inRedBrakingZone
-          || signal.color === 'yellow' && signedStopDistance <= yellowStopDistance);
-      ai.waitReason = stopForSignal ? `signal-${signal.color}` : null;
-      if (stopForSignal) {
-        yielding = true;
-        ai.state = 'signal-wait';
-      } else if (toNode < roadWidth / 2 + 5) {
-        let reservation = reservations.get(ai.targetNode);
-        if (reservation && aiTime - reservation.time > 8) { reservations.delete(ai.targetNode); reservation = null; }
-        if (!reservation || reservation.id === ai.id) {
-          reservations.set(ai.targetNode, { id: ai.id, time: aiTime });
-          ai.reservationNode = ai.targetNode;
-        } else if (ai.id.localeCompare(reservation.id) < 0 && !reservation.entered) {
-          reservations.set(ai.targetNode, { id: ai.id, time: aiTime });
-          const displaced = states.find(other => other.id === reservation.id);
-          if (displaced) {
-            displaced.ai.reservationNode = null; displaced.ai.state = 'yielding';
-            displaced.ai.control = { steer: 0, throttle: 0, brake: 1 };
+    for (const [key, reservation] of reservations) {
+      const nodeId = reservation.nodeId || key;
+      const owner = byId.get(reservation.id), node = graph.nodes.get(nodeId);
+      if (!owner || !node) { reservations.delete(key); continue; }
+      if (occupiesJunction(owner.car, node, roadWidth)) reservation.entered = true;
+      const cleared = reservation.entered && !occupiesJunction(owner.car, node, roadWidth);
+      const invalid = !reservation.entered && owner.ai.targetNode !== nodeId;
+      if (cleared || invalid) { reservations.delete(key); owner.ai.reservationNode = null; }
+    }
+
+    const exitBlocked = (plan, exit, movement) => {
+      const distance = roadWidth / 2 + 2.08 + 2;
+      const probe = { x: exit.start.x + Math.sin(exit.heading) * distance,
+        z: exit.start.z + Math.cos(exit.heading) * distance, heading: exit.heading };
+      return nearbyOccupants(probe, cells).some(other => {
+        if (other.id === plan.car.id || !footprintsOverlap(probe, other, 2)) return false;
+        const leader = other.state && reservationFor(other.state.ai);
+        // Moving leaders on the same path clear the exit continuously; following controls the gap.
+        return !(leader?.movement && movement?.key === leader.movement.key && leader.nodeId === plan.ai.targetNode
+          && other.vx * Math.sin(other.heading) + other.vz * Math.cos(other.heading) > 0.5);
+      });
+    };
+    const rerouteExit = plan => {
+      const { ai, edge } = plan;
+      if (aiTime < ai.nextExitReplan || ai.maneuver || occupiesJunction(plan.car, plan.node, roadWidth)) return false;
+      ai.nextExitReplan = aiTime + 1.5;
+      const next = ai.route[ai.routeIndex + 1] ?? ai.continuation?.route[1];
+      const goal = ai.continuation?.goal ?? ai.goalId;
+      // Do not undo the detour by routing immediately back through this junction.
+      const excluded = new Set([ai.targetNode]);
+      const options = (graph.adjacency.get(ai.targetNode) || []).filter(exit => exit.to !== next)
+        .map(exit => ({ exit, movement: movementFor(edge, exit.to) }))
+        .filter(option => !exitBlocked(plan, option.exit, option.movement))
+        .map(option => ({ ...option, route: goal ? findRoadRoute(graph, option.exit.to, goal, excluded) : null }));
+      options.sort((a, b) => Number(a.movement.turn === 'u-turn') - Number(b.movement.turn === 'u-turn')
+        || Number(!a.route) - Number(!b.route)
+        || (a.route?.length ?? Infinity) - (b.route?.length ?? Infinity)
+        || a.exit.to.localeCompare(b.exit.to));
+      const choice = options[0];
+      if (!choice) return false;
+      releaseReservation(ai);
+      ai.route = [ai.targetNode, ...(choice.route || [choice.exit.to])];
+      ai.routeIndex = 0; ai.goalId = ai.route.at(-1); ai.continuation = null;
+      ai.progressEdge = null; ai.exitReplans++;
+      plan.movement = choice.movement;
+      return true;
+    };
+    const requests = [];
+    for (const plan of plans) {
+      const { ai, car, edge, node } = plan;
+      if (!edge || !node) { plan.waitReason = 'no-path'; continue; }
+      const fx = Math.sin(edge.heading), fz = Math.cos(edge.heading);
+      const remaining = edge.length - edgeProgress(car, edge);
+      plan.remaining = remaining;
+      plan.signal = signalController.phase(ai.targetNode, ai.fromNode, aiTime);
+      const stopLine = getStopLineLayout(node, { forwardX: fx, forwardZ: fz, rightX: -fz, rightZ: fx }, roadWidth);
+      const stop = remaining - stopLine.distanceFromNode - projectedExtent(car, fx, fz);
+      const speed = Math.max(0, car.vx * fx + car.vz * fz);
+      const brakingDistance = speed * speed / (2 * 5.5) + 1;
+      const stopForSignal = !ai.evasion && stop > 0 && plan.signal.controlled
+        && (plan.signal.color === 'red' && stop < Math.max(brakingDistance, 6.5)
+          || plan.signal.color === 'yellow' && stop < brakingDistance);
+      if (stopForSignal) plan.waitReason = `signal-${plan.signal.color}`;
+      if (remaining > roadWidth / 2 + 8 || remaining < -roadWidth / 2) {
+        ai.requestNode = null; ai.requestedAt = null; continue;
+      }
+      if (ai.requestNode !== ai.targetNode) { ai.requestNode = ai.targetNode; ai.requestedAt = aiTime; }
+      const held = reservationFor(ai);
+      if (!held?.entered && !stopForSignal) {
+        const nextId = ai.route[ai.routeIndex + 1] ?? ai.continuation?.route[1];
+        const exit = graph.adjacency.get(ai.targetNode)?.find(item => item.to === nextId);
+        if (exit && exitBlocked(plan, exit, plan.movement) && !rerouteExit(plan)) plan.waitReason = 'blocked-junction-exit';
+      }
+      if (!plan.waitReason) requests.push(plan);
+    }
+
+    for (const plan of plans) {
+      const reservation = reservationFor(plan.ai);
+      if (plan.waitReason && reservation && !reservation.entered) releaseReservation(plan.ai);
+    }
+    const priority = plan => plan.ai.evasion ? 2 : plan.movement?.turn === 'right' ? 1 : 0;
+    const canStopBeforeEntry = plan => {
+      const held = reservationFor(plan.ai), speed = Math.hypot(plan.car.vx, plan.car.vz);
+      const room = plan.remaining - roadWidth / 2
+        - projectedExtent(plan.car, Math.sin(plan.edge.heading), Math.cos(plan.edge.heading));
+      return !held || !held.entered && room > speed * speed / (2 * 5.5) + speed * 0.1 + 0.3;
+    };
+    requests.sort((a, b) => priority(b) - priority(a)
+      || a.ai.requestedAt - b.ai.requestedAt || a.state.id.localeCompare(b.state.id));
+    // Priority can replace a pending permit, never a vehicle already crossing or unable to stop.
+    for (const plan of requests) if (priority(plan)) {
+      for (const [key, held] of [...reservations]) {
+        const other = byId.get(held.id);
+        if ((held.nodeId || key) === plan.ai.targetNode && other && priority(other) < priority(plan)
+          && movementsConflict(plan.movement, held.movement) && canStopBeforeEntry(other)) {
+          releaseReservation(other.ai); other.waitReason = 'junction-priority';
+        }
+      }
+    }
+    const requestSet = new Set(requests);
+    // A stopped upstream queue is not approaching traffic; yielding to it can lock both exits.
+    const oncomingPriority = new Set(requests.filter(plan => !plan.ai.evasion && plans.some(other => other !== plan
+      && other.ai.targetNode === plan.ai.targetNode && !other.waitReason && (other.signal?.canEnter || other.ai.evasion)
+      && other.remaining >= 0 && other.remaining <= 30
+      && (requestSet.has(other) || other.car.vx * Math.sin(other.edge.heading) + other.car.vz * Math.cos(other.edge.heading) > 0.5)
+      && yieldsToOncoming(plan.movement, other.movement))));
+    for (const plan of requests) {
+      if (plan.waitReason) continue;
+      const nodeId = plan.ai.targetNode, owned = reservationFor(plan.ai);
+      if (oncomingPriority.has(plan) && canStopBeforeEntry(plan)) {
+        if (owned) releaseReservation(plan.ai);
+        plan.waitReason = 'oncoming-priority'; continue;
+      }
+      if (owned) continue;
+      const conflicts = [...reservations.entries()].some(([key, reservation]) => (reservation.nodeId || key) === nodeId
+        && movementsConflict(plan.movement, reservation.movement));
+      if (!conflicts) {
+        const key = reservations.has(nodeId) ? `${nodeId}|${plan.state.id}` : nodeId;
+        reservations.set(key, { id: plan.state.id, nodeId, time: aiTime, movement: plan.movement,
+          entered: occupiesJunction(plan.car, plan.node, roadWidth) });
+        plan.ai.reservationNode = nodeId;
+      } else plan.waitReason = 'intersection-reservation';
+    }
+
+    const pathObstacles = [];
+    for (const plan of plans) if (plan.ai.maneuver) {
+      pathObstacles.push(...corridorFootprints(plan.car, [{ x: plan.car.x, z: plan.car.z },
+        ...plan.ai.maneuver.points.slice(plan.ai.maneuver.index)], plan.state.id));
+    }
+    for (const plan of plans) {
+      plan.neighbors = nearbyOccupants(plan.car, cells).filter(other => other.id !== plan.car.id);
+      plan.leaderLimit = Infinity;
+      const fx = Math.sin(plan.edge?.heading ?? plan.car.heading), fz = Math.cos(plan.edge?.heading ?? plan.car.heading);
+      // A turning chassis must follow its outgoing lane, not the opposite queue under its nose.
+      const laneCar = plan.edge ? { ...plan.car,
+        x: plan.edge.start.x + fx * edgeProgress(plan.car, plan.edge),
+        z: plan.edge.start.z + fz * edgeProgress(plan.car, plan.edge) } : plan.car;
+      for (const other of plan.neighbors) {
+        let limit = followingLimit(laneCar, other, fx, fz);
+        const own = reservationFor(plan.ai), leader = other.state && reservationFor(other.state.ai);
+        if (own?.movement && leader?.movement && own.nodeId === leader.nodeId && own.movement.key === leader.movement.key) {
+          const speed = item => Math.max(0, item.vx * Math.sin(item.heading) + item.vz * Math.cos(item.heading));
+          limit = followingLimit({ x: pathProgress(plan.car, own.movement), z: 0, heading: Math.PI / 2, vx: speed(plan.car), vz: 0 },
+            { x: pathProgress(other, own.movement), z: 0, heading: Math.PI / 2, vx: speed(other), vz: 0 }, 1, 0);
+        }
+        if (limit < plan.leaderLimit) { plan.leaderLimit = limit; plan.blocker = other; }
+      }
+    }
+    const queueReason = (plan, seen = new Set()) => {
+      if (!plan || seen.has(plan.state.id)) return null;
+      if (plan.waitReason) return plan.waitReason;
+      seen.add(plan.state.id);
+      return queueReason(byId.get(plan.blocker?.id), seen);
+    };
+    // Oldest stalled vehicle chooses first; all new maneuvers are checked against accepted corridors.
+    plans.sort((a, b) => (b.ai.noProgressTime || 0) - (a.ai.noProgressTime || 0) || a.state.id.localeCompare(b.state.id));
+    for (const plan of plans) {
+      const { state, ai, car, edge } = plan;
+      if (!edge) { ai.control = { steer: 0, throttle: 0, brake: 1 }; ai.state = 'no-path'; ai.waitReason = 'no-path'; continue; }
+      const fx = Math.sin(car.heading), fz = Math.cos(car.heading);
+      const speed = car.vx * fx + car.vz * fz;
+      const { neighbors, leaderLimit, blocker } = plan;
+      const contact = neighbors.find(other => footprintsOverlap(car, other, 0.12));
+      const leaderWait = blocker && queueReason(byId.get(blocker.id));
+      const legalWait = Boolean(plan.waitReason || leaderWait && leaderLimit < 0.4);
+      const crossingPath = reservationFor(ai)?.movement;
+      if (crossingPath) {
+        const length = crossingPath.points.at(-1).distance;
+        trackProgress(ai, { x: pathProgress(car, crossingPath), z: 0 },
+          { from: crossingPath.key, to: crossingPath.nodeId, start: { x: 0, z: 0 }, end: { x: length, z: 0 }, length }, dt, legalWait);
+      } else trackProgress(ai, car, edge, dt, legalWait);
+      ai.blocker = blocker?.id || contact?.id || null;
+      const obstacles = [...spawnObstacles, ...pathObstacles.filter(item => item.owner !== state.id)];
+      const canRetry = aiTime >= (ai.nextCorridorCheck || 0) && aiTime >= (ai.cooldownUntil || 0);
+      // Recovery needs the return path plus 3s of oncoming motion, not only leader range.
+      const recoveryNeighbors = ai.maneuver || canRetry && (contact || ai.noProgressTime >= 3)
+        ? nearbyOccupants(car, cells, 6).filter(other => other.id !== car.id) : neighbors;
+      if (!recoveryNeighbors.includes(playerOccupancy)) recoveryNeighbors.push(playerOccupancy);
+
+      if (!ai.maneuver && contact && canRetry) {
+        const ahead = (contact.x - car.x) * fx + (contact.z - car.z) * fz;
+        const sameDirection = Math.cos(contact.heading - car.heading) > 0.5;
+        const shouldRetreat = sameDirection ? ahead > 0 : car.id.localeCompare(contact.id) > 0;
+        if (contact.player && ai.evasion) {
+          for (const direction of ahead > 0 ? [-1, 1] : [1, -1]) {
+            const points = [{ x: car.x, z: car.z }, { x: car.x + fx * 4 * direction,
+              z: car.z + fz * 4 * direction, reverse: direction < 0 }];
+            if (sweptPathIsSafe(car, points, recoveryNeighbors, obstacles, 2)) {
+              ai.maneuver = { points, index: 1, blocker: contact.id, startedAt: aiTime, kind: 'player-escape' };
+              break;
+            }
           }
-          ai.reservationNode = ai.targetNode;
-        } else {
-          yielding = true;
-          ai.state = 'yielding';
-          ai.waitReason = 'intersection-reservation';
-          ai.waitTime += dt;
+        } else if (shouldRetreat) {
+          const points = [{ x: car.x, z: car.z }, { x: car.x - fx * 4, z: car.z - fz * 4, reverse: true }];
+          if (sweptPathIsSafe(car, points, recoveryNeighbors, obstacles, 2)) {
+            ai.maneuver = { points, index: 1, blocker: contact.id, startedAt: aiTime, kind: 'contact-retreat' };
+          }
         }
-        const owner = reservations.get(ai.targetNode);
-        if (owner?.id === ai.id && toNode < 6) owner.entered = true;
-      } else if (ai.state === 'yielding' || ai.state === 'signal-wait') ai.state = 'following';
-      if (ai.reservationNode && ai.reservationNode !== ai.targetNode) releaseReservation(ai);
+        ai.nextCorridorCheck = aiTime + 0.5;
+      }
+      if (!ai.maneuver && ai.noProgressTime >= 3 && !legalWait && canRetry) {
+        ai.reevaluations = (ai.reevaluations || 0) + 1;
+        ai.nextCorridorCheck = aiTime + 0.5;
+        const held = reservationFor(ai);
+        if (blocker && !held?.entered) {
+          ai.maneuver = planPassing(car, blocker, edge, roadWidth, recoveryNeighbors, obstacles);
+          if (ai.maneuver) { ai.maneuver.startedAt = aiTime; ai.maneuver.kind = 'passing'; }
+        } else if (!blocker && !held?.entered) replanAtNearest(state);
+      }
 
-      let targetSpeed = 8;
-      if (toNode < 13 && ai.routeIndex + 1 < ai.route.length) {
-        const turn = turnDirection(graph, ai.fromNode, ai.targetNode, ai.route[ai.routeIndex + 1]);
-        if (turn !== 'straight') targetSpeed = 4.4;
-        else targetSpeed = 6.2;
-      }
-      if (yielding) targetSpeed = 0;
-      const leader = leaderSpeedLimit(state, occupancy, forwardX, forwardZ);
-      const blockedByLeader = leader.limit < targetSpeed - 0.25;
-      const progress = ai.progressPosition || { x: body.position.x, z: body.position.z };
-      const moved = Math.hypot(body.position.x - progress.x, body.position.z - progress.z);
-      if (moved > 0.8) { ai.progressPosition = { x: body.position.x, z: body.position.z }; ai.noProgressTime = 0; }
-      else if (leader.blocker && !yielding && Math.abs(signedSpeed) < 2) ai.noProgressTime += dt;
-      else { ai.noProgressTime = 0; ai.progressPosition = { x: body.position.x, z: body.position.z }; }
-      if (ai.maneuver && (!leader.blocker || leader.blocker.id !== ai.maneuver.blocker)) ai.maneuver = null;
-      if (!ai.maneuver && ai.noProgressTime >= 3 && !yielding) {
-        ai.maneuver = passingOffset(state, occupancy, forwardX, forwardZ, leader.blocker, toNode);
-        if (ai.maneuver) ai.maneuver.startedAt = aiTime;
-      }
-      if (ai.maneuver && aiTime - ai.maneuver.startedAt > 8) ai.maneuver = null;
+      const turning = Math.cos(edge.heading - car.heading) < 0.9;
+      const junction = reservationFor(ai)?.movement;
+      const aim = junction ? pathTarget(car, junction) : laneTarget(graph, edge.from, edge.to,
+        (edgeProgress(car, edge) + (turning ? 2.5 : Math.max(4, Math.abs(speed) * 0.7))) / edge.length);
+      let dx = aim.x - car.x, dz = aim.z - car.z, reverse = false;
+      let targetSpeed = ai.evasion ? TRAFFIC_EVASION.speed : 8;
+      // Recover an off-route chassis gently; ordinary junction turns keep the cruise target.
+      if (!junction && turning) targetSpeed = Math.min(targetSpeed, 3.8);
+      let reason = plan.waitReason || (leaderWait && leaderLimit < 0.4 ? 'queue-wait' : null);
       if (ai.maneuver) {
-        const shift = ai.maneuver.offset;
-        const ahead = 10;
-        const aimX = body.position.x + forwardX * ahead + rightX * shift;
-        const aimZ = body.position.z + forwardZ * ahead + rightZ * shift;
-        dx = aimX - body.position.x; dz = aimZ - body.position.z;
-        targetSpeed = Math.min(targetSpeed, 5.2);
-      } else targetSpeed = Math.min(targetSpeed, leader.limit);
-      const desiredHeading = Math.atan2(dx, dz);
-      const error = headingError(desiredHeading, yaw);
-      const steer = clamp(error * 1.9, -1, 1);
-      const throttle = targetSpeed < 0.4 ? 0 : clamp((targetSpeed - signedSpeed) * 0.42, 0, 0.76);
-      const brake = targetSpeed < 0.4 ? 1 : clamp((signedSpeed - targetSpeed - 0.3) * 0.4, 0, 0.8);
-      ai.control = { steer, throttle, brake };
-      if (!yielding && signedSpeed < 0.55 && ai.noProgressTime > 3) ai.stuckTime = ai.noProgressTime;
-      else ai.stuckTime = Math.max(0, ai.stuckTime - dt * 2);
-      if (ai.stuckTime > 3 && !ai.maneuver) {
-        ai.state = 'stuck-recovery';
-        ai.recoveryTime += dt;
-        ai.control = { steer: 0, throttle: 0, brake: 1 };
-        if (ai.recoveryTime > 1.5 && !leader.blocker) { replanAtNearest(state); ai.recoveryTime = 0; }
-      } else if (!yielding && blockedByLeader) ai.state = 'yielding';
-      else if (!yielding && ai.state !== 'arrived-replan') ai.state = 'following';
-      if (leader.blocker && !yielding && !ai.maneuver) ai.waitReason = ai.noProgressTime >= 3 ? 'no-safe-passing-lane' : 'blocked-by-leader';
-      else if (ai.maneuver) ai.waitReason = 'passing';
+        const maneuver = ai.maneuver;
+        let waypoint = maneuver.points[maneuver.index];
+        const previous = maneuver.points[maneuver.index - 1];
+        const distance = Math.hypot(waypoint.x - previous.x, waypoint.z - previous.z) || 1;
+        const along = ((car.x - previous.x) * (waypoint.x - previous.x) + (car.z - previous.z) * (waypoint.z - previous.z)) / distance;
+        if (Math.hypot(car.x - waypoint.x, car.z - waypoint.z) < 1 || along > distance) {
+          maneuver.index++;
+          if (maneuver.index >= maneuver.points.length) {
+            ai.maneuver = null; ai.cooldownUntil = aiTime + 2; ai.progressEdge = null; ai.noProgressTime = 0;
+          } else waypoint = maneuver.points[maneuver.index];
+        }
+        if (ai.maneuver) {
+          dx = waypoint.x - car.x; dz = waypoint.z - car.z; reverse = Boolean(waypoint.reverse);
+          targetSpeed = reverse ? -2.2 : 4.4;
+          reason = maneuver.kind;
+          if (aiTime >= (maneuver.nextSafetyCheck || 0)) {
+            maneuver.safe = sweptPathIsSafe(car, [{ x: car.x, z: car.z }, ...maneuver.points.slice(maneuver.index)],
+              recoveryNeighbors, obstacles, Math.abs(targetSpeed));
+            maneuver.nextSafetyCheck = aiTime + 0.5;
+          }
+          if (!maneuver.safe) { targetSpeed = 0; reason = 'maneuver-blocked'; }
+          pathObstacles.push(...corridorFootprints(car, [{ x: car.x, z: car.z }, ...maneuver.points.slice(maneuver.index)], state.id));
+        }
+      }
+      if (!ai.maneuver) targetSpeed = plan.waitReason ? 0 : Math.min(targetSpeed, leaderLimit);
+      if (!ai.maneuver && contact && (Math.cos(contact.heading - car.heading) < 0.5
+        || (contact.x - car.x) * fx + (contact.z - car.z) * fz > 0)) targetSpeed = 0;
+      if (!reason && contact) reason = 'collision-jam';
+      if (!reason && blocker && targetSpeed < 0.4) reason = ai.noProgressTime >= 3 ? 'no-safe-passing-lane' : 'blocked-by-leader';
+      if (!reason && Math.abs(speed) < 0.3 && ai.noProgressTime >= 1) reason = 'controller-stall';
+      ai.control = driveControl(dx, dz, car.heading, speed, targetSpeed, reverse);
+      if (!ai.maneuver && junction) {
+        const error = Math.atan2(Math.sin(Math.atan2(dx, dz) - car.heading), Math.cos(Math.atan2(dx, dz) - car.heading));
+        const curvature = 2 * Math.sin(error) / Math.max(2, Math.hypot(dx, dz));
+        const lock = 0.95 / (1 + Math.abs(speed) * 0.016);
+        ai.control.steer = clamp(Math.atan(2.3 * curvature) / lock, -1, 1);
+      }
+      ai.targetSpeed = targetSpeed;
+      ai.waitReason = reason;
+      ai.state = ai.maneuver ? 'maneuver' : reason?.startsWith('signal-') ? 'signal-wait'
+        : reason === 'no-safe-passing-lane' || reason === 'controller-stall' ? 'stuck-recovery'
+        : reason ? 'yielding' : ai.evasion ? 'fleeing' : 'following';
+      ai.waitTime = reason ? (ai.waitTime || 0) + dt : 0;
     }
   };
-
   return {
     states, cars, simulations, reservations,
     attachPhysics(simulation) {
@@ -478,6 +663,7 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
     },
     setRoadNetwork(network, width = roadWidth, obstacles = spawnObstacles) {
       roadNetwork = network; roadWidth = width; graph = createRoadGraph(network, getLaneOffset(width));
+      movementCache.clear();
       spawnObstacles = obstacles; rebuildSpawnSlots();
       signalController = createTrafficSignals(network); reservations.clear();
       for (const state of states) replanAtNearest(state);
@@ -545,6 +731,7 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
         state.heading = state.previousHeading = heading; state.speed = 0;
         Object.assign(state.occupancyItem, { x, z, heading, vx: 0, vz: 0 });
         startOnEdge(ai, edge);
+        ai.evasion = null; ai.playerImpactPending = false;
         ai.control = { steer: 0, throttle: 0.5, brake: 0 }; ai.waitTime = 0; ai.stuckTime = 0; ai.recoveryTime = 0;
         syncState(state);
         reserved.push(state.occupancyItem);
@@ -572,13 +759,18 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
       awakeTrafficBodies: states.filter(state => !state.logical && state.simulation.body.sleepState === 0).length }; },
     debug() { return states.map(state => ({ id: state.id, goal: state.ai.goalId, route: [...state.ai.route], state: state.ai.state,
       segment: [state.ai.fromNode, state.ai.targetNode], seed: state.ai.seed, completedGoals: state.ai.completedGoals,
-      goals: [...state.ai.goalHistory], reason: state.ai.maneuver ? 'passing' : state.ai.waitReason || (state.ai.state === 'stuck-recovery' ? 'no-safe-passing-lane' : null),
+      goals: [...state.ai.goalHistory], reason: state.ai.waitReason,
       waitReason: state.ai.waitReason, noProgressTime: state.ai.noProgressTime || 0,
+      blocker: state.ai.blocker || null, progressAlong: state.ai.progressAlong ?? null, reevaluations: state.ai.reevaluations || 0,
       reservationNode: state.ai.reservationNode,
-      reservationAge: state.ai.reservationNode ? Math.max(0, aiTime - (reservations.get(state.ai.reservationNode)?.time ?? aiTime)) : null,
+      reservationAge: state.ai.reservationNode ? Math.max(0, aiTime - (reservationFor(state.ai)?.time ?? aiTime)) : null,
+      junctionTurn: reservationFor(state.ai)?.movement?.turn || null,
       signal: state.ai.targetNode ? { ...signalController.phase(state.ai.targetNode, state.ai.fromNode, aiTime) } : null,
       maneuver: state.ai.maneuver ? { ...state.ai.maneuver } : null,
       logical: Boolean(state.logical),
+      evasion: state.ai.evasion ? { ...state.ai.evasion } : null,
+      targetSpeed: state.ai.targetSpeed ?? null,
+      exitReplans: state.ai.exitReplans || 0,
       spawn: { x: state.simulation.spawn.x, z: state.simulation.spawn.z } })); },
   };
 }

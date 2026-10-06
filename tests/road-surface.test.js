@@ -1,7 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createRoadSurfacePositions, createRoadSurfaceRectangles } from '../src/road-surface.js';
+import { createRoadSurfacePositions, createRoadSurfaceRectangles, createSidewalkRectangles } from '../src/road-surface.js';
 import { ROAD_CENTRES, ROAD_WIDTH_LIMITS } from '../src/city-generator.js';
+
+test('sidewalk corners are disjoint and never cover the asphalt plaza', () => {
+  for (const width of [12, 15, 20, 30]) {
+    const plaza = { centerX: 0, centerZ: 0, width: 50, depth: 50 };
+    const walks = createSidewalkRectangles(ROAD_CENTRES, 210, width, 2, plaza);
+    const roads = createRoadSurfaceRectangles(ROAD_CENTRES, 210, width, plaza);
+    const overlaps = (a, b) => Math.min(a.maxX, b.maxX) > Math.max(a.minX, b.minX) + 1e-8
+      && Math.min(a.maxZ, b.maxZ) > Math.max(a.minZ, b.minZ) + 1e-8;
+    for (let i = 0; i < walks.length; i++) {
+      assert.ok(walks[i].maxX > walks[i].minX && walks[i].maxZ > walks[i].minZ);
+      assert.ok(roads.every(road => !overlaps(road, walks[i])));
+      assert.ok(walks.slice(i + 1).every(other => !overlaps(other, walks[i])));
+    }
+  }
+});
 
 test('road grid and spawn plaza form a continuous, non-overlapping surface', () => {
   for (const width of [12, 15, 20, 30]) {

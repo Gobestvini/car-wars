@@ -1,5 +1,6 @@
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const assert = require('node:assert/strict');
+const fs = require('node:fs/promises');
 const baseUrl = process.env.CARWARS_BASE_URL || 'http://localhost:5173/';
 const shortMs = Number(process.env.TRAFFIC_PERF_SHORT_MS || 10000);
 const longMs = Number(process.env.TRAFFIC_PERF_LONG_MS || 60000);
@@ -26,13 +27,18 @@ const percentile = (values, p) => {
 
     const setCount = async count => {
       await countInput.fill(String(count)); await countInput.press('Enter');
-      await page.waitForFunction(value => window.carLab.trafficStatus().count === value, count, { timeout: 15000 });
+      await page.waitForFunction(value => window.carLab.trafficStatus().count === value, count, { timeout: 120000 });
     };
     const setQuality = async quality => {
       await qualityInput.selectOption(quality);
       await page.waitForFunction(value => window.carLab.performance().quality === value, quality === 'Лёгкая' ? 'low' : 'high');
     };
     const measure = async (count, quality, durationMs, label) => {
+      console.error(`Measuring ${label} from a fresh seeded scene`);
+      await page.reload();
+      await page.waitForFunction(() => window.carLab?.modelReady);
+      await page.locator('#settings-button').click();
+      await page.locator('#settings-controls').getByText('Трафик', { exact: true }).click();
       await setCount(count); await setQuality(quality);
       await page.waitForTimeout(5000); // Shader/physics warm-up, excluded from the sample.
       const before = await page.evaluate(() => ({ dropped: window.carLab.performance().droppedSeconds, resources: window.carLab.resources() }));
@@ -80,14 +86,17 @@ const percentile = (values, p) => {
     results.push(await measure(60, 'Высокая', shortMs, 'high-60'));
     results.push(await measure(60, 'Лёгкая', longMs, 'low-60-long'));
     await session.send('Emulation.setCPUThrottlingRate', { rate: 1 });
-    console.log(JSON.stringify({ environment: { browser: 'Microsoft Edge via Playwright', headless: true,
+    const report = { environment: { browser: 'Microsoft Edge via Playwright', headless: true,
       renderer: 'SwiftShader software WebGL', cpuThrottle: 'CDP 4x (then reset to 1x)', deviceScaleFactor: 1,
       device: 'desktop surrogate; no physical mobile device' }, shortMs, longMs, results: results.map(item => ({
         label: item.label, fps: item.fps, p95FrameMs: item.frameIntervalMs.p95,
         p95PhysicsMs: item.physicsMs.p95, p95RenderMs: item.renderCpuMs.p95,
+        aiMsP95: item.aiMsP95, npcPrepareMsP95: item.npcPrepareMsP95, worldStepMsP95: item.worldStepMsP95,
         droppedSeconds: item.droppedSeconds, physical: item.trafficBodies, logical: item.logicalTraffic,
         visible: item.visibleTraffic, bodies: item.bodies, resourcesBefore: item.resourcesBefore, resourcesAfter: item.resourcesAfter,
-      })) }, null, 2));
+    })) };
+    if (process.env.TRAFFIC_PERF_FILE) await fs.writeFile(process.env.TRAFFIC_PERF_FILE, JSON.stringify(report, null, 2));
+    console.log(JSON.stringify(report, null, 2));
     await page.close();
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

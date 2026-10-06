@@ -23,10 +23,3 @@ export function getStopLineLayout(node, approach, roadWidth) {
     yaw: Math.atan2(approach.forwardX, approach.forwardZ),
   };
 }
-
-export function isSignalFacingCamera(signal, camera, wasVisible = true, hysteresis = 1.5) {
-  const towardCameraX = camera.x - (signal.x ?? signal.signalX);
-  const towardCameraZ = camera.z - (signal.z ?? signal.signalZ);
-  const frontDot = -(towardCameraX * signal.forwardX + towardCameraZ * signal.forwardZ);
-  return wasVisible ? frontDot > -hysteresis : frontDot > hysteresis;
-}

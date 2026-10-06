@@ -1,0 +1,65 @@
+[
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "duration": 180.48333333332684,
+    "windows": [
+      {
+        "time": 68.46666666666707,
+        "active": 60,
+        "moving": 27,
+        "minimumTravel": 28.21241863063158
+      },
+      {
+        "time": 128.70000000000084,
+        "active": 60,
+        "moving": 29,
+        "minimumTravel": 15.667506835012503
+      },
+      {
+        "time": 188.49999999999352,
+        "active": 60,
+        "moving": 33,
+        "minimumTravel": 10.311393084406664,
+        "duration": 59.79999999999268
+      }
+    ],
+    "minimumMoving": 19,
+    "maximumStillTime": 0,
+    "visible": 55,
+    "camera": [
+      15.44018895756639,
+      300,
+      -21.87360102321904
+    ],
+    "colors": 2609,
+    "errors": []
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "duration": 60.23333333333371,
+    "windows": [
+      {
+        "time": 66.40833333333372,
+        "active": 60,
+        "moving": 25,
+        "minimumTravel": 28.21034736638696
+      }
+    ],
+    "minimumMoving": 20,
+    "maximumStillTime": 0,
+    "visible": 29,
+    "camera": [
+      15.440426256283063,
+      300,
+      -21.873937196400995
+    ],
+    "colors": 1351,
+    "errors": []
+  }
+]

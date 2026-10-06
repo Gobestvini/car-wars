@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import { CarSimulation, STEP } from '../src/vehicle.js';
 import { createTraffic } from '../src/traffic.js';
+import { createCityPlan } from '../src/city-generator.js';
 import { createRoadGraph } from '../src/traffic-ai.js';
 import { createTrafficSpawnSlots } from '../src/traffic-spawn.js';
 import { footprintsOverlap, TRAFFIC_SPAWN } from '../src/traffic-spawn.js';
@@ -14,6 +15,29 @@ function integrate(physics, traffic, input = {}) {
   physics.postStep(STEP);
   traffic.postStep(STEP);
 }
+
+test('real-city NPC spawn and reset retain the independently expected right side at every width', () => {
+  for (const width of [12, 15, 20, 30]) {
+    const plan = createCityPlan(undefined, { roadWidth: width });
+    const player = new CarSimulation();
+    const traffic = createTraffic(new THREE.Scene(), THREE, 60, plan.roadNetwork, width);
+    traffic.attachPhysics(player);
+    for (let tick = 0; tick < 100 && traffic.status().pending; tick++) traffic.prepare(0.1);
+    const check = () => {
+      const directions = new Set();
+      for (const state of traffic.states) {
+        const from = plan.roadNetwork.intersections.find(node => node.id === state.ai.fromNode);
+        const to = plan.roadNetwork.intersections.find(node => node.id === state.ai.targetNode);
+        const dx = Math.sign(to.x - from.x), dz = Math.sign(to.z - from.z), offset = Math.min(5.2, width / 4);
+        directions.add(`${dx},${dz}`);
+        if (dx) assert.equal(state.simulation.spawn.z, from.z + dx * offset);
+        else assert.equal(state.simulation.spawn.x, from.x - dz * offset);
+      }
+      assert.equal(directions.size, 4);
+    };
+    check(); traffic.reset(); check(); traffic.dispose();
+  }
+});
 
 test('split single-car stepping matches the standalone solver and uses one world integration', () => {
   const standalone = new CarSimulation();
@@ -189,17 +213,40 @@ test('distant traffic swaps to logical route motion and becomes physical near th
   const start = state.simulation.body.position.clone();
   for (let i = 0; i < 120; i++) traffic.stepWorld({}, STEP);
   assert.ok(state.simulation.body.position.distanceTo(start) > 0.5, 'logical NPC should continue along its route');
+  assert.ok(Math.abs(state.z - 5) < 0.01, 'logical eastbound car stays on the independently expected right lane');
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
   camera.position.set(0, 20, 0); camera.lookAt(0, 20, -100); camera.updateMatrixWorld();
   traffic.render(1, camera);
   assert.equal(traffic.status().visible, 0, 'traffic outside the camera frustum should not be drawn');
   physics.body.position.set(state.x - 20, 0.96, state.z); physics.body.aabbNeedsUpdate = true;
+  const beforeSwitch = state.simulation.body.position.clone();
+  const beforeHeading = state.heading;
   traffic.prepare(0.11);
   assert.equal(traffic.status().logical, 0);
   assert.equal(traffic.status().bodies, 1);
   assert.ok(physics.world.bodies.includes(state.simulation.body));
+  assert.ok(state.simulation.body.position.distanceTo(beforeSwitch) <= 8.5 * 0.11,
+    'LOD switch adds no jump beyond the elapsed logical movement');
+  assert.equal(state.simulation.body.position.z, beforeSwitch.z, 'LOD does not reflect the lane');
+  assert.equal(state.heading, beforeHeading);
   traffic.render(1, camera);
   assert.equal(traffic.status().visible, 0);
   assert.ok(physics.world.bodies.includes(state.simulation.body), 'frustum culling must not disable nearby collision physics');
+  traffic.dispose();
+});
+
+test('physical LOD does not cascade across remote neighbors or retain a ground-only contact', () => {
+  const network = { intersections: [{ id: 'a', x: 0, z: 0 }, { id: 'b', x: 500, z: 0 }],
+    edges: [{ from: 'a', to: 'b', length: 500 }] };
+  const player = new CarSimulation({ spawn: { x: 15, y: 0.96, z: 5, yaw: Math.PI / 2 } });
+  const traffic = createTraffic(new THREE.Scene(), THREE, 6, network, 20);
+  traffic.attachPhysics(player);
+  const remote = traffic.states.find(state => state.x > 100);
+  assert.ok(remote && !remote.logical);
+  player.world.contacts.push({ bi: player.ground, bj: remote.simulation.body });
+  traffic.prepare(0.11);
+  assert.equal(remote.logical, true, 'a remote ground contact is not a traffic interaction');
+  assert.ok(traffic.states.filter(state => !state.logical).every(state =>
+    Math.hypot(state.x - player.body.position.x, state.z - player.body.position.z) < 55));
   traffic.dispose();
 });

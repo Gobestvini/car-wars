@@ -6,6 +6,16 @@ import * as THREE from 'three';
 import { CarSimulation, STEP } from '../src/vehicle.js';
 import { createTraffic } from '../src/traffic.js';
 
+test('right lanes have independent world coordinates in all four directions', () => {
+  const graph = createRoadGraph({ intersections: [{ id: 'o', x: 0, z: 0 }, { id: 'e', x: 50, z: 0 },
+    { id: 'n', x: 0, z: 50 }], edges: [{ from: 'o', to: 'e', length: 50 }, { from: 'o', to: 'n', length: 50 }] }, 5);
+  const at = (from, to) => laneTarget(graph, from, to, 0);
+  assert.deepEqual([at('o', 'e').x, at('o', 'e').z], [0, 5]);
+  assert.deepEqual([at('e', 'o').x, at('e', 'o').z], [50, -5]);
+  assert.deepEqual([at('o', 'n').x, at('o', 'n').z], [-5, 0]);
+  assert.deepEqual([at('n', 'o').x, at('n', 'o').z], [5, 50]);
+});
+
 test('city street graph is connected, directed into right-side lanes, and supports varied seeded destinations', () => {
   const plan = createCityPlan();
   const graph = createRoadGraph(plan.roadNetwork, 5);
@@ -17,9 +27,10 @@ test('city street graph is connected, directed into right-side lanes, and suppor
   }
   const forward = graph.adjacency.get('-25:-25').find(edge => edge.to === '25:-25');
   const reverse = graph.adjacency.get('25:-25').find(edge => edge.to === '-25:-25');
-  assert.equal(forward.start.z, -30);
-  assert.equal(reverse.start.z, -20);
-  assert.equal(turnDirection(graph, '-25:-25', '25:-25', '25:25'), 'left');
+  assert.equal(forward.start.z, -20);
+  assert.equal(reverse.start.z, -30);
+  assert.equal(turnDirection(graph, '-25:-25', '25:-25', '25:25'), 'right');
+  assert.equal(turnDirection(graph, '-25:-25', '25:-25', '25:-75'), 'left');
   assert.equal(turnDirection(graph, '-25:-25', '25:-25', '75:-25'), 'straight');
   assert.ok(laneTarget(graph, '-25:-25', '25:-25', 1));
 
@@ -42,7 +53,15 @@ test('no-path and invalid destinations fail safely without non-finite route poin
   assert.ok(Number.isFinite(target.x) && Number.isFinite(target.z));
 });
 
-test('six physical AI cars follow varied road paths and replan for two simulated minutes', () => {
+test('detour search avoids returning through the blocked junction while retaining the destination', () => {
+  const graph = createRoadGraph(createCityPlan().roadNetwork);
+  const route = findRoadRoute(graph, '25:75', '75:25', new Set(['25:25']));
+  assert.equal(route.at(-1), '75:25');
+  assert.ok(!route.includes('25:25'));
+  assert.equal(findRoadRoute(graph, '25:25', '75:25', new Set(['25:25'])), null);
+});
+
+test('six hybrid AI cars follow varied road paths and replan for two simulated minutes', () => {
   const plan = createCityPlan();
   const player = new CarSimulation();
   const traffic = createTraffic(new THREE.Scene(), THREE, 6, plan.roadNetwork, plan.roadWidth);
@@ -50,7 +69,14 @@ test('six physical AI cars follow varied road paths and replan for two simulated
   const initial = traffic.debug();
   assert.ok(new Set(initial.map(car => car.goal)).size >= 3);
   const start = traffic.states.map(state => [state.simulation.body.position.x, state.simulation.body.position.z]);
-  for (let tick = 0; tick < 120 * 120; tick++) traffic.stepWorld({}, STEP);
+  const previous = start.map(point => [...point]), travel = start.map(() => 0);
+  for (let tick = 0; tick < 120 * 120; tick++) {
+    traffic.stepWorld({}, STEP);
+    traffic.states.forEach((state, index) => {
+      travel[index] += Math.hypot(state.x - previous[index][0], state.z - previous[index][1]);
+      previous[index] = [state.x, state.z];
+    });
+  }
   const final = traffic.debug();
   assert.ok(final.reduce((sum, car) => sum + car.completedGoals, 0) >= 3,
     `AI did not reach/replan goals: ${JSON.stringify(final)}`);
@@ -59,8 +85,8 @@ test('six physical AI cars follow varied road paths and replan for two simulated
   assert.ok(traffic.states.every((state, index) => {
     const body = state.simulation.body;
     return [body.position.x, body.position.y, body.position.z, body.velocity.x, body.velocity.y, body.velocity.z].every(Number.isFinite)
-      && Math.hypot(body.position.x - start[index][0], body.position.z - start[index][1]) > 25;
-  }), 'cars should travel through the district without scripted transforms');
+      && travel[index] > 100;
+  }), `each car should travel through the district, distances: ${travel}; ${JSON.stringify(final)}`);
   traffic.setCount(0); traffic.stepWorld({}, STEP);
   assert.equal(traffic.status().reservations, 0);
   traffic.dispose();
@@ -104,14 +130,17 @@ test('AI detects a stationary leader independently of its commanded speed and pa
   player.body.position.set(npc.position.x + forwardX * 8, 0.96, npc.position.z + forwardZ * 8);
   player.body.quaternion.copy(npc.quaternion); player.body.velocity.setZero(); player.body.aabbNeedsUpdate = true;
   const blockerX = player.body.position.x, blockerZ = player.body.position.z;
+  let sawManeuver = false, stalledAge = 0;
   for (let tick = 0; tick < 9 * 120; tick++) {
     traffic.stepWorld({}, STEP);
     player.body.position.set(blockerX, 0.96, blockerZ);
-    player.body.quaternion.copy(npc.quaternion); player.body.velocity.setZero(); player.body.aabbNeedsUpdate = true;
+    player.body.quaternion.setFromEuler(0, yaw, 0); player.body.velocity.setZero(); player.body.aabbNeedsUpdate = true;
+    sawManeuver ||= Boolean(traffic.states[0].ai.maneuver);
+    stalledAge = Math.max(stalledAge, traffic.states[0].ai.noProgressTime || 0);
   }
   const [debug] = traffic.debug();
-  assert.ok(debug.noProgressTime >= 3, JSON.stringify(debug));
-  assert.ok(debug.maneuver, 'NPC should select a verified clear passing corridor');
+  assert.ok(stalledAge >= 3, JSON.stringify(debug));
+  assert.ok(sawManeuver, 'NPC should select a verified clear passing corridor');
   assert.ok(Math.abs(npc.position.z - player.body.position.z) > 1.5,
     `NPC should move laterally around the stopped leader (${npc.position.x}, ${npc.position.z}), speed=${npc.velocity.x},${npc.velocity.z}; ${JSON.stringify(debug)}`);
   traffic.dispose();
@@ -126,7 +155,7 @@ test('AI waits instead of entering occupied passing lanes when the route corrido
   const primary = traffic.states[0], npc = primary.simulation.body;
   const yaw = Math.atan2(2 * (npc.quaternion.x * npc.quaternion.z + npc.quaternion.w * npc.quaternion.y),
     1 - 2 * (npc.quaternion.x ** 2 + npc.quaternion.y ** 2));
-  const forwardX = Math.sin(yaw), forwardZ = Math.cos(yaw), rightX = forwardZ, rightZ = -forwardX;
+  const forwardX = Math.sin(yaw), forwardZ = Math.cos(yaw), rightX = -forwardZ, rightZ = forwardX;
   const originX = npc.position.x, originZ = npc.position.z;
   const setPosition = (body, ahead, offset) => {
     body.position.set(originX + forwardX * ahead + rightX * offset, 0.96, originZ + forwardZ * ahead + rightZ * offset);
@@ -162,8 +191,8 @@ test('conflicting paths reserve the same junction for one car with stable id pri
     state.simulation.body.quaternion.setFromEuler(0, yaw, 0);
     state.simulation.body.velocity.setZero(); state.simulation.body.aabbNeedsUpdate = true;
   };
-  configure(first, 'npc-02', '-25:25', '25:25', '75:25', 17, 20, Math.PI / 2);
-  configure(second, 'npc-01', '25:-25', '25:25', '25:75', 30, 17, 0);
+  configure(first, 'npc-02', '-25:25', '25:25', '75:25', 17, 28.75, Math.PI / 2);
+  configure(second, 'npc-01', '25:-25', '25:25', '25:75', 21.25, 17, 0);
   traffic.prepare(0.11);
   assert.equal(traffic.reservations.size, 1, JSON.stringify(traffic.debug()));
   assert.equal(traffic.reservations.get('25:25').id, 'npc-01', 'lower stable id wins an unentered conflict');
@@ -187,8 +216,8 @@ test('conflicting physical traffic crosses a reserved junction without chassis c
     state.simulation.body.velocity.set(Math.sin(yaw) * 3.5, 0, Math.cos(yaw) * 3.5);
     state.simulation.body.aabbNeedsUpdate = true;
   };
-  configure(traffic.states[0], '-25:25', '25:25', '25:75', 17, 20, Math.PI / 2);
-  configure(traffic.states[1], '25:-25', '25:25', '-25:25', 30, 17, 0);
+  configure(traffic.states[0], '-25:25', '25:25', '25:75', 17, 28.75, Math.PI / 2);
+  configure(traffic.states[1], '25:-25', '25:25', '-25:25', 21.25, 17, 0);
   let closest = Infinity, crossedAt = null;
   for (let tick = 0; tick < 10 * 120; tick++) {
     traffic.stepWorld({}, STEP);
