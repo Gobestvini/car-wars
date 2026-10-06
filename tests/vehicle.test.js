@@ -29,7 +29,7 @@ test('medium-speed steering responds quickly and holds a stable arcade turn', ()
   const entry = s.telemetry();
   assert.ok(entry.speed >= 40 && entry.speed <= 70, `entry speed ${entry.speed} km/h`);
   run(s, 0.18, { throttle: 0.45, steer: 0.65 });
-  const requestedLock = 0.78 / (1 + Math.abs(s.signedSpeed) * 0.016) * 0.65;
+  const requestedLock = 0.95 / (1 + Math.abs(s.signedSpeed) * 0.016) * 0.65;
   assert.ok(s.steering >= requestedLock * 0.8, `steer ${s.steering}, target ${requestedLock}`);
   const startHeading = s.telemetry().heading;
   let maxRoll = 0;
@@ -38,6 +38,105 @@ test('medium-speed steering responds quickly and holds a stable arcade turn', ()
   assert.ok(s.telemetry().heading - startHeading > 0.4);
   assert.ok(maxRoll < 0.4);
   assert.equal(s.telemetry().grounded, 4);
+});
+
+test('50 km/h steering meets response, heading, and lateral-slip targets', () => {
+  const s = settled();
+  const forward = s.body.quaternion.vmult({ x: 0, y: 0, z: 1 });
+  s.body.velocity.set(forward.x * 50 / 3.6, 0, forward.z * 50 / 3.6);
+  const startHeading = s.telemetry().heading;
+  const requestedLock = 0.95 / (1 + Math.abs(s.signedSpeed) * 0.016) * 0.65;
+  let response = null, lateralRatio = 0, maxRoll = 0;
+  for (let i = 1; i <= 120; i++) {
+    s.step({ throttle: 0.55, steer: 0.65 });
+    if (response === null && Math.abs(s.steering) >= requestedLock * 0.9) response = i * STEP;
+    const bodyForward = s.body.quaternion.vmult({ x: 0, y: 0, z: 1 });
+    const bodyRight = s.body.quaternion.vmult({ x: 1, y: 0, z: 0 });
+    lateralRatio += Math.abs(s.body.velocity.dot(bodyRight)) / Math.max(Math.abs(s.body.velocity.dot(bodyForward)), 1);
+    maxRoll = Math.max(maxRoll, Math.abs(s.telemetry().roll));
+  }
+  assert.ok(response <= 0.18, `90% steering response ${response}s`);
+  assert.ok(s.telemetry().heading - startHeading >= 0.79, `heading change ${s.telemetry().heading - startHeading} rad`);
+  assert.ok(lateralRatio / 120 <= 0.0497, `mean lateral ratio ${lateralRatio / 120}`);
+  assert.ok(maxRoll < 0.4);
+  assert.equal(s.telemetry().grounded, 4);
+});
+
+test('coasting from 50 km/h retains 60–90% speed over one second', () => {
+  const s = settled();
+  const forward = s.body.quaternion.vmult({ x: 0, y: 0, z: 1 });
+  s.body.velocity.set(forward.x * 50 / 3.6, 0, forward.z * 50 / 3.6);
+  run(s, 1);
+  const retained = s.telemetry().speed / 50;
+  assert.ok(retained >= 0.6 && retained <= 0.9, `retained speed ${retained}`);
+});
+
+test('partial damage still reduces throttle response', () => {
+  const acceleration = damage => {
+    const s = settled();
+    s.damage = damage;
+    run(s, 2, { throttle: 1 });
+    return s.telemetry().speed;
+  };
+  const healthySpeed = acceleration(0);
+  const damagedSpeed = acceleration(0.75);
+  assert.ok(damagedSpeed < healthySpeed * 0.65, `healthy ${healthySpeed} km/h, damaged ${damagedSpeed} km/h`);
+});
+
+test('handbrake keeps a controllable, grounded rear slide', () => {
+  const measure = handbrake => {
+    const s = settled();
+    const forward = s.body.quaternion.vmult({ x: 0, y: 0, z: 1 });
+    s.body.velocity.set(forward.x * 50 / 3.6, 0, forward.z * 50 / 3.6);
+    const startHeading = s.telemetry().heading;
+    let lateralRatio = 0, maxRoll = 0;
+    for (let i = 0; i < 120; i++) {
+      s.step({ throttle: 0.55, steer: 0.65, handbrake });
+      const bodyForward = s.body.quaternion.vmult({ x: 0, y: 0, z: 1 });
+      const bodyRight = s.body.quaternion.vmult({ x: 1, y: 0, z: 0 });
+      lateralRatio += Math.abs(s.body.velocity.dot(bodyRight)) / Math.max(Math.abs(s.body.velocity.dot(bodyForward)), 1);
+      maxRoll = Math.max(maxRoll, Math.abs(s.telemetry().roll));
+    }
+    return { heading: s.telemetry().heading - startHeading, lateralRatio: lateralRatio / 120, maxRoll, grounded: s.telemetry().grounded };
+  };
+  const normal = measure(false), drift = measure(true);
+  assert.ok(drift.heading > normal.heading + 0.5);
+  assert.ok(drift.lateralRatio > normal.lateralRatio * 2);
+  assert.ok(drift.maxRoll < 0.4);
+  assert.equal(drift.grounded, 4);
+});
+
+test('three-wheel handling keeps stepping without support or drive from the detached wheel', () => {
+  const s = settled();
+  const detachedWheel = s.wheels[0];
+  s.detachWheelAtImpact({
+    speed: 18,
+    point: { x: detachedWheel.mount.x, y: detachedWheel.mount.y, z: detachedWheel.mount.z },
+    normal: { x: -1, y: 0, z: 0 },
+  });
+  const forward = s.body.quaternion.vmult({ x: 0, y: 0, z: 1 });
+  s.body.velocity.set(forward.x * 40 / 3.6, 0, forward.z * 40 / 3.6);
+  let maxRoll = 0;
+  for (let i = 0; i < 3 / STEP; i++) {
+    s.step({ throttle: 0.55, steer: 0.65 });
+    maxRoll = Math.max(maxRoll, Math.abs(s.telemetry().roll));
+  }
+  assert.equal(detachedWheel.load, 0);
+  assert.equal(detachedWheel.grounded, false);
+  assert.ok(s.world.bodies.includes(detachedWheel.detachedBody));
+  assert.ok(s.telemetry().grounded >= 2 && s.telemetry().grounded <= 3);
+  assert.ok(Math.abs(s.telemetry().roll) < 0.45 && maxRoll < 0.45);
+  assert.ok([s.body.position.x, s.body.position.y, s.body.position.z, s.body.velocity.length()].every(Number.isFinite));
+});
+
+test('steering and tire forces do not add yaw while the car is airborne', () => {
+  const s = new CarSimulation();
+  s.body.position.y = 8;
+  s.body.aabbNeedsUpdate = true;
+  run(s, 0.25, { throttle: 1, steer: 1 });
+  assert.equal(s.telemetry().grounded, 0);
+  assert.ok(s.wheels.every(wheel => wheel.load === 0));
+  assert.ok(s.body.angularVelocity.length() < 1e-6);
 });
 
 test('full-lock arcade turn at top speed keeps all tires close to the ground', () => {
@@ -62,7 +161,7 @@ test('fixed step has similar acceleration at 60 Hz and 120 Hz', () => {
   assert.ok(Math.abs(a.telemetry().speed - b.telemetry().speed) < 3);
 });
 test('tuning extremes stay finite through prolonged steering and braking', () => {
-  for (const tuning of [{ softness: 1, grip: 0.55, power: 1.6 }, { softness: 0, grip: 1.25, power: 0.5 }]) {
+  for (const tuning of [{ softness: 1, grip: 0.55, power: 1.6 }, { softness: 0, grip: 1.8, power: 0.5 }]) {
     const s = settled(); Object.assign(s.tuning, tuning);
     for (let i = 0; i < 7200; i++) {
       s.step({ throttle: i % 1200 < 900 ? 1 : 0, brake: i % 1200 >= 900 ? 1 : 0, steer: Math.sin(i / 400), handbrake: i % 1700 > 1550 });

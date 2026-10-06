@@ -1,37 +1,63 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createCityPlan, CITY_BOUNDS, ROAD_WIDTH, ROAD_CENTRES, BUILDING_SETBACK } from '../src/city-generator.js';
+import { createCityPlan, CITY_BOUNDS, ROAD_WIDTH, ROAD_CENTRES, BUILDING_SETBACK, CITY_CONFIG } from '../src/city-generator.js';
 
-test('city plan is deterministic for a seed and changes for another seed', () => {
+test('city plans are deterministic for a seed and vary with seed/road width', () => {
   assert.deepEqual(createCityPlan(123), createCityPlan(123));
   assert.notDeepEqual(createCityPlan(123).buildings, createCityPlan(124).buildings);
+  assert.notDeepEqual(createCityPlan(123, { roadWidth: 12 }).buildings, createCityPlan(123, { roadWidth: 30 }).buildings);
 });
 
-test('buildings stay inside the finite district, avoid the start and road corridors', () => {
+test('default district expands to a deterministic grid with connected street intersections', () => {
   const plan = createCityPlan();
-  assert.ok(plan.buildings.length >= 24);
+  assert.equal(CITY_BOUNDS, 210);
+  assert.equal(plan.bounds * 2, 420);
+  assert.equal(ROAD_WIDTH, 15);
+  assert.deepEqual(ROAD_CENTRES, [-175, -125, -75, -25, 25, 75, 125, 175]);
+  assert.equal(plan.buildings.length, 192);
   assert.equal(plan.landmarks.length, 3);
-  for (const b of plan.buildings) {
-    assert.ok(Number.isFinite(b.x + b.z + b.height));
-    assert.ok(Math.abs(b.x) + b.width / 2 < CITY_BOUNDS - 5);
-    assert.ok(Math.abs(b.z) + b.depth / 2 < CITY_BOUNDS - 5);
-    const clearX = Math.max(0, Math.abs(b.x) - b.width / 2);
-    const clearZ = Math.max(0, Math.abs(b.z) - b.depth / 2);
-    assert.ok(Math.hypot(clearX, clearZ) > 4.5);
-    for (const road of plan.roads) {
-      const xClear = Math.abs(b.x - road) - b.width / 2;
-      const zClear = Math.abs(b.z - road) - b.depth / 2;
-      assert.ok(Math.max(xClear, zClear) >= ROAD_WIDTH / 2 + BUILDING_SETBACK);
+  assert.equal(plan.roadNetwork.intersections.length, 64);
+  assert.equal(plan.roadNetwork.edges.length, 112);
+  assert.ok(plan.roadNetwork.edges.every(edge => edge.length === 50));
+  assert.deepEqual(plan.roadNetwork.horizontal, plan.roads);
+  assert.deepEqual(plan.roadNetwork.vertical, plan.roads);
+  assert.ok(plan.buildings.every(building => Math.hypot(building.x, building.z) > 20));
+});
+
+test('buildings fit their blocks, stay inside walls, and clear streets at all supported widths', () => {
+  for (const roadWidth of [12, 15, 20, 30]) {
+    const plan = createCityPlan(20261005, { roadWidth });
+    assert.equal(plan.roadWidth, roadWidth);
+    for (const building of plan.buildings) {
+      assert.ok(Number.isFinite(building.x + building.z + building.height));
+      assert.ok(Math.abs(building.x) + building.width / 2 < plan.bounds - 5);
+      assert.ok(Math.abs(building.z) + building.depth / 2 < plan.bounds - 5);
+      assert.ok(Math.hypot(building.width, building.depth) > 0);
+      for (const road of plan.roads) {
+        const xClearance = Math.abs(building.x - road) - building.width / 2;
+        const zClearance = Math.abs(building.z - road) - building.depth / 2;
+        assert.ok(Math.max(xClearance, zClearance) >= roadWidth / 2 + BUILDING_SETBACK - 1e-8,
+          `building ${building.id} enters a ${roadWidth}m road corridor`);
+      }
     }
   }
 });
 
-test('wide connected street grid, setbacks, open spawn, and landmarks stay coherent', () => {
-  const plan = createCityPlan();
-  assert.equal(ROAD_WIDTH, 22);
-  assert.deepEqual(ROAD_CENTRES, [-75, -25, 25, 75]);
-  assert.equal(plan.buildings.length, 32);
-  assert.equal(plan.landmarks.length, 3);
-  assert.ok(plan.buildings.every(b => Math.hypot(b.x, b.z) > 20));
-  assert.ok(Math.max(...plan.buildings.flatMap(b => [Math.abs(b.x) + b.width / 2, Math.abs(b.z) + b.depth / 2])) < CITY_BOUNDS - 5);
+test('invalid width options fail before a city plan can be used', () => {
+  for (const roadWidth of [NaN, 11, 31, Infinity]) {
+    assert.throws(() => createCityPlan(1, { roadWidth }), RangeError);
+  }
+  assert.throws(() => createCityPlan(Number.NaN), TypeError);
+});
+
+test('city dimensions are configurable and wider footprints keep seeded heights stable', () => {
+  const base = createCityPlan(20261005);
+  const wider = createCityPlan(20261005, { config: { ...CITY_CONFIG, buildingFootprint: { min: 10, max: 12 } } });
+  assert.equal(wider.sidewalkWidth, 2);
+  assert.ok(wider.buildings.every(building => building.width >= 10 && building.width <= 12));
+  assert.deepEqual(wider.buildings.map(building => building.height), base.buildings.map(building => building.height));
+  assert.deepEqual(base.buildings.slice(0, 8).map(building => building.height),
+    [23, 5.677488787397743, 5.488524606302381, 8.194505616500974, 5.708790482878685, 5.700746128633619, 5.6394354119151835, 11.108622681498527]);
+  assert.throws(() => createCityPlan(1, { config: { ...CITY_CONFIG, sidewalkWidth: -1 } }), RangeError);
+  assert.throws(() => createCityPlan(1, { config: { ...CITY_CONFIG, buildingFootprint: { min: 12, max: 10 } } }), RangeError);
 });

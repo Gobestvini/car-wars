@@ -1,6 +1,6 @@
 export const CAMERA_SPEED_MIN_KMH = 15;
 export const CAMERA_SPEED_MAX_KMH = 110;
-export const CAMERA_MAX_SCALE = 1.35;
+export const CAMERA_MAX_SCALE = 1.7;
 export const CAMERA_ZOOM_OUT_RATE = 2.5;
 export const CAMERA_ZOOM_IN_RATE = 1.8;
 

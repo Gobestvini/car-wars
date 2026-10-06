@@ -5,9 +5,9 @@ import { targetCameraScale, smoothCameraScale } from '../src/camera-distance.js'
 test('camera target scale follows the bounded smooth speed range', () => {
   assert.equal(targetCameraScale(0), 1);
   assert.equal(targetCameraScale(15), 1);
-  assert.ok(Math.abs(targetCameraScale(62.5) - 1.175) < 1e-6);
-  assert.equal(targetCameraScale(110), 1.35);
-  assert.equal(targetCameraScale(200), 1.35);
+  assert.ok(Math.abs(targetCameraScale(62.5) - 1.35) < 1e-6);
+  assert.equal(targetCameraScale(110), 1.7);
+  assert.equal(targetCameraScale(200), 1.7);
   let previous = targetCameraScale(15);
   for (let speed = 16; speed <= 110; speed++) {
     const next = targetCameraScale(speed);

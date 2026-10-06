@@ -1,20 +1,43 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CarSimulation, DEFAULT_TUNING, STEP } from './vehicle.js';
 import { joystickVector } from './joystick.js';
 import { directionalInput } from './driving-input.js';
+import { DonutGesture, donutDriveInput } from './donut-input.js';
 import { FixedStepper } from './game-loop.js';
 import { TireTracks } from './tire-tracks.js';
 import { smoothCameraScale, targetCameraScale } from './camera-distance.js';
-import { createCityPlan, CITY_BOUNDS, ROAD_WIDTH } from './city-generator.js';
+import { createCityPlan, ROAD_WIDTH } from './city-generator.js';
+import { createCityScene } from './city-scene.js';
+import { updateShadowCoverage } from './shadow-coverage.js';
 import { createTraffic } from './traffic.js';
+import { createTrafficSignals } from './traffic-signals.js';
 import { CarDeformation } from './car-deformation.js';
-import { BuildingOcclusion } from './building-occlusion.js';
+import { createSettings } from './settings.js';
+import { clearSettingsDefaults, readSettingsDefaults, saveSettingsDefaults } from './settings-defaults.js';
 import './style.css';
 
 const $ = id => document.getElementById(id);
+const debug = location.hash === '#debug' || new URLSearchParams(location.search).has('debug');
+let cameraMode = 'follow';
+const freeCameraSpeed = 15;
+const factorySettings = {
+  ...DEFAULT_TUNING,
+  quality: matchMedia('(pointer: coarse)').matches ? 'Лёгкая' : 'Высокая',
+  trails: true,
+  roadWidth: ROAD_WIDTH,
+  trafficCount: 60,
+  cameraSpeed: freeCameraSpeed,
+  drawDistanceFollow: 200,
+  drawDistanceFree: 600,
+};
+const getSettingsStorage = () => { try { return window.localStorage; } catch { return null; } };
+const savedDefaults = readSettingsDefaults(getSettingsStorage(), factorySettings);
 const canvas = $('scene');
+const speedDisplay = $('speed');
 const sim = new CarSimulation();
+Object.assign(sim.tuning, { softness: savedDefaults.softness, grip: savedDefaults.grip, power: savedDefaults.power });
 let renderer;
 try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
@@ -22,7 +45,7 @@ try {
   $('load-status').textContent = 'Для 3D нужен браузер с поддержкой WebGL.';
   throw error;
 }
-let quality = matchMedia('(pointer: coarse)').matches ? 'low' : 'high';
+let quality = savedDefaults.quality === 'Лёгкая' ? 'low' : 'high';
 renderer.setPixelRatio(Math.min(devicePixelRatio, quality === 'low' ? 1 : 1.75));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -31,78 +54,34 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.3;
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#ecece6');
-scene.fog = new THREE.Fog('#ecece6', 65, 150);
+scene.fog = new THREE.Fog('#ecece6', 100, 260);
 const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.1, 200);
+const orbitControls = debug ? new OrbitControls(camera, canvas) : null;
+if (orbitControls) {
+  orbitControls.enabled = false;
+  orbitControls.enableDamping = false;
+  orbitControls.minDistance = 5;
+  orbitControls.maxDistance = 600;
+  orbitControls.minPolarAngle = 0.08;
+  orbitControls.maxPolarAngle = Math.PI / 2 - 0.01;
+}
 const follow = new THREE.Vector3();
 const cameraOffset = new THREE.Vector3(12, 20, -17);
+const cameraLookAt = new THREE.Vector3();
 let cameraDistanceScale = 1;
+let shadowBounds = null;
 scene.add(new THREE.HemisphereLight(0xf7fbf0, 0x9aa69b, 2.6));
 const sun = new THREE.DirectionalLight(0xfff5df, 3.1);
 sun.position.set(-14, 24, 10);
 sun.castShadow = true;
 sun.shadow.mapSize.set(1024, 1024);
-sun.shadow.camera.left = sun.shadow.camera.bottom = -16;
-sun.shadow.camera.right = sun.shadow.camera.top = 16;
-sun.shadow.camera.near = 1; sun.shadow.camera.far = 70;
+sun.shadow.camera.left = sun.shadow.camera.bottom = -48;
+sun.shadow.camera.right = sun.shadow.camera.top = 48;
+sun.shadow.camera.near = 0.1; sun.shadow.camera.far = 100;
 sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.03;
 sun.shadow.radius = 3;
 scene.add(sun, sun.target);
 
-const cityPlan = createCityPlan();
-const city = new THREE.Group(); city.name = 'Procedural City'; scene.add(city);
-const pavementMaterial = new THREE.MeshStandardMaterial({ color: '#bdb9aa', roughness: 1 });
-const roadMaterial = new THREE.MeshStandardMaterial({ color: '#353a3c', roughness: 0.96 });
-function cityPlane(width, depth, material, x = 0, z = 0, y = 0.015) {
-  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(width, depth), material);
-  mesh.rotation.x = -Math.PI / 2; mesh.position.set(x, y, z); mesh.receiveShadow = true; city.add(mesh);
-}
-cityPlane(CITY_BOUNDS * 2, CITY_BOUNDS * 2, pavementMaterial, 0, 0, -0.015);
-for (const road of cityPlan.roads) {
-  cityPlane(ROAD_WIDTH, CITY_BOUNDS * 2, roadMaterial, road, 0, 0.005);
-  cityPlane(CITY_BOUNDS * 2, ROAD_WIDTH, roadMaterial, 0, road, 0.005);
-}
-// Short connectors turn the empty central block into an open, four-way start plaza.
-cityPlane(ROAD_WIDTH, 50, roadMaterial, 0, 0, 0.006);
-cityPlane(50, ROAD_WIDTH, roadMaterial, 0, 0, 0.006);
-const dashGeometry = new THREE.BoxGeometry(0.16, 0.025, 2.2);
-const dashMaterial = new THREE.MeshStandardMaterial({ color: '#d6cdb4', roughness: 1 });
-const dashPositions = [];
-const dashMatrix = new THREE.Matrix4(); let dashIndex = 0;
-for (const road of cityPlan.roads) for (let offset = -CITY_BOUNDS + 6; offset <= CITY_BOUNDS - 6; offset += 6) {
-  if (cityPlan.roads.some(cross => Math.abs(offset - cross) < ROAD_WIDTH / 2 + 3)) continue;
-  dashPositions.push([road, offset], [offset, road]);
-}
-const dashes = new THREE.InstancedMesh(dashGeometry, dashMaterial, dashPositions.length);
-for (const [x, z] of dashPositions) { dashMatrix.makeTranslation(x, 0.025, z); dashes.setMatrixAt(dashIndex++, dashMatrix); }
-city.add(dashes);
-const buildingGeometry = new THREE.BoxGeometry(1, 1, 1);
-const buildingMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.88 });
-const buildings = new THREE.InstancedMesh(buildingGeometry, buildingMaterial, cityPlan.buildings.length);
-const buildingMatrix = new THREE.Matrix4();
-const buildingEntries = [];
-for (let i = 0; i < cityPlan.buildings.length; i++) {
-  const b = cityPlan.buildings[i];
-  buildingMatrix.compose(new THREE.Vector3(b.x, b.height / 2, b.z), new THREE.Quaternion(), new THREE.Vector3(b.width, b.height, b.depth));
-  buildings.setMatrixAt(i, buildingMatrix); buildings.setColorAt(i, new THREE.Color(b.color));
-  const entry = { ...b, index: i, opacity: 1, proxy: null, proxyMaterial: null,
-    bounds: { min: { x: b.x - b.width / 2, y: 0, z: b.z - b.depth / 2 }, max: { x: b.x + b.width / 2, y: b.height, z: b.z + b.depth / 2 } }, caps: [] };
-  buildingEntries.push(entry);
-  if (b.landmark) {
-    const cap = new THREE.Mesh(new THREE.ConeGeometry(b.width * 0.55, b.kind === 'tower' ? 5 : 2.5, b.kind === 'clock' ? 4 : 8), new THREE.MeshStandardMaterial({ color: '#675e53', roughness: 0.9 }));
-    cap.position.set(b.x, b.height + (b.kind === 'tower' ? 2.5 : 1.25), b.z); cap.castShadow = true; city.add(cap);
-    entry.caps.push(cap);
-  }
-}
-buildings.castShadow = true; buildings.receiveShadow = true; city.add(buildings);
-const buildingOcclusion = new BuildingOcclusion(THREE, city, buildings, buildingGeometry, buildingEntries);
-const grass = new THREE.Mesh(new THREE.PlaneGeometry(260, 260), new THREE.MeshStandardMaterial({ color: '#71816c', roughness: 1 }));
-grass.rotation.x = -Math.PI / 2; grass.position.y = -0.04; grass.receiveShadow = true; scene.add(grass);
-for (const [x, z, sx, sz] of [[0, -CITY_BOUNDS, CITY_BOUNDS * 2 + ROAD_WIDTH, 3], [0, CITY_BOUNDS, CITY_BOUNDS * 2 + ROAD_WIDTH, 3], [-CITY_BOUNDS, 0, 3, CITY_BOUNDS * 2 + ROAD_WIDTH], [CITY_BOUNDS, 0, 3, CITY_BOUNDS * 2 + ROAD_WIDTH]]) {
-  const wall = new THREE.Mesh(new THREE.BoxGeometry(sx, 3.2, sz), new THREE.MeshStandardMaterial({ color: '#8a8980', roughness: 1 }));
-  wall.position.set(x, 1.6, z); wall.castShadow = true; city.add(wall);
-}
-for (const b of cityPlan.buildings) sim.addStaticBox({ x: b.x, y: b.height / 2, z: b.z, halfX: b.width / 2, halfY: b.height / 2, halfZ: b.depth / 2 });
-for (const [x, z, sx, sz] of [[0, -CITY_BOUNDS, CITY_BOUNDS * 2 + ROAD_WIDTH, 3], [0, CITY_BOUNDS, CITY_BOUNDS * 2 + ROAD_WIDTH, 3], [-CITY_BOUNDS, 0, 3, CITY_BOUNDS * 2 + ROAD_WIDTH], [CITY_BOUNDS, 0, 3, CITY_BOUNDS * 2 + ROAD_WIDTH]]) sim.addStaticBox({ x, y: 1.6, z, halfX: sx / 2, halfY: 1.6, halfZ: sz / 2 });
 const damageTestType = new URLSearchParams(location.search).get('damageTest');
 const damageTest = damageTestType !== null;
 const damageTestObstacles = damageTestType === 'wheel' ? [[-1.72, 0.44, 0.3, 0.7, 1.4, -0.45]]
@@ -110,14 +89,21 @@ const damageTestObstacles = damageTestType === 'wheel' ? [[-1.72, 0.44, 0.3, 0.7
   : damageTestType === 'rear' ? [[4, -10, 8, 1.2]]
     : damageTestType === 'front' ? [[-8, 18, 10, 1.2]]
       : [[-8, 18, 10, 1.2], [-6, 10, 1.2, 14], [4, -10, 8, 1.2]];
-if (damageTest) for (const [x, z, sx, sz, height = 1.4, yaw = 0] of damageTestObstacles) {
-  const obstacle = new THREE.Mesh(new THREE.BoxGeometry(sx, height, sz), new THREE.MeshStandardMaterial({ color: '#c4a45f', roughness: 0.95 }));
-  obstacle.position.set(x, height / 2, z); obstacle.rotation.y = yaw; obstacle.castShadow = true; obstacle.receiveShadow = true; city.add(obstacle);
-  sim.addStaticBox({ x, y: height / 2, z, halfX: sx / 2, halfY: height / 2, halfZ: sz / 2, yaw });
-}
+let cityPlan = createCityPlan(undefined, { roadWidth: savedDefaults.roadWidth });
+let cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : []);
+let buildingEntries = cityState.entries;
+let buildingOcclusion = cityState.occlusion;
+const spawnObstaclesForPlan = plan => [...plan.buildings.map(building => ({ x: building.x, z: building.z,
+  halfX: building.width / 2, halfZ: building.depth / 2, heading: 0 })),
+...(damageTest ? damageTestObstacles.map(([x, z, width, depth, , heading = 0]) =>
+  ({ x, z, halfX: width / 2, halfZ: depth / 2, heading })) : [])];
+let trafficSpawnObstacles = spawnObstaclesForPlan(cityPlan);
 
 const car = new THREE.Group(); scene.add(car);
-const traffic = createTraffic(scene, THREE, 6);
+const traffic = createTraffic(scene, THREE, savedDefaults.trafficCount, cityPlan.roadNetwork, cityPlan.roadWidth, trafficSpawnObstacles);
+traffic.attachPhysics(sim);
+let trafficSignals = createTrafficSignals(cityPlan.roadNetwork);
+traffic.setSignalController(trafficSignals);
 const visualWheels = [];
 let modelReady = false;
 let loading = false;
@@ -127,6 +113,8 @@ const treadMaterial = new THREE.MeshStandardMaterial({ color: '#252b2c', roughne
 async function loadCar() {
   if (loading || modelReady) return;
   loading = true;
+  $('load-status').hidden = false;
+  $('load-status').textContent = 'Загрузка машины…';
   $('retry-load').hidden = true;
   try {
     const manager = new THREE.LoadingManager();
@@ -183,7 +171,7 @@ async function loadCar() {
     updateCamera(1);
     await renderer.compileAsync(scene, camera);
     modelReady = true;
-    $('load-status').textContent = '';
+    $('load-status').hidden = true;
   } catch (error) {
     console.error('Car model failed to load', error);
     // A retry must not duplicate partially prepared meshes after a compile failure.
@@ -202,8 +190,10 @@ loadCar();
 $('retry-load').addEventListener('click', loadCar);
 
 const tracks = new TireTracks(scene);
+tracks.mesh.visible = savedDefaults.trails;
 
 const pointer = { active: false, id: null, x: 0, y: 0, startX: 0, startY: 0 };
+const donutGesture = new DonutGesture();
 let driveDirection = 1;
 const keys = new Set();
 // The camera has a fixed yaw: convert screen directions to horizontal world axes.
@@ -213,12 +203,15 @@ const desiredDirection = new THREE.Vector3();
 function updatePointer(event) {
   pointer.x = event.clientX; pointer.y = event.clientY;
   const stick = joystickVector(pointer.startX, pointer.startY, pointer.x, pointer.y);
+  donutGesture.update(Math.atan2(-stick.y, stick.x), stick.strength, Math.abs(sim.signedSpeed) * 3.6, performance.now() / 1000);
   $('touch-marker').firstElementChild.style.transform = `translate(${stick.knobX}px, ${stick.knobY}px)`;
 }
 canvas.addEventListener('pointerdown', event => {
+  if (cameraMode === 'free') return;
   if (pointer.active || (event.pointerType === 'mouse' && event.button !== 0)) return;
   if (!modelReady) return;
   pointer.active = true; pointer.id = event.pointerId;
+  donutGesture.begin();
   pointer.startX = event.clientX; pointer.startY = event.clientY;
   $('touch-marker').style.left = `${pointer.startX}px`; $('touch-marker').style.top = `${pointer.startY}px`;
   updatePointer(event);
@@ -229,6 +222,7 @@ canvas.addEventListener('pointermove', event => { if (pointer.active && pointer.
 function releasePointer(event) {
   if (event && event.pointerId !== pointer.id) return;
   pointer.active = false; pointer.id = null;
+  donutGesture.reset();
   $('touch-marker').style.display = 'none';
 }
 canvas.addEventListener('pointerup', releasePointer);
@@ -241,14 +235,16 @@ document.addEventListener('visibilitychange', () => {
   previousTime = performance.now();
 });
 window.addEventListener('keydown', event => {
+  if (event.target.closest?.('#settings')) return;
   if (/INPUT|TEXTAREA/.test(document.activeElement?.tagName)) return;
   if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.code)) event.preventDefault();
   keys.add(event.code);
-  if (event.code === 'KeyR' && !event.repeat) reset();
+  if (event.code === 'KeyR' && !event.repeat && cameraMode !== 'free') reset();
 });
 window.addEventListener('keyup', event => keys.delete(event.code));
 const has = (...codes) => codes.some(code => keys.has(code));
 function getInput() {
+  if (cameraMode === 'free') return { steer: 0, throttle: 0, brake: 1, handbrake: false };
   const telemetry = sim.telemetry();
   const speed = telemetry.signedSpeed;
   const keyboard = has('KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space');
@@ -262,6 +258,11 @@ function getInput() {
   } else if (pointer.active) {
     const stick = joystickVector(pointer.startX, pointer.startY, pointer.x, pointer.y);
     if (stick.strength > 0) {
+      const donut = donutGesture.read(stick.strength, performance.now() / 1000);
+      if (donut.active) {
+        driveDirection = 1;
+        return donutDriveInput(donut.direction, stick.strength);
+      }
       screenRight.setFromMatrixColumn(camera.matrixWorld, 0); screenRight.y = 0; screenRight.normalize();
       screenUp.setFromMatrixColumn(camera.matrixWorld, 1); screenUp.y = 0; screenUp.normalize();
       desiredDirection.copy(screenRight).multiplyScalar(stick.x).addScaledVector(screenUp, -stick.y);
@@ -284,10 +285,6 @@ function reset() {
   stepper.reset();
   updateCamera(1);
 }
-$('reset').addEventListener('click', reset);
-$('settings-button').addEventListener('click', () => {
-  setSettingsOpen(settingsButton.getAttribute('aria-expanded') !== 'true');
-});
 const settingsPanel = $('settings');
 const settingsButton = $('settings-button');
 let settingsCloseTimer = 0;
@@ -295,6 +292,7 @@ function setSettingsOpen(open) {
   clearTimeout(settingsCloseTimer);
   settingsButton.setAttribute('aria-expanded', String(open));
   if (open) {
+    releasePointer(); keys.clear();
     settingsPanel.hidden = false;
     settingsPanel.inert = false;
     requestAnimationFrame(() => settingsPanel.classList.add('is-open'));
@@ -305,55 +303,192 @@ function setSettingsOpen(open) {
     settingsButton.focus({ preventScroll: true });
   }
 }
-$('close-settings').addEventListener('click', () => setSettingsOpen(false));
 window.addEventListener('keydown', event => { if (event.code === 'Escape' && settingsButton.getAttribute('aria-expanded') === 'true') setSettingsOpen(false); });
-function updateTuning() {
-  sim.tuning.softness = +$('softness').value; sim.tuning.grip = +$('grip').value; sim.tuning.power = +$('power').value;
-  $('softness-value').textContent = sim.tuning.softness > 0.6 ? 'Мягкая' : sim.tuning.softness > 0.3 ? 'Средняя' : 'Жёсткая';
-  $('grip-value').textContent = sim.tuning.grip.toFixed(2);
-  $('power-value').textContent = `${Math.round(sim.tuning.power * 100)}%`;
+settingsButton.addEventListener('click', () => setSettingsOpen(settingsButton.getAttribute('aria-expanded') !== 'true'));
+function setCameraMode(mode) {
+  if (!debug || !orbitControls) return;
+  releasePointer(); keys.clear();
+  if (mode === 'free') {
+    cameraMode = 'free';
+    settings.values.drawDistance = settings.values.drawDistanceFree;
+    settings.pane.refresh();
+    updateCamera(0);
+    orbitControls.target.copy(cameraLookAt);
+    applyDrawDistance(settings.values.drawDistanceFree);
+    orbitControls.enabled = true;
+    orbitControls.update();
+  } else {
+    orbitControls.enabled = false;
+    cameraMode = 'follow';
+    settings.values.drawDistance = settings.values.drawDistanceFollow;
+    settings.pane.refresh();
+    applyDrawDistance(settings.values.drawDistanceFollow);
+    updateCamera(0);
+  }
 }
-for (const id of ['softness','grip','power']) $(id).addEventListener('input', updateTuning);
-$('reset-tuning').addEventListener('click', () => { for (const id of ['softness','grip','power']) $(id).value = DEFAULT_TUNING[id]; updateTuning(); });
-$('trails').addEventListener('change', () => { tracks.mesh.visible = $('trails').checked; });
+let settingsReady = false;
+const settings = createSettings($('settings-controls'), {
+  ...savedDefaults,
+  roadWidth: cityPlan.roadWidth,
+  trafficCount: traffic.status().requestedCount,
+  trafficActual: traffic.status().count,
+  trafficPendingReason: traffic.status().insertionReason || '—',
+  debugMode: debug,
+  cameraMode,
+  cameraSpeed: savedDefaults.cameraSpeed,
+  drawDistanceFollow: savedDefaults.drawDistanceFollow,
+  drawDistanceFree: savedDefaults.drawDistanceFree,
+  drawDistance: savedDefaults.drawDistanceFollow,
+  defaultsStatus: '',
+}, {
+  onTuning: values => {
+    sim.tuning.softness = values.softness;
+    sim.tuning.grip = values.grip;
+    sim.tuning.power = values.power;
+  },
+  onQuality: value => {
+    if (settingsReady) applyQuality();
+    else quality = value === 'Лёгкая' ? 'low' : 'high';
+  },
+  onTrails: visible => { tracks.mesh.visible = visible; },
+  onRoadWidth: width => { if (settingsReady && width !== cityPlan.roadWidth) rebuildCity(width); },
+  onTrafficCount: count => { if (settingsReady) traffic.setCount(count); },
+  onCameraMode: setCameraMode,
+  onCameraSpeed: value => { settings.values.cameraSpeed = value; },
+  onDrawDistance: value => {
+    const key = cameraMode === 'free' ? 'drawDistanceFree' : 'drawDistanceFollow';
+    settings.values[key] = value;
+    applyDrawDistance(value);
+  },
+  onSaveDefaults: values => {
+    values.defaultsStatus = saveSettingsDefaults(getSettingsStorage(), values, factorySettings)
+      ? 'Дефолты записаны' : 'Не удалось записать';
+    settings.pane.refresh();
+  },
+  onClearDefaults: () => {
+    if (clearSettingsDefaults(getSettingsStorage())) location.reload();
+    else {
+      settings.values.defaultsStatus = 'Не удалось очистить';
+      settings.pane.refresh();
+    }
+  },
+  onReset: reset,
+  onResetTuning: (values, pane) => {
+    Object.assign(values, DEFAULT_TUNING);
+    sim.tuning.softness = values.softness;
+    sim.tuning.grip = values.grip;
+    sim.tuning.power = values.power;
+    pane.refresh();
+  },
+});
+settingsReady = true;
+
+function applyDrawDistance(distance) {
+  const far = Math.min(1000, Math.max(100, distance));
+  camera.far = Math.max(camera.near + 1, far);
+  camera.updateProjectionMatrix();
+  if (debug || far !== 200) {
+    scene.fog.near = far * 0.5;
+    scene.fog.far = far * 0.95;
+  } else {
+    scene.fog.near = 100;
+    scene.fog.far = 260;
+  }
+}
+applyDrawDistance(cameraMode === 'free' ? settings.values.drawDistanceFree : settings.values.drawDistanceFollow);
+
+function rebuildCity(roadWidth) {
+  const nextPlan = createCityPlan(cityPlan.seed, { roadWidth });
+  releasePointer(); keys.clear();
+  cityState.dispose();
+  cityPlan = nextPlan;
+  cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : []);
+  trafficSpawnObstacles = spawnObstaclesForPlan(cityPlan);
+  traffic.setRoadNetwork(cityPlan.roadNetwork, cityPlan.roadWidth, trafficSpawnObstacles);
+  trafficSignals = createTrafficSignals(cityPlan.roadNetwork);
+  traffic.setSignalController(trafficSignals);
+  buildingEntries = cityState.entries;
+  buildingOcclusion = cityState.occlusion;
+  reset();
+}
 
 const cameraGoal = new THREE.Vector3();
 function updateCamera(dt) {
   const goal = cameraGoal.set(car.position.x, 0, car.position.z);
-  follow.lerp(goal, 1 - Math.exp(-dt * 8));
+  follow.copy(goal);
   const speedKmh = Math.hypot(sim.body.velocity.x, sim.body.velocity.z) * 3.6;
   cameraDistanceScale = smoothCameraScale(cameraDistanceScale, targetCameraScale(speedKmh), dt);
-  const mobile = innerWidth < 700;
-  camera.position.copy(follow).addScaledVector(cameraOffset, cameraDistanceScale * (mobile ? 1.1 : 1));
-  camera.lookAt(follow.x, 0.5, follow.z);
+  cameraLookAt.copy(follow); cameraLookAt.y = 0.5;
+  if (cameraMode === 'follow') {
+    // Scale the fixed offset around the fixed aim point so speed changes distance, never camera angle.
+    const viewportScale = innerWidth < 700 ? 1.05 : innerHeight < 500 ? 0.82 : 1;
+    camera.position.copy(cameraLookAt).addScaledVector(cameraOffset, cameraDistanceScale * 1.4 * viewportScale);
+    camera.lookAt(cameraLookAt);
+  } else orbitControls?.update();
   camera.updateMatrixWorld();
-  sun.position.set(follow.x - 14, 24, follow.z + 10); sun.target.position.copy(follow);
+  const shadowTarget = cameraMode === 'free' ? orbitControls.target : follow;
+  sun.position.set(shadowTarget.x - 14, 24, shadowTarget.z + 10); sun.target.position.copy(shadowTarget);
+  shadowBounds = updateShadowCoverage(sun, camera, { resolution: sun.shadow.mapSize.x, casterHeight: 24 });
 }
-function resize() { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); }
+const freeMove = new THREE.Vector3(), cameraForward = new THREE.Vector3(), cameraRight = new THREE.Vector3();
+const previousFreeCameraPosition = new THREE.Vector3();
+function moveFreeCamera(dt) {
+  if (!orbitControls?.enabled) return;
+  orbitControls.update();
+  camera.getWorldDirection(cameraForward).setY(0).normalize();
+  cameraRight.setFromMatrixColumn(camera.matrixWorld, 0).setY(0).normalize();
+  freeMove.set(0, 0, 0)
+    .addScaledVector(cameraForward, Number(has('KeyW')) - Number(has('KeyS')))
+    .addScaledVector(cameraRight, Number(has('KeyD')) - Number(has('KeyA')));
+  freeMove.y = Number(has('KeyE')) - Number(has('KeyQ'));
+  if (freeMove.lengthSq() > 1) freeMove.normalize();
+  freeMove.multiplyScalar((settings.values.cameraSpeed || freeCameraSpeed) * Math.min(dt, 0.05));
+  previousFreeCameraPosition.copy(camera.position);
+  camera.position.add(freeMove);
+  camera.position.y = Math.max(3, Math.min(300, camera.position.y));
+  freeMove.copy(camera.position).sub(previousFreeCameraPosition);
+  orbitControls.target.add(freeMove);
+  orbitControls.target.y = Math.max(0.5, Math.min(210, orbitControls.target.y));
+}
+function resize() {
+  renderer.setSize(innerWidth, innerHeight);
+  camera.aspect = innerWidth / innerHeight;
+  camera.fov = 50;
+  camera.updateProjectionMatrix();
+}
 window.addEventListener('resize', resize); resize(); updateCamera(1);
 const currentChassisQuaternion = new THREE.Quaternion();
 const stepper = new FixedStepper(STEP);
-let previousTime = performance.now(), hudTime = 0;
+let previousTime = performance.now();
 let input = { brake: 0, handbrake: false };
-const debug = location.hash === '#debug' || new URLSearchParams(location.search).has('debug');
 $('performance').hidden = !debug;
-const metrics = { fps: 0, physicsMs: 0, frameCpuMs: 0, calls: 0, triangles: 0, quality };
+const metrics = { fps: 0, physicsMs: 0, renderMs: 0, frameCpuMs: 0, frameIntervalMs: 0, calls: 0, triangles: 0, quality };
 let metricTime = 0, metricFrames = 0;
+let previousFrameTimestamp = null;
 function frame(now) {
   requestAnimationFrame(frame);
   const cpuStart = performance.now();
+  if (previousFrameTimestamp !== null) metrics.frameIntervalMs = now - previousFrameTimestamp;
+  previousFrameTimestamp = now;
   const elapsed = Math.max(0, (now - previousTime) / 1000); previousTime = now;
   const dt = Math.min(elapsed, 0.08);
   if (document.hidden || !modelReady) { stepper.reset(); return; }
   const physicsStart = performance.now();
   const { alpha } = stepper.advance(elapsed, () => {
     input = getInput();
-    sim.step(input);
+    traffic.stepWorld(input, STEP);
+    const trafficStatus = traffic.status();
+    const pendingReason = trafficStatus.insertionReason || '—';
+    if (settings.values.trafficActual !== trafficStatus.count || settings.values.trafficPendingReason !== pendingReason) {
+      settings.values.trafficActual = trafficStatus.count;
+      settings.values.trafficPendingReason = pendingReason;
+      settings.pane.refresh();
+    }
     bodyDeformation?.apply(sim.drainImpactEvents());
-    traffic.update(STEP);
-    tracks.update(sim.wheels, $('trails').checked, STEP);
+    tracks.update(sim.wheels, settings.values.trails, STEP);
   });
   metrics.physicsMs = performance.now() - physicsStart;
+  speedDisplay.textContent = String(Math.round(Math.hypot(sim.body.velocity.x, sim.body.velocity.z) * 3.6));
   car.position.lerpVectors(sim.body.previousPosition, sim.body.position, alpha);
   currentChassisQuaternion.copy(sim.body.quaternion);
   car.quaternion.copy(sim.body.previousQuaternion).slerp(currentChassisQuaternion, alpha);
@@ -369,23 +504,15 @@ function frame(now) {
     }
     spin.rotation.x = THREE.MathUtils.lerp(wheel.previousRotation, wheel.rotation, alpha);
   });
-  traffic.render(alpha);
+  if (cameraMode === 'free') moveFreeCamera(dt);
   updateCamera(dt);
+  cityState.updateSignals(trafficSignals, traffic.simulationTime(), camera.position);
+  traffic.render(alpha, camera);
   buildingOcclusion.update(camera, car, dt);
-  hudTime += dt;
-  if (hudTime > 0.08) {
-    hudTime = 0;
-    const t = sim.telemetry();
-    $('speed-value').textContent = String(Math.round(t.speed));
-    $('speed-bar').style.width = `${Math.min(t.speed / 160 * 100, 100)}%`;
-    $('gear').textContent = t.gear;
-    $('damage-value').textContent = `${Math.round(t.damage * 100)}%`;
-    $('damage-label').textContent = t.damageState === 'destroyed' ? 'РАЗРУШЕНА' : t.damageState === 'damaged' ? 'ПОВРЕЖДЕНА' : 'ИСПРАВНА';
-    $('damage-bar').style.width = `${Math.round(t.damage * 100)}%`;
-    $('drive-status').textContent = t.grounded < 2 ? 'В ВОЗДУХЕ' : input.handbrake ? 'РУЧНОЙ ТОРМОЗ' : t.slip > 0.55 && t.speed > 12 ? 'СКОЛЬЖЕНИЕ' : input.brake > 0.5 && t.speed > 3 ? 'ТОРМОЖЕНИЕ' : t.speed > 2 ? 'В ДВИЖЕНИИ' : 'ГОТОВ К ПОЕЗДКЕ';
-  }
   tracks.prepareRender();
+  const renderStart = performance.now();
   renderer.render(scene, camera);
+  metrics.renderMs = performance.now() - renderStart;
   metrics.frameCpuMs = performance.now() - cpuStart;
   metrics.calls = renderer.info.render.calls;
   metrics.triangles = renderer.info.render.triangles;
@@ -393,27 +520,57 @@ function frame(now) {
   if (metricTime >= .5) {
     metrics.fps = metricFrames / metricTime;
     metricFrames = 0; metricTime = 0;
-    if (debug) $('performance').textContent = `${metrics.fps.toFixed(0)} FPS · CPU ${metrics.frameCpuMs.toFixed(1)} ms · физика ${metrics.physicsMs.toFixed(1)} ms\n${metrics.calls} draw calls · ${metrics.triangles} triangles · ${quality} · DPR ${renderer.getPixelRatio()}`;
+    Object.assign(metrics, traffic.performance());
+    if (debug) $('performance').textContent = `${metrics.fps.toFixed(0)} FPS · CPU ${metrics.frameCpuMs.toFixed(1)} ms · рендер ${metrics.renderMs.toFixed(1)} ms · физика ${metrics.physicsMs.toFixed(1)} ms · AI ${metrics.aiMs.toFixed(2)} ms\n${metrics.calls} draw calls · ${metrics.triangles} triangles · bodies ${metrics.totalBodies} · traffic ${metrics.trafficBodies} · ${quality} · DPR ${renderer.getPixelRatio()}`;
   }
 }
 requestAnimationFrame(frame);
 // Read-only diagnostics for browser smoke tests and future handling comparisons.
 window.carLab = {
   performance: () => ({ ...metrics, dpr: renderer.getPixelRatio(), droppedSeconds: stepper.droppedSeconds, trailSegments: tracks.count }),
+  trafficPerformance: () => traffic.performance(),
+  resources: () => ({ ...renderer.info.memory, programs: renderer.info.programs?.length ?? 0 }),
+  shadow: () => ({ ...shadowBounds, mapSize: sun.shadow.mapSize.toArray(), enabled: renderer.shadowMap.enabled }),
+  trails: () => ({ visible: tracks.mesh.visible }),
+  camera: () => ({ position: camera.position.toArray(), target: cameraMode === 'free' ? orbitControls.target.toArray() : cameraLookAt.toArray(), mode: cameraMode, scale: cameraDistanceScale, far: camera.far, fogNear: scene.fog.near, fogFar: scene.fog.far, orientation: camera.rotation.toArray(),
+    projectCar: () => {
+      const point = car.position.clone(); point.y += 0.8;
+      const screen = point.project(camera);
+      return { x: (screen.x + 1) / 2, y: (1 - screen.y) / 2, depth: screen.z };
+    },
+    projectAhead: (seconds = 2) => {
+      const forward = new THREE.Vector3(0, 0, 1).applyQuaternion(car.quaternion).setY(0).normalize();
+      const distance = sim.signedSpeed * Math.max(0, Math.min(Number.isFinite(seconds) ? seconds : 0, 4));
+      const point = car.position.clone().addScaledVector(forward, distance); point.y = 0;
+      const screen = point.project(camera);
+      const nose = car.position.clone().addScaledVector(forward, 2.2).project(camera);
+      const tail = car.position.clone().addScaledVector(forward, -2.2).project(camera);
+      return { x: (screen.x + 1) / 2, y: (1 - screen.y) / 2, depth: screen.z,
+        carLengthPx: Math.hypot((nose.x - tail.x) * innerWidth / 2, (nose.y - tail.y) * innerHeight / 2) };
+    } }),
   telemetry: () => sim.telemetry(), get modelReady() { return modelReady; }, get tuning() { return { ...sim.tuning }; },
-  city: () => ({ seed: cityPlan.seed, buildings: cityPlan.buildings.length, landmarks: cityPlan.landmarks.length, bounds: cityPlan.bounds, roadWidth: ROAD_WIDTH, roads: cityPlan.roads, hasBuildingWindows: false,
+  city: () => ({ seed: cityPlan.seed, buildings: cityPlan.buildings.length, landmarks: cityPlan.landmarks.length, bounds: cityPlan.bounds, roadWidth: cityPlan.roadWidth, roads: cityPlan.roads, roadNetwork: cityPlan.roadNetwork, hasBuildingWindows: false,
     fadedBuildings: buildingEntries.filter(entry => entry.opacity < 0.999).length }),
+  roadMarkings: () => cityState.roadMarkings(),
+  worldBodies: () => sim.world.bodies.length,
   damageTest,
   joystick: () => ({ active: pointer.active, startX: pointer.startX, startY: pointer.startY, direction: driveDirection, ...joystickVector(pointer.startX, pointer.startY, pointer.x, pointer.y) }),
+  donut: () => donutGesture.snapshot(),
   wheelTransforms: () => visualWheels.map(({ pivot }, i) => ({ position: pivot.position.toArray(), radius: sim.wheels[i].radius })),
   wheels: () => sim.wheels.map(wheel => ({ detached: wheel.detached, grounded: wheel.grounded })),
   traffic: () => traffic.states.map(({ x, z, heading, speed }) => ({ x, z, heading, speed })),
+  trafficClock: () => traffic.simulationTime(),
+  trafficStatus: () => traffic.status(),
+  trafficAI: () => traffic.debug(),
+  signals: () => ({ controlled: trafficSignals.controlled.size, approaches: cityState.signalApproaches.length,
+    visible: cityState.signalApproaches.filter(approach => approach.signalVisible).length,
+    phase: trafficSignals.phase('-25:-25', '-75:-25', traffic.simulationTime()) }),
+  stopLines: () => cityState.signalApproaches.map(({ nodeId, fromId, forwardX, forwardZ, stopX, stopZ,
+    stopDistance, stopLineLength, stopLineThickness }) => ({ nodeId, fromId, forwardX, forwardZ, x: stopX, z: stopZ,
+    distance: stopDistance, length: stopLineLength, thickness: stopLineThickness })),
 };
-for (const id of ['softness', 'grip', 'power']) $(id).value = DEFAULT_TUNING[id];
-updateTuning();
-
 function applyQuality() {
-  quality = $('quality').value;
+  quality = settings.values.quality === 'Лёгкая' ? 'low' : 'high';
   metrics.quality = quality;
   renderer.setPixelRatio(Math.min(devicePixelRatio, quality === 'low' ? 1 : 1.75));
   const size = quality === 'low' ? 512 : 1024;
@@ -422,6 +579,4 @@ function applyQuality() {
   sun.shadow.needsUpdate = true;
   resize();
 }
-$('quality').value = quality;
-$('quality').addEventListener('change', applyQuality);
 applyQuality();

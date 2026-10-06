@@ -1,0 +1,278 @@
+{
+  "environment": {
+    "browser": "Microsoft Edge via Playwright",
+    "headless": true,
+    "renderer": "SwiftShader software WebGL",
+    "cpuThrottle": "CDP 4x (then reset to 1x)",
+    "deviceScaleFactor": 1,
+    "device": "desktop surrogate; no physical mobile device"
+  },
+  "shortMs": 10000,
+  "longMs": 60000,
+  "results": [
+    {
+      "label": "low-0",
+      "count": 0,
+      "quality": "Лёгкая",
+      "viewport": "390x844 CSS px",
+      "durationMs": 10005,
+      "frames": 517,
+      "fps": 51.673129972414344,
+      "frameIntervalMs": {
+        "p50": 16.799999999999272,
+        "p95": 25.100000000000364
+      },
+      "physicsMs": {
+        "p50": 1,
+        "p95": 7.200000001117587
+      },
+      "frameCpuMs": {
+        "p50": 2.700000001117587,
+        "p95": 13.299999998882413
+      },
+      "renderCpuMs": {
+        "p50": 0.900000000372529,
+        "p95": 4.300000000745058
+      },
+      "aiMsP95": 0.2000000011175871,
+      "npcPrepareMsP95": 0,
+      "worldStepMsP95": 0.6000000014901161,
+      "droppedSeconds": 0,
+      "bodies": 198,
+      "trafficBodies": 0,
+      "aiTicks": 146,
+      "aiDecisions": 36,
+      "sleepingTrafficBodies": 0,
+      "resourcesBefore": {
+        "geometries": 33,
+        "textures": 2,
+        "programs": 7
+      },
+      "resourcesAfter": {
+        "geometries": 33,
+        "textures": 2,
+        "programs": 7
+      }
+    },
+    {
+      "label": "low-6",
+      "count": 6,
+      "quality": "Лёгкая",
+      "viewport": "390x844 CSS px",
+      "durationMs": 10030,
+      "frames": 416,
+      "fps": 41.47598679946958,
+      "frameIntervalMs": {
+        "p50": 20.900000000001455,
+        "p95": 45.900000000001455
+      },
+      "physicsMs": {
+        "p50": 3.399999998509884,
+        "p95": 30.600000001490116
+      },
+      "frameCpuMs": {
+        "p50": 7.800000000745058,
+        "p95": 35.5
+      },
+      "renderCpuMs": {
+        "p50": 0.5,
+        "p95": 8.400000000372529
+      },
+      "aiMsP95": 0.40000000037252903,
+      "npcPrepareMsP95": 2.899999998509884,
+      "worldStepMsP95": 1.099999999627471,
+      "droppedSeconds": 0.0023333333333361017,
+      "bodies": 204,
+      "trafficBodies": 6,
+      "aiTicks": 288,
+      "aiDecisions": 882,
+      "sleepingTrafficBodies": 0,
+      "resourcesBefore": {
+        "geometries": 45,
+        "textures": 2,
+        "programs": 7
+      },
+      "resourcesAfter": {
+        "geometries": 52,
+        "textures": 2,
+        "programs": 7
+      }
+    },
+    {
+      "label": "low-15",
+      "count": 15,
+      "quality": "Лёгкая",
+      "viewport": "390x844 CSS px",
+      "durationMs": 10038,
+      "frames": 199,
+      "fps": 19.82407379735612,
+      "frameIntervalMs": {
+        "p50": 50.099999999998545,
+        "p95": 75
+      },
+      "physicsMs": {
+        "p50": 42,
+        "p95": 69
+      },
+      "frameCpuMs": {
+        "p50": 46.79999999888241,
+        "p95": 71.59999999962747
+      },
+      "renderCpuMs": {
+        "p50": 3.599999999627471,
+        "p95": 5.300000000745058
+      },
+      "aiMsP95": 1,
+      "npcPrepareMsP95": 3,
+      "worldStepMsP95": 2.099999999627471,
+      "droppedSeconds": 0.030966666666669113,
+      "bodies": 213,
+      "trafficBodies": 15,
+      "aiTicks": 432,
+      "aiDecisions": 3024,
+      "sleepingTrafficBodies": 0,
+      "resourcesBefore": {
+        "geometries": 83,
+        "textures": 2,
+        "programs": 7
+      },
+      "resourcesAfter": {
+        "geometries": 96,
+        "textures": 2,
+        "programs": 7
+      }
+    },
+    {
+      "label": "low-30",
+      "count": 30,
+      "quality": "Лёгкая",
+      "viewport": "390x844 CSS px",
+      "durationMs": 10017,
+      "frames": 116,
+      "fps": 11.579851059157065,
+      "frameIntervalMs": {
+        "p50": 87.40000000000146,
+        "p95": 116.39999999999418
+      },
+      "physicsMs": {
+        "p50": 76.80000000074506,
+        "p95": 105.90000000037253
+      },
+      "frameCpuMs": {
+        "p50": 78.90000000037253,
+        "p95": 111.40000000037253
+      },
+      "renderCpuMs": {
+        "p50": 1.3999999985098839,
+        "p95": 3.699999999254942
+      },
+      "aiMsP95": 1.099999999627471,
+      "npcPrepareMsP95": 1.900000000372529,
+      "worldStepMsP95": 1.200000001117587,
+      "droppedSeconds": 1.0384000000000029,
+      "bodies": 228,
+      "trafficBodies": 30,
+      "aiTicks": 574,
+      "aiDecisions": 7194,
+      "sleepingTrafficBodies": 0,
+      "resourcesBefore": {
+        "geometries": 121,
+        "textures": 2,
+        "programs": 7
+      },
+      "resourcesAfter": {
+        "geometries": 134,
+        "textures": 2,
+        "programs": 7
+      }
+    },
+    {
+      "label": "high-6",
+      "count": 6,
+      "quality": "Высокая",
+      "viewport": "390x844 CSS px",
+      "durationMs": 10022,
+      "frames": 376,
+      "fps": 37.51858467126337,
+      "frameIntervalMs": {
+        "p50": 25,
+        "p95": 45.80000000000291
+      },
+      "physicsMs": {
+        "p50": 10.099999999627471,
+        "p95": 36.90000000037253
+      },
+      "frameCpuMs": {
+        "p50": 13.800000000745058,
+        "p95": 42.19999999925494
+      },
+      "renderCpuMs": {
+        "p50": 0.599999999627471,
+        "p95": 8.199999999254942
+      },
+      "aiMsP95": 0.40000000037252903,
+      "npcPrepareMsP95": 0.8000000007450581,
+      "worldStepMsP95": 11.900000000372529,
+      "droppedSeconds": 0,
+      "bodies": 204,
+      "trafficBodies": 6,
+      "aiTicks": 724,
+      "aiDecisions": 8238,
+      "sleepingTrafficBodies": 0,
+      "resourcesBefore": {
+        "geometries": 60,
+        "textures": 2,
+        "programs": 7
+      },
+      "resourcesAfter": {
+        "geometries": 66,
+        "textures": 2,
+        "programs": 7
+      }
+    },
+    {
+      "label": "low-6-60s",
+      "count": 6,
+      "quality": "Лёгкая",
+      "viewport": "390x844 CSS px",
+      "durationMs": 60013,
+      "frames": 2331,
+      "fps": 38.841325437319,
+      "frameIntervalMs": {
+        "p50": 20.90000000000873,
+        "p95": 45.80000000000291
+      },
+      "physicsMs": {
+        "p50": 6.399999998509884,
+        "p95": 36.19999999925494
+      },
+      "frameCpuMs": {
+        "p50": 12,
+        "p95": 40.5
+      },
+      "renderCpuMs": {
+        "p50": 0.5,
+        "p95": 5.699999999254942
+      },
+      "aiMsP95": 1.699999999254942,
+      "npcPrepareMsP95": 1,
+      "worldStepMsP95": 1.300000000745058,
+      "droppedSeconds": 0,
+      "bodies": 204,
+      "trafficBodies": 6,
+      "aiTicks": 1327,
+      "aiDecisions": 11856,
+      "sleepingTrafficBodies": 0,
+      "resourcesBefore": {
+        "geometries": 66,
+        "textures": 2,
+        "programs": 7
+      },
+      "resourcesAfter": {
+        "geometries": 75,
+        "textures": 2,
+        "programs": 7
+      }
+    }
+  ]
+}

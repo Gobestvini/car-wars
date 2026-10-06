@@ -121,4 +121,19 @@ export class BuildingOcclusion {
       if (!hidden && entry.opacity > .995) this.finishProxy(entry, entry.caps);
     }
   }
+
+  dispose() {
+    for (const entry of this.entries) {
+      if (!entry.proxy) continue;
+      this.scene.remove(entry.proxy);
+      const materials = new Set();
+      entry.proxy.traverse(node => {
+        if (!node.isMesh) return;
+        for (const material of Array.isArray(node.material) ? node.material : [node.material]) materials.add(material);
+      });
+      for (const material of materials) material.dispose();
+      entry.proxy = null;
+      entry.proxyMaterial = null;
+    }
+  }
 }

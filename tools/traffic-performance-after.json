@@ -1,0 +1,290 @@
+{
+  "environment": {
+    "browser": "Microsoft Edge via Playwright",
+    "headless": true,
+    "renderer": "SwiftShader software WebGL",
+    "cpuThrottle": "CDP 4x (then reset to 1x)",
+    "deviceScaleFactor": 1,
+    "device": "desktop surrogate; no physical mobile device"
+  },
+  "shortMs": 10000,
+  "longMs": 60000,
+  "results": [
+    {
+      "label": "low-0",
+      "count": 0,
+      "quality": "Лёгкая",
+      "viewport": "390x844 CSS px",
+      "durationMs": 10026,
+      "frames": 507,
+      "fps": 50.569026222084794,
+      "frameIntervalMs": {
+        "p50": 16.899999999999636,
+        "p95": 33.29999999999927
+      },
+      "physicsMs": {
+        "p50": 1.099999999627471,
+        "p95": 15.5
+      },
+      "frameCpuMs": {
+        "p50": 3.300000000745058,
+        "p95": 25.200000001117587
+      },
+      "renderCpuMs": {
+        "p50": 1.099999999627471,
+        "p95": 6.699999999254942
+      },
+      "aiMsP95": 0.19999999925494194,
+      "playerPrepareMsP95": 0.30000000074505806,
+      "npcPrepareMsP95": 0,
+      "worldStepMsP95": 0.5,
+      "postMsP95": 0.2999999988824129,
+      "droppedSeconds": 0,
+      "bodies": 198,
+      "trafficBodies": 0,
+      "aiTicks": 146,
+      "aiDecisions": 36,
+      "sleepingTrafficBodies": 0,
+      "resourcesBefore": {
+        "geometries": 36,
+        "textures": 2,
+        "programs": 7
+      },
+      "resourcesAfter": {
+        "geometries": 36,
+        "textures": 2,
+        "programs": 7
+      }
+    },
+    {
+      "label": "low-6",
+      "count": 6,
+      "quality": "Лёгкая",
+      "viewport": "390x844 CSS px",
+      "durationMs": 10005,
+      "frames": 437,
+      "fps": 43.67947064879508,
+      "frameIntervalMs": {
+        "p50": 20.900000000001455,
+        "p95": 41.79999999999927
+      },
+      "physicsMs": {
+        "p50": 2.099999999627471,
+        "p95": 28.199999999254942
+      },
+      "frameCpuMs": {
+        "p50": 3.400000000372529,
+        "p95": 33.09999999962747
+      },
+      "renderCpuMs": {
+        "p50": 0.5,
+        "p95": 9.300000000745058
+      },
+      "aiMsP95": 0.5,
+      "playerPrepareMsP95": 0.2000000011175871,
+      "npcPrepareMsP95": 1.599999999627471,
+      "worldStepMsP95": 0.599999999627471,
+      "postMsP95": 0.900000000372529,
+      "droppedSeconds": 0,
+      "bodies": 204,
+      "trafficBodies": 6,
+      "aiTicks": 289,
+      "aiDecisions": 882,
+      "sleepingTrafficBodies": 0,
+      "resourcesBefore": {
+        "geometries": 36,
+        "textures": 2,
+        "programs": 7
+      },
+      "resourcesAfter": {
+        "geometries": 37,
+        "textures": 2,
+        "programs": 7
+      }
+    },
+    {
+      "label": "low-15",
+      "count": 15,
+      "quality": "Лёгкая",
+      "viewport": "390x844 CSS px",
+      "durationMs": 10023,
+      "frames": 249,
+      "fps": 24.842613562670234,
+      "frameIntervalMs": {
+        "p50": 41.69999999999709,
+        "p95": 67.40000000000146
+      },
+      "physicsMs": {
+        "p50": 33.09999999962747,
+        "p95": 61.600000001490116
+      },
+      "frameCpuMs": {
+        "p50": 37.79999999888241,
+        "p95": 64.59999999962747
+      },
+      "renderCpuMs": {
+        "p50": 2.699999999254942,
+        "p95": 6.800000000745058
+      },
+      "aiMsP95": 1.599999999627471,
+      "playerPrepareMsP95": 0.2999999988824129,
+      "npcPrepareMsP95": 3.5,
+      "worldStepMsP95": 1.900000000372529,
+      "postMsP95": 3.5,
+      "droppedSeconds": 0,
+      "bodies": 213,
+      "trafficBodies": 15,
+      "aiTicks": 433,
+      "aiDecisions": 3015,
+      "sleepingTrafficBodies": 0,
+      "resourcesBefore": {
+        "geometries": 37,
+        "textures": 2,
+        "programs": 7
+      },
+      "resourcesAfter": {
+        "geometries": 37,
+        "textures": 2,
+        "programs": 7
+      }
+    },
+    {
+      "label": "low-30",
+      "count": 30,
+      "quality": "Лёгкая",
+      "viewport": "390x844 CSS px",
+      "durationMs": 10068,
+      "frames": 124,
+      "fps": 12.316861186987833,
+      "frameIntervalMs": {
+        "p50": 79.30000000000291,
+        "p95": 101.5
+      },
+      "physicsMs": {
+        "p50": 74.69999999925494,
+        "p95": 91.59999999962747
+      },
+      "frameCpuMs": {
+        "p50": 76.30000000074506,
+        "p95": 96
+      },
+      "renderCpuMs": {
+        "p50": 1,
+        "p95": 2.699999999254942
+      },
+      "aiMsP95": 0.6000000014901161,
+      "playerPrepareMsP95": 0.2000000011175871,
+      "npcPrepareMsP95": 3.100000001490116,
+      "worldStepMsP95": 1.200000001117587,
+      "postMsP95": 1.800000000745058,
+      "droppedSeconds": 0.5676333333333309,
+      "bodies": 228,
+      "trafficBodies": 30,
+      "aiTicks": 576,
+      "aiDecisions": 7275,
+      "sleepingTrafficBodies": 0,
+      "resourcesBefore": {
+        "geometries": 37,
+        "textures": 2,
+        "programs": 7
+      },
+      "resourcesAfter": {
+        "geometries": 37,
+        "textures": 2,
+        "programs": 7
+      }
+    },
+    {
+      "label": "high-6",
+      "count": 6,
+      "quality": "Высокая",
+      "viewport": "390x844 CSS px",
+      "durationMs": 10019,
+      "frames": 360,
+      "fps": 35.9328056534281,
+      "frameIntervalMs": {
+        "p50": 25,
+        "p95": 45.90000000000873
+      },
+      "physicsMs": {
+        "p50": 12.199999999254942,
+        "p95": 38.09999999962747
+      },
+      "frameCpuMs": {
+        "p50": 14.5,
+        "p95": 41.80000000074506
+      },
+      "renderCpuMs": {
+        "p50": 1.099999999627471,
+        "p95": 7.5
+      },
+      "aiMsP95": 4.099999999627471,
+      "playerPrepareMsP95": 0.30000000074505806,
+      "npcPrepareMsP95": 1.1000000014901161,
+      "worldStepMsP95": 2.199999999254942,
+      "postMsP95": 1.200000001117587,
+      "droppedSeconds": 0,
+      "bodies": 204,
+      "trafficBodies": 6,
+      "aiTicks": 725,
+      "aiDecisions": 8289,
+      "sleepingTrafficBodies": 0,
+      "resourcesBefore": {
+        "geometries": 37,
+        "textures": 2,
+        "programs": 7
+      },
+      "resourcesAfter": {
+        "geometries": 37,
+        "textures": 2,
+        "programs": 7
+      }
+    },
+    {
+      "label": "low-6-60s",
+      "count": 6,
+      "quality": "Лёгкая",
+      "viewport": "390x844 CSS px",
+      "durationMs": 60001,
+      "frames": 2321,
+      "fps": 38.68275309203695,
+      "frameIntervalMs": {
+        "p50": 21.20000000001164,
+        "p95": 45.79999999998836
+      },
+      "physicsMs": {
+        "p50": 9.5,
+        "p95": 35
+      },
+      "frameCpuMs": {
+        "p50": 12.799999998882413,
+        "p95": 39
+      },
+      "renderCpuMs": {
+        "p50": 0.5,
+        "p95": 5.5
+      },
+      "aiMsP95": 0.40000000037252903,
+      "playerPrepareMsP95": 0.2000000011175871,
+      "npcPrepareMsP95": 1.1000000014901161,
+      "worldStepMsP95": 3.699999999254942,
+      "postMsP95": 1.199999999254942,
+      "droppedSeconds": 0.0023666666666848357,
+      "bodies": 204,
+      "trafficBodies": 6,
+      "aiTicks": 1328,
+      "aiDecisions": 11907,
+      "sleepingTrafficBodies": 0,
+      "resourcesBefore": {
+        "geometries": 37,
+        "textures": 2,
+        "programs": 7
+      },
+      "resourcesAfter": {
+        "geometries": 37,
+        "textures": 2,
+        "programs": 7
+      }
+    }
+  ]
+}
