@@ -17,6 +17,8 @@ npm run dev
 
 Также поддерживается `pnpm install && pnpm dev`; lockfile включён.
 
+Управление задачами через Telegram на этом компьютере: [инструкция](docs/TELEGRAM.md).
+
 ```sh
 npm test
 npm run build

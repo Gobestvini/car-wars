@@ -7,7 +7,9 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "test": "node --test tests/*.test.js"
+    "test": "node --test tests/*.test.js",
+    "telegram": "node tools/telegram/bot.js",
+    "telegram:check": "node tools/telegram/bot.js --check"
   },
   "dependencies": {
     "cannon-es": "0.20.0",

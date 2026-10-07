@@ -5,3 +5,10 @@ tools/car-kit.zip
 tools/screenshots/
 tools/bruno-research/
 *.log
+.telegram-bot.env
+.telegram-bot.state.json
+.telegram-bot.lock
+.telegram-bot.pid
+.telegram-schema-*.json
+.telegram-result-*.json
+.telegram-worktrees/
