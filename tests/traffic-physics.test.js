@@ -164,6 +164,7 @@ test('blocked insertion retains pending count, retries after clearance, and canc
   const traffic = createTraffic(new THREE.Scene(), THREE, 4, network, 20, blockers);
   traffic.attachPhysics(physics);
   assert.deepEqual(traffic.status(), { count: 0, requestedCount: 4, pending: true,
+    totalCount: 0, roleCounts: { civilian: 0 }, pendingSpawns: 0,
     insertionReason: 'Нет свободного безопасного места', bodies: 0, logical: 0, visible: 0, reservations: 0 });
   traffic.setSpawnObstacles([]);
   traffic.prepare(0.11);
