@@ -82,3 +82,9 @@ npm test и npm run build. Расширить tests/tire-tracks.test.js и stora
 - Выполненные критерии: Порог обычный-vs-sustained skid подтверждён fixed-step физическим тестом; surface sampler road/sidewalk/pavement и elevation transition покрыты автоматическим тестом; значения двух настроек доступны в UI, настройка storage и старый version1 профиль покрыты тестом.
 - Непроверенное, блокеры и отклонения от плана: Не подтверждены визуально переход следа дороги↔тротуар, сохранение через UI save/reload и viewport390×844. Save/reload покрыты storage unit test; исходный localStorage профиль в браузере намеренно не перезаписывался. Нужна последующая ручная проверка управления в браузере.
 - Итоговый статус и дата: in-progress, 2026-10-07.
+
+### Продолжение проверки 2026-10-07
+
+- Повторные проверки текущего checkout: `node --test tests/tire-tracks.test.js tests/settings-defaults.test.js` — 20/20 pass; `node node_modules/vite/bin/vite.js build` — pass, штатное предупреждение о Three.js chunk748.48 kB.
+- Игра и Tweakpane открылись, видны порог1.25 и интенсивность1.00; короткий pointer drag достиг 3 км/ч, то есть ввод передаётся. Устойчивый занос и переход видимого следа дорога↔тротуар не проверены: доступный drag отпускает управление сразу. UI save/reload также не проверен.
+- Итоговый статус остаётся in-progress; визуальные критерии не закрыты.

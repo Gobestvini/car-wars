@@ -83,3 +83,9 @@ npm test, npm run build; добавить histogram assertions в spawn/integrat
 - Выполненные критерии: Безопасная стартовая раскладка проверена для6/60/300 машин и ширин12/15/30; для60 соблюдены все 9 proportional quotas; нет spawn footprint overlaps с buildings/другими машинами. В300с все секторы посещаются, offscreen simulation сохранена.
 - Непроверенное, блокеры и отклонения от плана: Не выполнялся отдельный12× browser rebuild/profile test. Код `setRoadNetwork` пересобирает общий city-wide ordered list; browser resource lifecycle не подтверждён в этой сессии. Дополнительная диагностика runtime API не добавлялась: секторная телеметрия собирается тестами, чтобы избежать ненужного production surface.
 - Итоговый статус и дата: in-progress, 2026-10-07; требуется ручная peripheral/rebuild проверка по задаче.
+
+### Продолжение проверки 2026-10-07
+
+- Повторная проверка текущего checkout: `node --test tests/traffic-spawn.test.js tests/traffic-flow.test.js` — 6/6 pass; тест длительного движения выполнил 300 с игровой симуляции, все9 секторов посещены.
+- Production build успешен в ходе проверки серии. Отдельный ручной обзор периферии, 12× browser rebuild и reset в UI не подтверждены.
+- Итоговый статус остаётся in-progress до ручной проверки.
