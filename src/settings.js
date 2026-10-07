@@ -17,6 +17,10 @@ export function createSettings(container, initialValues, handlers) {
     .on('change', event => { values.quality = event.value; handlers.onQuality(event.value); });
   graphics.addBinding(values, 'trails', { label: 'Следы шин' })
     .on('change', event => { values.trails = event.value; handlers.onTrails(event.value); });
+  graphics.addBinding(values, 'skidThreshold', { label: 'Порог заноса, ×', min: 0.5, max: 3, step: 0.05 })
+    .on('change', event => { values.skidThreshold = event.value; handlers.onTrackConfig(values); });
+  graphics.addBinding(values, 'trackIntensity', { label: 'Интенсивность следов', min: 0, max: 1, step: 0.01 })
+    .on('change', event => { values.trackIntensity = event.value; handlers.onTrackConfig(values); });
 
   const cityFolder = pane.addFolder({ title: 'Город', expanded: false });
   cityFolder.addBinding(values, 'roadWidth', { label: 'Ширина дорог, м', min: 12, max: 30, step: 1 })

@@ -6,10 +6,11 @@ import { joystickVector } from './joystick.js';
 import { directionalInput } from './driving-input.js';
 import { DonutGesture, donutDriveInput } from './donut-input.js';
 import { FixedStepper } from './game-loop.js';
-import { TireTracks } from './tire-tracks.js';
+import { TireTracks, DEFAULT_SKID_THRESHOLD, DEFAULT_TRACK_INTENSITY } from './tire-tracks.js';
 import { smoothCameraScale, targetCameraScale } from './camera-distance.js';
 import { createCityPlan, ROAD_WIDTH } from './city-generator.js';
 import { createCityScene } from './city-scene.js';
+import { createSurfaceHeightSampler } from './road-surface.js';
 import { updateShadowCoverage } from './shadow-coverage.js';
 import { createTraffic } from './traffic.js';
 import { createTrafficSignals } from './traffic-signals.js';
@@ -28,6 +29,8 @@ const factorySettings = {
   ...DEFAULT_TUNING,
   quality: matchMedia('(pointer: coarse)').matches ? 'Лёгкая' : 'Высокая',
   trails: true,
+  skidThreshold: DEFAULT_SKID_THRESHOLD,
+  trackIntensity: DEFAULT_TRACK_INTENSITY,
   roadWidth: ROAD_WIDTH,
   trafficCount: 60,
   cameraSpeed: freeCameraSpeed,
@@ -194,7 +197,8 @@ async function loadCar() {
 loadCar();
 $('retry-load').addEventListener('click', loadCar);
 
-const tracks = new TireTracks(scene);
+const tracks = new TireTracks(scene, undefined, { surfaceHeight: createSurfaceHeightSampler(cityPlan),
+  threshold: savedDefaults.skidThreshold, intensity: savedDefaults.trackIntensity });
 tracks.mesh.visible = savedDefaults.trails;
 
 const pointer = { active: false, id: null, x: 0, y: 0, startX: 0, startY: 0 };
@@ -357,6 +361,7 @@ const settings = createSettings($('settings-controls'), {
     else quality = value === 'Лёгкая' ? 'low' : 'high';
   },
   onTrails: visible => { tracks.mesh.visible = visible; },
+  onTrackConfig: values => tracks.setConfig({ threshold: values.skidThreshold, intensity: values.trackIntensity }),
   onRoadWidth: width => { if (settingsReady && width !== cityPlan.roadWidth) rebuildCity(width); },
   onTrafficCount: count => { if (settingsReady) traffic.setCount(count); },
   onCameraMode: setCameraMode,
@@ -408,6 +413,7 @@ function rebuildCity(roadWidth) {
   releasePointer(); keys.clear();
   cityState.dispose();
   cityPlan = nextPlan;
+  tracks.setSurfaceHeightSampler(createSurfaceHeightSampler(cityPlan));
   cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : []);
   trafficSpawnObstacles = spawnObstaclesForPlan(cityPlan);
   traffic.setRoadNetwork(cityPlan.roadNetwork, cityPlan.roadWidth, trafficSpawnObstacles);

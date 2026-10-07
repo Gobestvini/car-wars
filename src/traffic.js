@@ -3,10 +3,10 @@ import { CarSimulation, STEP } from './vehicle.js';
 import { chooseRoadGoal, createRoadGraph, createSeededRandom, findRoadRoute, laneTarget } from './traffic-ai.js';
 import { createTrafficSignals } from './traffic-signals.js';
 import { getStopLineLayout } from './signal-layout.js';
-import { createTrafficSpawnSlots, isTrafficSpawnSafe, footprintsOverlap } from './traffic-spawn.js';
+import { createTrafficSpawnSlots, distributeTrafficSpawnSlots, isTrafficSpawnSafe, footprintsOverlap } from './traffic-spawn.js';
 import { corridorFootprints, driveControl, edgeProgress, followingLimit, occupiesJunction, planPassing, projectedExtent, sweptPathIsSafe, trackProgress } from './traffic-planner.js';
 import { escapeRoute, hiddenFromPlayer, TRAFFIC_EVASION } from './traffic-evasion.js';
-import { junctionMovement, movementsConflict, pathProgress, pathTarget, yieldsToOncoming } from './traffic-junction.js';
+import { junctionMovement, movementsConflict, pathProgress, pathTarget, turnStagingTarget, yieldsToOncoming } from './traffic-junction.js';
 
 const headingOf = q => Math.atan2(2 * (q.x * q.z + q.w * q.y), 1 - 2 * (q.x * q.x + q.y * q.y));
 const now = () => globalThis.performance?.now?.() ?? Date.now();
@@ -73,9 +73,10 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
   const playerOccupancy = { id: 'player', x: 0, z: 0, heading: 0, vx: 0, vz: 0, player: true };
 
   const rebuildSpawnSlots = () => {
-    const eligible = graph.directed.filter(edge => Math.abs((edge.start.x + edge.end.x) / 2) <= 125
-      && Math.abs((edge.start.z + edge.end.z) / 2) <= 125);
-    spawnSlots = createTrafficSpawnSlots(eligible.length ? eligible : graph.directed);
+    const nodes = [...graph.nodes.values()];
+    const bounds = nodes.length ? { minX: Math.min(...nodes.map(node => node.x)), maxX: Math.max(...nodes.map(node => node.x)),
+      minZ: Math.min(...nodes.map(node => node.z)), maxZ: Math.max(...nodes.map(node => node.z)) } : null;
+    spawnSlots = distributeTrafficSpawnSlots(createTrafficSpawnSlots(graph.directed), bounds);
     spawnSearchCursor = 0;
   };
   rebuildSpawnSlots();
@@ -153,6 +154,7 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
     ai.continuation = null;
     ai.targetSpeed = null;
     ai.nextExitReplan = 0; ai.exitReplans = 0;
+    ai.staging = null;
   };
 
   const releaseReservation = ai => {
@@ -541,6 +543,7 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
     for (const plan of plans) {
       const { state, ai, car, edge } = plan;
       if (!edge) { ai.control = { steer: 0, throttle: 0, brake: 1 }; ai.state = 'no-path'; ai.waitReason = 'no-path'; continue; }
+      const node = graph.nodes.get(ai.targetNode);
       const fx = Math.sin(car.heading), fz = Math.cos(car.heading);
       const speed = car.vx * fx + car.vz * fz;
       const { neighbors, leaderLimit, blocker } = plan;
@@ -594,13 +597,32 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
 
       const turning = Math.cos(edge.heading - car.heading) < 0.9;
       const junction = reservationFor(ai)?.movement;
-      const aim = junction ? pathTarget(car, junction) : laneTarget(graph, edge.from, edge.to,
+      const stageRequested = !junction && !reservationFor(ai)?.entered && plan.signal?.color !== 'red'
+        && ['left', 'u-turn'].includes(plan.movement?.turn)
+        && ['oncoming-priority', 'intersection-reservation'].includes(plan.waitReason);
+      if (stageRequested) {
+        const target = turnStagingTarget(node, edge.heading, roadWidth);
+        const stagePath = [{ x: car.x, z: car.z }, target];
+        const room = (target.x - car.x) * Math.sin(edge.heading) + (target.z - car.z) * Math.cos(edge.heading);
+        const stoppingDistance = Math.max(0, speed) ** 2 / (2 * 5.5) + Math.max(0, speed) * 0.1;
+        // A nearby point cannot be reached by steering a moving chassis around it.
+        // If braking would carry us past it, hold the lane until the crossing is free.
+        const canApproach = ai.staging?.nodeId === ai.targetNode || room > stoppingDistance + 0.65;
+        if (canApproach && sweptPathIsSafe(car, stagePath, recoveryNeighbors, obstacles, Math.max(2.5, Math.abs(speed)))) {
+          ai.staging = { nodeId: ai.targetNode, target };
+        } else ai.staging = null;
+      } else ai.staging = null;
+      const stagingRoom = ai.staging ? (ai.staging.target.x - car.x) * Math.sin(edge.heading)
+        + (ai.staging.target.z - car.z) * Math.cos(edge.heading) : 0;
+      const aim = ai.staging && stagingRoom > 0.65 ? ai.staging.target
+        : junction ? pathTarget(car, junction) : laneTarget(graph, edge.from, edge.to,
         (edgeProgress(car, edge) + (turning ? 2.5 : Math.max(4, Math.abs(speed) * 0.7))) / edge.length);
       let dx = aim.x - car.x, dz = aim.z - car.z, reverse = false;
       let targetSpeed = ai.evasion ? TRAFFIC_EVASION.speed : 8;
       // Recover an off-route chassis gently; ordinary junction turns keep the cruise target.
       if (!junction && turning) targetSpeed = Math.min(targetSpeed, 3.8);
-      let reason = plan.waitReason || (leaderWait && leaderLimit < 0.4 ? 'queue-wait' : null);
+      let reason = ai.staging && stagingRoom > 0.65 ? 'turn-staging'
+        : plan.waitReason || (leaderWait && leaderLimit < 0.4 ? 'queue-wait' : null);
       if (ai.maneuver) {
         const maneuver = ai.maneuver;
         let waypoint = maneuver.points[maneuver.index];
@@ -620,13 +642,15 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
           if (aiTime >= (maneuver.nextSafetyCheck || 0)) {
             maneuver.safe = sweptPathIsSafe(car, [{ x: car.x, z: car.z }, ...maneuver.points.slice(maneuver.index)],
               recoveryNeighbors, obstacles, Math.abs(targetSpeed));
-            maneuver.nextSafetyCheck = aiTime + 0.5;
+            maneuver.nextSafetyCheck = aiTime + 0.1;
           }
           if (!maneuver.safe) { targetSpeed = 0; reason = 'maneuver-blocked'; }
           pathObstacles.push(...corridorFootprints(car, [{ x: car.x, z: car.z }, ...maneuver.points.slice(maneuver.index)], state.id));
         }
       }
-      if (!ai.maneuver) targetSpeed = plan.waitReason ? 0 : Math.min(targetSpeed, leaderLimit);
+      if (!ai.maneuver) targetSpeed = ai.staging && stagingRoom > 0.65
+        ? Math.min(2.4, Math.sqrt(2 * 5.5 * (stagingRoom - 0.65)), leaderLimit)
+        : plan.waitReason ? 0 : Math.min(targetSpeed, leaderLimit);
       if (!ai.maneuver && contact && (Math.cos(contact.heading - car.heading) < 0.5
         || (contact.x - car.x) * fx + (contact.z - car.z) * fz > 0)) targetSpeed = 0;
       if (!reason && contact) reason = 'collision-jam';

@@ -14,8 +14,10 @@ const SKID_CONTINUE_LATERAL = 1.5;
 const SKID_CONTINUE_ANGLE = 0.20;
 const SKID_CONFIRM_TIME = 0.08;
 const SKID_RELEASE_TIME = 0.12;
+export const DEFAULT_SKID_THRESHOLD = 1.25;
+export const DEFAULT_TRACK_INTENSITY = 1;
 
-export function isHardSkid(wheel, continuing = false) {
+export function isHardSkid(wheel, continuing = false, threshold = DEFAULT_SKID_THRESHOLD) {
   const speed = Math.abs(wheel?.longitudinal || 0);
   const lateral = Math.abs(wheel?.lateral || 0);
   if (!wheel || !wheel.grounded || wheel.detached || !Number.isFinite(speed + lateral)) return false;
@@ -23,7 +25,9 @@ export function isHardSkid(wheel, continuing = false) {
   const minimumLateral = continuing ? SKID_CONTINUE_LATERAL : SKID_START_LATERAL;
   const minimumAngle = continuing ? SKID_CONTINUE_ANGLE : SKID_START_ANGLE;
   const slipAngle = Math.atan2(lateral, Math.max(speed, 2.5));
-  return speed >= minimumSpeed && lateral >= minimumLateral && slipAngle >= minimumAngle;
+  const sensitivity = Number.isFinite(threshold) ? Math.max(0.5, Math.min(3, threshold)) : DEFAULT_SKID_THRESHOLD;
+  return speed >= minimumSpeed * sensitivity && lateral >= minimumLateral * sensitivity
+    && slipAngle >= minimumAngle * sensitivity;
 }
 
 const finitePoint = point => Number.isFinite(point.x) && Number.isFinite(point.z);
@@ -53,22 +57,22 @@ export function buildTrackSegment(start, end, startBirth, endBirth, startFade, e
   };
 }
 
-export function createTrackSection(point, normal, width = TRACK_WIDTH) {
+export function createTrackSection(point, normal, width = TRACK_WIDTH, y = 0.025) {
   if (!finitePoint(point) || !finitePoint(normal)) return null;
   const magnitude = Math.hypot(normal.x, normal.z);
   if (magnitude <= 1e-8 || !Number.isFinite(magnitude)) return null;
   const half = width / 2;
   const ox = normal.x / magnitude * half;
   const oz = normal.z / magnitude * half;
-  return { left: { x: point.x + ox, z: point.z + oz }, right: { x: point.x - ox, z: point.z - oz },
+  return { left: { x: point.x + ox, y, z: point.z + oz }, right: { x: point.x - ox, y, z: point.z - oz },
     normal: { x: normal.x / magnitude, z: normal.z / magnitude }, width };
 }
 
 export function buildSectionSegment(start, end, startBirth, endBirth, startFade = 1, endFade = 1, startCap = false, endCap = false) {
   if (!start || !end || !finitePoint(start.left) || !finitePoint(start.right) || !finitePoint(end.left) || !finitePoint(end.right)) return null;
-  const positions = [start.left.x, 0.025, start.left.z, start.right.x, 0.025, start.right.z,
-    end.left.x, 0.025, end.left.z, start.right.x, 0.025, start.right.z,
-    end.right.x, 0.025, end.right.z, end.left.x, 0.025, end.left.z];
+  const positions = [start.left.x, start.left.y ?? 0.025, start.left.z, start.right.x, start.right.y ?? 0.025, start.right.z,
+    end.left.x, end.left.y ?? 0.025, end.left.z, start.right.x, start.right.y ?? 0.025, start.right.z,
+    end.right.x, end.right.y ?? 0.025, end.right.z, end.left.x, end.left.y ?? 0.025, end.left.z];
   return { positions, births: [startBirth, startBirth, endBirth, startBirth, endBirth, endBirth],
     fades: [startCap ? 0 : startFade, startCap ? 0 : startFade, endCap ? 0 : endFade,
       startCap ? 0 : startFade, endCap ? 0 : endFade, endCap ? 0 : endFade] };
@@ -77,8 +81,12 @@ export function buildSectionSegment(start, end, startBirth, endBirth, startFade 
 // One draw call and bounded storage. A segment is retained for at least 45s;
 // at 120 segments/s the 6000-slot ring cannot overwrite a still-visible point.
 export class TireTracks {
-  constructor(scene, capacity = DEFAULT_TRACK_CAPACITY) {
+  constructor(scene, capacity = DEFAULT_TRACK_CAPACITY, { surfaceHeight = null, threshold = DEFAULT_SKID_THRESHOLD,
+    intensity = DEFAULT_TRACK_INTENSITY } = {}) {
     this.capacity = capacity;
+    this.surfaceHeight = typeof surfaceHeight === 'function' ? surfaceHeight : () => 0.025;
+    this.threshold = threshold;
+    this.intensity = Math.max(0, Math.min(1, Number.isFinite(intensity) ? intensity : DEFAULT_TRACK_INTENSITY));
     this.positions = new Float32Array(capacity * 18);
     this.births = new Float32Array(capacity * 6);
     this.fades = new Float32Array(capacity * 6);
@@ -91,14 +99,14 @@ export class TireTracks {
     this.geometry.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
     this.material = new THREE.ShaderMaterial({
       transparent: true, depthWrite: false, side: THREE.DoubleSide,
-      uniforms: { time: { value: 0 }, color: { value: new THREE.Color('#45574d') } },
+      uniforms: { time: { value: 0 }, intensity: { value: this.intensity }, color: { value: new THREE.Color('#45574d') } },
       vertexShader: `attribute float birth; attribute float fade; varying float vBirth; varying float vFade; varying vec2 vUv;
         void main() { vBirth = birth; vFade = fade; vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
-      fragmentShader: `uniform float time; uniform vec3 color; varying float vBirth; varying float vFade; varying vec2 vUv;
+      fragmentShader: `uniform float time; uniform float intensity; uniform vec3 color; varying float vBirth; varying float vFade; varying vec2 vUv;
         void main() {
           float edge = smoothstep(0.0, 0.16, vUv.x) * smoothstep(0.0, 0.16, 1.0 - vUv.x);
           float age = 1.0 - smoothstep(30.0, 45.0, time - vBirth);
-          gl_FragColor = vec4(color, 0.52 * edge * age * vFade);
+          gl_FragColor = vec4(color, 0.52 * intensity * edge * age * vFade);
           #include <tonemapping_fragment>
           #include <colorspace_fragment>
         }`,
@@ -111,6 +119,18 @@ export class TireTracks {
     this.tick = 0;
     this.pendingRanges = { position: [], birth: [], fade: [] };
     this.reset();
+  }
+
+  setSurfaceHeightSampler(surfaceHeight) {
+    this.surfaceHeight = typeof surfaceHeight === 'function' ? surfaceHeight : () => 0.025;
+    this.reset();
+  }
+
+  setConfig({ threshold = this.threshold, intensity = this.intensity } = {}) {
+    this.threshold = Number.isFinite(threshold) ? Math.max(0.5, Math.min(3, threshold)) : DEFAULT_SKID_THRESHOLD;
+    this.intensity = Number.isFinite(intensity) ? Math.max(0, Math.min(1, intensity)) : DEFAULT_TRACK_INTENSITY;
+    this.material.uniforms.intensity.value = this.intensity;
+    if (this.intensity === 0) this.reset();
   }
 
   reset() {
@@ -156,7 +176,7 @@ export class TireTracks {
   appendSegment(prev, point) {
     if (this.count === this.capacity && this.time - this.births[this.cursor * 6] < TRACK_LIFETIME) return false;
     const start = prev.headPoint;
-    const end = { x: point.x, z: point.z };
+    const end = { x: point.x, y: this.surfaceHeight(point.x, point.z), z: point.z };
     const dx = end.x - start.center.x, dz = end.z - start.center.z;
     const length = Math.hypot(dx, dz);
     if (length < 1e-8) return false;
@@ -172,8 +192,9 @@ export class TireTracks {
         sectionWidth *= scale;
       }
     }
-    const section = createTrackSection(end, sectionNormal, sectionWidth);
-    if (!start.section) start.section = createTrackSection(start.center, normal);
+    const section = createTrackSection(end, sectionNormal, sectionWidth, end.y);
+    if (!start.section) start.section = createTrackSection(start.center, normal, TRACK_WIDTH,
+      Number.isFinite(start.center.y) ? start.center.y : this.surfaceHeight(start.center.x, start.center.z));
     const built = buildSectionSegment(start.section, section, prev.headBirth, this.time, 1, 1, start.cap, false);
     if (!built) return false;
     const index = this.cursor;
@@ -198,14 +219,15 @@ export class TireTracks {
     wheels.slice(0, this.previous.length).forEach((wheel, i) => {
       const prev = this.previous[i];
       let strip = prev.strip;
-      const hasContact = enabled && wheel.grounded && !wheel.detached && Math.abs(wheel.longitudinal) >= SKID_CONTINUE_SPEED;
+      const hasContact = enabled && this.intensity > 0 && wheel.grounded && !wheel.detached
+        && Math.abs(wheel.longitudinal) >= SKID_CONTINUE_SPEED * this.threshold;
       if (!hasContact) { if (strip) this.endStrip(strip); prev.strip = null; prev.active = false; prev.slipping = false; prev.direction = 0; prev.pendingSlipTime = 0; prev.releaseTime = 0; return; }
       const direction = Math.sign(wheel.longitudinal);
       if (prev.slipping && direction !== prev.direction) {
         if (strip) this.endStrip(strip);
         prev.strip = null; prev.active = false; prev.slipping = false;
       }
-      const hardSkid = isHardSkid(wheel, prev.slipping);
+      const hardSkid = isHardSkid(wheel, prev.slipping, this.threshold);
       if (hardSkid) { prev.pendingSlipTime += sampleDt; prev.releaseTime = 0; }
       else if (prev.slipping) { prev.releaseTime += sampleDt; }
       else prev.pendingSlipTime = 0;
@@ -232,6 +254,7 @@ export class TireTracks {
       prev.x = x; prev.z = z; prev.active = true;
       if (!wasSlipping) {
         const center = { x, z };
+        center.y = this.surfaceHeight(x, z);
         strip = { head: -1, headPoint: { center, section: null, cap: true }, headBirth: this.time, headFade: 0, headNormal: null, headDirection: null, length: 0 };
         prev.strip = strip;
       }
@@ -249,9 +272,11 @@ export class TireTracks {
       const fadeLength = Math.min(TRACK_END_FADE_LENGTH, strip.length);
       const capCenter = {
         x: previousSection.center.x + strip.headDirection.x * fadeLength,
+        y: this.surfaceHeight(previousSection.center.x + strip.headDirection.x * fadeLength,
+          previousSection.center.z + strip.headDirection.z * fadeLength),
         z: previousSection.center.z + strip.headDirection.z * fadeLength,
       };
-      const cap = createTrackSection(capCenter, section.normal || strip.headNormal, section.width || TRACK_WIDTH);
+      const cap = createTrackSection(capCenter, section.normal || strip.headNormal, section.width || TRACK_WIDTH, capCenter.y);
       const built = buildSectionSegment(section, cap, lastBirth, lastBirth, 1, 0, false, false);
       if (built && (this.count < this.capacity || this.time - this.births[this.cursor * 6] >= TRACK_LIFETIME)) {
         const index = this.cursor;

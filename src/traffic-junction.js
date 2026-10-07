@@ -9,21 +9,37 @@ export function junctionMovement(incoming, outgoing, node, width) {
   const cross = a.x * b.z - a.z * b.x, dot = a.x * b.x + a.z * b.z;
   const turn = dot < -0.9 ? 'u-turn' : Math.abs(cross) < 0.1 ? 'straight' : cross > 0 ? 'right' : 'left';
   const reach = width / 2 + 3, lane = Math.min(5.2, width / 4);
-  const start = { x: -a.x * reach - a.z * lane, z: -a.z * reach + a.x * lane };
-  const end = { x: b.x * reach - b.z * lane, z: b.z * reach + b.x * lane };
+  const staged = ['left', 'u-turn'].includes(turn) ? turnStagingTarget(node, incoming.heading, width) : null;
+  const start = staged ? { x: staged.x - node.x, z: staged.z - node.z }
+    : { x: -a.x * reach - a.z * lane, z: -a.z * reach + a.x * lane };
+  const turnLane = turn === 'u-turn' ? Math.max(0.9, lane - 2.05) : lane;
+  const endLane = turn === 'u-turn' ? turnLane : lane;
+  const end = { x: b.x * reach - b.z * endLane, z: b.z * reach + b.x * endLane };
   const points = [];
-  for (let i = 0; i <= 48; i++) {
-    const t = i / 48, u = 1 - t;
+  const sampleCount = turn === 'u-turn' ? 96 : 48;
+  for (let i = 0; i <= sampleCount; i++) {
+    const t = i / sampleCount, u = 1 - t;
     let x, z;
     if (turn === 'straight') { x = start.x * u + end.x * t; z = start.z * u + end.z * t; }
     else if (turn === 'u-turn') {
-      const lead = reach - lane, arc = Math.PI * lane, distance = t * (2 * lead + arc);
+      const stageReach = -(start.x * a.x + start.z * a.z);
+      const lead = stageReach - turnLane, arc = Math.PI * turnLane;
+      const exitForward = reach - turnLane, exitSide = lane - turnLane;
+      const exit = Math.hypot(exitForward, exitSide), distance = t * (lead + arc + exit);
       let forward, side;
-      if (distance < lead) { forward = -reach + distance; side = lane; }
+      if (distance < lead) { forward = -stageReach + distance; side = turnLane; }
       else if (distance <= lead + arc) {
-        const angle = (distance - lead) / lane;
-        forward = -lane + lane * Math.sin(angle); side = lane * Math.cos(angle);
-      } else { forward = -lane - (distance - lead - arc); side = -lane; }
+        const angle = (distance - lead) / turnLane;
+        forward = -turnLane + turnLane * Math.sin(angle); side = turnLane * Math.cos(angle);
+      } else {
+        const fraction = (distance - lead - arc) / exit, v = 1 - fraction;
+        const startForward = -turnLane, endForward = -reach;
+        const p1Forward = startForward - exitForward / 3, p2Forward = endForward + exitForward / 3;
+        forward = v ** 3 * startForward + 3 * v ** 2 * fraction * p1Forward
+          + 3 * v * fraction ** 2 * p2Forward + fraction ** 3 * endForward;
+        side = v ** 3 * -turnLane + 3 * v ** 2 * fraction * -turnLane
+          + 3 * v * fraction ** 2 * -lane + fraction ** 3 * -lane;
+      }
       x = a.x * forward - a.z * side;
       z = a.z * forward + a.x * side;
     } else {
@@ -43,6 +59,17 @@ export function junctionMovement(incoming, outgoing, node, width) {
   });
   return { from: incoming.from, nodeId: node.id, to: outgoing.to, heading: incoming.heading, turn, points,
     key: `${width}:${Math.round(incoming.heading * 1000)}:${Math.round(outgoing.heading * 1000)}`, node };
+}
+
+/** A left/U-turn staging point near the centerline, leaving the curb side clear. */
+export function turnStagingTarget(node, heading, width, halfLength = 2.08, halfWidth = 0.87) {
+  const forwardX = Math.sin(heading), forwardZ = Math.cos(heading);
+  const rightX = -forwardZ, rightZ = forwardX;
+  const lane = Math.min(5.2, width / 4);
+  const lateral = Math.max(0.9, lane - 2 * halfWidth - 0.31);
+  const distance = width / 2 + halfLength + 0.4;
+  return { x: node.x - forwardX * distance + rightX * lateral,
+    z: node.z - forwardZ * distance + rightZ * lateral, heading };
 }
 
 export function movementsConflict(a, b) {

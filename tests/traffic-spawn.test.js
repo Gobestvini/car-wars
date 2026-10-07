@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createTrafficSpawnSlots, footprintsOverlap, isTrafficSpawnSafe, TRAFFIC_SPAWN } from '../src/traffic-spawn.js';
+import { createTrafficSpawnSlots, distributeTrafficSpawnSlots, footprintsOverlap, isTrafficSpawnSafe, TRAFFIC_SPAWN } from '../src/traffic-spawn.js';
 import { createCityPlan } from '../src/city-generator.js';
 import { createRoadGraph } from '../src/traffic-ai.js';
 
@@ -39,9 +39,10 @@ test('deterministic spawn allocation fits 6, 60 and 300 cars without footprint c
   for (const width of [12, 15, 30]) {
     const plan = createCityPlan(undefined, { roadWidth: width });
     const graph = createRoadGraph(plan.roadNetwork, Math.min(5.2, width * 0.25));
-    const eligible = graph.directed.filter(edge => Math.abs((edge.start.x + edge.end.x) / 2) <= 125
-      && Math.abs((edge.start.z + edge.end.z) / 2) <= 125);
-    const slots = createTrafficSpawnSlots(eligible.length ? eligible : graph.directed);
+    const nodes = [...graph.nodes.values()];
+    const bounds = { minX: Math.min(...nodes.map(node => node.x)), maxX: Math.max(...nodes.map(node => node.x)),
+      minZ: Math.min(...nodes.map(node => node.z)), maxZ: Math.max(...nodes.map(node => node.z)) };
+    const slots = distributeTrafficSpawnSlots(createTrafficSpawnSlots(graph.directed), bounds);
     const buildings = plan.buildings.map(building => ({ x: building.x, z: building.z,
       halfX: building.width / 2, halfZ: building.depth / 2 }));
     const occupied = [];
@@ -55,6 +56,32 @@ test('deterministic spawn allocation fits 6, 60 and 300 cars without footprint c
       assert.equal(new Set(ordered.map(item => `${item.x.toFixed(3)}:${item.z.toFixed(3)}:${item.heading.toFixed(3)}`)).size, count);
       assert.ok(ordered.every((item, index) => buildings.every(building => !footprintsOverlap(item, building, 0.2))
         && ordered.slice(0, index).every(other => !footprintsOverlap(item, other, TRAFFIC_SPAWN.minimumGap))));
+      if (count === 60) {
+        const sector = (value, min, max) => Math.max(0, Math.min(2, Math.floor((value - min) / (max - min) * 3)));
+        const available = Array(9).fill(0), placed = Array(9).fill(0);
+        for (const slot of slots) available[sector(slot.z, bounds.minZ, bounds.maxZ) * 3
+          + sector(slot.x, bounds.minX, bounds.maxX)]++;
+        for (const slot of occupied) placed[sector(slot.z, bounds.minZ, bounds.maxZ) * 3
+          + sector(slot.x, bounds.minX, bounds.maxX)]++;
+        assert.ok(placed.every(value => value > 0), `width ${width} did not fill every available sector: ${placed}`);
+        assert.ok(placed.every((value, index) => Math.abs(value - 60 * available[index] / slots.length)
+          <= Math.max(2, 0.25 * 60 * available[index] / slots.length)), `width ${width} missed sector quotas: ${placed}`);
+      }
     }
   }
+});
+
+test('city-wide spawn slots use every available sector and are deterministic', () => {
+  const plan = createCityPlan(), graph = createRoadGraph(plan.roadNetwork);
+  const nodes = [...graph.nodes.values()];
+  const bounds = { minX: Math.min(...nodes.map(node => node.x)), maxX: Math.max(...nodes.map(node => node.x)),
+    minZ: Math.min(...nodes.map(node => node.z)), maxZ: Math.max(...nodes.map(node => node.z)) };
+  const all = createTrafficSpawnSlots(graph.directed);
+  const distributed = distributeTrafficSpawnSlots(all, bounds);
+  assert.equal(distributed.length, all.length);
+  assert.deepEqual(distributed, distributeTrafficSpawnSlots(all, bounds));
+  const sector = (value, min, max) => Math.max(0, Math.min(2, Math.floor((value - min) / (max - min) * 3)));
+  const sectors = new Set(distributed.slice(0, 60).map(slot => `${sector(slot.x, bounds.minX, bounds.maxX)}:${sector(slot.z, bounds.minZ, bounds.maxZ)}`));
+  assert.equal(sectors.size, 9);
+  assert.equal(distributeTrafficSpawnSlots(all, null).length, all.length);
 });

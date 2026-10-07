@@ -8,6 +8,8 @@ const fieldRules = {
   power: { min: 0.5, max: 1.6 },
   roadWidth: ROAD_WIDTH_LIMITS,
   trafficCount: { min: 0, max: 300, step: 1 },
+  skidThreshold: { min: 0.5, max: 3, step: 0.05 },
+  trackIntensity: { min: 0, max: 1, step: 0.01 },
   cameraSpeed: { min: 2, max: 50, step: 1 },
   drawDistanceFollow: { min: 100, max: 1000, step: 10 },
   drawDistanceFree: { min: 100, max: 1000, step: 10 },

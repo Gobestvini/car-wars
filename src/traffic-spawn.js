@@ -27,6 +27,36 @@ export function createTrafficSpawnSlots(directedEdges) {
   return slots;
 }
 
+/** Interleave lanes from the whole map in proportion to available safe spawn slots. */
+export function distributeTrafficSpawnSlots(slots, bounds, divisions = 3) {
+  if (!slots.length || !bounds || !Number.isInteger(divisions) || divisions < 1) return [...slots];
+  const width = Math.max(1e-8, bounds.maxX - bounds.minX);
+  const depth = Math.max(1e-8, bounds.maxZ - bounds.minZ);
+  const sectors = Array.from({ length: divisions * divisions }, () => []);
+  for (let slotIndex = 0; slotIndex < slots.length; slotIndex++) {
+    const slot = slots[slotIndex];
+    const column = Math.max(0, Math.min(divisions - 1, Math.floor((slot.x - bounds.minX) / width * divisions)));
+    const row = Math.max(0, Math.min(divisions - 1, Math.floor((slot.z - bounds.minZ) / depth * divisions)));
+    sectors[row * divisions + column].push({ slot, slotIndex });
+  }
+  const cursor = new Uint32Array(sectors.length), ordered = [];
+  while (ordered.length < slots.length) {
+    let selected = -1, lowestShare = Infinity, earliest = Infinity;
+    for (let index = 0; index < sectors.length; index++) {
+      const sector = sectors[index];
+      if (cursor[index] >= sector.length) continue;
+      const share = cursor[index] / sector.length;
+      const firstUnallocated = sector[cursor[index]].slotIndex;
+      if (share < lowestShare || share === lowestShare && firstUnallocated < earliest) {
+        selected = index; lowestShare = share; earliest = firstUnallocated;
+      }
+    }
+    if (selected < 0) break;
+    ordered.push(sectors[selected][cursor[selected]++].slot);
+  }
+  return ordered;
+}
+
 function projectedHalfExtent(item, axisX, axisZ) {
   const heading = item.heading ?? 0;
   const forwardX = Math.sin(heading), forwardZ = Math.cos(heading);

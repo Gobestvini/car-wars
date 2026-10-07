@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { clearSettingsDefaults, readSettingsDefaults, saveSettingsDefaults, SETTINGS_DEFAULTS_KEY } from '../src/settings-defaults.js';
 
 const defaults = { softness: 0.45, grip: 1.8, power: 1, quality: 'Высокая', trails: true,
-  roadWidth: 15, trafficCount: 60, cameraSpeed: 15, drawDistanceFollow: 200, drawDistanceFree: 600 };
+  roadWidth: 15, trafficCount: 60, skidThreshold: 1.25, trackIntensity: 1,
+  cameraSpeed: 15, drawDistanceFollow: 200, drawDistanceFree: 600 };
 const memoryStorage = () => {
   const data = new Map();
   return { getItem: key => data.get(key) ?? null, setItem: (key, value) => data.set(key, value),
@@ -49,4 +50,15 @@ test('unsupported versions, corrupt JSON, and unavailable storage safely fall ba
   assert.deepEqual(readSettingsDefaults({ getItem() { throw new Error('denied'); } }, defaults), defaults);
   assert.equal(saveSettingsDefaults({ setItem() { throw new Error('denied'); } }, defaults, defaults), false);
   assert.equal(clearSettingsDefaults({ removeItem() { throw new Error('denied'); } }), false);
+});
+
+test('skid controls validate, persist, and default for profiles created before the controls existed', () => {
+  const storage = memoryStorage();
+  storage.setItem(SETTINGS_DEFAULTS_KEY, JSON.stringify({ version: 1, values: { trails: false } }));
+  assert.deepEqual(readSettingsDefaults(storage, defaults), { ...defaults, trails: false });
+  assert.equal(saveSettingsDefaults(storage, { ...defaults, skidThreshold: 2, trackIntensity: 0.35 }, defaults), true);
+  assert.deepEqual(readSettingsDefaults(storage, defaults), { ...defaults, skidThreshold: 2, trackIntensity: 0.35 });
+  storage.setItem(SETTINGS_DEFAULTS_KEY, JSON.stringify({ version: 1,
+    values: { skidThreshold: 1.23, trackIntensity: 1.5 } }));
+  assert.deepEqual(readSettingsDefaults(storage, defaults), defaults);
 });

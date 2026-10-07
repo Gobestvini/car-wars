@@ -65,3 +65,19 @@ export function createSidewalkRectangles(roadCenters, bounds, roadWidth, sidewal
   }
   return tiles;
 }
+
+/** Match the layered city surfaces so decals use the topmost visible surface height. */
+export function createSurfaceHeightSampler(plan, offset = 0.004) {
+  const centreIndex = Math.floor(plan.roads.length / 2);
+  const plazaSpan = Math.abs(plan.roads[centreIndex] - plan.roads[centreIndex - 1]);
+  const plaza = { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan };
+  const roads = createRoadSurfaceRectangles(plan.roads, plan.bounds, plan.roadWidth, plaza);
+  const sidewalks = createSidewalkRectangles(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plaza);
+  const contains = (rectangles, x, z) => rectangles.some(rect => x >= rect.minX && x <= rect.maxX
+    && z >= rect.minZ && z <= rect.maxZ);
+  return (x, z) => {
+    if (contains(sidewalks, x, z)) return 0.055 + offset;
+    if (contains(roads, x, z)) return 0.005 + offset;
+    return -0.015 + offset;
+  };
+}

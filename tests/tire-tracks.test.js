@@ -2,6 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import { TireTracks, buildTrackSegment, createTrackSection, buildSectionSegment, DEFAULT_TRACK_CAPACITY, TRACK_END_FADE_LENGTH, isHardSkid } from '../src/tire-tracks.js';
+import { createCityPlan } from '../src/city-generator.js';
+import { createSurfaceHeightSampler } from '../src/road-surface.js';
+import { CarSimulation, STEP } from '../src/vehicle.js';
 
 const wheel = (x, z, overrides = {}) => ({
   position: { x, z }, grounded: true, slip: 0.3, lateral: 3.2, longitudinal: 8, ...overrides,
@@ -40,6 +43,35 @@ test('segment cross sections share identical edges and remain finite on straight
   assert.equal(short, null);
   assert.ok(segments.flatMap(s => s.positions).every(Number.isFinite));
   assert.equal(TRACK_END_FADE_LENGTH, 0.5);
+});
+
+test('sections follow the visible road and sidewalk elevations, including transitions', () => {
+  const height = createSurfaceHeightSampler(createCityPlan());
+  assert.ok(Math.abs(height(0, 83.5) - 0.059) < 1e-9);
+  assert.ok(Math.abs(height(0, 80) - 0.009) < 1e-9);
+  assert.ok(Math.abs(height(0, 207) + 0.011) < 1e-9);
+  const start = createTrackSection({ x: 0, z: 80 }, { x: 1, z: 0 }, 0.29, height(0, 80));
+  const end = createTrackSection({ x: 0, z: 83.5 }, { x: 1, z: 0 }, 0.29, height(0, 83.5));
+  const segment = buildSectionSegment(start, end, 0, 1);
+  assert.ok(segment.positions.some(value => Math.abs(value - 0.009) < 1e-8));
+  assert.ok(segment.positions.some(value => Math.abs(value - 0.059) < 1e-8));
+});
+
+test('threshold calibration rejects a measured gentle turn and accepts a sustained physical skid', () => {
+  const gentleTracks = tracks(2048), gentleCar = new CarSimulation();
+  for (let i = 0; i < 2400; i++) {
+    gentleCar.step({ throttle: 0.75, steer: i < 600 ? 0 : 0.18 }, STEP);
+    gentleTracks.update(gentleCar.wheels, true, STEP);
+  }
+  assert.equal(gentleTracks.count, 0);
+
+  const skidTracks = tracks(2048), skidCar = new CarSimulation();
+  for (let i = 0; i < 2400; i++) {
+    skidCar.step(i < 1200 ? { throttle: 1 } : { throttle: 0.8, steer: 0.3, handbrake: true }, STEP);
+    skidTracks.update(skidCar.wheels, true, STEP);
+  }
+  assert.ok(skidTracks.count > 0, 'a sustained handbrake skid leaves track segments');
+  assert.ok([...skidTracks.positions.slice(0, skidTracks.count * 18)].every(Number.isFinite));
 });
 
 test('zero movement and invalid positions create no non-finite geometry', () => {
