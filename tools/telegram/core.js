@@ -45,6 +45,27 @@ export function nextQueuedJob(state) {
   return state.paused ? null : state.jobs.find(job => job.status === 'queued');
 }
 
+export const phaseLabels = {
+  preparing: 'Подготовка рабочего каталога',
+  planning: '6.1 Sol составляет задачу',
+  implementing: '6.0 Luna выполняет задачу',
+  checking: 'Проверка отчёта, тестов и сборки',
+  helping: '6.1 Sol помогает с проблемой',
+  publishing: 'Сохранение и отправка изменений в GitHub',
+};
+
+export function describeJob(job, now = Date.now()) {
+  const lines = [`#${job.id} ${job.status}`];
+  if (job.status === 'running') {
+    lines.push(`Этап: ${phaseLabels[job.phase] || 'Выполнение в фоне'}`);
+    if (job.startedAt) lines.push(`В работе: ${Math.max(0, Math.floor((now - Date.parse(job.startedAt)) / 60000))} мин.`);
+    if (job.lastActivityAt) lines.push(`Последний вывод агента: ${Math.max(0, Math.floor((now - Date.parse(job.lastActivityAt)) / 1000))} сек. назад`);
+  }
+  if (job.taskPath) lines.push(`Задача: ${job.taskPath}`);
+  if (job.question) lines.push(job.question);
+  return lines.join('\n');
+}
+
 export function replyToJob(state, id, text, chatId, updateId, previousTask = '') {
   if (state.jobs.some(job => job.updateId === updateId)) return null;
   const original = state.jobs.find(job => job.id === id && job.status === 'blocked');

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { newState, ingest, enqueue, recover, routeMessage, plannerPrompt, workerPrompt, validTaskPath, replyToJob, nextQueuedJob } from '../tools/telegram/core.js';
+import { newState, ingest, enqueue, recover, routeMessage, plannerPrompt, workerPrompt, validTaskPath, replyToJob, nextQueuedJob, describeJob } from '../tools/telegram/core.js';
 
 const message = (id, chatId, userId, text, type='private') => ({ message_id:id, chat:{id:chatId,type}, from:{id:userId}, text });
 
@@ -59,4 +59,14 @@ test('pause preserves incoming requests and replies carry original screenshot an
   assert.equal(replyToJob(state,original.id,'duplicate','42',11),null);
   assert.equal(nextQueuedJob(state),next);
   assert.equal(state.jobs.length,2);
+});
+
+test('running status identifies the actual phase, task and elapsed time', () => {
+  const now=Date.parse('2026-10-07T10:30:00Z');
+  const description=describeJob({id:1,status:'running',phase:'implementing',startedAt:'2026-10-07T10:23:00Z',lastActivityAt:'2026-10-07T10:29:55Z',taskPath:'docs/tasks/TASK-0050.md'},now);
+  assert.match(description,/6\.0 Luna выполняет/);
+  assert.match(description,/7 мин/);
+  assert.match(description,/5 сек/);
+  assert.match(description,/TASK-0050/);
+  assert.doesNotMatch(describeJob({id:1,status:'done',phase:'implementing',startedAt:'2026-10-07T10:23:00Z'},now),/В работе|Luna/);
 });

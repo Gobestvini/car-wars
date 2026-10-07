@@ -4,7 +4,8 @@ import { mkdtemp, mkdir, writeFile, readFile, rm, symlink } from 'node:fs/promis
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { saveState, loadState, makeTelegram, makeAgentRunner } from '../tools/telegram/runtime.js';
+import { saveState, loadState, makeTelegram, makeAgentRunner, runCodex } from '../tools/telegram/runtime.js';
+import { spawn } from 'node:child_process';
 import { git } from '../tools/telegram/publish.js';
 
 test('state writes are durable and Telegram API transport accepts an injected fake fetch', async t => {
@@ -33,7 +34,7 @@ async function temporaryRepo(t) {
 }
 
 test('pipeline runs planner, Luna, then Sol fallback, and requires successful external checks', async t => {
-  const root=await temporaryRepo(t); const calls=[]; let checks=0;
+  const root=await temporaryRepo(t); const calls=[]; let checks=0; const phases=[];
   const invoke=async options=>{
     calls.push(options.model);
     assert.equal(Object.hasOwn(options.env,'TELEGRAM_TOKEN'),false);
@@ -45,10 +46,11 @@ test('pipeline runs planner, Luna, then Sol fallback, and requires successful ex
     await writeFile(join(options.cwd,'docs/tasks/TASK-0001-fixture.md'),'- Статус: done\n## 10. Отчёт исполнителя\nРезультат: выполнено.\n');
     return {exitCode:0,result:{status:'done',summary:'ok',question:null}};
   };
-  const runner=makeAgentRunner({root,tempRoot:join(root,'worktrees'),env:{TELEGRAM_TOKEN:'hidden'},invoke,test:async()=>({ok:++checks>1}),publish:async options=>({status:'done',taskPath:options.taskPath})});
+  const runner=makeAgentRunner({root,tempRoot:join(root,'worktrees'),env:{TELEGRAM_TOKEN:'hidden'},invoke,test:async()=>({ok:++checks>1}),publish:async options=>({status:'done',taskPath:options.taskPath}),onProgress:async(job,p)=>{if(p.phase)phases.push(p.phase);}});
   const result=await runner({id:3,text:'fixture request',imagePath:null});
   assert.deepEqual(calls,['gpt-6.1-sol','gpt-6-luna','gpt-6.1-sol']);
   assert.equal(result.status,'done'); assert.equal(result.taskPath,'docs/tasks/TASK-0001-fixture.md');
+  assert.deepEqual(phases,['preparing','planning','implementing','checking','helping','checking','publishing']);
 });
 
 test('pipeline refuses to report done after fallback checks fail', async t => {
@@ -117,4 +119,36 @@ test('blocked planner retains its draft and never starts implementation', async 
   assert.equal(result.taskPath,taskPath);
   assert.equal(calls,1);
   assert.match(await readFile(join(result.worktree,taskPath),'utf8'),/draft/);
+});
+
+test('Codex runner streams both outputs to a log and reports activity before completion', async t => {
+  const root=await temporaryRepo(t);
+  const script=join(root,'fake-agent.cjs');
+  await writeFile(script,"const fs=require('fs');let p='';process.stdin.on('data',d=>p+=d);process.stdin.on('end',()=>{console.log('tool started');console.error('diagnostic');fs.writeFileSync(process.argv[process.argv.indexOf('-o')+1],JSON.stringify({ok:true}));});");
+  const logPath=join(root,'agent.log');let activities=0;
+  const result=await runCodex({cwd:root,model:'gpt-6-luna',prompt:'test',schema:{type:'object'},env:process.env,logPath,onActivity:()=>activities++,spawnImpl:(_cmd,args,options)=>{
+    assert.equal(args.at(-1),'-');assert.ok(args.includes('--json'));
+    return spawn(process.execPath,[script,...args],options);
+  }});
+  assert.equal(result.exitCode,0);
+  assert.equal(result.result.ok,true);
+  assert.ok(activities>=2);
+  assert.match(await readFile(logPath,'utf8'),/gpt-6-luna[\s\S]*tool started/);
+  assert.match(await readFile(logPath,'utf8'),/diagnostic/);
+});
+
+test('deliberately resumed request preserves its worktree and does not create another task', async t => {
+  const root=await temporaryRepo(t);const folder=join(root,'worktrees','telegram-1-resume');
+  const branch='codex/telegram-1-resume';await git(root,['worktree','add','-b',branch,folder,'HEAD']);
+  const taskPath='docs/tasks/TASK-0001-fixture.md';
+  await writeFile(join(folder,taskPath),'- Статус: in-progress\n## 10. Отчёт исполнителя\nНачата реализация\n');
+  await writeFile(join(folder,'README.md'),'partial implementation\n');
+  const models=[];
+  const runner=makeAgentRunner({root,tempRoot:join(root,'worktrees'),invoke:async options=>{
+    models.push(options.model);assert.equal(options.cwd,folder);assert.match(await readFile(join(folder,'README.md'),'utf8'),/partial implementation/);
+    await writeFile(join(folder,taskPath),'- Статус: done\n## 10. Отчёт исполнителя\nВыполнено\n');
+    return {exitCode:0,result:{status:'done',summary:'continued'}};
+  },test:async()=>({ok:true}),publish:async()=>({status:'done'})});
+  const result=await runner({id:1,text:'same request',resumeWorktree:true,worktree:folder,branch,taskPath});
+  assert.equal(result.status,'done');assert.deepEqual(models,['gpt-6-luna']);
 });
