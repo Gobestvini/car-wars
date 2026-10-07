@@ -147,20 +147,20 @@ function brightness(buffer, sample) {
           const rows = [];
           for (const gap of [10, 5, 2, 1, 5.95, 6.05, 10]) {
             f.pose(entry.x, entry.bounds.min.z - gap - 2.225);
-            // Free view from the same side: proximity must work while every camera ray is clear.
+            // Nearby facade must stay opaque when camera rays to the car are clear.
             f.camera.position.set(entry.x, 8, f.car.position.z - 20); f.camera.lookAt(f.car.position);
             f.draw(0, 180, quality, true);
-            rows.push({ gap, opacity: entry.opacity, near: entry.nearCar, ray: Boolean(entry.wasOccluded), proxy: Boolean(entry.proxy) });
+            rows.push({ gap, opacity: entry.opacity, ray: Boolean(entry.wasOccluded), proxy: Boolean(entry.proxy) });
           }
           return rows;
         }, quality);
-        assert.equal(proximity[0].opacity, 1); assert.equal(proximity[1].ray, false); assert.ok(proximity[1].opacity < 1);
-        assert.ok(Math.abs(proximity[2].opacity - .22) < .01); assert.equal(proximity.at(-1).opacity, 1); assert.equal(proximity.at(-1).proxy, false);
+        assert.equal(proximity[0].opacity, 1); assert.equal(proximity[1].ray, false); assert.equal(proximity[1].opacity, 1);
+        assert.ok(proximity.every(row => row.opacity === 1 && !row.proxy && !row.ray)); assert.equal(proximity.at(-1).opacity, 1); assert.equal(proximity.at(-1).proxy, false);
         result.proximity.push({ quality, rows: proximity });
         await page.screenshot({ path: `${out}/proximity-${viewport.width}-${quality}-restored.png` });
         await page.evaluate(quality => {
           const f = fixture, entry = f.city.entries.find(e => !e.caps.length && e.x > 0 && e.z > 0);
-          f.pose(entry.x, entry.bounds.min.z - 3.225); f.camera.position.set(entry.x, 8, f.car.position.z - 20); f.camera.lookAt(f.car.position); f.draw(0, 180, quality, true);
+          f.pose(entry.x, entry.bounds.min.z - 3.225); f.camera.position.set(entry.x, 8, entry.bounds.max.z + 20); f.camera.lookAt(f.car.position); f.draw(0, 180, quality, true);
         }, quality);
         await page.screenshot({ path: `${out}/proximity-${viewport.width}-${quality}-near.png` });
       }
@@ -197,7 +197,7 @@ function brightness(buffer, sample) {
         if (f.effects.snapshot().explosions !== 1 || f.effects.snapshot().activeSmoke) throw new Error('Repeated explosion or stale smoke');
         sim.removeStaticBox(wall); sim.reset(); f.effects.reset();
         const entry = f.city.entries.find(e => !e.caps.length && e.x > 0 && e.z > 0);
-        f.pose(entry.x, entry.bounds.min.z - 3.225); f.camera.position.set(entry.x, 8, f.car.position.z - 20); f.camera.lookAt(f.car.position);
+        f.pose(entry.x, entry.bounds.min.z - 3.225); f.camera.position.set(entry.x, 8, entry.bounds.max.z + 20); f.camera.lookAt(f.car.position);
         f.draw(0, 180, 'high', true);
         if (entry.opacity > .23) throw new Error('Expected faded facade');
         sim.body.position.copy(f.car.position); sim.body.quaternion.setFromEuler(0, 0, 0); sim.body.velocity.set(0, 0, 12); sim.body.aabbNeedsUpdate = true;

@@ -1,18 +1,6 @@
-const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
-export const BUILDING_FADE = Object.freeze({ minimum: .22, close: 2, enter: 6, exit: 8 });
-
-export function distanceToBuildingXZ(point, bounds) {
-  const dx = point.x - clamp(point.x, bounds.min.x, bounds.max.x);
-  const dz = point.z - clamp(point.z, bounds.min.z, bounds.max.z);
-  return Math.hypot(dx, dz);
-}
-
-export function proximityVisibility(gap, wasNear = false) {
-  const near = gap < (wasNear ? BUILDING_FADE.exit : BUILDING_FADE.enter);
-  const t = clamp((gap - BUILDING_FADE.close) / (BUILDING_FADE.enter - BUILDING_FADE.close), 0, 1);
-  return { near, opacity: near ? BUILDING_FADE.minimum + (1 - BUILDING_FADE.minimum) * t * t * (3 - 2 * t) : 1 };
-}
+export const BUILDING_FADE = Object.freeze({ minimum: .22 });
 
 export function smoothBuildingOpacity(current, target, dt) {
   return current + (target - current) * (1 - Math.exp(-Math.max(0, dt) / (target < current ? .18 : .3)));
@@ -89,7 +77,36 @@ export class BuildingOcclusion {
     }
     entry.art?.hide();
     entry.art?.proxy(group);
-    group.traverse(node => { if (node.isMesh) node.renderOrder = 2; });
+    // Resolve the whole building's outer surface before alpha blending any part.
+    // Identical opacity alone compounds at overlapping plinths/cornices/roofs.
+    const surfaces = group.children.slice();
+    // Bake once so the color and depth passes use exactly the same Float32 vertices.
+    // Separate GPU scale transforms can otherwise disagree at roof/trim edges.
+    for (const surface of surfaces) {
+      surface.updateMatrix();
+      surface.geometry = surface.geometry.clone().applyMatrix4(surface.matrix);
+      surface.position.set(0, 0, 0); surface.quaternion.identity(); surface.scale.setScalar(1);
+      surface.userData.buildingSurface = true;
+    }
+    const depthMaterial = new this.THREE.MeshDepthMaterial({ colorWrite: false, depthWrite: true, transparent: true });
+    const depthMesh = new this.THREE.Mesh(new this.THREE.BufferGeometry(), depthMaterial);
+    depthMesh.name = 'Whole building depth'; depthMesh.renderOrder = 1;
+    depthMesh.userData.buildingDepth = true;
+    group.userData.rebuildDepth = () => {
+      const parts = surfaces.filter(mesh => mesh.visible).map(mesh => {
+        mesh.updateMatrix();
+        return mesh.geometry.clone().applyMatrix4(mesh.matrix);
+      });
+      const combined = mergeGeometries(parts, false);
+      for (const part of parts) part.dispose();
+      depthMesh.geometry.dispose(); depthMesh.geometry = combined;
+    };
+    group.userData.rebuildDepth();
+    for (const surface of surfaces) {
+      surface.renderOrder = 2;
+      surface.material.depthFunc = this.THREE.EqualDepth;
+    }
+    group.add(depthMesh);
     this.scene.add(group);
     entry.proxy = group;
     entry.proxyMaterial = material;
@@ -100,7 +117,11 @@ export class BuildingOcclusion {
   finishProxy(entry, caps) {
     this.scene.remove(entry.proxy);
     const materials = new Set();
-    entry.proxy.traverse(node => { if (node.isMesh) materials.add(node.material); });
+    entry.proxy.traverse(node => {
+      if (!node.isMesh) return;
+      materials.add(node.material);
+      if (node.userData.buildingDepth || node.userData.buildingSurface) node.geometry.dispose();
+    });
     for (const material of materials) material.dispose();
     entry.proxy = null; entry.proxyMaterial = null;
     for (const cap of caps) cap.visible = true;
@@ -118,7 +139,7 @@ export class BuildingOcclusion {
       targets.push({ x: center.x + right.x * side * .64 + forward.x * nose * 1.65,
         y: center.y, z: center.z + right.z * side * .64 + forward.z * nose * 1.65 });
     }
-    // Sample the four footprint corners too: fade before the 4.45m body reaches a wall.
+    // Include the footprint corners so partial occlusion of the 4.45m body counts too.
     for (const side of [-1, 1]) for (const nose of [-1, 1]) {
       targets.push({ x: center.x + right.x * side * .9 + forward.x * nose * 2.225,
         y: center.y, z: center.z + right.z * side * .9 + forward.z * nose * 2.225 });
@@ -132,11 +153,7 @@ export class BuildingOcclusion {
         entry.clearTime += Math.max(0, dt);
         if (entry.clearTime >= .12) entry.wasOccluded = false;
       }
-      entry.carGap = Math.min(...targets.map(target => distanceToBuildingXZ(target, entry.bounds)));
-      const proximity = proximityVisibility(entry.carGap, entry.nearCar);
-      entry.nearCar = proximity.near;
-      const occlusionTarget = hit || entry.wasOccluded ? BUILDING_FADE.minimum : 1;
-      const target = Math.min(occlusionTarget, proximity.opacity);
+      const target = hit || entry.wasOccluded ? BUILDING_FADE.minimum : 1;
       const hidden = target < 1;
       if (hidden && !entry.proxy) this.startProxy(entry, entry.caps);
       if (!entry.proxy && !hidden) continue;
@@ -156,6 +173,7 @@ export class BuildingOcclusion {
       const materials = new Set();
       entry.proxy.traverse(node => {
         if (!node.isMesh) return;
+        if (node.userData.buildingDepth || node.userData.buildingSurface) node.geometry.dispose();
         for (const material of Array.isArray(node.material) ? node.material : [node.material]) materials.add(material);
       });
       for (const material of materials) material.dispose();

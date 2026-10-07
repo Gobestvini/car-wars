@@ -36,7 +36,8 @@ export function createCityArt(group, entries, seed) {
     part(1, entry.x,entry.height-.32,entry.z,entry.width+.015,.28,entry.depth+.015,'#fff6dc');
     const roofHeight = style.family === 0 ? .85 : style.family === 1 ? .2 : .6;
     part(2+style.family,entry.x,entry.height+roofHeight/2,entry.z,entry.width*.98,roofHeight,entry.depth*.98,ART.roof);
-    part(5,entry.x+entry.width*.18,entry.height+roofHeight+.18,entry.z-entry.depth*.15,entry.width*.22,.36,entry.depth*.3,'#a3b6ce');
+    // Roof plant needs a flat bearing surface; pitched roofs keep a clean silhouette.
+    if (style.family === 1) part(5,entry.x+entry.width*.18,entry.height+roofHeight+.18,entry.z-entry.depth*.15,entry.width*.22,.36,entry.depth*.3,'#a3b6ce');
     entry.art = {
       parts,
       hide() { for (const p of parts) { batches[p.batch].setMatrixAt(entry.index,zero); batches[p.batch].instanceMatrix.needsUpdate=true; } },
@@ -56,7 +57,10 @@ export function createCityArt(group, entries, seed) {
   return {
     setQuality(quality) {
       const next = quality !== 'low'; if (next===high) return; high=next; batches[5].visible=high;
-      for (const entry of entries) if (entry.proxy) for (const child of entry.proxy.children) if (child.userData.roofDetail) child.visible=high;
+      for (const entry of entries) if (entry.proxy) {
+        for (const child of entry.proxy.children) if (child.userData.roofDetail) child.visible=high;
+        entry.proxy.userData.rebuildDepth?.();
+      }
     },
   };
 }

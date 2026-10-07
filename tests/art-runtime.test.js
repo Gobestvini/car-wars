@@ -22,19 +22,33 @@ test('art variation never mutates the plan or physical city dimensions',()=>{
 test('batched decoration fades with its building and returns after fade; low hides optional proxies',()=>{
   const plan=createCityPlan(),scene=new THREE.Scene();
   const city=createCityScene(scene,{addStaticBox: spec=>spec,removeStaticBox(){}},plan);
-  const entry=city.entries[0];
+  const entry=city.entries.find(e=>e.artFamily===1);
   city.occlusion.startProxy(entry,entry.caps);
   const matrix=new THREE.Matrix4();
   const plinth=city.group.getObjectByName('Building plinths');
   plinth.getMatrixAt(entry.index,matrix);assert.equal(matrix.elements[0],0);
   assert.equal(entry.proxy.children.filter(c=>c.userData.roofDetail).length,1);
+  const depth=entry.proxy.children.find(c=>c.userData.buildingDepth);
+  const highCount=depth.geometry.index.count; let depthDisposed=0;
+  depth.geometry.addEventListener('dispose',()=>depthDisposed++);
   city.updateSignals({phase:()=>({color:'red'})},0,null,'low');
+  assert.equal(depthDisposed,1); assert.equal(highCount-depth.geometry.index.count,36);
+  for(const e of city.entries) {
+    const plant=e.art.parts.find(p=>p.batch===5);
+    assert.equal(Boolean(plant),e.artFamily===1);
+    if(plant) {
+      const bounds=new THREE.Box3(new THREE.Vector3(-.5,-.5,-.5),new THREE.Vector3(.5,.5,.5)).applyMatrix4(plant.matrix);
+      assert.ok(Math.abs(bounds.min.y-(e.height+.2))<1e-6);
+    }
+  }
   assert.equal(entry.proxy.children.find(c=>c.userData.roofDetail).visible,false);
+  let geometryDisposed=0;
+  entry.proxy.children.forEach(c=>c.geometry.addEventListener('dispose',()=>geometryDisposed++));
   let disposed=0;
   entry.proxy.children.forEach(c=>c.material.addEventListener('dispose',()=>disposed++));
   const expected=entry.proxy.children.length;
   city.occlusion.finishProxy(entry,entry.caps);
-  assert.equal(disposed,expected);assert.equal(entry.proxy,null);
+  assert.equal(disposed,expected);assert.equal(geometryDisposed,expected);assert.equal(entry.proxy,null);
   plinth.getMatrixAt(entry.index,matrix);assert.ok(matrix.elements[0]>0);
   city.dispose();assert.equal(scene.children.length,0);
 });
