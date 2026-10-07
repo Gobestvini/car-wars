@@ -1,4 +1,4 @@
-param([switch]$Background, [switch]$NoWatchdog)
+﻿param([switch]$Background, [switch]$NoWatchdog)
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 if (-not (Get-Command node -ErrorAction SilentlyContinue)) { throw 'Node.js не найден в PATH.' }
@@ -33,7 +33,8 @@ if ($Background) {
     }
     if (-not $watchAlive) {
       $watchArguments = '-NoProfile -ExecutionPolicy Bypass -File "' + (Join-Path $PSScriptRoot 'watch.ps1') + '"'
-      $watch = Start-Process -FilePath powershell.exe -ArgumentList $watchArguments -WorkingDirectory $root -WindowStyle Hidden -PassThru
+      $powershellPath = [Diagnostics.Process]::GetCurrentProcess().MainModule.FileName
+      $watch = Start-Process -FilePath $powershellPath -ArgumentList $watchArguments -WorkingDirectory $root -WindowStyle Hidden -PassThru
       Set-Content -LiteralPath $watchFile -Value $watch.Id -NoNewline
     }
   }

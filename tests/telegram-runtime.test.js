@@ -66,6 +66,20 @@ test('pipeline refuses to report done after fallback checks fail', async t => {
   assert.equal(result.status,'failed'); assert.equal(calls.length,3);
 });
 
+test('native check process crash stops expensive fallback and preserves the task', async t => {
+  const root = await temporaryRepo(t); let calls = 0;
+  const taskPath = 'docs/tasks/TASK-0001-fixture.md';
+  const invoke = async options => {
+    calls++;
+    await writeFile(join(options.cwd, taskPath), `- Статус: ${calls === 1 ? 'ready' : 'done'}\n## 10. Отчёт исполнителя\nВыполнено.\n`);
+    return { exitCode: 0, result: calls === 1 ? { status: 'ready', taskPath } : { status: 'done', summary: 'done' } };
+  };
+  const result = await makeAgentRunner({root,tempRoot:join(root,'worktrees'),invoke,
+    test:async()=>({ok:false,detail:'exitCode: 3221225477'})})({id:1,text:'fixture'});
+  assert.equal(result.status,'blocked'); assert.equal(calls,2);
+  assert.equal(result.taskPath,taskPath); assert.match(result.question,/0xC0000005/);
+});
+
 test('complete pipeline commits and pushes the task after verification', async t => {
   const root=await temporaryRepo(t);
   const remote=join(root,'worktrees','remote.git');

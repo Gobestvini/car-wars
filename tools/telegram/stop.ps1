@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $watchFile = Join-Path $root '.telegram-watchdog.pid'
 if (Test-Path -LiteralPath $watchFile) {

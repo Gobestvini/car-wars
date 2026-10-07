@@ -5,7 +5,8 @@ import { fileURLToPath } from 'node:url';
 import { git, protectedPath } from './publish.js';
 
 const knowledgeFile = 'docs/knowledge/agents/memory.json';
-const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+const hash = (bytes, path) => createHash('sha256').update(/\.(js|mjs|cjs|json|html|css|txt|ya?ml)$/i.test(path)
+  ? bytes.toString('utf8').replace(/\r\n/g, '\n') : bytes).digest('hex');
 async function load(cwd) {
   try { return JSON.parse(await readFile(join(cwd, knowledgeFile), 'utf8')); }
   catch (error) { if (error.code === 'ENOENT') return { version: 1, entries: [] }; throw error; }
@@ -14,7 +15,7 @@ async function sources(cwd, paths) {
   const result = {};
   for (const p of paths) {
     if (!p || protectedPath(p) || p.startsWith('docs/') || !/^(src|tests|tools|public)\/|^(package(-lock)?\.json|vite\.config\.[\w]+|index\.html)$/.test(p) || p.split('/').includes('..')) continue;
-    try { result[p] = hash(await readFile(join(cwd, p))); }
+    try { result[p] = hash(await readFile(join(cwd, p)), p); }
     catch (error) { if (error.code !== 'ENOENT') throw error; result[p] = null; }
   }
   return result;

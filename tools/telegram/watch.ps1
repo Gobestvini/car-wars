@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $mutexName = 'Local\CarWarsTelegramWatch-' + ([Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($root)) -replace '[^a-zA-Z0-9]', '')
 $created = $false

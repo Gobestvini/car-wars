@@ -17,7 +17,7 @@ async function fixture(t) {
   await writeFile(join(cwd, 'tests/example.test.js'), 'fixture');
   await writeFile(join(cwd, 'package.json'), '{}');
   await git(cwd, ['add', '.']);
-  await writeFile(join(cwd, 'src/traffic.js'), 'changed');
+  await writeFile(join(cwd, 'src/traffic.js'), 'changed\r\n');
   return cwd;
 }
 
@@ -25,6 +25,8 @@ test('memory stores verified outcome, hides stale facts and does not learn failu
   const cwd = await fixture(t);
   assert.equal(await recordKnowledge(cwd, { taskPath: 'failure', summary: 'bad', checked: { ok: false } }), false);
   await recordKnowledge(cwd, { taskPath: 'task', summary: 'Трафик ожидает поворот', checked: { ok: true } });
+  assert.match(await knowledgeContext(cwd, 'Трафик'), /Трафик ожидает поворот/);
+  await writeFile(join(cwd, 'src/traffic.js'), 'changed\n');
   assert.match(await knowledgeContext(cwd, 'Трафик'), /Трафик ожидает поворот/);
   await writeFile(join(cwd, 'tests/example.test.js'), 'unrelated');
   assert.match(await knowledgeContext(cwd, 'Трафик'), /Трафик ожидает поворот/);

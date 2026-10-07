@@ -7,7 +7,7 @@
       "text": "Стек: Three.js, cannon-es, Tweakpane; Vite собирает игру. Команды и версии берутся из package.json. npm test запускает Node test runner.",
       "at": "2026-10-07T11:11:58.911Z",
       "sources": {
-        "package.json": "8cdf930ecbadcaec2f71d2092c9c98f89448068b7a9b0426bce1f328bc15adc0"
+        "package.json": "9445342245651ab3199c441e01bdf92b07a5c91d3cd7d1f81baaa49221484a09"
       },
       "evidence": "проверена карта файлов"
     },
@@ -17,7 +17,7 @@
       "text": "FixedStepper в src/game-loop.js: шаг по умолчанию 1/120 секунды, максимум 10 догоняющих шагов; advance возвращает alpha и steps для интерполяции.",
       "at": "2026-10-07T11:11:58.912Z",
       "sources": {
-        "src/game-loop.js": "9e127e85e5d281976fca4363f140c1c8fc89accf4f78bcd083b52209329a85ca"
+        "src/game-loop.js": "65a3f5ccc827e535babd8df3c639d1488f5efcb829d468a6e4bc78982fd04c89"
       },
       "evidence": "проверена карта файлов"
     },
@@ -27,10 +27,10 @@
       "text": "Для задачи о движении трафика начинай с src/traffic.js, src/traffic-ai.js, src/traffic-junction.js и src/traffic-planner.js. Найди конкретную функцию через rg; не перечитывай весь генератор города без необходимости.",
       "at": "2026-10-07T11:11:58.912Z",
       "sources": {
-        "src/traffic.js": "6f2a1c1702870c104f044678b0407f38429c7bf77a7cec24009fd86acb12f3fe",
-        "src/traffic-ai.js": "b8079cfeb81c8713b0db45096948cc4f0c26d3bfa5588873a6065f7880485598",
-        "src/traffic-junction.js": "547a9255f4735c71382c4f835b655f9b37d575377ac3d93f080f70c6d5776644",
-        "src/traffic-planner.js": "737ab2cf52520b7343969c0a5453c692ca3d3246d0f53aa4d0feb267e18d1ee3"
+        "src/traffic.js": "52be67c5b3fd2d87897fa71c1d922d1b83fe0da53606311d154d112c7c179a8c",
+        "src/traffic-ai.js": "4053abe1760b41303237260d33a055a3b0562cff40a5245a70d7126701c80fca",
+        "src/traffic-junction.js": "0f8fb1c80798ff8f94b828785afc02f2d3eb5c346edd0c5ccd96106fa0881475",
+        "src/traffic-planner.js": "01affb524ad86753b7b724b5392fc84a10e3b79c54f71b3e390e211f550f3272"
       },
       "evidence": "проверена карта файлов"
     },
@@ -40,9 +40,9 @@
       "text": "Ввод игрока: src/driving-input.js и src/joystick.js; автомобиль: src/vehicle.js. При правках управления проверь телефон и потерю фокуса по правилам docs/knowledge/playbook.md.",
       "at": "2026-10-07T11:11:58.925Z",
       "sources": {
-        "src/driving-input.js": "e4a9c85bf8686ec2c18fdabb2b59e05f6e428d40c982e1858bf9e8f18e349be8",
-        "src/joystick.js": "c05dadac5f95e5c9e0a66cb5bae08fc6b88f8f78ab3a3d58bbc7cea8afe9414a",
-        "src/vehicle.js": "ada55f15d2d27030c5d1ba1816a6820cb751798d9c9babebfc50a761ac7df3b2"
+        "src/driving-input.js": "caeae9c560083c952bfe25f2f55c520caaab5ba8f0053be3334dc4b1610ee712",
+        "src/joystick.js": "c9a31f20906424ffcb55ce0b07618641bc2ce817ecd15c9f96d725f37bde3a43",
+        "src/vehicle.js": "ebda3a9c67ebdca435fd1c5b4fe8fc437287efb45ed6ef53bf818a9d3fe903b2"
       },
       "evidence": "проверена карта файлов"
     }
