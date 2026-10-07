@@ -103,7 +103,7 @@ export function makeAgentRunner({ root, tempRoot, env = process.env, invoke = ru
       const safeEnv = Object.fromEntries(Object.entries(env).filter(([key]) => !/TELEGRAM|BOT_TOKEN|PAIR_CODE/i.test(key)));
       const planner = await invoke({cwd:folder,model:'gpt-6.1-sol',prompt:plannerPrompt(job.text,job.imagePath),schema:plannerSchema,imagePath:job.imagePath,env:safeEnv});
       let plan = planner.result;
-      if (planner.exitCode || plan?.status !== 'ready' || !validTaskPath(plan.taskPath)) return {status:'blocked',question:plan?.question ?? planner.error ?? 'Планировщик не создал корректную задачу.',branch:base,worktree:folder};
+      if (planner.exitCode || plan?.status !== 'ready' || !validTaskPath(plan.taskPath)) return {status:'blocked',question:plan?.question ?? planner.error ?? 'Планировщик не создал корректную задачу.',branch:base,worktree:folder,taskPath:validTaskPath(plan?.taskPath) ? plan.taskPath : null};
       const taskFile = resolve(folder,plan.taskPath); if (!taskFile.startsWith(resolve(folder,'docs','tasks') + '\\') && !taskFile.startsWith(resolve(folder,'docs','tasks') + '/')) return {status:'blocked',question:'Путь задачи находится вне docs/tasks.',branch:base,worktree:folder};
       let taskText=''; try { taskText=await readFile(taskFile,'utf8'); } catch { return {status:'blocked',question:'Планировщик указал отсутствующий файл задачи.',branch:base,worktree:folder}; }
       if (!/^\s*- Статус: ready\s*$/m.test(taskText) || !taskText.includes('## 10. Отчёт исполнителя')) return {status:'blocked',question:'Задача не имеет статуса ready или секции отчёта.',branch:base,worktree:folder};

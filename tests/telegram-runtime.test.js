@@ -103,3 +103,18 @@ test('schema done without completed task report cannot publish', async t => {
   assert.equal(publications,0);
   assert.equal(calls,3);
 });
+
+test('blocked planner retains its draft and never starts implementation', async t => {
+  const root=await temporaryRepo(t); let calls=0;
+  const taskPath='docs/tasks/TASK-0001-fixture.md';
+  const invoke=async options=>{
+    calls++;
+    await writeFile(join(options.cwd,taskPath),'- Статус: draft\nНужна информация\n');
+    return {exitCode:0,result:{status:'blocked',taskPath,question:'Какой поворот?'}};
+  };
+  const result=await makeAgentRunner({root,tempRoot:join(root,'worktrees'),invoke,test:async()=>{throw new Error('should not check');}})({id:1,text:'fixture'});
+  assert.equal(result.status,'blocked');
+  assert.equal(result.taskPath,taskPath);
+  assert.equal(calls,1);
+  assert.match(await readFile(join(result.worktree,taskPath),'utf8'),/draft/);
+});
