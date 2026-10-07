@@ -6,14 +6,14 @@ export function smoothBuildingOpacity(current, target, dt) {
   return current + (target - current) * (1 - Math.exp(-Math.max(0, dt) / (target < current ? .18 : .3)));
 }
 
-export function segmentIntersectsAabb(start, end, bounds) {
+function segmentAabbEntry(start, end, bounds) {
   let minimum = 0;
   let maximum = 1;
   for (const axis of ['x', 'y', 'z']) {
     const origin = start[axis];
     const delta = end[axis] - origin;
     if (Math.abs(delta) < 1e-9) {
-      if (origin < bounds.min[axis] || origin > bounds.max[axis]) return false;
+      if (origin < bounds.min[axis] || origin > bounds.max[axis]) return null;
       continue;
     }
     let near = (bounds.min[axis] - origin) / delta;
@@ -21,9 +21,27 @@ export function segmentIntersectsAabb(start, end, bounds) {
     if (near > far) [near, far] = [far, near];
     minimum = Math.max(minimum, near);
     maximum = Math.min(maximum, far);
-    if (minimum > maximum) return false;
+    if (minimum > maximum) return null;
   }
-  return maximum > 1e-4 && minimum < 1 - 1e-4;
+  return maximum > 1e-4 && minimum < 1 - 1e-4 ? minimum : null;
+}
+
+export function segmentIntersectsAabb(start, end, bounds) {
+  return segmentAabbEntry(start, end, bounds) !== null;
+}
+
+// Sample solid portions of the body, not the empty corners of its footprint.
+// Stop at the near surface: a wall behind the visible car must not count.
+export function vehicleSightTargets(THREE, camera, car) {
+  const inverse = car.quaternion.clone().invert();
+  const localCamera = camera.position.clone().sub(car.position).applyQuaternion(inverse);
+  const body = { min: { x: -.75, y: -.35, z: -2.1 }, max: { x: .75, y: .65, z: 2.1 } };
+  return [[0, .45, 0], [-.55, .1, 0], [.55, .1, 0], [0, .1, -1.5], [0, .1, 1.5]].map(point => {
+    const target = new THREE.Vector3(...point);
+    const entry = segmentAabbEntry(localCamera, target, body);
+    if (entry !== null) target.lerpVectors(localCamera, target, entry);
+    return target.applyQuaternion(car.quaternion).add(car.position);
+  });
 }
 
 export function occludedBuildingIds(buildings, camera, targets) {
@@ -46,8 +64,6 @@ export class BuildingOcclusion {
     this.position = new THREE.Vector3();
     this.scale = new THREE.Vector3();
     this.quaternion = new THREE.Quaternion();
-    this.right = new THREE.Vector3();
-    this.forward = new THREE.Vector3();
   }
 
   setInstanceVisible(entry, visible) {
@@ -131,19 +147,7 @@ export class BuildingOcclusion {
   }
 
   update(camera, car, dt) {
-    const right = this.right.set(1, 0, 0).applyQuaternion(car.quaternion);
-    const forward = this.forward.set(0, 0, 1).applyQuaternion(car.quaternion);
-    const center = { x: car.position.x, y: car.position.y + .48, z: car.position.z };
-    const targets = [center];
-    for (const [side, nose] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
-      targets.push({ x: center.x + right.x * side * .64 + forward.x * nose * 1.65,
-        y: center.y, z: center.z + right.z * side * .64 + forward.z * nose * 1.65 });
-    }
-    // Include the footprint corners so partial occlusion of the 4.45m body counts too.
-    for (const side of [-1, 1]) for (const nose of [-1, 1]) {
-      targets.push({ x: center.x + right.x * side * .9 + forward.x * nose * 2.225,
-        y: center.y, z: center.z + right.z * side * .9 + forward.z * nose * 2.225 });
-    }
+    const targets = vehicleSightTargets(this.THREE, camera, car);
     const cameraPoint = { x: camera.position.x, y: camera.position.y, z: camera.position.z };
     const blocked = occludedBuildingIds(this.entries, cameraPoint, targets);
     for (const entry of this.entries) {

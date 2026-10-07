@@ -1,7 +1,8 @@
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const out = 'docs/art/verification/building-fade';
+const out = process.env.BUILDING_FADE_OUTPUT_DIR || 'docs/art/verification/building-fade';
+fs.mkdirSync(out, {recursive:true});
 const base = process.env.CARWARS_BASE_URL || 'http://127.0.0.1:5181/';
 (async () => {
  const browser = await chromium.launch({channel:'msedge',headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
@@ -13,6 +14,7 @@ const base = process.env.CARWARS_BASE_URL || 'http://127.0.0.1:5181/';
   const report = await page.evaluate(async () => {
    const T=await import('/node_modules/three/build/three.module.js');
    const {BuildingOcclusion}=await import('/src/building-occlusion.js');
+   const {createCityArt}=await import('/src/city-art.js');
    const renderer=new T.WebGLRenderer({canvas:document.querySelector('canvas'),antialias:false,preserveDrawingBuffer:true});
    renderer.setSize(390,844); renderer.setClearColor('white');
    const scene=new T.Scene(); scene.add(new T.HemisphereLight(0xffffff,0xffffff,2));
@@ -21,11 +23,12 @@ const base = process.env.CARWARS_BASE_URL || 'http://127.0.0.1:5181/';
    const body=new T.InstancedMesh(geometry,new T.MeshStandardMaterial({color:'#cc6633'}),1); scene.add(body);
    const cap=new T.Mesh(geometry,new T.MeshStandardMaterial({color:'#4779b0'})); cap.position.set(0,3.8,.025); cap.scale.set(4.1,.4,2.1); scene.add(cap);
    const entry={id:1,index:0,x:0,z:0,width:4,height:4,depth:2,color:'#cc6633',opacity:1,caps:[cap],bounds:{min:{x:-2,y:0,z:-1},max:{x:2,y:4,z:1}}};
+   const artGroup=new T.Group(); scene.add(artGroup); createCityArt(artGroup,[entry],1);
    const fade=new BuildingOcclusion(T,scene,body,geometry,[entry]); fade.setInstanceVisible(entry,true);
    const gl=renderer.getContext();
    const sample=()=>{
     renderer.render(scene,camera);
-    return [2,3.8].map(y=>{
+    return [.36,2,3.8].map(y=>{
      const point=new T.Vector3(0,y,1.1).project(camera), pixel=new Uint8Array(4);
      gl.readPixels(Math.floor((point.x+1)*195),Math.floor((point.y+1)*422),1,1,gl.RGBA,gl.UNSIGNED_BYTE,pixel);
      return [...pixel].slice(0,3);
@@ -35,9 +38,9 @@ const base = process.env.CARWARS_BASE_URL || 'http://127.0.0.1:5181/';
    for(const child of entry.proxy.children) child.material.opacity=.22;
    const faded=sample();
    window.renderFade={renderer,scene,camera,entry,fade};
-   return {opaque,fullProxy,faded,expected:opaque.map(rgb=>rgb.map(c=>Math.round(c*.22+255*.78)))};
+   return {opaque,fullProxy,faded,expected:opaque.map((rgb,index)=>index===0?rgb:rgb.map(c=>Math.round(c*.22+255*.78)))};
   });
-  for(let i=0;i<2;i++) for(let c=0;c<3;c++) {
+  for(let i=0;i<3;i++) for(let c=0;c<3;c++) {
    assert.ok(Math.abs(report.opaque[i][c]-report.fullProxy[i][c])<=1,JSON.stringify(report));
    assert.ok(Math.abs(report.faded[i][c]-report.expected[i][c])<=2,JSON.stringify(report));
   }

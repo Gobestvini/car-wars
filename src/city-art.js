@@ -4,6 +4,12 @@ import { ART, buildingArt } from './art-direction.js';
 // Five mandatory batches + one optional high batch. No new texture or collider.
 export function createCityArt(group, entries, seed) {
   const box = new THREE.BoxGeometry(1, 1, 1);
+  // Open perimeter instead of a solid blue platform when the upper body fades.
+  const plinth = box.clone(), perimeter = [];
+  for (const face of plinth.groups) if (face.materialIndex !== 2 && face.materialIndex !== 3) {
+    for (let i = face.start; i < face.start + face.count; i++) perimeter.push(plinth.index.getX(i));
+  }
+  plinth.setIndex(perimeter); plinth.clearGroups();
   const hip = new THREE.ConeGeometry(.7071, 1, 4);
   hip.rotateY(Math.PI / 4);
   const ridge = box.clone();
@@ -11,8 +17,9 @@ export function createCityArt(group, entries, seed) {
   for (let i = 0; i < pos.count; i++) if (pos.getY(i) > 0) pos.setZ(i, pos.getZ(i) * .12);
   ridge.computeVertexNormals();
   const material = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .95 });
-  const batches = [box, box, hip, box, ridge, box].map((geometry, index) => {
-    const mesh = new THREE.InstancedMesh(geometry, material, entries.length);
+  const boundaryMaterial = material.clone(); boundaryMaterial.side = THREE.DoubleSide;
+  const batches = [plinth, box, hip, box, ridge, box].map((geometry, index) => {
+    const mesh = new THREE.InstancedMesh(geometry, index === 0 ? boundaryMaterial : material, entries.length);
     mesh.name = ['Building plinths', 'Building cornices', 'Residential roofs', 'Commercial roofs', 'Industrial roofs', 'Roof plant'][index];
     mesh.castShadow = index >= 2; mesh.receiveShadow = true;
     group.add(mesh); return mesh;
@@ -40,10 +47,12 @@ export function createCityArt(group, entries, seed) {
     if (style.family === 1) part(5,entry.x+entry.width*.18,entry.height+roofHeight+.18,entry.z-entry.depth*.15,entry.width*.22,.36,entry.depth*.3,'#a3b6ce');
     entry.art = {
       parts,
-      hide() { for (const p of parts) { batches[p.batch].setMatrixAt(entry.index,zero); batches[p.batch].instanceMatrix.needsUpdate=true; } },
+      // Keep the blue collision boundary opaque even while the upper building fades.
+      hide() { for (const p of parts) if (p.batch !== 0) { batches[p.batch].setMatrixAt(entry.index,zero); batches[p.batch].instanceMatrix.needsUpdate=true; } },
       restore() { for (const p of parts) { batches[p.batch].setMatrixAt(entry.index,p.matrix); batches[p.batch].instanceMatrix.needsUpdate=true; } },
       proxy(parent) {
         for (const p of parts) {
+          if (p.batch === 0) continue;
           const mesh = new THREE.Mesh(batches[p.batch].geometry,material.clone());
           mesh.material.color.copy(p.color); mesh.material.transparent=true; mesh.material.depthWrite=false;
           p.matrix.decompose(mesh.position,mesh.quaternion,mesh.scale); mesh.position.sub(parent.position);

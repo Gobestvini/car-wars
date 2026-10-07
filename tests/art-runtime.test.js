@@ -26,7 +26,7 @@ test('batched decoration fades with its building and returns after fade; low hid
   city.occlusion.startProxy(entry,entry.caps);
   const matrix=new THREE.Matrix4();
   const plinth=city.group.getObjectByName('Building plinths');
-  plinth.getMatrixAt(entry.index,matrix);assert.equal(matrix.elements[0],0);
+  plinth.getMatrixAt(entry.index,matrix);assert.ok(matrix.elements[0]>0);
   assert.equal(entry.proxy.children.filter(c=>c.userData.roofDetail).length,1);
   const depth=entry.proxy.children.find(c=>c.userData.buildingDepth);
   const highCount=depth.geometry.index.count; let depthDisposed=0;

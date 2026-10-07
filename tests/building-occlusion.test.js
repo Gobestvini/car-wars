@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { occludedBuildingIds, segmentIntersectsAabb, smoothBuildingOpacity, BuildingOcclusion } from '../src/building-occlusion.js';
+import { occludedBuildingIds, segmentIntersectsAabb, smoothBuildingOpacity, vehicleSightTargets, BuildingOcclusion } from '../src/building-occlusion.js';
 import * as THREE from 'three';
 
 const box = { id: 1, bounds: { min: { x: 4, y: 0, z: -1 }, max: { x: 6, y: 8, z: 1 } } };
@@ -14,6 +14,28 @@ test('any visible vehicle sample detects the blocker; unrelated buildings remain
   const side = { ...box, id: 2, bounds: { min: { x: 4, y: 0, z: 9 }, max: { x: 6, y: 8, z: 11 } } };
   const ids = occludedBuildingIds([box, side], { x: 0, y: 2, z: 0 }, [{ x: 10, y: 2, z: 0 }]);
   assert.deepEqual([...ids], [1]);
+});
+
+test('a wall behind the near body surface does not fade at bumper contact', () => {
+  const camera = new THREE.PerspectiveCamera(), car = new THREE.Group();
+  camera.position.set(5, 3, -10); car.position.set(5, .96, -3.1);
+  // The old far footprint corner touches the wall, but the car is in front of it.
+  assert.equal(segmentIntersectsAabb(camera.position, { x: 5.9, y: 1.44, z: -.875 }, box.bounds), true);
+  const targets = vehicleSightTargets(THREE, camera, car);
+  assert.equal(occludedBuildingIds([box], camera.position, targets).size, 0);
+  camera.position.set(5, 3, 10);
+  assert.deepEqual([...occludedBuildingIds([box], camera.position, vehicleSightTargets(THREE, camera, car))], [1]);
+});
+
+test('sight targets follow the tilted body and stop at its near surface', () => {
+  const camera = new THREE.PerspectiveCamera(), car = new THREE.Group();
+  camera.position.set(8, 7, -10); car.position.set(2, 1, 3);
+  car.quaternion.setFromEuler(new THREE.Euler(.3, .7, .5));
+  for (const point of vehicleSightTargets(THREE, camera, car)) {
+    const local = point.clone().sub(car.position).applyQuaternion(car.quaternion.clone().invert());
+    assert.ok(Math.abs(local.x) <= .750001 && local.y >= -.350001 && local.y <= .650001 && Math.abs(local.z) <= 2.100001);
+    assert.ok(Math.abs(Math.abs(local.x)-.75)<1e-6 || Math.abs(local.y+.35)<1e-6 || Math.abs(local.y-.65)<1e-6 || Math.abs(Math.abs(local.z)-2.1)<1e-6);
+  }
 });
 
 test('fade smoothing has equal results at 30/60/120fps', () => {

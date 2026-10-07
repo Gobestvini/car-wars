@@ -12,62 +12,62 @@
       },
       "after": {
         "calls": 28,
-        "triangles": 68184
+        "triangles": 67416
       },
       "delta": {
         "calls": -1,
-        "triangles": 13084
+        "triangles": 12316
       },
       "resources": [
         {
-          "geometries": 28,
+          "geometries": 29,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 28,
+          "geometries": 29,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 28,
+          "geometries": 29,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 28,
+          "geometries": 29,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 28,
+          "geometries": 29,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 28,
+          "geometries": 29,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 28,
+          "geometries": 29,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 28,
+          "geometries": 29,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 28,
+          "geometries": 29,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 28,
+          "geometries": 29,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         }
       ]
     },
@@ -81,62 +81,62 @@
       },
       "after": {
         "calls": 31,
-        "triangles": 68536
+        "triangles": 67768
       },
       "delta": {
         "calls": -8,
-        "triangles": 13144
+        "triangles": 12376
       },
       "resources": [
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         }
       ]
     },
@@ -150,62 +150,62 @@
       },
       "after": {
         "calls": 32,
-        "triangles": 70828
+        "triangles": 70060
       },
       "delta": {
         "calls": -7,
-        "triangles": 15448
+        "triangles": 14680
       },
       "resources": [
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         },
         {
-          "geometries": 29,
+          "geometries": 30,
           "textures": 2,
-          "programs": 10
+          "programs": 11
         }
       ]
     }

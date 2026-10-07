@@ -145,7 +145,7 @@ function brightness(buffer, sample) {
           const f = fixture; f.effects.reset();
           const entry = f.city.entries.find(e => !e.caps.length && e.x > 0 && e.z > 0);
           const rows = [];
-          for (const gap of [10, 5, 2, 1, 5.95, 6.05, 10]) {
+          for (const gap of [10, 5, 2, 1, -.15, 5.95, 6.05, 10]) {
             f.pose(entry.x, entry.bounds.min.z - gap - 2.225);
             // Nearby facade must stay opaque when camera rays to the car are clear.
             f.camera.position.set(entry.x, 8, f.car.position.z - 20); f.camera.lookAt(f.car.position);
