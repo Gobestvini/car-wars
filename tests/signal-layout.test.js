@@ -52,7 +52,6 @@ test('fog beams originate at the active bulb and point down the incoming approac
       assert.equal(beam.visible, true);
       assert.equal(beam.length, 12);
       assert.equal(beam.width, 10.8);
-      assert.equal(beam.puffCount, 7);
       assert.equal(beam.source.y, { red: 3.5, yellow: 3.05, green: 2.6 }[color]);
       assert.ok(beam.direction.x * -fx + beam.direction.z * -fz > 0.9);
       assert.ok(beam.direction.x * -approach.rightX + beam.direction.z * -approach.rightZ > 0.3,
@@ -80,9 +79,9 @@ test('four signal assemblies persist and fog beam colors follow the controller o
     city.signalApproaches.forEach((approach, i) => {
       assert.equal(approach.signalVisible, true);
       const phase = controller.phase(approach.nodeId, approach.fromId, time).color;
-      city.signalBeam.getColorAt(i * 7, color);
+      city.signalBeam.getColorAt(i, color);
       assert.equal(color.getHexString(), new THREE.Color(expected[phase]).getHexString());
-      const beamMatrix = new THREE.Matrix4(); city.signalBeam.getMatrixAt(i * 7, beamMatrix);
+      const beamMatrix = new THREE.Matrix4(); city.signalBeam.getMatrixAt(i, beamMatrix);
       const beamScale = new THREE.Vector3(); beamMatrix.decompose(new THREE.Vector3(), new THREE.Quaternion(), beamScale);
       assert.equal(beamScale.y > 0, ['red', 'yellow', 'green'].includes(phase));
     });

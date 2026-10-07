@@ -196,6 +196,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
       const geometries = new Set(), materials = new Set();
       group.traverse(object => {
         if (!object.isMesh) return;
+        if (object.isInstancedMesh) object.dispose();
         geometries.add(object.geometry);
         for (const material of Array.isArray(object.material) ? object.material : [object.material]) materials.add(material);
       });

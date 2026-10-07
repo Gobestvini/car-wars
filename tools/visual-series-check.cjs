@@ -95,8 +95,8 @@ function brightness(buffer, sample) {
                   if (!a.signalVisible) throw new Error('Hidden assembly');
                   const color = f.signals.phase(a.nodeId, a.fromId, time).color;
                   if (color !== a.color) throw new Error('Mismatched phase');
-                  const actual = new f.THREE.Color(); f.city.signalBeam.getColorAt(i * 7, actual);
-                  const matrix = new f.THREE.Matrix4(); f.city.signalBeam.getMatrixAt(i * 7, matrix);
+                  const actual = new f.THREE.Color(); f.city.signalBeam.getColorAt(i, actual);
+                  const matrix = new f.THREE.Matrix4(); f.city.signalBeam.getMatrixAt(i, matrix);
                   const scale = new f.THREE.Vector3(); matrix.decompose(new f.THREE.Vector3(), new f.THREE.Quaternion(), scale);
                   if (color === 'priority') {
                     if (scale.y !== 0) throw new Error('Priority approach has a visible beam');
@@ -110,7 +110,7 @@ function brightness(buffer, sample) {
               snapshot = f.draw(0, 1, quality);
               const counts = new Map(); for (const a of f.city.signalApproaches) counts.set(a.nodeId, (counts.get(a.nodeId) || 0) + 1);
               if ([...counts.values()].some(n => n !== 4)) throw new Error('Expected four approaches');
-              if (f.city.signalBeam.count !== f.city.signalApproaches.length * 7) throw new Error('Fog instances are not shared');
+              if (f.city.signalBeam.count !== f.city.signalApproaches.length) throw new Error('Fog instances are not shared');
               return { colors: [...observed], count: f.city.signalApproaches.length, snapshot };
             }, { fx, fz, quality, width });
             assert.deepEqual([...signals.colors].sort(), ['green', 'red', 'yellow']);
