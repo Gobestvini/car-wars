@@ -12,7 +12,8 @@ import { createCityPlan, ROAD_WIDTH } from './city-generator.js';
 import { createCityScene } from './city-scene.js';
 import { createSurfaceHeightSampler } from './road-surface.js';
 import { updateShadowCoverage } from './shadow-coverage.js';
-import { createTraffic } from './traffic.js';
+import { createVehicleRuntime } from './traffic.js';
+import { createPolicePursuit } from './police-pursuit.js';
 import { createTrafficSignals } from './traffic-signals.js';
 import { CarDeformation } from './car-deformation.js';
 import { CarDamageEffects } from './car-damage-effects.js';
@@ -33,6 +34,7 @@ const factorySettings = {
   trackIntensity: DEFAULT_TRACK_INTENSITY,
   roadWidth: ROAD_WIDTH,
   trafficCount: 60,
+  policeCount: 2,
   cameraSpeed: freeCameraSpeed,
   drawDistanceFollow: 200,
   drawDistanceFree: 600,
@@ -107,8 +109,19 @@ let trafficSpawnObstacles = spawnObstaclesForPlan(cityPlan);
 const car = new THREE.Group(); scene.add(car);
 const damageEffects = new CarDamageEffects(scene);
 const damagePreview = debug ? Number(new URLSearchParams(location.search).get('damagePreview') || 0) : 0;
-const traffic = createTraffic(scene, THREE, savedDefaults.trafficCount, cityPlan.roadNetwork, cityPlan.roadWidth, trafficSpawnObstacles);
+const traffic = createVehicleRuntime(scene, THREE, savedDefaults.trafficCount, cityPlan.roadNetwork,
+  cityPlan.roadWidth, trafficSpawnObstacles, { minX: -cityPlan.bounds, maxX: cityPlan.bounds,
+    minZ: -cityPlan.bounds, maxZ: cityPlan.bounds });
 traffic.attachPhysics(sim);
+traffic.registerRole('police', { maxCount: 2, physicalOnly: true,
+  create: ({ targetId }) => createPolicePursuit({ targetId }),
+  update: (controller, context) => controller.update(context),
+  onContact: (controller, time) => controller.onContact(time),
+  reset: controller => controller.reset() });
+const policeSpawnSpecs = () => [-1, 1].map(side => ({ targetId: 'player', position: {
+  x: sim.body.position.x + side * 8, y: 0, z: sim.body.position.z - 9 }, yaw: side * 0.25,
+  options: { placement: 'nearest-safe', maxDistance: 48 } }));
+traffic.setRoleCount('police', savedDefaults.policeCount, policeSpawnSpecs());
 let trafficSignals = createTrafficSignals(cityPlan.roadNetwork);
 traffic.setSignalController(trafficSignals);
 const visualWheels = [];
@@ -341,6 +354,7 @@ const settings = createSettings($('settings-controls'), {
   ...savedDefaults,
   roadWidth: cityPlan.roadWidth,
   trafficCount: traffic.status().requestedCount,
+  policeCount: traffic.roleCount('police'),
   trafficActual: traffic.status().count,
   trafficPendingReason: traffic.status().insertionReason || '—',
   debugMode: debug,
@@ -355,6 +369,7 @@ const settings = createSettings($('settings-controls'), {
     sim.tuning.softness = values.softness;
     sim.tuning.grip = values.grip;
     sim.tuning.power = values.power;
+    traffic.setRoleTuning('police', sim.tuning);
   },
   onQuality: value => {
     if (settingsReady) applyQuality();
@@ -364,6 +379,7 @@ const settings = createSettings($('settings-controls'), {
   onTrackConfig: values => tracks.setConfig({ threshold: values.skidThreshold, intensity: values.trackIntensity }),
   onRoadWidth: width => { if (settingsReady && width !== cityPlan.roadWidth) rebuildCity(width); },
   onTrafficCount: count => { if (settingsReady) traffic.setCount(count); },
+  onPoliceCount: count => { if (settingsReady) traffic.setRoleCount('police', count, policeSpawnSpecs()); },
   onCameraMode: setCameraMode,
   onCameraSpeed: value => { settings.values.cameraSpeed = value; },
   onDrawDistance: value => {
@@ -575,10 +591,16 @@ window.carLab = {
   donut: () => donutGesture.snapshot(),
   wheelTransforms: () => visualWheels.map(({ pivot }, i) => ({ position: pivot.position.toArray(), radius: sim.wheels[i].radius })),
   wheels: () => sim.wheels.map(wheel => ({ detached: wheel.detached, grounded: wheel.grounded })),
-  traffic: () => traffic.states.map(({ x, z, heading, speed }) => ({ x, z, heading, speed })),
+  traffic: () => traffic.states.filter(state => state.role === 'civilian').map(({ x, z, heading, speed }) => ({ x, z, heading, speed })),
+  police: () => traffic.states.filter(state => state.role === 'police').map(({ id, x, z, heading, speed, ai }) => ({
+    id, x, z, heading, speed, targetId: ai.targetId, state: ai.state, waitReason: ai.waitReason,
+    pursuit: ai.roleState?.diagnostics?.() || null })),
+  requestVehicleSpawn: input => traffic.requestSpawn(input),
+  getSpawnRequest: requestId => traffic.spawnRequest(requestId),
+  cancelVehicleSpawn: requestId => traffic.cancelSpawn(requestId),
   trafficClock: () => traffic.simulationTime(),
   trafficStatus: () => traffic.status(),
-  trafficAI: () => traffic.debug(),
+  trafficAI: () => traffic.debug().filter(state => state.role === 'civilian'),
   signals: () => ({ controlled: trafficSignals.controlled.size, approaches: cityState.signalApproaches.length,
     visible: cityState.signalApproaches.filter(approach => approach.signalVisible).length,
     phase: trafficSignals.phase('-25:-25', '-75:-25', traffic.simulationTime()) }),

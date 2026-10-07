@@ -22,7 +22,9 @@ const percentile = (values, p) => {
     await session.send('Emulation.setCPUThrottlingRate', { rate: 4 });
     await page.locator('#settings-button').click();
     await page.locator('#settings-controls').getByText('Трафик', { exact: true }).click();
-    const countInput = page.locator('#settings-controls input[type="text"]').nth(4);
+    const trafficCountRow = page.locator('#settings-controls .tp-lblv')
+      .filter({ has: page.getByText('Машины', { exact: true }) });
+    const countInput = trafficCountRow.locator('input[type="text"]');
     const qualityInput = page.locator('#settings-controls select');
 
     const setCount = async count => {

@@ -29,6 +29,8 @@ export function createSettings(container, initialValues, handlers) {
   const trafficFolder = pane.addFolder({ title: 'Трафик', expanded: false });
   trafficFolder.addBinding(values, 'trafficCount', { label: 'Машины', min: 0, max: 300, step: 1 })
     .on('change', event => { values.trafficCount = event.value; if (event.last) handlers.onTrafficCount(event.value); });
+  trafficFolder.addBinding(values, 'policeCount', { label: 'Полиция', min: 0, max: 2, step: 1 })
+    .on('change', event => { values.policeCount = event.value; if (event.last) handlers.onPoliceCount(event.value); });
   trafficFolder.addBinding(values, 'trafficActual', { label: 'Активно', readonly: true, step: 1 });
   trafficFolder.addBinding(values, 'trafficPendingReason', { label: 'Очередь', readonly: true });
 

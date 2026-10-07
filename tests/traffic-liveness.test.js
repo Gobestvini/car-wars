@@ -36,6 +36,20 @@ test('following uses bumper orientation, headway, and reaction closing speed', (
   assert.ok(followingLimit(car, { ...stopped, heading: 0 }, 1, 0) > followingLimit(car, stopped, 1, 0));
 });
 
+test('traffic diagnostics tie a long stationary wait to the measured leader footprint', () => {
+  const { traffic } = fixture(2, straight, 15);
+  const [follower, leader] = traffic.states;
+  place(leader, 12, 5, Math.PI / 2);
+  place(follower, 7, 5, Math.PI / 2);
+  step(traffic, 0.25);
+  const diagnostic = traffic.debug().find(item => item.id === follower.id);
+  assert.equal(diagnostic.waitReason, 'blocked-by-leader');
+  assert.equal(diagnostic.blockerEvidence.id, leader.id);
+  assert.ok(diagnostic.blockerEvidence.followingLimit < 0.4);
+  assert.equal(diagnostic.blockerEvidence.overlapping, false);
+  traffic.dispose();
+});
+
 test('sideways displacement is not route progress, lawful waits reset the stall clock', () => {
   const edge = { from: 'a', to: 'b', start: { x: 0, z: 5 }, end: { x: 500, z: 5 }, length: 500 };
   const ai = {};

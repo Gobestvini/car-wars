@@ -7,6 +7,8 @@ import { createTrafficSpawnSlots, distributeTrafficSpawnSlots, isTrafficSpawnSaf
 import { corridorFootprints, driveControl, edgeProgress, followingLimit, occupiesJunction, planPassing, projectedExtent, sweptPathIsSafe, trackProgress } from './traffic-planner.js';
 import { escapeRoute, hiddenFromPlayer, TRAFFIC_EVASION } from './traffic-evasion.js';
 import { junctionMovement, movementsConflict, pathProgress, pathTarget, turnStagingTarget, yieldsToOncoming } from './traffic-junction.js';
+import { findSafeSpawnPose } from './vehicle-spawn.js';
+import { createPolicePursuit } from './police-pursuit.js';
 
 const headingOf = q => Math.atan2(2 * (q.x * q.z + q.w * q.y), 1 - 2 * (q.x * q.x + q.y * q.y));
 const now = () => globalThis.performance?.now?.() ?? Date.now();
@@ -16,20 +18,25 @@ const TRAFFIC_PALETTE = ['#496a80', '#b56f4c', '#8a956b', '#82718e', '#b9a76e', 
 function createTrafficAssets(THREE) {
   return {
     geometries: [new THREE.BoxGeometry(1.8, 0.62, 3.8), new THREE.BoxGeometry(1.48, 0.63, 1.75),
-      new THREE.CylinderGeometry(0.36, 0.36, 0.2, 10), new THREE.BoxGeometry(0.34, 0.14, 0.08)],
+      new THREE.CylinderGeometry(0.36, 0.36, 0.2, 10), new THREE.BoxGeometry(0.34, 0.14, 0.08),
+      new THREE.BoxGeometry(0.92, 0.12, 0.28), new THREE.BoxGeometry(0.38, 0.13, 0.3)],
     bodyMaterials: TRAFFIC_PALETTE.map(color => new THREE.MeshStandardMaterial({ color, roughness: 0.72 })),
+    policeBodyMaterial: new THREE.MeshStandardMaterial({ color: '#e7e9e9', roughness: 0.58, metalness: 0.08 }),
+    policeCabinMaterial: new THREE.MeshStandardMaterial({ color: '#202a32', roughness: 0.45, metalness: 0.12 }),
+    policeLightMaterials: [new THREE.MeshStandardMaterial({ color: '#ef344a', emissive: '#a90012', emissiveIntensity: 1.3 }),
+      new THREE.MeshStandardMaterial({ color: '#438eff', emissive: '#0646c9', emissiveIntensity: 1.3 })],
     cabinMaterial: new THREE.MeshStandardMaterial({ color: '#495861', roughness: 0.55, metalness: 0.1 }),
     wheelMaterial: new THREE.MeshStandardMaterial({ color: '#202326', roughness: 0.92 }),
     noseMaterials: ['#fff0cc', '#f2d6a0'].map(color => new THREE.MeshStandardMaterial({ color, emissive: '#4d3418' })),
   };
 }
 
-function makeTrafficCar(THREE, assets, index) {
+function makeTrafficCar(THREE, assets, index, role = 'civilian') {
   const car = new THREE.Group();
   const [bodyGeometry, cabinGeometry, wheelGeometry, noseGeometry] = assets.geometries;
-  const body = new THREE.Mesh(bodyGeometry, assets.bodyMaterials[index % assets.bodyMaterials.length]);
+  const body = new THREE.Mesh(bodyGeometry, role === 'police' ? assets.policeBodyMaterial : assets.bodyMaterials[index % assets.bodyMaterials.length]);
   body.position.y = 0.68; body.castShadow = true; car.add(body);
-  const cabin = new THREE.Mesh(cabinGeometry, assets.cabinMaterial);
+  const cabin = new THREE.Mesh(cabinGeometry, role === 'police' ? assets.policeCabinMaterial : assets.cabinMaterial);
   cabin.position.set(0, 1.22, -0.12); cabin.castShadow = true; car.add(cabin);
   for (const x of [-0.94, 0.94]) for (const z of [-1.18, 1.18]) {
     const wheel = new THREE.Mesh(wheelGeometry, assets.wheelMaterial);
@@ -37,10 +44,19 @@ function makeTrafficCar(THREE, assets, index) {
   }
   const nose = new THREE.Mesh(noseGeometry, assets.noseMaterials[index % 2]);
   nose.position.set(0, 0.8, 1.92); car.add(nose);
+  if (role === 'police') {
+    const bar = new THREE.Mesh(assets.geometries[4], assets.policeCabinMaterial);
+    bar.position.set(0, 1.61, -0.08); car.add(bar);
+    for (const [x, material] of [[-0.24, assets.policeLightMaterials[0]], [0.24, assets.policeLightMaterials[1]]]) {
+      const light = new THREE.Mesh(assets.geometries[5], material);
+      light.position.set(x, 1.68, -0.08); car.add(light);
+    }
+  }
   return car;
 }
 
-export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityPlan().roadNetwork, roadWidth = ROAD_WIDTH, obstacles = []) {
+export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = createCityPlan().roadNetwork,
+  roadWidth = ROAD_WIDTH, obstacles = [], mapBounds = null) {
   const states = [], cars = [], simulations = [];
   let requestedCount = 0, pendingCount = null, pendingReason = null, physics = null, serial = 0;
   let visualAssets = null;
@@ -51,6 +67,13 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
   const profile = { aiMs: 0, playerPrepareMs: 0, npcPrepareMs: 0, prepareMs: 0,
     worldStepMs: 0, postMs: 0, aiTicks: 0, aiDecisions: 0 };
   const reservations = new Map();
+  const roleRegistry = new Map([['civilian', { maxCount: 300, physicalOnly: false }]]);
+  const spawnRequests = new Map();
+  const spawnResults = new Map();
+  let spawnSerial = 0;
+  const roleStates = role => states.filter(state => state.role === role);
+  let spawnBounds = mapBounds && Number.isFinite(mapBounds) ? { minX: -mapBounds, maxX: mapBounds, minZ: -mapBounds, maxZ: mapBounds }
+    : mapBounds;
   const movementCache = new Map();
   const reservationFor = ai => {
     const first = reservations.get(ai.reservationNode);
@@ -76,6 +99,7 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
     const nodes = [...graph.nodes.values()];
     const bounds = nodes.length ? { minX: Math.min(...nodes.map(node => node.x)), maxX: Math.max(...nodes.map(node => node.x)),
       minZ: Math.min(...nodes.map(node => node.z)), maxZ: Math.max(...nodes.map(node => node.z)) } : null;
+    if (!spawnBounds) spawnBounds = bounds;
     spawnSlots = distributeTrafficSpawnSlots(createTrafficSpawnSlots(graph.directed), bounds);
     spawnSearchCursor = 0;
   };
@@ -163,28 +187,41 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
     ai.reservationNode = null;
   };
 
-  const add = (index, slot) => {
+  const add = (index, slot, role = 'civilian', options = {}) => {
     const { edge, t, x, z, heading } = slot;
-    const id = `npc-${String(serial++).padStart(2, '0')}`;
+    const id = `${role === 'civilian' ? 'npc' : role}-${String(serial++).padStart(2, '0')}`;
     const simulation = new CarSimulation({ world: physics.world, materials: physics.materials,
-      spawn: { x, y: 0.96, z, yaw: heading }, damage: false });
+      spawn: { x, y: Number.isFinite(slot.y) ? slot.y + 0.96 : 0.96, z, yaw: heading }, damage: false });
+    if (role !== 'civilian') Object.assign(simulation.tuning, physics.tuning);
     visualAssets ||= createTrafficAssets(THREE);
-    const mesh = makeTrafficCar(THREE, visualAssets, index);
+    const mesh = makeTrafficCar(THREE, visualAssets, index, role);
     scene.add(mesh);
     const seed = (0xC4A7 + serial * 0x9E3779B1) >>> 0;
     const ai = { id, seed, random: createSeededRandom(seed), state: 'following', fromNode: edge.from, targetNode: edge.to,
-      route: [], routeIndex: 0, goalId: null, previousGoal: null, control: { steer: 0, throttle: 0.5, brake: 0 },
+      role, roleState: null, route: [], routeIndex: 0, goalId: null, previousGoal: null, control: { steer: 0, throttle: 0.5, brake: 0 },
       waitTime: 0, stuckTime: 0, recoveryTime: 0, reservationNode: null, completedGoals: 0, goalHistory: [] };
-    startOnEdge(ai, edge);
-    const state = { id, x, z, heading, speed: 0, previousX: x, previousZ: z, previousHeading: heading,
+    if (role === 'civilian') startOnEdge(ai, edge);
+    else {
+      const roleDefinition = roleRegistry.get(role);
+      ai.state = role === 'police' ? 'pursue' : 'active';
+      ai.targetId = options.targetId || null;
+      ai.roleState = roleDefinition.create?.({ id, targetId: ai.targetId, spawn: { x, y: slot.y ?? 0, z, yaw: heading } }) || {};
+      ai.control = { steer: 0, throttle: 1, brake: 0 };
+    }
+    const state = { id, role, x, z, heading, speed: 0, previousX: x, previousZ: z, previousHeading: heading,
+      spawnPose: { x, y: slot.y ?? 0, z, yaw: heading },
       spawnEdge: { from: edge.from, to: edge.to }, spawnFraction: t, simulation, mesh, ai, logical: false,
       occupancyItem: { id, x, z, heading, vx: 0, vz: 0, state: null },
       renderQuaternion: new THREE.Quaternion(), currentQuaternion: new THREE.Quaternion() };
-    simulation.body.addEventListener('collide', event => {
-      if (event.body === physics.body && Math.abs(event.contact.getImpactVelocityAlongNormal()) >= TRAFFIC_EVASION.impactSpeed) {
+    const collide = event => {
+      if (role === 'civilian' && event.body === physics.body
+        && Math.abs(event.contact.getImpactVelocityAlongNormal()) >= TRAFFIC_EVASION.impactSpeed) {
         ai.playerImpactPending = true;
       }
-    });
+      if (role !== 'civilian' && event.body === physics.body) roleRegistry.get(role)?.onContact?.(ai.roleState, aiTime, event);
+    };
+    state.collideListener = collide;
+    simulation.body.addEventListener('collide', collide);
     state.occupancyItem.state = state;
     states.push(state); simulations.push(simulation); cars.push(mesh); syncState(state);
     return state;
@@ -194,6 +231,8 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
     const [state] = states.splice(index, 1);
     if (!state) return;
     releaseReservation(state.ai);
+    state.simulation.body.removeEventListener('collide', state.collideListener);
+    roleRegistry.get(state.role)?.dispose?.(state.ai.roleState);
     physics.world.removeBody(state.simulation.body);
     simulations.splice(simulations.indexOf(state.simulation), 1);
     cars.splice(cars.indexOf(state.mesh), 1);
@@ -209,8 +248,8 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
 
   const applyCount = value => {
     requestedCount = value;
-    while (states.length > value) removeAt(states.length - 1);
-    pendingCount = states.length < value ? value : null;
+    while (roleStates('civilian').length > value) removeAt(states.findLastIndex(state => state.role === 'civilian'));
+    pendingCount = roleStates('civilian').length < value ? value : null;
     pendingReason = pendingCount === null ? null : 'Ожидание безопасного размещения';
   };
 
@@ -218,7 +257,7 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
     if (!physics || pendingCount === null) return 0;
     buildOccupancy();
     let added = 0, checked = 0;
-    while (states.length < requestedCount && added < maxAdds && checked < maxChecks) {
+    while (roleStates('civilian').length < requestedCount && added < maxAdds && checked < maxChecks) {
       const result = findSafeCandidate(slot => nearbyOccupants(slot), maxChecks - checked);
       checked += result.checked;
       spawnSearchCursor = result.next;
@@ -226,14 +265,54 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
         if (checked >= maxChecks) break;
         break;
       }
-      const state = add(states.length, result.slot);
+      const state = add(states.length, result.slot, 'civilian');
       insertOccupancyItem(state.occupancyItem);
       added++;
     }
-    pendingCount = states.length < requestedCount ? requestedCount : null;
+    pendingCount = roleStates('civilian').length < requestedCount ? requestedCount : null;
     pendingReason = pendingCount === null ? null
       : added ? 'Машины добавляются по мере освобождения мест' : 'Нет свободного безопасного места';
     return added;
+  };
+
+  const nearestDirectedSlot = pose => {
+    let best = null, bestCost = Infinity;
+    for (const edge of graph.directed) {
+      const along = clamp(edgeProgress({ x: pose.x, z: pose.z }, edge), 0, edge.length);
+      const x = edge.start.x + Math.sin(edge.heading) * along;
+      const z = edge.start.z + Math.cos(edge.heading) * along;
+      const headingCost = 1 - Math.cos(edge.heading - pose.yaw);
+      const cost = Math.hypot(pose.x - x, pose.z - z) + headingCost * 8;
+      if (cost < bestCost) { bestCost = cost; best = { edge, t: along / edge.length }; }
+    }
+    if (!best) return null;
+    return { edge: best.edge, t: best.t, x: pose.x, y: pose.y, z: pose.z, heading: pose.yaw };
+  };
+  const createRoleActor = (role, pose, options = {}) => {
+    const slot = nearestDirectedSlot({ ...pose, yaw: options.yaw ?? 0 });
+    if (!slot) return { status: 'rejected', reason: 'no-road-graph' };
+    const state = add(states.length, slot, role, options);
+    insertOccupancyItem(state.occupancyItem);
+    return { status: 'created', id: state.id, pose: { x: pose.x, y: pose.y, z: pose.z, yaw: options.yaw ?? 0 } };
+  };
+  const serviceRoleSpawnRequests = (budget = 2) => {
+    if (!physics || !spawnRequests.size) return;
+    for (const [requestId, record] of spawnRequests) {
+      if (budget <= 0) break;
+      const definition = roleRegistry.get(record.input.role);
+      if (!definition) { record.result = { status: 'rejected', requestId, reason: 'unknown-role' }; spawnResults.set(requestId, record.result); spawnRequests.delete(requestId); continue; }
+      const targetExists = record.input.targetId === 'player' || states.some(state => state.id === record.input.targetId);
+      if (record.input.targetId && !targetExists) { record.result = { status: 'rejected', requestId, reason: 'missing-target' }; spawnResults.set(requestId, record.result); spawnRequests.delete(requestId); continue; }
+      const result = findSafeSpawnPose(record.input, { bounds: spawnBounds, obstacles: spawnObstacles,
+        occupants: [...roleStates('civilian').map(state => state.occupancyItem), ...states.filter(state => state.role !== 'civilian').map(state => state.occupancyItem), updatePlayerOccupancy()],
+        surfaceHeight: definition.surfaceHeight || (() => 0), maxDistance: record.input.options?.maxDistance ?? 40 });
+      if (result.status === 'rejected') { record.result = { ...result, requestId }; spawnResults.set(requestId, record.result); spawnRequests.delete(requestId); continue; }
+      if (result.status === 'pending') { record.result = { status: 'pending', requestId, reason: result.reason }; continue; }
+      const created = createRoleActor(record.input.role, result.pose, { targetId: record.input.targetId, yaw: result.pose.yaw });
+      record.result = { ...created, requestId, pose: result.pose, distance: result.distance };
+      spawnResults.set(requestId, record.result);
+      spawnRequests.delete(requestId); budget--;
+    }
   };
 
   const buildOccupancy = () => {
@@ -280,6 +359,10 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
       if (b) touching.add(b);
     }
     for (const state of states) {
+      if (roleRegistry.get(state.role)?.physicalOnly) {
+        if (state.logical) setLogical(state, false);
+        continue;
+      }
       const distance = Math.hypot(state.x - player.x, state.z - player.z);
       const candidate = { x: state.x, z: state.z, heading: headingOf(state.simulation.body.quaternion),
         vx: state.simulation.body.velocity.x, vz: state.simulation.body.velocity.z };
@@ -295,6 +378,7 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
 
   const stepLogical = dt => {
     for (const state of states) {
+      if (state.role !== 'civilian') continue;
       if (!state.logical) continue;
       const body = state.simulation.body, control = state.ai.control;
       body.previousPosition.copy(body.position); body.previousQuaternion.copy(body.quaternion);
@@ -344,6 +428,7 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
     const plans = [], byId = new Map();
     // Route changes do not move bodies. Every hazard uses this tick's occupancy snapshot.
     for (const state of states) {
+      if (state.role !== 'civilian') continue;
       const ai = state.ai, car = state.occupancyItem;
       if (!ai.targetNode) replanAtNearest(state);
       let edge = routeEdge(ai);
@@ -547,6 +632,7 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
       const fx = Math.sin(car.heading), fz = Math.cos(car.heading);
       const speed = car.vx * fx + car.vz * fz;
       const { neighbors, leaderLimit, blocker } = plan;
+      ai.leaderLimit = leaderLimit;
       const contact = neighbors.find(other => footprintsOverlap(car, other, 0.12));
       const leaderWait = blocker && queueReason(byId.get(blocker.id));
       const legalWait = Boolean(plan.waitReason || leaderWait && leaderLimit < 0.4);
@@ -655,7 +741,11 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
         || (contact.x - car.x) * fx + (contact.z - car.z) * fz > 0)) targetSpeed = 0;
       if (!reason && contact) reason = 'collision-jam';
       if (!reason && blocker && targetSpeed < 0.4) reason = ai.noProgressTime >= 3 ? 'no-safe-passing-lane' : 'blocked-by-leader';
-      if (!reason && Math.abs(speed) < 0.3 && ai.noProgressTime >= 1) reason = 'controller-stall';
+      if (!reason && Math.abs(speed) < 0.3 && ai.noProgressTime >= 1) {
+        // Keep a physical queue as the reported cause while its leader still limits
+        // the stopped car. Reserve controller-stall for an empty usable corridor.
+        reason = blocker && leaderLimit < 8 ? 'blocked-by-leader' : 'controller-stall';
+      }
       ai.control = driveControl(dx, dz, car.heading, speed, targetSpeed, reverse);
       if (!ai.maneuver && junction) {
         const error = Math.atan2(Math.sin(Math.atan2(dx, dz) - car.heading), Math.cos(Math.atan2(dx, dz) - car.heading));
@@ -670,9 +760,79 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
         : reason ? 'yielding' : ai.evasion ? 'fleeing' : 'following';
       ai.waitTime = reason ? (ai.waitTime || 0) + dt : 0;
     }
+    for (const state of states) {
+      if (state.role === 'civilian') continue;
+      const role = roleRegistry.get(state.role);
+      if (!role?.update) continue;
+      const result = role.update(state.ai.roleState, { car: state.occupancyItem, target: playerOccupancy,
+        graph, obstacles: spawnObstacles, occupants: [...states.map(actor => actor.occupancyItem), playerOccupancy],
+        time: aiTime, dt, world: physics.world });
+      if (result?.control) state.ai.control = result.control;
+      if (result?.state) state.ai.state = result.state;
+      state.ai.waitReason = result?.reason || null;
+      state.ai.targetSpeed = result?.targetSpeed ?? null;
+      state.ai.targetId = result?.targetId || state.ai.targetId;
+      state.ai.lastRoleUpdate = result;
+    }
   };
   return {
     states, cars, simulations, reservations,
+    registerRole(name, definition) {
+      if (typeof name !== 'string' || !name || name === 'civilian' || !definition || typeof definition.update !== 'function') {
+        throw new TypeError('A non-civilian role needs a name and update hook.');
+      }
+      roleRegistry.set(name, { maxCount: 2, physicalOnly: true, ...definition });
+    },
+    requestSpawn(input) {
+      const definition = roleRegistry.get(input?.role);
+      if (!definition) return { status: 'rejected', reason: 'unknown-role' };
+      if (input.targetId && input.targetId !== 'player' && !states.some(state => state.id === input.targetId)) {
+        return { status: 'rejected', reason: 'missing-target' };
+      }
+      const active = roleStates(input.role).length;
+      const pending = [...spawnRequests.values()].filter(item => item.input.role === input.role).length;
+      if (active + pending >= definition.maxCount) return { status: 'rejected', reason: 'capacity' };
+      const request = { ...input, options: { placement: 'exact', ...(input.options || {}) } };
+      const result = findSafeSpawnPose(request, { bounds: spawnBounds, obstacles: spawnObstacles,
+        occupants: [...states.map(state => state.occupancyItem), ...(physics ? [updatePlayerOccupancy()] : [])],
+        surfaceHeight: definition.surfaceHeight || (() => 0), maxDistance: request.options.maxDistance ?? 40 });
+      if (result.status === 'rejected') return result;
+      if (result.status === 'created' && physics) return createRoleActor(input.role, result.pose, { targetId: input.targetId, yaw: result.pose.yaw });
+      const requestId = `spawn-${String(++spawnSerial).padStart(4, '0')}`;
+      const record = { input: request, result: { status: 'pending', requestId, reason: result.reason || 'physics-not-attached' } };
+      spawnRequests.set(requestId, record);
+      return record.result;
+    },
+    spawnRequest(requestId) { return spawnRequests.get(requestId)?.result || spawnResults.get(requestId) || { status: 'rejected', requestId, reason: 'unknown-request' }; },
+    cancelSpawn(requestId) {
+      if (!spawnRequests.delete(requestId)) return false;
+      spawnResults.set(requestId, { status: 'rejected', requestId, reason: 'cancelled' });
+      return true;
+    },
+    remove(id) { const index = states.findIndex(state => state.id === id); if (index < 0) return false; removeAt(index); return true; },
+    roleCount(name) { return roleStates(name).length; },
+    setRoleTuning(name, tuning) {
+      for (const state of roleStates(name)) Object.assign(state.simulation.tuning, tuning);
+    },
+    setRoleCount(name, count, spawnList = []) {
+      const definition = roleRegistry.get(name);
+      if (!definition || name === 'civilian') throw new RangeError(`Unknown configurable role: ${name}`);
+      if (!Number.isInteger(count) || count < 0 || count > definition.maxCount) throw new RangeError(`Invalid ${name} count.`);
+      const active = roleStates(name);
+      const rolePending = [...spawnRequests].filter(([, record]) => record.input.role === name);
+      while (active.length + rolePending.length > count && rolePending.length) {
+        const [requestId] = rolePending.pop(); this.cancelSpawn(requestId);
+      }
+      while (roleStates(name).length > count) removeAt(states.findLastIndex(state => state.role === name));
+      const need = count - roleStates(name).length - [...spawnRequests.values()].filter(record => record.input.role === name).length;
+      const results = [];
+      for (let index = 0; index < need; index++) {
+        const spec = spawnList[index];
+        if (!spec) { results.push({ status: 'rejected', reason: 'missing-pose' }); continue; }
+        results.push(this.requestSpawn({ role: name, ...spec }));
+      }
+      return results;
+    },
     attachPhysics(simulation) {
       physics = simulation; graph = createRoadGraph(roadNetwork, getLaneOffset(roadWidth)); rebuildSpawnSlots();
       requestedCount = count; pendingCount = count; pendingReason = 'Поиск безопасных мест';
@@ -690,7 +850,10 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
       movementCache.clear();
       spawnObstacles = obstacles; rebuildSpawnSlots();
       signalController = createTrafficSignals(network); reservations.clear();
-      for (const state of states) replanAtNearest(state);
+      for (const state of states) {
+        if (state.role === 'civilian') replanAtNearest(state);
+        else roleRegistry.get(state.role)?.mapChanged?.(state.ai.roleState, graph, spawnObstacles);
+      }
     },
     setSpawnObstacles(obstacles = []) { spawnObstacles = obstacles; },
     prepare(dt = STEP) {
@@ -699,7 +862,7 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
       thinkTime += dt;
       if (thinkTime >= 0.1) {
         const thinkDt = thinkTime; thinkTime = 0;
-        const started = now(); updateControllers(thinkDt); servicePending(); profile.aiMs = now() - started;
+        const started = now(); updateControllers(thinkDt); servicePending(); serviceRoleSpawnRequests(); profile.aiMs = now() - started;
         profile.aiTicks++; profile.aiDecisions += states.length;
       }
       const prepareStarted = now();
@@ -741,6 +904,23 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
       const reserved = [updatePlayerOccupancy()];
       let resetCursor = 0;
       for (const state of [...states]) {
+        if (state.role !== 'civilian') {
+          const occupants = reserved;
+          const spawn = findSafeSpawnPose({ position: state.spawnPose, yaw: state.spawnPose.yaw,
+            options: { placement: 'nearest-safe', maxDistance: 40 } },
+          { bounds: spawnBounds, obstacles: spawnObstacles, occupants, surfaceHeight: roleRegistry.get(state.role)?.surfaceHeight || (() => 0), ownerId: state.id });
+          if (spawn.status === 'pending') { removeAt(states.indexOf(state)); continue; }
+          if (spawn.status !== 'created') { removeAt(states.indexOf(state)); continue; }
+          const pose = spawn.pose;
+          state.spawnPose = pose;
+          state.simulation.spawn = { x: pose.x, y: pose.y + 0.96, z: pose.z, yaw: pose.yaw };
+          state.simulation.reset();
+          state.x = state.previousX = pose.x; state.z = state.previousZ = pose.z;
+          state.heading = state.previousHeading = pose.yaw; state.speed = 0;
+          Object.assign(state.occupancyItem, { x: pose.x, z: pose.z, heading: pose.yaw, vx: 0, vz: 0 });
+          roleRegistry.get(state.role)?.reset?.(state.ai.roleState);
+          syncState(state); reserved.push(state.occupancyItem); continue;
+        }
         const result = findSafeCandidate(() => reserved, spawnSlots.length, resetCursor);
         resetCursor = result.next;
         if (!result.slot) { removeAt(states.indexOf(state)); continue; }
@@ -760,19 +940,22 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
         syncState(state);
         reserved.push(state.occupancyItem);
       }
-      pendingCount = states.length < requestedCount ? requestedCount : null;
+      pendingCount = roleStates('civilian').length < requestedCount ? requestedCount : null;
       pendingReason = pendingCount === null ? null : 'Нет свободных безопасных мест';
     },
     dispose() {
       while (states.length) removeAt(states.length - 1);
-      reservations.clear(); requestedCount = 0; pendingCount = null;
+      reservations.clear(); spawnRequests.clear(); spawnResults.clear(); requestedCount = 0; pendingCount = null;
       if (visualAssets) {
         visualAssets.geometries.forEach(geometry => geometry.dispose());
-        [...visualAssets.bodyMaterials, ...visualAssets.noseMaterials, visualAssets.cabinMaterial, visualAssets.wheelMaterial].forEach(material => material.dispose());
+        [...visualAssets.bodyMaterials, ...visualAssets.noseMaterials, visualAssets.cabinMaterial, visualAssets.wheelMaterial,
+          visualAssets.policeBodyMaterial, visualAssets.policeCabinMaterial, ...visualAssets.policeLightMaterials].forEach(material => material.dispose());
         visualAssets = null;
       }
     },
-    status() { return { count: states.length, requestedCount, pending: pendingCount !== null, insertionReason: pendingReason,
+    status() { return { count: roleStates('civilian').length, requestedCount, pending: pendingCount !== null,
+      totalCount: states.length, roleCounts: Object.fromEntries([...roleRegistry.keys()].map(role => [role, roleStates(role).length])),
+      pendingSpawns: spawnRequests.size, insertionReason: pendingReason,
       bodies: states.filter(state => !state.logical).length, logical: states.filter(state => state.logical).length,
       visible: visibleCount, reservations: reservations.size }; },
     performance() { return { ...profile, totalBodies: physics?.world.bodies.length ?? 0,
@@ -781,11 +964,20 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
       visibleTraffic: visibleCount,
       sleepingTrafficBodies: states.filter(state => !state.logical && state.simulation.body.sleepState === 2).length,
       awakeTrafficBodies: states.filter(state => !state.logical && state.simulation.body.sleepState === 0).length }; },
-    debug() { return states.map(state => ({ id: state.id, goal: state.ai.goalId, route: [...state.ai.route], state: state.ai.state,
+    debug() { return states.map(state => {
+      const blocker = states.find(other => other.id === state.ai.blocker);
+      const blockerLimit = blocker ? followingLimit(state.occupancyItem, blocker.occupancyItem,
+        Math.sin(state.heading), Math.cos(state.heading)) : null;
+      return { id: state.id, role: state.role, targetId: state.ai.targetId || null,
+      goal: state.ai.goalId, route: [...state.ai.route], state: state.ai.state,
       segment: [state.ai.fromNode, state.ai.targetNode], seed: state.ai.seed, completedGoals: state.ai.completedGoals,
       goals: [...state.ai.goalHistory], reason: state.ai.waitReason,
       waitReason: state.ai.waitReason, noProgressTime: state.ai.noProgressTime || 0,
-      blocker: state.ai.blocker || null, progressAlong: state.ai.progressAlong ?? null, reevaluations: state.ai.reevaluations || 0,
+      waitTime: state.ai.waitTime || 0, leaderLimit: state.ai.leaderLimit ?? null,
+      blocker: state.ai.blocker || null,
+      blockerEvidence: blocker ? { id: blocker.id, x: blocker.x, z: blocker.z, heading: blocker.heading,
+        speed: blocker.speed, followingLimit: blockerLimit, overlapping: footprintsOverlap(state, blocker, 0.12) } : null,
+      progressAlong: state.ai.progressAlong ?? null, reevaluations: state.ai.reevaluations || 0,
       reservationNode: state.ai.reservationNode,
       reservationAge: state.ai.reservationNode ? Math.max(0, aiTime - (reservationFor(state.ai)?.time ?? aiTime)) : null,
       junctionTurn: reservationFor(state.ai)?.movement?.turn || null,
@@ -793,10 +985,15 @@ export function createTraffic(scene, THREE, count = 6, roadNetwork = createCityP
       maneuver: state.ai.maneuver ? { ...state.ai.maneuver } : null,
       logical: Boolean(state.logical),
       evasion: state.ai.evasion ? { ...state.ai.evasion } : null,
+      pursuit: state.ai.roleState?.diagnostics?.() || null,
       targetSpeed: state.ai.targetSpeed ?? null,
       exitReplans: state.ai.exitReplans || 0,
-      spawn: { x: state.simulation.spawn.x, z: state.simulation.spawn.z } })); },
+      spawn: { x: state.simulation.spawn.x, z: state.simulation.spawn.z } };
+    }); },
   };
 }
+
+// Existing callers retain the civic traffic API while the manager now hosts registered vehicle roles.
+export const createTraffic = createVehicleRuntime;
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
