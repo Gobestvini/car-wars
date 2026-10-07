@@ -1,3 +1,4 @@
+import { formatUsage } from './economy.js';
 import { readFile, open, unlink } from 'node:fs/promises';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -60,8 +61,9 @@ async function handleAccepted(item) {
   if (item.type === 'paired') { await telegram.send(item.chatId,'Бот привязан. Отправьте /help, чтобы посмотреть команды.'); return; }
   if (item.type === 'start') return telegram.send(item.chatId,item.paired ? 'Бот привязан. Отправьте /help, чтобы посмотреть команды.' : 'Чтобы привязать личный чат, запустите локальный Telegram listener и отправьте ему выданную в его локальном журнале команду /pair CODE.');
   const message = item.message; const parsed = routeMessage(message);
-  if (parsed.command === 'help') return telegram.send(item.chatId,'Текст — запрос на правку. Фото отправляйте с подписью.\n/help — команды\n/status — очередь и состояние\n/game — ссылка на игру\n/pause — приостановить обработку\n/resume — возобновить\n/reply ID ТЕКСТ — ответ на вопрос заблокированной задачи.\nЗадачу составляет 6.1 Sol, выполняет 6.0 Luna; при проблемах помогает Sol. Проверенные изменения отправляются в GitHub автоматически. Компьютер должен быть включён.');
+  if (parsed.command === 'help') return telegram.send(item.chatId,'Текст — запрос на правку. Фото отправляйте с подписью.\n/help — команды\n/status — очередь и состояние\n/tokens — расход по последним задачам\n/game — ссылка на игру\n/pause — приостановить обработку\n/resume — возобновить\n/reply ID ТЕКСТ — ответ на вопрос заблокированной задачи.\nЗадачу составляет 6.1 Sol, выполняет 6.0 Luna; при проблемах помогает Sol. Проверенные изменения отправляются в GitHub автоматически. Компьютер должен быть включён.');
   if (parsed.command === 'status') return telegram.send(item.chatId,`Состояние: ${state.paused?'пауза':'работает'}\n`+(state.jobs.length ? state.jobs.slice(-12).map(j=>describeJob(j)).join('\n\n') : 'Очередь пуста.'));
+  if (parsed.command === 'tokens') return telegram.send(item.chatId, state.jobs.length ? state.jobs.slice(-5).map(j => `#${j.id}: ${formatUsage(j.stages)}`).join('\n\n') : 'Очередь пуста.');
   if (parsed.command === 'game') return telegram.send(item.chatId,'https://gobestvini.github.io/car-wars/');
   if (parsed.command === 'pause') { state.paused=true; await saveState(statePath,state); return telegram.send(item.chatId,'Новые задачи поставлены на паузу. Текущая задача завершится.'); }
   if (parsed.command === 'resume') { state.paused=false; await saveState(statePath,state); return telegram.send(item.chatId,'Обработка очереди возобновлена.'); }

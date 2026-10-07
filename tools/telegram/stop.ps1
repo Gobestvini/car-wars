@@ -1,5 +1,15 @@
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$watchFile = Join-Path $root '.telegram-watchdog.pid'
+if (Test-Path -LiteralPath $watchFile) {
+  $watchId = [int](Get-Content -LiteralPath $watchFile -Raw)
+  $watchProcess = Get-CimInstance Win32_Process -Filter "ProcessId = $watchId" -ErrorAction SilentlyContinue
+  if ($watchProcess) {
+    if ($watchProcess.CommandLine -notmatch 'tools[\\/]telegram[\\/]watch\.ps1') { throw 'Watchdog PID указывает на другой процесс.' }
+    Stop-Process -Id $watchId -Force
+  }
+  Remove-Item -LiteralPath $watchFile -Force
+}
 $pidFile = Join-Path $root '.telegram-bot.pid'
 if (-not (Test-Path -LiteralPath $pidFile)) { Write-Output 'PID-файл не найден; listener не запущен.'; exit 0 }
 $listenerPid = [int](Get-Content -LiteralPath $pidFile -Raw)

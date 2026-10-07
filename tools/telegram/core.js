@@ -1,3 +1,4 @@
+import { formatUsage } from './economy.js';
 import { randomBytes } from 'node:crypto';
 
 export const newState = (pairCode = randomBytes(5).toString('hex').toUpperCase()) => ({
@@ -32,7 +33,7 @@ export function ingest(state, updates) {
 }
 
 export function enqueue(state, text, imagePath = null, chatId = null, updateId = null) {
-  const job = { id: state.nextId++, text, imagePath, chatId, updateId, status: 'queued', question: null, createdAt: new Date().toISOString() };
+  const job = { id: state.nextId++, text, requestText: text, imagePath, chatId, updateId, status: 'queued', question: null, createdAt: new Date().toISOString() };
   state.jobs.push(job); return job;
 }
 
@@ -61,6 +62,7 @@ export function describeJob(job, now = Date.now()) {
     if (job.startedAt) lines.push(`В работе: ${Math.max(0, Math.floor((now - Date.parse(job.startedAt)) / 60000))} мин.`);
     if (job.lastActivityAt) lines.push(`Последний вывод агента: ${Math.max(0, Math.floor((now - Date.parse(job.lastActivityAt)) / 1000))} сек. назад`);
   }
+  if (job.stages?.length) lines.push(formatUsage(job.stages));
   if (job.taskPath) lines.push(`Задача: ${job.taskPath}`);
   if (job.question) lines.push(job.question);
   return lines.join('\n');
@@ -70,7 +72,11 @@ export function replyToJob(state, id, text, chatId, updateId, previousTask = '')
   if (state.jobs.some(job => job.updateId === updateId)) return null;
   const original = state.jobs.find(job => job.id === id && job.status === 'blocked');
   if (!original) return null;
-  const next = enqueue(state, `${original.text}\n\nОтвет владельца на уточнение задачи #${id}: ${text}${previousTask ? '\n\nПредыдущее задание и отчёт для контекста:\n'+previousTask : ''}`, original.imagePath, chatId, updateId);
+  const requestText = original.requestText ?? original.text;
+  const clarifications = [...(original.clarifications ?? []), {id,text}];
+  const context = previousTask ? '\n\nПоследнее задание и отчёт для контекста:\n' + previousTask : '';
+  const next = enqueue(state, requestText + clarifications.map(item => '\n\nОтвет владельца на уточнение задачи #' + item.id + ': ' + item.text).join('') + context, original.imagePath, chatId, updateId);
+  next.requestText = requestText; next.clarifications = clarifications;
   next.parentId = id;
   original.status = 'superseded';
   return next;
@@ -85,7 +91,7 @@ export function routeMessage(message) {
     const match = trimmed.match(/^\/reply\s+(\d+)\s+([\s\S]+)$/);
     return match ? { command: 'reply', id: Number(match[1]), text: match[2] } : { command: 'usage', text: 'Формат: /reply ID текст' };
   }
-  const command = trimmed.match(/^\/(help|status|game|pause|resume)(?:@\w+)?(?:\s|$)/)?.[1];
+  const command = trimmed.match(/^\/(help|status|tokens|game|pause|resume)(?:@\w+)?(?:\s|$)/)?.[1];
   if (command) return { command };
   if (trimmed.startsWith('/')) return { command: 'unknown' };
   if (!trimmed && !message.photo?.length) return { command: 'empty' };
@@ -97,7 +103,7 @@ export function plannerPrompt(text, imagePath) {
 }
 
 export function workerPrompt(taskPath) {
-  return `Execute ${taskPath} completely. Read AGENTS.md and the task fully; verify current code. Use find-skills. Update task report and INDEX. Run all required checks. Do not commit or push. Do not read environment secrets or .telegram-bot.env. Return a structured done/blocked/failed result.`;
+  return `Execute ${taskPath} completely. Read AGENTS.md and the task fully; verify current code. Use find-skills. Update task report and INDEX. Run all required checks. For final full tests and build use node tools/telegram/verify.js --full; logs are saved outside model context and the runner can reuse success only for unchanged code. Do not commit or push. Do not read environment secrets or .telegram-bot.env. Return a structured done/blocked/failed result.`;
 }
 
 export const plannerSchema = { type: 'object', required: ['status','taskPath','question'], additionalProperties: false, properties: { status: { enum: ['ready','blocked'] }, taskPath: { type: 'string' }, question: { type: ['string','null'] } } };

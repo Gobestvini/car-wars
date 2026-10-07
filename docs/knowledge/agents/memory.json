@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "stack",
+      "essential": true,
+      "text": "Стек: Three.js, cannon-es, Tweakpane; Vite собирает игру. Команды и версии берутся из package.json. npm test запускает Node test runner.",
+      "at": "2026-10-07T11:11:58.911Z",
+      "sources": {
+        "package.json": "8cdf930ecbadcaec2f71d2092c9c98f89448068b7a9b0426bce1f328bc15adc0"
+      },
+      "evidence": "проверена карта файлов"
+    },
+    {
+      "id": "loop",
+      "essential": true,
+      "text": "FixedStepper в src/game-loop.js: шаг по умолчанию 1/120 секунды, максимум 10 догоняющих шагов; advance возвращает alpha и steps для интерполяции.",
+      "at": "2026-10-07T11:11:58.912Z",
+      "sources": {
+        "src/game-loop.js": "9e127e85e5d281976fca4363f140c1c8fc89accf4f78bcd083b52209329a85ca"
+      },
+      "evidence": "проверена карта файлов"
+    },
+    {
+      "id": "traffic",
+      "essential": true,
+      "text": "Для задачи о движении трафика начинай с src/traffic.js, src/traffic-ai.js, src/traffic-junction.js и src/traffic-planner.js. Найди конкретную функцию через rg; не перечитывай весь генератор города без необходимости.",
+      "at": "2026-10-07T11:11:58.912Z",
+      "sources": {
+        "src/traffic.js": "6f2a1c1702870c104f044678b0407f38429c7bf77a7cec24009fd86acb12f3fe",
+        "src/traffic-ai.js": "b8079cfeb81c8713b0db45096948cc4f0c26d3bfa5588873a6065f7880485598",
+        "src/traffic-junction.js": "547a9255f4735c71382c4f835b655f9b37d575377ac3d93f080f70c6d5776644",
+        "src/traffic-planner.js": "737ab2cf52520b7343969c0a5453c692ca3d3246d0f53aa4d0feb267e18d1ee3"
+      },
+      "evidence": "проверена карта файлов"
+    },
+    {
+      "id": "input",
+      "essential": true,
+      "text": "Ввод игрока: src/driving-input.js и src/joystick.js; автомобиль: src/vehicle.js. При правках управления проверь телефон и потерю фокуса по правилам docs/knowledge/playbook.md.",
+      "at": "2026-10-07T11:11:58.925Z",
+      "sources": {
+        "src/driving-input.js": "e4a9c85bf8686ec2c18fdabb2b59e05f6e428d40c982e1858bf9e8f18e349be8",
+        "src/joystick.js": "c05dadac5f95e5c9e0a66cb5bae08fc6b88f8f78ab3a3d58bbc7cea8afe9414a",
+        "src/vehicle.js": "ada55f15d2d27030c5d1ba1816a6820cb751798d9c9babebfc50a761ac7df3b2"
+      },
+      "evidence": "проверена карта файлов"
+    }
+  ]
+}

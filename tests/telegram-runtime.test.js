@@ -124,14 +124,17 @@ test('blocked planner retains its draft and never starts implementation', async 
 test('Codex runner streams both outputs to a log and reports activity before completion', async t => {
   const root=await temporaryRepo(t);
   const script=join(root,'fake-agent.cjs');
-  await writeFile(script,"const fs=require('fs');let p='';process.stdin.on('data',d=>p+=d);process.stdin.on('end',()=>{console.log('tool started');console.error('diagnostic');fs.writeFileSync(process.argv[process.argv.indexOf('-o')+1],JSON.stringify({ok:true}));});");
+  await writeFile(script,"const fs=require('fs');let p='';process.stdin.on('data',d=>p+=d);process.stdin.on('end',()=>{console.log('tool started');console.log(JSON.stringify({type:'turn.completed',usage:{input_tokens:100,cached_input_tokens:80,output_tokens:20}}));console.error('diagnostic');fs.writeFileSync(process.argv[process.argv.indexOf('-o')+1],JSON.stringify({ok:true}));});");
   const logPath=join(root,'agent.log');let activities=0;
   const result=await runCodex({cwd:root,model:'gpt-6-luna',prompt:'test',schema:{type:'object'},env:process.env,logPath,onActivity:()=>activities++,spawnImpl:(_cmd,args,options)=>{
     assert.equal(args.at(-1),'-');assert.ok(args.includes('--json'));
+    assert.ok(args.includes('tool_output_token_limit=2000'));
+    assert.ok(args.includes('model_reasoning_effort="medium"'));
     return spawn(process.execPath,[script,...args],options);
   }});
   assert.equal(result.exitCode,0);
   assert.equal(result.result.ok,true);
+  assert.deepEqual(result.usage,{input_tokens:100,cached_input_tokens:80,output_tokens:20});
   assert.ok(activities>=2);
   assert.match(await readFile(logPath,'utf8'),/gpt-6-luna[\s\S]*tool started/);
   assert.match(await readFile(logPath,'utf8'),/diagnostic/);

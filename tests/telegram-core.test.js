@@ -59,6 +59,10 @@ test('pause preserves incoming requests and replies carry original screenshot an
   assert.equal(replyToJob(state,original.id,'duplicate','42',11),null);
   assert.equal(nextQueuedJob(state),next);
   assert.equal(state.jobs.length,2);
+  next.status = 'blocked';
+  const followup = replyToJob(state,next.id,'Only daytime','42',12,'Latest report');
+  assert.match(followup.text,/Fix turn[\s\S]*Only on reverse[\s\S]*Only daytime[\s\S]*Latest report/);
+  assert.doesNotMatch(followup.text,/Prior task report/);
 });
 
 test('running status identifies the actual phase, task and elapsed time', () => {

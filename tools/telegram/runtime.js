@@ -1,9 +1,12 @@
 import { spawn } from 'node:child_process';
-import { mkdir, readFile, rename, writeFile, copyFile, cp, access, symlink, readdir, appendFile } from 'node:fs/promises';
+import { mkdir, readFile, rename, writeFile, copyFile, cp, access, symlink, appendFile } from 'node:fs/promises';
 import { join, resolve, dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { plannerPrompt, workerPrompt, plannerSchema, workerSchema, validTaskPath } from './core.js';
 import { captureBase, publishWorktree, git } from './publish.js';
+import { economySettings, economicalInstructions, createEventReader } from './economy.js';
+import { verify } from './verify.js';
+import { knowledgeContext, recordKnowledge } from './knowledge.js';
 
 const saves = new Map();
 export function saveState(path, state) {
@@ -47,14 +50,15 @@ export function makeTelegram(token, fetchImpl = fetch) {
   };
 }
 
-export function runCodex({ cwd, model, prompt, schema, imagePath, env, logPath, onActivity = () => {}, spawnImpl = spawn }) {
+export function runCodex({ cwd, model, prompt, schema, imagePath, env, logPath, phase = 'planning', onActivity = () => {}, spawnImpl = spawn }) {
   return new Promise((resolvePromise) => {
     const schemaFile = join(cwd, `.telegram-schema-${randomUUID()}.json`);
     const resultFile = join(cwd, `.telegram-result-${randomUUID()}.json`);
     (async () => {
       await writeFile(schemaFile, JSON.stringify(schema));
       const args = ['-a','never','exec','--ignore-user-config','--ephemeral','--json','--skip-git-repo-check','-s','danger-full-access','-C',cwd,'-m',model,'--output-schema',schemaFile,'-o',resultFile];
-      args.push('-c', `model_reasoning_effort="${model === 'gpt-6-luna' ? 'medium' : 'high'}"`);
+      const settings = economySettings(phase);
+      args.push('-c', `model_reasoning_effort="${settings.effort}"`, '-c', `tool_output_token_limit=${settings.toolOutputTokenLimit}`);
       if (imagePath) args.splice(args.length, 0, '--image', imagePath);
       const childEnv = { ...env }; for (const key of Object.keys(childEnv)) if (/TELEGRAM|BOT_TOKEN|PAIR_CODE/i.test(key)) delete childEnv[key];
       args.push('-');
@@ -64,41 +68,27 @@ export function runCodex({ cwd, model, prompt, schema, imagePath, env, logPath, 
         if (logPath) writes = writes.then(()=>appendFile(logPath,bytes)).catch(error=>console.error(`Agent log: ${error.code || 'write failed'}`));
         Promise.resolve(onActivity()).catch(error=>console.error(`Agent progress: ${error.code || 'save failed'}`));
       };
+      let usage = null;
+      const events = createEventReader(event => { if (event.type === 'turn.completed') usage = event.usage ?? null; });
       const child = spawnImpl('codex', args, { cwd, env: childEnv, stdio: ['pipe','pipe','pipe'], windowsHide: true });
-      child.stdout.on('data',output);
+      child.stdout.on('data', bytes => { events.push(bytes); output(bytes); });
       let stderr = ''; child.stderr.on('data', b => { stderr = (stderr + b).slice(-6000); output(b); }); child.stdin.on('error',()=>{}); child.stdin.end(prompt);
       const timer=setTimeout(()=>child.kill(),30*60*1000);
       child.on('error', error => { clearTimeout(timer); resolvePromise({ exitCode: -1, error: error.message }); });
       child.on('close', async (code) => {
         clearTimeout(timer);
+        events.flush();
         await writes;
         let result = null;
         try { result = JSON.parse(await readFile(resultFile, 'utf8')); } catch { /* schema output absent */ }
         await import('node:fs/promises').then(fs => Promise.all([fs.unlink(schemaFile).catch(()=>{}),fs.unlink(resultFile).catch(()=>{})]));
-        resolvePromise({ exitCode: code, result, diagnostic: stderr.slice(-1200) });
+        resolvePromise({ exitCode: code, result, usage, diagnostic: stderr.slice(-1200) });
       });
     })().catch(error => resolvePromise({ exitCode: -1, error: error.message }));
   });
 }
 
-export function makeAgentRunner({ root, tempRoot, env = process.env, invoke = runCodex, publish = publishWorktree, onProgress = async () => {}, test = async (cwd) => {
-  const tests=(await readdir(join(cwd,'tests'))).filter(name=>name.endsWith('.test.js')).map(name=>join(cwd,'tests',name));
-  const { exitCode, diagnostic } = await new Promise(resolvePromise => {
-    const child = spawn(process.execPath, ['--test',...tests], { cwd, windowsHide: true, stdio: ['ignore','pipe','pipe'] });
-    let stderr=''; child.stderr.on('data',d=>stderr=(stderr+d).slice(-5000));
-    child.stdout?.on('data',d=>stderr=(stderr+d).slice(-5000));
-    child.on('error',error=>resolvePromise({exitCode:-1,diagnostic:error.message}));
-    child.on('close',exitCode=>resolvePromise({exitCode,diagnostic:stderr.slice(-1000)}));
-    const timer=setTimeout(()=>child.kill(),30*60*1000); child.on('close',()=>clearTimeout(timer));
-  });
-  if (exitCode) return { ok: false, detail: diagnostic || 'node tests failed' };
-  const { exitCode: buildCode, diagnostic: buildDiagnostic } = await new Promise(resolvePromise => {
-    const child = spawn(process.execPath, ['node_modules/vite/bin/vite.js','build'], { cwd, windowsHide: true, stdio: ['ignore','ignore','pipe'] });
-    let stderr = ''; child.stderr.on('data', d => stderr += d); child.on('error',error=>resolvePromise({exitCode:-1,diagnostic:error.message})); child.on('close', exitCode => resolvePromise({ exitCode, diagnostic: stderr.slice(-1000) }));
-    const timer=setTimeout(()=>child.kill(),30*60*1000); child.on('close',()=>clearTimeout(timer));
-  });
-  return buildCode ? { ok: false, detail: buildDiagnostic || 'Vite build failed' } : { ok: true };
-} }) {
+export function makeAgentRunner({ root, tempRoot, env = process.env, invoke = runCodex, publish = publishWorktree, onProgress = async () => {}, test = verify }) {
   return async function processJob(job, state) {
     await onProgress(job,{phase:'preparing'});
     const baseline = await captureBase(root);
@@ -115,10 +105,18 @@ export function makeAgentRunner({ root, tempRoot, env = process.env, invoke = ru
     let lastActivity = 0;
     const invokeModel = async (phase,model,prompt,schema) => {
       await onProgress(job,{...metadata,phase,model});
-      return invoke({cwd:folder,model,prompt,schema,imagePath:job.imagePath,env:safeEnv,
+      const stage = {phase,model,usage:null};
+      job.stages = [...(job.stages ?? []), stage];
+      await onProgress(job,{stages:job.stages});
+      const context = await knowledgeContext(folder, job.text + ' ' + (job.taskPath ?? ''));
+      const answer = await invoke({cwd:folder,model,phase,prompt:prompt + '\n' + economicalInstructions(phase === 'planning' ? 'planner' : phase === 'implementing' ? 'worker' : 'helper') + '\n' + context,schema,imagePath:job.imagePath,env:safeEnv,
         logPath:join(root,'tools','telegram',`job-${job.id}.log`),
         onActivity:async()=>{ if(Date.now()-lastActivity < 5000) return; lastActivity=Date.now(); await onProgress(job,{lastActivityAt:new Date().toISOString()}); },
       });
+      stage.usage = answer.usage ?? null;
+      stage.finishedAt = new Date().toISOString();
+      await onProgress(job,{stages:job.stages});
+      return answer;
     };
     const safeEnv = Object.fromEntries(Object.entries(env).filter(([key]) => !/TELEGRAM|BOT_TOKEN|PAIR_CODE/i.test(key)));
     try {
@@ -147,15 +145,16 @@ export function makeAgentRunner({ root, tempRoot, env = process.env, invoke = ru
       let reason;
       if (!worker.exitCode && result?.status === 'done') {
         const checks = await verifyDone();
-        if (checks.ok) { await onProgress(job,{phase:'publishing'}); return { ...await publish({root,folder,branch:base,baseline,taskPath:plan.taskPath,summary:result.summary}), worktree:folder }; }
+        if (checks.ok) { await recordKnowledge(folder,{taskPath:plan.taskPath,summary:result.summary,checked:checks}); await onProgress(job,{phase:'publishing'}); return { ...await publish({root,folder,branch:base,baseline,taskPath:plan.taskPath,summary:result.summary}), worktree:folder }; }
         reason = checks.detail;
       }
-      reason ??= result?.question ?? worker.error ?? (worker.exitCode ? worker.diagnostic : 'Исполнитель сообщил о проблеме или проверки не прошли.');
-      const fallback = await invokeModel('helping','gpt-6.1-sol',`Исправь результат задачи ${plan.taskPath}. Предыдущая проблема: ${reason}. Заверши изменения, обнови отчёт и INDEX, обязательно выполни node --test tests/*.test.js и vite build. Верни done только если оба проходят. Без commit/push и без чтения секретов.`,workerSchema);
+      reason ??= result?.question ?? result?.summary ?? worker.error ?? (worker.exitCode ? worker.diagnostic : 'Исполнитель сообщил о проблеме или проверки не прошли.');
+      if (/exitCode: 3221225477/.test(reason ?? '') && !/AssertionError/.test(reason)) return {status:'blocked',question:'Процесс Node аварийно завершился (0xC0000005). Полный журнал: .telegram-check-logs/tests.log. Сначала требуется устранить проблему среды; автоматический повтор через Sol остановлен для экономии токенов.',branch:base,worktree:folder,taskPath:plan.taskPath};
+      const fallback = await invokeModel('helping','gpt-6.1-sol',`Исправь результат задачи ${plan.taskPath}. Предыдущая проблема: ${String(reason).slice(-1800)}. Заверши изменения, обнови отчёт и INDEX, обязательно выполни node tools/telegram/verify.js --full (полные тесты и сборка), а также остальные обязательные проверки задачи. Верни done только если оба проходят. Без commit/push и без чтения секретов.`,workerSchema);
       result = fallback.result;
       if (!fallback.exitCode && result?.status === 'done') {
         const checks = await verifyDone();
-        if (checks.ok) { await onProgress(job,{phase:'publishing'}); return { ...await publish({root,folder,branch:base,baseline,taskPath:plan.taskPath,summary:result.summary}), worktree:folder }; }
+        if (checks.ok) { await recordKnowledge(folder,{taskPath:plan.taskPath,summary:result.summary,checked:checks}); await onProgress(job,{phase:'publishing'}); return { ...await publish({root,folder,branch:base,baseline,taskPath:plan.taskPath,summary:result.summary}), worktree:folder }; }
         reason = checks.detail;
       }
       return {status:result?.status === 'blocked' ? 'blocked' : 'failed',question:result?.question ?? reason ?? 'Fallback завершился без успешных проверок.',branch:base,worktree:folder,taskPath:plan.taskPath};
