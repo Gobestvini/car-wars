@@ -87,6 +87,8 @@ export class BuildingOcclusion {
       proxyCap.material.transparent = true; proxyCap.material.depthWrite = false;
       group.add(proxyCap);
     }
+    entry.art?.hide();
+    entry.art?.proxy(group);
     group.traverse(node => { if (node.isMesh) node.renderOrder = 2; });
     this.scene.add(group);
     entry.proxy = group;
@@ -97,13 +99,12 @@ export class BuildingOcclusion {
 
   finishProxy(entry, caps) {
     this.scene.remove(entry.proxy);
-    entry.proxy.traverse(node => {
-      if (!node.isMesh || node.geometry === this.geometry) return;
-      node.material.dispose();
-    });
-    entry.proxyMaterial.dispose();
+    const materials = new Set();
+    entry.proxy.traverse(node => { if (node.isMesh) materials.add(node.material); });
+    for (const material of materials) material.dispose();
     entry.proxy = null; entry.proxyMaterial = null;
     for (const cap of caps) cap.visible = true;
+    entry.art?.restore();
     this.setInstanceVisible(entry, true);
     entry.opacity = 1;
   }

@@ -21,6 +21,8 @@ import { createSettings } from './settings.js';
 import { clearSettingsDefaults, readSettingsDefaults, saveSettingsDefaults } from './settings-defaults.js';
 import './style.css';
 import packageInfo from '../package.json';
+import { ART, ART_LIGHT, artQuality } from './art-direction.js';
+import { stylePlayerBody } from './vehicle-visuals.js';
 
 const $ = id => document.getElementById(id);
 const debug = location.hash === '#debug' || new URLSearchParams(location.search).has('debug');
@@ -58,10 +60,10 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.3;
+renderer.toneMappingExposure = ART_LIGHT.exposure;
 const scene = new THREE.Scene();
-scene.background = new THREE.Color('#ecece6');
-scene.fog = new THREE.Fog('#ecece6', 100, 260);
+scene.background = new THREE.Color(ART.fog);
+scene.fog = new THREE.Fog(ART.fog, 100, 260);
 const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.1, 200);
 const orbitControls = debug ? new OrbitControls(camera, canvas) : null;
 if (orbitControls) {
@@ -77,8 +79,8 @@ const cameraOffset = new THREE.Vector3(12, 20, -17);
 const cameraLookAt = new THREE.Vector3();
 let cameraDistanceScale = 1;
 let shadowBounds = null;
-scene.add(new THREE.HemisphereLight(0xf7fbf0, 0x9aa69b, 2.6));
-const sun = new THREE.DirectionalLight(0xfff5df, 3.1);
+scene.add(new THREE.HemisphereLight(ART_LIGHT.sky, ART_LIGHT.ground, ART_LIGHT.ambient));
+const sun = new THREE.DirectionalLight(ART_LIGHT.sun, ART_LIGHT.intensity);
 sun.position.set(-14, 24, 10);
 sun.castShadow = true;
 sun.shadow.mapSize.set(1024, 1024);
@@ -128,7 +130,7 @@ const visualWheels = [];
 let modelReady = false;
 let loading = false;
 let bodyDeformation = null;
-const treadGeometry = new THREE.CylinderGeometry(0.45, 0.45, 0.3, 48, 1, true);
+const treadGeometry = new THREE.CylinderGeometry(0.45, 0.45, 0.3, 20, 1, true);
 const treadMaterial = new THREE.MeshStandardMaterial({ color: '#252b2c', roughness: 0.92 });
 async function loadCar() {
   if (loading || modelReady) return;
@@ -148,6 +150,7 @@ async function loadCar() {
     });
     // Model's +Z is its nose. Scale bodywork to a full-size 4.5m sedan.
     const body = model.getObjectByName('body');
+    stylePlayerBody(body);
     body.geometry.computeBoundingBox();
     const bounds = body.geometry.boundingBox;
     const scale = 4.45 / (bounds.max.z - bounds.min.z);
@@ -196,9 +199,21 @@ async function loadCar() {
   } catch (error) {
     console.error('Car model failed to load', error);
     // A retry must not duplicate partially prepared meshes after a compile failure.
-    for (const { pivot } of visualWheels) pivot.removeFromParent();
+    const failedGeometry = new Set(), failedMaterials = new Set(), failedTextures = new Set();
+    const collectFailedResources = node => { if (node.isMesh) {
+      if (node.geometry !== treadGeometry) failedGeometry.add(node.geometry);
+      for (const material of Array.isArray(node.material) ? node.material : [node.material]) {
+        if (!material || material === treadMaterial) continue;
+        failedMaterials.add(material);
+        for (const value of Object.values(material)) if (value?.isTexture) failedTextures.add(value);
+      }
+    } };
+    for (const { pivot } of visualWheels) { pivot.traverse(collectFailedResources); pivot.removeFromParent(); }
     visualWheels.length = 0;
-    car.traverse(node => { if (node.isMesh) { node.geometry?.dispose(); for (const material of Array.isArray(node.material) ? node.material : [node.material]) material?.dispose(); } });
+    car.traverse(collectFailedResources);
+    for (const geometry of failedGeometry) geometry?.dispose();
+    for (const material of failedMaterials) material.dispose();
+    for (const texture of failedTextures) texture.dispose();
     bodyDeformation = null;
     car.clear();
     $('load-status').textContent = 'Не удалось загрузить машину.';
@@ -615,8 +630,9 @@ window.carLab = {
 function applyQuality() {
   quality = settings.values.quality === 'Лёгкая' ? 'low' : 'high';
   metrics.quality = quality;
-  renderer.setPixelRatio(Math.min(devicePixelRatio, quality === 'low' ? 1 : 1.75));
-  const size = quality === 'low' ? 512 : 1024;
+  const preset = artQuality(quality);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, preset.dpr));
+  const size = preset.shadow;
   sun.shadow.mapSize.set(size, size);
   if (sun.shadow.map) { sun.shadow.map.dispose(); sun.shadow.map = null; }
   sun.shadow.needsUpdate = true;

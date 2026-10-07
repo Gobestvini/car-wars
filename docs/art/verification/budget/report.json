@@ -1,0 +1,213 @@
+{
+  "reference": "e16dc4d",
+  "kind": "deterministic rendering fixture, 60 civilians/2 police, fixed transforms; not a physical-phone FPS measurement",
+  "cases": [
+    {
+      "width": 390,
+      "height": 844,
+      "quality": "low",
+      "before": {
+        "calls": 29,
+        "triangles": 55100
+      },
+      "after": {
+        "calls": 28,
+        "triangles": 68184
+      },
+      "delta": {
+        "calls": -1,
+        "triangles": 13084
+      },
+      "resources": [
+        {
+          "geometries": 28,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 28,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 28,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 28,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 28,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 28,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 28,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 28,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 28,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 28,
+          "textures": 2,
+          "programs": 10
+        }
+      ]
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "quality": "low",
+      "before": {
+        "calls": 39,
+        "triangles": 55392
+      },
+      "after": {
+        "calls": 31,
+        "triangles": 68536
+      },
+      "delta": {
+        "calls": -8,
+        "triangles": 13144
+      },
+      "resources": [
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "quality": "high",
+      "before": {
+        "calls": 39,
+        "triangles": 55380
+      },
+      "after": {
+        "calls": 32,
+        "triangles": 70828
+      },
+      "delta": {
+        "calls": -7,
+        "triangles": 15448
+      },
+      "resources": [
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        },
+        {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 10
+        }
+      ]
+    }
+  ]
+}

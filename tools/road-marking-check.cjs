@@ -25,7 +25,7 @@ const baseUrl = process.env.CARWARS_BASE_URL || 'http://localhost:5173/';
     await page.screenshot({ path: 'tools/screenshots/stop-lines-15m.png' });
     await page.locator('#settings-button').click();
     await page.locator('#settings-controls').getByText('Город', { exact: true }).click();
-    const roadWidth = page.locator('#settings-controls input[type="text"]').nth(3);
+    const roadWidth = page.locator('#settings-controls .tp-lblv').filter({ hasText: 'Ширина дорог, м' }).locator('input[type="text"]');
     await roadWidth.fill('30'); await roadWidth.press('Enter');
     await page.waitForFunction(() => window.carLab.city().roadWidth === 30);
     const wideLines = await page.evaluate(() => window.carLab.stopLines());

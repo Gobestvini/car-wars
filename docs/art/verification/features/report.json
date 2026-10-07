@@ -1,0 +1,1734 @@
+{
+  "viewports": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "signals": [
+        {
+          "quality": "high",
+          "width": 12,
+          "fx": 1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 12,
+          "fx": -1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 12,
+          "fx": 0,
+          "fz": 1,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 12,
+          "fx": 0,
+          "fz": -1,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 15,
+          "fx": 1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 15,
+          "fx": -1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 15,
+          "fx": 0,
+          "fz": 1,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 15,
+          "fx": 0,
+          "fz": -1,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 30,
+          "fx": 1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 30,
+          "fx": -1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 30,
+          "fx": 0,
+          "fz": 1,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 30,
+          "fx": 0,
+          "fz": -1,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 12,
+          "fx": 1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 12,
+          "fx": -1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 12,
+          "fx": 0,
+          "fz": 1,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 12,
+          "fx": 0,
+          "fz": -1,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 15,
+          "fx": 1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 15,
+          "fx": -1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 15,
+          "fx": 0,
+          "fz": 1,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 15,
+          "fx": 0,
+          "fz": -1,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 30,
+          "fx": 1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 30,
+          "fx": -1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 30,
+          "fx": 0,
+          "fz": 1,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 30,
+          "fx": 0,
+          "fz": -1,
+          "count": 144
+        }
+      ],
+      "damage": [
+        {
+          "quality": "high",
+          "damage": 0,
+          "effects": {
+            "stage": "healthy",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 0,
+            "activeFire": 0,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 23,
+            "textures": 2,
+            "programs": 12
+          },
+          "calls": 26
+        },
+        {
+          "quality": "high",
+          "damage": 0.25,
+          "effects": {
+            "stage": "grey-smoke",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 11,
+            "activeFire": 0,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 24,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 27
+        },
+        {
+          "quality": "high",
+          "damage": 0.6,
+          "effects": {
+            "stage": "dark-smoke",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 52,
+            "activeFire": 0,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 24,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 27
+        },
+        {
+          "quality": "high",
+          "damage": 0.85,
+          "effects": {
+            "stage": "fire",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 64,
+            "activeFire": 16,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 28
+        },
+        {
+          "quality": "high",
+          "damage": 1,
+          "effects": {
+            "stage": "terminal",
+            "exploded": true,
+            "explosions": 1,
+            "terminalTime": 0.6000000000000002,
+            "activeSmoke": 69,
+            "activeFire": 78,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 28
+        },
+        {
+          "quality": "low",
+          "damage": 0,
+          "effects": {
+            "stage": "healthy",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 0,
+            "activeFire": 0,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 25
+        },
+        {
+          "quality": "low",
+          "damage": 0.25,
+          "effects": {
+            "stage": "grey-smoke",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 6,
+            "activeFire": 0,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 26
+        },
+        {
+          "quality": "low",
+          "damage": 0.6,
+          "effects": {
+            "stage": "dark-smoke",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 28,
+            "activeFire": 0,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 26
+        },
+        {
+          "quality": "low",
+          "damage": 0.85,
+          "effects": {
+            "stage": "fire",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 35,
+            "activeFire": 7,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 27
+        },
+        {
+          "quality": "low",
+          "damage": 1,
+          "effects": {
+            "stage": "terminal",
+            "exploded": true,
+            "explosions": 1,
+            "terminalTime": 0.6000000000000002,
+            "activeSmoke": 35,
+            "activeFire": 41,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 27
+        }
+      ],
+      "proximity": [
+        {
+          "quality": "high",
+          "rows": [
+            {
+              "gap": 10,
+              "opacity": 1,
+              "near": false,
+              "ray": false,
+              "proxy": false
+            },
+            {
+              "gap": 5,
+              "opacity": 0.8781250070416311,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 2,
+              "opacity": 0.22000003802480786,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 1,
+              "opacity": 0.22000000000000222,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 5.95,
+              "opacity": 0.9996020263908068,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 6.05,
+              "opacity": 1,
+              "near": true,
+              "ray": false,
+              "proxy": false
+            },
+            {
+              "gap": 10,
+              "opacity": 1,
+              "near": false,
+              "ray": false,
+              "proxy": false
+            }
+          ]
+        },
+        {
+          "quality": "low",
+          "rows": [
+            {
+              "gap": 10,
+              "opacity": 1,
+              "near": false,
+              "ray": false,
+              "proxy": false
+            },
+            {
+              "gap": 5,
+              "opacity": 0.8781250070416311,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 2,
+              "opacity": 0.22000003802480786,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 1,
+              "opacity": 0.22000000000000222,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 5.95,
+              "opacity": 0.9996020263908068,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 6.05,
+              "opacity": 1,
+              "near": true,
+              "ray": false,
+              "proxy": false
+            },
+            {
+              "gap": 10,
+              "opacity": 1,
+              "near": false,
+              "ray": false,
+              "proxy": false
+            }
+          ]
+        }
+      ],
+      "shadow": [
+        {
+          "quality": "high",
+          "kind": "building",
+          "dash": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          },
+          "stop": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          }
+        },
+        {
+          "quality": "high",
+          "kind": "car",
+          "dash": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          },
+          "stop": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          }
+        },
+        {
+          "quality": "low",
+          "kind": "building",
+          "dash": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          },
+          "stop": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          }
+        },
+        {
+          "quality": "low",
+          "kind": "car",
+          "dash": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          },
+          "stop": {
+            "shade": 223,
+            "sun": 237.66666666666666
+          }
+        }
+      ],
+      "lifecycle": [
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        }
+      ],
+      "physical": {
+        "impacts": [
+          {
+            "damage": 0.45457634534572783,
+            "effects": {
+              "stage": "dark-smoke",
+              "exploded": false,
+              "explosions": 0,
+              "terminalTime": 0,
+              "activeSmoke": 35,
+              "activeFire": 0,
+              "capacity": 288,
+              "origin": [
+                0.00006488505903404912,
+                1.31,
+                3.294721871979857
+              ]
+            }
+          },
+          {
+            "damage": 0.9091526906914557,
+            "effects": {
+              "stage": "fire",
+              "exploded": false,
+              "explosions": 0,
+              "terminalTime": 0,
+              "activeSmoke": 78,
+              "activeFire": 25,
+              "capacity": 288,
+              "origin": [
+                0.00006488505903404912,
+                1.31,
+                3.294721871979857
+              ]
+            }
+          },
+          {
+            "damage": 1,
+            "effects": {
+              "stage": "terminal",
+              "exploded": true,
+              "explosions": 1,
+              "terminalTime": 0.6000000000000002,
+              "activeSmoke": 95,
+              "activeFire": 0,
+              "capacity": 288,
+              "origin": [
+                0.00006488505903404912,
+                1.31,
+                3.294721871979857
+              ]
+            }
+          }
+        ],
+        "facadeDamage": 0.29224346821052266,
+        "facadeOpacity": 0.22000004506643844
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "signals": [
+        {
+          "quality": "high",
+          "width": 12,
+          "fx": 1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 12,
+          "fx": -1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 12,
+          "fx": 0,
+          "fz": 1,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 12,
+          "fx": 0,
+          "fz": -1,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 15,
+          "fx": 1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 15,
+          "fx": -1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 15,
+          "fx": 0,
+          "fz": 1,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 15,
+          "fx": 0,
+          "fz": -1,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 30,
+          "fx": 1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 30,
+          "fx": -1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 30,
+          "fx": 0,
+          "fz": 1,
+          "count": 144
+        },
+        {
+          "quality": "high",
+          "width": 30,
+          "fx": 0,
+          "fz": -1,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 12,
+          "fx": 1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 12,
+          "fx": -1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 12,
+          "fx": 0,
+          "fz": 1,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 12,
+          "fx": 0,
+          "fz": -1,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 15,
+          "fx": 1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 15,
+          "fx": -1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 15,
+          "fx": 0,
+          "fz": 1,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 15,
+          "fx": 0,
+          "fz": -1,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 30,
+          "fx": 1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 30,
+          "fx": -1,
+          "fz": 0,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 30,
+          "fx": 0,
+          "fz": 1,
+          "count": 144
+        },
+        {
+          "quality": "low",
+          "width": 30,
+          "fx": 0,
+          "fz": -1,
+          "count": 144
+        }
+      ],
+      "damage": [
+        {
+          "quality": "high",
+          "damage": 0,
+          "effects": {
+            "stage": "healthy",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 0,
+            "activeFire": 0,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 23,
+            "textures": 2,
+            "programs": 12
+          },
+          "calls": 26
+        },
+        {
+          "quality": "high",
+          "damage": 0.25,
+          "effects": {
+            "stage": "grey-smoke",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 11,
+            "activeFire": 0,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 24,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 27
+        },
+        {
+          "quality": "high",
+          "damage": 0.6,
+          "effects": {
+            "stage": "dark-smoke",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 52,
+            "activeFire": 0,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 24,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 27
+        },
+        {
+          "quality": "high",
+          "damage": 0.85,
+          "effects": {
+            "stage": "fire",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 64,
+            "activeFire": 16,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 28
+        },
+        {
+          "quality": "high",
+          "damage": 1,
+          "effects": {
+            "stage": "terminal",
+            "exploded": true,
+            "explosions": 1,
+            "terminalTime": 0.6000000000000002,
+            "activeSmoke": 69,
+            "activeFire": 78,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 28
+        },
+        {
+          "quality": "low",
+          "damage": 0,
+          "effects": {
+            "stage": "healthy",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 0,
+            "activeFire": 0,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 25
+        },
+        {
+          "quality": "low",
+          "damage": 0.25,
+          "effects": {
+            "stage": "grey-smoke",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 6,
+            "activeFire": 0,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 26
+        },
+        {
+          "quality": "low",
+          "damage": 0.6,
+          "effects": {
+            "stage": "dark-smoke",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 28,
+            "activeFire": 0,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 26
+        },
+        {
+          "quality": "low",
+          "damage": 0.85,
+          "effects": {
+            "stage": "fire",
+            "exploded": false,
+            "explosions": 0,
+            "terminalTime": 0,
+            "activeSmoke": 35,
+            "activeFire": 8,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 27
+        },
+        {
+          "quality": "low",
+          "damage": 1,
+          "effects": {
+            "stage": "terminal",
+            "exploded": true,
+            "explosions": 1,
+            "terminalTime": 0.6000000000000002,
+            "activeSmoke": 35,
+            "activeFire": 39,
+            "capacity": 288,
+            "origin": [
+              0,
+              1.31,
+              1.45
+            ]
+          },
+          "resources": {
+            "geometries": 25,
+            "textures": 2,
+            "programs": 13
+          },
+          "calls": 27
+        }
+      ],
+      "proximity": [
+        {
+          "quality": "high",
+          "rows": [
+            {
+              "gap": 10,
+              "opacity": 1,
+              "near": false,
+              "ray": false,
+              "proxy": false
+            },
+            {
+              "gap": 5,
+              "opacity": 0.8781250070416311,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 2,
+              "opacity": 0.22000003802480786,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 1,
+              "opacity": 0.22000000000000222,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 5.95,
+              "opacity": 0.9996020263908068,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 6.05,
+              "opacity": 1,
+              "near": true,
+              "ray": false,
+              "proxy": false
+            },
+            {
+              "gap": 10,
+              "opacity": 1,
+              "near": false,
+              "ray": false,
+              "proxy": false
+            }
+          ]
+        },
+        {
+          "quality": "low",
+          "rows": [
+            {
+              "gap": 10,
+              "opacity": 1,
+              "near": false,
+              "ray": false,
+              "proxy": false
+            },
+            {
+              "gap": 5,
+              "opacity": 0.8781250070416311,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 2,
+              "opacity": 0.22000003802480786,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 1,
+              "opacity": 0.22000000000000222,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 5.95,
+              "opacity": 0.9996020263908068,
+              "near": true,
+              "ray": false,
+              "proxy": true
+            },
+            {
+              "gap": 6.05,
+              "opacity": 1,
+              "near": true,
+              "ray": false,
+              "proxy": false
+            },
+            {
+              "gap": 10,
+              "opacity": 1,
+              "near": false,
+              "ray": false,
+              "proxy": false
+            }
+          ]
+        }
+      ],
+      "shadow": [
+        {
+          "quality": "high",
+          "kind": "building",
+          "dash": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          },
+          "stop": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          }
+        },
+        {
+          "quality": "high",
+          "kind": "car",
+          "dash": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          },
+          "stop": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          }
+        },
+        {
+          "quality": "low",
+          "kind": "building",
+          "dash": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          },
+          "stop": {
+            "shade": 222.33333333333334,
+            "sun": 237.66666666666666
+          }
+        },
+        {
+          "quality": "low",
+          "kind": "car",
+          "dash": {
+            "shade": 223.33333333333334,
+            "sun": 237.66666666666666
+          },
+          "stop": {
+            "shade": 223.33333333333334,
+            "sun": 237.66666666666666
+          }
+        }
+      ],
+      "lifecycle": [
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        },
+        {
+          "geometries": 25,
+          "textures": 2,
+          "programs": 13
+        }
+      ],
+      "physical": {
+        "impacts": [
+          {
+            "damage": 0.45457634534572783,
+            "effects": {
+              "stage": "dark-smoke",
+              "exploded": false,
+              "explosions": 0,
+              "terminalTime": 0,
+              "activeSmoke": 35,
+              "activeFire": 0,
+              "capacity": 288,
+              "origin": [
+                0.00006488505903404912,
+                1.31,
+                3.294721871979857
+              ]
+            }
+          },
+          {
+            "damage": 0.9091526906914557,
+            "effects": {
+              "stage": "fire",
+              "exploded": false,
+              "explosions": 0,
+              "terminalTime": 0,
+              "activeSmoke": 75,
+              "activeFire": 24,
+              "capacity": 288,
+              "origin": [
+                0.00006488505903404912,
+                1.31,
+                3.294721871979857
+              ]
+            }
+          },
+          {
+            "damage": 1,
+            "effects": {
+              "stage": "terminal",
+              "exploded": true,
+              "explosions": 1,
+              "terminalTime": 0.6000000000000002,
+              "activeSmoke": 90,
+              "activeFire": 0,
+              "capacity": 288,
+              "origin": [
+                0.00006488505903404912,
+                1.31,
+                3.294721871979857
+              ]
+            }
+          }
+        ],
+        "facadeDamage": 0.29224346821052266,
+        "facadeOpacity": 0.22000004506643844
+      }
+    }
+  ],
+  "app": [
+    {
+      "preview": 0.25,
+      "before": {
+        "damage": 0.25,
+        "effects": {
+          "stage": "grey-smoke",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 1,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -0.6307000244612837,
+            1.2041503517947585,
+            1.3056482984113817
+          ]
+        },
+        "signals": {
+          "controlled": 36,
+          "approaches": 144,
+          "visible": 144,
+          "phase": {
+            "color": "green",
+            "axis": "ew",
+            "canEnter": true,
+            "controlled": true
+          }
+        },
+        "resources": {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 12
+        },
+        "performance": {
+          "fps": 3.582517315500358,
+          "physicsMs": 2.7000000001862645,
+          "renderMs": 0.6000000000931323,
+          "frameCpuMs": 3.7000000001862645,
+          "frameIntervalMs": 91.70000000000005,
+          "calls": 39,
+          "triangles": 71672,
+          "quality": "high",
+          "signalBeams": 16,
+          "signalBeamTotal": 144,
+          "signalBeamSamples": 16,
+          "aiMs": 1.7000000001862645,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.10000000009313226,
+          "prepareMs": 1.8000000002793968,
+          "worldStepMs": 0.10000000009313226,
+          "postMs": 0,
+          "aiTicks": 2,
+          "aiDecisions": 32,
+          "totalBodies": 204,
+          "trafficBodies": 6,
+          "logicalTraffic": 12,
+          "visibleTraffic": 2,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 6,
+          "dpr": 1,
+          "droppedSeconds": 0.6293333333333333,
+          "trailSegments": 0
+        }
+      },
+      "after": {
+        "stage": "healthy",
+        "exploded": false,
+        "explosions": 0,
+        "terminalTime": 0,
+        "activeSmoke": 0,
+        "activeFire": 0,
+        "capacity": 288,
+        "origin": [
+          -0.6307000244612838,
+          1.2552138505355845,
+          1.3056482984113815
+        ]
+      }
+    },
+    {
+      "preview": 0.6,
+      "before": {
+        "damage": 0.6,
+        "effects": {
+          "stage": "dark-smoke",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 1,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -0.6307000244612838,
+            1.2552138505355845,
+            1.3056482984113815
+          ]
+        },
+        "signals": {
+          "controlled": 36,
+          "approaches": 144,
+          "visible": 144,
+          "phase": {
+            "color": "green",
+            "axis": "ew",
+            "canEnter": true,
+            "controlled": true
+          }
+        },
+        "resources": {
+          "geometries": 28,
+          "textures": 2,
+          "programs": 12
+        },
+        "performance": {
+          "fps": 4.675810473815462,
+          "physicsMs": 7.7999999998137355,
+          "renderMs": 105,
+          "frameCpuMs": 113.5,
+          "frameIntervalMs": 250,
+          "calls": 38,
+          "triangles": 71428,
+          "quality": "high",
+          "signalBeams": 16,
+          "signalBeamTotal": 144,
+          "signalBeamSamples": 16,
+          "aiMs": 3.6000000000931323,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.10000000009313226,
+          "prepareMs": 3.7000000001862645,
+          "worldStepMs": 0,
+          "postMs": 0.09999999962747097,
+          "aiTicks": 1,
+          "aiDecisions": 14,
+          "totalBodies": 204,
+          "trafficBodies": 6,
+          "logicalTraffic": 8,
+          "visibleTraffic": 2,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 6,
+          "dpr": 1,
+          "droppedSeconds": 0.4749333333333333,
+          "trailSegments": 0
+        }
+      },
+      "after": {
+        "stage": "healthy",
+        "exploded": false,
+        "explosions": 0,
+        "terminalTime": 0,
+        "activeSmoke": 0,
+        "activeFire": 0,
+        "capacity": 288,
+        "origin": [
+          -0.6307000244612838,
+          1.258877319089667,
+          1.3056482984113815
+        ]
+      }
+    },
+    {
+      "preview": 0.85,
+      "before": {
+        "damage": 0.85,
+        "effects": {
+          "stage": "fire",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 2,
+          "activeFire": 1,
+          "capacity": 288,
+          "origin": [
+            -0.6307000244612838,
+            1.2552138505355845,
+            1.3056482984113815
+          ]
+        },
+        "signals": {
+          "controlled": 36,
+          "approaches": 144,
+          "visible": 144,
+          "phase": {
+            "color": "green",
+            "axis": "ew",
+            "canEnter": true,
+            "controlled": true
+          }
+        },
+        "resources": {
+          "geometries": 29,
+          "textures": 2,
+          "programs": 12
+        },
+        "performance": {
+          "fps": 4.55719276925414,
+          "physicsMs": 7.600000000093132,
+          "renderMs": 130.5,
+          "frameCpuMs": 138.6999999997206,
+          "frameIntervalMs": 262.5,
+          "calls": 39,
+          "triangles": 71684,
+          "quality": "high",
+          "signalBeams": 16,
+          "signalBeamTotal": 144,
+          "signalBeamSamples": 16,
+          "aiMs": 3.1999999997206032,
+          "playerPrepareMs": 0.10000000009313226,
+          "npcPrepareMs": 0,
+          "prepareMs": 3.2999999998137355,
+          "worldStepMs": 0.20000000018626451,
+          "postMs": 0.10000000009313226,
+          "aiTicks": 1,
+          "aiDecisions": 14,
+          "totalBodies": 204,
+          "trafficBodies": 6,
+          "logicalTraffic": 8,
+          "visibleTraffic": 2,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 6,
+          "dpr": 1,
+          "droppedSeconds": 0.4916333333333333,
+          "trailSegments": 0
+        }
+      },
+      "after": {
+        "stage": "healthy",
+        "exploded": false,
+        "explosions": 0,
+        "terminalTime": 0,
+        "activeSmoke": 0,
+        "activeFire": 0,
+        "capacity": 288,
+        "origin": [
+          -0.6307000244612838,
+          1.2570748925610582,
+          1.3056482984113815
+        ]
+      }
+    },
+    {
+      "preview": 1,
+      "before": {
+        "damage": 1,
+        "effects": {
+          "stage": "terminal",
+          "exploded": true,
+          "explosions": 1,
+          "terminalTime": 0.6461000000000002,
+          "activeSmoke": 70,
+          "activeFire": 74,
+          "capacity": 288,
+          "origin": [
+            -0.6307000244612838,
+            1.2150008893392732,
+            1.3056482984113817
+          ]
+        },
+        "signals": {
+          "controlled": 36,
+          "approaches": 144,
+          "visible": 144,
+          "phase": {
+            "color": "green",
+            "axis": "ew",
+            "canEnter": true,
+            "controlled": true
+          }
+        },
+        "resources": {
+          "geometries": 30,
+          "textures": 2,
+          "programs": 12
+        },
+        "performance": {
+          "fps": 9.758001561280249,
+          "physicsMs": 3.3999999999068677,
+          "renderMs": 0.5,
+          "frameCpuMs": 4.2000000001862645,
+          "frameIntervalMs": 87.5,
+          "calls": 40,
+          "triangles": 71928,
+          "quality": "high",
+          "signalBeams": 16,
+          "signalBeamTotal": 144,
+          "signalBeamSamples": 16,
+          "aiMs": 1.1000000000931323,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.10000000009313226,
+          "prepareMs": 1.2000000001862645,
+          "worldStepMs": 0,
+          "postMs": 0,
+          "aiTicks": 4,
+          "aiDecisions": 80,
+          "totalBodies": 204,
+          "trafficBodies": 6,
+          "logicalTraffic": 20,
+          "visibleTraffic": 3,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 6,
+          "dpr": 1,
+          "droppedSeconds": 0.6169000000000001,
+          "trailSegments": 0
+        }
+      },
+      "after": {
+        "stage": "healthy",
+        "exploded": false,
+        "explosions": 0,
+        "terminalTime": 0,
+        "activeSmoke": 0,
+        "activeFire": 0,
+        "capacity": 288,
+        "origin": [
+          -0.6307000244612838,
+          1.258877319089667,
+          1.3056482984113815
+        ]
+      }
+    }
+  ],
+  "resume": {
+    "clock": 0.21666666666666665,
+    "effects": {
+      "stage": "fire",
+      "exploded": false,
+      "explosions": 0,
+      "terminalTime": 0,
+      "activeSmoke": 4,
+      "activeFire": 2,
+      "capacity": 288,
+      "origin": [
+        -0.6307000244612838,
+        1.2231793051179474,
+        1.3056482984113817
+      ]
+    }
+  },
+  "realImpact": {
+    "damage": 0.22404010025347515,
+    "effects": {
+      "stage": "grey-smoke",
+      "exploded": false,
+      "explosions": 0,
+      "terminalTime": 0,
+      "activeSmoke": 1,
+      "activeFire": 0,
+      "capacity": 288,
+      "origin": [
+        -8.195080555885967,
+        1.291587141631288,
+        15.901983150728746
+      ]
+    }
+  }
+}

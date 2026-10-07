@@ -64,7 +64,7 @@ class ParticlePool {
         void main() {
           vec2 p = (vUv - .5) * 2.0;
           float shape = max(0.0, 1.0 - dot(p, p));
-          float wisps = .8 + .2 * sin(p.x * 13.0 + sin(p.y * 11.0));
+          float wisps = .9 + .1 * (1.0 - abs(p.x));
           gl_FragColor = vec4(vColor, pow(shape, 1.6) * wisps * vAlpha);
           #include <colorspace_fragment>
         }`,
@@ -90,7 +90,7 @@ class ParticlePool {
     const angle = Math.random() * Math.PI * 2, spread = burst ? 2 + Math.random() * 4 : .3;
     p.velocity.set(Math.cos(angle) * spread, kind === 'spark' ? 3 + Math.random() * 4 : 1 + Math.random() * 1.5, Math.sin(angle) * spread);
     p.life = kind === 'smoke' ? (burst ? 3 + Math.random() * 1.7 : 2 + Math.random()) : kind === 'flash' ? .2 : kind === 'spark' ? .7 + Math.random() * .6 : .4 + Math.random() * .5;
-    p.size = kind === 'smoke' ? .5 + Math.random() * .35 : kind === 'flash' ? 5 : kind === 'spark' ? .06 : .45 + Math.random() * .5;
+    p.size = kind === 'smoke' ? .55 + Math.random() * .35 : kind === 'flash' ? 3.8 : kind === 'spark' ? .06 : .35 + Math.random() * .4;
   }
   update(dt, camera, limit) {
     this.rotation.copy(camera.quaternion);
@@ -104,11 +104,11 @@ class ParticlePool {
         if (p.kind === 'spark') p.velocity.y -= dt * 7;
         else p.velocity.multiplyScalar(Math.exp(-dt * .3));
         const progress = p.age / p.life;
-        const size = p.size * (p.kind === 'smoke' ? 1 + progress * 3.5 : p.kind === 'flash' ? 1 + progress : 1 + progress * .7);
-        this.scale.set(size, p.kind === 'spark' ? size * 3 : size, 1);
+        const size = p.size * (p.kind === 'smoke' ? 1 + progress * 2.5 : p.kind === 'flash' ? 1 + progress : 1 + progress * .7);
+        this.scale.set(size, p.kind === 'spark' ? size * 3 : p.kind === 'fire' ? size * 1.6 : size, 1);
         const fade = Math.sin(Math.PI * progress);
-        this.alpha.setX(i, p.kind === 'flash' ? 1 - progress : fade * (p.kind === 'smoke' ? .25 + p.shade * .35 : .95));
-        if (p.kind === 'smoke') this.color.setScalar(.38 - p.shade * .34);
+        this.alpha.setX(i, p.kind === 'flash' ? 1 - progress : fade * (p.kind === 'smoke' ? .23 + p.shade * .25 : .95));
+        if (p.kind === 'smoke') { const grey=.38-p.shade*.30; this.color.setRGB(grey*.94,grey,grey*1.07); }
         else this.color.setRGB(1, p.kind === 'flash' ? .85 : .2 + (1 - progress) * .55, p.kind === 'flash' ? .35 : .015);
         this.mesh.setColorAt(i, this.color);
       } else { this.scale.setScalar(0); this.alpha.setX(i, 0); }
@@ -123,7 +123,7 @@ class ParticlePool {
     for (const p of this.particles) { p.life = 0; p.age = 0; }
     this.mesh.visible = false;
   }
-  dispose() { this.mesh.removeFromParent(); this.mesh.geometry.dispose(); this.mesh.material.dispose(); }
+  dispose() { this.mesh.removeFromParent(); this.mesh.dispose(); this.mesh.geometry.dispose(); this.mesh.material.dispose(); }
 }
 
 export class CarDamageEffects {

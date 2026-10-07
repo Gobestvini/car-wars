@@ -9,51 +9,10 @@ import { escapeRoute, hiddenFromPlayer, TRAFFIC_EVASION } from './traffic-evasio
 import { junctionMovement, movementsConflict, pathProgress, pathTarget, turnStagingTarget, yieldsToOncoming } from './traffic-junction.js';
 import { findSafeSpawnPose } from './vehicle-spawn.js';
 import { createPolicePursuit } from './police-pursuit.js';
+import { createTrafficAssets, makeTrafficCar } from './vehicle-visuals.js';
 
 const headingOf = q => Math.atan2(2 * (q.x * q.z + q.w * q.y), 1 - 2 * (q.x * q.x + q.y * q.y));
 const now = () => globalThis.performance?.now?.() ?? Date.now();
-
-const TRAFFIC_PALETTE = ['#496a80', '#b56f4c', '#8a956b', '#82718e', '#b9a76e', '#63928b'];
-
-function createTrafficAssets(THREE) {
-  return {
-    geometries: [new THREE.BoxGeometry(1.8, 0.62, 3.8), new THREE.BoxGeometry(1.48, 0.63, 1.75),
-      new THREE.CylinderGeometry(0.36, 0.36, 0.2, 10), new THREE.BoxGeometry(0.34, 0.14, 0.08),
-      new THREE.BoxGeometry(0.92, 0.12, 0.28), new THREE.BoxGeometry(0.38, 0.13, 0.3)],
-    bodyMaterials: TRAFFIC_PALETTE.map(color => new THREE.MeshStandardMaterial({ color, roughness: 0.72 })),
-    policeBodyMaterial: new THREE.MeshStandardMaterial({ color: '#e7e9e9', roughness: 0.58, metalness: 0.08 }),
-    policeCabinMaterial: new THREE.MeshStandardMaterial({ color: '#202a32', roughness: 0.45, metalness: 0.12 }),
-    policeLightMaterials: [new THREE.MeshStandardMaterial({ color: '#ef344a', emissive: '#a90012', emissiveIntensity: 1.3 }),
-      new THREE.MeshStandardMaterial({ color: '#438eff', emissive: '#0646c9', emissiveIntensity: 1.3 })],
-    cabinMaterial: new THREE.MeshStandardMaterial({ color: '#495861', roughness: 0.55, metalness: 0.1 }),
-    wheelMaterial: new THREE.MeshStandardMaterial({ color: '#202326', roughness: 0.92 }),
-    noseMaterials: ['#fff0cc', '#f2d6a0'].map(color => new THREE.MeshStandardMaterial({ color, emissive: '#4d3418' })),
-  };
-}
-
-function makeTrafficCar(THREE, assets, index, role = 'civilian') {
-  const car = new THREE.Group();
-  const [bodyGeometry, cabinGeometry, wheelGeometry, noseGeometry] = assets.geometries;
-  const body = new THREE.Mesh(bodyGeometry, role === 'police' ? assets.policeBodyMaterial : assets.bodyMaterials[index % assets.bodyMaterials.length]);
-  body.position.y = 0.68; body.castShadow = true; car.add(body);
-  const cabin = new THREE.Mesh(cabinGeometry, role === 'police' ? assets.policeCabinMaterial : assets.cabinMaterial);
-  cabin.position.set(0, 1.22, -0.12); cabin.castShadow = true; car.add(cabin);
-  for (const x of [-0.94, 0.94]) for (const z of [-1.18, 1.18]) {
-    const wheel = new THREE.Mesh(wheelGeometry, assets.wheelMaterial);
-    wheel.rotation.z = Math.PI / 2; wheel.position.set(x, 0.38, z); wheel.castShadow = true; car.add(wheel);
-  }
-  const nose = new THREE.Mesh(noseGeometry, assets.noseMaterials[index % 2]);
-  nose.position.set(0, 0.8, 1.92); car.add(nose);
-  if (role === 'police') {
-    const bar = new THREE.Mesh(assets.geometries[4], assets.policeCabinMaterial);
-    bar.position.set(0, 1.61, -0.08); car.add(bar);
-    for (const [x, material] of [[-0.24, assets.policeLightMaterials[0]], [0.24, assets.policeLightMaterials[1]]]) {
-      const light = new THREE.Mesh(assets.geometries[5], material);
-      light.position.set(x, 1.68, -0.08); car.add(light);
-    }
-  }
-  return car;
-}
 
 export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = createCityPlan().roadNetwork,
   roadWidth = ROAD_WIDTH, obstacles = [], mapBounds = null) {
@@ -885,6 +844,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       started = now(); physics.postStep(dt); this.postStep(dt); profile.postMs = now() - started;
     },
     render(alpha = 1, camera = null) {
+      visualAssets?.animate(thinkTime);
       let frustum = null;
       if (camera) {
         frustum = visibilityFrustum.setFromProjectionMatrix(
@@ -947,9 +907,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       while (states.length) removeAt(states.length - 1);
       reservations.clear(); spawnRequests.clear(); spawnResults.clear(); requestedCount = 0; pendingCount = null;
       if (visualAssets) {
-        visualAssets.geometries.forEach(geometry => geometry.dispose());
-        [...visualAssets.bodyMaterials, ...visualAssets.noseMaterials, visualAssets.cabinMaterial, visualAssets.wheelMaterial,
-          visualAssets.policeBodyMaterial, visualAssets.policeCabinMaterial, ...visualAssets.policeLightMaterials].forEach(material => material.dispose());
+        visualAssets.dispose();
         visualAssets = null;
       }
     },

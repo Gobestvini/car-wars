@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <meta name="theme-color" content="#ecece6" />
+    <meta name="theme-color" content="#d7eafa" />
     <title>CarWars</title>
   </head>
   <body>
     <canvas id="scene" aria-label="Площадка для управления машиной"></canvas>
     <div id="speedometer" aria-label="Скорость машины"><span id="speed">0</span> <span class="speed-unit">км/ч</span></div>
-    <button id="settings-button" class="icon-button" type="button" aria-label="Настройки" title="Настройки" aria-controls="settings" aria-expanded="false">⚙</button>
+    <button id="settings-button" class="icon-button" type="button" aria-label="Настройки" title="Настройки" aria-controls="settings" aria-expanded="false"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m9 3-.6 2.4-2 .9-2.2-.6L2.5 9l1.7 1.8v2.4L2.5 15l1.7 3.3 2.2-.6 2 .9L9 21h6l.6-2.4 2-.9 2.2.6 1.7-3.3-1.7-1.8v-2.4L21.5 9l-1.7-3.3-2.2.6-2-.9L15 3Z"/><circle cx="12" cy="12" r="3.2"/></svg></button>
     <section id="settings" class="panel" aria-label="Настройки автомобиля" hidden inert>
       <div id="settings-controls"></div>
     </section>

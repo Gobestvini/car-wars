@@ -4,7 +4,7 @@ const { PNG } = require(process.env.PNGJS_MODULE || 'pngjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const base = process.env.CARWARS_BASE_URL || 'http://127.0.0.1:5174/';
-const out = 'tools/screenshots';
+const out = process.env.VISUAL_OUTPUT_DIR || 'tools/screenshots';
 fs.mkdirSync(out, { recursive: true });
 
 async function fixture(page) {
@@ -16,12 +16,14 @@ async function fixture(page) {
       import('/src/traffic-signals.js'), import('/src/car-damage-effects.js'), import('/src/vehicle.js'),
       import('/src/shadow-coverage.js'), import('/node_modules/three/examples/jsm/loaders/GLTFLoader.js'),
     ]);
+    const { ART, ART_LIGHT } = await import('/src/art-direction.js');
+    const { stylePlayerBody } = await import('/src/vehicle-visuals.js');
     const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('canvas'), antialias: true, preserveDrawingBuffer: true });
     renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.3;
-    const scene = new THREE.Scene(); scene.background = new THREE.Color('#ecece6');
-    scene.add(new THREE.HemisphereLight(0xf7fbf0, 0x9aa69b, 2.6));
-    const sun = new THREE.DirectionalLight(0xfff5df, 3.1); sun.castShadow = true;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = ART_LIGHT.exposure;
+    const scene = new THREE.Scene(); scene.background = new THREE.Color(ART.fog);
+    scene.add(new THREE.HemisphereLight(ART_LIGHT.sky, ART_LIGHT.ground, ART_LIGHT.ambient));
+    const sun = new THREE.DirectionalLight(ART_LIGHT.sun, ART_LIGHT.intensity); sun.castShadow = true;
     sun.shadow.mapSize.set(1024, 1024); sun.shadow.bias = -.0008; sun.shadow.normalBias = .03;
     scene.add(sun, sun.target);
     const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, .1, 200);
@@ -31,6 +33,7 @@ async function fixture(page) {
     const effects = new CarDamageEffects(scene), car = new THREE.Group(); scene.add(car);
     const model = (await new GLTFLoader().loadAsync('/models/sedan.glb')).scene;
     const body = model.getObjectByName('body'); body.geometry.computeBoundingBox();
+    stylePlayerBody(body);
     const box = body.geometry.boundingBox;
     model.scale.set(1.25, 1.15, 4.45 / (box.max.z - box.min.z)); model.position.y = -.5;
     model.traverse(node => { if (node.isMesh) { node.castShadow = true; node.receiveShadow = true; } }); car.add(model);
@@ -248,12 +251,17 @@ function brightness(buffer, sample) {
       const before = await page.evaluate(() => ({ damage: carLab.telemetry().damage, effects: carLab.damageEffects(), signals: carLab.signals(), resources: carLab.resources(), performance: carLab.performance() }));
       assert.equal(before.signals.visible, before.signals.approaches);
       if (preview === .85) {
-        const cdp = await page.context().newCDPSession(page);
-        const clock = await page.evaluate(() => carLab.trafficClock());
-        await cdp.send('Page.setWebLifecycleState', { state: 'frozen' }); await page.waitForTimeout(500);
-        await cdp.send('Page.setWebLifecycleState', { state: 'active' });
+        // Headless CDP freeze does not consistently change document.hidden.
+        // Exercise the app's actual hidden branch, with an exact no-advance assertion.
+        const clock = await page.evaluate(() => {
+          Object.defineProperty(document,'hidden',{ configurable:true,get:()=>true });
+          return carLab.trafficClock();
+        });
+        await page.waitForTimeout(500);
+        assert.equal(await page.evaluate(()=>carLab.trafficClock()),clock);
+        await page.evaluate(()=>delete document.hidden);
         const resumed = await page.evaluate(() => ({ clock: carLab.trafficClock(), effects: carLab.damageEffects() }));
-        assert.ok(resumed.clock - clock < .2); assert.equal(resumed.effects.exploded, false);
+        assert.equal(resumed.effects.exploded, false);
         report.resume = resumed;
       }
       await page.screenshot({ path: `${out}/app-damage-${preview}.png` });
@@ -269,7 +277,7 @@ function brightness(buffer, sample) {
     const impact = await page.evaluate(() => ({ damage: carLab.telemetry().damage, effects: carLab.damageEffects() }));
     assert.ok(impact.damage > .15); assert.ok(impact.effects.activeSmoke > 0);
     report.realImpact = impact; await page.close();
-    fs.writeFileSync('docs/knowledge/visual-series-2026-10-06.json', JSON.stringify(report, null, 2) + '\n');
+    fs.writeFileSync(process.env.VISUAL_REPORT_PATH || 'docs/knowledge/visual-series-2026-10-06.json', JSON.stringify(report, null, 2) + '\n');
     console.log(JSON.stringify({ viewports: report.viewports.map(v => ({ viewport: v.viewport, signalChecks: v.signals.length, damageChecks: v.damage.length, shadow: v.shadow, lifecycle: v.lifecycle.at(-1) })), previews: report.app.length, impact: report.realImpact }, null, 2));
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

@@ -1,13 +1,13 @@
 # Каталог визуальных семейств
 
-TASK-0051, 2026-10-07. Статус: подготовка; runtime-проверки записываются в отчёт задачи.
+TASK-0051, 2026-10-07. Статус: интегрировано; WebGL-проверки записаны в отчёт задачи. Физическое мобильное устройство не проверено.
 
 | ID / источник | Варианты и назначение | Технический контракт | Владелец |
 | --- | --- | --- | --- |
 | player-sedan / public/models/sedan.glb | Игрок, healthy → deformation → detached wheels | body и четыре wheel-*, +Z нос, кузов около 4.45 м; непрозрачный кузов/стекло, независимые wheel pivots | loadCar и существующий retry cleanup |
 | player-colormap / public/models/Textures/colormap.png | Исходный atlas Kenney | Сохранить UV; цветная текстура sRGB, линейная фильтрация и mipmaps | Материалы модели |
-| civilian / src/traffic.js | Четыре+ приглушённых кузова, два верха | Общая geometry/material, прежние collision role и габариты; opaque | Vehicle runtime dispose |
-| police / src/traffic.js | Светлый кузов, тёмная ливрея, красно-синий маяк | Общие материалы, bounded emissive, без отдельных источников света | Vehicle runtime dispose |
+| civilian / src/vehicle-visuals.js | Четыре+ приглушённых кузова, два верха | Общая geometry/material, прежние collision role и габариты; opaque | Vehicle runtime dispose |
+| police / src/vehicle-visuals.js | Светлый кузов, тёмная ливрея, красно-синий маяк | Общие материалы, bounded emissive, без отдельных источников света | Vehicle runtime dispose |
 | buildings / src/city-scene.js | Три семьи, три района, landmarks tower/hall/clock | Footprints/высоты физического тела неизменны; instance colors и общая геометрия; все детали участвуют в fade | City dispose / BuildingOcclusion |
 | roads / src/city-scene.js | Асфальт, тротуар, спавн и граница | Opaque общие материалы, раздельные глубины слоёв, прежние colliders | City dispose |
 | markings / src/road-markings.js | Dashes и stop lines | Instancing, прежние координаты при ширине 12/15/30 м | City dispose |
@@ -23,3 +23,11 @@ TASK-0051, 2026-10-07. Статус: подготовка; runtime-провер�
 Процедурные формы и SVG: авторство проекта, создано при TASK-0051; внешних приобретённых/generated моделей нет. К ним применяется лицензия репозитория, если она определена владельцем; новую стороннюю лицензию не придумывать. Новые PNG проверки — кадры собственной игровой сцены, не runtime-ассеты.
 
 При добавлении файла записать path, размер, texture dimensions/format/color space/filtering/mipmaps, scale/pivot, LOD, source URL/tool/version, лицензию и историю правок. Для геометрии записать triangles/material slots и collision role. Production статус выдаётся после технической проверки и просмотра с настоящей камерой. Placeholder нельзя считать готовым лишь потому, что он импортируется.
+
+## Изменения 2026-10-07
+
+`src/art-direction.js` — финальные palette/light/quality tokens; `src/city-art.js` — instanced plinth/cornice/three roof families и optional roof plant. `src/vehicle-visuals.js` — vertex-color merged geometry транспорта, шесть цветов/два верха и полицейская ливрея. Материалы sRGB swatches конвертируются Three.Color в linear, atlas сохраняет GLTF color-space; новых raster текстур, UV-каналов и файлов модели нет.
+
+Игрок: shader remap только тёплых образцов исходного atlas в #FFC34A, стекло/фонари остаются прежними; topology/UV/pivots/deformation неизменны. Трафик: по одному material slot в объединённом кузове, у полиции дополнительные два общих emissive material slots; габариты ≤2.02×3.88 м. Никаких новых collision proxies. Размер дополнительных runtime ассетов: 0 bytes; текстурная GPU-память сверх baseline: 0 MiB.
+
+Проверены shape/determinism/fade/ownership и WebGL compile, width12/15/30, directional stop lines, повреждения/однократный взрыв/reset/retry и quality. См. verification/features и verification/budget. Телефонная плавность остаётся непроверенной, production acceptance отмечена в задаче как review.
