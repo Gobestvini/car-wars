@@ -1,0 +1,27 @@
+name: Check reusable game template
+on:
+  push:
+    paths: ['game-template/**', '.github/workflows/game-template.yml']
+  pull_request:
+    paths: ['game-template/**', '.github/workflows/game-template.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: game-template
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: game-template/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: game-template/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check:full

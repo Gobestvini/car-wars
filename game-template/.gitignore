@@ -1,0 +1,9 @@
+node_modules/
+dist/
+artifacts/
+*.log
+.env
+.env.*
+!.env.example
+.telegram-*
+!.telegram-bot.env.example

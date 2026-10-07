@@ -1,0 +1,21 @@
+{
+  "name": "ai-game-template",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.12.0" },
+  "packageManager": "pnpm@11.19.0",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test tests/*.test.js",
+    "check": "node tools/telegram/verify.js",
+    "check:full": "node tools/telegram/verify.js --full",
+    "context": "node tools/telegram/knowledge.js",
+    "test:browser": "node tools/browser-check.cjs",
+    "telegram": "node tools/telegram/bot.js",
+    "telegram:check": "node tools/telegram/bot.js --check"
+  },
+  "devDependencies": { "vite": "7.1.9" }
+}
