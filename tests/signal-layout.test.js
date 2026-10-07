@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createCityPlan } from '../src/city-generator.js';
 import { getSignalPosition, getStopLineLayout } from '../src/signal-layout.js';
-import { signalBeamLayout, signalGlowLayout } from '../src/signal-glow.js';
+import { signalBeamLayout } from '../src/signal-glow.js';
 import { createCityScene } from '../src/city-scene.js';
 import { createTrafficSignals } from '../src/traffic-signals.js';
 import * as THREE from 'three';
@@ -44,34 +44,28 @@ test('signal assemblies sit fully inside approach sidewalks for every cardinal d
   }
 });
 
-test('glow pools extend into the incoming half-road in all four world directions', () => {
-  for (const width of [12, 15, 30]) for (const [fx, fz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
-    const approach = { forwardX: fx, forwardZ: fz, rightX: -fz, rightZ: fx };
-    const line = getStopLineLayout({ x: 0, z: 0 }, approach, width);
-    const glow = signalGlowLayout({ ...approach, stopX: line.x, stopZ: line.z }, width);
-    assert.ok((glow.x - line.x) * fx + (glow.z - line.z) * fz < 0);
-    const lateral = glow.x * -fz + glow.z * fx;
-    assert.ok(lateral - glow.width / 2 > 0);
-    assert.ok(lateral + glow.width / 2 < width / 2);
-  }
-});
-
 test('fog beams originate at the active bulb and point down the incoming approach', () => {
   for (const [fx, fz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
-    const approach = { forwardX: fx, forwardZ: fz, signalX: 10, signalZ: -20 };
+    const approach = { forwardX: fx, forwardZ: fz, rightX: -fz, rightZ: fx, signalX: 10, signalZ: -20 };
     for (const color of ['red', 'yellow', 'green']) {
       const beam = signalBeamLayout(approach, color);
       assert.equal(beam.visible, true);
+      assert.equal(beam.length, 12);
+      assert.equal(beam.width, 10.8);
+      assert.equal(beam.puffCount, 7);
       assert.equal(beam.source.y, { red: 3.5, yellow: 3.05, green: 2.6 }[color]);
-      assert.ok(beam.direction.x * -fx + beam.direction.z * -fz > 0.99);
+      assert.ok(beam.direction.x * -fx + beam.direction.z * -fz > 0.9);
+      assert.ok(beam.direction.x * -approach.rightX + beam.direction.z * -approach.rightZ > 0.3,
+        'beam angles inward from the sidewalk toward the road');
       assert.ok(beam.direction.y < 0, 'beam slopes down into the road');
-      assert.ok((beam.x - beam.source.x) * -fx + (beam.z - beam.source.z) * -fz > 0);
+      assert.ok(beam.source.y + beam.direction.y * beam.length - beam.verticalRadius > 0,
+        'the haze volume stays above the asphalt instead of painting it');
     }
     assert.equal(signalBeamLayout(approach, 'priority').visible, false);
   }
 });
 
-test('four signal assemblies persist and glow colors follow the controller on the real city', () => {
+test('four signal assemblies persist and fog beam colors follow the controller on the real city', () => {
   const plan = createCityPlan(), scene = new THREE.Scene();
   const city = createCityScene(scene, { addStaticBox: () => ({}), removeStaticBox() {} }, plan);
   const controller = createTrafficSignals(plan.roadNetwork);
@@ -86,9 +80,9 @@ test('four signal assemblies persist and glow colors follow the controller on th
     city.signalApproaches.forEach((approach, i) => {
       assert.equal(approach.signalVisible, true);
       const phase = controller.phase(approach.nodeId, approach.fromId, time).color;
-      city.signalGlow.getColorAt(i, color);
+      city.signalBeam.getColorAt(i * 7, color);
       assert.equal(color.getHexString(), new THREE.Color(expected[phase]).getHexString());
-      const beamMatrix = new THREE.Matrix4(); city.signalBeam.getMatrixAt(i, beamMatrix);
+      const beamMatrix = new THREE.Matrix4(); city.signalBeam.getMatrixAt(i * 7, beamMatrix);
       const beamScale = new THREE.Vector3(); beamMatrix.decompose(new THREE.Vector3(), new THREE.Quaternion(), beamScale);
       assert.equal(beamScale.y > 0, ['red', 'yellow', 'green'].includes(phase));
     });

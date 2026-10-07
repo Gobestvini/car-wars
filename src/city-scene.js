@@ -3,7 +3,7 @@ import { BuildingOcclusion } from './building-occlusion.js';
 import { createRoadMarkings } from './road-markings.js';
 import { createRoadSurfacePositions, createRoadSurfaceRectangles, createSidewalkRectangles } from './road-surface.js';
 import { getSignalPosition, getStopLineLayout } from './signal-layout.js';
-import { createSignalBeam, createSignalGlow } from './signal-glow.js';
+import { createSignalBeam } from './signal-glow.js';
 
 export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const group = new THREE.Group();
@@ -111,9 +111,8 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
     stopLines.setMatrixAt(index, visualMatrix);
     visualScale.set(1, 1, 1);
   });
-  const signalGlow = createSignalGlow(approaches, plan.roadWidth);
   const signalBeam = createSignalBeam(approaches);
-  group.add(poles, housings, bulbs, stopLines, signalGlow, signalBeam);
+  group.add(poles, housings, bulbs, stopLines, signalBeam);
 
   const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
   const buildingMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.88 });
@@ -171,7 +170,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   }
 
   return {
-    group, entries, buildings, marks, dashes, stopLines, signalGlow, signalBeam, occlusion, staticBodies, signalApproaches: approaches,
+    group, entries, buildings, marks, dashes, stopLines, signalBeam, occlusion, staticBodies, signalApproaches: approaches,
     updateSignals(controller, time) {
       let changed = false;
       for (let i = 0; i < approaches.length; i++) {
@@ -180,7 +179,6 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
         if (approach.color === color) continue;
         approach.color = color;
         changed = true;
-        signalGlow.setColorAt(i, lightColors[color] || lightColors.off);
         signalBeam.userData.updateBeam(i, approach, color);
         const active = color === 'green' ? 2 : color === 'yellow' ? 1 : color === 'red' ? 0 : -1;
         for (let lamp = 0; lamp < 3; lamp++) bulbs.setColorAt(i * 3 + lamp,
@@ -188,7 +186,6 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
       }
       if (!changed) return;
       bulbs.instanceColor.needsUpdate = true;
-      signalGlow.instanceColor.needsUpdate = true;
       signalBeam.instanceColor.needsUpdate = true;
       signalBeam.instanceMatrix.needsUpdate = true;
     },
