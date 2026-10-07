@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createCityPlan } from '../src/city-generator.js';
 import { getSignalPosition, getStopLineLayout } from '../src/signal-layout.js';
-import { signalBeamLayout } from '../src/signal-glow.js';
+import { createSignalBeam, signalBeamLayout } from '../src/signal-glow.js';
 import { createCityScene } from '../src/city-scene.js';
 import { createTrafficSignals } from '../src/traffic-signals.js';
 import * as THREE from 'three';
@@ -105,4 +105,44 @@ test('stop lines span only the incoming half-road and share an approach plane', 
     assert.ok(lateral - line.length / 2 >= 0);
     assert.ok(lateral + line.length / 2 <= roadWidth / 2);
   }
+});
+
+test('fog renders only active volumes in the camera frustum, and restores their latest phase on return', () => {
+  const approaches = [0, 300].map(signalX => ({
+    forwardX: 0, forwardZ: 1, rightX: -1, rightZ: 0, signalX, signalZ: 0,
+  }));
+  const beam = createSignalBeam(approaches);
+  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+  camera.position.set(0, 20, 30); camera.lookAt(0, 0, 0);
+  beam.userData.updateBeam(0, approaches[0], 'red');
+  beam.userData.updateBeam(1, approaches[1], 'green');
+  beam.userData.prepare(camera, 'low');
+  assert.deepEqual(beam.userData.visibleApproachIndices, [0]);
+  assert.equal(beam.count, 1);
+  const version = beam.instanceMatrix.version;
+  beam.userData.prepare(camera, 'low');
+  assert.equal(beam.instanceMatrix.version, version, 'stationary visibility does not upload buffers again');
+  beam.userData.updateBeam(1, approaches[1], 'yellow');
+  camera.position.x = 300; camera.lookAt(300, 0, 0);
+  beam.userData.prepare(camera, 'high');
+  assert.deepEqual(beam.userData.visibleApproachIndices, [1]);
+  const color = new THREE.Color(); beam.getColorAt(0, color);
+  assert.equal(color.getHexString(), new THREE.Color('#ffc34a').getHexString());
+  beam.userData.updateBeam(1, approaches[1], 'priority');
+  beam.userData.prepare(camera);
+  assert.equal(beam.count, 0);
+  assert.equal(beam.visible, false, 'no draw call when all volumes are outside the frame or inactive');
+  beam.dispose(); beam.geometry.dispose(); beam.material.dispose();
+});
+
+test('a visible fog volume is retained when its source lamp is outside the frame', () => {
+  const approach = { forwardX: 1, forwardZ: 0, rightX: 0, rightZ: 1, signalX: 7, signalZ: 0 };
+  const beam = createSignalBeam([approach]);
+  const camera = new THREE.OrthographicCamera(-3, 3, 3, -3, 0.1, 50);
+  camera.position.set(0, 20, 0); camera.up.set(0, 0, -1); camera.lookAt(0, 0, 0);
+  beam.userData.updateBeam(0, approach, 'green'); beam.userData.prepare(camera);
+  const source = signalBeamLayout(approach, 'green').source;
+  assert.ok(new THREE.Vector3(source.x, source.y, source.z).project(camera).x > 1);
+  assert.equal(beam.count, 1, 'cull the whole volume rather than just its source point');
+  beam.dispose(); beam.geometry.dispose(); beam.material.dispose();
 });

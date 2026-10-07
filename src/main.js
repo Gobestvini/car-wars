@@ -534,7 +534,7 @@ function frame(now) {
   });
   if (cameraMode === 'free') moveFreeCamera(dt);
   updateCamera(dt);
-  cityState.updateSignals(trafficSignals, traffic.simulationTime());
+  cityState.updateSignals(trafficSignals, traffic.simulationTime(), camera, quality);
   traffic.render(alpha, camera);
   buildingOcclusion.update(camera, car, dt);
   damageEffects.update({ damage: sim.damage, car, camera, dt, quality });
@@ -545,12 +545,15 @@ function frame(now) {
   metrics.frameCpuMs = performance.now() - cpuStart;
   metrics.calls = renderer.info.render.calls;
   metrics.triangles = renderer.info.render.triangles;
+  metrics.signalBeams = cityState.signalBeam.count;
+  metrics.signalBeamTotal = cityState.signalApproaches.length;
+  metrics.signalBeamSamples = cityState.signalBeam.material.uniforms.sampleCount.value;
   metricTime += elapsed; metricFrames++;
   if (metricTime >= .5) {
     metrics.fps = metricFrames / metricTime;
     metricFrames = 0; metricTime = 0;
     Object.assign(metrics, traffic.performance());
-    if (debug) $('performance').textContent = `${metrics.fps.toFixed(0)} FPS · CPU ${metrics.frameCpuMs.toFixed(1)} ms · рендер ${metrics.renderMs.toFixed(1)} ms · физика ${metrics.physicsMs.toFixed(1)} ms · AI ${metrics.aiMs.toFixed(2)} ms\n${metrics.calls} draw calls · ${metrics.triangles} triangles · bodies ${metrics.totalBodies} · traffic ${metrics.trafficBodies} · ${quality} · DPR ${renderer.getPixelRatio()}`;
+    if (debug) $('performance').textContent = `${metrics.fps.toFixed(0)} FPS · CPU ${metrics.frameCpuMs.toFixed(1)} ms · рендер ${metrics.renderMs.toFixed(1)} ms · физика ${metrics.physicsMs.toFixed(1)} ms · AI ${metrics.aiMs.toFixed(2)} ms\n${metrics.calls} draw calls · ${metrics.triangles} triangles · bodies ${metrics.totalBodies} · traffic ${metrics.trafficBodies} · ${quality} · DPR ${renderer.getPixelRatio()} · beams ${metrics.signalBeams}/${metrics.signalBeamTotal} · ${metrics.signalBeamSamples} samples`;
   }
 }
 requestAnimationFrame(frame);

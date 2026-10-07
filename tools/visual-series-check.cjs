@@ -48,7 +48,7 @@ async function fixture(page) {
       if (sun.shadow.mapSize.x !== size) { sun.shadow.map?.dispose(); sun.shadow.map = null; sun.shadow.mapSize.set(size, size); }
       updateShadowCoverage(sun, camera, { resolution: size, casterHeight: 24 });
       for (let i = 0; i < frames; i++) {
-        city.updateSignals(signals, f.time);
+        city.updateSignals(signals, f.time, camera, quality);
         city.occlusion.update(camera, car, 1 / 60);
         effects.update({ damage, car, camera, dt: 1 / 60, quality });
       }
@@ -95,12 +95,14 @@ function brightness(buffer, sample) {
                   if (!a.signalVisible) throw new Error('Hidden assembly');
                   const color = f.signals.phase(a.nodeId, a.fromId, time).color;
                   if (color !== a.color) throw new Error('Mismatched phase');
-                  const actual = new f.THREE.Color(); f.city.signalBeam.getColorAt(i, actual);
-                  const matrix = new f.THREE.Matrix4(); f.city.signalBeam.getMatrixAt(i, matrix);
-                  const scale = new f.THREE.Vector3(); matrix.decompose(new f.THREE.Vector3(), new f.THREE.Quaternion(), scale);
+                  const slot = f.city.signalBeam.userData.visibleApproachIndices.indexOf(i);
                   if (color === 'priority') {
-                    if (scale.y !== 0) throw new Error('Priority approach has a visible beam');
+                    if (slot !== -1) throw new Error('Priority approach has a visible beam');
                   } else {
+                    if (slot === -1) throw new Error('Missing active fog beam');
+                    const actual = new f.THREE.Color(); f.city.signalBeam.getColorAt(slot, actual);
+                    const matrix = new f.THREE.Matrix4(); f.city.signalBeam.getMatrixAt(slot, matrix);
+                    const scale = new f.THREE.Vector3(); matrix.decompose(new f.THREE.Vector3(), new f.THREE.Quaternion(), scale);
                     const expected = new f.THREE.Color({ red: '#f34f45', green: '#51d28b', yellow: '#ffc34a' }[color]);
                     if (actual.getHex() !== expected.getHex() || scale.y === 0) throw new Error('Mismatched fog beam');
                   }
@@ -110,7 +112,8 @@ function brightness(buffer, sample) {
               snapshot = f.draw(0, 1, quality);
               const counts = new Map(); for (const a of f.city.signalApproaches) counts.set(a.nodeId, (counts.get(a.nodeId) || 0) + 1);
               if ([...counts.values()].some(n => n !== 4)) throw new Error('Expected four approaches');
-              if (f.city.signalBeam.count !== f.city.signalApproaches.length) throw new Error('Fog instances are not shared');
+              if (f.city.signalBeam.count !== f.city.signalBeam.userData.visibleApproachIndices.length ||
+                  f.city.signalBeam.count > f.city.signalApproaches.length) throw new Error('Invalid visible fog instance count');
               return { colors: [...observed], count: f.city.signalApproaches.length, snapshot };
             }, { fx, fz, quality, width });
             assert.deepEqual([...signals.colors].sort(), ['green', 'red', 'yellow']);

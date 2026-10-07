@@ -171,7 +171,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
 
   return {
     group, entries, buildings, marks, dashes, stopLines, signalBeam, occlusion, staticBodies, signalApproaches: approaches,
-    updateSignals(controller, time) {
+    updateSignals(controller, time, camera = null, quality = 'high') {
       let changed = false;
       for (let i = 0; i < approaches.length; i++) {
         const approach = approaches[i];
@@ -184,10 +184,8 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
         for (let lamp = 0; lamp < 3; lamp++) bulbs.setColorAt(i * 3 + lamp,
           lightColors[lamp === active ? ['red', 'yellow', 'green'][lamp] : 'off']);
       }
-      if (!changed) return;
-      bulbs.instanceColor.needsUpdate = true;
-      signalBeam.instanceColor.needsUpdate = true;
-      signalBeam.instanceMatrix.needsUpdate = true;
+      if (changed) bulbs.instanceColor.needsUpdate = true;
+      signalBeam.userData.prepare(camera, quality);
     },
     dispose() {
       occlusion.dispose();
