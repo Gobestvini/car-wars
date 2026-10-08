@@ -1,8 +1,9 @@
 import * as THREE from 'three';
 import { BuildingOcclusion } from './building-occlusion.js';
 import { createRoadMarkings } from './road-markings.js';
-import { createRoadSurfacePositions, createRoadSurfaceRectangles, createSidewalkRectangles,
-  createSidewalkSupportBoxes, ROAD_SURFACE_HEIGHTS } from './road-surface.js';
+import { createRoadSurfacePositions, createRoadSurfaceRectangles,
+  createRoundedSidewalkLayout, createSidewalkSupportBoxes, createSidewalkSupportPrisms,
+  ROAD_SURFACE_HEIGHTS } from './road-surface.js';
 import { createSidewalkVisuals } from './sidewalk-visuals.js';
 import { getSignalPosition, getStopLineLayout } from './signal-layout.js';
 import { createSignalBeam } from './signal-glow.js';
@@ -45,9 +46,9 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   roadSurface.name = 'Road surface';
   roadSurface.receiveShadow = true;
   group.add(roadSurface);
-  const sidewalkRects = createSidewalkRectangles(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth,
+  const sidewalkLayout = createRoundedSidewalkLayout(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth,
     { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan });
-  group.add(...createSidewalkVisuals(THREE, sidewalkRects, roadRects, sidewalkMaterial, curbMaterial));
+  group.add(...createSidewalkVisuals(THREE, sidewalkLayout, roadRects, sidewalkMaterial, curbMaterial, ART.asphalt));
   const marks = createRoadMarkings(plan.roads, plan.bounds, plan.roadWidth);
   const dashGeometry = new THREE.BoxGeometry(0.16, 0.025, 2.2);
   const dashMaterial = new THREE.MeshStandardMaterial({ color: ART.marking, roughness: 1 });
@@ -148,8 +149,11 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
       halfX: building.width / 2, halfY: building.height / 2, halfZ: building.depth / 2 }));
   }
 
-  for (const support of createSidewalkSupportBoxes(sidewalkRects)) {
+  for (const support of createSidewalkSupportBoxes(sidewalkLayout.rectangles)) {
     staticBodies.push(simulation.addStaticBox(support));
+  }
+  for (const support of createSidewalkSupportPrisms(sidewalkLayout.corners)) {
+    if (typeof simulation.addStaticConvex === 'function') staticBodies.push(simulation.addStaticConvex(support));
   }
   buildings.castShadow = true;
   buildings.receiveShadow = true;

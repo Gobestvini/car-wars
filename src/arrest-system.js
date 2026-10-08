@@ -41,7 +41,8 @@ export function createArrestSystem(config = {}) {
         return { ...snapshot(), completed: false };
       }
 
-      const candidates = police.filter(unit => unit && unit.id && unit.role === 'police'
+      const candidates = police.filter(unit => unit && unit.id && unit.role === 'police' && unit.operational !== false
+        && (!finite(unit.damage) || unit.damage < 1)
         && unit.targetId === 'player' && !unit.logical && unit.clearPath !== false
         && finite(unit.x) && finite(unit.z) && finite(unit.speed) && unit.speed <= settings.policeSpeed);
       const within = radius => candidates.filter(unit => distance(player, unit) <= radius);

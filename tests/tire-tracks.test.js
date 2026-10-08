@@ -158,6 +158,23 @@ test('simulation time advances with stopped wheels and prepareRender publishes i
   assert.equal(t.material.uniforms.time.value, 12);
 });
 
+test('multiple vehicle sources share one clock and retain independent wheel strips', () => {
+  const t = tracks(1024);
+  for (let step = 0; step < 24; step++) {
+    const source = (id, offset) => ({ id, wheels: Array.from({ length: 4 }, (_, index) =>
+      wheel(offset + step * 0.2, index * 0.5, { lateral: 5, longitudinal: 12 })) });
+    t.updateVehicles([source('police-a', 0), source('police-b', 100)], true, STEP);
+  }
+  assert.ok(Math.abs(t.time - 24 * STEP) < 1e-12);
+  assert.equal(t.sourceStates.size, 3);
+  assert.ok(t.count > 0);
+  assert.notEqual(t.sourceStates.get('police-a')[0].strip, t.sourceStates.get('police-b')[0].strip);
+  assert.ok(t.removeSource('police-a'));
+  assert.equal(t.sourceStates.has('police-a'), false);
+  t.updateVehicles([{ id: 'police-b', wheels: Array.from({ length: 4 }, (_, index) => wheel(110, index * 0.5)) }], true, STEP);
+  assert.equal(t.sourceStates.get('police-a'), undefined);
+});
+
 test('prepareRender publishes changed geometry attributes and the bounded draw range', () => {
   const scene = new THREE.Scene();
   const t = new TireTracks(scene, 32);

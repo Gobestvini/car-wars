@@ -114,7 +114,9 @@ export class TireTracks {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.frustumCulled = false;
     scene.add(this.mesh);
-    this.previous = Array.from({ length: 4 }, () => ({ x: 0, z: 0, active: false, slipping: false, direction: 0, strip: null, pendingSlipTime: 0, releaseTime: 0 }));
+    this.sourceStates = new Map();
+    this.previous = this.createWheelStates();
+    this.sourceStates.set('player', this.previous);
     this.time = 0;
     this.tick = 0;
     this.pendingRanges = { position: [], birth: [], fade: [] };
@@ -139,6 +141,10 @@ export class TireTracks {
     for (const point of this.previous) {
       point.active = false; point.slipping = false; point.direction = 0; point.strip = null; point.pendingSlipTime = 0; point.releaseTime = 0;
     }
+    for (const state of this.sourceStates.values()) for (const point of state) {
+      point.active = false; point.slipping = false; point.direction = 0; point.strip = null; point.pendingSlipTime = 0; point.releaseTime = 0;
+    }
+    this.sourceStates.clear(); this.sourceStates.set('player', this.previous);
     this.pendingRanges = { position: [], birth: [], fade: [] };
     for (const name of ['position', 'birth', 'fade']) this.geometry.attributes[name].clearUpdateRanges();
   }
@@ -211,13 +217,41 @@ export class TireTracks {
     return true;
   }
 
+  createWheelStates() {
+    return Array.from({ length: 4 }, () => ({ x: 0, z: 0, active: false, slipping: false, direction: 0,
+      strip: null, pendingSlipTime: 0, releaseTime: 0 }));
+  }
+
   update(wheels, enabled, dt) {
+    this.updateVehicles([{ id: 'player', wheels }], enabled, dt);
+  }
+
+  removeSource(id) {
+    const state = this.sourceStates.get(id);
+    if (!state || id === 'player') return false;
+    for (const point of state) {
+      if (point.strip) this.endStrip(point.strip);
+      point.strip = null; point.active = false; point.slipping = false;
+    }
+    this.sourceStates.delete(id);
+    return true;
+  }
+
+  updateVehicles(sources, enabled, dt) {
     this.time += dt;
     this.flushRanges();
     if (++this.tick % 4) return;
     const sampleDt = dt * 4;
-    wheels.slice(0, this.previous.length).forEach((wheel, i) => {
-      const prev = this.previous[i];
+    const present = new Set(['player']);
+    for (const source of sources) {
+      if (!source || source.id == null || !Array.isArray(source.wheels)) continue;
+      const id = String(source.id);
+      present.add(id);
+      let states = this.sourceStates.get(id);
+      if (!states) { states = this.createWheelStates(); this.sourceStates.set(id, states); }
+      if (id === 'player') this.previous = states;
+      source.wheels.slice(0, states.length).forEach((wheel, i) => {
+      const prev = states[i];
       let strip = prev.strip;
       const hasContact = enabled && this.intensity > 0 && wheel.grounded && !wheel.detached
         && Math.abs(wheel.longitudinal) >= SKID_CONTINUE_SPEED * this.threshold;
@@ -260,7 +294,9 @@ export class TireTracks {
       }
       prev.direction = direction;
       if (strip) prev.strip = strip;
-    });
+      });
+    }
+    for (const id of this.sourceStates.keys()) if (id !== 'player' && !present.has(id)) this.removeSource(id);
   }
 
   endStrip(strip) {
@@ -307,5 +343,9 @@ export class TireTracks {
     this.material.uniforms.time.value = this.time;
     this.geometry.setDrawRange(0, this.count * 6);
     this.flushRanges();
+  }
+
+  dispose() {
+    this.reset(); this.mesh.removeFromParent(); this.geometry.dispose(); this.material.dispose();
   }
 }

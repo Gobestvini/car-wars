@@ -4,6 +4,7 @@ import { ART } from './art-direction.js';
 
 function vehicleGeometry(color, estate, police) {
   const parts = [];
+  let policeBody = null;
   const add = (geometry, color, x,y,z) => {
     geometry.translate(x,y,z);
     const count = geometry.attributes.position.count, c = new THREE.Color(color);
@@ -18,7 +19,9 @@ function vehicleGeometry(color, estate, police) {
     pos.setX(i,pos.getX(i)*.84); pos.setZ(i,pos.getZ(i)*.8);
   }
   cabin.computeVertexNormals();
-  add(new THREE.BoxGeometry(1.8,.58,3.8),color,0,.68,0);
+  const lowerBody = new THREE.BoxGeometry(1.8,.58,3.8,5,2,10);
+  add(lowerBody,color,0,.68,0);
+  if (police) policeBody = parts.at(-1);
   add(cabin,ART.ink,0,1.2,estate ? -.28 : -.12);
   add(new THREE.BoxGeometry(1.2,.025,estate ? 1.5 : 1.13),color,0,1.52,estate ? -.28 : -.12);
   for (const x of [-.89,.89]) for (const z of [-1.18,1.18]) {
@@ -34,7 +37,14 @@ function vehicleGeometry(color, estate, police) {
     add(new THREE.BoxGeometry(1.815,.24,2.3),ART.ink,0,.69,-.12);
     add(new THREE.BoxGeometry(.92,.12,.28),ART.ink,0,1.61,-.08);
   }
-  const merged = mergeGeometries(parts,false); for (const p of parts) p.dispose();
+  if (police) {
+    const staticParts = parts.filter(part => part !== policeBody);
+    const staticGeometry = mergeGeometries(staticParts,false);
+    for (const p of staticParts) p.dispose();
+    return { body: policeBody, static: staticGeometry };
+  }
+  const merged = mergeGeometries(parts,false);
+  for (const p of parts) p.dispose();
   return merged;
 }
 
@@ -45,17 +55,30 @@ export function createTrafficAssets() {
   const lightGeometry = new THREE.BoxGeometry(.38,.13,.3);
   const lights = ['#ef344a','#438eff'].map(color=>new THREE.MeshStandardMaterial({ color,emissive:color,emissiveIntensity:.65,roughness:.5 }));
   return { civilian,police,material,lightGeometry,lights,
-    dispose() { civilian.flat().forEach(g=>g.dispose()); police.dispose();lightGeometry.dispose();material.dispose();lights.forEach(m=>m.dispose()); },
+    dispose() { civilian.flat().forEach(g=>g.dispose()); police.body.dispose(); police.static.dispose();lightGeometry.dispose();material.dispose();lights.forEach(m=>m.dispose()); },
     animate(time) { lights.forEach((m,i)=>{m.emissiveIntensity=.35+.55*(.5+.5*Math.sin(time*6+i*Math.PI));}); },
   };
 }
 
 export function makeTrafficCar(THREE, assets, index, role='civilian') {
   const group = new THREE.Group();
-  const geometry = role==='police' ? assets.police : assets.civilian[index % assets.civilian.length][index % 2];
-  const mesh = new THREE.Mesh(geometry,assets.material); mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);
-  if (role==='police') for (let i=0;i<2;i++) {
-    const lamp = new THREE.Mesh(assets.lightGeometry,assets.lights[i]);lamp.position.set(i ? .24 : -.24,1.68,-.08);group.add(lamp);
+  if (role === 'police') {
+    const body = new THREE.Mesh(assets.police.body.clone(), assets.material);
+    body.castShadow = true; body.receiveShadow = true; body.name = 'Police damageable body';
+    const fixed = new THREE.Mesh(assets.police.static, assets.material);
+    fixed.castShadow = true; fixed.receiveShadow = true; fixed.name = 'Police fixed parts';
+    group.add(body, fixed);
+    group.userData.damageableBody = body;
+  } else {
+    const geometry = assets.civilian[index % assets.civilian.length][index % 2];
+    const mesh = new THREE.Mesh(geometry,assets.material); mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);
+  }
+  if (role==='police') {
+    const lamps = new THREE.Group(); lamps.name = 'Police roof lights';
+    for (let i=0;i<2;i++) {
+      const lamp = new THREE.Mesh(assets.lightGeometry,assets.lights[i]);lamp.position.set(i ? .24 : -.24,1.68,-.08);lamps.add(lamp);
+    }
+    group.add(lamps);
   }
   return group;
 }

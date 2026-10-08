@@ -1,4 +1,4 @@
-import { createRoadSurfaceRectangles, createSidewalkRectangles } from './road-surface.js';
+import { createRoadSurfaceRectangles, createRoundedSidewalkLayout } from './road-surface.js';
 
 export const TREE_PLACEMENT = Object.freeze({
   maxTrees: 320,
@@ -26,6 +26,14 @@ function rootInside(rectangles, x, z, radius) {
     && z - radius >= rect.minZ - 1e-7 && z + radius <= rect.maxZ + 1e-7);
 }
 
+function rootInsideRounded(layout, x, z, radius) {
+  if (rootInside(layout.rectangles, x, z, radius)) return true;
+  return layout.corners.some(corner => {
+    const dx = (x - corner.x) * corner.sx, dz = (z - corner.z) * corner.sz;
+    return dx >= radius && dz >= radius && Math.hypot(dx, dz) <= corner.radius - radius;
+  });
+}
+
 function obstacleBounds([x, z, width, depth, , yaw = 0]) {
   const c = Math.abs(Math.cos(yaw)), s = Math.abs(Math.sin(yaw));
   const halfX = c * width / 2 + s * depth / 2;
@@ -38,7 +46,7 @@ export function createTreePlacements(plan, { damageObstacles = [], signals = [] 
   const { maxTrees, minSpacing, signalClearance, roadClearance, canopyRadius } = TREE_PLACEMENT;
   const plazaSpan = plan.blockPitch;
   const plaza = { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan };
-  const sidewalks = createSidewalkRectangles(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plaza);
+  const sidewalks = createRoundedSidewalkLayout(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plaza);
   const roads = createRoadSurfaceRectangles(plan.roads, plan.bounds, plan.roadWidth, plaza);
   const buildings = plan.buildings.map(({ x, z, width, depth }) => ({
     minX: x - width / 2, maxX: x + width / 2, minZ: z - depth / 2, maxZ: z + depth / 2,
@@ -65,7 +73,7 @@ export function createTreePlacements(plan, { damageObstacles = [], signals = [] 
       const x = from.x + (to.x - from.x) * along + (horizontal ? 0 : side * (plan.roadWidth / 2 + inset));
       const z = from.z + (to.z - from.z) * along + (horizontal ? side * (plan.roadWidth / 2 + inset) : 0);
 
-      if (Math.hypot(x, z) < plazaSpan / 2 + radius || !rootInside(sidewalks, x, z, stemRadius)) continue;
+      if (Math.hypot(x, z) < plazaSpan / 2 + radius || !rootInsideRounded(sidewalks, x, z, stemRadius)) continue;
       if (roads.some(rect => circleTouchesRect(x, z, radius + roadClearance, rect))) continue;
       if (buildings.some(rect => circleTouchesRect(x, z, radius + 0.2, rect))) continue;
       if (obstacles.some(rect => circleTouchesRect(x, z, radius + 0.2, rect))) continue;

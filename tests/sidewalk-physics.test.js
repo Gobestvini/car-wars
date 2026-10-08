@@ -7,6 +7,7 @@ import {
   createSidewalkWallPositions, createSurfaceHeightSampler, ROAD_SURFACE_HEIGHTS,
 } from '../src/road-surface.js';
 import { createSidewalkVisuals } from '../src/sidewalk-visuals.js';
+import { createRoundedSidewalkLayout } from '../src/road-surface.js';
 import { CITY_CONFIG, createCityPlan } from '../src/city-generator.js';
 import { createCityScene } from '../src/city-scene.js';
 import { CarSimulation, STEP } from '../src/vehicle.js';
@@ -97,11 +98,10 @@ test('the live city scene adds raycastable raised slabs and removes every suppor
   const scene = new THREE.Scene();
   const simulation = new CarSimulation({ spawn: { x: 0, y: 0.96, z: 83.5, yaw: Math.PI / 2 } });
   const plan = createCityPlan();
-  const sidewalkRects = createSidewalkRectangles(plan.roads, plan.bounds, plan.roadWidth,
-    plan.sidewalkWidth, plazaFor(plan.roads));
+  const rounded = createRoundedSidewalkLayout(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plazaFor(plan.roads));
   const city = createCityScene(scene, simulation, plan);
   const supports = city.staticBodies.filter(body => body.wheelSupport);
-  assert.equal(supports.length, sidewalkRects.length);
+  assert.equal(supports.length, rounded.rectangles.length + rounded.corners.length);
   assert.ok(city.group.getObjectByName('Sidewalk surface'));
   assert.ok(city.group.getObjectByName('Sidewalk faces'));
   assert.ok(city.group.getObjectByName('Curb top edges'));

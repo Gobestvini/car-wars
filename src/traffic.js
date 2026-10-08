@@ -150,7 +150,9 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     const { edge, t, x, z, heading } = slot;
     const id = `${role === 'civilian' ? 'npc' : role}-${String(serial++).padStart(2, '0')}`;
     const simulation = new CarSimulation({ world: physics.world, materials: physics.materials,
-      spawn: { x, y: Number.isFinite(slot.y) ? slot.y + 0.96 : 0.96, z, yaw: heading }, damage: false });
+      spawn: { x, y: Number.isFinite(slot.y) ? slot.y + 0.96 : 0.96, z, yaw: heading },
+      damage: role === 'police', damageMultiplier: role === 'police' ? 2 : 1,
+      allowWheelDetachment: role !== 'police' });
     if (role !== 'civilian') Object.assign(simulation.tuning, physics.tuning);
     visualAssets ||= createTrafficAssets(THREE);
     const mesh = makeTrafficCar(THREE, visualAssets, index, role);
@@ -192,8 +194,11 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     releaseReservation(state.ai);
     state.simulation.body.removeEventListener('collide', state.collideListener);
     roleRegistry.get(state.role)?.dispose?.(state.ai.roleState);
+    state.simulation.disposeDamageListener();
     physics.world.removeBody(state.simulation.body);
+    for (const wheel of state.simulation.wheels) if (wheel.detachedBody) physics.world.removeBody(wheel.detachedBody);
     simulations.splice(simulations.indexOf(state.simulation), 1);
+    if (state.role === 'police') state.mesh.userData.damageableBody?.geometry.dispose();
     cars.splice(cars.indexOf(state.mesh), 1);
     scene.remove(state.mesh);
   };
@@ -724,7 +729,12 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       if (state.role === 'civilian') continue;
       const role = roleRegistry.get(state.role);
       if (!role?.update) continue;
-      const result = role.update(state.ai.roleState, { car: state.occupancyItem, target: playerOccupancy,
+      if (state.role === 'police' && state.simulation.damage >= 1) {
+        state.ai.control = { steer: 0, throttle: 0, brake: 1 };
+        state.ai.state = 'destroyed'; state.ai.waitReason = 'vehicle-destroyed';
+        continue;
+      }
+      const result = role.update(state.ai.roleState, { car: { ...state.occupancyItem, damage: state.simulation.damage }, target: playerOccupancy,
         graph, obstacles: spawnObstacles, occupants: [...states.map(actor => actor.occupancyItem), playerOccupancy],
         time: aiTime, dt, world: physics.world });
       if (result?.control) state.ai.control = result.control;
@@ -919,9 +929,14 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       visible: visibleCount, reservations: reservations.size }; },
     physicalActors() { return states.filter(state => !state.logical).map(state => ({
       id: state.id, role: state.role, body: state.simulation.body, logical: state.logical,
+      mesh: state.mesh, damageableBody: state.mesh.userData.damageableBody || null,
+      damage: state.simulation.damage, operational: state.simulation.damage < 1,
       targetId: state.ai.targetId || null,
       x: state.x, z: state.z, heading: state.heading, vx: state.simulation.body.velocity.x,
       vz: state.simulation.body.velocity.z,
+    })); },
+    physicalTireSources() { return states.filter(state => !state.logical).map(state => ({
+      id: state.id, role: state.role, x: state.x, z: state.z, body: state.simulation.body, wheels: state.simulation.wheels,
     })); },
     performance() { return { ...profile, totalBodies: physics?.world.bodies.length ?? 0,
       trafficBodies: states.filter(state => !state.logical).length,

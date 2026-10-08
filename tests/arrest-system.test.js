@@ -59,3 +59,12 @@ test('hidden, free camera, destroyed vehicle, reset, and invalid time do not com
   assert.equal(update(system, NaN).completed, false);
   assert.equal(system.reset().state, 'idle');
 });
+
+test('destroyed police cannot hold or finish an arrest, while an operational partner can', () => {
+  const system = createArrestSystem();
+  const destroyed = { ...police[0], damage: 1, operational: false };
+  assert.equal(update(system, 1 / 120, { police: [destroyed] }).state, 'idle');
+  const partner = { ...police[0], id: 'police-2', x: -5, damage: 0.2, operational: true };
+  assert.equal(update(system, 1 / 120, { police: [destroyed, partner] }).state, 'holding');
+  assert.deepEqual(system.snapshot().nearbyPoliceIds, ['police-2']);
+});

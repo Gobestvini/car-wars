@@ -8,7 +8,8 @@ const v = (x = 0, y = 0, z = 0) => new C.Vec3(x, y, z);
 
 /** SI units; +Z forward, +X right, +Y up. No scripted body roll or yaw. */
 export class CarSimulation {
-  constructor({ world = null, materials = null, spawn = { x: 0, y: 0.96, z: 0, yaw: -0.45 }, damage = true } = {}) {
+  constructor({ world = null, materials = null, spawn = { x: 0, y: 0.96, z: 0, yaw: -0.45 }, damage = true,
+    damageMultiplier = 1, allowWheelDetachment = true } = {}) {
     this.ownsWorld = world === null;
     this.world = world || new C.World({ gravity: v(0, -9.81, 0) });
     if (this.ownsWorld) {
@@ -28,6 +29,8 @@ export class CarSimulation {
     this.materials = materials;
     this.spawn = { ...spawn };
     this.hasDamage = damage;
+    this.damageMultiplier = Number.isFinite(damageMultiplier) && damageMultiplier >= 0 ? damageMultiplier : 1;
+    this.allowWheelDetachment = allowWheelDetachment;
     this.body = new C.Body({ mass: 1600, material: materials.chassis, linearDamping: 0.005, angularDamping: 0.3, allowSleep: false });
     // Offset collision shapes leave the COM below the bodywork, but high enough to roll.
     this.body.addShape(new C.Box(v(0.87, 0.27, 2.08)), v(0, 0.12, 0));
@@ -40,7 +43,8 @@ export class CarSimulation {
     this.lastImpactSpeed = 0;
     this.impactEvents = [];
     this.impactCooldowns = new Map();
-    if (damage) this.world.addEventListener('beginContact', event => this.recordImpact(event.bodyA, event.bodyB));
+    this.damageListener = damage ? event => this.recordImpact(event.bodyA, event.bodyB) : null;
+    if (this.damageListener) this.world.addEventListener('beginContact', this.damageListener);
     this.tuning = { ...DEFAULT_TUNING };
     this.wheels = [v(-0.77, -0.04, 1.15), v(0.77, -0.04, 1.15), v(-0.77, -0.04, -1.15), v(0.77, -0.04, -1.15)].map((mount, i) => ({
       mount, front: i < 2, radius: 0.45, length: 0.5, compression: 0, detached: false, detachedBody: null,
@@ -80,11 +84,40 @@ export class CarSimulation {
     for (const wheel of this.wheels) wheel.previousPosition.copy(wheel.position);
   }
 
+  repair() {
+    const needsRepair = this.damage > 0 || this.wheels.some(wheel => wheel.detached);
+    if (!needsRepair) return false;
+    for (const wheel of this.wheels) {
+      if (wheel.detachedBody) this.world.removeBody(wheel.detachedBody);
+      wheel.detached = false; wheel.detachedBody = null;
+      wheel.length = 0.5; wheel.compression = 0; wheel.slip = 0; wheel.load = 0;
+      wheel.result.reset();
+    }
+    this.damage = 0;
+    this.lastImpactSpeed = 0;
+    this.impactEvents.length = 0;
+    this.body.aabbNeedsUpdate = true;
+    this.syncWheelPositions();
+    for (const wheel of this.wheels) wheel.previousPosition.copy(wheel.position);
+    return true;
+  }
+
   addStaticBox({ x, y, z, halfX, halfY, halfZ, yaw = 0, wheelSupport = false }) {
     const body = new C.Body({ mass: 0 });
     body.addShape(new C.Box(v(halfX, halfY, halfZ)));
     body.position.set(x, y, z);
     body.quaternion.setFromEuler(0, yaw, 0);
+    body.collisionFilterGroup = wheelSupport ? 1 : 4;
+    body.wheelSupport = wheelSupport;
+    this.world.addBody(body);
+    this.staticBodies.push(body);
+    return body;
+  }
+
+  addStaticConvex({ x, y, z, vertices, faces, wheelSupport = false }) {
+    const body = new C.Body({ mass: 0 });
+    body.addShape(new C.ConvexPolyhedron({ vertices: vertices.map(point => v(...point)), faces }));
+    body.position.set(x, y, z);
     body.collisionFilterGroup = wheelSupport ? 1 : 4;
     body.wheelSupport = wheelSupport;
     this.world.addBody(body);
@@ -126,8 +159,8 @@ export class CarSimulation {
       if (last !== undefined && this.time - last < 0.65) continue;
       this.impactCooldowns.set(key, this.time);
       this.lastImpactSpeed = Math.max(this.lastImpactSpeed, event.speed);
-      this.damage = accumulateDamage(this.damage, event.impact.amount);
-      this.detachWheelAtImpact(event);
+      this.damage = accumulateDamage(this.damage, event.impact.amount * this.damageMultiplier);
+      if (this.allowWheelDetachment) this.detachWheelAtImpact(event);
       if (this.impactEvents.length < 32) this.impactEvents.push({ ...event, otherBodyId: other.id });
     }
     for (const [key, time] of this.impactCooldowns) if (this.time - time > 5) this.impactCooldowns.delete(key);
@@ -135,6 +168,13 @@ export class CarSimulation {
 
   drainImpactEvents() {
     return this.impactEvents.splice(0, this.impactEvents.length);
+  }
+
+  disposeDamageListener() {
+    if (!this.damageListener) return false;
+    this.world.removeEventListener('beginContact', this.damageListener);
+    this.damageListener = null;
+    return true;
   }
 
   detachWheelAtImpact(event) {
