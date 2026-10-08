@@ -1,11 +1,14 @@
 import * as THREE from 'three';
 import { BuildingOcclusion } from './building-occlusion.js';
 import { createRoadMarkings } from './road-markings.js';
-import { createRoadSurfacePositions, createRoadSurfaceRectangles, createSidewalkRectangles } from './road-surface.js';
+import { createRoadSurfacePositions, createRoadSurfaceRectangles, createSidewalkRectangles,
+  createSidewalkSupportBoxes, ROAD_SURFACE_HEIGHTS } from './road-surface.js';
+import { createSidewalkVisuals } from './sidewalk-visuals.js';
 import { getSignalPosition, getStopLineLayout } from './signal-layout.js';
 import { createSignalBeam } from './signal-glow.js';
 import { ART, buildingArt } from './art-direction.js';
 import { createCityArt } from './city-art.js';
+import { createCityTrees } from './city-trees.js';
 
 export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const group = new THREE.Group();
@@ -17,6 +20,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const pavementMaterial = new THREE.MeshStandardMaterial({ color: ART.ground, roughness: 1,
     polygonOffset: true, polygonOffsetFactor: 0, polygonOffsetUnits: 2 });
   const sidewalkMaterial = new THREE.MeshStandardMaterial({ color: ART.sidewalk, roughness: 1 });
+  const curbMaterial = new THREE.MeshStandardMaterial({ color: '#fff2d8', roughness: 1 });
   const roadMaterial = new THREE.MeshStandardMaterial({ color: ART.asphalt, roughness: 0.96, vertexColors: true });
   const plane = (width, depth, material, x = 0, z = 0, y = 0.015) => {
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(width, depth), material);
@@ -43,22 +47,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   group.add(roadSurface);
   const sidewalkRects = createSidewalkRectangles(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth,
     { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan });
-  const sidewalkGeometry = new THREE.BufferGeometry();
-  sidewalkGeometry.setAttribute('position', new THREE.BufferAttribute(createRoadSurfacePositions(sidewalkRects, 0.055), 3));
-  sidewalkGeometry.computeVertexNormals();
-  const sidewalk = new THREE.Mesh(sidewalkGeometry, sidewalkMaterial);
-  sidewalk.name = 'Sidewalk surface'; sidewalk.receiveShadow = true; group.add(sidewalk);
-  // Narrow top edges remain inside the existing sidewalk rectangles.
-  const curbs = sidewalkRects.flatMap(({ minX,maxX,minZ,maxZ }) => {
-    const t = Math.min(.12, (maxX-minX)/2, (maxZ-minZ)/2);
-    return [{minX,maxX,minZ,maxZ:minZ+t}, {minX,maxX,minZ:maxZ-t,maxZ},
-      {minX,maxX:minX+t,minZ:minZ+t,maxZ:maxZ-t}, {minX:maxX-t,maxX,minZ:minZ+t,maxZ:maxZ-t}];
-  });
-  const curbGeometry = new THREE.BufferGeometry();
-  curbGeometry.setAttribute('position',new THREE.BufferAttribute(createRoadSurfacePositions(curbs,.059),3));
-  curbGeometry.computeVertexNormals();
-  const curb = new THREE.Mesh(curbGeometry,new THREE.MeshStandardMaterial({color:'#fff2d8',roughness:1}));
-  curb.name='Sidewalk edges';curb.receiveShadow=true;group.add(curb);
+  group.add(...createSidewalkVisuals(THREE, sidewalkRects, roadRects, sidewalkMaterial, curbMaterial));
   const marks = createRoadMarkings(plan.roads, plan.bounds, plan.roadWidth);
   const dashGeometry = new THREE.BoxGeometry(0.16, 0.025, 2.2);
   const dashMaterial = new THREE.MeshStandardMaterial({ color: ART.marking, roughness: 1 });
@@ -107,14 +96,14 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const visualScale = new THREE.Vector3(1, 1, 1);
   const lightColors = { red: new THREE.Color('#f34f45'), yellow: new THREE.Color('#ffc34a'), green: new THREE.Color('#51d28b'), off: new THREE.Color('#393737') };
   approaches.forEach((approach, index) => {
-    visualPosition.set(approach.signalX, 1.5, approach.signalZ);
+    visualPosition.set(approach.signalX, ROAD_SURFACE_HEIGHTS.sidewalk + 1.5, approach.signalZ);
     visualMatrix.compose(visualPosition, visualRotation.setFromAxisAngle(up, approach.signalYaw), visualScale);
     poles.setMatrixAt(index, visualMatrix);
-    visualPosition.y = 3.05;
+    visualPosition.y = ROAD_SURFACE_HEIGHTS.sidewalk + 3.05;
     visualMatrix.compose(visualPosition, visualRotation, visualScale);
     housings.setMatrixAt(index, visualMatrix);
     for (let lamp = 0; lamp < 3; lamp++) {
-      visualPosition.y = 3.5 - lamp * 0.45;
+      visualPosition.y = ROAD_SURFACE_HEIGHTS.sidewalk + 3.5 - lamp * 0.45;
       visualPosition.x = approach.signalX - approach.forwardX * 0.22;
       visualPosition.z = approach.signalZ - approach.forwardZ * 0.22;
       visualMatrix.compose(visualPosition, visualRotation, visualScale);
@@ -158,6 +147,10 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
     staticBodies.push(simulation.addStaticBox({ x: building.x, y: building.height / 2, z: building.z,
       halfX: building.width / 2, halfY: building.height / 2, halfZ: building.depth / 2 }));
   }
+
+  for (const support of createSidewalkSupportBoxes(sidewalkRects)) {
+    staticBodies.push(simulation.addStaticBox(support));
+  }
   buildings.castShadow = true;
   buildings.receiveShadow = true;
   group.add(buildings);
@@ -188,8 +181,11 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
     staticBodies.push(simulation.addStaticBox({ x, y: height / 2, z, halfX: width / 2, halfY: height / 2, halfZ: depth / 2, yaw }));
   }
 
+  const trees = createCityTrees(group, plan, { damageObstacles,
+    signals: approaches.map(({ signalX: x, signalZ: z }) => ({ x, z })) });
+
   return {
-    group, entries, buildings, marks, dashes, stopLines, signalBeam, occlusion, staticBodies, signalApproaches: approaches,
+    group, entries, buildings, marks, dashes, stopLines, signalBeam, occlusion, trees, staticBodies, signalApproaches: approaches,
     updateSignals(controller, time, camera = null, quality = 'high') {
       art.setQuality(quality);
       let changed = false;

@@ -12,6 +12,8 @@ TASK-0051, 2026-10-07. Статус: интегрировано; WebGL-пров�
 | roads / src/city-scene.js | Асфальт, тротуар, спавн и граница | Opaque общие материалы, раздельные глубины слоёв, прежние colliders | City dispose |
 | markings / src/road-markings.js | Dashes и stop lines | Instancing, прежние координаты при ширине 12/15/30 м | City dispose |
 | signals / src/city-scene.js, src/signal-glow.js | red/yellow/green/off | Текущие сигналы TASK-0050, общий ограниченный beam draw, low/high sample limit | City dispose |
+| street-trees / src/tree-placement.js, src/city-trees.js | До 96 деревьев, три оттенка кроны/ствола | Seeded placement, 5-sided CylinderGeometry + IcosahedronGeometry detail 0; две shared InstancedMesh batches; декоративные, без коллизий | City dispose; скрытие только крон, перекрывающих игрока |
+| miniature-blur / src/miniature-blur.js | Peripheral miniature edge blur | Linear RGBA16F sharp scene/depth target плюс два RGBA16F blur targets; три fullscreen passes, 3 CSS px low / 5 CSS px high | Renderer lifecycle, resize/quality reuse, pagehide dispose; direct-render fallback при неподдерживаемом HDR |
 | damage-fx / src/car-damage-effects.js | healthy, grey/dark smoke, fire, explosion | Существующие ограниченные пулы, camera-facing alpha, terminal burst однократный, reset | CarDamageEffects |
 | tracks / src/tire-tracks.js | Контактный hard skid, старение | Существующий кольцевой буфер, без новых текстур | TireTracks |
 | ui / index.html, src/style.css | speed, settings, joystick, loading/error/retry | System font, локальный SVG gear, цели ≥44 CSS px, safe areas | DOM lifecycle |
@@ -35,3 +37,7 @@ TASK-0051, 2026-10-07. Статус: интегрировано; WebGL-пров�
 Поправки по просмотру: вентиляция размещается только на плоских кровлях, нижняя грань совпадает с верхом крыши. Fade запускается перекрытием автомобиля для камеры, без отдельного proximity fade. Все поверхности прозрачного дома используют одинаковые запечённые вершины с общим depth prepass, чтобы alpha применялась один раз к наружной оболочке. При смене quality depth geometry пересобирается без скрытой вентиляции; при restore/dispose все временные геометрии освобождаются. См. verification/building-fade.
 
 Уточнение по скриншоту: синий цоколь исключён из fade, сохраняет непрозрачный instance и обозначает габарит препятствия в low/high без дополнительных draw calls. Геометрия цоколя — открытый периметр с двусторонними боками, без сплошной верхней площадки. Лучи проверки заканчиваются на ближней поверхности ориентированного объёма кузова; точки лежат внутри кузова, а не в пустых углах bounding footprint, и следуют roll/pitch/yaw машины. См. verification/building-boundary.
+
+## Изменения 2026-10-08
+
+TASK-0056: процедурные деревья добавлены в город двумя инстансированными batches, новых внешних моделей/текстур и физических тел нет. Высота силуэта около 4.7–5.6 м; крона — IcosahedronGeometry detail 0, ствол — пятигранный цилиндр. Посадки используют отдельный seeded hash, не меняющий план дорог/зданий. TASK-0057: screen-space blur добавлен поверх linear RGBA16F сцены; Three.js применяет ACES и sRGB один раз в финальном composite. Кадры в verification-папку пока не сохранены, физический телефонный профиль не проверен.

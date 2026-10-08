@@ -65,3 +65,41 @@ test('traffic art reuses geometry and stays inside its original collision footpr
   }
   assets.animate(1);assets.dispose();
 });
+
+test('street trees use two shared low-poly batches, protect the car, and dispose with the city',()=>{
+  const scene=new THREE.Scene(),removed=[];
+  const city=createCityScene(scene,{addStaticBox:spec=>spec,removeStaticBox:body=>removed.push(body)},createCityPlan());
+  const {trees}=city;
+  assert.ok(trees.count>=32 && trees.count<=96);
+  assert.equal(trees.trunks.count,trees.count);assert.equal(trees.crowns.count,trees.count);
+  assert.ok((trees.crowns.geometry.index?.count ?? trees.crowns.geometry.attributes.position.count)/3<=80);
+  const blocker=trees.placements[0];
+  const camera=new THREE.PerspectiveCamera(45,1,.1,100);
+  camera.position.set(blocker.x,blocker.radius+12,blocker.z+18);
+  const car=new THREE.Object3D();car.position.set(blocker.x,.5,blocker.z-18);
+  trees.updateVisibility(camera,car,1/60,'follow');
+  let hidden=new THREE.Matrix4();trees.crowns.getMatrixAt(blocker.id,hidden);
+  assert.equal(hidden.elements[0],0);
+  camera.position.x+=100;
+  trees.updateVisibility(camera,car,.1,'follow');
+  trees.crowns.getMatrixAt(blocker.id,hidden);assert.equal(hidden.elements[0],0);
+  trees.updateVisibility(camera,car,.1,'follow');
+  trees.crowns.getMatrixAt(blocker.id,hidden);assert.notEqual(hidden.elements[0],0);
+  const geometryDisposals=[trees.trunks.geometry,trees.crowns.geometry].map(geometry=>{
+    let count=0;geometry.addEventListener('dispose',()=>count++);return ()=>count;
+  });
+  const initialChildren=scene.children.length;
+  city.dispose();
+  assert.equal(scene.children.length,initialChildren-1);
+  assert.ok(removed.length>0);
+  assert.deepEqual(geometryDisposals.map(read=>read()),[1,1]);
+  for(let rebuild=0;rebuild<10;rebuild++) {
+    const nextCity=createCityScene(scene,{addStaticBox:spec=>spec,removeStaticBox:body=>removed.push(body)},createCityPlan());
+    const disposed=[nextCity.trees.trunks.geometry,nextCity.trees.crowns.geometry].map(geometry=>{
+      let count=0;geometry.addEventListener('dispose',()=>count++);return ()=>count;
+    });
+    nextCity.dispose();
+    assert.equal(scene.children.length,initialChildren-1,`city rebuild ${rebuild} left a scene child`);
+    assert.deepEqual(disposed.map(read=>read()),[1,1],`city rebuild ${rebuild} did not dispose each tree geometry once`);
+  }
+});

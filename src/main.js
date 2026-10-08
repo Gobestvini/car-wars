@@ -18,6 +18,7 @@ import { createTrafficSignals } from './traffic-signals.js';
 import { createWantedSystem } from './wanted-system.js';
 import { createTrafficViolationDetector } from './traffic-violations.js';
 import { createArrestSystem } from './arrest-system.js';
+import { createMiniatureBlur } from './miniature-blur.js';
 import { CarDeformation } from './car-deformation.js';
 import { CarDamageEffects } from './car-damage-effects.js';
 import { createSettings } from './settings.js';
@@ -110,6 +111,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(ART.fog);
 scene.fog = new THREE.Fog(ART.fog, 100, 260);
 const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.1, 200);
+const miniatureBlur = createMiniatureBlur(renderer);
 const orbitControls = debug ? new OrbitControls(camera, canvas) : null;
 if (orbitControls) {
   orbitControls.enabled = false;
@@ -243,6 +245,7 @@ async function loadCar() {
     visualWheels.forEach(({ pivot }, i) => { pivot.position.copy(sim.wheels[i].position); pivot.quaternion.copy(car.quaternion); });
     updateCamera(1);
     await renderer.compileAsync(scene, camera);
+    await miniatureBlur.compile();
     modelReady = true;
     $('load-status').hidden = true;
   } catch (error) {
@@ -565,6 +568,7 @@ function moveFreeCamera(dt) {
 }
 function resize() {
   renderer.setSize(innerWidth, innerHeight);
+  miniatureBlur.resize(innerWidth, innerHeight, renderer.getPixelRatio());
   camera.aspect = innerWidth / innerHeight;
   camera.fov = 50;
   camera.updateProjectionMatrix();
@@ -641,10 +645,11 @@ function frame(now) {
   cityState.updateSignals(trafficSignals, traffic.simulationTime(), camera, quality);
   traffic.render(alpha, camera);
   buildingOcclusion.update(camera, car, dt);
+  cityState.trees.updateVisibility(camera, car, dt, cameraMode);
   damageEffects.update({ damage: sim.damage, car, camera, dt, quality });
   tracks.prepareRender();
   const renderStart = performance.now();
-  renderer.render(scene, camera);
+  miniatureBlur.render(scene, camera, { mode: cameraMode, car });
   metrics.renderMs = performance.now() - renderStart;
   metrics.frameCpuMs = performance.now() - cpuStart;
   metrics.calls = renderer.info.render.calls;
@@ -667,6 +672,8 @@ window.carLab = {
   performance: () => ({ ...metrics, dpr: renderer.getPixelRatio(), droppedSeconds: stepper.droppedSeconds, trailSegments: tracks.count }),
   trafficPerformance: () => traffic.performance(),
   resources: () => ({ ...renderer.info.memory, programs: renderer.info.programs?.length ?? 0 }),
+  miniatureBlur: () => miniatureBlur.snapshot(),
+  setMiniatureBlurBypass: value => miniatureBlur.setDebugBypass(value, debug),
   shadow: () => ({ ...shadowBounds, mapSize: sun.shadow.mapSize.toArray(), enabled: renderer.shadowMap.enabled }),
   trails: () => ({ visible: tracks.mesh.visible }),
   camera: () => ({ position: camera.position.toArray(), target: cameraMode === 'free' ? orbitControls.target.toArray() : cameraLookAt.toArray(), mode: cameraMode, scale: cameraDistanceScale, far: camera.far, fogNear: scene.fog.near, fogFar: scene.fog.far, orientation: camera.rotation.toArray(),
@@ -689,7 +696,7 @@ window.carLab = {
   damageEffects: () => damageEffects.snapshot(),
   buildingVisibility: () => buildingEntries.map(entry => ({ id: entry.id, bounds: entry.bounds, opacity: entry.opacity,
     proximity: Boolean(entry.nearCar), gap: entry.carGap, occluded: Boolean(entry.wasOccluded), proxy: Boolean(entry.proxy) })),
-  city: () => ({ seed: cityPlan.seed, buildings: cityPlan.buildings.length, landmarks: cityPlan.landmarks.length, bounds: cityPlan.bounds, roadWidth: cityPlan.roadWidth, roads: cityPlan.roads, roadNetwork: cityPlan.roadNetwork, hasBuildingWindows: false,
+  city: () => ({ seed: cityPlan.seed, buildings: cityPlan.buildings.length, trees: cityState.trees.count, landmarks: cityPlan.landmarks.length, bounds: cityPlan.bounds, roadWidth: cityPlan.roadWidth, roads: cityPlan.roads, roadNetwork: cityPlan.roadNetwork, hasBuildingWindows: false,
     fadedBuildings: buildingEntries.filter(entry => entry.opacity < 0.999).length }),
   roadMarkings: () => cityState.roadMarkings(),
   worldBodies: () => sim.world.bodies.length,
@@ -726,6 +733,7 @@ window.carLab = {
 function applyQuality() {
   quality = settings.values.quality === 'Лёгкая' ? 'low' : 'high';
   metrics.quality = quality;
+  miniatureBlur.setQuality(quality);
   const preset = artQuality(quality);
   renderer.setPixelRatio(Math.min(devicePixelRatio, preset.dpr));
   const size = preset.shadow;
@@ -735,3 +743,4 @@ function applyQuality() {
   resize();
 }
 applyQuality();
+window.addEventListener('pagehide', () => miniatureBlur.dispose(), { once: true });

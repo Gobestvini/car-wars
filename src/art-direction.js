@@ -17,6 +17,7 @@ export function buildingArt(building, seed) {
 }
 
 export function artQuality(quality) {
-  return quality === 'low' ? { dpr: 1, shadow: 512, roofDetail: false }
-    : { dpr: 1.75, shadow: 1024, roofDetail: true };
+  return quality === 'low'
+    ? { dpr: 1, shadow: 512, roofDetail: false, edgeBlur: { scale: 0.25, radiusCss: 3 } }
+    : { dpr: 1.75, shadow: 1024, roofDetail: true, edgeBlur: { scale: 0.5, radiusCss: 5 } };
 }
