@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { miniatureBlurFocus, miniatureBlurSamples, miniatureBlurTargetSize, miniatureBlurWeight,
-  normalizeBlurStrength, MINIATURE_BLUR } from '../src/miniature-blur.js';
+import { miniatureBlurFocusRadius, miniatureBlurSamples, miniatureBlurTargetSize, miniatureBlurWeight,
+  normalizeBlurFocusSize, normalizeBlurStrength, MINIATURE_BLUR } from '../src/miniature-blur.js';
 
 test('blur targets follow CSS size, DPR and portrait or landscape aspect ratios', () => {
   assert.deepEqual(miniatureBlurTargetSize(390, 844, 1.75, 'high'),
@@ -41,11 +41,16 @@ test('scene MSAA request respects quality and available maximum samples', () => 
   assert.equal(miniatureBlurSamples('low', 1), 0);
   assert.equal(miniatureBlurSamples('high', NaN), 0);
 });
-test('gameplay quality selects a narrow radius, with a protected and safe focus between car and road', () => {
+test('focus band has a fixed screen center and user-sized screen-space coverage', () => {
   assert.equal(MINIATURE_BLUR.low.radiusCss, 3);
   assert.equal(MINIATURE_BLUR.high.radiusCss, 5);
-  assert.deepEqual(miniatureBlurFocus({ x: .5, y: .65 }, { x: .5, y: .4 }), { x: .5, y: .555 });
-  assert.deepEqual(miniatureBlurFocus(null, { x: .5, y: .4 }), { x: .5, y: .5 });
-  assert.deepEqual(miniatureBlurFocus({ x: NaN, y: .5 }, { x: .2, y: .3 }), { x: .5, y: .5 });
-  assert.deepEqual(miniatureBlurFocus({ x: 1.2, y: .5 }, { x: .2, y: .3 }), { x: .5, y: .5 });
+  assert.equal(MINIATURE_BLUR.focusY, .5);
+  assert.equal(MINIATURE_BLUR.focusSize, .68);
+  assert.equal(normalizeBlurFocusSize(.1), .2);
+  assert.equal(normalizeBlurFocusSize(.68), .68);
+  assert.equal(normalizeBlurFocusSize(1), .9);
+  assert.equal(normalizeBlurFocusSize(NaN), .68);
+  assert.ok(Math.abs(miniatureBlurFocusRadius(.68) * 2 * MINIATURE_BLUR.transitionStart - .68) < 1e-12);
+  assert.equal(miniatureBlurWeight(.5, MINIATURE_BLUR.focusY, miniatureBlurFocusRadius(.68)), 0);
+  assert.ok(miniatureBlurWeight(.5 + .68 / 2, MINIATURE_BLUR.focusY, miniatureBlurFocusRadius(.68)) < 1e-12);
 });

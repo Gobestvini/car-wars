@@ -5,8 +5,10 @@ import { artQuality } from './art-direction.js';
 export const MINIATURE_BLUR = Object.freeze({
   high: Object.freeze(artQuality('high').edgeBlur),
   low: Object.freeze(artQuality('low').edgeBlur),
-  focusOffset: 0.38,
-  focusRadiusY: 0.43,
+  focusY: 0.5,
+  focusSize: 0.68,
+  minFocusSize: 0.2,
+  maxFocusSize: 0.9,
   transitionStart: 0.8,
   transitionEnd: 1.3,
 });
@@ -41,19 +43,22 @@ function multisampleCounts(renderer) {
   }
 }
 
-export function miniatureBlurWeight(y, focusY, radiusY = MINIATURE_BLUR.focusRadiusY,
+export function miniatureBlurWeight(y, focusY, radiusY = miniatureBlurFocusRadius(MINIATURE_BLUR.focusSize),
   transitionStart = MINIATURE_BLUR.transitionStart, transitionEnd = MINIATURE_BLUR.transitionEnd) {
   if (![y, focusY, radiusY, transitionStart, transitionEnd].every(Number.isFinite)
     || radiusY <= 0 || transitionEnd <= transitionStart) return 1;
   return THREE.MathUtils.smoothstep(Math.abs(y - focusY) / radiusY, transitionStart, transitionEnd);
 }
 
-export function miniatureBlurFocus(car, ahead) {
-  const usable = point => point && Number.isFinite(point.x) && Number.isFinite(point.y)
-    && point.x >= 0 && point.x <= 1 && point.y >= 0 && point.y <= 1;
-  if (!usable(car) || !usable(ahead)) return { x: 0.5, y: 0.5 };
-  return { x: THREE.MathUtils.lerp(car.x, ahead.x, MINIATURE_BLUR.focusOffset),
-    y: THREE.MathUtils.lerp(car.y, ahead.y, MINIATURE_BLUR.focusOffset) };
+export function normalizeBlurFocusSize(value) {
+  return Number.isFinite(value)
+    ? THREE.MathUtils.clamp(value, MINIATURE_BLUR.minFocusSize, MINIATURE_BLUR.maxFocusSize)
+    : MINIATURE_BLUR.focusSize;
+}
+
+export function miniatureBlurFocusRadius(size) {
+  const normalized = normalizeBlurFocusSize(size);
+  return normalized / (2 * MINIATURE_BLUR.transitionStart);
 }
 
 export function normalizeBlurStrength(value) {
@@ -170,7 +175,7 @@ export function createMiniatureBlur(renderer) {
   const compositeMaterial = supported ? material(compositeFragment, {
     tSharp: { value: null }, tBlur: { value: null },
     focusY: { value: 0.5 },
-    focusRadiusY: { value: MINIATURE_BLUR.focusRadiusY },
+    focusRadiusY: { value: miniatureBlurFocusRadius(MINIATURE_BLUR.focusSize) },
     transitionStart: { value: MINIATURE_BLUR.transitionStart },
     transitionEnd: { value: MINIATURE_BLUR.transitionEnd },
     blurAmount: { value: 1 },
@@ -184,7 +189,8 @@ export function createMiniatureBlur(renderer) {
   let cssWidth = 0, cssHeight = 0, pixelRatio = 1;
   let enabled = supported;
   let failure = supported ? null : 'half-float-linear-render-target-unsupported';
-  let focusY = 0.5;
+  let focusY = MINIATURE_BLUR.focusY;
+  let focusSize = MINIATURE_BLUR.focusSize;
   let debugFocusY = null;
   let antialiasSamples = miniatureBlurSamples(quality, renderer.capabilities.maxSamples, renderbufferSamples);
   let antialiasFailure = antialiasSamples > 0 ? null : 'multisample-unavailable';
@@ -221,19 +227,8 @@ export function createMiniatureBlur(renderer) {
     return true;
   };
 
-  const setFocus = (car, camera) => {
-    const point = car.position.clone();
-    point.y += 0.8;
-    const projectedCar = point.project(camera);
-    const forward = new THREE.Vector3(0, 0, 1).applyQuaternion(car.quaternion).normalize();
-    point.copy(car.position).addScaledVector(forward, 8);
-    point.y += 0.15;
-    const projectedAhead = point.project(camera);
-    const focus = miniatureBlurFocus(
-      { x: projectedCar.x * 0.5 + 0.5, y: projectedCar.y * 0.5 + 0.5 },
-      { x: projectedAhead.x * 0.5 + 0.5, y: projectedAhead.y * 0.5 + 0.5 },
-    );
-    focusY = debugFocusY ?? focus.y;
+  const setFocus = () => {
+    focusY = debugFocusY ?? MINIATURE_BLUR.focusY;
     compositeMaterial.uniforms.focusY.value = focusY;
   };
 
@@ -263,7 +258,7 @@ export function createMiniatureBlur(renderer) {
 
     compositeMaterial.uniforms.tSharp.value = sharpTarget.texture;
     compositeMaterial.uniforms.tBlur.value = verticalTarget.texture;
-    setFocus(car, camera);
+    setFocus();
     fullscreen.material = compositeMaterial;
     renderer.setRenderTarget(priorTarget);
     if (priorTarget === null) {
@@ -344,7 +339,7 @@ export function createMiniatureBlur(renderer) {
     const blurPixels = horizontalTarget ? horizontalTarget.width * horizontalTarget.height : 0;
     const estimatedBytes = sharpPixels * bytesPerPixel + blurPixels * 16;
     return { enabled, failure, antialiasSamples, antialiasing: antialiasSamples ? 'msaa' : 'none',
-      antialiasFailure, focusY, quality, strength, radiusCss: MINIATURE_BLUR[quality].radiusCss * strength,
+      antialiasFailure, focusY, focusSize, quality, strength, radiusCss: MINIATURE_BLUR[quality].radiusCss * strength,
       debugBypass, draws: lastDrawCalls, size: sharpTarget ? [sharpTarget.width, sharpTarget.height] : [0, 0],
       blurSize: horizontalTarget ? [horizontalTarget.width, horizontalTarget.height] : [0, 0],
       estimatedMiB: Number((estimatedBytes / 1048576).toFixed(2)) };
@@ -402,6 +397,10 @@ export function createMiniatureBlur(renderer) {
       strength = normalizeBlurStrength(value);
       if (horizontalMaterial) horizontalMaterial.uniforms.h.value = MINIATURE_BLUR[quality].radiusCss * strength / (4 * Math.max(cssWidth, 1));
       if (verticalMaterial) verticalMaterial.uniforms.v.value = MINIATURE_BLUR[quality].radiusCss * strength / (4 * Math.max(cssHeight, 1));
+    },
+    setFocusSize(value) {
+      focusSize = normalizeBlurFocusSize(value);
+      if (compositeMaterial) compositeMaterial.uniforms.focusRadiusY.value = miniatureBlurFocusRadius(focusSize);
     },
     render,
     compile,

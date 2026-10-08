@@ -11,6 +11,7 @@ const fieldRules = {
   skidThreshold: { min: 0.5, max: 3, step: 0.05 },
   trackIntensity: { min: 0, max: 1, step: 0.01 },
   blurStrength: { min: 0, max: 2, step: 0.05 },
+  blurFocusSize: { min: 20, max: 90, step: 1 },
   cameraSpeed: { min: 2, max: 50, step: 1 },
   drawDistanceFollow: { min: 100, max: 1000, step: 10 },
   drawDistanceFree: { min: 100, max: 1000, step: 10 },
