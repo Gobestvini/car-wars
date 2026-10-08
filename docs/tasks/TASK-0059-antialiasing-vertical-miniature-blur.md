@@ -1,6 +1,6 @@
 # TASK-0059: Сглаживание сцены и блюр только сверху и снизу
 
-- Статус: ready
+- Статус: review
 - Приоритет: high
 - Создана: 2026-10-08
 - Обновлена: 2026-10-08
@@ -114,10 +114,10 @@
 
 ## 10. Отчёт исполнителя
 
-- Результат: Не выполнялась.
-- Изменённые файлы и зачем: —
-- Команды и фактические результаты: —
-- Ручные проверки: —
-- Выполненные критерии: —
-- Непроверенное, блокеры и отклонения от плана: —
-- Итоговый статус и дата: —
+- Результат: добавлены 2/4 MSAA samples в RGBA16F sharp scene target при подтверждённой поддержке цветового/depth форматов, фактические samples/fallback/focusY и примерная стоимость attachment в snapshot; при неполном MSAA framebuffer эффект один раз пересоздаёт sharp target single-sample и повторяет pipeline. Blur-маска зависит только от |Y-focusY|; крайние области размываются по всей ширине, центральная полоса остаётся резкой. Название настройки уточнено без изменения storage key.
+- Изменённые файлы и зачем: `src/miniature-blur.js` — MSAA-политика, проверка форматов/fallback, независимая от X маска и diagnostics; `src/main.js` — debug-only controls для изолированной GPU fixture; `src/settings.js` — подпись «Блюр сверху/снизу»; `tests/miniature-blur.test.js` — проверки mask symmetry/axis invariance и sample support; `tools/antialiasing-vertical-blur-regression.{html,js}` — диагональная MSAA и масочная fixture; `docs/art/ART-DIRECTION.md`, `docs/art/ASSETS.md`, отчёт и индекс — актуальные договоры/результаты.
+- Команды и фактические результаты: целевые `node --test tests/miniature-blur.test.js tests/art-runtime.test.js tests/settings-defaults.test.js` — 16/16; полный `npm test` — 256/256; финальный `npm run build` — успешно (существующее предупреждение Three.js чанка 752.40 kB). `node --check` для blur-модуля и browser fixture, `git diff --check` и JSON parse — успешно. Браузерный color runner: 18/18 size×quality×strength сочетаний, max RGB delta 0; после 10 quality/resize cycles 33 geometries / 3 textures / 19 programs до и после. Regression measurements сохранены в `docs/art/verification/antialiasing-vertical-blur/antialiasing-vertical-blur-regression.json`.
+- Ручные проверки: Chrome 155 / Windows / WebGL2 при 640×480 target/DPR1: diagonal fixture при 4x увеличила переходные sample pixels 173/4151 (4.17%) → 562/4151 (13.54%). Синтетические вертикальные границы: средняя линия имеет 0 channel delta; верх/низ в трёх позициях слева/центр/справа получили одинаково направленное размытие, horizontal spread максимум1 RGB. В игре high→low→high переключение сохранило WebGL кадр; snapshot reports 4→2→4 samples. Debug viewport показал 82–94 draw calls и CPU submission ~0.5–4.0 ms при стоящей машине; это не GPU time и не мобильный профиль. Продолжительная поездка 120с не проводилась.
+- Выполненные критерии: фактический RGBA16F/depth24 sample list и maxSamples учитываются перед MSAA; fallback single-sample предусмотрен при incomplete framebuffer, без постоянных retry; фокусная маска в шейдере не имеет зависимости X. Диагональная WebGL fixture при 4x MSAA дала 13.54% частичных пикселей против4.17% без MSAA. Цвет, quality switch и render target reuse подтверждены автоматическим и браузерным runner; browser fixture показывает центральный delta0, верх/низ delta4–6 RGB в трёх точках по X с горизонтальным spread ≤1.
+- Непроверенное, блокеры и отклонения от плана: PNG сравнения и физический телефон не проверены; p95/p99 rAF при 60 NPC/2 police, 120с маршрут и пятиминутная мобильная поездка не выполнялись. GPU fixture canvas имела drawing buffer640×480/DPR1; browser app была при CSS viewport 690×1244 и прошла переключение quality high→low→high. Автоматизированная матрица размеров 640×360, 390×844, 844×390 в color runner не заменяет фактическое изменение viewport браузера/игры. Поэтому статус оставлен review. Snapshot memory estimate учитывает resolved/MSAA color+depth и два blur targets, но не измерение драйверного расхода.
+- Итоговый статус и дата: review, 2026-10-08.

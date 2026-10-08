@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-08",
+  "browser": "Chrome 155 on Windows 10 x64",
+  "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+  "fixture": {
+    "drawingBuffer": [640, 480],
+    "devicePixelRatio": 1,
+    "quality": "high",
+    "samples": 4,
+    "focusY": 0.5
+  },
+  "antialiasing": {
+    "edgeProbePixels": 4151,
+    "intermediateCoveragePixelsWithoutMsaa": 173,
+    "intermediateCoverageWithoutMsaa": 0.041676704408576244,
+    "intermediateCoveragePixelsWithMsaa": 562,
+    "intermediateCoverageWithMsaa": 0.13538906287641533,
+    "improvementRatio": 3.25
+  },
+  "verticalMask": {
+    "sampleXNormalized": [0.12, 0.5, 0.88],
+    "sampleYNormalized": [0.08, 0.5, 0.92],
+    "rgbDeltaAtTop": [4, 5, 5],
+    "rgbDeltaAtCenter": [0, 0, 0],
+    "rgbDeltaAtBottom": [5, 5, 6],
+    "horizontalSpreadMaxRgb": 1
+  },
+  "colorRegression": {
+    "cases": 18,
+    "maxChannelDeltaOutOf255": 0,
+    "sizesCssAndDpr": [[640, 360, 1], [390, 844, 1.75], [844, 390, 1.75]],
+    "qualities": ["low", "high"],
+    "blurStrengths": [0, 1, 2]
+  },
+  "resourceRegression": {
+    "resizeQualityCycles": 10,
+    "before": { "geometries": 33, "textures": 3, "programs": 19 },
+    "after": { "geometries": 33, "textures": 3, "programs": 19 }
+  },
+  "estimatedAttachmentMemoryMiBAtDpr1": {
+    "640x360Low2x": 8.13,
+    "640x360High4x": 14.06
+  },
+  "limits": [
+    "The browser fixture canvas measured 640x480 while the host page CSS viewport varied during capture; the required 1440x900 game viewport was not independently verified.",
+    "The color runner uses synthetic swatches and static city geometry; this is not a physical-phone GPU-time profile.",
+    "No 120-second route or five-minute mobile drive was performed.",
+    "PNG comparison frames were not saved."
+  ]
+}

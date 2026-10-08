@@ -15,7 +15,7 @@ export function createSettings(container, initialValues, handlers) {
   const graphics = pane.addFolder({ title: 'Графика', expanded: true });
   graphics.addBinding(values, 'quality', { label: 'Качество', options: { Высокая: 'Высокая', 'Лёгкая': 'Лёгкая' } })
     .on('change', event => { values.quality = event.value; handlers.onQuality(event.value); });
-  graphics.addBinding(values, 'blurStrength', { label: 'Блюр краёв, ×', min: 0, max: 2, step: 0.05 })
+  graphics.addBinding(values, 'blurStrength', { label: 'Блюр сверху/снизу, ×', min: 0, max: 2, step: 0.05 })
     .on('change', event => { values.blurStrength = event.value; handlers.onBlur(event.value); });
   graphics.addBinding(values, 'trails', { label: 'Следы шин' })
     .on('change', event => { values.trails = event.value; handlers.onTrails(event.value); });

@@ -6,7 +6,6 @@ export const MINIATURE_BLUR = Object.freeze({
   high: Object.freeze(artQuality('high').edgeBlur),
   low: Object.freeze(artQuality('low').edgeBlur),
   focusOffset: 0.38,
-  focusRadiusX: 0.45,
   focusRadiusY: 0.43,
   transitionStart: 0.8,
   transitionEnd: 1.3,
@@ -21,6 +20,32 @@ export function miniatureBlurTargetSize(cssWidth, cssHeight, pixelRatio, quality
   const height = Math.max(1, Math.floor(cssHeight * pixelRatio));
   return { width, height, blurWidth: Math.max(1, Math.ceil(width * scale)),
     blurHeight: Math.max(1, Math.ceil(height * scale)) };
+}
+
+export function miniatureBlurSamples(quality, maxSamples, supportedSamples = null) {
+  if (!Number.isFinite(maxSamples) || maxSamples < 2) return 0;
+  const limit = Math.min(quality === 'low' ? 2 : 4, Math.floor(maxSamples));
+  const candidates = supportedSamples ?? [4, 2];
+  return [...candidates].filter(samples => Number.isInteger(samples) && samples <= limit && samples >= 2)
+    .sort((a, b) => b - a)[0] ?? 0;
+}
+
+function multisampleCounts(renderer) {
+  const gl = renderer.getContext();
+  try {
+    const color = gl.getInternalformatParameter(gl.RENDERBUFFER, gl.SAMPLES, gl.RGBA16F);
+    const depth = gl.getInternalformatParameter(gl.RENDERBUFFER, gl.SAMPLES, gl.DEPTH_COMPONENT24);
+    return [...color].filter(samples => depth.includes(samples));
+  } catch {
+    return null;
+  }
+}
+
+export function miniatureBlurWeight(y, focusY, radiusY = MINIATURE_BLUR.focusRadiusY,
+  transitionStart = MINIATURE_BLUR.transitionStart, transitionEnd = MINIATURE_BLUR.transitionEnd) {
+  if (![y, focusY, radiusY, transitionStart, transitionEnd].every(Number.isFinite)
+    || radiusY <= 0 || transitionEnd <= transitionStart) return 1;
+  return THREE.MathUtils.smoothstep(Math.abs(y - focusY) / radiusY, transitionStart, transitionEnd);
 }
 
 export function miniatureBlurFocus(car, ahead) {
@@ -84,15 +109,15 @@ const verticalFragment = /* glsl */`
 const compositeFragment = /* glsl */`
   uniform sampler2D tSharp;
   uniform sampler2D tBlur;
-  uniform vec2 focus;
-  uniform vec2 focusRadius;
+  uniform float focusY;
+  uniform float focusRadiusY;
   uniform float transitionStart;
   uniform float transitionEnd;
+  uniform float blurAmount;
   varying vec2 vUv;
   void main() {
-    vec2 delta = (vUv - focus) / focusRadius;
-    float edge = length(delta);
-    float blurMix = smoothstep(transitionStart, transitionEnd, edge);
+    float verticalDistance = abs(vUv.y - focusY) / focusRadiusY;
+    float blurMix = smoothstep(transitionStart, transitionEnd, verticalDistance) * blurAmount;
     vec4 color = mix(texture2D(tSharp, vUv), texture2D(tBlur, vUv), blurMix);
     gl_FragColor = color;
     // ShaderMaterial injects the function declarations, not these output calls.
@@ -130,9 +155,11 @@ function material(fragmentShader, uniforms, { toneMapped = false } = {}) {
   });
 }
 
-/** Reuse one scene-color buffer and three full-screen passes for a peripheral miniature blur. */
+/** Reuse one scene-color buffer and three full-screen passes for a vertical miniature blur. */
 export function createMiniatureBlur(renderer) {
+  let quality = 'high';
   const supported = renderer.capabilities.isWebGL2 && renderer.extensions.has('EXT_color_buffer_float');
+  const renderbufferSamples = supported ? multisampleCounts(renderer) : [];
   const sharpTarget = supported ? makeLinearTarget(1, 1, THREE.HalfFloatType, true) : null;
   const horizontalTarget = supported ? makeLinearTarget(1, 1, THREE.HalfFloatType, false) : null;
   const verticalTarget = supported ? makeLinearTarget(1, 1, THREE.HalfFloatType, false) : null;
@@ -142,21 +169,27 @@ export function createMiniatureBlur(renderer) {
     { tDiffuse: { value: null }, v: { value: 0 } }) : null;
   const compositeMaterial = supported ? material(compositeFragment, {
     tSharp: { value: null }, tBlur: { value: null },
-    focus: { value: new THREE.Vector2(0.5, 0.5) },
-    focusRadius: { value: new THREE.Vector2(MINIATURE_BLUR.focusRadiusX, MINIATURE_BLUR.focusRadiusY) },
+    focusY: { value: 0.5 },
+    focusRadiusY: { value: MINIATURE_BLUR.focusRadiusY },
     transitionStart: { value: MINIATURE_BLUR.transitionStart },
     transitionEnd: { value: MINIATURE_BLUR.transitionEnd },
+    blurAmount: { value: 1 },
   }, { toneMapped: true }) : null;
   const fullscreen = supported ? new FullScreenQuad(horizontalMaterial) : null;
   const warmupScene = supported ? new THREE.Scene() : null;
   const warmupCamera = supported ? new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 4) : null;
   const warmupMesh = supported ? new THREE.Mesh(new THREE.PlaneGeometry(2, 2), horizontalMaterial) : null;
   if (warmupScene) { warmupScene.add(warmupMesh); warmupCamera.position.z = 1; }
-  let quality = 'high';
   let strength = 1;
   let cssWidth = 0, cssHeight = 0, pixelRatio = 1;
   let enabled = supported;
   let failure = supported ? null : 'half-float-linear-render-target-unsupported';
+  let focusY = 0.5;
+  let debugFocusY = null;
+  let antialiasSamples = miniatureBlurSamples(quality, renderer.capabilities.maxSamples, renderbufferSamples);
+  let antialiasFailure = antialiasSamples > 0 ? null : 'multisample-unavailable';
+  let antialiasValidated = false;
+  if (sharpTarget) sharpTarget.samples = antialiasSamples;
   let debugBypass = false;
   let disposed = false;
   let lastDrawCalls = 0;
@@ -169,6 +202,7 @@ export function createMiniatureBlur(renderer) {
     if (!enabled) return false;
     if (sharpTarget.width !== next.width || sharpTarget.height !== next.height) {
       sharpTarget.setSize(next.width, next.height);
+      antialiasValidated = false;
     }
     if (horizontalTarget.width !== next.blurWidth || horizontalTarget.height !== next.blurHeight) {
       horizontalTarget.setSize(next.blurWidth, next.blurHeight);
@@ -199,7 +233,45 @@ export function createMiniatureBlur(renderer) {
       { x: projectedCar.x * 0.5 + 0.5, y: projectedCar.y * 0.5 + 0.5 },
       { x: projectedAhead.x * 0.5 + 0.5, y: projectedAhead.y * 0.5 + 0.5 },
     );
-    compositeMaterial.uniforms.focus.value.set(focus.x, focus.y);
+    focusY = debugFocusY ?? focus.y;
+    compositeMaterial.uniforms.focusY.value = focusY;
+  };
+
+  const drawPipeline = (scene, camera, car, priorTarget) => {
+    renderer.setRenderTarget(sharpTarget);
+    if (antialiasSamples > 0 && !antialiasValidated) {
+      const gl = renderer.getContext();
+      if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) {
+        throw new Error('multisample-framebuffer-incomplete');
+      }
+      antialiasValidated = true;
+    }
+    renderer.clear(true, true, true);
+    renderer.render(scene, camera);
+
+    horizontalMaterial.uniforms.tDiffuse.value = sharpTarget.texture;
+    fullscreen.material = horizontalMaterial;
+    renderer.setRenderTarget(horizontalTarget);
+    renderer.clear(true, false, false);
+    fullscreen.render(renderer);
+
+    verticalMaterial.uniforms.tDiffuse.value = horizontalTarget.texture;
+    fullscreen.material = verticalMaterial;
+    renderer.setRenderTarget(verticalTarget);
+    renderer.clear(true, false, false);
+    fullscreen.render(renderer);
+
+    compositeMaterial.uniforms.tSharp.value = sharpTarget.texture;
+    compositeMaterial.uniforms.tBlur.value = verticalTarget.texture;
+    setFocus(car, camera);
+    fullscreen.material = compositeMaterial;
+    renderer.setRenderTarget(priorTarget);
+    if (priorTarget === null) {
+      // setViewport applies renderer DPR itself; passing buffer pixels doubles it.
+      renderer.setViewport(0, 0, cssWidth, cssHeight);
+    }
+    renderer.clear(true, false, false);
+    fullscreen.render(renderer);
   };
 
   const render = (scene, camera, { mode = 'follow', car = null } = {}) => {
@@ -231,39 +303,23 @@ export function createMiniatureBlur(renderer) {
       renderer.info.autoReset = false;
       renderer.setScissorTest(false);
       renderer.autoClear = true;
-      renderer.setRenderTarget(sharpTarget);
-      renderer.clear(true, true, true);
-      renderer.render(scene, camera);
-
-      horizontalMaterial.uniforms.tDiffuse.value = sharpTarget.texture;
-      fullscreen.material = horizontalMaterial;
-      renderer.setRenderTarget(horizontalTarget);
-      renderer.clear(true, false, false);
-      fullscreen.render(renderer);
-
-      verticalMaterial.uniforms.tDiffuse.value = horizontalTarget.texture;
-      fullscreen.material = verticalMaterial;
-      renderer.setRenderTarget(verticalTarget);
-      renderer.clear(true, false, false);
-      fullscreen.render(renderer);
-
-      compositeMaterial.uniforms.tSharp.value = sharpTarget.texture;
-      compositeMaterial.uniforms.tBlur.value = verticalTarget.texture;
-      setFocus(car, camera);
-      fullscreen.material = compositeMaterial;
-      renderer.setRenderTarget(priorTarget);
-      if (priorTarget === null) {
-        // setViewport applies renderer DPR itself; passing buffer pixels doubles it.
-        renderer.setViewport(0, 0, cssWidth, cssHeight);
+      try {
+        drawPipeline(scene, camera, car, priorTarget);
+      } catch (error) {
+        if (antialiasSamples === 0 || error?.message !== 'multisample-framebuffer-incomplete') throw error;
+        antialiasFailure = error.message;
+        antialiasSamples = 0;
+        antialiasValidated = false;
+        sharpTarget.samples = 0;
+        sharpTarget.dispose();
+        drawPipeline(scene, camera, car, priorTarget);
       }
-      renderer.clear(true, false, false);
-      fullscreen.render(renderer);
       renderer.info.autoReset = priorInfoAutoReset;
       lastDrawCalls = renderer.info.render.calls;
     } catch (error) {
       failed = error;
       enabled = false;
-      failure = `render-failed-${error?.name || 'Error'}`;
+      failure = `render-failed-${error?.name || 'Error'}-${error?.message || 'unknown'}:${error?.stack || ''}`;
     } finally {
       renderer.setRenderTarget(priorTarget);
       renderer.setViewport(priorViewport);
@@ -283,11 +339,12 @@ export function createMiniatureBlur(renderer) {
   };
 
   const snapshot = () => {
-    const bytesPerPixel = 12; // RGBA16F color plus a 24/32-bit depth attachment.
+    const bytesPerPixel = 12 + antialiasSamples * 12; // Resolved RGBA16F/depth plus multisampled RGBA16F/depth.
     const sharpPixels = sharpTarget ? sharpTarget.width * sharpTarget.height : 0;
     const blurPixels = horizontalTarget ? horizontalTarget.width * horizontalTarget.height : 0;
     const estimatedBytes = sharpPixels * bytesPerPixel + blurPixels * 16;
-    return { enabled, failure, quality, strength, radiusCss: MINIATURE_BLUR[quality].radiusCss * strength,
+    return { enabled, failure, antialiasSamples, antialiasing: antialiasSamples ? 'msaa' : 'none',
+      antialiasFailure, focusY, quality, strength, radiusCss: MINIATURE_BLUR[quality].radiusCss * strength,
       debugBypass, draws: lastDrawCalls, size: sharpTarget ? [sharpTarget.width, sharpTarget.height] : [0, 0],
       blurSize: horizontalTarget ? [horizontalTarget.width, horizontalTarget.height] : [0, 0],
       estimatedMiB: Number((estimatedBytes / 1048576).toFixed(2)) };
@@ -303,7 +360,44 @@ export function createMiniatureBlur(renderer) {
 
   return {
     resize,
-    setQuality,
+    setQuality(value) {
+      const next = value === 'low' ? 'low' : 'high';
+      if (quality === next) return false;
+      quality = next;
+      antialiasSamples = miniatureBlurSamples(quality, renderer.capabilities.maxSamples, renderbufferSamples);
+      antialiasFailure = antialiasSamples > 0 ? null : 'multisample-unavailable';
+      antialiasValidated = false;
+      if (sharpTarget) {
+        sharpTarget.samples = antialiasSamples;
+        sharpTarget.dispose();
+      }
+      resize(cssWidth || innerWidth, cssHeight || innerHeight, pixelRatio);
+      return true;
+    },
+    setDebugAntialiasSamples(value, debug) {
+      if (!debug || !Number.isFinite(value)) return false;
+      const requested = Math.max(0, Math.floor(value));
+      const supported = renderbufferSamples?.includes(requested) ?? [0, 2, 4].includes(requested);
+      if (!supported || requested > renderer.capabilities.maxSamples) return false;
+      antialiasSamples = requested;
+      antialiasFailure = requested > 0 ? null : 'debug-disabled';
+      antialiasValidated = false;
+      if (sharpTarget) {
+        sharpTarget.samples = requested;
+        sharpTarget.dispose();
+      }
+      return true;
+    },
+    setDebugBlurMask(value, debug) {
+      if (!debug || !compositeMaterial) return false;
+      compositeMaterial.uniforms.blurAmount.value = value ? 1 : 0;
+      return true;
+    },
+    setDebugFocusY(value, debug) {
+      if (!debug || !Number.isFinite(value) || value < 0 || value > 1) return false;
+      debugFocusY = value;
+      return true;
+    },
     setStrength(value) {
       strength = normalizeBlurStrength(value);
       if (horizontalMaterial) horizontalMaterial.uniforms.h.value = MINIATURE_BLUR[quality].radiusCss * strength / (4 * Math.max(cssWidth, 1));
