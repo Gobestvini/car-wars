@@ -1,0 +1,432 @@
+{
+  "pass": true,
+  "results": [
+    {
+      "width": 640,
+      "height": 360,
+      "dpr": 1,
+      "quality": "low",
+      "strength": 0,
+      "maxDelta": 0,
+      "sampledPixels": 10620,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 0,
+      "debugBypass": false,
+      "draws": 0,
+      "size": [
+        640,
+        360
+      ],
+      "blurSize": [
+        160,
+        90
+      ],
+      "estimatedMiB": 2.86
+    },
+    {
+      "width": 640,
+      "height": 360,
+      "dpr": 1,
+      "quality": "low",
+      "strength": 1,
+      "maxDelta": 0,
+      "sampledPixels": 10620,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 3,
+      "debugBypass": false,
+      "draws": 10,
+      "size": [
+        640,
+        360
+      ],
+      "blurSize": [
+        160,
+        90
+      ],
+      "estimatedMiB": 2.86
+    },
+    {
+      "width": 640,
+      "height": 360,
+      "dpr": 1,
+      "quality": "low",
+      "strength": 2,
+      "maxDelta": 0,
+      "sampledPixels": 10620,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 6,
+      "debugBypass": false,
+      "draws": 10,
+      "size": [
+        640,
+        360
+      ],
+      "blurSize": [
+        160,
+        90
+      ],
+      "estimatedMiB": 2.86
+    },
+    {
+      "width": 640,
+      "height": 360,
+      "dpr": 1,
+      "quality": "high",
+      "strength": 0,
+      "maxDelta": 0,
+      "sampledPixels": 10620,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 0,
+      "debugBypass": false,
+      "draws": 0,
+      "size": [
+        640,
+        360
+      ],
+      "blurSize": [
+        320,
+        180
+      ],
+      "estimatedMiB": 3.52
+    },
+    {
+      "width": 640,
+      "height": 360,
+      "dpr": 1,
+      "quality": "high",
+      "strength": 1,
+      "maxDelta": 0,
+      "sampledPixels": 10620,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 5,
+      "debugBypass": false,
+      "draws": 10,
+      "size": [
+        640,
+        360
+      ],
+      "blurSize": [
+        320,
+        180
+      ],
+      "estimatedMiB": 3.52
+    },
+    {
+      "width": 640,
+      "height": 360,
+      "dpr": 1,
+      "quality": "high",
+      "strength": 2,
+      "maxDelta": 0,
+      "sampledPixels": 10620,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 10,
+      "debugBypass": false,
+      "draws": 10,
+      "size": [
+        640,
+        360
+      ],
+      "blurSize": [
+        320,
+        180
+      ],
+      "estimatedMiB": 3.52
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dpr": 1.75,
+      "quality": "low",
+      "strength": 0,
+      "maxDelta": 0,
+      "sampledPixels": 45220,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 0,
+      "debugBypass": false,
+      "draws": 0,
+      "size": [
+        682,
+        1477
+      ],
+      "blurSize": [
+        171,
+        370
+      ],
+      "estimatedMiB": 12.49
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dpr": 1.75,
+      "quality": "low",
+      "strength": 1,
+      "maxDelta": 0,
+      "sampledPixels": 45220,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 3,
+      "debugBypass": false,
+      "draws": 10,
+      "size": [
+        682,
+        1477
+      ],
+      "blurSize": [
+        171,
+        370
+      ],
+      "estimatedMiB": 12.49
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dpr": 1.75,
+      "quality": "low",
+      "strength": 2,
+      "maxDelta": 0,
+      "sampledPixels": 45220,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 6,
+      "debugBypass": false,
+      "draws": 10,
+      "size": [
+        682,
+        1477
+      ],
+      "blurSize": [
+        171,
+        370
+      ],
+      "estimatedMiB": 12.49
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dpr": 1.75,
+      "quality": "high",
+      "strength": 0,
+      "maxDelta": 0,
+      "sampledPixels": 45220,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 0,
+      "debugBypass": false,
+      "draws": 0,
+      "size": [
+        682,
+        1477
+      ],
+      "blurSize": [
+        341,
+        739
+      ],
+      "estimatedMiB": 15.37
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dpr": 1.75,
+      "quality": "high",
+      "strength": 1,
+      "maxDelta": 0,
+      "sampledPixels": 45220,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 5,
+      "debugBypass": false,
+      "draws": 10,
+      "size": [
+        682,
+        1477
+      ],
+      "blurSize": [
+        341,
+        739
+      ],
+      "estimatedMiB": 15.37
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dpr": 1.75,
+      "quality": "high",
+      "strength": 2,
+      "maxDelta": 0,
+      "sampledPixels": 45220,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 10,
+      "debugBypass": false,
+      "draws": 10,
+      "size": [
+        682,
+        1477
+      ],
+      "blurSize": [
+        341,
+        739
+      ],
+      "estimatedMiB": 15.37
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dpr": 1.75,
+      "quality": "low",
+      "strength": 0,
+      "maxDelta": 0,
+      "sampledPixels": 47544,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 0,
+      "debugBypass": false,
+      "draws": 0,
+      "size": [
+        1477,
+        682
+      ],
+      "blurSize": [
+        370,
+        171
+      ],
+      "estimatedMiB": 12.49
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dpr": 1.75,
+      "quality": "low",
+      "strength": 1,
+      "maxDelta": 0,
+      "sampledPixels": 47544,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 3,
+      "debugBypass": false,
+      "draws": 10,
+      "size": [
+        1477,
+        682
+      ],
+      "blurSize": [
+        370,
+        171
+      ],
+      "estimatedMiB": 12.49
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dpr": 1.75,
+      "quality": "low",
+      "strength": 2,
+      "maxDelta": 0,
+      "sampledPixels": 47544,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 6,
+      "debugBypass": false,
+      "draws": 10,
+      "size": [
+        1477,
+        682
+      ],
+      "blurSize": [
+        370,
+        171
+      ],
+      "estimatedMiB": 12.49
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dpr": 1.75,
+      "quality": "high",
+      "strength": 0,
+      "maxDelta": 0,
+      "sampledPixels": 47544,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 0,
+      "debugBypass": false,
+      "draws": 0,
+      "size": [
+        1477,
+        682
+      ],
+      "blurSize": [
+        739,
+        341
+      ],
+      "estimatedMiB": 15.37
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dpr": 1.75,
+      "quality": "high",
+      "strength": 1,
+      "maxDelta": 0,
+      "sampledPixels": 47544,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 5,
+      "debugBypass": false,
+      "draws": 10,
+      "size": [
+        1477,
+        682
+      ],
+      "blurSize": [
+        739,
+        341
+      ],
+      "estimatedMiB": 15.37
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "dpr": 1.75,
+      "quality": "high",
+      "strength": 2,
+      "maxDelta": 0,
+      "sampledPixels": 47544,
+      "enabled": true,
+      "failure": null,
+      "radiusCss": 10,
+      "debugBypass": false,
+      "draws": 10,
+      "size": [
+        1477,
+        682
+      ],
+      "blurSize": [
+        739,
+        341
+      ],
+      "estimatedMiB": 15.37
+    }
+  ],
+  "trees": 320,
+  "treeTriangles": 13880,
+  "warmMemory": {
+    "geometries": 33,
+    "textures": 3,
+    "programs": 19
+  },
+  "afterCycles": {
+    "geometries": 33,
+    "textures": 3,
+    "programs": 19
+  },
+  "note": "Desktop WebGL regression; no physical-phone timing claim."
+}

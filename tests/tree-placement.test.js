@@ -14,11 +14,13 @@ test('tree placements are deterministic, spread across town and do not mutate th
     const first = createTreePlacements(plan);
     assert.deepEqual(first, createTreePlacements(plan));
     assert.equal(JSON.stringify(plan), before);
-    assert.ok(first.length >= 32 && first.length <= 96, `seed ${seed} produced ${first.length} trees`);
+    assert.ok(first.length >= 192 && first.length <= 320, `seed ${seed} produced ${first.length} trees`);
+    assert.equal(new Set(first.map(tree=>tree.crownType)).size,3);
+    assert.ok(new Set(first.map(tree=>Math.round(tree.x*10))).size>70,'placements must not repeat segment midpoints');
     assert.ok(first.some(tree => tree.x < -70) && first.some(tree => tree.x > 70));
     assert.ok(first.some(tree => tree.z < -70) && first.some(tree => tree.z > 70));
     assert.ok(first.every((tree, i) => tree.id === i && first.slice(0, i).every(other =>
-      Math.hypot(tree.x - other.x, tree.z - other.z) >= 6.5)));
+      Math.hypot(tree.x - other.x, tree.z - other.z) >= 4.5)));
   }
 });
 

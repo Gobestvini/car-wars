@@ -1,12 +1,11 @@
 import { createRoadSurfaceRectangles, createSidewalkRectangles } from './road-surface.js';
 
 export const TREE_PLACEMENT = Object.freeze({
-  maxTrees: 96,
-  minSpacing: 6.5,
+  maxTrees: 320,
+  minSpacing: 4.5,
   signalClearance: 3,
   roadClearance: 0.05,
-  sidewalkInset: 1.72,
-  canopyRadius: Object.freeze({ min: 1.08, max: 1.3 }),
+  canopyRadius: Object.freeze({ min: 0.78, max: 1.5 }),
 });
 
 function hash(seed, value) {
@@ -34,9 +33,9 @@ function obstacleBounds([x, z, width, depth, , yaw = 0]) {
   return { minX: x - halfX, maxX: x + halfX, minZ: z - halfZ, maxZ: z + halfZ };
 }
 
-/** Place one deterministically ranked tree on a road-side sidewalk per street segment. */
+/** Seeded candidates on both sidewalks, with varied longitudinal and curb offsets. */
 export function createTreePlacements(plan, { damageObstacles = [], signals = [] } = {}) {
-  const { maxTrees, minSpacing, signalClearance, roadClearance, sidewalkInset, canopyRadius } = TREE_PLACEMENT;
+  const { maxTrees, minSpacing, signalClearance, roadClearance, canopyRadius } = TREE_PLACEMENT;
   const plazaSpan = plan.blockPitch;
   const plaza = { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan };
   const sidewalks = createSidewalkRectangles(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plaza);
@@ -46,35 +45,50 @@ export function createTreePlacements(plan, { damageObstacles = [], signals = [] 
   }));
   const obstacles = damageObstacles.map(obstacleBounds);
   const ranked = [];
+  const nodes = new Map(plan.roadNetwork.intersections.map(node => [node.id, node]));
 
-  for (const edge of plan.roadNetwork.edges) {
-    const from = plan.roadNetwork.intersections.find(node => node.id === edge.from);
-    const to = plan.roadNetwork.intersections.find(node => node.id === edge.to);
+  for (const [edgeIndex, edge] of plan.roadNetwork.edges.entries()) {
+    const from = nodes.get(edge.from);
+    const to = nodes.get(edge.to);
     if (!from || !to) continue;
     const horizontal = Math.abs(to.x - from.x) > Math.abs(to.z - from.z);
-    const midpointX = (from.x + to.x) / 2;
-    const midpointZ = (from.z + to.z) / 2;
-    const token = hash(plan.seed >>> 0, (Math.abs(from.x) * 8191 + Math.abs(from.z) * 127
-      + Math.abs(to.x) * 17 + Math.abs(to.z)) | 0);
-    const sign = token & 1 ? 1 : -1;
-    const x = horizontal ? midpointX : from.x + sign * (plan.roadWidth / 2 + sidewalkInset);
-    const z = horizontal ? from.z + sign * (plan.roadWidth / 2 + sidewalkInset) : midpointZ;
-    const radius = canopyRadius.min + ((token >>> 8) % 1000) / 1000 * (canopyRadius.max - canopyRadius.min);
-    const stemRadius = 0.21;
+    for (let slot = 0; slot < 4; slot++) for (const side of [-1, 1]) {
+      const token = hash(plan.seed >>> 0, edgeIndex * 8 + slot * 2 + (side === 1 ? 1 : 0));
+      const random = salt => hash(token, salt) / 4294967296;
+      const radius = canopyRadius.min + random(1) * (canopyRadius.max - canopyRadius.min);
+      const stemRadius = 0.21;
+      const minInset = radius + roadClearance + 0.02;
+      const maxInset = plan.sidewalkWidth - stemRadius - 0.02;
+      if (maxInset < minInset) continue;
+      const inset = minInset + random(2) * (maxInset - minInset);
+      const along = 0.15 + slot * 0.2 + random(3) * 0.1;
+      const x = from.x + (to.x - from.x) * along + (horizontal ? 0 : side * (plan.roadWidth / 2 + inset));
+      const z = from.z + (to.z - from.z) * along + (horizontal ? side * (plan.roadWidth / 2 + inset) : 0);
 
-    if (Math.hypot(x, z) < plazaSpan / 2 + radius || !rootInside(sidewalks, x, z, stemRadius)) continue;
-    if (roads.some(rect => circleTouchesRect(x, z, radius + roadClearance, rect))) continue;
-    if (buildings.some(rect => circleTouchesRect(x, z, radius + 0.2, rect))) continue;
-    if (obstacles.some(rect => circleTouchesRect(x, z, radius + 0.2, rect))) continue;
-    if (signals.some(signal => Math.hypot(x - signal.x, z - signal.z) < signalClearance + radius)) continue;
-    ranked.push({ x, z, radius, token });
+      if (Math.hypot(x, z) < plazaSpan / 2 + radius || !rootInside(sidewalks, x, z, stemRadius)) continue;
+      if (roads.some(rect => circleTouchesRect(x, z, radius + roadClearance, rect))) continue;
+      if (buildings.some(rect => circleTouchesRect(x, z, radius + 0.2, rect))) continue;
+      if (obstacles.some(rect => circleTouchesRect(x, z, radius + 0.2, rect))) continue;
+      if (signals.some(signal => Math.hypot(x - signal.x, z - signal.z) < signalClearance + radius)) continue;
+      ranked.push({ x, z, radius, token, crownType: hash(token, 4) % 3 });
+    }
   }
 
   ranked.sort((a, b) => a.token - b.token || a.x - b.x || a.z - b.z);
   const accepted = [];
+  const cells = new Map();
   for (const candidate of ranked) {
-    if (accepted.some(tree => Math.hypot(candidate.x - tree.x, candidate.z - tree.z) < minSpacing)) continue;
+    const cx = Math.floor(candidate.x / minSpacing), cz = Math.floor(candidate.z / minSpacing);
+    let crowded = false;
+    for (let dx = -1; dx <= 1 && !crowded; dx++) for (let dz = -1; dz <= 1 && !crowded; dz++) {
+      crowded = (cells.get(`${cx + dx}:${cz + dz}`) || []).some(tree =>
+        (candidate.x - tree.x) ** 2 + (candidate.z - tree.z) ** 2 < minSpacing ** 2);
+    }
+    if (crowded) continue;
     accepted.push({ ...candidate, id: accepted.length });
+    const key = `${cx}:${cz}`;
+    if (!cells.has(key)) cells.set(key, []);
+    cells.get(key).push(candidate);
     if (accepted.length === maxTrees) break;
   }
   return accepted;

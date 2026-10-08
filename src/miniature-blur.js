@@ -17,8 +17,8 @@ export function miniatureBlurTargetSize(cssWidth, cssHeight, pixelRatio, quality
     return { width: 0, height: 0, blurWidth: 0, blurHeight: 0 };
   }
   const scale = MINIATURE_BLUR[quality === 'low' ? 'low' : 'high'].scale;
-  const width = Math.max(1, Math.ceil(cssWidth * pixelRatio));
-  const height = Math.max(1, Math.ceil(cssHeight * pixelRatio));
+  const width = Math.max(1, Math.floor(cssWidth * pixelRatio));
+  const height = Math.max(1, Math.floor(cssHeight * pixelRatio));
   return { width, height, blurWidth: Math.max(1, Math.ceil(width * scale)),
     blurHeight: Math.max(1, Math.ceil(height * scale)) };
 }
@@ -29,6 +29,10 @@ export function miniatureBlurFocus(car, ahead) {
   if (!usable(car) || !usable(ahead)) return { x: 0.5, y: 0.5 };
   return { x: THREE.MathUtils.lerp(car.x, ahead.x, MINIATURE_BLUR.focusOffset),
     y: THREE.MathUtils.lerp(car.y, ahead.y, MINIATURE_BLUR.focusOffset) };
+}
+
+export function normalizeBlurStrength(value) {
+  return Number.isFinite(value) ? THREE.MathUtils.clamp(value, 0, 2) : 1;
 }
 
 const fullscreenVertex = /* glsl */`
@@ -82,7 +86,6 @@ const compositeFragment = /* glsl */`
   uniform sampler2D tBlur;
   uniform vec2 focus;
   uniform vec2 focusRadius;
-  uniform vec2 viewport;
   uniform float transitionStart;
   uniform float transitionEnd;
   varying vec2 vUv;
@@ -92,6 +95,9 @@ const compositeFragment = /* glsl */`
     float blurMix = smoothstep(transitionStart, transitionEnd, edge);
     vec4 color = mix(texture2D(tSharp, vUv), texture2D(tBlur, vUv), blurMix);
     gl_FragColor = color;
+    // ShaderMaterial injects the function declarations, not these output calls.
+    #include <tonemapping_fragment>
+    #include <colorspace_fragment>
   }
 `;
 
@@ -147,6 +153,7 @@ export function createMiniatureBlur(renderer) {
   const warmupMesh = supported ? new THREE.Mesh(new THREE.PlaneGeometry(2, 2), horizontalMaterial) : null;
   if (warmupScene) { warmupScene.add(warmupMesh); warmupCamera.position.z = 1; }
   let quality = 'high';
+  let strength = 1;
   let cssWidth = 0, cssHeight = 0, pixelRatio = 1;
   let enabled = supported;
   let failure = supported ? null : 'half-float-linear-render-target-unsupported';
@@ -167,8 +174,8 @@ export function createMiniatureBlur(renderer) {
       horizontalTarget.setSize(next.blurWidth, next.blurHeight);
       verticalTarget.setSize(next.blurWidth, next.blurHeight);
     }
-    horizontalMaterial.uniforms.h.value = MINIATURE_BLUR[quality].radiusCss / (4 * cssWidth);
-    verticalMaterial.uniforms.v.value = MINIATURE_BLUR[quality].radiusCss / (4 * cssHeight);
+    horizontalMaterial.uniforms.h.value = MINIATURE_BLUR[quality].radiusCss * strength / (4 * cssWidth);
+    verticalMaterial.uniforms.v.value = MINIATURE_BLUR[quality].radiusCss * strength / (4 * cssHeight);
     return true;
   };
 
@@ -176,8 +183,6 @@ export function createMiniatureBlur(renderer) {
     const next = value === 'low' ? 'low' : 'high';
     if (quality === next) return false;
     quality = next;
-    horizontalMaterial?.uniforms.h && (horizontalMaterial.uniforms.h.value = MINIATURE_BLUR[quality].radiusCss / (4 * Math.max(cssWidth, 1)));
-    verticalMaterial?.uniforms.v && (verticalMaterial.uniforms.v.value = MINIATURE_BLUR[quality].radiusCss / (4 * Math.max(cssHeight, 1)));
     resize(cssWidth || innerWidth, cssHeight || innerHeight, pixelRatio);
     return true;
   };
@@ -198,7 +203,7 @@ export function createMiniatureBlur(renderer) {
   };
 
   const render = (scene, camera, { mode = 'follow', car = null } = {}) => {
-    if (disposed || !enabled || debugBypass || mode === 'free') {
+    if (disposed || !enabled || strength === 0 || debugBypass || mode === 'free') {
       lastDrawCalls = 0;
       renderer.render(scene, camera);
       return;
@@ -248,7 +253,8 @@ export function createMiniatureBlur(renderer) {
       fullscreen.material = compositeMaterial;
       renderer.setRenderTarget(priorTarget);
       if (priorTarget === null) {
-        renderer.setViewport(0, 0, cssWidth * pixelRatio, cssHeight * pixelRatio);
+        // setViewport applies renderer DPR itself; passing buffer pixels doubles it.
+        renderer.setViewport(0, 0, cssWidth, cssHeight);
       }
       renderer.clear(true, false, false);
       fullscreen.render(renderer);
@@ -281,7 +287,7 @@ export function createMiniatureBlur(renderer) {
     const sharpPixels = sharpTarget ? sharpTarget.width * sharpTarget.height : 0;
     const blurPixels = horizontalTarget ? horizontalTarget.width * horizontalTarget.height : 0;
     const estimatedBytes = sharpPixels * bytesPerPixel + blurPixels * 16;
-    return { enabled, failure, quality, radiusCss: MINIATURE_BLUR[quality].radiusCss,
+    return { enabled, failure, quality, strength, radiusCss: MINIATURE_BLUR[quality].radiusCss * strength,
       debugBypass, draws: lastDrawCalls, size: sharpTarget ? [sharpTarget.width, sharpTarget.height] : [0, 0],
       blurSize: horizontalTarget ? [horizontalTarget.width, horizontalTarget.height] : [0, 0],
       estimatedMiB: Number((estimatedBytes / 1048576).toFixed(2)) };
@@ -298,6 +304,11 @@ export function createMiniatureBlur(renderer) {
   return {
     resize,
     setQuality,
+    setStrength(value) {
+      strength = normalizeBlurStrength(value);
+      if (horizontalMaterial) horizontalMaterial.uniforms.h.value = MINIATURE_BLUR[quality].radiusCss * strength / (4 * Math.max(cssWidth, 1));
+      if (verticalMaterial) verticalMaterial.uniforms.v.value = MINIATURE_BLUR[quality].radiusCss * strength / (4 * Math.max(cssHeight, 1));
+    },
     render,
     compile,
     snapshot,

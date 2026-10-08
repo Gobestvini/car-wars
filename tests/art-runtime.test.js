@@ -5,6 +5,7 @@ import { createCityPlan } from '../src/city-generator.js';
 import { createCityScene } from '../src/city-scene.js';
 import { buildingArt } from '../src/art-direction.js';
 import { createTrafficAssets, makeTrafficCar } from '../src/vehicle-visuals.js';
+import { createSurfaceHeightSampler } from '../src/road-surface.js';
 
 test('art variation never mutates the plan or physical city dimensions',()=>{
   const plan=createCityPlan(), before=JSON.stringify(plan), physical=[];
@@ -66,40 +67,69 @@ test('traffic art reuses geometry and stays inside its original collision footpr
   assets.animate(1);assets.dispose();
 });
 
-test('street trees use two shared low-poly batches, protect the car, and dispose with the city',()=>{
+test('varied street trees connect to their trunks, use four batches, protect the car and dispose',()=>{
   const scene=new THREE.Scene(),removed=[];
   const city=createCityScene(scene,{addStaticBox:spec=>spec,removeStaticBox:body=>removed.push(body)},createCityPlan());
   const {trees}=city;
-  assert.ok(trees.count>=32 && trees.count<=96);
-  assert.equal(trees.trunks.count,trees.count);assert.equal(trees.crowns.count,trees.count);
-  assert.ok((trees.crowns.geometry.index?.count ?? trees.crowns.geometry.attributes.position.count)/3<=80);
+  assert.ok(trees.count>=192 && trees.count<=320);
+  assert.equal(trees.trunks.count,trees.count);
+  assert.equal(trees.crownBatches.length,3);
+  assert.equal(trees.crownBatches.reduce((sum,batch)=>sum+batch.count,0),trees.count);
+  const treeMeshes=[trees.trunks,...trees.crownBatches];
+  assert.ok(treeMeshes.every(mesh=>mesh.isInstancedMesh));
+  assert.ok(treeMeshes.reduce((sum,mesh)=>sum+mesh.count*(mesh.geometry.index?.count??mesh.geometry.attributes.position.count)/3,0)<18000);
+  const surface=createSurfaceHeightSampler(createCityPlan(),0),heightRange=[];
+  for(const tree of trees.placements) {
+    const transform=new THREE.Matrix4();
+    trees.trunks.getMatrixAt(tree.id,transform);
+    trees.trunks.geometry.computeBoundingBox();
+    const stem=trees.trunks.geometry.boundingBox.clone().applyMatrix4(transform);
+    const batch=trees.crownBatches[tree.crownType];
+    batch.getMatrixAt(tree.crownIndex,transform);
+    const canopy=new THREE.Box3();
+    const vertex=new THREE.Vector3();
+    for(let i=0;i<batch.geometry.attributes.position.count;i++) {
+      vertex.fromBufferAttribute(batch.geometry.attributes.position,i).applyMatrix4(transform);
+      canopy.expandByPoint(vertex);
+    }
+    assert.ok(Math.abs(stem.min.y-surface(tree.x,tree.z))<1e-5);
+    assert.ok(stem.max.y>canopy.min.y+(canopy.max.y-canopy.min.y)*.45,'stem ends inside the canopy');
+    assert.ok(stem.max.y<canopy.max.y,'stem does not poke out above the canopy');
+    assert.ok(Math.max(Math.abs(canopy.min.x-tree.x),Math.abs(canopy.max.x-tree.x),
+      Math.abs(canopy.min.z-tree.z),Math.abs(canopy.max.z-tree.z))<=tree.radius+1e-4);
+    heightRange.push(canopy.max.y-canopy.min.y);
+  }
+  assert.ok(Math.max(...heightRange)-Math.min(...heightRange)>2,'tree volumes should vary');
   const blocker=trees.placements[0];
+  const blockerBatch=trees.crownBatches[blocker.crownType];
+  const blockerMatrix=new THREE.Matrix4();
+  blockerBatch.getMatrixAt(blocker.crownIndex,blockerMatrix);
   const camera=new THREE.PerspectiveCamera(45,1,.1,100);
-  camera.position.set(blocker.x,blocker.radius+12,blocker.z+18);
+  camera.position.set(blocker.x,blockerMatrix.elements[13]*2-.5,blocker.z+18);
   const car=new THREE.Object3D();car.position.set(blocker.x,.5,blocker.z-18);
   trees.updateVisibility(camera,car,1/60,'follow');
-  let hidden=new THREE.Matrix4();trees.crowns.getMatrixAt(blocker.id,hidden);
+  let hidden=new THREE.Matrix4();blockerBatch.getMatrixAt(blocker.crownIndex,hidden);
   assert.equal(hidden.elements[0],0);
   camera.position.x+=100;
   trees.updateVisibility(camera,car,.1,'follow');
-  trees.crowns.getMatrixAt(blocker.id,hidden);assert.equal(hidden.elements[0],0);
+  blockerBatch.getMatrixAt(blocker.crownIndex,hidden);assert.equal(hidden.elements[0],0);
   trees.updateVisibility(camera,car,.1,'follow');
-  trees.crowns.getMatrixAt(blocker.id,hidden);assert.notEqual(hidden.elements[0],0);
-  const geometryDisposals=[trees.trunks.geometry,trees.crowns.geometry].map(geometry=>{
+  blockerBatch.getMatrixAt(blocker.crownIndex,hidden);assert.notEqual(hidden.elements[0],0);
+  const geometryDisposals=treeMeshes.map(mesh=>mesh.geometry).map(geometry=>{
     let count=0;geometry.addEventListener('dispose',()=>count++);return ()=>count;
   });
   const initialChildren=scene.children.length;
   city.dispose();
   assert.equal(scene.children.length,initialChildren-1);
   assert.ok(removed.length>0);
-  assert.deepEqual(geometryDisposals.map(read=>read()),[1,1]);
+  assert.deepEqual(geometryDisposals.map(read=>read()),[1,1,1,1]);
   for(let rebuild=0;rebuild<10;rebuild++) {
     const nextCity=createCityScene(scene,{addStaticBox:spec=>spec,removeStaticBox:body=>removed.push(body)},createCityPlan());
-    const disposed=[nextCity.trees.trunks.geometry,nextCity.trees.crowns.geometry].map(geometry=>{
+    const disposed=[nextCity.trees.trunks,...nextCity.trees.crownBatches].map(mesh=>mesh.geometry).map(geometry=>{
       let count=0;geometry.addEventListener('dispose',()=>count++);return ()=>count;
     });
     nextCity.dispose();
     assert.equal(scene.children.length,initialChildren-1,`city rebuild ${rebuild} left a scene child`);
-    assert.deepEqual(disposed.map(read=>read()),[1,1],`city rebuild ${rebuild} did not dispose each tree geometry once`);
+    assert.deepEqual(disposed.map(read=>read()),[1,1,1,1],`city rebuild ${rebuild} did not dispose each tree geometry once`);
   }
 });

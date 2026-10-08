@@ -4,7 +4,7 @@ import { clearSettingsDefaults, readSettingsDefaults, saveSettingsDefaults, SETT
 
 const defaults = { softness: 0.45, grip: 1.8, power: 1, quality: 'Высокая', trails: true,
   roadWidth: 15, trafficCount: 60, skidThreshold: 1.25, trackIntensity: 1,
-  cameraSpeed: 15, drawDistanceFollow: 200, drawDistanceFree: 600 };
+  cameraSpeed: 15, drawDistanceFollow: 200, drawDistanceFree: 600, blurStrength: 1 };
 const memoryStorage = () => {
   const data = new Map();
   return { getItem: key => data.get(key) ?? null, setItem: (key, value) => data.set(key, value),
@@ -61,4 +61,16 @@ test('skid controls validate, persist, and default for profiles created before t
   storage.setItem(SETTINGS_DEFAULTS_KEY, JSON.stringify({ version: 1,
     values: { skidThreshold: 1.23, trackIntensity: 1.5 } }));
   assert.deepEqual(readSettingsDefaults(storage, defaults), defaults);
+});
+
+test('blur control preserves disabled/strong values and migrates older profiles without changing other settings', () => {
+  const storage=memoryStorage();
+  for(const blurStrength of [0,.35,2]) {
+    saveSettingsDefaults(storage,{...defaults,blurStrength},defaults);
+    assert.equal(readSettingsDefaults(storage,defaults).blurStrength,blurStrength);
+  }
+  for(const blurStrength of [-1,3,'1',.333]) {
+    storage.setItem(SETTINGS_DEFAULTS_KEY,JSON.stringify({version:1,values:{blurStrength,trails:false}}));
+    assert.deepEqual(readSettingsDefaults(storage,defaults),{...defaults,trails:false});
+  }
 });

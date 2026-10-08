@@ -35,6 +35,7 @@ const freeCameraSpeed = 15;
 const factorySettings = {
   ...DEFAULT_TUNING,
   quality: matchMedia('(pointer: coarse)').matches ? 'Лёгкая' : 'Высокая',
+  blurStrength: 1,
   trails: true,
   skidThreshold: DEFAULT_SKID_THRESHOLD,
   trackIntensity: DEFAULT_TRACK_INTENSITY,
@@ -112,6 +113,7 @@ scene.background = new THREE.Color(ART.fog);
 scene.fog = new THREE.Fog(ART.fog, 100, 260);
 const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.1, 200);
 const miniatureBlur = createMiniatureBlur(renderer);
+miniatureBlur.setStrength(savedDefaults.blurStrength);
 const orbitControls = debug ? new OrbitControls(camera, canvas) : null;
 if (orbitControls) {
   orbitControls.enabled = false;
@@ -447,6 +449,7 @@ const settings = createSettings($('settings-controls'), {
     else quality = value === 'Лёгкая' ? 'low' : 'high';
   },
   onTrails: visible => { tracks.mesh.visible = visible; },
+  onBlur: strength => miniatureBlur.setStrength(strength),
   onTrackConfig: values => tracks.setConfig({ threshold: values.skidThreshold, intensity: values.trackIntensity }),
   onRoadWidth: width => { if (settingsReady && width !== cityPlan.roadWidth) rebuildCity(width); },
   onTrafficCount: count => { if (settingsReady) traffic.setCount(count); },
