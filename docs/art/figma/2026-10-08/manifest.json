@@ -1,0 +1,151 @@
+{
+  "title": "Car Stars — основные экраны",
+  "date": "2026-10-08",
+  "fileKey": "NllQADLKwk6RK8pMTurKiN",
+  "figmaUrl": "https://www.figma.com/design/NllQADLKwk6RK8pMTurKiN?node-id=6-57",
+  "sectionId": "6:57",
+  "canvas": {
+    "screenWidth": 390,
+    "screenHeight": 844
+  },
+  "screens": [
+    {
+      "id": "5:248",
+      "name": "01 · Меню — угонщик",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "5:281",
+      "name": "02 · Меню — город",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "5:314",
+      "name": "03 · Игра — угонщик",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "5:362",
+      "name": "04 · Игра — управление городом",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "5:404",
+      "name": "05 · Победа",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "5:446",
+      "name": "06 · Поражение",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/thief-city.png",
+      "kind": "background-illustration-without-UI",
+      "source": "OpenAI built-in image_gen",
+      "reference": "docs/art/concepts/2026-10-08/02-gameplay-thief.png",
+      "prompt": "Create a clean portrait game-art BACKGROUND PLATE by editing this reference. Remove ALL interface: every text, logo, speed label, star panel, pause button, joystick, damage bar, circular controls, icons. Seamlessly reconstruct the underlying low-poly city streets and buildings. Preserve the exact sunny miniature-town art direction: cream sidewalks, peach/yellow buildings with vivid blue roofs, faceted green trees, matte golden-yellow getaway sedan at lower-middle, two navy-white police cars following it, curved tire tracks, softly blurred far foreground edges. Keep bright original colors and daytime lighting, no dark filter. Compose hero yellow car around 60% screen height, plenty of clear road area at upper 25% and lower 20% for later editable UI. Entire image is uninterrupted environment illustration with absolutely no typography, no UI, no labels, no border. Polished 3D stylized mobile game render, portrait 1:2.",
+      "dimensions": {
+        "width": 887,
+        "height": 1774
+      },
+      "transparent": false,
+      "use": "Figma illustration fill; no runtime integration",
+      "rights": "AI-generated derivative of project-owned concepts; no third-party downloaded assets",
+      "sha256": "ed47c43997e4472daaeb8297add2dbff5f0128df09ffd14fc6ea941a839bbfcf"
+    },
+    {
+      "path": "assets/city-control.png",
+      "kind": "background-illustration-without-UI",
+      "source": "OpenAI built-in image_gen",
+      "reference": "docs/art/concepts/2026-10-08/car-stars-menu-v2/02-city-selected.png",
+      "prompt": "Create a clean portrait game-art BACKGROUND PLATE based on the RIGHT CITY SIDE of this reference. Expand that city into the entire portrait image. Remove all logo, text, buttons, selection badge, pins, glowing routes, diagonal split and left close-up thief side. Show a sunny low-poly miniature city from a higher isometric angle, a grid of streets with cream sidewalks, pastel peach and yellow buildings, vivid blue roofs, varied faceted green trees. Include THREE small navy-white police patrol cars spread around the city streets and one small golden yellow target car near lower-middle. Leave readable open road areas for later editable route overlays. Consistent daytime lighting, bright colors, subtle tilt-shift edge blur, no dark filter. This is citywide management, not a close-up of one cop. Absolutely no text, labels, symbols, pins, UI or graphic overlay. Full uninterrupted portrait 1:2 illustration.",
+      "dimensions": {
+        "width": 887,
+        "height": 1774
+      },
+      "transparent": false,
+      "use": "Figma illustration fill; no runtime integration",
+      "rights": "AI-generated derivative of project-owned concepts; no third-party downloaded assets",
+      "sha256": "51397cae8fd0be839a41d1e9c80ec13b551f0a53e87fc08dedf5edc79ed7036c"
+    },
+    {
+      "path": "assets/victory.png",
+      "kind": "background-illustration-without-UI",
+      "source": "OpenAI built-in image_gen",
+      "reference": "docs/art/concepts/2026-10-08/04-victory.png",
+      "prompt": "Edit this reference into a clean portrait 1:2 background illustration for an editable Figma victory screen. Remove ALL typography, logo, labels, UI cards, stars, counters, buttons and their containers. Reconstruct city seamlessly beneath removed UI. Preserve the cheerful low-poly miniature city colors, vivid blue roofs, sunny cream sidewalks, faceted trees and the golden yellow getaway sedan displayed on a blue circular podium with blue and gold confetti. Move/compress the entire hero podium and car into the UPPER HALF of the composition, with car center near 34% height, so lower half is softly blurred underlying city street reserved for later UI overlay. No chase police immediately behind hero. Absolutely no interface, no letters, no symbols, no reward stars, no border. Clean 3D game illustration only.",
+      "dimensions": {
+        "width": 887,
+        "height": 1774
+      },
+      "transparent": false,
+      "use": "Figma illustration fill; no runtime integration",
+      "rights": "AI-generated derivative of project-owned concepts; no third-party downloaded assets",
+      "sha256": "341397e59030756201ec99ed6e98c0cb9e03e8e4f2eee6fc7903d83a6b91b378"
+    },
+    {
+      "path": "assets/defeat.png",
+      "kind": "background-illustration-without-UI",
+      "source": "OpenAI built-in image_gen",
+      "reference": "docs/art/concepts/2026-10-08/05-defeat.png",
+      "prompt": "Edit this reference into a clean portrait 1:2 background illustration for an editable Figma defeat screen. Remove ALL typography, logo, labels, status cards, wheel icon, buttons and their containers. Reconstruct underlying city street seamlessly. Preserve sunny miniature low-poly peach buildings, bright blue roofs, cream sidewalks, varied faceted trees, yellow sedan stopped between TWO police cars with small engine smoke. Arrange cars together in UPPER HALF with center near 35% height, leave lower half a softly blurred empty city backdrop reserved for later editable UI. Bright original palette, no black darkening filter. Absolutely no interface, no text, no icons, no graphic labels, no border.",
+      "dimensions": {
+        "width": 887,
+        "height": 1774
+      },
+      "transparent": false,
+      "use": "Figma illustration fill; no runtime integration",
+      "rights": "AI-generated derivative of project-owned concepts; no third-party downloaded assets",
+      "sha256": "e8b58fb94133d99f072d968c7462775ad7407bd18a37cdaf9c0b29a5ad87d614"
+    }
+  ],
+  "fonts": [
+    {
+      "family": "Russo One",
+      "style": "Regular",
+      "use": "Logo, headings, buttons, numeric values"
+    },
+    {
+      "family": "Nunito",
+      "style": "Bold / ExtraBold",
+      "use": "Body and captions"
+    }
+  ],
+  "scope": "Editable mobile screen designs and reusable Figma UI components. City patrol controls are a design proposal.",
+  "reusableComponents": {
+    "buttonTones": [
+      "Gold",
+      "Blue",
+      "Secondary"
+    ],
+    "starStates": [
+      "Earned",
+      "Empty"
+    ],
+    "metricTones": [
+      "Light",
+      "Dark"
+    ],
+    "icons": [
+      "star",
+      "play",
+      "pause",
+      "check",
+      "shield",
+      "target",
+      "gear",
+      "brake",
+      "clock"
+    ]
+  },
+  "helpers": "Adapted local helper patterns from official Figma figma-generate-library scripts."
+}
