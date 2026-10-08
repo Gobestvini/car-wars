@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-08",
+  "art_direction_brief": "README.md",
+  "assets": [
+    {
+      "id": "01-thief-selected",
+      "path": "01-thief-selected.png",
+      "role": "main-menu/thief-selected",
+      "status": "concept-reviewed",
+      "technical": {
+        "dimensions": "887x1774",
+        "format": "PNG",
+        "mode": "RGB",
+        "color_space": "sRGB",
+        "alpha": false,
+        "filtering": "linear preview",
+        "mipmaps": "not applicable",
+        "anchor": "full screen",
+        "frames": 1,
+        "collision_role": "none",
+        "runtime_import": false
+      },
+      "source": {
+        "tool": "built-in image_gen.imagegen",
+        "model_version": "not exposed",
+        "created_at": "2026-10-08",
+        "kind": "AI-generated",
+        "reference": "../01-role-selection.png",
+        "prompt_record": "prompts.json",
+        "license": "AI-generated concept; no third-party license assigned",
+        "edit_history": "Full main-menu redesign from v1 reference"
+      },
+      "verification": {
+        "technical_checks_passed": true,
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": false,
+        "reviewed_by": "Codex",
+        "user_approved": false
+      }
+    },
+    {
+      "id": "02-city-selected",
+      "path": "02-city-selected.png",
+      "role": "main-menu/city-law-enforcer-selected",
+      "status": "concept-reviewed",
+      "technical": {
+        "dimensions": "887x1774",
+        "format": "PNG",
+        "mode": "RGB",
+        "color_space": "sRGB",
+        "alpha": false,
+        "filtering": "linear preview",
+        "mipmaps": "not applicable",
+        "anchor": "full screen",
+        "frames": 1,
+        "collision_role": "none",
+        "runtime_import": false
+      },
+      "source": {
+        "tool": "built-in image_gen.imagegen",
+        "model_version": "not exposed",
+        "created_at": "2026-10-08",
+        "kind": "AI-generated",
+        "reference": "01-thief-selected.png",
+        "prompt_record": "prompts.json",
+        "license": "AI-generated concept; no third-party license assigned",
+        "edit_history": "City-selected layout refinement from thief-selected reference"
+      },
+      "verification": {
+        "technical_checks_passed": true,
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": false,
+        "reviewed_by": "Codex",
+        "user_approved": false
+      }
+    }
+  ]
+}

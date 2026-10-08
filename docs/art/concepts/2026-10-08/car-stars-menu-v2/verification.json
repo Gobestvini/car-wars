@@ -1,0 +1,46 @@
+{
+  "ok": true,
+  "assets": [
+    {
+      "path": "01-thief-selected.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "width": 887,
+      "height": 1774,
+      "bytes": 2073742,
+      "color_count": ">65535",
+      "has_alpha": false,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "transparent_pixels": 0,
+      "content_bounds": [
+        0,
+        0,
+        887,
+        1774
+      ],
+      "problems": []
+    },
+    {
+      "path": "02-city-selected.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "width": 887,
+      "height": 1774,
+      "bytes": 2168477,
+      "color_count": ">65535",
+      "has_alpha": false,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "transparent_pixels": 0,
+      "content_bounds": [
+        0,
+        0,
+        887,
+        1774
+      ],
+      "problems": []
+    }
+  ],
+  "app_validation": "npm run build: passed; dist/index.html title verified as Car Stars"
+}
