@@ -1,0 +1,105 @@
+{
+  "ok": true,
+  "assets": [
+    {
+      "path": "01-role-selection.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "width": 887,
+      "height": 1774,
+      "bytes": 1770176,
+      "color_count": ">65535",
+      "has_alpha": false,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "transparent_pixels": 0,
+      "content_bounds": [
+        0,
+        0,
+        887,
+        1774
+      ],
+      "problems": []
+    },
+    {
+      "path": "02-gameplay-thief.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "width": 887,
+      "height": 1774,
+      "bytes": 1918100,
+      "color_count": ">65535",
+      "has_alpha": false,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "transparent_pixels": 0,
+      "content_bounds": [
+        0,
+        0,
+        887,
+        1774
+      ],
+      "problems": []
+    },
+    {
+      "path": "03-gameplay-cop.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "width": 887,
+      "height": 1774,
+      "bytes": 1822175,
+      "color_count": ">65535",
+      "has_alpha": false,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "transparent_pixels": 0,
+      "content_bounds": [
+        0,
+        0,
+        887,
+        1774
+      ],
+      "problems": []
+    },
+    {
+      "path": "04-victory.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "width": 887,
+      "height": 1774,
+      "bytes": 1760268,
+      "color_count": ">65535",
+      "has_alpha": false,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "transparent_pixels": 0,
+      "content_bounds": [
+        0,
+        0,
+        887,
+        1774
+      ],
+      "problems": []
+    },
+    {
+      "path": "05-defeat.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "width": 887,
+      "height": 1774,
+      "bytes": 1685761,
+      "color_count": ">65535",
+      "has_alpha": false,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "transparent_pixels": 0,
+      "content_bounds": [
+        0,
+        0,
+        887,
+        1774
+      ],
+      "problems": []
+    }
+  ]
+}

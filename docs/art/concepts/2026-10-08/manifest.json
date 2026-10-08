@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "art_direction_brief": "README.md",
+  "created_at": "2026-10-08",
+  "purpose": "Screen concept art; not runtime assets",
+  "assets": [
+    {
+      "id": "01-role-selection",
+      "role": "Старт и выбор роли",
+      "path": "01-role-selection.png",
+      "status": "concept-reviewed",
+      "technical": {
+        "dimensions": "887x1774",
+        "format": "PNG",
+        "alpha": false,
+        "color_space": "sRGB",
+        "filtering": "linear for preview",
+        "mipmaps": "not applicable",
+        "anchor": "full screen",
+        "frames": 1,
+        "collision_role": "none",
+        "runtime_import": false
+      },
+      "visual_locks": [
+        "sunny miniature city",
+        "matte low-poly cars",
+        "yellow getaway sedan",
+        "white/navy police sedan",
+        "blue roofs",
+        "cream rounded cards",
+        "navy Cyrillic type"
+      ],
+      "source": {
+        "kind": "AI-generated",
+        "url_or_tool": "built-in image_gen.imagegen",
+        "model_version": "not exposed by tool",
+        "creator": "Codex image generation",
+        "created_at": "2026-10-08",
+        "license": "AI-generated concept; no third-party license assigned",
+        "prompt_or_source_record": "prompts.json#01-role-selection",
+        "reference": "../../verification/after/390x844-high.png",
+        "edit_history": "Generated once; copied original PNG without content edits"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": true,
+        "reviewed_by": "Codex",
+        "user_approved": false
+      }
+    },
+    {
+      "id": "02-gameplay-thief",
+      "role": "Геймплей за угонщика",
+      "path": "02-gameplay-thief.png",
+      "status": "concept-reviewed",
+      "technical": {
+        "dimensions": "887x1774",
+        "format": "PNG",
+        "alpha": false,
+        "color_space": "sRGB",
+        "filtering": "linear for preview",
+        "mipmaps": "not applicable",
+        "anchor": "full screen",
+        "frames": 1,
+        "collision_role": "none",
+        "runtime_import": false
+      },
+      "visual_locks": [
+        "sunny miniature city",
+        "matte low-poly cars",
+        "yellow getaway sedan",
+        "white/navy police sedan",
+        "blue roofs",
+        "cream rounded cards",
+        "navy Cyrillic type"
+      ],
+      "source": {
+        "kind": "AI-generated",
+        "url_or_tool": "built-in image_gen.imagegen",
+        "model_version": "not exposed by tool",
+        "creator": "Codex image generation",
+        "created_at": "2026-10-08",
+        "license": "AI-generated concept; no third-party license assigned",
+        "prompt_or_source_record": "prompts.json#02-gameplay-thief",
+        "reference": "01-role-selection.png",
+        "edit_history": "Generated once; copied original PNG without content edits"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": true,
+        "reviewed_by": "Codex",
+        "user_approved": false
+      }
+    },
+    {
+      "id": "03-gameplay-cop",
+      "role": "Геймплей за копа",
+      "path": "03-gameplay-cop.png",
+      "status": "concept-reviewed",
+      "technical": {
+        "dimensions": "887x1774",
+        "format": "PNG",
+        "alpha": false,
+        "color_space": "sRGB",
+        "filtering": "linear for preview",
+        "mipmaps": "not applicable",
+        "anchor": "full screen",
+        "frames": 1,
+        "collision_role": "none",
+        "runtime_import": false
+      },
+      "visual_locks": [
+        "sunny miniature city",
+        "matte low-poly cars",
+        "yellow getaway sedan",
+        "white/navy police sedan",
+        "blue roofs",
+        "cream rounded cards",
+        "navy Cyrillic type"
+      ],
+      "source": {
+        "kind": "AI-generated",
+        "url_or_tool": "built-in image_gen.imagegen",
+        "model_version": "not exposed by tool",
+        "creator": "Codex image generation",
+        "created_at": "2026-10-08",
+        "license": "AI-generated concept; no third-party license assigned",
+        "prompt_or_source_record": "prompts.json#03-gameplay-cop",
+        "reference": "01-role-selection.png",
+        "edit_history": "Generated once; copied original PNG without content edits"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": true,
+        "reviewed_by": "Codex",
+        "user_approved": false
+      }
+    },
+    {
+      "id": "04-victory",
+      "role": "Победа и награда",
+      "path": "04-victory.png",
+      "status": "concept-reviewed",
+      "technical": {
+        "dimensions": "887x1774",
+        "format": "PNG",
+        "alpha": false,
+        "color_space": "sRGB",
+        "filtering": "linear for preview",
+        "mipmaps": "not applicable",
+        "anchor": "full screen",
+        "frames": 1,
+        "collision_role": "none",
+        "runtime_import": false
+      },
+      "visual_locks": [
+        "sunny miniature city",
+        "matte low-poly cars",
+        "yellow getaway sedan",
+        "white/navy police sedan",
+        "blue roofs",
+        "cream rounded cards",
+        "navy Cyrillic type"
+      ],
+      "source": {
+        "kind": "AI-generated",
+        "url_or_tool": "built-in image_gen.imagegen",
+        "model_version": "not exposed by tool",
+        "creator": "Codex image generation",
+        "created_at": "2026-10-08",
+        "license": "AI-generated concept; no third-party license assigned",
+        "prompt_or_source_record": "prompts.json#04-victory",
+        "reference": "01-role-selection.png",
+        "edit_history": "Generated once; copied original PNG without content edits"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": true,
+        "reviewed_by": "Codex",
+        "user_approved": false
+      }
+    },
+    {
+      "id": "05-defeat",
+      "role": "Проигрыш и арест",
+      "path": "05-defeat.png",
+      "status": "concept-reviewed",
+      "technical": {
+        "dimensions": "887x1774",
+        "format": "PNG",
+        "alpha": false,
+        "color_space": "sRGB",
+        "filtering": "linear for preview",
+        "mipmaps": "not applicable",
+        "anchor": "full screen",
+        "frames": 1,
+        "collision_role": "none",
+        "runtime_import": false
+      },
+      "visual_locks": [
+        "sunny miniature city",
+        "matte low-poly cars",
+        "yellow getaway sedan",
+        "white/navy police sedan",
+        "blue roofs",
+        "cream rounded cards",
+        "navy Cyrillic type"
+      ],
+      "source": {
+        "kind": "AI-generated",
+        "url_or_tool": "built-in image_gen.imagegen",
+        "model_version": "not exposed by tool",
+        "creator": "Codex image generation",
+        "created_at": "2026-10-08",
+        "license": "AI-generated concept; no third-party license assigned",
+        "prompt_or_source_record": "prompts.json#05-defeat",
+        "reference": "01-role-selection.png",
+        "edit_history": "Generated once; copied original PNG without content edits"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": true,
+        "reviewed_by": "Codex",
+        "user_approved": false
+      }
+    }
+  ]
+}
