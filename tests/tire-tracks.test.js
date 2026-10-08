@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import { TireTracks, buildTrackSegment, createTrackSection, buildSectionSegment, DEFAULT_TRACK_CAPACITY, TRACK_END_FADE_LENGTH, isHardSkid } from '../src/tire-tracks.js';
 import { createCityPlan } from '../src/city-generator.js';
-import { createSurfaceHeightSampler } from '../src/road-surface.js';
+import { createSurfaceHeightSampler, ROAD_SURFACE_HEIGHTS } from '../src/road-surface.js';
 import { CarSimulation, STEP } from '../src/vehicle.js';
 
 const wheel = (x, z, overrides = {}) => ({
@@ -47,14 +47,14 @@ test('segment cross sections share identical edges and remain finite on straight
 
 test('sections follow the visible road and sidewalk elevations, including transitions', () => {
   const height = createSurfaceHeightSampler(createCityPlan());
-  assert.ok(Math.abs(height(0, 83.5) - 0.059) < 1e-9);
-  assert.ok(Math.abs(height(0, 80) - 0.009) < 1e-9);
+  assert.ok(Math.abs(height(0, 83.5) - (ROAD_SURFACE_HEIGHTS.sidewalkVisual + 0.004)) < 1e-9);
+  assert.ok(Math.abs(height(0, 80) - (ROAD_SURFACE_HEIGHTS.road + 0.004)) < 1e-9);
   assert.ok(Math.abs(height(0, 207) + 0.011) < 1e-9);
   const start = createTrackSection({ x: 0, z: 80 }, { x: 1, z: 0 }, 0.29, height(0, 80));
   const end = createTrackSection({ x: 0, z: 83.5 }, { x: 1, z: 0 }, 0.29, height(0, 83.5));
   const segment = buildSectionSegment(start, end, 0, 1);
   assert.ok(segment.positions.some(value => Math.abs(value - 0.009) < 1e-8));
-  assert.ok(segment.positions.some(value => Math.abs(value - 0.059) < 1e-8));
+  assert.ok(segment.positions.some(value => Math.abs(value - (ROAD_SURFACE_HEIGHTS.sidewalkVisual + 0.004)) < 1e-8));
 });
 
 test('threshold calibration rejects a measured gentle turn and accepts a sustained physical skid', () => {

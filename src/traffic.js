@@ -312,7 +312,8 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     const touching = new Set();
     const physicalBodies = new Map(states.filter(state => !state.logical).map(state => [state.simulation.body, state]));
     for (const contact of physics.world.contacts) {
-      if (contact.bi === physics.ground || contact.bj === physics.ground) continue;
+      if (contact.bi === physics.ground || contact.bj === physics.ground
+        || contact.bi.wheelSupport || contact.bj.wheelSupport) continue;
       const a = physicalBodies.get(contact.bi), b = physicalBodies.get(contact.bj);
       if (a) touching.add(a);
       if (b) touching.add(b);

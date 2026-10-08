@@ -80,12 +80,13 @@ export class CarSimulation {
     for (const wheel of this.wheels) wheel.previousPosition.copy(wheel.position);
   }
 
-  addStaticBox({ x, y, z, halfX, halfY, halfZ, yaw = 0 }) {
+  addStaticBox({ x, y, z, halfX, halfY, halfZ, yaw = 0, wheelSupport = false }) {
     const body = new C.Body({ mass: 0 });
     body.addShape(new C.Box(v(halfX, halfY, halfZ)));
     body.position.set(x, y, z);
     body.quaternion.setFromEuler(0, yaw, 0);
-    body.collisionFilterGroup = 4;
+    body.collisionFilterGroup = wheelSupport ? 1 : 4;
+    body.wheelSupport = wheelSupport;
     this.world.addBody(body);
     this.staticBodies.push(body);
     return body;

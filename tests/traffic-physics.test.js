@@ -244,10 +244,13 @@ test('physical LOD does not cascade across remote neighbors or retain a ground-o
   traffic.attachPhysics(player);
   const remote = traffic.states.find(state => state.x > 100);
   assert.ok(remote && !remote.logical);
+  const sidewalk = player.addStaticBox({ x: -100, y: 0.0675, z: 0, halfX: 1, halfY: 0.0825, halfZ: 1, wheelSupport: true });
   player.world.contacts.push({ bi: player.ground, bj: remote.simulation.body });
+  player.world.contacts.push({ bi: sidewalk, bj: remote.simulation.body });
   traffic.prepare(0.11);
-  assert.equal(remote.logical, true, 'a remote ground contact is not a traffic interaction');
+  assert.equal(remote.logical, true, 'remote ground/support contacts are not traffic interactions');
   assert.ok(traffic.states.filter(state => !state.logical).every(state =>
     Math.hypot(state.x - player.body.position.x, state.z - player.body.position.z) < 55));
   traffic.dispose();
+  player.removeStaticBox(sidewalk);
 });

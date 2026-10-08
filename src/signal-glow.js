@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { ROAD_SURFACE_HEIGHTS } from './road-surface.js';
 
 const SIGNAL_COLORS = Object.freeze({
   red: new THREE.Color('#f34f45'),
@@ -10,7 +11,7 @@ const SIGNAL_COLORS = Object.freeze({
 export function signalBeamLayout(approach, color) {
   if (!SIGNAL_COLORS[color]) return { visible: false };
   const length = 12, width = 10.8, verticalRadius = 1.35;
-  const sourceY = color === 'red' ? 3.5 : color === 'yellow' ? 3.05 : 2.6;
+  const sourceY = ROAD_SURFACE_HEIGHTS.sidewalk + (color === 'red' ? 3.5 : color === 'yellow' ? 3.05 : 2.6);
   const dirX = -approach.forwardX - approach.rightX * 0.38;
   const dirY = -0.015;
   const dirZ = -approach.forwardZ - approach.rightZ * 0.38;

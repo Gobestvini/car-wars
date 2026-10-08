@@ -5,6 +5,7 @@ import { getSignalPosition, getStopLineLayout } from '../src/signal-layout.js';
 import { createSignalBeam, signalBeamLayout } from '../src/signal-glow.js';
 import { createCityScene } from '../src/city-scene.js';
 import { createTrafficSignals } from '../src/traffic-signals.js';
+import { ROAD_SURFACE_HEIGHTS } from '../src/road-surface.js';
 import * as THREE from 'three';
 
 test('signals and stop lines use independently expected right-hand world coordinates', () => {
@@ -52,7 +53,7 @@ test('fog beams originate at the active bulb and point down the incoming approac
       assert.equal(beam.visible, true);
       assert.equal(beam.length, 12);
       assert.equal(beam.width, 10.8);
-      assert.equal(beam.source.y, { red: 3.5, yellow: 3.05, green: 2.6 }[color]);
+      assert.equal(beam.source.y, ROAD_SURFACE_HEIGHTS.sidewalk + { red: 3.5, yellow: 3.05, green: 2.6 }[color]);
       assert.ok(beam.direction.x * -fx + beam.direction.z * -fz > 0.9);
       assert.ok(beam.direction.x * -approach.rightX + beam.direction.z * -approach.rightZ > 0.3,
         'beam angles inward from the sidewalk toward the road');
