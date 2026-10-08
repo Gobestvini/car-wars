@@ -12,6 +12,11 @@
 | tools/telegram/verify.js | Тесты/сборка, логи, квитанция проверки |
 | tools/telegram/economy.js | Инструкции экономии, JSONL usage, учёт кэша |
 | tools/browser-check.cjs | Desktop/mobile layout, pause/reset, ввод, ошибки |
+| docs/knowledge/README.md | Выбор справочника по теме и правила сохранения знаний |
+| docs/knowledge/game-architecture.md | Контракты и владельцы при расширении каркаса |
+| docs/knowledge/threejs.md | Справочник для добавления 3D renderer; Three.js пока не подключён |
+| docs/knowledge/debug-performance.md, assets-and-ui.md | Диагностика, бюджеты, контент и интерфейс |
+| docs/knowledge/sources.md | Версии, происхождение и степень проверки знаний |
 
 Рабочая директория всех команд — корень шаблона. `pnpm dev`, `pnpm test`, `pnpm build`, `pnpm check:full`, `pnpm context -- "тема"`.
 
