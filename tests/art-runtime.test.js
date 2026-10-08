@@ -6,6 +6,8 @@ import { createCityScene } from '../src/city-scene.js';
 import { buildingArt } from '../src/art-direction.js';
 import { createTrafficAssets, makeTrafficCar } from '../src/vehicle-visuals.js';
 import { createSurfaceHeightSampler } from '../src/road-surface.js';
+import { createCityTrees } from '../src/city-trees.js';
+import { CarSimulation, STEP } from '../src/vehicle.js';
 
 test('art variation never mutates the plan or physical city dimensions',()=>{
   const plan=createCityPlan(), before=JSON.stringify(plan), physical=[];
@@ -67,7 +69,7 @@ test('traffic art reuses geometry and stays inside its original collision footpr
   assets.animate(1);assets.dispose();
 });
 
-test('varied street trees connect to their trunks, use four batches, protect the car and dispose',()=>{
+test('varied street trees connect to their trunks, use four batches and dispose',()=>{
   const scene=new THREE.Scene(),removed=[];
   const city=createCityScene(scene,{addStaticBox:spec=>spec,removeStaticBox:body=>removed.push(body)},createCityPlan());
   const {trees}=city;
@@ -100,21 +102,6 @@ test('varied street trees connect to their trunks, use four batches, protect the
     heightRange.push(canopy.max.y-canopy.min.y);
   }
   assert.ok(Math.max(...heightRange)-Math.min(...heightRange)>2,'tree volumes should vary');
-  const blocker=trees.placements[0];
-  const blockerBatch=trees.crownBatches[blocker.crownType];
-  const blockerMatrix=new THREE.Matrix4();
-  blockerBatch.getMatrixAt(blocker.crownIndex,blockerMatrix);
-  const camera=new THREE.PerspectiveCamera(45,1,.1,100);
-  camera.position.set(blocker.x,blockerMatrix.elements[13]*2-.5,blocker.z+18);
-  const car=new THREE.Object3D();car.position.set(blocker.x,.5,blocker.z-18);
-  trees.updateVisibility(camera,car,1/60,'follow');
-  let hidden=new THREE.Matrix4();blockerBatch.getMatrixAt(blocker.crownIndex,hidden);
-  assert.equal(hidden.elements[0],0);
-  camera.position.x+=100;
-  trees.updateVisibility(camera,car,.1,'follow');
-  blockerBatch.getMatrixAt(blocker.crownIndex,hidden);assert.equal(hidden.elements[0],0);
-  trees.updateVisibility(camera,car,.1,'follow');
-  blockerBatch.getMatrixAt(blocker.crownIndex,hidden);assert.notEqual(hidden.elements[0],0);
   const geometryDisposals=treeMeshes.map(mesh=>mesh.geometry).map(geometry=>{
     let count=0;geometry.addEventListener('dispose',()=>count++);return ()=>count;
   });
@@ -132,4 +119,38 @@ test('varied street trees connect to their trunks, use four batches, protect the
     assert.equal(scene.children.length,initialChildren-1,`city rebuild ${rebuild} left a scene child`);
     assert.deepEqual(disposed.map(read=>read()),[1,1,1,1],`city rebuild ${rebuild} did not dispose each tree geometry once`);
   }
+});
+
+test('decorative trees remain fixed and add no collisions while a physical car drives through',()=>{
+  const scene=new THREE.Scene(),plan=createCityPlan();
+  const simulation=new CarSimulation();
+  const bodyCount=simulation.world.bodies.length;
+  const trees=createCityTrees(scene,plan);
+  assert.equal(simulation.world.bodies.length,bodyCount);
+  const meshes=[trees.trunks,...trees.crownBatches];
+  const initialMatrices=meshes.map(mesh=>mesh.instanceMatrix.array.slice());
+  // Reproduce the old sight ray through a canopy, then cross the trunk on flat ground.
+  const tree=trees.placements[0],transform=new THREE.Matrix4();
+  trees.crownBatches[tree.crownType].getMatrixAt(tree.crownIndex,transform);
+  const camera=new THREE.PerspectiveCamera(45,1,.1,100);
+  camera.position.set(tree.x,transform.elements[13]*2-.5,tree.z+18);
+  const car=new THREE.Object3D();
+  car.position.set(tree.x,.5,tree.z-18);
+  trees.updateVisibility?.(camera,car,STEP,'follow');
+  Object.assign(simulation.spawn,{x:tree.x,z:tree.z-6,yaw:0});
+  simulation.reset();
+  for(let i=0;i<120;i++) simulation.step();
+  let crossed=false;
+  for(let i=0;i<240;i++) {
+    simulation.step({throttle:.5});
+    car.position.copy(simulation.body.position);
+    trees.updateVisibility?.(camera,car,STEP,'follow');
+    crossed ||= simulation.body.position.z>tree.z+3;
+    meshes.forEach((mesh,index)=>assert.deepEqual(mesh.instanceMatrix.array,initialMatrices[index]));
+  }
+  assert.ok(crossed,'car must pass completely through the tree');
+  assert.equal(simulation.damage,0);
+  assert.equal(simulation.world.bodies.length,bodyCount);
+  for(const geometry of new Set(meshes.map(mesh=>mesh.geometry))) geometry.dispose();
+  for(const material of new Set(meshes.map(mesh=>mesh.material))) material.dispose();
 });

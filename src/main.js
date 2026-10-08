@@ -648,7 +648,6 @@ function frame(now) {
   cityState.updateSignals(trafficSignals, traffic.simulationTime(), camera, quality);
   traffic.render(alpha, camera);
   buildingOcclusion.update(camera, car, dt);
-  cityState.trees.updateVisibility(camera, car, dt, cameraMode);
   damageEffects.update({ damage: sim.damage, car, camera, dt, quality });
   tracks.prepareRender();
   const renderStart = performance.now();

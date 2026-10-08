@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { segmentIntersectsAabb, vehicleSightTargets } from './building-occlusion.js';
 import { createTreePlacements } from './tree-placement.js';
 import { createSurfaceHeightSampler } from './road-surface.js';
 
@@ -37,8 +36,6 @@ export function createCityTrees(group, plan, { damageObstacles = [], signals = [
   const rotation = new THREE.Quaternion();
   const scale = new THREE.Vector3();
   const matrix = new THREE.Matrix4();
-  const hiddenMatrix = new THREE.Matrix4().makeScale(0, 0, 0);
-  const originals = [];
   const crownIndices = [0, 0, 0];
 
   for (let i = 0; i < trees.length; i++) {
@@ -62,7 +59,6 @@ export function createCityTrees(group, plan, { damageObstacles = [], signals = [
     matrix.compose(position, rotation, scale);
     trunks.setMatrixAt(i, matrix);
     trunks.setColorAt(i, new THREE.Color(TRUNKS[trunkColorPick]));
-    const trunk = matrix.clone();
 
     position.set(tree.x, crownCenter, tree.z);
     rotation.setFromAxisAngle(THREE.Object3D.DEFAULT_UP, variation * Math.PI * 2);
@@ -71,9 +67,6 @@ export function createCityTrees(group, plan, { damageObstacles = [], signals = [
     batch.setMatrixAt(tree.crownIndex, matrix);
     batch.setColorAt(tree.crownIndex, new THREE.Color(FOLIAGE[colorPick]).multiplyScalar(0.92 + variation * 0.16));
 
-    const bounds = { min: { x: tree.x - tree.radius, y: crownBottom, z: tree.z - tree.radius },
-      max: { x: tree.x + tree.radius, y: crownBottom + halfHeight * 2, z: tree.z + tree.radius } };
-    originals.push({ tree, bounds, trunk, canopy: matrix.clone(), batch, visible: true, boundsClear: 0 });
   }
 
   trunks.instanceMatrix.needsUpdate = true;
@@ -84,37 +77,6 @@ export function createCityTrees(group, plan, { damageObstacles = [], signals = [
   }
   group.add(trunks, ...crownBatches);
 
-  const updateVisibility = (camera, car, dt, cameraMode = 'follow') => {
-    if (trees.length === 0) return;
-    const targets = cameraMode === 'follow' && car ? vehicleSightTargets(THREE, camera, car) : null;
-    let trunkChanged = false;
-    const elapsed = Number.isFinite(dt) ? Math.max(0, Math.min(dt, 0.1)) : 0;
-    // Reject trees outside the entire sight-ray corridor before testing individual rays.
-    let minX = camera.position.x, maxX = minX, minZ = camera.position.z, maxZ = minZ;
-    for (const target of targets || []) {
-      minX = Math.min(minX, target.x); maxX = Math.max(maxX, target.x);
-      minZ = Math.min(minZ, target.z); maxZ = Math.max(maxZ, target.z);
-    }
-    for (let i = 0; i < originals.length; i++) {
-      const item = originals[i];
-      const inCorridor = item.bounds.min.x <= maxX && item.bounds.max.x >= minX
-        && item.bounds.min.z <= maxZ && item.bounds.max.z >= minZ;
-      const occluded = inCorridor && (targets?.some(target => segmentIntersectsAabb(camera.position, target, item.bounds)) ?? false);
-      if (occluded) item.boundsClear = 0;
-      else item.boundsClear += elapsed;
-
-      const shouldShow = !targets || (!occluded && (item.visible || item.boundsClear >= 0.18));
-      if (shouldShow === item.visible) continue;
-      item.visible = shouldShow;
-      matrix.copy(shouldShow ? item.trunk : hiddenMatrix);
-      trunks.setMatrixAt(i, matrix);
-      matrix.copy(shouldShow ? item.canopy : hiddenMatrix);
-      item.batch.setMatrixAt(item.tree.crownIndex, matrix);
-      item.batch.instanceMatrix.needsUpdate = true;
-      trunkChanged = true;
-    }
-    if (trunkChanged) trunks.instanceMatrix.needsUpdate = true;
-  };
-
-  return { count: trees.length, placements: trees, trunks, crownBatches, updateVisibility };
+  // Decorative trees stay fixed even when a vehicle passes through their trunks/canopies.
+  return { count: trees.length, placements: trees, trunks, crownBatches };
 }
