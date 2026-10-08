@@ -1,6 +1,6 @@
 # TASK-0054: Шесть звёзд розыска с предупреждениями за нарушения
 
-- Статус: ready
+- Статус: in-progress
 - Приоритет: high
 - Создана: 2026-10-08
 - Обновлена: 2026-10-08
@@ -116,11 +116,11 @@ API-ориентир: чистый `createWantedSystem(config)` с `update(dt, v
 
 ## 10. Отчёт исполнителя
 
-- Результат: Не выполнялась.
-- Изменённые файлы и зачем: —
-- Команды и фактические результаты: —
-- Ручные проверки: —
-- Выполненные критерии: —
-- Окончательный API wanted/reset/diagnostics для TASK-0055: —
-- Непроверенное, блокеры и отклонения от плана: —
-- Итоговый статус и дата: —
+- Результат: реализованы шестизвёздный wanted FSM, speeding/red-light/player-to-traffic collision detector, idle/chase gate полиции и HUD.
+- Изменённые файлы и зачем: `src/wanted-system.js`, `src/traffic-violations.js` — правила и игровое время; `src/traffic.js` — выдача реестра физических actor bodies; `src/main.js` — один-step интеграция, полиция, reset/free-camera lifecycle и `carLab.wanted()`; `index.html`, `src/style.css` — шесть доступных индикаторов.
+- Команды и фактические результаты: FSM/violation tests pass; последняя полная серия `node --test` — 270/270 pass; последний Vite build успешен с ожидаемым предупреждением о размере Three.js chunk.
+- Ручные проверки: WebGL страница показывает шесть пустых звёзд; клавиатурным движением получено первое настоящее speeding событие, первая звезда вошла в warning/pending и визуально стала жёлтой. Проверено окно1280×720.
+- Выполненные критерии: шесть слотов, таймер предупреждения, cooldown/priority, четыре направления crossing detector, green и соседняя полоса фильтруются; police idle до уровня1 и chase после.
+- Окончательный API wanted/reset/diagnostics для TASK-0055: `createWantedSystem().update(dt, events)`, `.snapshot()` возвращает `level`, шесть `stars`, `pendingStar`, `warningRemaining`, `lastViolation`, `lastAcceptedAt`; `.reset()` очищает состояние. `main.js` предоставляет read-only `carLab.wanted()`.
+- Непроверенное, блокеры и отклонения от плана: browser сценарии повторного подтверждения звезды, timeout10с, speed repeat, реальные красные crossing, удары civilian/police, level6/count0, free-camera/reset/rebuild и quality не пройдены полностью; точные1440×900/390×844, reduced motion и verification artifacts отсутствуют. Поэтому задача остаётся in-progress.
+- Итоговый статус и дата: in-progress, 2026-10-08.

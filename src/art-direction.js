@@ -1,7 +1,7 @@
 // Shared sRGB swatches. Pure data: rendering and physics do not depend on the DOM.
 export const ART = Object.freeze({
   asphalt: '#58677a', sidewalk: '#e7e0cf', ground: '#dbd8cf', roof: '#4779b0',
-  fog: '#d7eafa', player: '#ffc34a', ink: '#26334c', marking: '#fff6dc',
+  fog: '#d7eafa', player: '#c66f24', ink: '#26334c', marking: '#fff6dc',
   facades: ['#f6a5a0', '#ffc876', '#7dc4ed'],
   traffic: ['#6aafe0', '#df8880', '#ba9bde', '#75bccc', '#d8a677', '#7894d6'],
 });

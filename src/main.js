@@ -15,6 +15,9 @@ import { updateShadowCoverage } from './shadow-coverage.js';
 import { createVehicleRuntime } from './traffic.js';
 import { createPolicePursuit } from './police-pursuit.js';
 import { createTrafficSignals } from './traffic-signals.js';
+import { createWantedSystem } from './wanted-system.js';
+import { createTrafficViolationDetector } from './traffic-violations.js';
+import { createArrestSystem } from './arrest-system.js';
 import { CarDeformation } from './car-deformation.js';
 import { CarDamageEffects } from './car-damage-effects.js';
 import { createSettings } from './settings.js';
@@ -45,6 +48,48 @@ const getSettingsStorage = () => { try { return window.localStorage; } catch { r
 const savedDefaults = readSettingsDefaults(getSettingsStorage(), factorySettings);
 const canvas = $('scene');
 const speedDisplay = $('speed');
+const wantedDisplay = $('wanted');
+const wantedStars = [...document.querySelectorAll('#wanted-stars .wanted-star')];
+const wanted = createWantedSystem();
+const violations = createTrafficViolationDetector();
+const arrest = createArrestSystem();
+const arrestBanner = $('arrest-banner');
+const arrestStatus = $('arrest-status');
+const arrestProgress = $('arrest-progress');
+const arrestTimer = $('arrest-timer');
+const arrestRestart = $('arrest-restart');
+let lastArrestHudState = '';
+let wantedRenderKey = '';
+function renderWantedHud() {
+  const state = wanted.snapshot();
+  const key = `${state.level}:${state.pendingStar || 0}:${Math.ceil(state.warningRemaining * 2)}`;
+  if (key === wantedRenderKey) return;
+  wantedRenderKey = key;
+  wantedDisplay.setAttribute('aria-label', `Розыск: ${state.level} из 6${state.pendingStar ? ', предупреждение' : ''}`);
+  wantedStars.forEach((star, index) => {
+    const pending = state.pendingStar === index + 1;
+    star.dataset.state = index < state.level ? 'filled' : pending ? 'pending' : 'empty';
+    star.classList.toggle('is-warning', pending);
+  });
+}
+function renderArrestHud(result = arrest.snapshot()) {
+  const visible = result.state !== 'idle';
+  arrestBanner.hidden = !visible;
+  arrestRestart.hidden = result.state !== 'arrested';
+  if (result.state !== lastArrestHudState) {
+    lastArrestHudState = result.state;
+    arrestStatus.textContent = result.state === 'holding' ? 'Полиция удерживает машину — уезжайте, чтобы вырваться'
+      : result.state === 'arresting' ? 'Арест — уезжайте, чтобы вырваться'
+        : result.state === 'arrested' ? 'Арестован' : '';
+  }
+  arrestProgress.value = result.state === 'holding' ? result.holdProgress : result.progress;
+  arrestProgress.setAttribute('aria-valuetext', result.state === 'holding'
+    ? `${Math.ceil((1 - result.holdProgress) * 2)} секунд до ареста`
+    : `${Math.ceil(result.remainingSeconds)} секунд`);
+  arrestTimer.textContent = result.state === 'holding' ? `Удержание ${Math.ceil((1 - result.holdProgress) * 2)} с`
+    : result.state === 'arresting' ? `${Math.ceil(result.remainingSeconds)} с — нажмите газ или уезжайте`
+      : result.state === 'arrested' ? 'Нажмите R или начните заново' : '';
+}
 const sim = new CarSimulation();
 Object.assign(sim.tuning, { softness: savedDefaults.softness, grip: savedDefaults.grip, power: savedDefaults.power });
 let renderer;
@@ -117,7 +162,10 @@ const traffic = createVehicleRuntime(scene, THREE, savedDefaults.trafficCount, c
 traffic.attachPhysics(sim);
 traffic.registerRole('police', { maxCount: 2, physicalOnly: true,
   create: ({ targetId }) => createPolicePursuit({ targetId }),
-  update: (controller, context) => controller.update(context),
+  update: (controller, context) => wanted.snapshot().level > 0 && arrest.snapshot().state !== 'arrested'
+    ? controller.update(context)
+    : (controller.reset(), { state: 'idle', reason: arrest.snapshot().state === 'arrested' ? 'arrest-complete' : 'no-wanted-level',
+      control: { steer: 0, throttle: 0, brake: 1 } }),
   onContact: (controller, time) => controller.onContact(time),
   reset: controller => controller.reset() });
 const policeSpawnSpecs = () => [-1, 1].map(side => ({ targetId: 'player', position: {
@@ -127,6 +175,7 @@ traffic.setRoleCount('police', savedDefaults.policeCount, policeSpawnSpecs());
 let trafficSignals = createTrafficSignals(cityPlan.roadNetwork);
 traffic.setSignalController(trafficSignals);
 const visualWheels = [];
+const playerVisualSteeringScale = 0.5;
 let modelReady = false;
 let loading = false;
 let bodyDeformation = null;
@@ -282,6 +331,7 @@ window.addEventListener('keyup', event => keys.delete(event.code));
 const has = (...codes) => codes.some(code => keys.has(code));
 function getInput() {
   if (cameraMode === 'free') return { steer: 0, throttle: 0, brake: 1, handbrake: false };
+  if (arrest.snapshot().state === 'arrested') return { steer: 0, throttle: 0, brake: 1, handbrake: false };
   const telemetry = sim.telemetry();
   const speed = telemetry.signedSpeed;
   const keyboard = has('KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space');
@@ -312,6 +362,8 @@ function getInput() {
 
 function reset() {
   releasePointer(); keys.clear(); sim.reset(); traffic.reset(); driveDirection = 1;
+  violations.reset(); wanted.reset(); arrest.reset(); wantedRenderKey = ''; renderWantedHud();
+  lastArrestHudState = ''; renderArrestHud();
   damageEffects.reset();
   bodyDeformation?.restore();
   follow.set(0, 0, 0);
@@ -341,6 +393,7 @@ function setSettingsOpen(open) {
     settingsButton.focus({ preventScroll: true });
   }
 }
+arrestRestart.addEventListener('click', reset);
 window.addEventListener('keydown', event => { if (event.code === 'Escape' && settingsButton.getAttribute('aria-expanded') === 'true') setSettingsOpen(false); });
 settingsButton.addEventListener('click', () => setSettingsOpen(settingsButton.getAttribute('aria-expanded') !== 'true'));
 function setCameraMode(mode) {
@@ -473,6 +526,23 @@ function updateCamera(dt) {
   sun.position.set(shadowTarget.x - 14, 24, shadowTarget.z + 10); sun.target.position.copy(shadowTarget);
   shadowBounds = updateShadowCoverage(sun, camera, { resolution: sun.shadow.mapSize.x, casterHeight: 24 });
 }
+function segmentHitsRect(ax, az, bx, bz, minX, minZ, maxX, maxZ) {
+  let enter = 0, leave = 1;
+  const dx = bx - ax, dz = bz - az;
+  for (const [origin, direction, minimum, maximum] of [[ax, dx, minX, maxX], [az, dz, minZ, maxZ]]) {
+    if (Math.abs(direction) < 1e-8) { if (origin < minimum || origin > maximum) return false; continue; }
+    let first = (minimum - origin) / direction, last = (maximum - origin) / direction;
+    if (first > last) [first, last] = [last, first];
+    enter = Math.max(enter, first); leave = Math.min(leave, last);
+    if (enter > leave) return false;
+  }
+  return true;
+}
+function arrestCorridorIsClear(playerPose, policeUnit) {
+  return !cityPlan.buildings.some(building => segmentHitsRect(playerPose.x, playerPose.z, policeUnit.x, policeUnit.z,
+    building.x - building.width / 2 - 0.65, building.z - building.depth / 2 - 0.65,
+    building.x + building.width / 2 + 0.65, building.z + building.depth / 2 + 0.65));
+}
 const freeMove = new THREE.Vector3(), cameraForward = new THREE.Vector3(), cameraRight = new THREE.Vector3();
 const previousFreeCameraPosition = new THREE.Vector3();
 function moveFreeCamera(dt) {
@@ -519,7 +589,26 @@ function frame(now) {
   const physicsStart = performance.now();
   const { alpha } = stepper.advance(elapsed, () => {
     input = getInput();
+    const enabled = cameraMode !== 'free';
+    const actorsBefore = traffic.physicalActors();
+    const velocitiesBefore = new Map([[sim.body, { ...sim.body.velocity }],
+      ...actorsBefore.map(actor => [actor.body, { ...actor.body.velocity }])]);
     traffic.stepWorld(input, STEP);
+    const observed = violations.update({ dt: STEP, enabled, player: { x: sim.body.position.x, z: sim.body.position.z,
+      heading: Math.atan2(2 * (sim.body.quaternion.x * sim.body.quaternion.z + sim.body.quaternion.w * sim.body.quaternion.y),
+        1 - 2 * (sim.body.quaternion.x ** 2 + sim.body.quaternion.y ** 2)), vx: sim.body.velocity.x,
+      vz: sim.body.velocity.z, body: sim.body }, actors: traffic.physicalActors(), contacts: sim.world.contacts,
+      velocitiesBefore, approaches: cityState.signalApproaches,
+      phaseAt: approach => trafficSignals.phase(approach.nodeId, approach.fromId, traffic.simulationTime()) });
+    if (enabled) wanted.update(STEP, observed);
+    renderWantedHud();
+    const playerArrestPose = { x: sim.body.position.x, z: sim.body.position.z,
+      speed: Math.hypot(sim.body.velocity.x, sim.body.velocity.z) };
+    const policeForArrest = traffic.physicalActors().map(actor => ({ ...actor,
+      speed: Math.hypot(actor.vx, actor.vz), clearPath: arrestCorridorIsClear(playerArrestPose, actor) }));
+    const arrestResult = arrest.update(STEP, { wantedLevel: wanted.snapshot().level, player: playerArrestPose,
+      police: policeForArrest, enabled: cameraMode !== 'free', damage: sim.damage });
+    renderArrestHud(arrestResult);
     const trafficStatus = traffic.status();
     const pendingReason = trafficStatus.insertionReason || '—';
     if (settings.values.trafficActual !== trafficStatus.count || settings.values.trafficPendingReason !== pendingReason) {
@@ -543,7 +632,7 @@ function frame(now) {
     } else {
       pivot.position.lerpVectors(wheel.previousPosition, wheel.position, alpha);
       pivot.quaternion.copy(car.quaternion);
-      if (wheel.front) pivot.rotateY(THREE.MathUtils.lerp(sim.previousSteering, sim.steering, alpha));
+      if (wheel.front) pivot.rotateY(THREE.MathUtils.lerp(sim.previousSteering, sim.steering, alpha) * playerVisualSteeringScale);
     }
     spin.rotation.x = THREE.MathUtils.lerp(wheel.previousRotation, wheel.rotation, alpha);
   });
@@ -607,12 +696,19 @@ window.carLab = {
   damageTest,
   joystick: () => ({ active: pointer.active, startX: pointer.startX, startY: pointer.startY, direction: driveDirection, ...joystickVector(pointer.startX, pointer.startY, pointer.x, pointer.y) }),
   donut: () => donutGesture.snapshot(),
-  wheelTransforms: () => visualWheels.map(({ pivot }, i) => ({ position: pivot.position.toArray(), radius: sim.wheels[i].radius })),
+  wheelTransforms: () => visualWheels.map(({ pivot }, i) => {
+    const wheel = sim.wheels[i];
+    const localOrientation = car.quaternion.clone().invert().multiply(pivot.quaternion);
+    return { position: pivot.position.toArray(), radius: wheel.radius, front: wheel.front,
+      steeringAngle: wheel.detached ? null : 2 * Math.atan2(localOrientation.y, localOrientation.w) };
+  }),
   wheels: () => sim.wheels.map(wheel => ({ detached: wheel.detached, grounded: wheel.grounded })),
   traffic: () => traffic.states.filter(state => state.role === 'civilian').map(({ x, z, heading, speed }) => ({ x, z, heading, speed })),
   police: () => traffic.states.filter(state => state.role === 'police').map(({ id, x, z, heading, speed, ai }) => ({
     id, x, z, heading, speed, targetId: ai.targetId, state: ai.state, waitReason: ai.waitReason,
     pursuit: ai.roleState?.diagnostics?.() || null })),
+  wanted: () => wanted.snapshot(),
+  arrest: () => arrest.snapshot(),
   requestVehicleSpawn: input => traffic.requestSpawn(input),
   getSpawnRequest: requestId => traffic.spawnRequest(requestId),
   cancelVehicleSpawn: requestId => traffic.cancelSpawn(requestId),

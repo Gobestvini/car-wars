@@ -916,6 +916,12 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       pendingSpawns: spawnRequests.size, insertionReason: pendingReason,
       bodies: states.filter(state => !state.logical).length, logical: states.filter(state => state.logical).length,
       visible: visibleCount, reservations: reservations.size }; },
+    physicalActors() { return states.filter(state => !state.logical).map(state => ({
+      id: state.id, role: state.role, body: state.simulation.body, logical: state.logical,
+      targetId: state.ai.targetId || null,
+      x: state.x, z: state.z, heading: state.heading, vx: state.simulation.body.velocity.x,
+      vz: state.simulation.body.velocity.z,
+    })); },
     performance() { return { ...profile, totalBodies: physics?.world.bodies.length ?? 0,
       trafficBodies: states.filter(state => !state.logical).length,
       logicalTraffic: states.filter(state => state.logical).length,
