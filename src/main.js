@@ -30,9 +30,18 @@ import packageInfo from '../package.json';
 import { ART, ART_LIGHT, artQuality } from './art-direction.js';
 import { stylePlayerBody } from './vehicle-visuals.js';
 import { TireSmoke } from './tire-smoke.js';
+import { createStartScreen } from './start-screen.js';
 
 const $ = id => document.getElementById(id);
 const debug = location.hash === '#debug' || new URLSearchParams(location.search).has('debug');
+const startScreen = createStartScreen({
+  // Explicit lab/test entry points keep their direct access to the simulation.
+  bypass: debug || new URLSearchParams(location.search).has('damageTest') || new URLSearchParams(location.search).get('play') === '1',
+  onPlay: () => { setSettingsOpen(false); reset(); },
+  onShow: () => { releasePointer(); keys.clear(); stepper.reset(); setSettingsOpen(false); },
+  onSettings: () => setSettingsOpen(settingsButton.getAttribute('aria-expanded') !== 'true'),
+  onRetry: () => loadCar(),
+});
 let cameraMode = 'follow';
 const freeCameraSpeed = 15;
 const factorySettings = {
@@ -102,6 +111,7 @@ let renderer;
 try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
 } catch (error) {
+  startScreen.setError('This browser cannot start the 3D race. Please enable WebGL.', { retryable: false });
   $('load-status').textContent = 'Для 3D нужен браузер с поддержкой WebGL.';
   throw error;
 }
@@ -194,6 +204,7 @@ const treadMaterial = new THREE.MeshStandardMaterial({ color: '#252b2c', roughne
 async function loadCar() {
   if (loading || modelReady) return;
   loading = true;
+  startScreen.setReady(false);
   $('load-status').hidden = false;
   $('load-status').textContent = 'Загрузка машины…';
   $('retry-load').hidden = true;
@@ -255,6 +266,7 @@ async function loadCar() {
     await renderer.compileAsync(scene, camera);
     await miniatureBlur.compile();
     modelReady = true;
+    startScreen.setReady(true);
     $('load-status').hidden = true;
   } catch (error) {
     console.error('Car model failed to load', error);
@@ -277,6 +289,7 @@ async function loadCar() {
     bodyDeformation = null;
     car.clear();
     $('load-status').textContent = 'Не удалось загрузить машину.';
+    startScreen.setError('Could not load the race. Please try again.');
     $('retry-load').hidden = false;
   } finally {
     loading = false;
@@ -308,6 +321,7 @@ function updatePointer(event) {
   $('touch-marker').firstElementChild.style.transform = `translate(${stick.knobX}px, ${stick.knobY}px)`;
 }
 canvas.addEventListener('pointerdown', event => {
+  if (startScreen.isOpen) return;
   if (cameraMode === 'free') return;
   if (pointer.active || (event.pointerType === 'mouse' && event.button !== 0)) return;
   if (!modelReady) return;
@@ -336,6 +350,7 @@ document.addEventListener('visibilitychange', () => {
   previousTime = performance.now();
 });
 window.addEventListener('keydown', event => {
+  if (startScreen.isOpen) return;
   if (event.target.closest?.('#settings')) return;
   if (/INPUT|TEXTAREA/.test(document.activeElement?.tagName)) return;
   if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.code)) event.preventDefault();
@@ -400,6 +415,7 @@ let settingsCloseTimer = 0;
 function setSettingsOpen(open) {
   clearTimeout(settingsCloseTimer);
   settingsButton.setAttribute('aria-expanded', String(open));
+  $('menu-settings').setAttribute('aria-expanded', String(open));
   if (open) {
     releasePointer(); keys.clear();
     settingsPanel.hidden = false;
@@ -409,7 +425,7 @@ function setSettingsOpen(open) {
     settingsPanel.inert = true;
     settingsPanel.classList.remove('is-open');
     settingsCloseTimer = setTimeout(() => { settingsPanel.hidden = true; }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 210);
-    settingsButton.focus({ preventScroll: true });
+    (startScreen.isOpen ? $('menu-settings') : settingsButton).focus({ preventScroll: true });
   }
 }
 arrestRestart.addEventListener('click', reset);
@@ -611,7 +627,7 @@ function frame(now) {
   previousFrameTimestamp = now;
   const elapsed = Math.max(0, (now - previousTime) / 1000); previousTime = now;
   const dt = Math.min(elapsed, 0.08);
-  if (document.hidden || !modelReady) { stepper.reset(); return; }
+  if (document.hidden || !modelReady || startScreen.isOpen) { stepper.reset(); return; }
   const physicsStart = performance.now();
   const { alpha } = stepper.advance(elapsed, () => {
     input = getInput();
@@ -730,6 +746,7 @@ function frame(now) {
 requestAnimationFrame(frame);
 // Read-only diagnostics for browser smoke tests and future handling comparisons.
 window.carLab = {
+  startScreen: () => startScreen.snapshot(),
   version: packageInfo.version,
   performance: () => ({ ...metrics, dpr: renderer.getPixelRatio(), droppedSeconds: stepper.droppedSeconds, trailSegments: tracks.count }),
   trafficPerformance: () => traffic.performance(),

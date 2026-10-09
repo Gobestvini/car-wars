@@ -1,0 +1,84 @@
+{
+  "assets": [
+    {
+      "file": "menu-racer-clean.webp",
+      "source": "docs/art/figma/2026-10-09/approved-menu/assets/menu-racer-clean.png",
+      "dimensions": [
+        887,
+        1774
+      ],
+      "bytes": 248310,
+      "provenance": "Built-in ImageGen; approved Car Stars Figma art; resized and encoded as WebP."
+    },
+    {
+      "file": "menu-city-clean.webp",
+      "source": "docs/art/figma/2026-10-09/approved-menu/assets/menu-city-clean.png",
+      "dimensions": [
+        887,
+        1774
+      ],
+      "bytes": 239314,
+      "provenance": "Built-in ImageGen; approved Car Stars Figma art; resized and encoded as WebP."
+    },
+    {
+      "file": "role-titles-racer.webp",
+      "source": "docs/art/figma/2026-10-09/approved-menu/assets/role-titles-racer.png",
+      "dimensions": [
+        900,
+        175
+      ],
+      "bytes": 41914,
+      "provenance": "Built-in ImageGen; approved Car Stars Figma art; resized and encoded as WebP."
+    },
+    {
+      "file": "role-titles-city.webp",
+      "source": "docs/art/figma/2026-10-09/approved-menu/assets/role-titles-city.png",
+      "dimensions": [
+        900,
+        171
+      ],
+      "bytes": 42804,
+      "provenance": "Built-in ImageGen; approved Car Stars Figma art; resized and encoded as WebP."
+    },
+    {
+      "file": "choose-side-title.webp",
+      "source": "docs/art/figma/2026-10-09/approved-menu/assets/choose-side-title.png",
+      "dimensions": [
+        900,
+        111
+      ],
+      "bytes": 41932,
+      "provenance": "Built-in ImageGen; approved Car Stars Figma art; resized and encoded as WebP."
+    },
+    {
+      "file": "logo.webp",
+      "source": "docs/art/figma/2026-10-08/v2/assets/logo.png",
+      "dimensions": [
+        900,
+        495
+      ],
+      "bytes": 81168,
+      "provenance": "Built-in ImageGen; approved Car Stars Figma art; resized and encoded as WebP."
+    },
+    {
+      "file": "button-gold.webp",
+      "source": "docs/art/figma/2026-10-08/v2/assets/button-gold.png",
+      "dimensions": [
+        900,
+        214
+      ],
+      "bytes": 21700,
+      "provenance": "Built-in ImageGen; approved Car Stars Figma art; resized and encoded as WebP."
+    },
+    {
+      "file": "button-blue.webp",
+      "source": "docs/art/figma/2026-10-08/v2/assets/button-blue.png",
+      "dimensions": [
+        900,
+        218
+      ],
+      "bytes": 17226,
+      "provenance": "Built-in ImageGen; approved Car Stars Figma art; resized and encoded as WebP."
+    }
+  ]
+}

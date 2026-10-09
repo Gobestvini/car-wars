@@ -1,0 +1,86 @@
+@font-face { font-family: 'Lilita One'; src: url('/fonts/LilitaOne-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Car Roboto'; src: url('/fonts/Roboto-Variable.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+
+#start-screen {
+  --menu-ease: cubic-bezier(.22,.8,.2,1);
+  --split-top: 86%;
+  --split-bottom: 48%;
+  position: fixed; inset: 0; z-index: 20; overflow: hidden; isolation: isolate;
+  color: #fff9ec; background: #143759; font-family: 'Car Roboto', sans-serif;
+  transition: opacity .5s ease, filter .5s ease;
+}
+#start-screen[data-side="city"] { --split-top: 48%; --split-bottom: 10%; }
+.menu-ambient {
+  position: absolute; inset: -40px; background: linear-gradient(90deg,#f2b83c30,#0879e54d), url('/ui/start/menu-racer-clean.webp') center 55% / cover;
+  filter: blur(24px) brightness(.68); transform: scale(1.08); pointer-events: none;
+}
+.menu-stage { position: relative; height: 100%; width: min(100%, 50dvh); margin: auto; isolation: isolate; box-shadow: 0 0 100px #071c3e66; }
+.menu-scenes, .menu-scene-targets { position: absolute; inset: 0; }
+.menu-scene { position: absolute; inset: 0; overflow: hidden; will-change: clip-path; transition: clip-path .85s var(--menu-ease); }
+.menu-scene img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.05s var(--menu-ease), filter .85s ease; }
+.menu-target-racer { clip-path: polygon(0 0,86% 0,48% 100%,0 100%); }
+.menu-target-city { clip-path: polygon(86% 0,100% 0,100% 100%,48% 100%); }
+[data-side="city"] .menu-target-racer { clip-path: polygon(0 0,48% 0,10% 100%,0 100%); }
+[data-side="city"] .menu-target-city { clip-path: polygon(48% 0,100% 0,100% 100%,10% 100%); }
+/* Each approved illustration already contains its scene split. A diagonal reveal
+   between the complete illustrations preserves the art at rest without a second seam. */
+.menu-scene-city { opacity: 0; clip-path: polygon(86% 0,100% 0,100% 100%,48% 100%); transition: clip-path .9s var(--menu-ease),opacity .65s ease; }
+.menu-scene-city img { transform: scale(1.035); }
+[data-side="city"] .menu-scene-city { opacity: 1; clip-path: polygon(0 0,100% 0,100% 100%,0 100%); }
+[data-side="city"] .menu-scene-city img { transform: scale(1); }
+.menu-scene-shade { position: absolute; inset: 0; background: linear-gradient(0deg,#071c3e7a,transparent 30%,transparent 80%,#fff7bd18); pointer-events: none; }
+.menu-scene-target { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: none; -webkit-tap-highlight-color: transparent; }
+.menu-logo { position: absolute; top: 2.6%; left: 50%; width: 56.4%; margin: 0; transform: translateX(-50%); pointer-events: none; animation: menu-logo-in .85s var(--menu-ease) both; }
+.menu-logo img { width: 100%; display: block; filter: drop-shadow(0 5px 9px #071c3e33); }
+.menu-gear { position: absolute; top: max(1.5%,env(safe-area-inset-top)); right: 3%; display: grid; place-items: center; width: 11.2%; aspect-ratio: 1; border: 1px solid #fff9d8; border-radius: 28%; color: #071c3e; background: linear-gradient(#fffef7,#fff3d6); box-shadow: 0 3px 0 #c4bb9b,0 6px 14px #071c3e33; }
+.menu-gear svg { width: 66%; height: 66%; fill: currentColor; transition: transform .4s var(--menu-ease); }
+.menu-gear:hover svg { transform: rotate(50deg); }
+.menu-bottom { position: absolute; inset: auto 4.6% max(1.4%,env(safe-area-inset-bottom)); animation: menu-controls-in .75s .12s var(--menu-ease) both; }
+.menu-choose { width: 85%; margin: 0 auto 1%; pointer-events: none; }
+.menu-choose img { width: 100%; display: block; }
+.menu-role-choices { position: relative; display: grid; grid-template-columns: 55.5% 44.5%; padding-top: 19.5%; margin-bottom: 2.8%; }
+.menu-role-art { position: absolute; inset: 0 0 auto; pointer-events: none; }
+.menu-role-art img { display: block; position: absolute; top: 0; width: 100%; transition: opacity .5s ease, transform .75s var(--menu-ease); }
+.menu-role-art-racer { opacity: 1; transform: translateY(0); }
+.menu-role-art-city { opacity: 0; transform: translateY(3px); }
+[data-side="city"] .menu-role-art-racer { opacity: 0; transform: translateY(3px); }
+[data-side="city"] .menu-role-art-city { opacity: 1; transform: translateY(0); }
+.menu-role { position: static; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; border: 0; border-radius: 14px; padding: 0 0 7px; background: none; color: #fffdf5; text-align: center; font-weight: 900; -webkit-tap-highlight-color: transparent; }
+.menu-role::before { content: ''; position: absolute; top: 0; width: 55.5%; height: 100%; left: 0; }
+.menu-role-city::before { width: 44.5%; left: 55.5%; }
+.menu-role-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.menu-role-description { display: block; font-size: clamp(12px,1.9dvh,21px); line-height: 1.17; text-shadow: 0 2px 4px #071c3e,0 0 12px #071c3e; }
+.menu-coming-soon { display: block; width: fit-content; margin: 5px auto 0; padding: 2px 7px; border: 1px solid #a5e8ff88; border-radius: 20px; background: #071c3eb8; color: #d6f5ff; font-size: clamp(9px,1.2dvh,13px); line-height: 1.15; text-transform: uppercase; letter-spacing: .055em; }
+.menu-role-racer { padding-top: 0; }
+#menu-play { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 354 / 86; padding: 0 0 1.5%; border: 0; background: url('/ui/start/button-gold.webp') center / 100% 100% no-repeat; color: #071c3e; font: 400 clamp(36px,7.6dvh,86px)/1 'Lilita One',sans-serif; text-shadow: 0 1px 0 #ffffff33; filter: drop-shadow(0 7px 10px #071c3e55); transition: transform .22s var(--menu-ease),filter .3s ease; -webkit-tap-highlight-color: transparent; }
+#menu-play span { pointer-events: none; }
+#menu-play:not(:disabled):hover { transform: translateY(-3px) scale(1.015); filter: drop-shadow(0 10px 14px #071c3e66) brightness(1.06); }
+#menu-play:not(:disabled):active { transform: translateY(3px) scale(.985); }
+[data-side="city"] #menu-play { color: #fff; background-image: url('/ui/start/button-blue.webp'); filter: drop-shadow(0 5px 10px #071c3e55) saturate(.75); cursor: not-allowed; }
+.menu-status-row { position: relative; min-height: 20px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+#menu-status { margin: 5px 0 0; font-size: 11px; font-weight: 800; text-align: center; text-shadow: 0 1px 4px #071c3e; }
+#menu-retry { position: relative; z-index: 1; border: 0; border-radius: 6px; padding: 3px 10px; background: #fff9ec; color: #071c3e; font-weight: 900; }
+#start-screen button:focus-visible { outline: 3px solid #fffcef; outline-offset: 4px; box-shadow: 0 0 0 7px #087bd5; }
+#start-screen.is-launching { opacity: 0; filter: blur(5px); pointer-events: none; }
+.is-launching .menu-scenes { transform: scale(1.14); transition: transform .52s var(--menu-ease); }
+.is-launching .menu-bottom { transform: translateY(35px); opacity: 0; transition: transform .4s ease,opacity .3s ease; }
+#menu-button { position: fixed; top: calc(12px + env(safe-area-inset-top)); left: 50%; z-index: 5; transform: translateX(-50%); min-height: 44px; padding: 8px 17px; border: 2px solid #071c3e; border-radius: 12px; background: #fff9ec; color: #071c3e; font: 22px 'Lilita One',sans-serif; box-shadow: 0 3px 0 #071c3e44; }
+body[data-screen="menu"] #scene { visibility: hidden; }
+body[data-screen="menu"] :is(#speedometer,#arrest-banner,#settings-button,#load-status,#retry-load,#performance,#touch-marker) { display: none !important; }
+body[data-screen="menu"] #settings { z-index: 30; }
+@keyframes menu-logo-in { from { opacity: 0; transform: translate(-50%,-24px) scale(.9); } to { opacity: 1; transform: translate(-50%,0) scale(1); } }
+@keyframes menu-controls-in { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+@media (orientation: landscape) and (max-height: 600px) {
+  .menu-stage { width: min(100%,1100px); }
+  .menu-logo { top: 5%; left: 23%; width: min(24%,170px); }
+  .menu-bottom { left: auto; right: 5%; width: min(45%,355px); bottom: max(3%,env(safe-area-inset-bottom)); }
+  .menu-gear { width: 40px; right: 2%; top: 4%; }
+  .menu-scene img { object-position: center 53%; }
+  .menu-role-description { font-size: 13px; }
+  .menu-coming-soon { font-size: 9px; }
+  #menu-play { font-size: 46px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #start-screen *,#start-screen *::before { animation: none !important; transition: none !important; }
+  #start-screen { transition: none; }
+}

@@ -6,8 +6,45 @@
     <meta name="theme-color" content="#d7eafa" />
     <title>Car Stars</title>
   </head>
-  <body>
-    <canvas id="scene" aria-label="Площадка для управления машиной"></canvas>
+  <body data-screen="menu">
+    <canvas id="scene" tabindex="-1" aria-label="Площадка для управления машиной"></canvas>
+    <section id="start-screen" data-side="racer" aria-label="Car Stars main menu">
+      <div class="menu-ambient" aria-hidden="true"></div>
+      <div class="menu-stage">
+        <div class="menu-scenes" aria-hidden="true">
+          <div class="menu-scene menu-scene-racer"><img src="/ui/start/menu-racer-clean.webp" alt="" fetchpriority="high" draggable="false" /></div>
+          <div class="menu-scene menu-scene-city"><img src="/ui/start/menu-city-clean.webp" alt="" draggable="false" /></div>
+          <div class="menu-scene-shade"></div>
+        </div>
+        <div class="menu-scene-targets" aria-hidden="true">
+          <button class="menu-scene-target menu-target-racer" type="button" data-choose-side="racer" tabindex="-1" aria-label="Choose Racer"></button>
+          <button class="menu-scene-target menu-target-city" type="button" data-choose-side="city" tabindex="-1" aria-label="Choose City"></button>
+        </div>
+        <h1 class="menu-logo"><img src="/ui/start/logo.webp" alt="Car Stars" draggable="false" /></h1>
+        <button id="menu-settings" type="button" class="menu-gear" aria-label="Settings" aria-controls="settings" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 2-.6 2.6-2.1 1.2-2.6-.7L1 9.8l2 1.9v2.4l-2 1.9 2.7 4.7 2.6-.7 2.1 1.2L9 24h6l.6-2.8 2.1-1.2 2.6.7 2.7-4.7-2-1.9v-2.4l2-1.9-2.7-4.7-2.6.7-2.1-1.2L15 2Z" transform="translate(1 -1) scale(.92)"/><circle cx="12" cy="12" r="4" fill="#fff9e9"/></svg>
+        </button>
+        <div class="menu-bottom">
+          <h2 class="menu-choose"><img src="/ui/start/choose-side-title.webp" alt="Choose your side" draggable="false" /></h2>
+          <div class="menu-role-choices" role="group" aria-label="Choose your side">
+            <div class="menu-role-art" aria-hidden="true">
+              <img class="menu-role-art-racer" src="/ui/start/role-titles-racer.webp" alt="" draggable="false" />
+              <img class="menu-role-art-city" src="/ui/start/role-titles-city.webp" alt="" draggable="false" />
+            </div>
+            <button class="menu-role menu-role-racer" type="button" data-choose-side="racer" aria-pressed="true" aria-label="Racer" aria-describedby="racer-description">
+              <span class="menu-role-name">Racer</span><span id="racer-description" class="menu-role-description">Outrun patrols.<br />Earn stars.</span>
+            </button>
+            <button class="menu-role menu-role-city" type="button" data-choose-side="city" aria-pressed="false" aria-label="City" aria-describedby="city-description city-availability">
+              <span class="menu-role-name">City</span><span id="city-description" class="menu-role-description">Command patrols.<br />Catch the racer.</span>
+              <span id="city-availability" class="menu-coming-soon">Coming soon</span>
+            </button>
+          </div>
+          <button id="menu-play" type="button" disabled aria-describedby="menu-status"><span>PLAY</span></button>
+          <div class="menu-status-row"><p id="menu-status" role="status" aria-live="polite">Preparing race…</p><button id="menu-retry" type="button" hidden>Retry</button></div>
+        </div>
+      </div>
+    </section>
+    <button id="menu-button" type="button" aria-label="Return to main menu" hidden>MENU</button>
     <div id="speedometer" aria-label="Скорость машины"><div><span id="speed">0</span> <span class="speed-unit">км/ч</span></div><div id="wanted" aria-label="Розыск: 0 из 6"><span id="wanted-stars" aria-hidden="true"><span class="wanted-star">★</span><span class="wanted-star">★</span><span class="wanted-star">★</span><span class="wanted-star">★</span><span class="wanted-star">★</span><span class="wanted-star">★</span></span></div></div>
     <section id="arrest-banner" hidden aria-label="Арест">
       <div id="arrest-status" role="status" aria-live="polite"></div>
