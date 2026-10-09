@@ -1,5 +1,19 @@
 # Loading screen verification — 2026-10-09
 
+## Art revision 2
+
+Replaced the active illustration with `background-v2.webp` after user feedback.
+Checked the generated full-resolution source and the actual 390×844 loading UI:
+visible street trees have sidewalk soil beds, the raised left roof garden was
+removed, rear tire smoke is restrained, tire trails stay behind the car, and
+the foreground road is clean. Runtime image decodes at 887px wide and uses the
+new versioned URL for both art and ambient background. Screenshot:
+`loading-v2-390x844.jpg`. Source is retained as `background-v2.png`; exact prompts
+are in the manifest. Runtime WebP is 173,002 bytes (smaller than v1).
+`npm run build` and `git diff --check` passed. No gameplay/controller changes;
+the full physics suite was not rerun for this asset-only revision. Temporary
+held-resource QA tab/proxy closed, viewport reset, normal game tab refreshed.
+
 Art generated first with built-in ImageGen and visually inspected, then imported
 as a 196,190-byte WebP. Source PNG, brief and exact prompt are retained in
 `docs/art/concepts/2026-10-09/loading/` and `public/ui/loading/manifest.json`.

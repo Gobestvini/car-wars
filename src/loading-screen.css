@@ -4,7 +4,7 @@ html,body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
 #loading-screen { position: fixed; inset: 0; z-index: 40; overflow: hidden; isolation: isolate; background: #163b65; color: #fff9ec; font-family: 'Car Roboto',sans-serif; transition: opacity .45s ease, visibility .45s; }
 #loading-screen[hidden] { display: none !important; }
 #loading-screen [hidden] { display: none !important; }
-.loading-ambient { position: absolute; inset: -30px; background: url('/ui/loading/background.webp') center 60% / cover; filter: blur(24px) brightness(.65); }
+.loading-ambient { position: absolute; inset: -30px; background: url('/ui/loading/background-v2.webp') center 60% / cover; filter: blur(24px) brightness(.65); }
 .loading-stage { position: relative; height: 100%; width: min(100%,50dvh); margin: auto; overflow: hidden; box-shadow: 0 0 100px #071c3e55; }
 .loading-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .loading-shade { position: absolute; inset: 0; background: linear-gradient(0deg,#071c3ee6, #071c3e80 18%,transparent 38%); }
