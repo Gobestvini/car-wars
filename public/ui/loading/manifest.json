@@ -1,17 +1,19 @@
 {
-  "id": "car-stars-loading-background-v2",
+  "id": "car-stars-loading-background-v3",
   "date": "2026-10-09",
   "tool": "Built-in ImageGen",
   "model": "Tool-managed; model version not exposed",
-  "source": "docs/art/concepts/2026-10-09/loading/background-v2.png",
-  "runtime": "public/ui/loading/background-v2.webp",
+  "source": "docs/art/concepts/2026-10-09/loading/background-v3.png",
+  "runtime": "public/ui/loading/background-v3.webp",
   "reference": "docs/art/verification/start-screen-2026-10-09/racer-390x844.jpg",
   "dimensions": [
     887,
     1774
   ],
-  "bytes": 173002,
+  "bytes": 157932,
   "alpha": false,
+  "v3_edit_prompt": "Precise edit of the attached Car Stars loading-screen background. Preserve the composition, yellow sedan identity and location, two police cars behind, sunny cream buildings with blue roofs, trees rooted ONLY in ground-level sidewalk beds, restrained rear-wheel smoke, and tire tracks ONLY behind rear wheels. Make just these improvements: 1. There must be EXACTLY ONE zebra pedestrian crossing in the ENTIRE image. Remove ALL existing crosswalks, including background crossings between police cars, markings beside the police car, and the cropped disconnected foreground crossing. Replace them with matching unmarked asphalt. Then construct ONE coherent full-width zebra crossing directly in front of the yellow car's front bumper, at roughly 68-72% down the portrait image. The crossing must span the whole road from the left ground-level sidewalk to the right ground-level sidewalk, with both ends visibly meeting aligned curb ramps / small sidewalk openings. Its parallel white stripes must follow consistent road perspective and be a realistic single row. It MUST NOT terminate in the middle of the road, at a building wall, or at the image border. Adjust only the nearby sidewalk curb contours slightly if needed to visibly connect BOTH ends. All other road surfaces remain plain, except the short existing rear tire trails. 2. Strengthen the miniature tilt-shift optical depth of field moderately: maintain the yellow car sharply focused, including its wheels and bumper; make distant buildings, sky-line street details and far police car softer, and soften the extreme bottom foreground trees and outer corners more than now. Smooth gradual lens blur, realistic tiny diorama photography, not a flat blur over the whole image. Retain vivid warm gold/cream/blue colors and original brightness. Keep upper logo reserve and lower loading text reserve. No new objects, no rooftop trees, no extra smoke, no extra crossings, no text/logo/UI/watermark. Portrait 1:2.",
+  "v3_refinement_prompt": "Localized geometry correction only. Keep this exact image including its strong miniature lens blur, car, police, colors, one zebra crossing and all other details unchanged. The RIGHT end of the one zebra crossing currently disappears at the image border. Correct this by extending the RIGHT cream ground-level sidewalk and curb outward into the roadway as a modest pedestrian curb extension at the crossing. The cream sidewalk must occupy a clearly visible wedge near x=85-100%, y=63-76%, continuous with the existing right sidewalk behind it. Give it a visible cream curb and a flat pedestrian ramp facing the zebra crossing. Shorten the existing crossing to end against that visible ramp at approximately x=85%,y=68%, so BOTH sidewalk ends of the crossing are INSIDE the image frame. Keep the left sidewalk and left end as they are. Exactly ONE crosswalk, connecting left and right sidewalks directly in front of the yellow car. Do not add a traffic island: the right landing is a continuous sidewalk connected to the right-hand buildings/street edge. No markings beyond this crossing, no new trees or props or text. Preserve vehicle location and clarity and foreground/distance blur.",
   "collision": "none",
   "generation_note": "Created for this project from its approved game art. Generated output subject to the applicable OpenAI terms; no separate third-party asset license claimed.",
   "edits": "Two ImageGen edit passes: sidewalk-only trees, small rear-wheel smoke, short rear tire trails and clean foreground. Pillow WebP quality=90 method=6. Original source retained.",

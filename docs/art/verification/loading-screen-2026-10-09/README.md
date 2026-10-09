@@ -1,5 +1,18 @@
 # Loading screen verification — 2026-10-09
 
+## Art revision 3
+
+User requested exactly one crossing and stronger miniature blur. Inspected the
+edited source: one zebra crossing in front of the racer, with both sidewalk
+landings visible; other crossings removed. Foreground trees and distant city
+are softer, the racer stays sharp. Actual 390×844 browser capture:
+`loading-v3-390x844.jpg`. Browser confirmed active `background-v3.webp` decodes
+at 887px wide, loading completes and PLAY becomes enabled. Viewport override
+reset afterward. Source: `background-v3.png`; runtime: 157,932 bytes.
+`npm run build` and staged `git diff --check` passed. No gameplay logic changed;
+physics tests were not repeated for this art revision. Exact built-in ImageGen
+edit and refinement prompts are retained in the manifest.
+
 ## Art revision 2
 
 Replaced the active illustration with `background-v2.webp` after user feedback.

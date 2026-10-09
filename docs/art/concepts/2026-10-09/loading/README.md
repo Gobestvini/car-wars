@@ -1,5 +1,15 @@
 # Car Stars loading screen
 
+## Revision 3
+
+Removed all repeated/disconnected crosswalks and retained one zebra crossing
+in front of the racer. Added a visible right sidewalk curb extension so both
+ends meet sidewalks inside the frame. Increased optical miniature depth blur
+on the foreground and distant city while keeping the racer sharp. Two built-in
+ImageGen edits; source `background-v3.png`, runtime `background-v3.webp`,
+887×1774, 157,932 bytes. Exact prompts are in the manifest. Previous sources
+retained; new versioned URL used in preload, illustration and ambient layer.
+
 ## Revision 2
 
 User-requested art correction: street trees rooted in sidewalk beds, bare blue
