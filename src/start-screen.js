@@ -18,7 +18,7 @@ export function createStartScreen({ bypass = false, onPlay, onShow, onSettings, 
   function render() {
     root.dataset.side = side;
     root.hidden = !open;
-    root.inert = !open;
+    root.inert = !open || document.body.dataset.loading === 'true';
     home.hidden = open;
     document.body.dataset.screen = open ? 'menu' : 'playing';
     for (const button of roleButtons) button.setAttribute('aria-pressed', String(button.dataset.chooseSide === side));

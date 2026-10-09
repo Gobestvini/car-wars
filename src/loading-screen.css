@@ -1,0 +1,36 @@
+@font-face { font-family: 'Lilita One'; src: url('/fonts/LilitaOne-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Car Roboto'; src: url('/fonts/Roboto-Variable.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+html,body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+#loading-screen { position: fixed; inset: 0; z-index: 40; overflow: hidden; isolation: isolate; background: #163b65; color: #fff9ec; font-family: 'Car Roboto',sans-serif; transition: opacity .45s ease, visibility .45s; }
+#loading-screen[hidden] { display: none !important; }
+#loading-screen [hidden] { display: none !important; }
+.loading-ambient { position: absolute; inset: -30px; background: url('/ui/loading/background.webp') center 60% / cover; filter: blur(24px) brightness(.65); }
+.loading-stage { position: relative; height: 100%; width: min(100%,50dvh); margin: auto; overflow: hidden; box-shadow: 0 0 100px #071c3e55; }
+.loading-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.loading-shade { position: absolute; inset: 0; background: linear-gradient(0deg,#071c3ee6, #071c3e80 18%,transparent 38%); }
+.loading-logo { position: absolute; width: 68%; left: 16%; top: max(5%,env(safe-area-inset-top)); filter: drop-shadow(0 6px 10px #071c3e44); }
+.loading-footer { position: absolute; left: 8%; right: 8%; bottom: max(4%,env(safe-area-inset-bottom)); }
+.loading-footer h1 { margin: 0 0 14px; text-align: center; font: 400 clamp(19px,3.5dvh,38px)/1.05 'Lilita One',sans-serif; text-shadow: 0 3px 0 #071c3e,0 4px 12px #071c3e; }
+.loading-progress { height: clamp(21px,3.8dvh,38px); padding: 4px; border: 2px solid #fff4bb; border-radius: 24px; background: #071c3ed9; box-shadow: 0 4px 0 #071c3e88,inset 0 2px 5px #0008,0 0 20px #ffd63c22; }
+.loading-fill { height: 100%; width: 0%; min-width: 0; border-radius: 18px; background: linear-gradient(#fff98c 0%,#ffe829 35%,#ffb719 100%); box-shadow: inset 0 2px 0 #fffad9,0 0 12px #ffcf4b80; transition: width .32s ease; position: relative; overflow: hidden; }
+.loading-fill::after { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg,transparent 20%,#fff8 50%,transparent 80%); transform: translateX(-100%); animation: loading-sheen 1.8s ease-in-out infinite; }
+.loading-details { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 11px; font-size: clamp(11px,1.65dvh,17px); font-weight: 800; text-shadow: 0 2px 4px #071c3e; }
+#loading-phase { margin: 0; }
+#loading-percent { font-variant-numeric: tabular-nums; color: #fff1a2; }
+.loading-tip { margin: 24px 0 0; text-align: center; font-size: clamp(11px,1.6dvh,16px); font-weight: 700; color: #d3e9ff; text-shadow: 0 2px 4px #071c3e; }
+#loading-retry { display: block; min-height: 44px; margin: 16px auto 0; padding: 10px 30px; border: 2px solid #fff4bb; border-radius: 14px; background: linear-gradient(#fff66a,#ffc020); color: #071c3e; font: 22px 'Lilita One',sans-serif; box-shadow: 0 4px 0 #bb740c; }
+#loading-retry:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+#loading-screen.is-leaving { opacity: 0; visibility: hidden; pointer-events: none; }
+#loading-screen[data-error="true"] .loading-fill::after { animation: none; }
+body[data-loading="true"] :is(#scene,#speedometer,#wanted,#arrest-banner,#menu-button,#settings-button,#performance,#touch-marker,#load-status,#retry-load) { visibility: hidden !important; }
+@keyframes loading-sheen { to { transform: translateX(100%); } }
+@media (orientation: landscape) and (max-height: 600px) {
+  .loading-stage { width: min(100%,1100px); }
+  .loading-art { object-position: center 57%; }
+  .loading-logo { width: min(27%,210px); left: 7%; top: 8%; }
+  .loading-footer { left: auto; right: 6%; width: 42%; bottom: 7%; }
+  .loading-footer h1 { font-size: 26px; }
+  .loading-details { font-size: 13px; }
+  .loading-tip { font-size: 12px; margin-top: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { #loading-screen,.loading-fill { transition: none; } .loading-fill::after { animation: none; } }

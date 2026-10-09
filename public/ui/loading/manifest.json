@@ -1,0 +1,20 @@
+{
+  "id": "car-stars-loading-background-v1",
+  "date": "2026-10-09",
+  "tool": "Built-in ImageGen",
+  "model": "Tool-managed; model version not exposed",
+  "source": "docs/art/concepts/2026-10-09/loading/background.png",
+  "runtime": "public/ui/loading/background.webp",
+  "reference": "docs/art/verification/start-screen-2026-10-09/racer-390x844.jpg",
+  "dimensions": [
+    887,
+    1774
+  ],
+  "bytes": 196190,
+  "alpha": false,
+  "collision": "none",
+  "generation_note": "Created for this project from its approved game art. Generated output subject to the applicable OpenAI terms; no separate third-party asset license claimed.",
+  "edits": "Source copied unchanged. Pillow WebP quality=90 method=6; provenance retained in this manifest.",
+  "review": "Agent visually verified in the browser at mobile/landscape sizes; user review pending",
+  "prompt": "Use case: stylized-concept. Create a beautiful finished portrait 1:2 loading-screen BACKGROUND illustration for the mobile game Car Stars, matching the attached reference's polished sunny low-poly toy-city 3D art, colors and vehicle identity. Reference is style/identity only, NOT an edit target. Single continuous cinematic scene, no split screen. A bright gold-yellow boxy sport sedan drifts around a broad street bend in the center-lower middle, front three-quarter view, readable four wheels, dark navy windows, chrome bumper, stylized white tire smoke and curved skid trails. Two small white-and-blue patrol cars with red/blue lights follow farther back. Cream buildings with bright blue roofs, faceted green sidewalk trees, crosswalks, warm sunlight, blue shadows, miniature tilt-shift depth of field on outer edges, rich saturated but clean gold/blue palette. Composition: reserve upper 22% as softly blurred uncluttered sky-blue and warm city background for a separate logo overlay, vehicle focal scene between 30% and 70%, bottom 22% an uncluttered softly blurred navy-blue street area for a separate loading bar. High-quality rounded/beveled forms matching reference. Technical: portrait aspect 1:2, opaque background. IMPORTANT absolutely NO TEXT, no logo, no letters, no UI, no progress bar, no frame, no watermark. We will add the existing logo and accessible animated loading bar in code. Full bleed art."
+}

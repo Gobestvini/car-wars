@@ -5,10 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <meta name="theme-color" content="#d7eafa" />
     <title>Car Stars</title>
+    <link rel="stylesheet" href="/src/loading-screen.css" />
+    <link rel="preload" as="image" href="/ui/loading/background.webp" />
   </head>
-  <body data-screen="menu">
+  <body data-screen="menu" data-loading="true">
+    <section id="loading-screen" aria-label="Loading Car Stars" aria-busy="true">
+      <div class="loading-ambient" aria-hidden="true"></div>
+      <div class="loading-stage">
+        <img id="loading-art" class="loading-art" src="/ui/loading/background.webp" alt="" fetchpriority="high" draggable="false" />
+        <div class="loading-shade" aria-hidden="true"></div>
+        <img class="loading-logo" src="/ui/start/logo.webp" alt="Car Stars" draggable="false" />
+        <div class="loading-footer">
+          <h1>GET READY TO RACE</h1>
+          <div class="loading-progress" role="progressbar" aria-label="Preparing Car Stars" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="loading-fill"></div></div>
+          <div class="loading-details"><p id="loading-phase" role="status" aria-live="polite">Starting engines…</p><span id="loading-percent" aria-hidden="true">0%</span></div>
+          <button id="loading-retry" type="button" hidden>RETRY</button>
+          <p class="loading-tip">Outrun patrols. Earn your stars.</p>
+        </div>
+      </div>
+    </section>
     <canvas id="scene" tabindex="-1" aria-label="Площадка для управления машиной"></canvas>
-    <section id="start-screen" data-side="racer" aria-label="Car Stars main menu">
+    <section id="start-screen" data-side="racer" aria-label="Car Stars main menu" inert>
       <div class="menu-ambient" aria-hidden="true"></div>
       <div class="menu-stage">
         <div class="menu-scenes" aria-hidden="true">
