@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-09",
+  "tool": "Built-in ImageGen",
+  "purpose": "Regenerated main-menu concept mockups with English Racer / City bottom selection; refined CHOOSE YOUR SIDE heading.",
+  "status": "Concept reference, not implemented UI or flattened Figma replacement",
+  "assets": [
+    {
+      "name": "Racer selected",
+      "path": "01-racer-selected.png",
+      "sourceFile": "C:/Users/gobes/.codex/generated_images/01a11a7f-568a-7412-8fb4-aa384192a212/exec-7b4de9fd-8d6a-4c28-bff5-1b75ce509dcb.png",
+      "width": 887,
+      "height": 1774,
+      "mode": "RGB",
+      "sha256": "2e9fc5addf5dd9710251b19a76d09680eb425ad76c491959a0debbadc421af9e"
+    },
+    {
+      "name": "City selected",
+      "path": "02-city-selected.png",
+      "sourceFile": "C:/Users/gobes/.codex/generated_images/01a11a7f-568a-7412-8fb4-aa384192a212/exec-38492967-16ad-47b5-89ea-2e7ac5c614e4.png",
+      "width": 887,
+      "height": 1774,
+      "mode": "RGB",
+      "sha256": "03498908aa6288fccc7a71ab04a08299e9366dc00c59d8dc3220e041d0d142a0"
+    }
+  ]
+}

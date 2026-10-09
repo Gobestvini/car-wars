@@ -1,0 +1,23 @@
+{
+  "files": [
+    {
+      "path": "01-racer-selected.png",
+      "size": [
+        887,
+        1774
+      ],
+      "validPNG": true,
+      "aspect": "1:2"
+    },
+    {
+      "path": "02-city-selected.png",
+      "size": [
+        887,
+        1774
+      ],
+      "validPNG": true,
+      "aspect": "1:2"
+    }
+  ],
+  "visualReview": "Both final generated mockups inspected; English copy, sculpted heading without capsule, both roles bottom, PLAY without icon, three city patrols."
+}
