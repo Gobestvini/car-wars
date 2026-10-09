@@ -28,7 +28,7 @@ import { clearSettingsDefaults, readSettingsDefaults, saveSettingsDefaults } fro
 import './style.css';
 import packageInfo from '../package.json';
 import { ART, ART_LIGHT, artQuality } from './art-direction.js';
-import { stylePlayerBody } from './vehicle-visuals.js';
+import { PLAYER_MODEL_URL, preparePlayerModel } from './player-model.js';
 import { TireSmoke } from './tire-smoke.js';
 import { createStartScreen } from './start-screen.js';
 
@@ -39,7 +39,11 @@ const bypassMenu = debug || new URLSearchParams(location.search).has('damageTest
 const startScreen = createStartScreen({
   // Explicit lab/test entry points keep their direct access to the simulation.
   bypass: bypassMenu,
-  onPlay: () => { setSettingsOpen(false); reset(); },
+  onPlay: () => {
+    setSettingsOpen(false); reset();
+    traffic.render(1, camera);
+    miniatureBlur.render(scene, camera, { mode: cameraMode, car });
+  },
   onShow: () => { releasePointer(); keys.clear(); stepper.reset(); setSettingsOpen(false); },
   onSettings: () => setSettingsOpen(settingsButton.getAttribute('aria-expanded') !== 'true'),
 });
@@ -200,8 +204,6 @@ const playerVisualSteeringScale = 0.5;
 let modelReady = false;
 let loading = false;
 let bodyDeformation = null;
-const treadGeometry = new THREE.CylinderGeometry(0.45, 0.45, 0.3, 20, 1, true);
-const treadMaterial = new THREE.MeshStandardMaterial({ color: '#252b2c', roughness: 0.92 });
 async function loadCar() {
   if (loading || modelReady) return;
   loading = true;
@@ -212,48 +214,21 @@ async function loadCar() {
     manager.onProgress = (_url, loaded, total) => {
       loadingScreen.update(12 + 48 * loaded / Math.max(1,total), 'Loading cars…');
     };
-    const gltf = await new GLTFLoader(manager).loadAsync(`${import.meta.env.BASE_URL}models/sedan.glb`, event => {
+    const gltf = await new GLTFLoader(manager).loadAsync(`${import.meta.env.BASE_URL}${PLAYER_MODEL_URL}`, event => {
       if (event.total > 0) loadingScreen.update(12 + 48 * event.loaded / event.total, 'Loading cars…');
     });
-    const model = gltf.scene;
-    const wheelNodes = [];
-    model.traverse(node => {
-      if (node.name.startsWith('wheel-')) wheelNodes.push(node);
-      if (node.isMesh) { node.castShadow = true; node.receiveShadow = true; node.material.roughness = 0.6; }
-    });
-    // Model's +Z is its nose. Scale bodywork to a full-size 4.5m sedan.
-    const body = model.getObjectByName('body');
-    stylePlayerBody(body);
-    body.geometry.computeBoundingBox();
-    const bounds = body.geometry.boundingBox;
-    const scale = 4.45 / (bounds.max.z - bounds.min.z);
-    model.scale.set(1.25, 1.15, scale);
-    model.position.y = -0.50;
-    body.geometry = body.geometry.clone();
+    const { model, body, wheels: wheelNodes } = preparePlayerModel(gltf.scene);
+    // Authored in metres about the existing simulation COM; no visual rescaling.
     model.updateMatrixWorld(true);
     body.updateWorldMatrix(true, false);
     bodyDeformation = new CarDeformation(body.geometry, body.matrixWorld.clone());
     car.add(model);
     // Detach wheels so suspension, steering and wheel spin remain independent of chassis roll.
-    wheelNodes.sort((a, b) => (b.position.z - a.position.z) || (a.position.x - b.position.x));
     for (const node of wheelNodes) {
-      node.geometry.computeBoundingBox();
-      const box = node.geometry.boundingBox;
-      const center = box.getCenter(new THREE.Vector3());
-      node.geometry = node.geometry.clone();
-      node.geometry.translate(-center.x, -center.y, -center.z);
-      const wheelScale = sim.wheels[visualWheels.length].radius * 2 / (box.max.y - box.min.y);
       node.removeFromParent();
       node.position.set(0, 0, 0);
-      // Keep a 30cm tire width: uniformly scaling the asset made the wheels protrude.
-      node.scale.set(0.3 / (box.max.x - box.min.x), wheelScale * 0.98, wheelScale * 0.98);
       const pivot = new THREE.Group(); const spin = new THREE.Group();
-      const tread = new THREE.Mesh(
-        treadGeometry,
-        treadMaterial,
-      );
-      tread.rotation.z = Math.PI / 2; tread.castShadow = true;
-      spin.add(node, tread); pivot.add(spin); scene.add(pivot);
+      spin.add(node); pivot.add(spin); scene.add(pivot);
       visualWheels.push({ pivot, spin });
     }
     // Compile while the loading indicator is visible, before accepting movement.
@@ -293,9 +268,9 @@ async function loadCar() {
     // A retry must not duplicate partially prepared meshes after a compile failure.
     const failedGeometry = new Set(), failedMaterials = new Set(), failedTextures = new Set();
     const collectFailedResources = node => { if (node.isMesh) {
-      if (node.geometry !== treadGeometry) failedGeometry.add(node.geometry);
+      failedGeometry.add(node.geometry);
       for (const material of Array.isArray(node.material) ? node.material : [node.material]) {
-        if (!material || material === treadMaterial) continue;
+        if (!material) continue;
         failedMaterials.add(material);
         for (const value of Object.values(material)) if (value?.isTexture) failedTextures.add(value);
       }
@@ -643,7 +618,12 @@ function frame(now) {
   previousFrameTimestamp = now;
   const elapsed = Math.max(0, (now - previousTime) / 1000); previousTime = now;
   const dt = Math.min(elapsed, 0.08);
-  if (document.hidden || !modelReady || startScreen.isOpen || loadingScreen.isOpen) { stepper.reset(); return; }
+  if (document.hidden || !modelReady || loadingScreen.isOpen) { stepper.reset(); return; }
+  if (startScreen.isOpen) {
+    // Keep the WebGL buffer populated throughout the menu's translucent exit.
+    if (startScreen.isLaunching) miniatureBlur.render(scene, camera, { mode: cameraMode, car });
+    stepper.reset(); return;
+  }
   const physicsStart = performance.now();
   const { alpha } = stepper.advance(elapsed, () => {
     input = getInput();
@@ -791,6 +771,22 @@ window.carLab = {
         carLengthPx: Math.hypot((nose.x - tail.x) * innerWidth / 2, (nose.y - tail.y) * innerHeight / 2) };
     } }),
   telemetry: () => sim.telemetry(), get modelReady() { return modelReady; }, get tuning() { return { ...sim.tuning }; },
+  playerModel: () => {
+    const meshes = [];
+    car.traverse(node => { if (node.isMesh) meshes.push(node); });
+    for (const { spin } of visualWheels) spin.traverse(node => { if (node.isMesh) meshes.push(node); });
+    let deformedVertices = 0;
+    if (bodyDeformation) {
+      const current = bodyDeformation.geometry.attributes.position.array;
+      for (let i = 0; i < current.length; i += 3) {
+        if (Math.hypot(...[0, 1, 2].map(axis => current[i + axis] - bodyDeformation.originalPositions[i + axis])) > 1e-6) deformedVertices++;
+      }
+    }
+    return { url: PLAYER_MODEL_URL, meshes: meshes.length,
+      triangles: meshes.reduce((sum, mesh) => sum + (mesh.geometry.index?.count ?? mesh.geometry.attributes.position.count) / 3, 0),
+      textures: new Set(meshes.map(mesh => mesh.material.map).filter(Boolean)).size,
+      materials: new Set(meshes.map(mesh => mesh.material)).size, deformedVertices };
+  },
   damageEffects: () => damageEffects.snapshot(),
   buildingVisibility: () => buildingEntries.map(entry => ({ id: entry.id, bounds: entry.bounds, opacity: entry.opacity,
     proximity: Boolean(entry.nearCar), gap: entry.carGap, occluded: Boolean(entry.wasOccluded), proxy: Boolean(entry.proxy) })),

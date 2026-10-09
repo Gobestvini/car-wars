@@ -44,13 +44,15 @@ export function createStartScreen({ bypass = false, onPlay, onShow, onSettings }
     root.classList.add('is-launching');
     root.inert = true;
     play.disabled = true;
+    // Reveal the prepared race underneath the fading menu, with input still paused.
+    document.body.dataset.screen = 'launching';
+    onPlay(side);
     // Equal to the CSS exit; reduced-motion users enter immediately.
     launchTimer = setTimeout(() => {
       open = false;
       launching = false;
       root.classList.remove('is-launching');
       render();
-      onPlay(side);
       document.getElementById('scene').focus({ preventScroll: true });
     }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 520);
   });
@@ -68,6 +70,7 @@ export function createStartScreen({ bypass = false, onPlay, onShow, onSettings }
 
   return {
     get isOpen() { return open; },
+    get isLaunching() { return launching; },
     snapshot: () => ({ open, side, ready, launching }),
     setReady(value) { ready = value; render(); },
   };
