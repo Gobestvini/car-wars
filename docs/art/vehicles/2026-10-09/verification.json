@@ -1,0 +1,26 @@
+[
+  {
+    "file": "01-yellow-getaway.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "0007D7D61E3BE09A9EDFCF2C7E7AD1D5F245C5697498502F56F1BD623F686EA2"
+  },
+  {
+    "file": "02-police-patrol.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "44D16795C4EBABB6258825A26CADBD6AAD0DAB78CAD78B124479664CDE6ACF97"
+  },
+  {
+    "file": "03-grey-traffic.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "5B993EF43845C120B6CDD02066ECA06625AFCED73E36AD729206FBAA07A981EB"
+  },
+  {
+    "file": "04-green-traffic.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "79A99761F302E5DCCE51A383E6655C9C21D860426E53FA6F29A791F854E8682D"
+  }
+]
