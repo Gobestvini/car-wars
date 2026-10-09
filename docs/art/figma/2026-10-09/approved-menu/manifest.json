@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-09",
+  "figmaFile": "NllQADLKwk6RK8pMTurKiN",
+  "assets": [
+    {
+      "name": "role-titles-racer",
+      "path": "assets/role-titles-racer.png",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-59418378-f46f-4190-b942-dfa477e3befe.png",
+      "transparent": true,
+      "reference": "C:/Users/gobes/AppData/Local/Temp/codex-clipboard-f656c058-96ca-4f8b-afa7-5442010e1d84.png",
+      "prompt": "Use case: background-extraction. Extract ONLY the TWO sculpted role titles RACER and CITY together from the reference, on actual transparent background. One horizontal graphic with RACER left and CITY right, same baseline, original relative widths and spacing. Preserve exact chunky heavy 3D letter shapes, yellow-gold RACER faces with orange extrusion and navy backing, cream-white CITY with icy highlights and navy extrusion, and the warm gold curved underline/glow beneath RACER only. Remove ALL other artwork, descriptions, CHOOSE YOUR SIDE, logo, PLAY, cars, scenery and UI. Tight transparent bounding box with8px padding. This is a discrete two-title artwork asset, not a full UI screenshot. Render words exactly RACER and CITY, no other words.",
+      "source": "Built-in ImageGen",
+      "crop": [
+        68,
+        184,
+        2113,
+        582
+      ],
+      "width": 2045,
+      "height": 398,
+      "sha256": "d2e7da93c1a9849e4b5a37c457fa9fb363fdc7960241529a79f15117a16a95a3"
+    },
+    {
+      "name": "role-titles-city",
+      "path": "assets/role-titles-city.png",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-8b323197-91f8-45e2-8c77-99aba960d070.png",
+      "transparent": true,
+      "reference": "C:/Users/gobes/OneDrive/Документы/CarWars/docs/art/concepts/2026-10-09/menu-v3/02-city-selected.png",
+      "prompt": "Use case: background-extraction. Extract ONLY the TWO sculpted role titles RACER and CITY together from the reference on actual transparent background. Single horizontal graphic, RACER left and CITY right, same baseline and original relative widths/spacing. Preserve chunky heavy 3D letter shapes: inactive RACER cream-white faces and navy depth; active CITY bright icy cyan-blue faces and navy extrusion with thin curved cyan underline/glow below CITY only. Remove all descriptions, CHOOSE YOUR SIDE, logo, PLAY, cars, scenery and UI. Tight transparent bounding box with8px padding. Discrete title artwork asset, no complete UI. Exactly RACER and CITY, no other text.",
+      "source": "Built-in ImageGen",
+      "crop": [
+        33,
+        183,
+        2106,
+        577
+      ],
+      "width": 2073,
+      "height": 394,
+      "sha256": "083652a6771208740bd295b3bf3afe21ec301742df48dbc85b744210bc48dbf3"
+    },
+    {
+      "name": "choose-side-title",
+      "path": "assets/choose-side-title.png",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-5e8201e8-0d82-420b-a401-b12e97572eb0.png",
+      "transparent": true,
+      "reference": "C:/Users/gobes/AppData/Local/Temp/codex-clipboard-f656c058-96ca-4f8b-afa7-5442010e1d84.png",
+      "prompt": "Use case: background-extraction. Extract faithfully ONLY the small sculpted CHOOSE YOUR SIDE heading together with its short gold dash on left and cyan dash on right from the reference. Actual transparent background. Preserve exact single-line words CHOOSE YOUR SIDE, heavy rounded condensed block letters, white icy face highlights, navy outline and shallow blue extrusion. Keep both accent dashes original small scale. No cream capsule or plate, no surrounding panel. Remove logo, roles, descriptions, scenery, button and all other content. One tightly framed horizontal typography artwork with small transparent padding.",
+      "source": "Built-in ImageGen",
+      "crop": [
+        35,
+        251,
+        2137,
+        511
+      ],
+      "width": 2102,
+      "height": 260,
+      "sha256": "e752ce775998964298b464e21132925be7dd29122a89042e102363f8dc5dcbcb"
+    },
+    {
+      "name": "menu-racer-clean",
+      "path": "assets/menu-racer-clean.png",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-6ca79f46-1662-4f04-8102-3ffb7a869f69.png",
+      "transparent": false,
+      "reference": "C:/Users/gobes/AppData/Local/Temp/codex-clipboard-f656c058-96ca-4f8b-afa7-5442010e1d84.png",
+      "prompt": "Use case: precise-object-edit. Remove ALL interface elements and ALL text from this exact reference, leaving ONLY its clean 1:2 portrait scene illustration. Remove CAR STARS logo, gear button, CHOOSE YOUR SIDE heading and both accent dashes, RACER and CITY titles and active underline, all small descriptions, and huge PLAY button. Reconstruct natural city/road/trees behind removed items. Preserve the exact large left yellow drifting car, its position/size and smoke, warm sunny cream buildings with blue roofs and faceted green trees, narrow right city strip with exactly THREE police cars and cyan routes/pins, white diagonal 70/30 seam, original camera/lighting, soft edge tilt-shift blur and localized navy shading in lower20% for later native UI overlay. No lettering, symbols, buttons, logo, HUD or controls left. Do not change existing central hero composition. This is illustration-only background, not full UI.",
+      "source": "Built-in ImageGen",
+      "width": 887,
+      "height": 1774,
+      "sha256": "768c26c38f2eb0d37bd458e7b1fee619ea0fc88f4b7aafa7645aae380fb4338d"
+    },
+    {
+      "name": "menu-city-clean",
+      "path": "assets/menu-city-clean.png",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-8cfbbe81-319f-4a6c-bf69-a59cf6debe66.png",
+      "transparent": false,
+      "reference": "C:/Users/gobes/OneDrive/Документы/CarWars/docs/art/concepts/2026-10-09/menu-v3/02-city-selected.png",
+      "prompt": "Use case: precise-object-edit. Remove ALL interface elements and text from this exact portrait reference, producing ONLY clean 1:2 illustration. Remove CAR STARS logo, top gear control, CHOOSE YOUR SIDE heading with dashes, RACER/CITY role titles and underline, small descriptions and giant PLAY button. Fill removed areas naturally with same miniature city/streets/trees. Preserve 30% left yellow drifting car strip, white diagonal divider and large70% elevated city view on right, exactly THREE police patrol cars with cyan routes/pins and one yellow target car, cream buildings with vivid blue roofs, faceted green trees, same warm sunlight/camera/art quality and edge tilt-shift blur. Retain subtle lower20% navy shading for later UI overlay. Absolutely no text, logo, buttons, controls or UI. Illustration-only background.",
+      "source": "Built-in ImageGen",
+      "width": 887,
+      "height": 1774,
+      "sha256": "3d8c7c4b954d7050b78a07e03f9db57cf95de58b9872496653f7501a33aedb51"
+    }
+  ]
+}

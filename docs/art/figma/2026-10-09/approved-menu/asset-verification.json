@@ -1,0 +1,75 @@
+{
+  "assets": [
+    {
+      "path": "assets/role-titles-racer.png",
+      "dimensions": [
+        2045,
+        398
+      ],
+      "sha256": "d2e7da93c1a9849e4b5a37c457fa9fb363fdc7960241529a79f15117a16a95a3",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "passed": true
+    },
+    {
+      "path": "assets/role-titles-city.png",
+      "dimensions": [
+        2073,
+        394
+      ],
+      "sha256": "083652a6771208740bd295b3bf3afe21ec301742df48dbc85b744210bc48dbf3",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "passed": true
+    },
+    {
+      "path": "assets/choose-side-title.png",
+      "dimensions": [
+        2102,
+        260
+      ],
+      "sha256": "e752ce775998964298b464e21132925be7dd29122a89042e102363f8dc5dcbcb",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "passed": true
+    },
+    {
+      "path": "assets/menu-racer-clean.png",
+      "dimensions": [
+        887,
+        1774
+      ],
+      "sha256": "768c26c38f2eb0d37bd458e7b1fee619ea0fc88f4b7aafa7645aae380fb4338d",
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "passed": true
+    },
+    {
+      "path": "assets/menu-city-clean.png",
+      "dimensions": [
+        887,
+        1774
+      ],
+      "sha256": "3d8c7c4b954d7050b78a07e03f9db57cf95de58b9872496653f7501a33aedb51",
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "passed": true
+    }
+  ],
+  "exportDimensions": [
+    1306,
+    1944
+  ],
+  "prototypeConnectionsChecked": 8,
+  "passed": true
+}
