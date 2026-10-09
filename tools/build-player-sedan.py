@@ -287,6 +287,7 @@ for obj in list(scene.objects):
     dest.objects.link(obj)
 reference=bpy.data.images.load(str(ROOT/'docs/art/vehicles/2026-10-09/01-yellow-getaway.png'))
 reference.name='REFERENCE | yellow getaway turnaround'
+reference.use_fake_user=True
 reference.pack()
 scene['concept_reference']=reference.name
 scene['game_axes']='GLB: +X right, +Y up, +Z nose. Blender: +X right, +Z up, -Y nose.'
