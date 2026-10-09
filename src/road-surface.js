@@ -204,14 +204,16 @@ export function createSidewalkCapPositions(edges, width = ROAD_SURFACE_HEIGHTS.s
   const positions = [];
   for (const { axis, value, min, max, side } of edges) {
     if (axis === 'x') {
-      const innerZ = value + (side === 'north' ? width : -width);
-      if (side === 'north') positions.push(min, y, value, min, y, innerZ, max, y, innerZ,
+      // `side` names the occupied side of the edge. Keep the trim inside
+      // that side, matching the inward radial strip around a rounded corner.
+      const innerZ = value + (side === 'north' ? -width : width);
+      if (side === 'south') positions.push(min, y, value, min, y, innerZ, max, y, innerZ,
         min, y, value, max, y, innerZ, max, y, value);
       else positions.push(min, y, value, max, y, innerZ, min, y, innerZ,
         min, y, value, max, y, value, max, y, innerZ);
     } else {
-      const innerX = value + (side === 'west' ? width : -width);
-      if (side === 'east') positions.push(value, y, min, innerX, y, min, innerX, y, max,
+      const innerX = value + (side === 'west' ? -width : width);
+      if (side === 'west') positions.push(value, y, min, innerX, y, min, innerX, y, max,
         value, y, min, innerX, y, max, value, y, max);
       else positions.push(value, y, min, innerX, y, max, innerX, y, min,
         value, y, min, value, y, max, innerX, y, max);

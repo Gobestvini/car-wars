@@ -5,7 +5,8 @@ import * as THREE from 'three';
 import { CITY_CONFIG, createCityPlan } from '../src/city-generator.js';
 import { CarSimulation } from '../src/vehicle.js';
 import { createRoadSurfaceRectangles, createRoundedSidewalkLayout, createSidewalkSupportPrisms, createSurfaceHeightSampler,
-  containsRoundedSidewalk, createRoundedSidewalkEdges, ROAD_SURFACE_HEIGHTS } from '../src/road-surface.js';
+  containsRoundedSidewalk, createRoundedSidewalkEdges, createRoadFacingSidewalkEdges,
+  createSidewalkCapPositions, ROAD_SURFACE_HEIGHTS } from '../src/road-surface.js';
 import { createSidewalkVisuals } from '../src/sidewalk-visuals.js';
 import { getSignalPosition } from '../src/signal-layout.js';
 
@@ -90,6 +91,40 @@ test('rounded top, asphalt patch, curved wall and curb are batched and have upwa
   const geometries = new Set(meshes.map(mesh => mesh.geometry));
   for (const geometry of geometries) geometry.dispose();
   sidewalk.dispose(); curb.dispose();
+});
+
+test('straight curb trim stays on the sidewalk and shares both tangent endpoints with the curved trim', () => {
+  const layout = createRoundedSidewalkLayout([0], 20, 12, 4);
+  const roads = createRoadSurfaceRectangles([0], 20, 12);
+  const edges = createRoadFacingSidewalkEdges(createRoundedSidewalkEdges(layout.rectangles, layout.corners), roads);
+  const straight = createSidewalkCapPositions(edges);
+  const sidewalk = new THREE.MeshStandardMaterial(), curb = new THREE.MeshStandardMaterial();
+  const meshes = createSidewalkVisuals(THREE, layout, roads, sidewalk, curb);
+  const caps = meshes.find(mesh => mesh.name === 'Curb top edges').geometry.attributes.position.array;
+  const curved = caps.slice(straight.length);
+  const hasPoint = (positions, x, z) => {
+    for (let i = 0; i < positions.length; i += 3) {
+      if (Math.abs(positions[i] - x) < 1e-6 && Math.abs(positions[i + 2] - z) < 1e-6) return true;
+    }
+    return false;
+  };
+  try {
+    for (let i = 0; i < straight.length; i += 3) {
+      assert.ok(containsRoundedSidewalk(layout, straight[i], straight[i + 2]),
+        `curb trim floats outside the sidewalk at (${straight[i]}, ${straight[i + 2]})`);
+    }
+    const width = ROAD_SURFACE_HEIGHTS.sidewalkCapWidth;
+    for (const { x, z, sx, sz, radius } of layout.corners) {
+      for (const [tx, tz] of [[x - sx * radius, z], [x - sx * (radius - width), z],
+        [x, z - sz * radius], [x, z - sz * (radius - width)]]) {
+        assert.ok(hasPoint(straight, tx, tz), `missing straight tangent (${tx}, ${tz})`);
+        assert.ok(hasPoint(curved, tx, tz), `missing curved tangent (${tx}, ${tz})`);
+      }
+    }
+  } finally {
+    for (const mesh of meshes) mesh.geometry.dispose();
+    for (const material of new Set(meshes.map(mesh => mesh.material))) material.dispose();
+  }
 });
 
 test('rounded convex support ends at its arc and leaves the cut corner clear for a raycast', () => {

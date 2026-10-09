@@ -1,0 +1,20 @@
+{
+  "fixture": "tools/sidewalk-rounding-regression.html",
+  "viewport": [1280, 720],
+  "dpr": 1,
+  "baselineCommit": "9753cf0",
+  "baselineRegression": {
+    "passed": false,
+    "firstOutsideStraightTrimVertexXZ": [-20, -5.880000114440918],
+    "straightTrimExtendedTowardRoadMeters": 0.12
+  },
+  "after": {
+    "cornerCount": 4,
+    "interiorJoinWalls": 0,
+    "protrudingStraightVertices": 0,
+    "tangentMismatches": 0,
+    "maxTopColorDeltaRGB": 0,
+    "pass": true
+  },
+  "image": "curb-tangents-after.png"
+}
