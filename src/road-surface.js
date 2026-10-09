@@ -86,20 +86,21 @@ export function createRoundedSidewalkLayout(roadCenters, bounds, roadWidth, side
   const halfRoad = roadWidth / 2;
   for (const xCenter of roadCenters) for (const zCenter of roadCenters) {
     for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
-      const innerX = xCenter + sx * halfRoad, innerZ = zCenter + sz * halfRoad;
-      const outerX = innerX + sx * radius, outerZ = innerZ + sz * radius;
-      const boundsRect = { minX: Math.min(innerX, outerX), maxX: Math.max(innerX, outerX),
-        minZ: Math.min(innerZ, outerZ), maxZ: Math.max(innerZ, outerZ) };
+      const pointX = xCenter + sx * halfRoad, pointZ = zCenter + sz * halfRoad;
+      const centerX = pointX + sx * radius, centerZ = pointZ + sz * radius;
+      const boundsRect = { minX: Math.min(pointX, centerX), maxX: Math.max(pointX, centerX),
+        minZ: Math.min(pointZ, centerZ), maxZ: Math.max(pointZ, centerZ) };
       // Only round a complete, real sidewalk corner; this excludes plaza notches and clipped map edges.
       const samples = [0.1, 0.5, 0.9].every(a => [0.1, 0.5, 0.9].every(b =>
-        containsSurface(source, innerX + (outerX - innerX) * a, innerZ + (outerZ - innerZ) * b)));
+        containsSurface(source, pointX + (centerX - pointX) * a, pointZ + (centerZ - pointZ) * b)));
       if (!samples) continue;
       rectangles = subtractRectangles(rectangles, boundsRect);
       const arc = Array.from({ length: ROUND_CORNER_SEGMENTS + 1 }, (_, i) => {
         const angle = i / ROUND_CORNER_SEGMENTS * Math.PI / 2;
-        return { x: innerX + sx * radius * Math.cos(angle), z: innerZ + sz * radius * Math.sin(angle) };
+        return { x: centerX - sx * radius * Math.cos(angle), z: centerZ - sz * radius * Math.sin(angle) };
       });
-      corners.push({ x: innerX, z: innerZ, sx, sz, radius, arc, bounds: boundsRect });
+      corners.push({ x: centerX, z: centerZ, sx, sz, radius, arc, bounds: boundsRect,
+        point: { x: pointX, z: pointZ } });
     }
   }
   return { rectangles, corners, patches: corners.map(corner => corner.bounds) };
@@ -109,7 +110,7 @@ export function containsRoundedSidewalk(layout, x, z) {
   if (containsSurface(layout.rectangles, x, z)) return true;
   return layout.corners.some(({ x: cx, z: cz, sx, sz, radius }) => {
     const dx = (x - cx) * sx, dz = (z - cz) * sz;
-    return dx >= -1e-7 && dz >= -1e-7 && dx * dx + dz * dz <= radius * radius + 1e-7;
+    return dx <= 1e-7 && dz <= 1e-7 && dx * dx + dz * dz <= radius * radius + 1e-7;
   });
 }
 
@@ -151,8 +152,8 @@ export function createRoundedSidewalkEdges(rectangles, corners) {
   let edges = createRectangleUnionEdges(rectangles);
   const epsilon = 1e-7;
   for (const corner of corners) {
-    const outerX = corner.x + corner.sx * corner.radius;
-    const outerZ = corner.z + corner.sz * corner.radius;
+    const outerX = corner.x - corner.sx * corner.radius;
+    const outerZ = corner.z - corner.sz * corner.radius;
     const minX = Math.min(corner.x, outerX), maxX = Math.max(corner.x, outerX);
     const minZ = Math.min(corner.z, outerZ), maxZ = Math.max(corner.z, outerZ);
     const next = [];

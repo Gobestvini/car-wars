@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { artQuality } from '../src/art-direction.js';
 import { miniatureBlurFocusRadius, miniatureBlurSamples, miniatureBlurTargetSize, miniatureBlurWeight,
   normalizeBlurFocusSize, normalizeBlurStrength, MINIATURE_BLUR } from '../src/miniature-blur.js';
 
@@ -42,14 +43,16 @@ test('scene MSAA request respects quality and available maximum samples', () => 
   assert.equal(miniatureBlurSamples('high', NaN), 0);
 });
 test('focus band has a fixed screen center and user-sized screen-space coverage', () => {
-  assert.equal(MINIATURE_BLUR.low.radiusCss, 3);
-  assert.equal(MINIATURE_BLUR.high.radiusCss, 5);
+  assert.deepEqual(MINIATURE_BLUR.low.radiiCss, [4, 8, 12]);
+  assert.deepEqual(MINIATURE_BLUR.high.radiiCss, [6, 12, 18]);
   assert.equal(MINIATURE_BLUR.focusY, .5);
-  assert.equal(MINIATURE_BLUR.focusSize, .68);
+  assert.equal(MINIATURE_BLUR.focusSize, .4);
   assert.equal(normalizeBlurFocusSize(.1), .2);
-  assert.equal(normalizeBlurFocusSize(.68), .68);
+  assert.equal(normalizeBlurFocusSize(.4), .4);
   assert.equal(normalizeBlurFocusSize(1), .9);
-  assert.equal(normalizeBlurFocusSize(NaN), .68);
+  assert.equal(normalizeBlurFocusSize(NaN), .4);
+  assert.equal(artQuality('high').edgeBlur.radiiCss.at(-1), 18);
+  assert.equal(artQuality('low').edgeBlur.radiiCss.at(-1), 12);
   assert.ok(Math.abs(miniatureBlurFocusRadius(.68) * 2 * MINIATURE_BLUR.transitionStart - .68) < 1e-12);
   assert.equal(miniatureBlurWeight(.5, MINIATURE_BLUR.focusY, miniatureBlurFocusRadius(.68)), 0);
   assert.ok(miniatureBlurWeight(.5 + .68 / 2, MINIATURE_BLUR.focusY, miniatureBlurFocusRadius(.68)) < 1e-12);

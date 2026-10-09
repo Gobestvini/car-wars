@@ -54,6 +54,16 @@ function saveFrame(label) {
   const container = document.getElementById('frames');
   container.append(link, document.createElement('br'), image, document.createElement('br'));
 }
+function rowContrast(data, width, height, normalizedY) {
+  const y = Math.round((1 - normalizedY) * (height - 1));
+  const values = [];
+  for (let x = Math.floor(width * .1); x < width * .9; x++) {
+    const index = (y * width + x) * 4;
+    values.push((data[index] + data[index + 1] + data[index + 2]) / 3);
+  }
+  const mean = values.reduce((sum, value) => sum + value, 0) / values.length;
+  return Math.sqrt(values.reduce((sum, value) => sum + (value - mean) ** 2, 0) / values.length);
+}
 try {
   const results = [];
   for (const [width, height, dpr] of [[640, 360, 1], [390, 844, 1.75], [844, 390, 1.75]]) {
@@ -67,6 +77,27 @@ try {
         ...compare(reference, pixels(), gl.drawingBufferWidth, gl.drawingBufferHeight), ...effect.snapshot() });
     }
   }
+  scene.clear();
+  const frequencyCamera = new THREE.OrthographicCamera(-5, 5, 3, -3, .1, 20);
+  frequencyCamera.position.z = 10; frequencyCamera.updateMatrixWorld();
+  scene.background = new THREE.Color('#999999');
+  const stripeMaterial = [new THREE.MeshBasicMaterial({ color: '#111111' }),
+    new THREE.MeshBasicMaterial({ color: '#eeeeee' })];
+  for (let index = 0; index < 60; index++) {
+    const stripe = new THREE.Mesh(new THREE.PlaneGeometry(.085, 6), stripeMaterial[index % 2]);
+    stripe.position.x = -4.95 + index * .17; scene.add(stripe);
+  }
+  renderer.setPixelRatio(1); renderer.setSize(640, 360);
+  effect.setQuality('high'); effect.setStrength(1); effect.resize(640, 360, 1);
+  renderer.render(scene, frequencyCamera); const sharpFrequency = pixels();
+  effect.setDebugBlurMask(true, true); effect.render(scene, frequencyCamera, { car });
+  const blurredFrequency = pixels();
+  const frequencyContrast = [.06, .5, .94].map(y => ({
+    y, sharp: rowContrast(sharpFrequency, 640, 360, y), blurred: rowContrast(blurredFrequency, 640, 360, y),
+  }));
+  effect.setDebugBlurMask(true, false);
+  for (const mesh of scene.children) { mesh.geometry?.dispose(); }
+  for (const material of stripeMaterial) material.dispose();
   // A representative static city rendered twice with identical scene/camera/light.
   scene.clear();
   const plan = createCityPlan();
@@ -91,7 +122,10 @@ try {
   effect.setStrength(1); effect.render(scene, view, { car });
   const treeTriangles = [city.trees.trunks, ...city.trees.crownBatches].reduce((sum, mesh) =>
     sum + mesh.count * (mesh.geometry.index?.count ?? mesh.geometry.attributes.position.count) / 3, 0);
-  const report = { pass: results.every(row => row.enabled && !row.failure && row.maxDelta <= 2), results,
+  const frequencyPass = frequencyContrast[1].blurred > frequencyContrast[0].blurred * 1.5
+    && frequencyContrast[1].blurred > frequencyContrast[2].blurred * 1.5;
+  const report = { pass: results.every(row => row.enabled && !row.failure && row.maxDelta <= 2) && frequencyPass,
+    frequencyPass, frequencyContrast, results,
     trees: city.trees.count, treeTriangles, warmMemory,
     afterCycles: { ...renderer.info.memory, programs: renderer.info.programs.length },
     note: 'Desktop WebGL regression; no physical-phone timing claim.' };

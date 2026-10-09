@@ -6,7 +6,7 @@ export const MINIATURE_BLUR = Object.freeze({
   high: Object.freeze(artQuality('high').edgeBlur),
   low: Object.freeze(artQuality('low').edgeBlur),
   focusY: 0.5,
-  focusSize: 0.68,
+  focusSize: 0.4,
   minFocusSize: 0.2,
   maxFocusSize: 0.9,
   transitionStart: 0.8,
@@ -113,7 +113,9 @@ const verticalFragment = /* glsl */`
 
 const compositeFragment = /* glsl */`
   uniform sampler2D tSharp;
-  uniform sampler2D tBlur;
+  uniform sampler2D tBlur0;
+  uniform sampler2D tBlur1;
+  uniform sampler2D tBlur2;
   uniform float focusY;
   uniform float focusRadiusY;
   uniform float transitionStart;
@@ -123,7 +125,11 @@ const compositeFragment = /* glsl */`
   void main() {
     float verticalDistance = abs(vUv.y - focusY) / focusRadiusY;
     float blurMix = smoothstep(transitionStart, transitionEnd, verticalDistance) * blurAmount;
-    vec4 color = mix(texture2D(tSharp, vUv), texture2D(tBlur, vUv), blurMix);
+    float level = blurMix * 3.0;
+    vec4 color;
+    if (level < 1.0) color = mix(texture2D(tSharp, vUv), texture2D(tBlur0, vUv), level);
+    else if (level < 2.0) color = mix(texture2D(tBlur0, vUv), texture2D(tBlur1, vUv), level - 1.0);
+    else color = mix(texture2D(tBlur1, vUv), texture2D(tBlur2, vUv), min(level - 2.0, 1.0));
     gl_FragColor = color;
     // ShaderMaterial injects the function declarations, not these output calls.
     #include <tonemapping_fragment>
@@ -166,24 +172,24 @@ export function createMiniatureBlur(renderer) {
   const supported = renderer.capabilities.isWebGL2 && renderer.extensions.has('EXT_color_buffer_float');
   const renderbufferSamples = supported ? multisampleCounts(renderer) : [];
   const sharpTarget = supported ? makeLinearTarget(1, 1, THREE.HalfFloatType, true) : null;
-  const horizontalTarget = supported ? makeLinearTarget(1, 1, THREE.HalfFloatType, false) : null;
-  const verticalTarget = supported ? makeLinearTarget(1, 1, THREE.HalfFloatType, false) : null;
-  const horizontalMaterial = supported ? material(horizontalFragment,
-    { tDiffuse: { value: null }, h: { value: 0 } }) : null;
-  const verticalMaterial = supported ? material(verticalFragment,
-    { tDiffuse: { value: null }, v: { value: 0 } }) : null;
+  const horizontalTargets = supported ? Array.from({ length: 3 }, () => makeLinearTarget(1, 1, THREE.HalfFloatType, false)) : [];
+  const verticalTargets = supported ? Array.from({ length: 3 }, () => makeLinearTarget(1, 1, THREE.HalfFloatType, false)) : [];
+  const horizontalMaterials = supported ? Array.from({ length: 3 }, () => material(horizontalFragment,
+    { tDiffuse: { value: null }, h: { value: 0 } })) : [];
+  const verticalMaterials = supported ? Array.from({ length: 3 }, () => material(verticalFragment,
+    { tDiffuse: { value: null }, v: { value: 0 } })) : [];
   const compositeMaterial = supported ? material(compositeFragment, {
-    tSharp: { value: null }, tBlur: { value: null },
+    tSharp: { value: null }, tBlur0: { value: null }, tBlur1: { value: null }, tBlur2: { value: null },
     focusY: { value: 0.5 },
     focusRadiusY: { value: miniatureBlurFocusRadius(MINIATURE_BLUR.focusSize) },
     transitionStart: { value: MINIATURE_BLUR.transitionStart },
     transitionEnd: { value: MINIATURE_BLUR.transitionEnd },
     blurAmount: { value: 1 },
   }, { toneMapped: true }) : null;
-  const fullscreen = supported ? new FullScreenQuad(horizontalMaterial) : null;
+  const fullscreen = supported ? new FullScreenQuad(horizontalMaterials[0]) : null;
   const warmupScene = supported ? new THREE.Scene() : null;
   const warmupCamera = supported ? new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 4) : null;
-  const warmupMesh = supported ? new THREE.Mesh(new THREE.PlaneGeometry(2, 2), horizontalMaterial) : null;
+  const warmupMesh = supported ? new THREE.Mesh(new THREE.PlaneGeometry(2, 2), horizontalMaterials[0]) : null;
   if (warmupScene) { warmupScene.add(warmupMesh); warmupCamera.position.z = 1; }
   let strength = 1;
   let cssWidth = 0, cssHeight = 0, pixelRatio = 1;
@@ -200,6 +206,15 @@ export function createMiniatureBlur(renderer) {
   let disposed = false;
   let lastDrawCalls = 0;
 
+  const updateBlurRadii = () => {
+    if (!supported) return;
+    const radii = MINIATURE_BLUR[quality].radiiCss;
+    for (let i = 0; i < radii.length; i++) {
+      horizontalMaterials[i].uniforms.h.value = radii[i] * strength / (4 * Math.max(cssWidth, 1));
+      verticalMaterials[i].uniforms.v.value = radii[i] * strength / (4 * Math.max(cssHeight, 1));
+    }
+  };
+
   const resize = (width = innerWidth, height = innerHeight, ratio = renderer.getPixelRatio()) => {
     if (disposed) return false;
     const next = miniatureBlurTargetSize(width, height, ratio, quality);
@@ -210,12 +225,10 @@ export function createMiniatureBlur(renderer) {
       sharpTarget.setSize(next.width, next.height);
       antialiasValidated = false;
     }
-    if (horizontalTarget.width !== next.blurWidth || horizontalTarget.height !== next.blurHeight) {
-      horizontalTarget.setSize(next.blurWidth, next.blurHeight);
-      verticalTarget.setSize(next.blurWidth, next.blurHeight);
+    for (const target of [...horizontalTargets, ...verticalTargets]) {
+      if (target.width !== next.blurWidth || target.height !== next.blurHeight) target.setSize(next.blurWidth, next.blurHeight);
     }
-    horizontalMaterial.uniforms.h.value = MINIATURE_BLUR[quality].radiusCss * strength / (4 * cssWidth);
-    verticalMaterial.uniforms.v.value = MINIATURE_BLUR[quality].radiusCss * strength / (4 * cssHeight);
+    updateBlurRadii();
     return true;
   };
 
@@ -244,20 +257,24 @@ export function createMiniatureBlur(renderer) {
     renderer.clear(true, true, true);
     renderer.render(scene, camera);
 
-    horizontalMaterial.uniforms.tDiffuse.value = sharpTarget.texture;
-    fullscreen.material = horizontalMaterial;
-    renderer.setRenderTarget(horizontalTarget);
-    renderer.clear(true, false, false);
-    fullscreen.render(renderer);
+    for (let i = 0; i < 3; i++) {
+      horizontalMaterials[i].uniforms.tDiffuse.value = sharpTarget.texture;
+      fullscreen.material = horizontalMaterials[i];
+      renderer.setRenderTarget(horizontalTargets[i]);
+      renderer.clear(true, false, false);
+      fullscreen.render(renderer);
 
-    verticalMaterial.uniforms.tDiffuse.value = horizontalTarget.texture;
-    fullscreen.material = verticalMaterial;
-    renderer.setRenderTarget(verticalTarget);
-    renderer.clear(true, false, false);
-    fullscreen.render(renderer);
+      verticalMaterials[i].uniforms.tDiffuse.value = horizontalTargets[i].texture;
+      fullscreen.material = verticalMaterials[i];
+      renderer.setRenderTarget(verticalTargets[i]);
+      renderer.clear(true, false, false);
+      fullscreen.render(renderer);
+    }
 
     compositeMaterial.uniforms.tSharp.value = sharpTarget.texture;
-    compositeMaterial.uniforms.tBlur.value = verticalTarget.texture;
+    compositeMaterial.uniforms.tBlur0.value = verticalTargets[0].texture;
+    compositeMaterial.uniforms.tBlur1.value = verticalTargets[1].texture;
+    compositeMaterial.uniforms.tBlur2.value = verticalTargets[2].texture;
     setFocus();
     fullscreen.material = compositeMaterial;
     renderer.setRenderTarget(priorTarget);
@@ -336,18 +353,19 @@ export function createMiniatureBlur(renderer) {
   const snapshot = () => {
     const bytesPerPixel = 12 + antialiasSamples * 12; // Resolved RGBA16F/depth plus multisampled RGBA16F/depth.
     const sharpPixels = sharpTarget ? sharpTarget.width * sharpTarget.height : 0;
-    const blurPixels = horizontalTarget ? horizontalTarget.width * horizontalTarget.height : 0;
-    const estimatedBytes = sharpPixels * bytesPerPixel + blurPixels * 16;
+    const blurPixels = horizontalTargets[0] ? horizontalTargets[0].width * horizontalTargets[0].height : 0;
+    const estimatedBytes = sharpPixels * bytesPerPixel + blurPixels * 48;
     return { enabled, failure, antialiasSamples, antialiasing: antialiasSamples ? 'msaa' : 'none',
-      antialiasFailure, focusY, focusSize, quality, strength, radiusCss: MINIATURE_BLUR[quality].radiusCss * strength,
+      antialiasFailure, focusY, focusSize, quality, strength,
+      radiiCss: MINIATURE_BLUR[quality].radiiCss.map(radius => radius * strength),
       debugBypass, draws: lastDrawCalls, size: sharpTarget ? [sharpTarget.width, sharpTarget.height] : [0, 0],
-      blurSize: horizontalTarget ? [horizontalTarget.width, horizontalTarget.height] : [0, 0],
+      blurSize: horizontalTargets[0] ? [horizontalTargets[0].width, horizontalTargets[0].height] : [0, 0],
       estimatedMiB: Number((estimatedBytes / 1048576).toFixed(2)) };
   };
 
   const compile = async () => {
     if (!enabled) return;
-    for (const effectMaterial of [horizontalMaterial, verticalMaterial, compositeMaterial]) {
+    for (const effectMaterial of [...horizontalMaterials, ...verticalMaterials, compositeMaterial]) {
       warmupMesh.material = effectMaterial;
       await renderer.compileAsync(warmupScene, warmupCamera);
     }
@@ -395,8 +413,7 @@ export function createMiniatureBlur(renderer) {
     },
     setStrength(value) {
       strength = normalizeBlurStrength(value);
-      if (horizontalMaterial) horizontalMaterial.uniforms.h.value = MINIATURE_BLUR[quality].radiusCss * strength / (4 * Math.max(cssWidth, 1));
-      if (verticalMaterial) verticalMaterial.uniforms.v.value = MINIATURE_BLUR[quality].radiusCss * strength / (4 * Math.max(cssHeight, 1));
+      updateBlurRadii();
     },
     setFocusSize(value) {
       focusSize = normalizeBlurFocusSize(value);
@@ -411,8 +428,8 @@ export function createMiniatureBlur(renderer) {
       disposed = true;
       fullscreen?.dispose();
       warmupMesh?.geometry.dispose();
-      for (const target of [sharpTarget, horizontalTarget, verticalTarget]) target?.dispose();
-      for (const effectMaterial of [horizontalMaterial, verticalMaterial, compositeMaterial]) effectMaterial?.dispose();
+      for (const target of [sharpTarget, ...horizontalTargets, ...verticalTargets]) target?.dispose();
+      for (const effectMaterial of [...horizontalMaterials, ...verticalMaterials, compositeMaterial]) effectMaterial?.dispose();
     },
   };
 }

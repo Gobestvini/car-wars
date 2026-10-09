@@ -39,7 +39,7 @@ const factorySettings = {
   ...DEFAULT_TUNING,
   quality: matchMedia('(pointer: coarse)').matches ? 'Лёгкая' : 'Высокая',
   blurStrength: 1,
-  blurFocusSize: 68,
+  blurFocusSize: 40,
   trails: true,
   skidThreshold: DEFAULT_SKID_THRESHOLD,
   trackIntensity: DEFAULT_TRACK_INTENSITY,
@@ -173,7 +173,7 @@ traffic.attachPhysics(sim);
 traffic.registerRole('police', { maxCount: 2, physicalOnly: true,
   create: ({ targetId }) => createPolicePursuit({ targetId }),
   update: (controller, context) => wanted.snapshot().level > 0 && arrest.snapshot().state !== 'arrested'
-    ? controller.update(context)
+    ? controller.update({ ...context, wantedLevel: wanted.snapshot().level })
     : (controller.reset(), { state: 'idle', reason: arrest.snapshot().state === 'arrested' ? 'arrest-complete' : 'no-wanted-level',
       control: { steer: 0, throttle: 0, brake: 1 } }),
   onContact: (controller, time) => controller.onContact(time),

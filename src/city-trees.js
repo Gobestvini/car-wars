@@ -2,8 +2,8 @@ import * as THREE from 'three';
 import { createTreePlacements } from './tree-placement.js';
 import { createSurfaceHeightSampler } from './road-surface.js';
 
-const FOLIAGE = ['#559663', '#68a773', '#4d8b5a'];
-const TRUNKS = ['#8f6248', '#a06d4c', '#916a50'];
+const FOLIAGE = ['#62a653', '#78b75f', '#55944b'];
+const TRUNKS = ['#9b6846', '#ad754e', '#a17450'];
 
 /** Three canopy silhouettes and one trunk batch; no mesh, material or collider per tree. */
 export function createCityTrees(group, plan, { damageObstacles = [], signals = [] } = {}) {

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
-import { TireSmoke, TIRE_SMOKE_CONFIG, tireSmokeIntensity } from '../src/tire-smoke.js';
+import { TireSmoke, TIRE_SMOKE_CONFIG, tireSmokeAlpha, tireSmokeIntensity } from '../src/tire-smoke.js';
 
 const wheel = (overrides = {}) => ({ grounded: true, detached: false, longitudinal: 18, lateral: 12,
   contact: { x: 0, y: 0.15, z: 0 }, ...overrides });
@@ -13,6 +13,29 @@ test('tire smoke requires a stronger grounded slip than ordinary track skidding'
   assert.equal(tireSmokeIntensity(wheel({ detached: true })), 0);
   assert.equal(tireSmokeIntensity(wheel({ lateral: NaN })), 0);
   assert.equal(tireSmokeIntensity(wheel({ contact: { x: Infinity, y: 0, z: 0 } })), 0);
+});
+
+test('cloud particles fade in alpha while growing instead of shrinking into points', () => {
+  assert.equal(tireSmokeAlpha(0), 0);
+  assert.ok(tireSmokeAlpha(.06) > 0 && tireSmokeAlpha(.06) < 1);
+  assert.equal(tireSmokeAlpha(.12), 1);
+  assert.ok(tireSmokeAlpha(.75) > 0 && tireSmokeAlpha(.75) < 1);
+  assert.equal(tireSmokeAlpha(1), 0);
+  const smoke = new TireSmoke(new THREE.Scene(), { capacity: 2, seed: 1 });
+  smoke.emit({ x: 0, y: 0, z: 0 });
+  const base = smoke.particles[0].size;
+  smoke.update(.2, new THREE.PerspectiveCamera());
+  const earlyAlpha = smoke.alpha.getX(0), earlyMatrix = new THREE.Matrix4();
+  smoke.mesh.getMatrixAt(0, earlyMatrix);
+  smoke.update(.3, new THREE.PerspectiveCamera());
+  const lateAlpha = smoke.alpha.getX(0), lateMatrix = new THREE.Matrix4();
+  smoke.mesh.getMatrixAt(0, lateMatrix);
+  assert.ok(earlyAlpha > 0 && lateAlpha > 0);
+  assert.ok(lateMatrix.elements[0] > earlyMatrix.elements[0]);
+  assert.ok(earlyMatrix.elements[0] > base);
+  smoke.reset();
+  assert.equal(smoke.alpha.getX(0), 0);
+  smoke.dispose();
 });
 
 test('emitters confirm slip, honor role/distance budgets, and retain particles when sources vanish', () => {

@@ -9,19 +9,82 @@ import { createVehicleRuntime } from '../src/traffic.js';
 import { corridorBlocked, createPolicePursuit } from '../src/police-pursuit.js';
 import { findSafeSpawnPose, validateSpawnGeometry } from '../src/vehicle-spawn.js';
 import { footprintsOverlap } from '../src/traffic-spawn.js';
+import { getPoliceIntensity, normalizeWantedLevel } from '../src/police-intensity.js';
+import { createWantedSystem } from '../src/wanted-system.js';
 
 const bounds = { minX: -100, maxX: 100, minZ: -100, maxZ: 100 };
 const carPose = (x, z, yaw = 0) => ({ x, y: 0, z, yaw });
 
 function stalledPursuit({ car = {}, target = {}, obstacles = [], occupants = [] } = {}) {
   const controller = createPolicePursuit();
-  const context = { car: { id: 'police', x: 0, z: 0, heading: 0, vx: 0, vz: 0, ...car },
+  const context = { wantedLevel: 6, car: { id: 'police', x: 0, z: 0, heading: 0, vx: 0, vz: 0, ...car },
     target: { id: 'player', x: 0, z: 30, heading: 0, vx: 0, vz: 0, ...target },
     graph: createRoadGraph(createCityPlan().roadNetwork), obstacles, occupants, dt: 0.1 };
   let result;
   for (let tick = 0; tick < 18; tick++) result = controller.update({ ...context, time: tick * 0.1 });
   return { controller, context, result };
 }
+
+test('wanted level profiles normalize safely and monotonically scale distant chase speed', () => {
+  assert.equal(normalizeWantedLevel(NaN), 0);
+  assert.equal(normalizeWantedLevel(Infinity), 0);
+  assert.equal(normalizeWantedLevel(undefined), 0);
+  assert.equal(normalizeWantedLevel(-4), 0);
+  assert.equal(normalizeWantedLevel(3.9), 3);
+  assert.equal(normalizeWantedLevel(99), 6);
+  const speedTargets = [];
+  for (let level = 1; level <= 6; level++) {
+    const profile = getPoliceIntensity(level);
+    assert.equal(profile.level, level);
+    const controller = createPolicePursuit();
+    const result = controller.update({ wantedLevel: level,
+      car: { id: 'police', x: 0, z: 0, heading: 0, vx: 0, vz: 0 },
+      target: { id: 'player', x: 0, z: 100, heading: 0, vx: 0, vz: 0 }, time: 0, dt: .1 });
+    speedTargets.push(result.targetSpeedLimit);
+    assert.equal(controller.diagnostics().wantedLevel, level);
+  }
+  assert.deepEqual(speedTargets, [22, 28, 34, 40, 45, 50]);
+});
+
+test('pending stars do not activate police; a confirmed wanted star applies without resetting pursuit', () => {
+  const wanted = createWantedSystem(), controller = createPolicePursuit();
+  const context = { car: { id: 'police', x: 0, z: 0, heading: 0, vx: 0, vz: 0 },
+    target: { id: 'player', x: 0, z: 100, heading: 0, vx: 0, vz: 0 }, time: 0, dt: .1 };
+  wanted.update(.51, [{ type: 'speeding' }]);
+  assert.equal(wanted.snapshot().level, 0);
+  assert.equal(controller.update({ ...context, wantedLevel: wanted.snapshot().level }).state, 'idle');
+  wanted.update(.51, [{ type: 'speeding' }]);
+  assert.equal(wanted.snapshot().level, 1);
+  assert.equal(controller.update({ ...context, wantedLevel: wanted.snapshot().level }).state, 'follow');
+  assert.equal(controller.diagnostics().wantedLevel, 1);
+  assert.equal(controller.update({ ...context, wantedLevel: 0 }).state, 'idle');
+});
+
+test('recovery survives a wanted-level change and retains the active star profile', () => {
+  const { controller, context } = stalledPursuit();
+  assert.equal(controller.diagnostics().escapePhase, 'reverse');
+  controller.update({ ...context, wantedLevel: 2, time: 1.8 });
+  assert.equal(controller.diagnostics().wantedLevel, 2);
+  assert.equal(controller.diagnostics().escapePhase, 'reverse');
+});
+
+test('ram thresholds escalate by stars while low levels keep a six-metre follow distance', () => {
+  for (const [level, distance] of [[3, 5.5], [4, 7.5], [5, 9.5], [6, 11.5]]) {
+    const controller = createPolicePursuit();
+    const result = controller.update({ wantedLevel: level,
+      car: { id: 'police', x: 0, z: 0, heading: 0, vx: 0, vz: 0 },
+      target: { id: 'player', x: 0, z: distance, heading: 0, vx: 0, vz: 0 } });
+    assert.equal(result.state, 'ram', `level ${level}`);
+  }
+  for (const wantedLevel of [1, 2]) {
+    const controller = createPolicePursuit();
+    const result = controller.update({ wantedLevel,
+      car: { id: 'police', x: 0, z: 0, heading: 0, vx: 0, vz: 0 },
+      target: { id: 'player', x: 0, z: 5.5, heading: 0, vx: 0, vz: 0 } });
+    assert.equal(result.state, 'follow');
+    assert.equal(result.targetSpeedLimit, 0);
+  }
+});
 
 test('stalled police reverse away from a building and another police car, even near the player', () => {
   for (const heading of [0, Math.PI / 3]) {
@@ -91,7 +154,7 @@ test('moving police and police holding a stopped target do not trigger reverse r
   assert.notEqual(moving.result.reason, 'unstuck-reverse');
   const controller = createPolicePursuit();
   controller.onContact(0);
-  const context = { car: { id: 'police', x: 0, z: -4.2, heading: 0, vx: 0, vz: 0 },
+  const context = { wantedLevel: 6, car: { id: 'police', x: 0, z: -4.2, heading: 0, vx: 0, vz: 0 },
     target: { id: 'player', x: 0, z: 0, heading: 0, vx: 0, vz: 0 }, dt: 0.1 };
   for (let tick = 0; tick < 100; tick++) {
     const held = controller.update({ ...context, time: tick * 0.1 });
@@ -111,7 +174,7 @@ test('shared vehicle physics actually back a stalled police car away from a wall
   for (let tick = 0; tick < 8 / STEP; tick++) {
     const car = { id: 'police', x: simulation.body.position.x, z: simulation.body.position.z,
       heading: simulation.telemetry().heading, vx: simulation.body.velocity.x, vz: simulation.body.velocity.z };
-    const result = controller.update({ car, target: { id: 'player', x: 0, z: 30, heading: 0 },
+    const result = controller.update({ wantedLevel: 6, car, target: { id: 'player', x: 0, z: 30, heading: 0 },
       graph, obstacles: [wall], time: tick * STEP, dt: STEP });
     if (result.reason === 'unstuck-reverse') {
       reversed = true; reverseStart ??= car.z;
@@ -153,7 +216,7 @@ test('police plans a real corridor detour around a rotated building', () => {
   const controller = createPolicePursuit();
   const plan = createCityPlan();
   const graph = createRoadGraph(plan.roadNetwork);
-  const result = controller.update({ car: { id: 'police', x: -12, z: 0, heading: 0, vx: 0, vz: 0 },
+  const result = controller.update({ wantedLevel: 6, car: { id: 'police', x: -12, z: 0, heading: 0, vx: 0, vz: 0 },
     target: { id: 'player', x: 0, z: 16, heading: 0, vx: 0, vz: 0 }, graph, obstacles: [block], time: 0.1, dt: 0.1 });
   assert.equal(result.sightBlocked, true);
   assert.equal(result.state, 'intercept');
@@ -166,7 +229,7 @@ test('police role uses the shared world, pursues through collision, and disposes
   runtime.attachPhysics(player);
   runtime.registerRole('police', { maxCount: 1, physicalOnly: true,
     create: ({ targetId }) => createPolicePursuit({ targetId }),
-    update: (controller, context) => controller.update(context),
+    update: (controller, context) => controller.update({ ...context, wantedLevel: 6 }),
     onContact: (controller, time) => controller.onContact(time),
     reset: controller => controller.reset() });
   try {
@@ -218,7 +281,7 @@ test('police role retains at least 90% of player acceleration on a clear straigh
   runtime.attachPhysics(player);
   runtime.registerRole('police', { maxCount: 1, physicalOnly: true,
     create: ({ targetId }) => createPolicePursuit({ targetId }),
-    update: (controller, context) => controller.update(context),
+    update: (controller, context) => controller.update({ ...context, wantedLevel: 6 }),
     onContact: (controller, time) => controller.onContact(time), reset: controller => controller.reset() });
   try {
     const result = runtime.requestSpawn({ role: 'police', targetId: 'player', position: carPose(0, -80), yaw: 0 });

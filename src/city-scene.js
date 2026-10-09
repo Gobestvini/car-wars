@@ -21,7 +21,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const pavementMaterial = new THREE.MeshStandardMaterial({ color: ART.ground, roughness: 1,
     polygonOffset: true, polygonOffsetFactor: 0, polygonOffsetUnits: 2 });
   const sidewalkMaterial = new THREE.MeshStandardMaterial({ color: ART.sidewalk, roughness: 1 });
-  const curbMaterial = new THREE.MeshStandardMaterial({ color: '#fff2d8', roughness: 1 });
+  const curbMaterial = new THREE.MeshStandardMaterial({ color: '#ead6ad', roughness: 1 });
   const roadMaterial = new THREE.MeshStandardMaterial({ color: ART.asphalt, roughness: 0.96, vertexColors: true });
   const plane = (width, depth, material, x = 0, z = 0, y = 0.015) => {
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(width, depth), material);

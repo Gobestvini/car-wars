@@ -1,8 +1,14 @@
 import * as THREE from 'three';
 
 export const TIRE_SMOKE_CONFIG = Object.freeze({ capacity: 512, lowCapacity: 256,
-  lifetimeMin: 0.8, lifetimeMax: 1.6, thresholdMultiplier: 1.35, highSources: 24, lowSources: 12,
+  lifetimeMin: 0.8, lifetimeMax: 1.6, alphaFadeIn: 0.12, thresholdMultiplier: 1.35, highSources: 24, lowSources: 12,
   highDistance: 80, lowDistance: 50, rate: 12 });
+
+export function tireSmokeAlpha(progress, fadeIn = TIRE_SMOKE_CONFIG.alphaFadeIn) {
+  if (!Number.isFinite(progress) || progress <= 0 || progress >= 1 || !Number.isFinite(fadeIn) || fadeIn <= 0 || fadeIn >= 1) return 0;
+  const fadeOut = (1 - progress) / (1 - fadeIn);
+  return Math.max(0, Math.min(1, progress / fadeIn, fadeOut));
+}
 
 const finiteWheel = wheel => wheel?.grounded && !wheel.detached
   && [wheel.longitudinal, wheel.lateral, wheel.contact?.x, wheel.contact?.y, wheel.contact?.z].every(Number.isFinite);
@@ -22,8 +28,14 @@ export function tireSmokeIntensity(wheel, threshold = 1.25, continuing = false) 
 function createSoftSmokeTexture() {
   const size = 32, data = new Uint8Array(size * size * 4);
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
-    const radius = Math.hypot((x + 0.5 - size / 2) / (size / 2), (y + 0.5 - size / 2) / (size / 2));
-    const alpha = Math.round(255 * Math.pow(Math.max(0, 1 - radius * radius), 2.2));
+    const nx = (x + 0.5 - size / 2) / (size / 2), ny = (y + 0.5 - size / 2) / (size / 2);
+    let cloud = 0;
+    for (const [cx, cy, rx, ry, strength] of [[-.28, -.12, .48, .4, 1], [.25, -.2, .43, .38, .9],
+      [-.06, .27, .4, .47, .85], [.38, .22, .29, .32, .65]]) {
+      const dx = (nx - cx) / rx, dy = (ny - cy) / ry;
+      cloud += strength * Math.exp(-3 * (dx * dx + dy * dy));
+    }
+    const alpha = Math.round(255 * Math.max(0, Math.min(1, 1 - Math.exp(-cloud * 1.8))));
     const offset = (y * size + x) * 4;
     data[offset] = 232; data[offset + 1] = 235; data[offset + 2] = 232; data[offset + 3] = alpha;
   }
@@ -45,8 +57,18 @@ export class TireSmoke {
     this.texture = createSoftSmokeTexture();
     this.material = new THREE.MeshBasicMaterial({ map: this.texture, transparent: true,
       opacity: 0.52, depthWrite: false, toneMapped: false, side: THREE.DoubleSide, color: '#f1f2ee' });
+    this.material.onBeforeCompile = shader => {
+      shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nattribute float instanceAlpha;\nvarying float vInstanceAlpha;');
+      shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvInstanceAlpha = instanceAlpha;');
+      shader.fragmentShader = shader.fragmentShader.replace('#include <common>', '#include <common>\nvarying float vInstanceAlpha;');
+      shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', '#include <color_fragment>\ndiffuseColor.a *= vInstanceAlpha;');
+    };
+    this.material.customProgramCacheKey = () => 'tire-smoke-instance-alpha-v1';
     this.geometry = new THREE.PlaneGeometry(1, 1);
     this.mesh = new THREE.InstancedMesh(this.geometry, this.material, capacity);
+    this.alpha = new THREE.InstancedBufferAttribute(new Float32Array(capacity), 1);
+    this.alpha.setUsage(THREE.DynamicDrawUsage);
+    this.mesh.geometry.setAttribute('instanceAlpha', this.alpha);
     this.mesh.name = 'Tire skid smoke';
     this.mesh.frustumCulled = false;
     this.mesh.count = 0;
@@ -114,7 +136,7 @@ export class TireSmoke {
     particle.life = TIRE_SMOKE_CONFIG.lifetimeMin + this.random() * (TIRE_SMOKE_CONFIG.lifetimeMax - TIRE_SMOKE_CONFIG.lifetimeMin);
     particle.x = contact.x; particle.y = contact.y + 0.1; particle.z = contact.z;
     particle.vx = (this.random() - 0.5) * 0.7; particle.vy = 0.35 + this.random() * 0.45; particle.vz = (this.random() - 0.5) * 0.7;
-    particle.size = 0.25 + this.random() * 0.22;
+    particle.size = 0.42 + this.random() * 0.28;
     this.diagnostics.emitted++;
     return true;
   }
@@ -126,18 +148,19 @@ export class TireSmoke {
     this.rotation.copy(camera?.quaternion || new THREE.Quaternion());
     for (let index = 0; index < this.capacity; index++) {
       const particle = this.particles[index];
-      if (!particle.active) { this.matrix.compose(this.position.set(0, -1000, 0), this.rotation, this.zeroScale); this.mesh.setMatrixAt(index, this.matrix); continue; }
+      if (!particle.active) { this.alpha.setX(index, 0); this.matrix.compose(this.position.set(0, -1000, 0), this.rotation, this.zeroScale); this.mesh.setMatrixAt(index, this.matrix); continue; }
       particle.age += dt;
-      if (particle.age >= particle.life) { particle.active = false; this.matrix.compose(this.position.set(0, -1000, 0), this.rotation, this.zeroScale); this.mesh.setMatrixAt(index, this.matrix); continue; }
+      if (particle.age >= particle.life) { particle.active = false; this.alpha.setX(index, 0); this.matrix.compose(this.position.set(0, -1000, 0), this.rotation, this.zeroScale); this.mesh.setMatrixAt(index, this.matrix); continue; }
       const progress = particle.age / particle.life;
       particle.x += particle.vx * dt; particle.y += particle.vy * dt; particle.z += particle.vz * dt;
       particle.size += dt * 0.45;
-      const fade = progress < 0.15 ? progress / 0.15 : (1 - progress) / 0.85;
-      const scale = particle.size * Math.max(0, Math.min(1, fade));
+      const scale = particle.size + progress * 0.72;
+      this.alpha.setX(index, tireSmokeAlpha(progress));
       this.matrix.compose(this.position.set(particle.x, particle.y, particle.z), this.rotation, this.scale.set(scale, scale, scale));
       this.mesh.setMatrixAt(index, this.matrix); active.push(index);
     }
     this.mesh.instanceMatrix.needsUpdate = true;
+    this.alpha.needsUpdate = true;
     this.mesh.count = this.capacity;
     this.mesh.visible = active.length > 0;
     this.diagnostics.active = active.length;
@@ -151,7 +174,8 @@ export class TireSmoke {
   reset() {
     for (const state of this.states.values()) for (const wheel of state) { wheel.active = false; wheel.pending = 0; wheel.release = 0; wheel.credit = 0; }
     this.states.clear();
-    for (const particle of this.particles) particle.active = false;
+    for (let i = 0; i < this.particles.length; i++) { this.particles[i].active = false; this.alpha.setX(i, 0); }
+    this.alpha.needsUpdate = true;
     this.mesh.visible = false; this.diagnostics.active = 0; this.diagnostics.highWater = 0;
   }
 

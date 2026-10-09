@@ -35,14 +35,10 @@ function roundedPositions(corners, bottom, top, capWidth = 0, part = 'all') {
 
 function cutoutPositions(THREE, corners) {
   const positions = [];
-  for (const { bounds, arc, x, z, sx, sz } of corners) {
-    const inner = arc[0], outer = arc.at(-1);
-    const far = { x: x + sx * (bounds.maxX - bounds.minX), z: z + sz * (bounds.maxZ - bounds.minZ) };
+  for (const { arc, point } of corners) {
     const shape = new THREE.Shape();
-    shape.moveTo(inner.x, inner.z);
-    shape.lineTo(far.x, far.z);
-    shape.lineTo(outer.x, outer.z);
-    for (let i = arc.length - 1; i >= 0; i--) shape.lineTo(arc[i].x, arc[i].z);
+    shape.moveTo(point.x, point.z);
+    for (const vertex of arc) shape.lineTo(vertex.x, vertex.z);
     shape.closePath();
     const geometry = new THREE.ShapeGeometry(shape);
     // ShapeGeometry's XY plane is mapped onto the city's XZ plane.

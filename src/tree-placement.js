@@ -30,7 +30,7 @@ function rootInsideRounded(layout, x, z, radius) {
   if (rootInside(layout.rectangles, x, z, radius)) return true;
   return layout.corners.some(corner => {
     const dx = (x - corner.x) * corner.sx, dz = (z - corner.z) * corner.sz;
-    return dx >= radius && dz >= radius && Math.hypot(dx, dz) <= corner.radius - radius;
+    return dx <= -radius && dz <= -radius && Math.hypot(dx, dz) <= corner.radius - radius;
   });
 }
 
