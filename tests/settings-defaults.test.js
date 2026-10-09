@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { clearSettingsDefaults, readSettingsDefaults, saveSettingsDefaults, SETTINGS_DEFAULTS_KEY } from '../src/settings-defaults.js';
 
 const defaults = { softness: 0.45, grip: 1.8, power: 1, quality: 'Высокая', trails: true,
-  roadWidth: 15, trafficCount: 60, skidThreshold: 1.25, trackIntensity: 1,
-  cameraSpeed: 15, drawDistanceFollow: 200, drawDistanceFree: 600, blurStrength: 1, blurFocusSize: 68 };
+  roadWidth: 15, trafficCount: 102, policeCount: 1, skidThreshold: 1.55, trackIntensity: 1,
+  cameraSpeed: 15, drawDistanceFollow: 200, drawDistanceFree: 600, blurStrength: 1, blurFocusSize: 58 };
 const memoryStorage = () => {
   const data = new Map();
   return { getItem: key => data.get(key) ?? null, setItem: (key, value) => data.set(key, value),

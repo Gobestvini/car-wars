@@ -8,6 +8,7 @@ const fieldRules = {
   power: { min: 0.5, max: 1.6 },
   roadWidth: ROAD_WIDTH_LIMITS,
   trafficCount: { min: 0, max: 300, step: 1 },
+  policeCount: { min: 0, max: 2, step: 1 },
   skidThreshold: { min: 0.5, max: 3, step: 0.05 },
   trackIntensity: { min: 0, max: 1, step: 0.01 },
   blurStrength: { min: 0, max: 2, step: 0.05 },
