@@ -21,12 +21,14 @@ function roundedPositions(corners, bottom, top, capWidth = 0, part = 'all') {
         pushTri(aBottom, { ...b, y: top }, { ...a, y: top });
       }
       if ((part === 'all' || part === 'cap') && capWidth > 0) {
-        const ai = { x: x + (a.x - x) * (1 - capWidth / radius), y: top + 0.001,
+        const capY = top + 0.001;
+        const capP = { ...p, y: capY }, capQ = { ...q, y: capY };
+        const ai = { x: x + (a.x - x) * (1 - capWidth / radius), y: capY,
           z: z + (a.z - z) * (1 - capWidth / radius) };
-        const bi = { x: x + (b.x - x) * (1 - capWidth / radius), y: top + 0.001,
+        const bi = { x: x + (b.x - x) * (1 - capWidth / radius), y: capY,
           z: z + (b.z - z) * (1 - capWidth / radius) };
-        if (sx * sz > 0) { pushTri(p, bi, q); pushTri(p, ai, bi); }
-        else { pushTri(p, q, bi); pushTri(p, bi, ai); }
+        if (sx * sz > 0) { pushTri(capP, bi, capQ); pushTri(capP, ai, bi); }
+        else { pushTri(capP, capQ, bi); pushTri(capP, bi, ai); }
       }
     }
   }

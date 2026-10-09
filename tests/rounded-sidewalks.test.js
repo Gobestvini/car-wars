@@ -72,6 +72,10 @@ test('rounded top, asphalt patch, curved wall and curb are batched and have upwa
     const normals = mesh.geometry.attributes.normal;
     assert.ok(normals && Array.from({ length: normals.count }, (_, i) => normals.getY(i)).every(y => y > 0.99));
   }
+  const roundedTopY = meshes[1].geometry.attributes.position.array.filter((_, i) => i % 3 === 1);
+  assert.ok(roundedTopY.every(y => Math.abs(y - ROAD_SURFACE_HEIGHTS.sidewalkVisual) < 1e-6));
+  const capY = meshes[4].geometry.attributes.position.array.filter((_, i) => i % 3 === 1);
+  assert.ok(capY.every(y => Math.abs(y - ROAD_SURFACE_HEIGHTS.sidewalkVisual - 0.001) < 1e-6));
   const edges = createRoundedSidewalkEdges(layout.rectangles, layout.corners);
   for (const corner of layout.corners) {
     const outerX = corner.x - corner.sx * corner.radius, outerZ = corner.z - corner.sz * corner.radius;
