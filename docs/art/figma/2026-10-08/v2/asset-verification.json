@@ -1,0 +1,98 @@
+[
+  {
+    "name": "logo",
+    "size": [
+      1498,
+      824
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "transparent": true
+  },
+  {
+    "name": "button-gold",
+    "size": [
+      1982,
+      471
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "transparent": true
+  },
+  {
+    "name": "button-blue",
+    "size": [
+      1918,
+      465
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "transparent": true
+  },
+  {
+    "name": "star-gold",
+    "size": [
+      1120,
+      1044
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "transparent": true
+  },
+  {
+    "name": "menu-thief",
+    "size": [
+      887,
+      1774
+    ],
+    "alphaExtrema": [
+      255,
+      255
+    ],
+    "transparent": false
+  },
+  {
+    "name": "title-victory",
+    "size": [
+      2163,
+      651
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "transparent": true
+  },
+  {
+    "name": "title-defeat",
+    "size": [
+      2110,
+      502
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "transparent": true
+  },
+  {
+    "name": "menu-city",
+    "size": [
+      887,
+      1774
+    ],
+    "alphaExtrema": [
+      255,
+      255
+    ],
+    "transparent": false
+  }
+]

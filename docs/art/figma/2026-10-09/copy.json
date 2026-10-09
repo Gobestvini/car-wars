@@ -1,0 +1,16 @@
+{
+  "language": "en",
+  "menu": {
+    "heading": "CHOOSE YOUR SIDE",
+    "roles": [
+      {"title": "RACER", "description": "Outrun patrols.\nEarn stars."},
+      {"title": "CITY", "description": "Command patrols.\nCatch the racer."}
+    ],
+    "action": "PLAY",
+    "selectionIndicator": "Expanded scene and highlighted role card; no status label"
+  },
+  "racer": ["RACER", "SPEED · KM/H", "WANTED", "OUTRUN THE PATROLS", "CONDITION", "BRAKE"],
+  "city": ["PATROLS", "TIME", "INTERCEPT THE RACER", "TARGET", "PATROL 02", "IN PURSUIT", "Select a patrol and set a route.", "INTERCEPT"],
+  "victory": ["VICTORY!", "YOU ESCAPED THE CHASE", "STARS EARNED", "Race reward", "Race time", "Damage", "RACE AGAIN", "MAIN MENU"],
+  "busted": ["BUSTED!", "THE PATROLS CAUGHT YOU", "CAUGHT", "Try a different route.", "Race time", "Wanted", "TRY AGAIN", "MAIN MENU"]
+}

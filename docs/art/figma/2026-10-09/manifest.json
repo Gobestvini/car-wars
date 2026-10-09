@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-09",
+  "figmaFile": "NllQADLKwk6RK8pMTurKiN",
+  "task": "English UI, Racer / City bottom selection, label-only PLAY and concept-style icons",
+  "assets": [
+    {
+      "name": "title-victory-en",
+      "path": "assets/title-victory-en.png",
+      "transparent": true,
+      "source": "Built-in ImageGen",
+      "reference": "C:/Users/gobes/OneDrive/Документы/CarWars/docs/art/figma/2026-10-08/v2/assets/title-victory.png",
+      "prompt": "Use case: text-localization. Edit target: attached sculpted game heading. Replace ALL Cyrillic text with exactly VICTORY! in English uppercase. Preserve the exact chunky rounded toy-like sculpted letter family, curved energetic word silhouette, glossy saturated yellow faces, pale yellow bevel highlights, orange gold extrusion, joined thick dark navy backing, subtle royal blue rim, same front-facing perspective and material. An isolated polished Car Stars game UI heading ONLY, on real transparent background, tightly framed with 5% clear padding. No Russian letters, no scenery, no panels, no other symbols or words. Wide horizontal composition. Do not simply typeset a flat font.",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-eee37fa5-3215-4b22-84a7-4ef6495c5044.png",
+      "width": 2172,
+      "height": 677,
+      "crop": [
+        0,
+        19,
+        2172,
+        696
+      ],
+      "sha256": "9291c38cffc944fe167657d689294f17b75655dfa948e08ca66a6e45d16f8a6b",
+      "status": "Normalized; actual alpha verified"
+    },
+    {
+      "name": "title-busted-en",
+      "path": "assets/title-busted-en.png",
+      "transparent": true,
+      "source": "Built-in ImageGen",
+      "reference": "C:/Users/gobes/OneDrive/Документы/CarWars/docs/art/figma/2026-10-08/v2/assets/title-defeat.png",
+      "prompt": "Use case: text-localization. Edit target: attached sculpted game heading. Replace ALL Cyrillic text with exactly BUSTED! in English uppercase. Preserve the same chunky rounded 3D toy letter family, gently arched connected word silhouette, glossy coral-red faces, light peach bevel highlights, rich darker red extrusion, thick joined dark navy silhouette backing and subtle cobalt rim. Front-facing legible hero UI artwork for Car Stars. Isolated heading ONLY on actual transparent background. Tight wide horizontal composition with 5% transparent padding. No Russian letters, no scenery, no panel, no icons, no other words. No flat font substitute.",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-017c693b-65e6-4007-a9d8-c47ac69461e8.png",
+      "width": 2135,
+      "height": 600,
+      "crop": [
+        20,
+        53,
+        2155,
+        653
+      ],
+      "sha256": "e65b1d95f0a54f4158b1694f5add98b2f90da8ac7bc202bc8530ec76683f0897",
+      "status": "Normalized; actual alpha verified"
+    },
+    {
+      "name": "icon-brake",
+      "path": "assets/icon-brake.png",
+      "transparent": true,
+      "source": "Built-in ImageGen",
+      "reference": "C:/Users/gobes/OneDrive/Документы/CarWars/docs/art/concepts/2026-10-08/02-gameplay-thief.png",
+      "prompt": "Use case: background-extraction. Extract and faithfully recreate ONLY the stylized tire with skid marks pictogram inside the bottom-right brake control of the reference. No circular button shell. A chunky dark navy tire tilted in three-quarter perspective, white cream five-spoke wheel hub, a thin golden yellow sidewall accent, two sweeping short navy skid marks below, playful sculpted polished icon with subtle volume exactly matching this sketch's readable symbol. Large clean silhouette, retain the clear wheel ring and spokes. Actual transparent background. Single isolated icon centered, ample padding, no text, no city, no UI plate, no duplicates. Production bitmap icon for a 32–48 pixel game control.",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-4e42458c-4333-4edd-9a8d-99281a5e7349.png",
+      "width": 1003,
+      "height": 1095,
+      "crop": [
+        155,
+        80,
+        1158,
+        1175
+      ],
+      "sha256": "1dc019a98e800f12a216b0cc9de0630fdbd644d58949a0aaa79909e64e8ed830",
+      "status": "Normalized; actual alpha verified"
+    }
+  ]
+}

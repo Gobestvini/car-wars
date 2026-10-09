@@ -1,0 +1,19 @@
+{
+  "source": "Visual match to project concept sketches and extracted UI artwork",
+  "navy": "#071C3E",
+  "creamTop": "#FFFCEF",
+  "creamBottom": "#FFF6E2",
+  "creamDepth": "#D5C9AE",
+  "goldHighlight": "#FFF34D",
+  "goldFace": "#FFC21E",
+  "goldDepth": "#D88710",
+  "blueHighlight": "#27C5FF",
+  "blueFace": "#0069FF",
+  "blueDepth": "#0049D5",
+  "failureHighlight": "#FF8B80",
+  "failureFace": "#FF564C",
+  "failureDepth": "#BC251C",
+  "silverFace": "#E5ECF2",
+  "silverEdge": "#7796BA",
+  "route": "#56D9FF"
+}

@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-09",
+  "figmaFile": "NllQADLKwk6RK8pMTurKiN",
+  "section": "6:57",
+  "frameSize": [390, 844],
+  "frames": ["5:248", "5:281", "5:314", "5:362", "5:404", "5:446"],
+  "visualReview": "Full final Figma section PNG inspected",
+  "copyLanguage": "English",
+  "selection": "Expanded scene plus card color, border and depth; no written status badge",
+  "playIconRemoved": true,
+  "cityPatrols": 3,
+  "reward": {"earned": 4, "total": 6},
+  "statisticsClipping": "02:14 and 24% visually verified fully visible",
+  "assetChecks": "All 11 assets passed dimensions, SHA256 and alpha verification",
+  "prototypeValidation": "Configured destinations inspected in Prototype panel; no full live playthrough",
+  "prototypeLinks": [
+    {"node": "5:277", "destination": "5:281", "action": "Select City from Racer menu"},
+    {"node": "5:309", "destination": "5:248", "action": "Select Racer from City menu"},
+    {"node": "12:68", "destination": "5:314", "action": "Racer PLAY"},
+    {"node": "12:118", "destination": "5:362", "action": "City PLAY"},
+    {"node": "12:90", "destination": "5:314", "action": "RACE AGAIN"},
+    {"node": "12:93", "destination": "5:248", "action": "Victory MAIN MENU"},
+    {"node": "12:139", "destination": "5:314", "action": "TRY AGAIN"},
+    {"node": "12:142", "destination": "5:248", "action": "Busted MAIN MENU"}
+  ],
+  "proof": "figma-proof.jpg",
+  "export": "overview.png"
+}

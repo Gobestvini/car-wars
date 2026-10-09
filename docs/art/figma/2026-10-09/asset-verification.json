@@ -1,0 +1,29 @@
+[
+  {
+    "name": "title-victory-en",
+    "width": 2172,
+    "height": 677,
+    "alphaExtrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "name": "title-busted-en",
+    "width": 2135,
+    "height": 600,
+    "alphaExtrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "name": "icon-brake",
+    "width": 1003,
+    "height": 1095,
+    "alphaExtrema": [
+      0,
+      255
+    ]
+  }
+]

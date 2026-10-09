@@ -1,0 +1,191 @@
+{
+  "date": "2026-10-08",
+  "task": "Bring editable screens closer to original concept art",
+  "figmaFile": "NllQADLKwk6RK8pMTurKiN",
+  "assets": [
+    {
+      "name": "logo",
+      "path": "assets/logo.png",
+      "transparent": true,
+      "source": "built-in ImageGen",
+      "reference": "docs/art/concepts/2026-10-08/car-stars-menu-v2/01-thief-selected.png",
+      "prompt": "Use case: background-extraction. Extract ONLY the CAR STARS logo from this reference as a standalone production logo asset on actual transparent background. Preserve the exact two-line stacked wording CAR above STARS, all original chunky rounded 3D block letter shapes, slightly playful curved baseline, thick joined dark navy silhouette backing, subtle royal-blue outer rim, white CAR faces with pale icy-blue bevels, saturated yellow STARS faces with orange-gold extrusion, glossy edge highlights, perspective and depth. This should closely match the actual reference logo, NOT a flat typeset imitation. Clean antialiased edges, centered with small transparent padding, no other words or icons, no city, no UI, no cast shadow extending far outside the logo. High resolution cutout.",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-a49b9464-439a-47be-8693-471efe8ff954.png",
+      "status": "Normalized and alpha-validated; original preserved",
+      "width": 1498,
+      "height": 824,
+      "crop": [
+        138,
+        40,
+        1636,
+        864
+      ],
+      "originalSize": [
+        1774,
+        887
+      ],
+      "sha256": "7b5b09668ec7d772357207d35244a9f1b91e40282194421da7d4f01b659ad54f"
+    },
+    {
+      "name": "button-gold",
+      "path": "assets/button-gold.png",
+      "transparent": true,
+      "source": "built-in ImageGen",
+      "reference": "docs/art/concepts/2026-10-08/car-stars-menu-v2/01-thief-selected.png",
+      "prompt": "Use case: background-extraction. Isolate and reconstruct ONLY the large GOLD PLAY BUTTON SHELL from the reference on actual transparent background. Remove the word PLAY and play triangle completely; the center must be blank so editable typography can be added later in Figma. Keep the exact rounded pill/rounded rectangle shape, broad face, softly curved corners, dimensional orange-gold lower thickness, buttery yellow gradient top, lemon-yellow upper rim, thin warm cream highlight inset border, small glossy bevels. Front-facing flat UI view, original style, broad horizontal face approximately 4.4:1, one button only, transparent padding, no city or UI, no lettering or symbols, no checkerboard baked into pixels. Rich warm saturated gold; avoid excessive chrome or casino ornaments.",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-7e290814-0175-44f6-8f57-ef77d9ad39d4.png",
+      "status": "Normalized and alpha-validated; original preserved",
+      "width": 1982,
+      "height": 471,
+      "crop": [
+        51,
+        135,
+        2033,
+        606
+      ],
+      "originalSize": [
+        2094,
+        751
+      ],
+      "sha256": "b55223618f90fcc610347790d7b0f3f10e02dcbe8666ef505e6a3259562757ab"
+    },
+    {
+      "name": "button-blue",
+      "path": "assets/button-blue.png",
+      "transparent": true,
+      "source": "built-in ImageGen",
+      "reference": "docs/art/concepts/2026-10-08/car-stars-menu-v2/02-city-selected.png",
+      "prompt": "Use case: background-extraction. Isolate and reconstruct ONLY the large BLUE PLAY BUTTON SHELL from the reference on actual transparent background. Remove the word PLAY and triangle completely; center blank for editable typography in Figma. Preserve broad horizontal rounded rectangle approximately 4.4:1, big softly curved corners, clear dimensional deep blue lower thickness, saturated royal-blue base gradually blending to cyan-blue upper face, thin ice-blue highlight inset border, soft glossy bevel edge. Front-facing flat UI view. One blank button, no city, no other UI, no text, no symbols, no decorations, clean alpha edges and small transparent padding. Match original expressive game-art material, not a flat CSS-looking button.",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-33b711ea-9ac6-4027-8ea6-50a27ab46804.png",
+      "status": "Normalized and alpha-validated; original preserved",
+      "width": 1918,
+      "height": 465,
+      "crop": [
+        81,
+        147,
+        1999,
+        612
+      ],
+      "originalSize": [
+        2079,
+        756
+      ],
+      "sha256": "19b6e0b3007bc224db37a6e2fdc496153a67413fac46ba09bc9562b93655dcf0"
+    },
+    {
+      "name": "star-gold",
+      "path": "assets/star-gold.png",
+      "transparent": true,
+      "source": "built-in ImageGen",
+      "reference": "docs/art/concepts/2026-10-08/04-victory.png",
+      "prompt": "Use case: background-extraction. Extract one GOLD EARNED REWARD STAR from the reference as a single isolated transparent game UI icon. Preserve thick rounded five-point silhouette, luminous yellow front face, orange-gold beveled border and extrusion, small cream upper-left highlight, subtle dimensional shading. Front facing, clean edges, evenly balanced shape, tiny local contact shadow only. No text, no numbers, no other stars, no card or city backdrop, no sparkle decoration. Make it read strongly at 40 pixels while matching the exact reference.",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-aeb50af9-9ab3-4711-9500-57bb97838873.png",
+      "status": "Normalized and alpha-validated; original preserved",
+      "width": 1120,
+      "height": 1044,
+      "crop": [
+        96,
+        71,
+        1216,
+        1115
+      ],
+      "originalSize": [
+        1312,
+        1199
+      ],
+      "sha256": "c9ddb85cebae593590420eb2e0c2ae116595803bd17b7b3df1984d7e45cd7fa0"
+    },
+    {
+      "name": "menu-thief",
+      "path": "assets/menu-thief.png",
+      "transparent": false,
+      "source": "built-in ImageGen",
+      "reference": "docs/art/concepts/2026-10-08/car-stars-menu-v2/01-thief-selected.png",
+      "prompt": "Use case: precise-object-edit. Prepare the reference as a clean full portrait MAIN MENU BACKGROUND PLATE. Remove every logo, lettering, cream label capsule, selected badge, main role title, subtitle, settings icon/button and PLAY button, seamlessly reconstructing the city and road beneath them. Keep the exact 70/30 diagonal split and thin cream diagonal separator. Left dominant scene has ONE huge golden yellow getaway car drifting at screen center-left around 50% to 57% vertical height, original sweeping black tire tracks and white smoke, warm yellow/cream low-poly buildings with vivid blue roofs and green faceted trees. Right narrow side is a higher isometric city scene with multiple police vehicles and bright cyan dotted patrol routes/pins. Preserve sunny lighting, original saturated warm/cool contrast and soft miniature blur near outer edges. This is art only; no written words, no UI labels, no buttons, no logos. Portrait1:2.",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-12f937c0-9451-47f0-b911-82005f605453.png",
+      "status": "Normalized and alpha-validated; original preserved",
+      "width": 887,
+      "height": 1774,
+      "crop": [
+        0,
+        0,
+        887,
+        1774
+      ],
+      "originalSize": [
+        887,
+        1774
+      ],
+      "sha256": "6dc0061bb13d5c2f5ec6a91a05b5318aa321b3fcaaba93827be74ce80e3b9783"
+    },
+    {
+      "name": "title-victory",
+      "path": "assets/title-victory.png",
+      "transparent": true,
+      "source": "built-in ImageGen",
+      "reference": "docs/art/concepts/2026-10-08/04-victory.png",
+      "prompt": "Use case: background-extraction. Extract ONLY the huge Russian word ПОБЕДА! from the reference into a transparent standalone game heading. Preserve the exact Cyrillic wording, exclamation point, chunky rounded expressive 3D letters, gently arched baseline, warm yellow face, rich orange-gold dimensional lower edges, cream highlights, thick contiguous dark navy backplate and subtle royal blue rim. Match original shapes and cheerful rich game-art style closely. Single isolated title, small transparent padding. No subtitle, city, car, other UI or stars. High resolution crisp antialiased alpha.",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-c3057fb4-9a1c-4979-86ef-b5ca3426dec4.png",
+      "status": "Normalized and alpha-validated; original preserved",
+      "width": 2163,
+      "height": 651,
+      "crop": [
+        9,
+        44,
+        2172,
+        695
+      ],
+      "originalSize": [
+        2172,
+        724
+      ],
+      "sha256": "126db250d484805e275773341af13b283a0f81ef5c25a7ed4ec3c4b436252aa8"
+    },
+    {
+      "name": "title-defeat",
+      "path": "assets/title-defeat.png",
+      "transparent": true,
+      "source": "built-in ImageGen",
+      "reference": "docs/art/concepts/2026-10-08/05-defeat.png",
+      "prompt": "Use case: background-extraction. Extract ONLY the huge Russian word ПОРАЖЕНИЕ from the reference into a transparent standalone game heading. Preserve exact Cyrillic spelling, chunky rounded expressive 3D letter silhouettes, slight curved baseline, bright coral red front face, red-orange darker extrusion, soft cream-pink bevel highlights, thick contiguous navy backplate and subtle blue rim. Match actual reference closely, NOT flat typesetting. Small transparent padding. No subtitle, city, cars, any other text, icons or UI. High resolution antialiased alpha.",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-5b342766-2777-4ce2-a3bb-55fa8b81bf7f.png",
+      "status": "Normalized and alpha-validated; original preserved",
+      "width": 2110,
+      "height": 502,
+      "crop": [
+        29,
+        134,
+        2139,
+        636
+      ],
+      "originalSize": [
+        2162,
+        727
+      ],
+      "sha256": "d354b4e5a9147876b0b5c2c404c164d797e8c14b128f6e93d9cd69c27f81e39c"
+    },
+    {
+      "name": "menu-city",
+      "path": "assets/menu-city.png",
+      "transparent": false,
+      "source": "built-in ImageGen",
+      "reference": "docs/art/concepts/2026-10-08/car-stars-menu-v2/02-city-selected.png",
+      "prompt": "Use case: precise-object-edit. Make the reference into a clean full portrait main menu BACKGROUND PLATE with NO UI. Remove all logo, lettering, role badges, captions, setting button/icon, PLAY button and their plates, seamlessly reconstructing underlying city. Preserve exact diagonal 30/70 split with narrow getaway scene left and dominant higher isometric city management scene right. Preserve huge yellow car drifting on narrow left side at about 48% height, sweeping black tracks/white smoke. Dominant right scene must preserve three navy-white police patrol cars and one yellow car dispersed through sunny low-poly city with cream sidewalks, golden buildings, vivid blue roofs, green faceted trees, cyan dotted routes and pins. Keep natural sunny saturated palette, original proportions and subtle miniature blur outer edges. No dark filter, no labels or letters, no buttons, no logo. Portrait1:2 uninterrupted illustration except native diagonal cream divider.",
+      "sourceFile": "C:\\Users\\gobes\\.codex\\generated_images\\01a11a7f-568a-7412-8fb4-aa384192a212\\exec-70c736f3-9912-48c1-b2cf-36703d92d54e.png",
+      "status": "Normalized and alpha-validated; original preserved",
+      "width": 887,
+      "height": 1774,
+      "crop": [
+        0,
+        0,
+        887,
+        1774
+      ],
+      "originalSize": [
+        887,
+        1774
+      ],
+      "sha256": "786a52b325be56cf38ec99d81476e65ee1189a2977113825dcc39a0eba77453c"
+    }
+  ]
+}
