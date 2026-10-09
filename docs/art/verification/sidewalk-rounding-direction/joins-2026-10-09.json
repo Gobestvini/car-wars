@@ -1,0 +1,14 @@
+{
+  "fixture": "tools/sidewalk-rounding-regression.html",
+  "viewport": [1280, 720],
+  "dpr": 1,
+  "interiorJoinWalls": 0,
+  "cornerCount": 4,
+  "topColors": [
+    { "sx": -1, "sz": -1, "rounded": [217, 208, 181], "straight": [217, 208, 181], "maxDelta": 0 },
+    { "sx": -1, "sz": 1, "rounded": [217, 208, 182], "straight": [217, 208, 182], "maxDelta": 0 },
+    { "sx": 1, "sz": -1, "rounded": [217, 208, 181], "straight": [217, 208, 181], "maxDelta": 0 },
+    { "sx": 1, "sz": 1, "rounded": [217, 208, 181], "straight": [217, 208, 181], "maxDelta": 0 }
+  ],
+  "pass": true
+}

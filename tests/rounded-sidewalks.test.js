@@ -75,13 +75,16 @@ test('rounded top, asphalt patch, curved wall and curb are batched and have upwa
   const roundedTopY = meshes[1].geometry.attributes.position.array.filter((_, i) => i % 3 === 1);
   assert.ok(roundedTopY.every(y => Math.abs(y - ROAD_SURFACE_HEIGHTS.sidewalkVisual) < 1e-6));
   const capY = meshes[4].geometry.attributes.position.array.filter((_, i) => i % 3 === 1);
-  assert.ok(capY.every(y => Math.abs(y - ROAD_SURFACE_HEIGHTS.sidewalkVisual - 0.001) < 1e-6));
+  assert.ok(capY.every(y => Math.abs(y - ROAD_SURFACE_HEIGHTS.sidewalkVisual) < 1e-6));
+  assert.equal(meshes[4].material.polygonOffset, true);
+  const capNormals = meshes[4].geometry.attributes.normal;
+  assert.ok(Array.from({ length: capNormals.count }, (_, i) => capNormals.getY(i)).every(y => y > 0.99));
   const edges = createRoundedSidewalkEdges(layout.rectangles, layout.corners);
   for (const corner of layout.corners) {
     const outerX = corner.x - corner.sx * corner.radius, outerZ = corner.z - corner.sz * corner.radius;
-    assert.ok(edges.every(edge => !(edge.axis === 'z' && Math.abs(edge.value - outerX) < 1e-7
+    assert.ok(edges.every(edge => !(edge.axis === 'z' && Math.abs(edge.value - corner.x) < 1e-7
       && edge.min < Math.max(corner.z, outerZ) && edge.max > Math.min(corner.z, outerZ))));
-    assert.ok(edges.every(edge => !(edge.axis === 'x' && Math.abs(edge.value - outerZ) < 1e-7
+    assert.ok(edges.every(edge => !(edge.axis === 'x' && Math.abs(edge.value - corner.z) < 1e-7
       && edge.min < Math.max(corner.x, outerX) && edge.max > Math.min(corner.x, outerX))));
   }
   const geometries = new Set(meshes.map(mesh => mesh.geometry));

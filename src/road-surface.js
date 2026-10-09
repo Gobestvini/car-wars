@@ -158,8 +158,10 @@ export function createRoundedSidewalkEdges(rectangles, corners) {
     const minZ = Math.min(corner.z, outerZ), maxZ = Math.max(corner.z, outerZ);
     const next = [];
     for (const edge of edges) {
-      const replaced = (edge.axis === 'x' && Math.abs(edge.value - outerZ) < epsilon)
-        || (edge.axis === 'z' && Math.abs(edge.value - outerX) < epsilon);
+      // The fan fills the removed square up to C. These two radii join the
+      // rectangular slab and are internal edges, not exposed curb faces.
+      const replaced = (edge.axis === 'x' && Math.abs(edge.value - corner.z) < epsilon)
+        || (edge.axis === 'z' && Math.abs(edge.value - corner.x) < epsilon);
       if (!replaced) { next.push(edge); continue; }
       const cutMin = edge.axis === 'x' ? minX : minZ;
       const cutMax = edge.axis === 'x' ? maxX : maxZ;
@@ -198,7 +200,7 @@ export function createRoadFacingSidewalkEdges(edges, roadRects) {
 
 /** Narrow markings lie on the top surface and only follow the road-facing perimeter. */
 export function createSidewalkCapPositions(edges, width = ROAD_SURFACE_HEIGHTS.sidewalkCapWidth,
-  y = ROAD_SURFACE_HEIGHTS.sidewalkVisual + 0.001) {
+  y = ROAD_SURFACE_HEIGHTS.sidewalkVisual) {
   const positions = [];
   for (const { axis, value, min, max, side } of edges) {
     if (axis === 'x') {

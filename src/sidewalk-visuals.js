@@ -21,7 +21,7 @@ function roundedPositions(corners, bottom, top, capWidth = 0, part = 'all') {
         pushTri(aBottom, { ...b, y: top }, { ...a, y: top });
       }
       if ((part === 'all' || part === 'cap') && capWidth > 0) {
-        const capY = top + 0.001;
+        const capY = top;
         const capP = { ...p, y: capY }, capQ = { ...q, y: capY };
         const ai = { x: x + (a.x - x) * (1 - capWidth / radius), y: capY,
           z: z + (a.z - z) * (1 - capWidth / radius) };
@@ -110,6 +110,11 @@ export function createSidewalkVisuals(THREE, layout, roadRects, sidewalkMaterial
 
   const roadEdges = createRoadFacingSidewalkEdges(edges, roadRects);
   if (roadEdges.length) {
+    // A coplanar color trim, not a second raised slab. Depth bias prevents
+    // z-fighting without introducing a ledge at the straight/curved join.
+    curbMaterial.polygonOffset = true;
+    curbMaterial.polygonOffsetFactor = -1;
+    curbMaterial.polygonOffsetUnits = -1;
     const capGeometry = new THREE.BufferGeometry();
     const straightCaps = createSidewalkCapPositions(roadEdges);
     const curvedCaps = roundedPositions(corners, ROAD_SURFACE_HEIGHTS.sidewalkVisual,

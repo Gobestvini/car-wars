@@ -63,7 +63,7 @@ test('union walls remove internal seams, road-facing caps stay on top, and zero-
   assert.equal(capPositions.length, roadEdges.length * 18);
   assert.ok(wallPositions.every(Number.isFinite) && capPositions.every(Number.isFinite));
   assert.ok([...capPositions].filter((_, index) => index % 3 === 1)
-    .every(y => Math.abs(y - ROAD_SURFACE_HEIGHTS.sidewalkVisual - 0.001) < 1e-7));
+    .every(y => Math.abs(y - ROAD_SURFACE_HEIGHTS.sidewalkVisual) < 1e-7));
   assert.deepEqual(createSidewalkSupportBoxes([]), []);
   assert.deepEqual(createSidewalkRectangles(plan.roads, plan.bounds, plan.roadWidth, 0, plaza), []);
   const emptyPlan = createCityPlan(undefined, { config: { ...CITY_CONFIG, sidewalkWidth: 0 } });
