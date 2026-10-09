@@ -1,4 +1,4 @@
-export function createLoadingScreen({ bypass = false, onRetry }) {
+export function createLoadingScreen({ onRetry }) {
   const root = document.getElementById('loading-screen');
   const menu = document.getElementById('start-screen');
   const bar = root.querySelector('[role="progressbar"]');
@@ -6,7 +6,7 @@ export function createLoadingScreen({ bypass = false, onRetry }) {
   const phase = document.getElementById('loading-phase');
   const percent = document.getElementById('loading-percent');
   const retry = document.getElementById('loading-retry');
-  let progress = 0, open = !bypass, leaving = false, failed = false;
+  let progress = 0, open = true, leaving = false, failed = false, completed = false;
   let dismissTimer;
 
   function update(value, label) {
@@ -18,7 +18,7 @@ export function createLoadingScreen({ bypass = false, onRetry }) {
     if (label) phase.textContent = label;
   }
   function begin() {
-    if (bypass) return;
+    if (completed) return;
     clearTimeout(dismissTimer);
     open = true; leaving = false; failed = false; progress = 0;
     root.hidden = false; root.inert = false;
@@ -29,15 +29,14 @@ export function createLoadingScreen({ bypass = false, onRetry }) {
     update(0,'Starting engines…');
   }
   retry.addEventListener('click', () => { begin(); onRetry(); });
-  if (bypass) { root.hidden = true; document.body.dataset.loading = 'false'; }
-  else begin();
+  begin();
 
   return {
     get isOpen() { return open; },
     begin,
     update,
     // Yield a paint before constructing the city and allocating WebGL resources.
-    paint: () => bypass ? Promise.resolve() : new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve,0))),
+    paint: () => new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve,0))),
     finish() {
       if (!open || leaving || failed) return;
       update(100,'Ready to race!');
@@ -47,7 +46,7 @@ export function createLoadingScreen({ bypass = false, onRetry }) {
       dismissTimer = setTimeout(() => {
         root.classList.add('is-leaving');
         dismissTimer = setTimeout(() => {
-          open = false; root.hidden = true; root.inert = true;
+          open = false; completed = true; root.hidden = true; root.inert = true;
           document.body.dataset.loading = 'false';
           menu.inert = menu.hidden;
         }, reduced ? 0 : 450);

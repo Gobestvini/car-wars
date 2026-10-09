@@ -57,7 +57,7 @@
             </button>
           </div>
           <button id="menu-play" type="button" disabled aria-describedby="menu-status"><span>PLAY</span></button>
-          <div class="menu-status-row"><p id="menu-status" role="status" aria-live="polite">Preparing race…</p><button id="menu-retry" type="button" hidden>Retry</button></div>
+          <div class="menu-status-row"><p id="menu-status" role="status" aria-live="polite"></p></div>
         </div>
       </div>
     </section>
@@ -73,10 +73,8 @@
     <section id="settings" class="panel" aria-label="Настройки автомобиля" hidden inert>
       <div id="settings-controls"></div>
     </section>
-    <div id="load-status" role="status">Загрузка машины…</div>
-    <button id="retry-load" type="button" hidden>Повторить загрузку</button>
     <pre id="performance" hidden></pre>
     <div id="touch-marker" aria-hidden="true"><span></span></div>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/boot.js"></script>
   </body>
 </html>

@@ -31,8 +31,8 @@ import { ART, ART_LIGHT, artQuality } from './art-direction.js';
 import { stylePlayerBody } from './vehicle-visuals.js';
 import { TireSmoke } from './tire-smoke.js';
 import { createStartScreen } from './start-screen.js';
-import { createLoadingScreen } from './loading-screen.js';
 
+export async function startGame(loadingScreen) {
 const $ = id => document.getElementById(id);
 const debug = location.hash === '#debug' || new URLSearchParams(location.search).has('debug');
 const bypassMenu = debug || new URLSearchParams(location.search).has('damageTest') || new URLSearchParams(location.search).get('play') === '1';
@@ -42,10 +42,7 @@ const startScreen = createStartScreen({
   onPlay: () => { setSettingsOpen(false); reset(); },
   onShow: () => { releasePointer(); keys.clear(); stepper.reset(); setSettingsOpen(false); },
   onSettings: () => setSettingsOpen(settingsButton.getAttribute('aria-expanded') !== 'true'),
-  onRetry: () => loadCar(),
 });
-const loadingScreen = createLoadingScreen({ bypass: bypassMenu, onRetry: () => loadCar() });
-await loadingScreen.paint();
 loadingScreen.update(5, 'Building the city…');
 let cameraMode = 'follow';
 const freeCameraSpeed = 15;
@@ -116,9 +113,7 @@ let renderer;
 try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
 } catch (error) {
-  startScreen.setError('This browser cannot start the 3D race. Please enable WebGL.', { retryable: false });
   loadingScreen.fail('WebGL is unavailable. Enable it to race.', { retryable: false });
-  $('load-status').textContent = 'Для 3D нужен браузер с поддержкой WebGL.';
   throw error;
 }
 let quality = savedDefaults.quality === 'Лёгкая' ? 'low' : 'high';
@@ -210,16 +205,11 @@ const treadMaterial = new THREE.MeshStandardMaterial({ color: '#252b2c', roughne
 async function loadCar() {
   if (loading || modelReady) return;
   loading = true;
-  loadingScreen.begin();
   loadingScreen.update(12, 'Loading cars…');
   startScreen.setReady(false);
-  $('load-status').hidden = false;
-  $('load-status').textContent = 'Загрузка машины…';
-  $('retry-load').hidden = true;
   try {
     const manager = new THREE.LoadingManager();
     manager.onProgress = (_url, loaded, total) => {
-      $('load-status').textContent = `Загрузка ресурсов: ${loaded}/${total}`;
       loadingScreen.update(12 + 48 * loaded / Math.max(1,total), 'Loading cars…');
     };
     const gltf = await new GLTFLoader(manager).loadAsync(`${import.meta.env.BASE_URL}models/sedan.glb`, event => {
@@ -267,7 +257,6 @@ async function loadCar() {
       visualWheels.push({ pivot, spin });
     }
     // Compile while the loading indicator is visible, before accepting movement.
-    $('load-status').textContent = 'Подготовка сцены…';
     loadingScreen.update(68, 'Preparing the city…');
     await loadingScreen.paint();
     sim.reset();
@@ -282,17 +271,23 @@ async function loadCar() {
     loadingScreen.update(86, 'Polishing lights and shadows…');
     await miniatureBlur.compile();
     loadingScreen.update(94, 'Preparing your start screen…');
-    if (!bypassMenu) {
-      await Promise.all([...document.querySelectorAll('#start-screen img,#loading-screen img')].map(image => {
-        if (image.complete && !image.naturalWidth) image.src = image.src;
-        return image.decode();
-      }));
-      await Promise.all([document.fonts.load('22px "Lilita One"'), document.fonts.load('900 16px "Car Roboto"')]);
-    }
+    const buttonImages = ['button-gold.webp','button-blue.webp'].map(file => {
+      const image = new Image();
+      image.src = `${import.meta.env.BASE_URL}ui/start/${file}`;
+      return image;
+    });
+    await Promise.all([...document.querySelectorAll('#start-screen img,#loading-screen img'), ...buttonImages].map(image => {
+      if (image.complete && !image.naturalWidth) image.src = image.src;
+      return image.decode();
+    }));
+    await Promise.all([document.fonts.load('22px "Lilita One"'), document.fonts.load('900 16px "Car Roboto"')]);
+    // Allocate render targets, upload textures and render shadows before exposing PLAY.
+    loadingScreen.update(98, 'Finishing the first frame…');
+    miniatureBlur.render(scene, camera, { mode: cameraMode, car });
+    await loadingScreen.paint();
     modelReady = true;
     startScreen.setReady(true);
     loadingScreen.finish();
-    $('load-status').hidden = true;
   } catch (error) {
     console.error('Car model failed to load', error);
     // A retry must not duplicate partially prepared meshes after a compile failure.
@@ -313,16 +308,11 @@ async function loadCar() {
     for (const texture of failedTextures) texture.dispose();
     bodyDeformation = null;
     car.clear();
-    $('load-status').textContent = 'Не удалось загрузить машину.';
-    startScreen.setError('Could not load the race. Please try again.');
     loadingScreen.fail('Could not load the race. Please try again.');
-    $('retry-load').hidden = false;
   } finally {
     loading = false;
   }
 }
-loadCar();
-$('retry-load').addEventListener('click', loadCar);
 
 const tracks = new TireTracks(scene, 18000, { surfaceHeight: createSurfaceHeightSampler(cityPlan),
   threshold: savedDefaults.skidThreshold, intensity: savedDefaults.trackIntensity });
@@ -859,3 +849,7 @@ window.addEventListener('pagehide', () => { miniatureBlur.dispose(); tireSmoke.d
   repairPickupVisuals.dispose();
   sim.disposeDamageListener();
   for (const runtime of policeDamageVisuals.values()) runtime.effects.dispose(); policeDamageVisuals.clear(); }, { once: true });
+// All controls, world effects and quality settings exist before warmup starts.
+await loadCar();
+return { retry: loadCar };
+}

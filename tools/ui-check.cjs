@@ -12,6 +12,9 @@ const baseUrl = process.env.CARWARS_BASE_URL || 'http://localhost:5173/';
       page.on('pageerror', error => errors.push(error.message));
       await page.goto(baseUrl);
       await page.waitForFunction(() => window.carLab?.modelReady);
+      await page.locator('#loading-screen').waitFor({ state: 'hidden' });
+      await page.locator('#menu-play').click();
+      await page.locator('#start-screen').waitFor({ state: 'hidden' });
       const closed = await page.evaluate(() => ({
         width: document.documentElement.scrollWidth,
         height: document.documentElement.scrollHeight,
@@ -19,8 +22,8 @@ const baseUrl = process.env.CARWARS_BASE_URL || 'http://localhost:5173/';
         panelInert: document.querySelector('#settings').inert,
         expanded: document.querySelector('#settings-button').getAttribute('aria-expanded'),
         performanceHidden: document.querySelector('#performance').hidden,
-        loadHidden: document.querySelector('#load-status').hidden,
-        remainingText: [...document.body.children].filter(node => node.tagName !== 'SCRIPT' && !['scene', 'speedometer', 'settings-button', 'settings', 'load-status', 'retry-load', 'performance', 'touch-marker'].includes(node.id)).length,
+        loadHidden: document.querySelector('#loading-screen').hidden,
+        remainingText: [...document.body.children].filter(node => node.tagName !== 'SCRIPT' && !['scene', 'speedometer', 'arrest-banner', 'settings-button', 'settings', 'loading-screen', 'start-screen', 'menu-button', 'performance', 'touch-marker'].includes(node.id)).length,
         speed: document.querySelector('#speed').textContent,
       }));
       assert.ok(closed.width <= viewport.width && closed.height <= viewport.height, `closed overflow ${JSON.stringify(closed)}`);

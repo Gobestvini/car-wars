@@ -2,17 +2,14 @@ import './start-screen.css';
 
 // Menu ownership is independent of the simulation: a closed menu starts a new run,
 // and an open menu never forwards input or time to the world.
-export function createStartScreen({ bypass = false, onPlay, onShow, onSettings, onRetry }) {
+export function createStartScreen({ bypass = false, onPlay, onShow, onSettings }) {
   const root = document.getElementById('start-screen');
   const play = document.getElementById('menu-play');
   const status = document.getElementById('menu-status');
-  const retry = document.getElementById('menu-retry');
   const home = document.getElementById('menu-button');
-  const settings = document.getElementById('menu-settings');
   const roleButtons = [...root.querySelectorAll('.menu-role')];
-  let side = 'racer', ready = false, error = '', launching = false;
+  let side = 'racer', ready = false, launching = false;
   let open = !bypass;
-  let retryable = true;
   let launchTimer;
 
   function render() {
@@ -23,9 +20,7 @@ export function createStartScreen({ bypass = false, onPlay, onShow, onSettings, 
     document.body.dataset.screen = open ? 'menu' : 'playing';
     for (const button of roleButtons) button.setAttribute('aria-pressed', String(button.dataset.chooseSide === side));
     play.disabled = launching || !ready || side === 'city';
-    status.textContent = error || (side === 'city' ? 'City mode is coming soon.' : ready ? '' : 'Preparing race…');
-    retry.hidden = !error || !retryable;
-    settings.disabled = !!error && !retryable;
+    status.textContent = side === 'city' ? 'City mode is coming soon.' : '';
   }
 
   function choose(value) {
@@ -69,13 +64,11 @@ export function createStartScreen({ bypass = false, onPlay, onShow, onSettings, 
     roleButtons.find(button => button.dataset.chooseSide === side).focus({ preventScroll: true });
   });
   document.getElementById('menu-settings').addEventListener('click', onSettings);
-  retry.addEventListener('click', () => { error = ''; render(); onRetry(); });
   render();
 
   return {
     get isOpen() { return open; },
     snapshot: () => ({ open, side, ready, launching }),
-    setReady(value) { ready = value; error = ''; render(); },
-    setError(message, { retryable: canRetry = true } = {}) { ready = false; error = message; retryable = canRetry; render(); },
+    setReady(value) { ready = value; render(); },
   };
 }

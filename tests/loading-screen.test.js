@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createLoadingScreen } from '../src/loading-screen.js';
 
-function fixture(t, { bypass = false, reduced = false } = {}) {
+function fixture(t, { reduced = false } = {}) {
   const element = () => ({ hidden: false, inert: false, dataset: {}, style: {}, attrs: {}, textContent: '',
     classes: new Set(), events: {},
     setAttribute(name,value) { this.attrs[name] = value; },
@@ -27,7 +27,7 @@ function fixture(t, { bypass = false, reduced = false } = {}) {
     Object.defineProperty(globalThis,key,{value,writable:true,configurable:true});
     t.after(() => descriptor ? Object.defineProperty(globalThis,key,descriptor) : delete globalThis[key]);
   }
-  const screen = createLoadingScreen({ bypass, onRetry: () => retries++ });
+  const screen = createLoadingScreen({ onRetry: () => retries++ });
   const tick = () => { const queued = [...timers.values()]; timers.clear(); queued.forEach(callback => callback()); };
   return { screen,nodes,body,tick,get retries() { return retries; } };
 }
@@ -77,9 +77,10 @@ test('fatal WebGL failure offers no retry', t => {
   assert.equal(f.screen.isOpen,true);
 });
 
-test('bypassed loader never blocks the simulation or reveals itself on begin', t => {
-  const {screen,nodes,body} = fixture(t,{bypass:true});
-  screen.begin(); screen.update(68); screen.finish();
+test('completed boot cannot reopen a loading screen during gameplay', t => {
+  const {screen,nodes,body,tick} = fixture(t);
+  screen.finish(); tick(); tick();
+  screen.begin(); screen.update(68); screen.fail('Late failure'); screen.finish();
   assert.equal(screen.isOpen,false);
   assert.equal(nodes['loading-screen'].hidden,true);
   assert.equal(body.dataset.loading,'false');

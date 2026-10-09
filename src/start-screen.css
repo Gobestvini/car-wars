@@ -59,14 +59,13 @@
 [data-side="city"] #menu-play { color: #fff; background-image: url('/ui/start/button-blue.webp'); filter: drop-shadow(0 5px 10px #071c3e55) saturate(.75); cursor: not-allowed; }
 .menu-status-row { position: relative; min-height: 20px; display: flex; justify-content: center; align-items: center; gap: 8px; }
 #menu-status { margin: 5px 0 0; font-size: 11px; font-weight: 800; text-align: center; text-shadow: 0 1px 4px #071c3e; }
-#menu-retry { position: relative; z-index: 1; border: 0; border-radius: 6px; padding: 3px 10px; background: #fff9ec; color: #071c3e; font-weight: 900; }
 #start-screen button:focus-visible { outline: 3px solid #fffcef; outline-offset: 4px; box-shadow: 0 0 0 7px #087bd5; }
 #start-screen.is-launching { opacity: 0; filter: blur(5px); pointer-events: none; }
 .is-launching .menu-scenes { transform: scale(1.14); transition: transform .52s var(--menu-ease); }
 .is-launching .menu-bottom { transform: translateY(35px); opacity: 0; transition: transform .4s ease,opacity .3s ease; }
 #menu-button { position: fixed; top: calc(12px + env(safe-area-inset-top)); left: 50%; z-index: 5; transform: translateX(-50%); min-height: 44px; padding: 8px 17px; border: 2px solid #071c3e; border-radius: 12px; background: #fff9ec; color: #071c3e; font: 22px 'Lilita One',sans-serif; box-shadow: 0 3px 0 #071c3e44; }
 body[data-screen="menu"] #scene { visibility: hidden; }
-body[data-screen="menu"] :is(#speedometer,#arrest-banner,#settings-button,#load-status,#retry-load,#performance,#touch-marker) { display: none !important; }
+body[data-screen="menu"] :is(#speedometer,#arrest-banner,#settings-button,#performance,#touch-marker) { display: none !important; }
 body[data-screen="menu"] #settings { z-index: 30; }
 @keyframes menu-logo-in { from { opacity: 0; transform: translate(-50%,-24px) scale(.9); } to { opacity: 1; transform: translate(-50%,0) scale(1); } }
 @keyframes menu-controls-in { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
