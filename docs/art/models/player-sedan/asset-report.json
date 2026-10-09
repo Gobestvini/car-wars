@@ -1,0 +1,76 @@
+{
+  "generator": "Blender 5.2.2 LTS",
+  "palette_srgb": {
+    "paint": "#ffc12f",
+    "glass": "#202c49",
+    "trim": "#535a6b",
+    "tire": "#20252e",
+    "hub": "#afb6c5",
+    "grille": "#19202d",
+    "lamp": "#fff0b8",
+    "amber": "#e7a227",
+    "tail": "#db3345"
+  },
+  "axes": "Game +X right +Y up +Z nose; Blender x,-z,y",
+  "objects": [
+    {
+      "name": "body",
+      "triangles": 1524,
+      "vertices": 876,
+      "materials": 1,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "wheel-front-left",
+      "triangles": 188,
+      "vertices": 120,
+      "materials": 1,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "wheel-front-right",
+      "triangles": 188,
+      "vertices": 120,
+      "materials": 1,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "wheel-rear-left",
+      "triangles": 188,
+      "vertices": 120,
+      "materials": 1,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "wheel-rear-right",
+      "triangles": 188,
+      "vertices": 120,
+      "materials": 1,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "triangles": 2276,
+  "glb_bytes": 161384,
+  "textures": 0,
+  "physics": "Existing cannon-es bodies, wheel mounts, radius .45 and wheelbase 2.3m preserved"
+}

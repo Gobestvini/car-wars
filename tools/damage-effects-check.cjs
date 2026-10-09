@@ -6,12 +6,12 @@ const base = process.env.CARWARS_BASE_URL || 'http://127.0.0.1:5174/';
   const browser = await chromium.launch({ headless: true, channel: 'msedge', args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
   try {
     const page = await browser.newPage();
-    await page.route('**/models/sedan.glb', route => route.abort());
+    await page.route('**/models/player-sedan.glb', route => route.abort());
     await page.goto(`${base}?damagePreview=.85#debug`);
     await page.locator('#loading-retry').waitFor({ state: 'visible' });
     const failed = await page.evaluate(() => ({ ready: carLab.modelReady, effects: carLab.damageEffects() }));
     assert.equal(failed.ready, false); assert.equal(failed.effects.activeSmoke, 0); assert.equal(failed.effects.activeFire, 0);
-    await page.unroute('**/models/sedan.glb'); await page.locator('#loading-retry').click();
+    await page.unroute('**/models/player-sedan.glb'); await page.locator('#loading-retry').click();
     await page.waitForFunction(() => carLab.modelReady && carLab.damageEffects().activeFire > 0);
     const recovered = await page.evaluate(() => carLab.damageEffects()); assert.equal(recovered.capacity, 288);
     await page.keyboard.press('KeyR');

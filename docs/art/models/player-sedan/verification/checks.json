@@ -1,0 +1,10 @@
+{
+  "asset_sha256": "34E6C9231A09062D285741093174F0E9619CF38C2CDC17CF4A390681322F477E",
+  "targeted_tests": "30/30 passed",
+  "build": "passed",
+  "browser_player_model": "passed",
+  "browser_damage_effects": "passed",
+  "full_suite": "282/283; existing settings-defaults blur focus 58 vs 68",
+  "phone_benchmark": "not performed",
+  "blend_opened": "player-sedan.blend in separate Blender 5.2.2 LTS window"
+}

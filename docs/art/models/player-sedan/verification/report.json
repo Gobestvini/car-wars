@@ -1,0 +1,260 @@
+{
+  "environment": "Desktop Edge SwiftShader; not a physical phone benchmark",
+  "scenes": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "model": {
+        "url": "models/player-sedan.glb",
+        "meshes": 5,
+        "triangles": 2276,
+        "textures": 0,
+        "materials": 1,
+        "deformedVertices": 0
+      }
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "model": {
+        "url": "models/player-sedan.glb",
+        "meshes": 5,
+        "triangles": 2276,
+        "textures": 0,
+        "materials": 1,
+        "deformedVertices": 0
+      }
+    }
+  ],
+  "driving": {
+    "initial": {
+      "model": {
+        "url": "models/player-sedan.glb",
+        "meshes": 5,
+        "triangles": 2276,
+        "textures": 0,
+        "materials": 1,
+        "deformedVertices": 0
+      },
+      "telemetry": {
+        "position": {
+          "x": 3.861127898941827e-18,
+          "y": 0.9383884838157304,
+          "z": 2.831133653268864e-17
+        },
+        "speed": 1.448989595373626,
+        "signedSpeed": 5.027112284293864e-16,
+        "heading": -0.45,
+        "roll": -3.613725730296904e-17,
+        "steer": 0,
+        "grounded": 4,
+        "slip": 0,
+        "gear": "1",
+        "damage": 0,
+        "damageState": "healthy",
+        "traction": 1,
+        "lastImpactSpeed": 0
+      },
+      "wheels": [
+        {
+          "position": [
+            -1.193554633039476,
+            0.4499999999999999,
+            0.700590706439931
+          ],
+          "radius": 0.45,
+          "front": true,
+          "steeringAngle": 0
+        },
+        {
+          "position": [
+            0.1931339045836466,
+            0.4499999999999997,
+            1.3704376289712257
+          ],
+          "radius": 0.45,
+          "front": true,
+          "steeringAngle": 0
+        },
+        {
+          "position": [
+            -0.1931339045836466,
+            0.45000000000000034,
+            -1.3704376289712257
+          ],
+          "radius": 0.45,
+          "front": false,
+          "steeringAngle": 0
+        },
+        {
+          "position": [
+            1.193554633039476,
+            0.4500000000000001,
+            -0.700590706439931
+          ],
+          "radius": 0.45,
+          "front": false,
+          "steeringAngle": 0
+        }
+      ]
+    },
+    "driving": {
+      "position": {
+        "x": -0.5297127500707688,
+        "y": 0.8647722893976185,
+        "z": 1.0965735973370812
+      },
+      "speed": 18.196918316488905,
+      "signedSpeed": 5.0467906233822895,
+      "heading": -0.4500012538931382,
+      "roll": 0.0000025224890402272514,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "1",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "steering": [
+      {
+        "position": [
+          -1.8617529265672175,
+          0.4492330823976114,
+          2.1142195631915865
+        ],
+        "radius": 0.45,
+        "front": true,
+        "steeringAngle": 0.20475000000000046
+      },
+      {
+        "position": [
+          -0.4718774009240728,
+          0.4492330823976112,
+          2.77748813245743
+        ],
+        "radius": 0.45,
+        "front": true,
+        "steeringAngle": 0.20475000000000046
+      },
+      {
+        "position": [
+          -0.8701968144082098,
+          0.44923308239761184,
+          0.034624267728356715
+        ],
+        "radius": 0.45,
+        "front": false,
+        "steeringAngle": 0
+      },
+      {
+        "position": [
+          0.5196787112349351,
+          0.4492330823976118,
+          0.6978928369942006
+        ],
+        "radius": 0.45,
+        "front": false,
+        "steeringAngle": 0
+      }
+    ],
+    "reset": "passed",
+    "loadRetry": "passed"
+  },
+  "collision": {
+    "telemetry": {
+      "position": {
+        "x": -7.700142135619506,
+        "y": 0.7988281828972362,
+        "z": 15.085162226465066
+      },
+      "speed": 18.7000208030124,
+      "signedSpeed": -1.7596612973872574,
+      "heading": -0.31692063747309285,
+      "roll": 0.027315544166315212,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 3.691504362633782,
+      "gear": "R",
+      "damage": 0.2240741962694963,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 16.60450477350513
+    },
+    "model": {
+      "url": "models/player-sedan.glb",
+      "meshes": 5,
+      "triangles": 2276,
+      "textures": 0,
+      "materials": 1,
+      "deformedVertices": 373
+    },
+    "reset": "passed"
+  },
+  "detachment": {
+    "wheels": [
+      {
+        "detached": true,
+        "grounded": false
+      },
+      {
+        "detached": false,
+        "grounded": true
+      },
+      {
+        "detached": false,
+        "grounded": true
+      },
+      {
+        "detached": false,
+        "grounded": true
+      }
+    ],
+    "model": {
+      "url": "models/player-sedan.glb",
+      "meshes": 5,
+      "triangles": 2276,
+      "textures": 0,
+      "materials": 1,
+      "deformedVertices": 751
+    },
+    "telemetry": {
+      "position": {
+        "x": -0.3181454398033172,
+        "y": 0.8503761405010405,
+        "z": -0.9110871689528247
+      },
+      "speed": 17.011249946186737,
+      "signedSpeed": -4.119401759808547,
+      "heading": 0.30161413236561674,
+      "roll": -0.030673532999953616,
+      "steer": 0,
+      "grounded": 3,
+      "slip": 2.1308085338137177,
+      "gear": "R",
+      "damage": 0.49015903644116265,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 17.88117358815872
+    },
+    "reset": "passed"
+  },
+  "errors": [],
+  "preview": {
+    "calls": 6,
+    "triangles": 2278,
+    "lighting": {
+      "sky": 16777215,
+      "ground": 10266823,
+      "ambient": 1.8,
+      "sun": 16773076,
+      "intensity": 2.4,
+      "exposure": 1.08
+    }
+  }
+}
