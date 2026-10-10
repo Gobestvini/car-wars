@@ -5,7 +5,7 @@ import { CarSimulation, DEFAULT_TUNING, STEP } from './vehicle.js';
 import { joystickVector } from './joystick.js';
 import { directionalInput } from './driving-input.js';
 import { DonutGesture, donutDriveInput } from './donut-input.js';
-import { FixedStepper } from './game-loop.js';
+import { FixedStepper, FrameRateLimiter } from './game-loop.js';
 import { TireTracks, DEFAULT_SKID_THRESHOLD, DEFAULT_TRACK_INTENSITY } from './tire-tracks.js';
 import { smoothCameraScale, targetCameraScale } from './camera-distance.js';
 import { createCityPlan, ROAD_WIDTH } from './city-generator.js';
@@ -351,7 +351,10 @@ window.addEventListener('blur', () => { releasePointer(); keys.clear(); });
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) { releasePointer(); keys.clear(); }
   stepper.reset();
+  frameRateLimiter.reset();
   previousTime = performance.now();
+  previousFrameTimestamp = null;
+  metricTime = 0; metricFrames = 0;
 });
 window.addEventListener('keydown', event => {
   if (startScreen.isOpen || loadingScreen.isOpen) return;
@@ -619,6 +622,7 @@ function resize() {
 window.addEventListener('resize', resize); resize(); updateCamera(1);
 const currentChassisQuaternion = new THREE.Quaternion();
 const stepper = new FixedStepper(STEP);
+const frameRateLimiter = new FrameRateLimiter();
 let previousTime = performance.now();
 let input = { brake: 0, handbrake: false };
 $('performance').hidden = !debug;
@@ -627,12 +631,20 @@ let metricTime = 0, metricFrames = 0;
 let previousFrameTimestamp = null;
 function frame(now) {
   requestAnimationFrame(frame);
+  if (document.hidden || !modelReady || loadingScreen.isOpen) {
+    frameRateLimiter.reset();
+    stepper.reset();
+    previousTime = now;
+    previousFrameTimestamp = null;
+    return;
+  }
+  if (!frameRateLimiter.shouldRender(now)) return;
+
   const cpuStart = performance.now();
   if (previousFrameTimestamp !== null) metrics.frameIntervalMs = now - previousFrameTimestamp;
   previousFrameTimestamp = now;
   const elapsed = Math.max(0, (now - previousTime) / 1000); previousTime = now;
   const dt = Math.min(elapsed, 0.08);
-  if (document.hidden || !modelReady || loadingScreen.isOpen) { stepper.reset(); return; }
   if (startScreen.isOpen) {
     // Keep the WebGL buffer populated throughout the menu's translucent exit.
     if (startScreen.isLaunching) miniatureBlur.render(scene, camera, { mode: cameraMode, car });
