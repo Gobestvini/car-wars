@@ -808,6 +808,11 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       requestedCount = count; pendingCount = count; pendingReason = 'Поиск безопасных мест';
       servicePending(8, 512);
     },
+    setVisualAssets(assets) {
+      if (states.length) throw new Error('Install traffic visuals before attaching physics');
+      visualAssets?.dispose();
+      visualAssets = assets;
+    },
     setSignalController(controller) { signalController = controller || createTrafficSignals(roadNetwork); },
     signalPhase(nodeId, fromId, time = aiTime) { return signalController.phase(nodeId, fromId, time); },
     simulationTime() { return aiTime; },

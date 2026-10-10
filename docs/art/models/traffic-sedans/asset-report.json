@@ -1,0 +1,47 @@
+[
+  {
+    "name": "grey",
+    "concept": "03-grey-traffic.png",
+    "paint_srgb": "#a5a8b1",
+    "triangles": 4140,
+    "lod_triangles": 1454,
+    "glb_bytes": 232984,
+    "atlas_size": [
+      512,
+      512
+    ],
+    "shared_base": "player-sedan-v2",
+    "beacon_colors": null
+  },
+  {
+    "name": "green",
+    "concept": "04-green-traffic.png",
+    "paint_srgb": "#66a47e",
+    "triangles": 4140,
+    "lod_triangles": 1454,
+    "glb_bytes": 233100,
+    "atlas_size": [
+      512,
+      512
+    ],
+    "shared_base": "player-sedan-v2",
+    "beacon_colors": null
+  },
+  {
+    "name": "police",
+    "concept": "02-police-patrol.png",
+    "paint_srgb": "#edf0f5",
+    "triangles": 4316,
+    "lod_triangles": null,
+    "glb_bytes": 177712,
+    "atlas_size": [
+      512,
+      512
+    ],
+    "shared_base": "player-sedan-v2",
+    "beacon_colors": {
+      "left": "red",
+      "right": "blue"
+    }
+  }
+]

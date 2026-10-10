@@ -1,0 +1,245 @@
+{
+  "environment": "Desktop Edge SwiftShader; not a physical phone benchmark",
+  "loadRetry": "passed",
+  "moving": "passed",
+  "initial": {
+    "visuals": [
+      {
+        "id": "npc-00",
+        "role": "civilian",
+        "variant": "grey",
+        "damageable": false,
+        "triangles": [
+          [
+            4140,
+            1454
+          ]
+        ],
+        "bodyId": 734
+      },
+      {
+        "id": "npc-01",
+        "role": "civilian",
+        "variant": "green",
+        "damageable": false,
+        "triangles": [
+          [
+            4140,
+            1454
+          ]
+        ],
+        "bodyId": 735
+      },
+      {
+        "id": "npc-02",
+        "role": "civilian",
+        "variant": "grey",
+        "damageable": false,
+        "triangles": [
+          [
+            4140,
+            1454
+          ]
+        ],
+        "bodyId": 736
+      },
+      {
+        "id": "npc-03",
+        "role": "civilian",
+        "variant": "green",
+        "damageable": false,
+        "triangles": [
+          [
+            4140,
+            1454
+          ]
+        ],
+        "bodyId": 737
+      },
+      {
+        "id": "npc-04",
+        "role": "civilian",
+        "variant": "grey",
+        "damageable": false,
+        "triangles": [
+          [
+            4140,
+            1454
+          ]
+        ],
+        "bodyId": 738
+      },
+      {
+        "id": "npc-05",
+        "role": "civilian",
+        "variant": "green",
+        "damageable": false,
+        "triangles": [
+          [
+            4140,
+            1454
+          ]
+        ],
+        "bodyId": 739
+      },
+      {
+        "id": "police-06",
+        "role": "police",
+        "variant": "police",
+        "damageable": true,
+        "triangles": [
+          2876,
+          1352,
+          44,
+          44
+        ],
+        "bodyId": 740
+      },
+      {
+        "id": "police-07",
+        "role": "police",
+        "variant": "police",
+        "damageable": true,
+        "triangles": [
+          2876,
+          1352,
+          44,
+          44
+        ],
+        "bodyId": 741
+      }
+    ],
+    "positions": [
+      {
+        "x": -159.96863125230539,
+        "z": -171.25,
+        "heading": 1.5707963267948963,
+        "speed": 0.3800302196680036
+      },
+      {
+        "x": -171.25,
+        "z": -40.03136874465899,
+        "heading": 3.141592653589793,
+        "speed": 0.3800301928171237
+      },
+      {
+        "x": -171.25,
+        "z": 59.96863125534101,
+        "heading": 3.141592653589793,
+        "speed": 0.3800301928171244
+      },
+      {
+        "x": -40.03136874769457,
+        "z": -178.75,
+        "heading": -1.5707963267948963,
+        "speed": 0.38003021966800354
+      },
+      {
+        "x": -40.03136874769457,
+        "z": -28.75,
+        "heading": -1.5707963267948963,
+        "speed": 0.38003021966800465
+      },
+      {
+        "x": -40.03136874769457,
+        "z": 71.25,
+        "heading": -1.5707963267948963,
+        "speed": 0.3800302196680053
+      }
+    ],
+    "status": {
+      "count": 6,
+      "requestedCount": 6,
+      "pending": false,
+      "totalCount": 8,
+      "roleCounts": {
+        "civilian": 6,
+        "police": 2
+      },
+      "pendingSpawns": 0,
+      "insertionReason": null,
+      "bodies": 2,
+      "logical": 6,
+      "visible": 2,
+      "reservations": 0
+    }
+  },
+  "preview": {
+    "deformed": true,
+    "isolated": true,
+    "sharedGeometry": true,
+    "atlases": {
+      "grey": [
+        512,
+        512
+      ],
+      "green": [
+        512,
+        512
+      ],
+      "police": [
+        512,
+        512
+      ]
+    },
+    "beacons": [
+      [
+        -0.32999999821186066,
+        1.9450000524520874,
+        -0.07999999821186066
+      ],
+      [
+        0.32999999821186066,
+        1.9450000524520874,
+        -0.07999999821186066
+      ]
+    ]
+  },
+  "draws": {
+    "grey-front": {
+      "calls": 2,
+      "triangles": 4142
+    },
+    "grey-rear": {
+      "calls": 2,
+      "triangles": 4142
+    },
+    "grey-left": {
+      "calls": 2,
+      "triangles": 4142
+    },
+    "green-front": {
+      "calls": 2,
+      "triangles": 4142
+    },
+    "green-rear": {
+      "calls": 2,
+      "triangles": 4142
+    },
+    "green-left": {
+      "calls": 2,
+      "triangles": 4142
+    },
+    "police-front": {
+      "calls": 5,
+      "triangles": 4318
+    },
+    "police-rear": {
+      "calls": 5,
+      "triangles": 4318
+    },
+    "police-left": {
+      "calls": 5,
+      "triangles": 4318
+    },
+    "distant": {
+      "calls": 2,
+      "triangles": 1456
+    }
+  },
+  "beaconIntensities": [
+    1.7996695423571665,
+    0.25033045764283346
+  ],
+  "errors": []
+}

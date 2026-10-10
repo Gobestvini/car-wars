@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { ART } from './art-direction.js';
+import { makeConceptTrafficCar } from './traffic-models.js';
 
 function vehicleGeometry(color, estate, police) {
   const parts = [];
@@ -61,6 +62,7 @@ export function createTrafficAssets() {
 }
 
 export function makeTrafficCar(THREE, assets, index, role='civilian') {
+  if (assets.concept) return makeConceptTrafficCar(assets,index,role);
   const group = new THREE.Group();
   if (role === 'police') {
     const body = new THREE.Mesh(assets.police.body.clone(), assets.material);

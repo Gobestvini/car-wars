@@ -30,6 +30,7 @@ import packageInfo from '../package.json';
 import { ART, ART_LIGHT, artQuality } from './art-direction.js';
 import { PLAYER_MODEL_URL, preparePlayerModel, offsetPlayerWheel } from './player-model.js';
 import { createPlayerLights } from './player-lights.js';
+import { TRAFFIC_MODEL_URLS, createConceptTrafficAssets } from './traffic-models.js';
 import { TireSmoke } from './tire-smoke.js';
 import { createStartScreen } from './start-screen.js';
 
@@ -185,7 +186,6 @@ const damagePreview = debug ? Number(new URLSearchParams(location.search).get('d
 const traffic = createVehicleRuntime(scene, THREE, savedDefaults.trafficCount, cityPlan.roadNetwork,
   cityPlan.roadWidth, trafficSpawnObstacles, { minX: -cityPlan.bounds, maxX: cityPlan.bounds,
     minZ: -cityPlan.bounds, maxZ: cityPlan.bounds });
-traffic.attachPhysics(sim);
 traffic.registerRole('police', { maxCount: 2, physicalOnly: true,
   create: ({ targetId }) => createPolicePursuit({ targetId }),
   update: (controller, context) => wanted.snapshot().level > 0 && arrest.snapshot().state !== 'arrested'
@@ -206,6 +206,7 @@ let modelReady = false;
 let loading = false;
 let bodyDeformation = null;
 let playerLights = null;
+let trafficModelsReady = false;
 async function loadCar() {
   if (loading || modelReady) return;
   loading = true;
@@ -219,6 +220,13 @@ async function loadCar() {
     const gltf = await new GLTFLoader(manager).loadAsync(`${import.meta.env.BASE_URL}${PLAYER_MODEL_URL}`, event => {
       if (event.total > 0) loadingScreen.update(12 + 48 * event.loaded / event.total, 'Loading cars…');
     });
+    if (!trafficModelsReady) {
+      const loaded = await Promise.all(Object.entries(TRAFFIC_MODEL_URLS).map(async ([name,url]) =>
+        [name,(await new GLTFLoader(manager).loadAsync(`${import.meta.env.BASE_URL}${url}`)).scene]));
+      traffic.setVisualAssets(createConceptTrafficAssets(Object.fromEntries(loaded)));
+      traffic.attachPhysics(sim);
+      trafficModelsReady = true;
+    }
     const { model, body, wheels: wheelNodes } = preparePlayerModel(gltf.scene);
     // Authored in metres about the existing simulation COM; no visual rescaling.
     model.updateMatrixWorld(true);
