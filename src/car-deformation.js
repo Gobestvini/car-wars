@@ -3,7 +3,7 @@ import * as THREE from 'three';
 const keyOf = (x, y, z) => `${Math.round(x * 10000)}:${Math.round(y * 10000)}:${Math.round(z * 10000)}`;
 
 export class CarDeformation {
-  constructor(geometry, geometryToCarMatrix, { maxDisplacement = 0.3 } = {}) {
+  constructor(geometry, geometryToCarMatrix, { maxDisplacement = 0.3, preserveHardEdges = false } = {}) {
     this.geometry = geometry;
     const positions = geometry.getAttribute('position');
     this.originalPositions = positions.array.slice();
@@ -14,6 +14,7 @@ export class CarDeformation {
     this.carToGeometry = geometryToCarMatrix.clone().invert();
     this.baselineCar = new Array(this.positionCount);
     this.uniqueIndices = new Map();
+    this.normalGroups = new Map();
     const point = new THREE.Vector3();
     for (let i = 0; i < this.positionCount; i++) {
       point.fromArray(this.originalPositions, i * 3).applyMatrix4(this.geometryToCar);
@@ -21,6 +22,10 @@ export class CarDeformation {
       const key = keyOf(point.x, point.y, point.z);
       if (!this.uniqueIndices.has(key)) this.uniqueIndices.set(key, []);
       this.uniqueIndices.get(key).push(i);
+      const normalKey = preserveHardEdges && this.originalNormals
+        ? `${key}:${keyOf(...this.originalNormals.slice(i * 3, i * 3 + 3))}` : key;
+      if (!this.normalGroups.has(normalKey)) this.normalGroups.set(normalKey, []);
+      this.normalGroups.get(normalKey).push(i);
     }
     this.maxDisplacement = maxDisplacement;
     this.impacts = [];
@@ -64,7 +69,7 @@ export class CarDeformation {
     this.geometry.computeVertexNormals();
     const normals = this.geometry.getAttribute('normal');
     const average = new THREE.Vector3();
-    for (const indices of this.uniqueIndices.values()) {
+    for (const indices of this.normalGroups.values()) {
       average.set(0, 0, 0);
       for (const index of indices) average.add(new THREE.Vector3().fromBufferAttribute(normals, index));
       average.normalize();

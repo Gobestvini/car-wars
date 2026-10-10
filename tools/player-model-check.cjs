@@ -3,7 +3,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const base = process.env.CARWARS_BASE_URL || 'http://127.0.0.1:5176/';
-const out = 'docs/art/models/player-sedan/verification';
+const out = 'docs/art/models/player-sedan-v2/verification';
 fs.mkdirSync(out, { recursive: true });
 
 (async () => {
@@ -30,8 +30,10 @@ fs.mkdirSync(out, { recursive: true });
     const initial = await page.evaluate(() => ({ model: carLab.playerModel(), telemetry: carLab.telemetry(), wheels: carLab.wheelTransforms() }));
     assert.equal(initial.model.meshes, 5);
     assert.equal(initial.model.materials, 1);
-    assert.equal(initial.model.textures, 0);
-    assert.equal(initial.model.triangles, 2276);
+    assert.equal(initial.model.textures, 1);
+    assert.ok(initial.model.triangles <= 2500);
+    assert.ok(initial.model.lights.lensVertices.every(count => count > 0));
+    assert.equal(initial.model.lights.reverse, false);
     assert.equal(initial.telemetry.grounded, 4);
     assert.equal(initial.telemetry.damage, 0);
     await page.screenshot({ path: `${out}/game-desktop.png` });
@@ -45,6 +47,12 @@ fs.mkdirSync(out, { recursive: true });
     await page.keyboard.up('KeyD'); await page.keyboard.up('KeyW');
     await page.keyboard.press('KeyR');
     await page.waitForFunction(() => carLab.telemetry().speed < .1 && carLab.playerModel().deformedVertices === 0);
+    await page.keyboard.down('KeyS');
+    await page.waitForFunction(() => carLab.telemetry().signedSpeed < -1 && carLab.playerModel().lights.reverse);
+    report.reverse = await page.evaluate(() => ({ telemetry: carLab.telemetry(), lights: carLab.playerModel().lights }));
+    await page.keyboard.up('KeyS');
+    await page.keyboard.press('KeyR');
+    await page.waitForFunction(() => !carLab.playerModel().lights.reverse);
     report.driving = { initial, driving, steering, reset: 'passed', loadRetry: 'passed' };
     for (const viewport of [{ width: 390, height: 844 }, { width: 844, height: 390 }]) {
       await page.setViewportSize(viewport);
@@ -98,12 +106,15 @@ fs.mkdirSync(out, { recursive: true });
       sun.shadow.camera.left = sun.shadow.camera.bottom = -5;
       sun.shadow.camera.right = sun.shadow.camera.top = 5;
       scene.add(sun);
-      const { model } = preparePlayerModel((await new GLTFLoader().loadAsync('/'+PLAYER_MODEL_URL)).scene);
+      const { createPlayerLights } = await import('/src/player-lights.js');
+      const { model, body, wheels } = preparePlayerModel((await new GLTFLoader().loadAsync('/'+PLAYER_MODEL_URL)).scene);
+      const lights = createPlayerLights(body); model.add(lights.glow);
       scene.add(model);
       const floor = new THREE.Mesh(new THREE.PlaneGeometry(100,100), new THREE.MeshStandardMaterial({ color: '#dbd8cf', roughness: 1 }));
       floor.rotation.x = -Math.PI/2; floor.position.y = -.99; floor.receiveShadow = true; scene.add(floor);
       const camera = new THREE.PerspectiveCamera(38, innerWidth/innerHeight,.1,100);
-      window.preview = { renderer, scene, camera, model, draw: (rear=false) => {
+      window.preview = { renderer, scene, camera, model, body, wheels, lights, draw: (rear=false, reverse=false) => {
+        lights.update({ signedSpeed: reverse ? -2 : 0 });
         camera.position.set(6,3.4,rear ? -7 : 7); camera.lookAt(0,-.05,0); renderer.render(scene,camera);
       }};
       preview.draw();
@@ -112,6 +123,31 @@ fs.mkdirSync(out, { recursive: true });
     await page.screenshot({ path: `${out}/game-lighting-front.png` });
     await page.evaluate(() => preview.draw(true));
     await page.screenshot({ path: `${out}/game-lighting-rear.png` });
+    report.redTailPixels = await page.evaluate(() => {
+      preview.draw(true,true);
+      const canvas = document.createElement('canvas');
+      canvas.width = innerWidth; canvas.height = innerHeight;
+      const context = canvas.getContext('2d');
+      context.drawImage(preview.renderer.domElement,0,0);
+      const pixels = context.getImageData(0,0,canvas.width,canvas.height).data;
+      let red = 0;
+      for (let i=0;i<pixels.length;i+=4) {
+        if (pixels[i]>180 && pixels[i+1]<65 && pixels[i+2]<65) red++;
+      }
+      return red;
+    });
+    assert.ok(report.redTailPixels > 500, `Rear lamps must stay saturated red under game tone mapping: ${report.redTailPixels}`);
+    await page.screenshot({ path: `${out}/game-lighting-reverse.png` });
+    await page.evaluate(async () => {
+      const { CarDeformation } = await import('/src/car-deformation.js');
+      const THREE = await import('/node_modules/three/build/three.module.js');
+      const damage = new CarDeformation(preview.body.geometry, new THREE.Matrix4(), { preserveHardEdges:true });
+      damage.apply([{point:{x:.7,y:.60,z:.6},normal:{x:-1,y:0,z:-.2},impact:{depth:.22,radius:1.2}}]);
+      preview.wheels[0].rotation.y = -.475;
+      preview.wheels[1].rotation.y = -.475;
+      preview.draw(false);
+    });
+    await page.screenshot({ path: `${out}/damaged-glass-full-steering.png` });
     fs.writeFileSync(`${out}/report.json`, JSON.stringify(report,null,2)+'\n');
     console.log(JSON.stringify(report,null,2));
   } finally { await browser.close(); }

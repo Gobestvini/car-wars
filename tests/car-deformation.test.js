@@ -27,3 +27,14 @@ test('deformation is local in metres across rotated nonuniform transforms and re
   deformation.restore();
   assert.deepEqual(Array.from(positions.array), Array.from(original));
 });
+
+test('hard-edge mode does not weld normals across perpendicular body panels after damage',()=>{
+  const geometry=new THREE.BoxGeometry(1,1,1);
+  const deformation=new CarDeformation(geometry,new THREE.Matrix4(),{preserveHardEdges:true});
+  deformation.apply([{point:{x:.5,y:.5,z:.5},normal:{x:-1,y:0,z:0},impact:{depth:.1,radius:2}}]);
+  const n=geometry.attributes.normal;
+  for(let i=0;i<n.count;i++) {
+    const old=new THREE.Vector3().fromArray(deformation.originalNormals,i*3);
+    assert.ok(old.dot(new THREE.Vector3().fromBufferAttribute(n,i))>.95);
+  }
+});

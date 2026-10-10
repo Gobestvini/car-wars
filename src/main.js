@@ -28,7 +28,8 @@ import { clearSettingsDefaults, readSettingsDefaults, saveSettingsDefaults } fro
 import './style.css';
 import packageInfo from '../package.json';
 import { ART, ART_LIGHT, artQuality } from './art-direction.js';
-import { PLAYER_MODEL_URL, preparePlayerModel } from './player-model.js';
+import { PLAYER_MODEL_URL, preparePlayerModel, offsetPlayerWheel } from './player-model.js';
+import { createPlayerLights } from './player-lights.js';
 import { TireSmoke } from './tire-smoke.js';
 import { createStartScreen } from './start-screen.js';
 
@@ -204,6 +205,7 @@ const playerVisualSteeringScale = 0.5;
 let modelReady = false;
 let loading = false;
 let bodyDeformation = null;
+let playerLights = null;
 async function loadCar() {
   if (loading || modelReady) return;
   loading = true;
@@ -221,8 +223,10 @@ async function loadCar() {
     // Authored in metres about the existing simulation COM; no visual rescaling.
     model.updateMatrixWorld(true);
     body.updateWorldMatrix(true, false);
-    bodyDeformation = new CarDeformation(body.geometry, body.matrixWorld.clone());
+    bodyDeformation = new CarDeformation(body.geometry, body.matrixWorld.clone(), { preserveHardEdges: true });
     car.add(model);
+    playerLights = createPlayerLights(body);
+    car.add(playerLights.glow);
     // Detach wheels so suspension, steering and wheel spin remain independent of chassis roll.
     for (const node of wheelNodes) {
       node.removeFromParent();
@@ -240,7 +244,7 @@ async function loadCar() {
     if (damageTestType === 'wheel') sim.body.velocity.set(-16.2, 0, -7.83);
     car.position.copy(sim.body.position);
     car.quaternion.copy(sim.body.quaternion);
-    visualWheels.forEach(({ pivot }, i) => { pivot.position.copy(sim.wheels[i].position); pivot.quaternion.copy(car.quaternion); });
+    visualWheels.forEach(({ pivot }, i) => { pivot.position.copy(sim.wheels[i].position); pivot.quaternion.copy(car.quaternion); offsetPlayerWheel(pivot, sim.wheels[i], car); });
     updateCamera(1);
     await renderer.compileAsync(scene, camera);
     loadingScreen.update(86, 'Polishing lights and shadows…');
@@ -282,6 +286,7 @@ async function loadCar() {
     for (const material of failedMaterials) material.dispose();
     for (const texture of failedTextures) texture.dispose();
     bodyDeformation = null;
+    playerLights = null;
     car.clear();
     loadingScreen.fail('Could not load the race. Please try again.');
   } finally {
@@ -391,12 +396,13 @@ function reset() {
   repairPickups.reset();
   for (const runtime of policeDamageVisuals.values()) { runtime.deformation.restore(); runtime.effects.reset(); }
   bodyDeformation?.restore();
+  playerLights?.update();
   follow.set(0, 0, 0);
   cameraDistanceScale = 1;
   tracks.reset();
   car.position.copy(sim.body.position);
   car.quaternion.copy(sim.body.quaternion);
-  visualWheels.forEach(({ pivot }, i) => { pivot.position.copy(sim.wheels[i].position); pivot.quaternion.copy(sim.body.quaternion); });
+  visualWheels.forEach(({ pivot }, i) => { pivot.position.copy(sim.wheels[i].position); pivot.quaternion.copy(sim.body.quaternion); offsetPlayerWheel(pivot, sim.wheels[i], car); });
   stepper.reset();
   updateCamera(1);
 }
@@ -708,7 +714,9 @@ function frame(now) {
       if (wheel.front) pivot.rotateY(THREE.MathUtils.lerp(sim.previousSteering, sim.steering, alpha) * playerVisualSteeringScale);
     }
     spin.rotation.x = THREE.MathUtils.lerp(wheel.previousRotation, wheel.rotation, alpha);
+    offsetPlayerWheel(pivot, wheel, car, wheel.detached && Boolean(wheel.detachedBody));
   });
+  playerLights?.update({ signedSpeed: sim.signedSpeed, throttle: input.throttle });
   if (cameraMode === 'free') moveFreeCamera(dt);
   updateCamera(dt);
   cityState.updateSignals(trafficSignals, traffic.simulationTime(), camera, quality);
@@ -773,7 +781,7 @@ window.carLab = {
   telemetry: () => sim.telemetry(), get modelReady() { return modelReady; }, get tuning() { return { ...sim.tuning }; },
   playerModel: () => {
     const meshes = [];
-    car.traverse(node => { if (node.isMesh) meshes.push(node); });
+    car.traverse(node => { if (node.isMesh && !node.userData.playerLightEffect) meshes.push(node); });
     for (const { spin } of visualWheels) spin.traverse(node => { if (node.isMesh) meshes.push(node); });
     let deformedVertices = 0;
     if (bodyDeformation) {
@@ -785,7 +793,8 @@ window.carLab = {
     return { url: PLAYER_MODEL_URL, meshes: meshes.length,
       triangles: meshes.reduce((sum, mesh) => sum + (mesh.geometry.index?.count ?? mesh.geometry.attributes.position.count) / 3, 0),
       textures: new Set(meshes.map(mesh => mesh.material.map).filter(Boolean)).size,
-      materials: new Set(meshes.map(mesh => mesh.material)).size, deformedVertices };
+      materials: new Set(meshes.map(mesh => mesh.material)).size, deformedVertices,
+      lights: playerLights?.snapshot(), glowDrawCalls: playerLights ? 1 : 0 };
   },
   damageEffects: () => damageEffects.snapshot(),
   buildingVisibility: () => buildingEntries.map(entry => ({ id: entry.id, bounds: entry.bounds, opacity: entry.opacity,
