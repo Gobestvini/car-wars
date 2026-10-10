@@ -74,9 +74,9 @@
 | [TASK-0071](TASK-0071-cloudy-tire-smoke-alpha.md) | Облачный дым шин с исчезновением в альфу | review | normal | нет функциональных; код 0061 реализован | Сильная модель, высокий уровень рассуждения: instancing, alpha fade и визуальные бюджеты. |
 | [TASK-0072](TASK-0072-wanted-scaled-police-pursuit.md) | Интенсивность полицейской погони по числу звёзд | review | normal | нет функциональных; последовательно при правках main.js | Сильная модель, высокий уровень рассуждения: профили AI, wanted level и сохранение recovery/ареста. |
 | [TASK-0073](TASK-0073-limit-render-fps.md) | Ограничить частоту кадров игры до 60 FPS | review | normal | нет; последовательно при правках main.js | gpt-6-luna, high |
-| [TASK-0074](TASK-0074-tire-tracks-over-markings.md) | Видимые следы шин поверх дорожной разметки | ready | normal | нет функциональных; последовательно при общих файлах | gpt-6.1-sol, high |
-| [TASK-0075](TASK-0075-sidewalk-lamps-and-bins.md) | Модели уличных фонарей и урн на тротуарах | ready | normal | нет функциональных; после 0074 для последовательных правок city-scene | gpt-6.1-sol, high |
-| [TASK-0076](TASK-0076-match-mockup-light-materials.md) | Свет и материалы по прямому сравнению игры с мокапом | draft | normal | TASK-0074/0075 — должны быть done либо приняты пользователем с ограничениями | gpt-6.1-sol, high |
+| [TASK-0074](TASK-0074-tire-tracks-over-markings.md) | Видимые следы шин поверх дорожной разметки | done | normal | реализация и WebGL проверки завершены; независимый QA | gpt-6.1-sol, high |
+| [TASK-0075](TASK-0075-sidewalk-lamps-and-bins.md) | Модели уличных фонарей и урн на тротуарах | done | normal | 160 фонарей/80 урн, placement и lifecycle проверены; QA после0074 | gpt-6.1-sol, high |
+| [TASK-0076](TASK-0076-match-mockup-light-materials.md) | Свет и материалы по прямому сравнению игры с мокапом | done | normal | actual-game before/after, GPU и resource matrix готовы; QA после0074/0075 | gpt-6.1-sol, high |
 
 TASK-0073 реализована 2026-10-10 и переведена в review: синтетические 30/60/120/144/165 Hz cadence и jitter/reset прошли; `npm test` — 292/292 после обновления устаревшего blurFocusSize expectation; build прошёл. Браузерный debug HUD показывал 60 FPS в low/high, 30 секунд проверено с активным трафиком. Физический дисплей >60 Hz и длительное управление игроком не проверены; см. отчёт задачи.
 

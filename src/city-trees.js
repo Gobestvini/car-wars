@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { createTreePlacements } from './tree-placement.js';
 import { createSurfaceHeightSampler } from './road-surface.js';
 
-const FOLIAGE = ['#62a653', '#78b75f', '#55944b'];
+const FOLIAGE = ['#82a94a', '#9abb53', '#739342'];
 const TRUNKS = ['#9b6846', '#ad754e', '#a17450'];
 
 /** Three canopy silhouettes and one trunk batch; no mesh, material or collider per tree. */

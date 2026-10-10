@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { conformTrackSegment } from './track-surface.js';
 
 export const DEFAULT_TRACK_CAPACITY = 6000;
 export const TRACK_WIDTH = 0.29;
@@ -91,14 +92,17 @@ export class TireTracks {
     this.births = new Float32Array(capacity * 6);
     this.fades = new Float32Array(capacity * 6);
     const uv = new Float32Array(capacity * 12);
+    this.uvs = uv;
     for (let i = 0; i < capacity; i++) uv.set([0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1], i * 12);
     this.geometry = new THREE.BufferGeometry();
     this.geometry.setAttribute('position', new THREE.BufferAttribute(this.positions, 3).setUsage(THREE.DynamicDrawUsage));
     this.geometry.setAttribute('birth', new THREE.BufferAttribute(this.births, 1).setUsage(THREE.DynamicDrawUsage));
     this.geometry.setAttribute('fade', new THREE.BufferAttribute(this.fades, 1).setUsage(THREE.DynamicDrawUsage));
-    this.geometry.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+    this.geometry.setAttribute('uv', new THREE.BufferAttribute(uv, 2).setUsage(THREE.DynamicDrawUsage));
     this.material = new THREE.ShaderMaterial({
       transparent: true, depthWrite: false, side: THREE.DoubleSide,
+      // Match the coplanar curb trim's slope bias, then place the decal in front.
+      polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -2,
       uniforms: { time: { value: 0 }, intensity: { value: this.intensity }, color: { value: new THREE.Color('#45574d') } },
       vertexShader: `attribute float birth; attribute float fade; varying float vBirth; varying float vFade; varying vec2 vUv;
         void main() { vBirth = birth; vFade = fade; vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
@@ -119,7 +123,7 @@ export class TireTracks {
     this.sourceStates.set('player', this.previous);
     this.time = 0;
     this.tick = 0;
-    this.pendingRanges = { position: [], birth: [], fade: [] };
+    this.pendingRanges = { position: [], birth: [], fade: [], uv: [] };
     this.reset();
   }
 
@@ -145,8 +149,8 @@ export class TireTracks {
       point.active = false; point.slipping = false; point.direction = 0; point.strip = null; point.pendingSlipTime = 0; point.releaseTime = 0;
     }
     this.sourceStates.clear(); this.sourceStates.set('player', this.previous);
-    this.pendingRanges = { position: [], birth: [], fade: [] };
-    for (const name of ['position', 'birth', 'fade']) this.geometry.attributes[name].clearUpdateRanges();
+    this.pendingRanges = { position: [], birth: [], fade: [], uv: [] };
+    for (const name of ['position', 'birth', 'fade', 'uv']) this.geometry.attributes[name].clearUpdateRanges();
   }
 
   addRange(name, start, count) { this.pendingRanges[name].push([start, count]); }
@@ -174,9 +178,30 @@ export class TireTracks {
     this.positions.set(segment.positions, offset);
     this.births.set(segment.births, dataOffset);
     this.fades.set(segment.fades, dataOffset);
+    if (segment.uvs) {
+      this.uvs.set(segment.uvs, segmentIndex * 12);
+      this.addRange('uv', segmentIndex * 12, 12);
+    }
     this.addRange('position', offset, 18);
     this.addRange('birth', dataOffset, 6);
     this.addRange('fade', dataOffset, 6);
+  }
+
+  canWriteSegments(count) {
+    if (count > this.capacity) return false;
+    for (let i = 0; i < count; i++) if (this.count + i >= this.capacity &&
+      this.time - this.births[((this.cursor + i) % this.capacity) * 6] < TRACK_LIFETIME) return false;
+    return true;
+  }
+
+  writeSegments(parts) {
+    const indices = [];
+    for (const part of parts) {
+      indices.push(this.cursor); this.setVertexData(this.cursor, part);
+      this.cursor = (this.cursor + 1) % this.capacity;
+      this.count = Math.min(this.count + 1, this.capacity);
+    }
+    return indices;
   }
 
   appendSegment(prev, point) {
@@ -203,17 +228,16 @@ export class TireTracks {
       Number.isFinite(start.center.y) ? start.center.y : this.surfaceHeight(start.center.x, start.center.z));
     const built = buildSectionSegment(start.section, section, prev.headBirth, this.time, 1, 1, start.cap, false);
     if (!built) return false;
-    const index = this.cursor;
-    this.setVertexData(index, built);
-    prev.head = index;
+    const parts = conformTrackSegment(built, this.surfaceHeight);
+    if (!this.canWriteSegments(parts.length)) return false;
+    prev.headParts = this.writeSegments(parts);
+    prev.head = prev.headParts.at(-1);
     prev.headPoint = { center: end, section, cap: false };
     prev.headBirth = this.time;
     prev.headFade = 1;
     prev.headNormal = { x: -dz / length, z: dx / length };
     prev.headDirection = { x: dx / length, z: dz / length };
     prev.length += length;
-    this.cursor = (this.cursor + 1) % this.capacity;
-    this.count = Math.min(this.count + 1, this.capacity);
     return true;
   }
 
@@ -301,7 +325,7 @@ export class TireTracks {
 
   endStrip(strip) {
     if (strip.head < 0) return;
-    const lastBirth = this.births[strip.head * 6 + 2];
+    const lastBirth = strip.headBirth ?? this.births[strip.head * 6 + 2];
     const previousSection = strip.headPoint;
     const section = previousSection?.section;
     if (section && strip.headDirection) {
@@ -314,15 +338,16 @@ export class TireTracks {
       };
       const cap = createTrackSection(capCenter, section.normal || strip.headNormal, section.width || TRACK_WIDTH, capCenter.y);
       const built = buildSectionSegment(section, cap, lastBirth, lastBirth, 1, 0, false, false);
-      if (built && (this.count < this.capacity || this.time - this.births[this.cursor * 6] >= TRACK_LIFETIME)) {
-        const index = this.cursor;
-        this.setVertexData(index, built);
-        // Remove the cap's centerline fade endpoints entirely.
-        const offset = index * 6;
-        this.fades[offset + 2] = 0; this.fades[offset + 4] = 0; this.fades[offset + 5] = 0;
-        this.addRange('fade', offset, 6);
-        this.cursor = (this.cursor + 1) % this.capacity;
-        this.count = Math.min(this.count + 1, this.capacity);
+      const parts = built && conformTrackSegment(built, this.surfaceHeight);
+      if (parts && this.canWriteSegments(parts.length)) {
+        this.writeSegments(parts);
+      } else if (parts && (parts.length > 1 || strip.headParts?.length > 1)) {
+        // A clipped terminal segment has no single end cross-section to extend.
+        // Fade its existing UV interval without overwriting any live ring slot.
+        for (const index of strip.headParts || [strip.head]) {
+          for (let i = 0; i < 6; i++) this.fades[index * 6 + i] *= 1 - this.uvs[index * 12 + i * 2 + 1];
+          this.addRange('fade', index * 6, 6);
+        }
       } else if (built) {
         // No safe slot for service geometry: extend the existing terminal quad.
         const index = strip.head;

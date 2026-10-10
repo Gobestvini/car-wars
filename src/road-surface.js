@@ -3,6 +3,7 @@ const appendCut = (cuts, value, bounds) => cuts.push(Math.max(-bounds, Math.min(
 export const ROAD_SURFACE_HEIGHTS = Object.freeze({
   ground: 0,
   road: 0.005,
+  marking: 0.006,
   sidewalk: 0.15,
   sidewalkVisual: 0.155,
   sidewalkCapWidth: 0.12,

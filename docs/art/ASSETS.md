@@ -16,9 +16,13 @@ TASK-0051, 2026-10-07. Статус: интегрировано; WebGL-пров�
 | miniature-blur / src/miniature-blur.js | Верхняя и нижняя полосы размытия, резкий центр по всей ширине | RGBA16F scene/depth target с MSAA2 low / MSAA4 high там, где GPU поддерживает; два single-sample blur targets и три fullscreen passes, 3 CSS px low / 5 CSS px high | Renderer lifecycle, resize/quality reuse, pagehide dispose; MSAA downgrade сохраняет blur, HDR fallback использует direct render |
 | damage-fx / src/car-damage-effects.js | healthy, grey/dark smoke, fire, explosion | Существующие ограниченные пулы, camera-facing alpha, terminal burst однократный, reset | CarDamageEffects |
 | tracks / src/tire-tracks.js | Контактный hard skid, старение | Существующий кольцевой буфер, без новых текстур | TireTracks |
+| street-lamp / src/city-street-props.js | До 160 дневных фонарей | Собственная процедурная 3D-геометрия: 5 shared batches; высота 3.82 м, radius .96 м; pivot на тротуаре, +Z консоль к дороге; без текстур/PointLight/коллизий | City dispose |
+| street-bin / src/city-street-props.js | До 80 открытых урн | Собственная процедурная 3D-геометрия: корпус/обод/внутренняя поверхность, 3 shared batches; высота .84 м, radius .4 м; без текстур/коллизий | City dispose |
 | ui / index.html, src/style.css | speed, settings, joystick, loading/error/retry | System font, локальный SVG gear, цели ≥44 CSS px, safe areas | DOM lifecycle |
 
 ## Происхождение
+
+TASK-0075, 2026-10-10: фонари/урны созданы из Cylinder/Box/TorusGeometry в Three.js 0.180.0, исходник и воспроизводимый генератор — `src/city-street-props.js`, размещение — `src/street-prop-placement.js`. Это собственные формы проекта, внешняя лицензия не добавляется. Вместе 8 geometry batches, 4 shared MeshStandardMaterial, 0 текстур, 22400 геометрических треугольников при 160/80 экземплярах; реальные envelopes, нормали/матрицы/опора и однократный dispose проверены. [Манифест и кадры](verification/street-props/README.md). Текущий свет/шероховатость после TASK-0076: [сравнение](verification/mockup-light-materials/README.md). Физический телефон не проверен.
 
 Игрок и его atlas: Kenney Car Kit 3.1, CC0, свидетельство [LICENSE](../../public/models/LICENSE.txt), исходный автор Kenney. Ассет остаётся производным от существующей модели; изменения материала/цвета фиксируются в коммите TASK-0051. Лицензию не удалять.
 

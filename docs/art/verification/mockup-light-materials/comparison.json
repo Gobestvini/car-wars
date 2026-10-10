@@ -1,0 +1,207 @@
+{
+  "sameTransforms": true,
+  "crops": {
+    "roof": [
+      190,
+      560,
+      310,
+      630
+    ],
+    "facade": [
+      275,
+      690,
+      350,
+      735
+    ],
+    "road-and-shadow": [
+      70,
+      525,
+      170,
+      645
+    ],
+    "sidewalk-tree-car": [
+      170,
+      250,
+      350,
+      400
+    ]
+  },
+  "renderCost": [
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 0,
+      "mode": "follow",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 109744,
+      "trianglesAfter": 109744
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 0,
+      "mode": "free",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 109744,
+      "trianglesAfter": 109744
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 1,
+      "mode": "follow",
+      "callsBefore": 79,
+      "callsAfter": 78,
+      "trianglesBefore": 154611,
+      "trianglesAfter": 154595
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 1,
+      "mode": "free",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 109744,
+      "trianglesAfter": 109744
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "follow",
+      "callsBefore": 46,
+      "callsAfter": 46,
+      "trianglesBefore": 112048,
+      "trianglesAfter": 112048
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "free",
+      "callsBefore": 46,
+      "callsAfter": 46,
+      "trianglesBefore": 112048,
+      "trianglesAfter": 112048
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 1,
+      "mode": "follow",
+      "callsBefore": 81,
+      "callsAfter": 80,
+      "trianglesBefore": 159219,
+      "trianglesAfter": 159203
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 1,
+      "mode": "free",
+      "callsBefore": 46,
+      "callsAfter": 46,
+      "trianglesBefore": 112048,
+      "trianglesAfter": 112048
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 0,
+      "mode": "follow",
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109444,
+      "trianglesAfter": 109444
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 0,
+      "mode": "free",
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109444,
+      "trianglesAfter": 109444
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 1,
+      "mode": "follow",
+      "callsBefore": 77,
+      "callsAfter": 77,
+      "trianglesBefore": 154295,
+      "trianglesAfter": 154295
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 1,
+      "mode": "free",
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109444,
+      "trianglesAfter": 109444
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "follow",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111748,
+      "trianglesAfter": 111748
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "free",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111748,
+      "trianglesAfter": 111748
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 1,
+      "mode": "follow",
+      "callsBefore": 79,
+      "callsAfter": 79,
+      "trianglesBefore": 158903,
+      "trianglesAfter": 158903
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 1,
+      "mode": "free",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111748,
+      "trianglesAfter": 111748
+    }
+  ]
+}

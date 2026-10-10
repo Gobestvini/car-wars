@@ -1,0 +1,472 @@
+[
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.750035545848636,
+        "y": 0.8718772833133753,
+        "z": -47.83904654663577
+      },
+      "speed": 5.881386247092631,
+      "signedSpeed": 1.6008967013818223,
+      "heading": -0.0000039900911759135394,
+      "roll": 0.00005014780423442554,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "1",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.41036467732879783,
+      0.729537204140085,
+      -0.5471529031050639
+    ],
+    "shadow": {
+      "left": -48.8510563047563,
+      "right": 95.1489436952437,
+      "bottom": -53.846723914308704,
+      "top": 78.15327608569129,
+      "near": 0.1,
+      "far": 129,
+      "width": 144,
+      "height": 132,
+      "margin": 24.500000000000007,
+      "resolution": 1024,
+      "centreX": 17.4375,
+      "centreY": -28.359375,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.749982856486536,
+        "y": 0.8553229899207243,
+        "z": -47.095844583964194
+      },
+      "speed": 15.491085972334616,
+      "signedSpeed": 4.2985557133564765,
+      "heading": -6.295226503073407e-7,
+      "roll": -0.000006640828557142433,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "1",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.41036467732879783,
+      0.729537204140085,
+      -0.5471529031050639
+    ],
+    "shadow": {
+      "left": -48.86159117194114,
+      "right": 95.13840882805886,
+      "bottom": -53.880682970036695,
+      "top": 78.1193170299633,
+      "near": 0.1,
+      "far": 129,
+      "width": 144,
+      "height": 132,
+      "margin": 24.500000000000007,
+      "resolution": 1024,
+      "centreX": 17.859375,
+      "centreY": -27.97265625,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.7499741607056,
+        "y": 0.8666444027303886,
+        "z": -45.018522237404454
+      },
+      "speed": 29.022810202010795,
+      "signedSpeed": 8.048447748819736,
+      "heading": 0.000004525863906852612,
+      "roll": -0.0000015271845456044075,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "1",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.41036467732879783,
+      0.7295372041400852,
+      -0.547152903105064
+    ],
+    "shadow": {
+      "left": -48.54230664388504,
+      "right": 95.45769335611496,
+      "bottom": -54.666588474771544,
+      "top": 79.33341152522846,
+      "near": 0.1,
+      "far": 130,
+      "width": 144,
+      "height": 134,
+      "margin": 24.500000000000007,
+      "resolution": 1024,
+      "centreX": 19.40625,
+      "centreY": -26.564453125,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.74996632843731,
+        "y": 0.8664353900184829,
+        "z": -42.65419930322285
+      },
+      "speed": 38.56195830196657,
+      "signedSpeed": 10.694265091528843,
+      "heading": 0.000004561236108103078,
+      "roll": 5.452521354970198e-7,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "2",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.41036467732879783,
+      0.729537204140085,
+      -0.5471529031050641
+    ],
+    "shadow": {
+      "left": -49.81873925263689,
+      "right": 98.18126074736311,
+      "bottom": -55.3050780585148,
+      "top": 80.6949219414852,
+      "near": 0.1,
+      "far": 132,
+      "width": 148,
+      "height": 136,
+      "margin": 24.500000000000007,
+      "resolution": 1024,
+      "centreX": 21.53515625,
+      "centreY": -24.8359375,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.749947782349864,
+        "y": 0.8663079832677185,
+        "z": -38.391462273429696
+      },
+      "speed": 50.89287201154283,
+      "signedSpeed": 14.115764600868152,
+      "heading": 0.0000041795351403575465,
+      "roll": -2.0137538929157936e-8,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "2",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.4103646773287979,
+      0.729537204140085,
+      -0.5471529031050639
+    ],
+    "shadow": {
+      "left": -51.99595922353033,
+      "right": 104.00404077646968,
+      "bottom": -57.29581856711586,
+      "top": 84.70418143288414,
+      "near": 0.1,
+      "far": 138,
+      "width": 156,
+      "height": 142,
+      "margin": 24.500000000000007,
+      "resolution": 1024,
+      "centreX": 25.8984375,
+      "centreY": -21.35546875,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.749931469777277,
+        "y": 0.8664412653457243,
+        "z": -34.54218843658973
+      },
+      "speed": 59.63566504920558,
+      "signedSpeed": 16.540369390344857,
+      "heading": 0.0000041902448266470916,
+      "roll": -4.749374858345192e-8,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "2",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.41036467732879794,
+      0.729537204140085,
+      -0.5471529031050638
+    ],
+    "shadow": {
+      "left": -53.291414640378925,
+      "right": 108.70858535962108,
+      "bottom": -59.38603373562615,
+      "top": 88.61396626437386,
+      "near": 0.1,
+      "far": 144,
+      "width": 162,
+      "height": 148,
+      "margin": 24.500000000000007,
+      "resolution": 1024,
+      "centreX": 29.900390625,
+      "centreY": -18.2109375,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.749912796700684,
+        "y": 0.8664094252656365,
+        "z": -30.09748467947484
+      },
+      "speed": 67.90645838325486,
+      "signedSpeed": 18.83501917531548,
+      "heading": 0.0000042218535072958764,
+      "roll": 1.8455224283029793e-9,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "3",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.4103646773287979,
+      0.729537204140085,
+      -0.5471529031050639
+    ],
+    "shadow": {
+      "left": -55.481891058307916,
+      "right": 114.51810894169208,
+      "bottom": -62.535335726480724,
+      "top": 93.46466427351928,
+      "near": 0.1,
+      "far": 150,
+      "width": 170,
+      "height": 156,
+      "margin": 24.500000000000007,
+      "resolution": 1024,
+      "centreX": 34.365234375,
+      "centreY": -14.77734375,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.749891750575188,
+        "y": 0.8663350963099736,
+        "z": -25.10638416147459
+      },
+      "speed": 75.54771831303559,
+      "signedSpeed": 20.95762274662515,
+      "heading": 0.000004224787972383557,
+      "roll": 6.771161941305441e-9,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "3",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.410364677328798,
+      0.729537204140085,
+      -0.5471529031050639
+    ],
+    "shadow": {
+      "left": -57.719827982859925,
+      "right": 120.28017201714007,
+      "bottom": -64.41844516649094,
+      "top": 97.58155483350906,
+      "near": 0.1,
+      "far": 156,
+      "width": 178,
+      "height": 162,
+      "margin": 24.500000000000007,
+      "resolution": 1024,
+      "centreX": 39.111328125,
+      "centreY": -10.7578125,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.749868451954313,
+        "y": 0.8665710823781125,
+        "z": -19.59208767695671
+      },
+      "speed": 82.9821336063001,
+      "signedSpeed": 23.020233992625112,
+      "heading": 0.000004222126237803457,
+      "roll": -6.986615956894194e-10,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "3",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.41036467732879794,
+      0.729537204140085,
+      -0.5471529031050639
+    ],
+    "shadow": {
+      "left": -58.926264841508925,
+      "right": 125.07373515849108,
+      "bottom": -66.59546902825569,
+      "top": 101.40453097174431,
+      "near": 0.1,
+      "far": 163,
+      "width": 184,
+      "height": 168,
+      "margin": 24.500000000000007,
+      "resolution": 1024,
+      "centreX": 44.203125,
+      "centreY": -6.7265625,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.749851716573637,
+        "y": 0.8666037171560788,
+        "z": -15.632255500125222
+      },
+      "speed": 87.82556809671964,
+      "signedSpeed": 24.363596805348386,
+      "heading": 0.000004223083668807674,
+      "roll": -2.7116263637192013e-9,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "3",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.41036467732879783,
+      0.7295372041400852,
+      -0.5471529031050639
+    ],
+    "shadow": {
+      "left": -60.81300192990105,
+      "right": 129.18699807009895,
+      "bottom": -68.03672754408248,
+      "top": 103.96327245591752,
+      "near": 0.1,
+      "far": 166,
+      "width": 190,
+      "height": 172,
+      "margin": 24.500000000000007,
+      "resolution": 1024,
+      "centreX": 47.685546875,
+      "centreY": -3.86328125,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  }
+]

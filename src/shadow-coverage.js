@@ -44,19 +44,31 @@ export function updateShadowCoverage(light, camera, { resolution = light.shadow.
     groundCount = 2;
   }
 
-  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, maxDepth = 0;
+  lightDirection.setFromMatrixColumn(shadowCamera.matrixWorld, 2).normalize();
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, minDepth = Infinity, maxDepth = 0;
   for (let i = 0; i < groundCount; i++) {
     const point = groundPoints[i];
     const x = point.dot(right), y = point.dot(up);
     localPoint.copy(point).sub(origin);
     minX = Math.min(minX, x); maxX = Math.max(maxX, x);
     minY = Math.min(minY, y); maxY = Math.max(maxY, y);
-    maxDepth = Math.max(maxDepth, -localPoint.z);
+    // Depth is measured along the light view axis, not the world's Z axis.
+    const depth = -localPoint.dot(lightDirection);
+    minDepth = Math.min(minDepth, depth - casterHeight * Math.max(0, lightDirection.y));
+    maxDepth = Math.max(maxDepth, depth);
+  }
+
+  // At a wide/free view, a tall caster can lie behind the original light origin.
+  // Move only along the same ray: illumination and the stabilized XY fit stay fixed.
+  if (minDepth < 1) {
+    const retreat = 1 - minDepth;
+    light.position.addScaledVector(lightDirection, retreat);
+    light.updateMatrixWorld(true);
+    maxDepth += retreat;
   }
 
   // A caster above the ground can project into the visible footprint from outside
   // it. Cover the maximum city building height along both light-plane axes.
-  lightDirection.setFromMatrixColumn(shadowCamera.matrixWorld, 2).normalize();
   const slope = Math.hypot(lightDirection.x, lightDirection.z) / Math.max(0.2, Math.abs(lightDirection.y));
   const margin = casterHeight * slope + casterMargin;
   minX -= margin; maxX += margin; minY -= margin; maxY += margin;

@@ -1,0 +1,284 @@
+[
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.74999402140774,
+        "y": 0.8527268218586317,
+        "z": -47.41939616683199
+      },
+      "speed": 12.139020597309235,
+      "signedSpeed": 3.3674111032118255,
+      "heading": -0.000002559170113148599,
+      "roll": 0.000002599119314165512,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "1",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.41036467732879806,
+      0.7295372041400853,
+      -0.5471529031050638
+    ],
+    "shadow": {
+      "left": -45.18579585512562,
+      "right": 84.81420414487438,
+      "bottom": -33.63387071627578,
+      "top": 50.36612928372422,
+      "near": 0.1,
+      "far": 100,
+      "width": 130,
+      "height": 84,
+      "margin": 24.499999999999996,
+      "resolution": 1024,
+      "centreX": 14.345703125,
+      "centreY": -31.91015625,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.7499741607056,
+        "y": 0.8666444027303886,
+        "z": -45.018522237404454
+      },
+      "speed": 29.022810202010795,
+      "signedSpeed": 8.048447748819736,
+      "heading": 0.000004525863906852612,
+      "roll": -0.0000015271845456044075,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "1",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.4103646773287979,
+      0.7295372041400852,
+      -0.5471529031050639
+    ],
+    "shadow": {
+      "left": -44.95246289388504,
+      "right": 85.04753710611496,
+      "bottom": -33.535729099771544,
+      "top": 50.464270900228456,
+      "near": 0.1,
+      "far": 100,
+      "width": 130,
+      "height": 84,
+      "margin": 24.500000000000007,
+      "resolution": 1024,
+      "centreX": 15.99609375,
+      "centreY": -30.43359375,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.749953240645958,
+        "y": 0.8662018480890303,
+        "z": -39.64962564265661
+      },
+      "speed": 47.62807735883811,
+      "signedSpeed": 13.210206214272944,
+      "heading": 0.000004223016534451115,
+      "roll": 8.495126105955639e-8,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "2",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.41036467732879783,
+      0.7295372041400852,
+      -0.5471529031050639
+    ],
+    "shadow": {
+      "left": -47.25536561050273,
+      "right": 90.74463438949726,
+      "bottom": -34.85108157008476,
+      "top": 53.14891842991524,
+      "near": 0.1,
+      "far": 102,
+      "width": 138,
+      "height": 88,
+      "margin": 24.500000000000004,
+      "resolution": 1024,
+      "centreX": 20.888671875,
+      "centreY": -26.640625,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.74991992795869,
+        "y": 0.8664326930390275,
+        "z": -31.793606211707292
+      },
+      "speed": 65.05197661364451,
+      "signedSpeed": 18.042546829511835,
+      "heading": 0.000004214141373715431,
+      "roll": -1.1271799237544734e-8,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "3",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.41036467732879783,
+      0.7295372041400852,
+      -0.5471529031050639
+    ],
+    "shadow": {
+      "left": -50.415454003887746,
+      "right": 99.58454599611225,
+      "bottom": -35.61568824923761,
+      "top": 56.38431175076239,
+      "near": 0.1,
+      "far": 106,
+      "width": 150,
+      "height": 92,
+      "margin": 24.500000000000004,
+      "resolution": 1024,
+      "centreX": 28.41796875,
+      "centreY": -20.84375,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.74988499224712,
+        "y": 0.866401153833351,
+        "z": -23.506378552574514
+      },
+      "speed": 77.7995615448085,
+      "signedSpeed": 21.582600080835196,
+      "heading": 0.000004223685549962349,
+      "roll": 4.2793093246550404e-9,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "3",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.41036467732879783,
+      0.7295372041400852,
+      -0.5471529031050639
+    ],
+    "shadow": {
+      "left": -52.6942765244537,
+      "right": 107.3057234755463,
+      "bottom": -36.49765428133796,
+      "top": 59.50234571866204,
+      "near": 0.1,
+      "far": 109,
+      "width": 160,
+      "height": 96,
+      "margin": 24.500000000000004,
+      "resolution": 1024,
+      "centreX": 36.09375,
+      "centreY": -14.90625,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  },
+  {
+    "telemetry": {
+      "position": {
+        "x": -28.74983494505653,
+        "y": 0.8665922968604144,
+        "z": -11.66466069616587
+      },
+      "speed": 92.34450757125937,
+      "signedSpeed": 25.617097392041554,
+      "heading": 0.000004225528802174861,
+      "roll": -2.4888435599365457e-9,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "3",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "sun": [
+      -0.410364677328798,
+      0.7295372041400852,
+      -0.5471529031050639
+    ],
+    "shadow": {
+      "left": -56.017347250818375,
+      "right": 115.98265274918163,
+      "bottom": -38.25639246840129,
+      "top": 63.74360753159871,
+      "near": 0.1,
+      "far": 113,
+      "width": 172,
+      "height": 102,
+      "margin": 24.500000000000007,
+      "resolution": 1024,
+      "centreX": 45.85546875,
+      "centreY": -6.7734375,
+      "frustumCorners": 4,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "enabled": true
+    },
+    "camera": "follow"
+  }
+]

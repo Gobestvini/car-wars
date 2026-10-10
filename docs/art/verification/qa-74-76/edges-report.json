@@ -1,0 +1,142 @@
+[
+  {
+    "width": 1440,
+    "height": 900,
+    "q": "low",
+    "p": {
+      "type": "bin",
+      "x": -99.135,
+      "z": -184.05448,
+      "radius": 0.4,
+      "yaw": 0,
+      "token": 1154985673,
+      "id": 122
+    },
+    "calls": 34,
+    "triangles": 104648,
+    "resources": {
+      "geometries": 40,
+      "textures": 2,
+      "programs": 18
+    },
+    "props": {
+      "lamp": 160,
+      "bin": 80
+    },
+    "camera": [
+      -90.135,
+      14,
+      -196.05448
+    ],
+    "target": [
+      -99.135,
+      0,
+      -184.05448
+    ]
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "q": "high",
+    "p": {
+      "type": "bin",
+      "x": -99.135,
+      "z": -184.05448,
+      "radius": 0.4,
+      "yaw": 0,
+      "token": 1154985673,
+      "id": 122
+    },
+    "calls": 35,
+    "triangles": 106952,
+    "resources": {
+      "geometries": 40,
+      "textures": 2,
+      "programs": 18
+    },
+    "props": {
+      "lamp": 160,
+      "bin": 80
+    },
+    "camera": [
+      -90.135,
+      14,
+      -196.05448
+    ],
+    "target": [
+      -99.135,
+      0,
+      -184.05448
+    ]
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "q": "low",
+    "p": {
+      "type": "bin",
+      "x": -99.135,
+      "z": -184.05448,
+      "radius": 0.4,
+      "yaw": 0,
+      "token": 1154985673,
+      "id": 122
+    },
+    "calls": 33,
+    "triangles": 104636,
+    "resources": {
+      "geometries": 40,
+      "textures": 2,
+      "programs": 18
+    },
+    "props": {
+      "lamp": 160,
+      "bin": 80
+    },
+    "camera": [
+      -90.135,
+      14,
+      -196.05448
+    ],
+    "target": [
+      -99.135,
+      0,
+      -184.05448
+    ]
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "q": "high",
+    "p": {
+      "type": "bin",
+      "x": -99.135,
+      "z": -184.05448,
+      "radius": 0.4,
+      "yaw": 0,
+      "token": 1154985673,
+      "id": 122
+    },
+    "calls": 34,
+    "triangles": 106940,
+    "resources": {
+      "geometries": 40,
+      "textures": 2,
+      "programs": 18
+    },
+    "props": {
+      "lamp": 160,
+      "bin": 80
+    },
+    "camera": [
+      -90.135,
+      14,
+      -196.05448
+    ],
+    "target": [
+      -99.135,
+      0,
+      -184.05448
+    ]
+  }
+]

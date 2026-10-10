@@ -152,7 +152,8 @@ let cameraDistanceScale = 1;
 let shadowBounds = null;
 scene.add(new THREE.HemisphereLight(ART_LIGHT.sky, ART_LIGHT.ground, ART_LIGHT.ambient));
 const sun = new THREE.DirectionalLight(ART_LIGHT.sun, ART_LIGHT.intensity);
-sun.position.set(-14, 24, 10);
+const sunOffset = new THREE.Vector3().fromArray(ART_LIGHT.offset);
+sun.position.copy(sunOffset);
 sun.castShadow = true;
 sun.shadow.mapSize.set(1024, 1024);
 sun.shadow.camera.left = sun.shadow.camera.bottom = -48;
@@ -572,7 +573,7 @@ function updateCamera(dt) {
   } else orbitControls?.update();
   camera.updateMatrixWorld();
   const shadowTarget = cameraMode === 'free' ? orbitControls.target : follow;
-  sun.position.set(shadowTarget.x - 14, 24, shadowTarget.z + 10); sun.target.position.copy(shadowTarget);
+  sun.position.copy(shadowTarget).add(sunOffset); sun.target.position.copy(shadowTarget);
   shadowBounds = updateShadowCoverage(sun, camera, { resolution: sun.shadow.mapSize.x, casterHeight: 24 });
 }
 function segmentHitsRect(ax, az, bx, bz, minX, minZ, maxX, maxZ) {

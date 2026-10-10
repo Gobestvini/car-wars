@@ -1,22 +1,17 @@
 import * as THREE from 'three';
+import { VEHICLE_ROUGHNESS_FRAGMENT } from './vehicle-surface.js';
 
 // Tile IDs match the deterministic Blender atlas (4 x 4 cells, from bottom left).
 const HEAD = 8, TAIL = 10;
 export function createPlayerLights(body) {
   const material = body.material;
   const reverse = { value: 0 };
-  material.roughness = .72;
+  material.roughness = .58;
   material.metalness = 0;
   material.onBeforeCompile = shader => {
     shader.uniforms.playerReverse = reverse;
     shader.fragmentShader = 'uniform float playerReverse;\n' + shader.fragmentShader;
-    shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', `
-      #include <roughnessmap_fragment>
-      #ifdef USE_MAP
-        float surfaceTile = floor(vMapUv.x * 4.0) + 4.0 * (3.0 - floor(vMapUv.y * 4.0));
-        if (surfaceTile >= 1.0 && surfaceTile <= 3.0) roughnessFactor = 1.0;
-      #endif
-    `);
+    shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', VEHICLE_ROUGHNESS_FRAGMENT);
     shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', `
       #include <emissivemap_fragment>
       #ifdef USE_MAP
@@ -45,7 +40,7 @@ export function createPlayerLights(body) {
       #endif
     `);
   };
-  material.customProgramCacheKey = () => 'car-stars-concept-surface-v4';
+  material.customProgramCacheKey = () => 'car-stars-concept-surface-v5';
   material.needsUpdate = true;
 
   // Four camera-facing soft halos in one draw call. Centres track deformed

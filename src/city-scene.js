@@ -10,6 +10,7 @@ import { createSignalBeam } from './signal-glow.js';
 import { ART, buildingArt } from './art-direction.js';
 import { createCityArt } from './city-art.js';
 import { createCityTrees } from './city-trees.js';
+import { createCityStreetProps } from './city-street-props.js';
 
 export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const group = new THREE.Group();
@@ -21,7 +22,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const pavementMaterial = new THREE.MeshStandardMaterial({ color: ART.ground, roughness: 1,
     polygonOffset: true, polygonOffsetFactor: 0, polygonOffsetUnits: 2 });
   const sidewalkMaterial = new THREE.MeshStandardMaterial({ color: ART.sidewalk, roughness: 1 });
-  const curbMaterial = new THREE.MeshStandardMaterial({ color: '#ead6ad', roughness: 1 });
+  const curbMaterial = new THREE.MeshStandardMaterial({ color: '#fff0d5', roughness: 1 });
   const roadMaterial = new THREE.MeshStandardMaterial({ color: ART.asphalt, roughness: 0.96, vertexColors: true });
   const plane = (width, depth, material, x = 0, z = 0, y = 0.015) => {
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(width, depth), material);
@@ -50,8 +51,10 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
     { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan });
   group.add(...createSidewalkVisuals(THREE, sidewalkLayout, roadRects, sidewalkMaterial, curbMaterial, ART.asphalt));
   const marks = createRoadMarkings(plan.roads, plan.bounds, plan.roadWidth);
-  const dashGeometry = new THREE.BoxGeometry(0.16, 0.025, 2.2);
-  const dashMaterial = new THREE.MeshStandardMaterial({ color: ART.marking, roughness: 1 });
+  // Paint is a surface layer, below sampled tire decals, rather than a raised block.
+  const dashGeometry = new THREE.PlaneGeometry(0.16, 2.2).rotateX(-Math.PI / 2);
+  const dashMaterial = new THREE.MeshStandardMaterial({ color: ART.marking, roughness: 1,
+    polygonOffset: true, polygonOffsetFactor: 0, polygonOffsetUnits: -1 });
   const dashes = new THREE.InstancedMesh(dashGeometry, dashMaterial, marks.length);
   dashes.receiveShadow = true;
   const matrix = new THREE.Matrix4();
@@ -61,7 +64,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const unitScale = new THREE.Vector3(1, 1, 1);
   for (let i = 0; i < marks.length; i++) {
     const mark = marks[i];
-    position.set(mark.x, 0.025, mark.z);
+    position.set(mark.x, ROAD_SURFACE_HEIGHTS.marking, mark.z);
     rotation.setFromAxisAngle(up, mark.yaw);
     matrix.compose(position, rotation, unitScale);
     dashes.setMatrixAt(i, matrix);
@@ -90,8 +93,8 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
     new THREE.MeshStandardMaterial({ color: '#282c2d', roughness: 0.7 }), approaches.length);
   const bulbGeometry = new THREE.SphereGeometry(0.17, 8, 6);
   const bulbs = new THREE.InstancedMesh(bulbGeometry, new THREE.MeshBasicMaterial({ color: '#ffffff' }), approaches.length * 3);
-  const stopLines = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 0.035, 1),
-    new THREE.MeshStandardMaterial({ color: ART.marking, roughness: 1 }), approaches.length);
+  const stopLines = new THREE.InstancedMesh(new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2),
+    dashMaterial, approaches.length);
   stopLines.receiveShadow = true;
   const visualMatrix = new THREE.Matrix4(), visualPosition = new THREE.Vector3(), visualRotation = new THREE.Quaternion();
   const visualScale = new THREE.Vector3(1, 1, 1);
@@ -111,7 +114,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
       bulbs.setMatrixAt(index * 3 + lamp, visualMatrix);
       bulbs.setColorAt(index * 3 + lamp, lightColors.off);
     }
-    visualPosition.set(approach.stopX, 0.0275, approach.stopZ);
+    visualPosition.set(approach.stopX, ROAD_SURFACE_HEIGHTS.marking, approach.stopZ);
     visualMatrix.compose(visualPosition, visualRotation.setFromAxisAngle(up, approach.yaw),
       visualScale.set(approach.stopLineLength, 1, approach.stopLineThickness));
     stopLines.setMatrixAt(index, visualMatrix);
@@ -187,9 +190,11 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
 
   const trees = createCityTrees(group, plan, { damageObstacles,
     signals: approaches.map(({ signalX: x, signalZ: z }) => ({ x, z })) });
+  const streetProps = createCityStreetProps(group, plan, { damageObstacles, trees: trees.placements,
+    signals: approaches.map(({ signalX: x, signalZ: z }) => ({ x, z })) });
 
   return {
-    group, entries, buildings, marks, dashes, stopLines, signalBeam, occlusion, trees, staticBodies, signalApproaches: approaches,
+    group, entries, buildings, marks, dashes, stopLines, signalBeam, occlusion, trees, streetProps, staticBodies, signalApproaches: approaches,
     updateSignals(controller, time, camera = null, quality = 'high') {
       art.setQuality(quality);
       let changed = false;

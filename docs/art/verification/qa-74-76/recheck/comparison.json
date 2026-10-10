@@ -1,0 +1,168 @@
+{
+  "sameTransforms": true,
+  "scenes": 16,
+  "cost": [
+    {
+      "width": 1440,
+      "q": "low",
+      "b": 0,
+      "mode": "follow",
+      "callsBefore": 45,
+      "callsNow": 45,
+      "trianglesBefore": 109744,
+      "trianglesNow": 109744
+    },
+    {
+      "width": 1440,
+      "q": "low",
+      "b": 0,
+      "mode": "free",
+      "callsBefore": 45,
+      "callsNow": 45,
+      "trianglesBefore": 109744,
+      "trianglesNow": 109744
+    },
+    {
+      "width": 1440,
+      "q": "low",
+      "b": 1,
+      "mode": "follow",
+      "callsBefore": 79,
+      "callsNow": 78,
+      "trianglesBefore": 154611,
+      "trianglesNow": 154595
+    },
+    {
+      "width": 1440,
+      "q": "low",
+      "b": 1,
+      "mode": "free",
+      "callsBefore": 45,
+      "callsNow": 45,
+      "trianglesBefore": 109744,
+      "trianglesNow": 109744
+    },
+    {
+      "width": 1440,
+      "q": "high",
+      "b": 0,
+      "mode": "follow",
+      "callsBefore": 46,
+      "callsNow": 46,
+      "trianglesBefore": 112048,
+      "trianglesNow": 112048
+    },
+    {
+      "width": 1440,
+      "q": "high",
+      "b": 0,
+      "mode": "free",
+      "callsBefore": 46,
+      "callsNow": 46,
+      "trianglesBefore": 112048,
+      "trianglesNow": 112048
+    },
+    {
+      "width": 1440,
+      "q": "high",
+      "b": 1,
+      "mode": "follow",
+      "callsBefore": 81,
+      "callsNow": 80,
+      "trianglesBefore": 159219,
+      "trianglesNow": 159203
+    },
+    {
+      "width": 1440,
+      "q": "high",
+      "b": 1,
+      "mode": "free",
+      "callsBefore": 46,
+      "callsNow": 46,
+      "trianglesBefore": 112048,
+      "trianglesNow": 112048
+    },
+    {
+      "width": 390,
+      "q": "low",
+      "b": 0,
+      "mode": "follow",
+      "callsBefore": 44,
+      "callsNow": 44,
+      "trianglesBefore": 109444,
+      "trianglesNow": 109444
+    },
+    {
+      "width": 390,
+      "q": "low",
+      "b": 0,
+      "mode": "free",
+      "callsBefore": 44,
+      "callsNow": 44,
+      "trianglesBefore": 109444,
+      "trianglesNow": 109444
+    },
+    {
+      "width": 390,
+      "q": "low",
+      "b": 1,
+      "mode": "follow",
+      "callsBefore": 77,
+      "callsNow": 77,
+      "trianglesBefore": 154295,
+      "trianglesNow": 154295
+    },
+    {
+      "width": 390,
+      "q": "low",
+      "b": 1,
+      "mode": "free",
+      "callsBefore": 44,
+      "callsNow": 44,
+      "trianglesBefore": 109444,
+      "trianglesNow": 109444
+    },
+    {
+      "width": 390,
+      "q": "high",
+      "b": 0,
+      "mode": "follow",
+      "callsBefore": 45,
+      "callsNow": 45,
+      "trianglesBefore": 111748,
+      "trianglesNow": 111748
+    },
+    {
+      "width": 390,
+      "q": "high",
+      "b": 0,
+      "mode": "free",
+      "callsBefore": 45,
+      "callsNow": 45,
+      "trianglesBefore": 111748,
+      "trianglesNow": 111748
+    },
+    {
+      "width": 390,
+      "q": "high",
+      "b": 1,
+      "mode": "follow",
+      "callsBefore": 79,
+      "callsNow": 79,
+      "trianglesBefore": 158903,
+      "trianglesNow": 158903
+    },
+    {
+      "width": 390,
+      "q": "high",
+      "b": 1,
+      "mode": "free",
+      "callsBefore": 45,
+      "callsNow": 45,
+      "trianglesBefore": 111748,
+      "trianglesNow": 111748
+    }
+  ],
+  "gpuPass": true,
+  "maxDelta": 0
+}

@@ -17,9 +17,10 @@ export function createCityArt(group, entries, seed) {
   for (let i = 0; i < pos.count; i++) if (pos.getY(i) > 0) pos.setZ(i, pos.getZ(i) * .12);
   ridge.computeVertexNormals();
   const material = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .95 });
+  const roofMaterial = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .62, metalness: .04 });
   const boundaryMaterial = material.clone(); boundaryMaterial.side = THREE.DoubleSide;
   const batches = [plinth, box, hip, box, ridge, box].map((geometry, index) => {
-    const mesh = new THREE.InstancedMesh(geometry, index === 0 ? boundaryMaterial : material, entries.length);
+    const mesh = new THREE.InstancedMesh(geometry, index === 0 ? boundaryMaterial : index >= 2 && index <= 4 ? roofMaterial : material, entries.length);
     mesh.name = ['Building plinths', 'Building cornices', 'Residential roofs', 'Commercial roofs', 'Industrial roofs', 'Roof plant'][index];
     mesh.castShadow = index >= 2; mesh.receiveShadow = true;
     group.add(mesh); return mesh;
@@ -53,7 +54,7 @@ export function createCityArt(group, entries, seed) {
       proxy(parent) {
         for (const p of parts) {
           if (p.batch === 0) continue;
-          const mesh = new THREE.Mesh(batches[p.batch].geometry,material.clone());
+          const mesh = new THREE.Mesh(batches[p.batch].geometry,batches[p.batch].material.clone());
           mesh.material.color.copy(p.color); mesh.material.transparent=true; mesh.material.depthWrite=false;
           p.matrix.decompose(mesh.position,mesh.quaternion,mesh.scale); mesh.position.sub(parent.position);
           mesh.castShadow=p.batch>=2; mesh.receiveShadow=true; mesh.userData.roofDetail=p.batch===5;

@@ -1,0 +1,223 @@
+{
+  "phase": "before",
+  "suite": "materials",
+  "environment": "Desktop Edge / SwiftShader / DPR 1; not a physical phone",
+  "scenes": [
+    {
+      "width": 1440,
+      "height": 900,
+      "quality": "low",
+      "strength": 0,
+      "calls": 40,
+      "triangles": 109076,
+      "resources": {
+        "geometries": 40,
+        "textures": 2,
+        "programs": 18
+      },
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      },
+      "camera": [
+        -28,
+        60,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "quality": "low",
+      "strength": 1,
+      "calls": 70,
+      "triangles": 153495,
+      "resources": {
+        "geometries": 41,
+        "textures": 9,
+        "programs": 31
+      },
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      },
+      "camera": [
+        -28,
+        60,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "quality": "high",
+      "strength": 0,
+      "calls": 41,
+      "triangles": 111380,
+      "resources": {
+        "geometries": 41,
+        "textures": 2,
+        "programs": 31
+      },
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      },
+      "camera": [
+        -28,
+        60,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "quality": "high",
+      "strength": 1,
+      "calls": 72,
+      "triangles": 158103,
+      "resources": {
+        "geometries": 41,
+        "textures": 9,
+        "programs": 31
+      },
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      },
+      "camera": [
+        -28,
+        60,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "quality": "low",
+      "strength": 0,
+      "calls": 40,
+      "triangles": 108896,
+      "resources": {
+        "geometries": 40,
+        "textures": 2,
+        "programs": 18
+      },
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      },
+      "camera": [
+        -28,
+        60,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "quality": "low",
+      "strength": 1,
+      "calls": 70,
+      "triangles": 153315,
+      "resources": {
+        "geometries": 41,
+        "textures": 9,
+        "programs": 31
+      },
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      },
+      "camera": [
+        -28,
+        60,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "quality": "high",
+      "strength": 0,
+      "calls": 41,
+      "triangles": 111200,
+      "resources": {
+        "geometries": 41,
+        "textures": 2,
+        "programs": 31
+      },
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      },
+      "camera": [
+        -28,
+        60,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "quality": "high",
+      "strength": 1,
+      "calls": 72,
+      "triangles": 157923,
+      "resources": {
+        "geometries": 41,
+        "textures": 9,
+        "programs": 31
+      },
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      },
+      "camera": [
+        -28,
+        60,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE),fs=require('node:fs'),assert=require('node:assert/strict');
+(async()=>{const browser=await chromium.launch({channel:'msedge',headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});const data=[];try{
+for(const [width,height] of [[1440,900],[390,844]]) {const page=await browser.newPage({viewport:{width,height}});await page.goto('http://127.0.0.1:5173/tools/city-visual-regression.html');await page.waitForFunction(()=>window.fixtureReady);
+for(const q of ['low','high']) {const p=await page.evaluate(q=>{const f=fixture,poses=f.city.streetProps.placements;const p=poses.reduce((a,b)=>Math.max(Math.abs(a.x),Math.abs(a.z))>Math.max(Math.abs(b.x),Math.abs(b.z))?a:b);f.pose([p.x,0,p.z],[9,14,-12]);return {p,...f.draw(q)};},q);assert.ok(Math.max(Math.abs(p.p.x),Math.abs(p.p.z))>150);await page.screenshot({path:`docs/art/verification/qa-74-76/${width}x${height}-${q}-map-edge.png`});data.push({width,height,q,...p});}await page.close();}
+fs.writeFileSync('docs/art/verification/qa-74-76/edges-report.json',JSON.stringify(data,null,2)+'\n');console.log('Map edges: four scenes passed');
+}finally{await browser.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

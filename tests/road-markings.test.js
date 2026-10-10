@@ -1,6 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRoadMarkings } from '../src/road-markings.js';
+import * as THREE from 'three';
+import { createCityPlan } from '../src/city-generator.js';
+import { createCityScene } from '../src/city-scene.js';
+import { createSurfaceHeightSampler, ROAD_SURFACE_HEIGHTS } from '../src/road-surface.js';
 
 test('dashes align their long axis with both directions of the street grid', () => {
   const marks = createRoadMarkings([-75, -25, 25, 75], 110, 22);
@@ -28,4 +32,28 @@ test('mark spacing, bounds, and junction gaps derive from the current road plan'
     assert.ok(roads.every(cross => Math.abs(offset - cross) >= 13), `junction gap at ${offset}`);
   }
   assert.notEqual(marks.length, createRoadMarkings(roads, 80, 20).length);
+});
+
+test('both paint batches receive shadows below continuous tire decals in either road direction', () => {
+  const plan = createCityPlan(), sample = createSurfaceHeightSampler(plan);
+  const city = createCityScene(new THREE.Scene(), { addStaticBox: s => s, removeStaticBox() {} }, plan);
+  for (const batch of [city.dashes, city.stopLines]) {
+    assert.ok(batch.receiveShadow && batch.material.depthTest);
+    const transform = new THREE.Matrix4();
+    for (let i = 0; i < batch.count; i++) {
+      batch.getMatrixAt(i, transform);
+      const vertex = new THREE.Vector3();
+      for (let v = 0; v < batch.geometry.attributes.position.count; v++) {
+        vertex.fromBufferAttribute(batch.geometry.attributes.position, v).applyMatrix4(transform);
+        assert.ok(vertex.y > ROAD_SURFACE_HEIGHTS.road);
+        assert.ok(vertex.y < sample(vertex.x, vertex.z));
+      }
+      const x = transform.elements[12], z = transform.elements[14];
+      // Crossing paint does not raise the strip or change its sampled surface.
+      assert.equal(sample(x, z), sample(x + .3, z));
+      assert.equal(sample(x, z), sample(x, z + .3));
+    }
+  }
+  assert.ok(sample(-66.5, -5) > ROAD_SURFACE_HEIGHTS.sidewalkVisual);
+  city.dispose();
 });

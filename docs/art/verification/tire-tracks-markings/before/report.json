@@ -1,0 +1,295 @@
+{
+  "phase": "before",
+  "suite": "markings",
+  "environment": "Desktop Edge / SwiftShader / DPR 1; not a physical phone",
+  "scenes": [
+    {
+      "width": 1440,
+      "height": 900,
+      "quality": "low",
+      "name": "dash",
+      "calls": 28,
+      "triangles": 90704,
+      "resources": {
+        "geometries": 32,
+        "textures": 2,
+        "programs": 16
+      },
+      "camera": [
+        -20,
+        9,
+        -1
+      ],
+      "target": [
+        -25,
+        0,
+        6
+      ],
+      "withTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "withoutTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "segments": 56
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "quality": "low",
+      "name": "stop",
+      "calls": 27,
+      "triangles": 90704,
+      "resources": {
+        "geometries": 32,
+        "textures": 2,
+        "programs": 16
+      },
+      "camera": [
+        -23.75,
+        9,
+        -41
+      ],
+      "target": [
+        -28.75,
+        0,
+        -34
+      ],
+      "withTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "withoutTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "segments": 56
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "quality": "high",
+      "name": "dash",
+      "calls": 29,
+      "triangles": 93008,
+      "resources": {
+        "geometries": 32,
+        "textures": 2,
+        "programs": 16
+      },
+      "camera": [
+        -20,
+        9,
+        -1
+      ],
+      "target": [
+        -25,
+        0,
+        6
+      ],
+      "withTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "withoutTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "segments": 56
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "quality": "high",
+      "name": "stop",
+      "calls": 28,
+      "triangles": 93008,
+      "resources": {
+        "geometries": 32,
+        "textures": 2,
+        "programs": 16
+      },
+      "camera": [
+        -23.75,
+        9,
+        -41
+      ],
+      "target": [
+        -28.75,
+        0,
+        -34
+      ],
+      "withTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "withoutTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "segments": 56
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "quality": "low",
+      "name": "dash",
+      "calls": 28,
+      "triangles": 90704,
+      "resources": {
+        "geometries": 32,
+        "textures": 2,
+        "programs": 16
+      },
+      "camera": [
+        -20,
+        9,
+        -1
+      ],
+      "target": [
+        -25,
+        0,
+        6
+      ],
+      "withTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "withoutTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "segments": 56
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "quality": "low",
+      "name": "stop",
+      "calls": 27,
+      "triangles": 90704,
+      "resources": {
+        "geometries": 32,
+        "textures": 2,
+        "programs": 16
+      },
+      "camera": [
+        -23.75,
+        9,
+        -41
+      ],
+      "target": [
+        -28.75,
+        0,
+        -34
+      ],
+      "withTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "withoutTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "segments": 56
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "quality": "high",
+      "name": "dash",
+      "calls": 29,
+      "triangles": 93008,
+      "resources": {
+        "geometries": 32,
+        "textures": 2,
+        "programs": 16
+      },
+      "camera": [
+        -20,
+        9,
+        -1
+      ],
+      "target": [
+        -25,
+        0,
+        6
+      ],
+      "withTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "withoutTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "segments": 56
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "quality": "high",
+      "name": "stop",
+      "calls": 28,
+      "triangles": 93008,
+      "resources": {
+        "geometries": 32,
+        "textures": 2,
+        "programs": 16
+      },
+      "camera": [
+        -23.75,
+        9,
+        -41
+      ],
+      "target": [
+        -28.75,
+        0,
+        -34
+      ],
+      "withTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "withoutTrack": [
+        234,
+        230,
+        219,
+        255
+      ],
+      "segments": 56
+    }
+  ]
+}

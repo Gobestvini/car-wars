@@ -1,14 +1,16 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { VEHICLE_ROUGHNESS_FRAGMENT } from './vehicle-surface.js';
 
 export const TRAFFIC_MODEL_URLS = Object.freeze({
   grey: 'models/grey-sedan.glb', green: 'models/green-sedan.glb', police: 'models/police-sedan.glb',
 });
 
 function surfaceMaterial(material) {
-  material.roughness = .82;
+  material.roughness = .62;
   material.metalness = 0;
   material.onBeforeCompile = shader => {
+    shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', VEHICLE_ROUGHNESS_FRAGMENT);
     shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', `
       #include <emissivemap_fragment>
       #ifdef USE_MAP
@@ -26,7 +28,7 @@ function surfaceMaterial(material) {
       #endif
     `);
   };
-  material.customProgramCacheKey = () => 'car-stars-traffic-atlas-v1';
+  material.customProgramCacheKey = () => 'car-stars-traffic-atlas-v2';
   material.needsUpdate = true;
   return material;
 }

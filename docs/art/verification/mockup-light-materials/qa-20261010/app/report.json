@@ -1,0 +1,4326 @@
+{
+  "phase": "qa-20261010",
+  "kind": "Actual game, injected capture-only camera/freeze hooks, isolated traffic=0; desktop SwiftShader, DPR1, not a physical phone",
+  "scenes": [
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 0,
+      "mode": "follow",
+      "calls": 45,
+      "triangles": 109744,
+      "resources": {
+        "geometries": 45,
+        "textures": 3,
+        "programs": 22
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          360,
+          225
+        ],
+        "estimatedMiB": 48.2
+      },
+      "shadow": {
+        "left": -78.65390625,
+        "right": 167.34609375,
+        "bottom": -106.65609923095958,
+        "top": 139.34390076904043,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 67.74609375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 0,
+      "mode": "free",
+      "calls": 45,
+      "triangles": 109744,
+      "resources": {
+        "geometries": 45,
+        "textures": 3,
+        "programs": 22
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          360,
+          225
+        ],
+        "estimatedMiB": 48.2
+      },
+      "shadow": {
+        "left": -72.85390625,
+        "right": 173.14609375,
+        "bottom": -107.09382155344363,
+        "top": 138.90617844655637,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 67.74609375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 1,
+      "mode": "follow",
+      "calls": 78,
+      "triangles": 154595,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 1,
+        "radiiCss": [
+          4,
+          8,
+          12
+        ],
+        "debugBypass": false,
+        "draws": 78,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          360,
+          225
+        ],
+        "estimatedMiB": 48.2
+      },
+      "shadow": {
+        "left": -78.65390625,
+        "right": 167.34609375,
+        "bottom": -106.65609923095958,
+        "top": 139.34390076904043,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 67.74609375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 1,
+      "mode": "free",
+      "calls": 45,
+      "triangles": 109744,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 1,
+        "radiiCss": [
+          4,
+          8,
+          12
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          360,
+          225
+        ],
+        "estimatedMiB": 48.2
+      },
+      "shadow": {
+        "left": -72.85390625,
+        "right": 173.14609375,
+        "bottom": -107.09382155344363,
+        "top": 138.90617844655637,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 67.74609375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "follow",
+      "calls": 46,
+      "triangles": 112048,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -78.894140625,
+        "right": 167.105859375,
+        "bottom": -106.65609923095958,
+        "top": 139.34390076904043,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 67.505859375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "free",
+      "calls": 46,
+      "triangles": 112048,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -73.094140625,
+        "right": 172.905859375,
+        "bottom": -107.09382155344363,
+        "top": 138.90617844655637,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 67.505859375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 1,
+      "mode": "follow",
+      "calls": 80,
+      "triangles": 159203,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 80,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -78.894140625,
+        "right": 167.105859375,
+        "bottom": -106.65609923095958,
+        "top": 139.34390076904043,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 67.505859375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 1,
+      "mode": "free",
+      "calls": 46,
+      "triangles": 112048,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -73.094140625,
+        "right": 172.905859375,
+        "bottom": -107.09382155344363,
+        "top": 138.90617844655637,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 67.505859375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 0,
+      "mode": "follow",
+      "calls": 44,
+      "triangles": 109444,
+      "resources": {
+        "geometries": 45,
+        "textures": 3,
+        "programs": 22
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -73.275,
+        "right": 150.725,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 0,
+      "mode": "free",
+      "calls": 44,
+      "triangles": 109444,
+      "resources": {
+        "geometries": 45,
+        "textures": 3,
+        "programs": 22
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -67.475,
+        "right": 156.525,
+        "bottom": -39.10163405344363,
+        "top": 68.89836594655637,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 1,
+      "mode": "follow",
+      "calls": 77,
+      "triangles": 154295,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 1,
+        "radiiCss": [
+          4,
+          8,
+          12
+        ],
+        "debugBypass": false,
+        "draws": 77,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -73.275,
+        "right": 150.725,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 1,
+      "mode": "free",
+      "calls": 44,
+      "triangles": 109444,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 1,
+        "radiiCss": [
+          4,
+          8,
+          12
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -67.475,
+        "right": 156.525,
+        "bottom": -39.10163405344363,
+        "top": 68.89836594655637,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "follow",
+      "calls": 45,
+      "triangles": 111748,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -73.49375,
+        "right": 150.50625,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "free",
+      "calls": 45,
+      "triangles": 111748,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -67.69375,
+        "right": 156.30625,
+        "bottom": -39.10163405344363,
+        "top": 68.89836594655637,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 1,
+      "mode": "follow",
+      "calls": 79,
+      "triangles": 158903,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 79,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -73.49375,
+        "right": 150.50625,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 1,
+      "mode": "free",
+      "calls": 45,
+      "triangles": 111748,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -67.69375,
+        "right": 156.30625,
+        "bottom": -39.10163405344363,
+        "top": 68.89836594655637,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    }
+  ],
+  "lifecycle": [
+    {
+      "calls": 44,
+      "triangles": 109548,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 27
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -73.275,
+        "right": 150.725,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "calls": 79,
+      "triangles": 158903,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 27
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 79,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -73.49375,
+        "right": 150.50625,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "calls": 44,
+      "triangles": 109548,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 27
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -73.275,
+        "right": 150.725,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "calls": 79,
+      "triangles": 158903,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 27
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 79,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -73.49375,
+        "right": 150.50625,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "calls": 44,
+      "triangles": 109548,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 27
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -73.275,
+        "right": 150.725,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "calls": 79,
+      "triangles": 158903,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 27
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 79,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -73.49375,
+        "right": 150.50625,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "calls": 44,
+      "triangles": 109548,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 27
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -73.275,
+        "right": 150.725,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "calls": 79,
+      "triangles": 158903,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 27
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 79,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -73.49375,
+        "right": 150.50625,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "calls": 44,
+      "triangles": 109548,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 27
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -73.275,
+        "right": 150.725,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "calls": 79,
+      "triangles": 158903,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 27
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 79,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -73.49375,
+        "right": 150.50625,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    }
+  ],
+  "props": {
+    "counts": {
+      "lamp": 160,
+      "bin": 80
+    },
+    "placements": [
+      {
+        "type": "lamp",
+        "x": -83.50116,
+        "z": -49.65,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 2167570,
+        "id": 0
+      },
+      {
+        "type": "bin",
+        "x": 116.877,
+        "z": 148.07,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 4814114,
+        "id": 1
+      },
+      {
+        "type": "bin",
+        "x": 113.205,
+        "z": -166.80508,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 5070141,
+        "id": 2
+      },
+      {
+        "type": "lamp",
+        "x": -50.405,
+        "z": -66.49307999999999,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 6855419,
+        "id": 3
+      },
+      {
+        "type": "lamp",
+        "x": -166.48804,
+        "z": -63.32,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 7369836,
+        "id": 4
+      },
+      {
+        "type": "bin",
+        "x": 116.27496,
+        "z": -49.795,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 23323541,
+        "id": 5
+      },
+      {
+        "type": "lamp",
+        "x": 87.25,
+        "z": 83.5024,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 26870950,
+        "id": 6
+      },
+      {
+        "type": "bin",
+        "x": 113.91499999999999,
+        "z": 166.6508,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 30190283,
+        "id": 7
+      },
+      {
+        "type": "bin",
+        "x": 164.67000000000002,
+        "z": 66.34224,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 35374434,
+        "id": 8
+      },
+      {
+        "type": "lamp",
+        "x": 33.50676,
+        "z": -164.47,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 39605606,
+        "id": 9
+      },
+      {
+        "type": "bin",
+        "x": -100.575,
+        "z": 33.53248,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 43126385,
+        "id": 10
+      },
+      {
+        "type": "lamp",
+        "x": 183.51152,
+        "z": 85.915,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 48287683,
+        "id": 11
+      },
+      {
+        "type": "bin",
+        "x": 101.97,
+        "z": -16.98256,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 65883894,
+        "id": 12
+      },
+      {
+        "type": "bin",
+        "x": 133.72272,
+        "z": 112.94,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 72467088,
+        "id": 13
+      },
+      {
+        "type": "bin",
+        "x": -33.93152,
+        "z": 49.995000000000005,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 85493499,
+        "id": 14
+      },
+      {
+        "type": "lamp",
+        "x": -116.50896,
+        "z": -0.28500000000000014,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 87149443,
+        "id": 15
+      },
+      {
+        "type": "lamp",
+        "x": 116.49836,
+        "z": 50.455,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 88234591,
+        "id": 16
+      },
+      {
+        "type": "lamp",
+        "x": 183.48016,
+        "z": -101.03,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 118803294,
+        "id": 17
+      },
+      {
+        "type": "lamp",
+        "x": -66.51196,
+        "z": 49.435,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 119609387,
+        "id": 18
+      },
+      {
+        "type": "bin",
+        "x": 116.6276,
+        "z": -62.864999999999995,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 132671927,
+        "id": 19
+      },
+      {
+        "type": "lamp",
+        "x": -133.48836,
+        "z": -99.67,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 144219566,
+        "id": 20
+      },
+      {
+        "type": "bin",
+        "x": 183.30628000000002,
+        "z": 64.195,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 152918339,
+        "id": 21
+      },
+      {
+        "type": "lamp",
+        "x": 0.5850000000000009,
+        "z": 183.5128,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 159009617,
+        "id": 22
+      },
+      {
+        "type": "bin",
+        "x": -116.93848,
+        "z": -97.915,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 168437917,
+        "id": 23
+      },
+      {
+        "type": "bin",
+        "x": -63.79,
+        "z": -116.99648,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 172328742,
+        "id": 24
+      },
+      {
+        "type": "bin",
+        "x": 49.480000000000004,
+        "z": 116.6044,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 173713396,
+        "id": 25
+      },
+      {
+        "type": "lamp",
+        "x": -183.48984000000002,
+        "z": -99.4,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 177137620,
+        "id": 26
+      },
+      {
+        "type": "lamp",
+        "x": 33.498239999999996,
+        "z": 100.355,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 194382571,
+        "id": 27
+      },
+      {
+        "type": "bin",
+        "x": 116.1288,
+        "z": -100.13,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 224543474,
+        "id": 28
+      },
+      {
+        "type": "bin",
+        "x": -133.57772,
+        "z": 100.19,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 235795538,
+        "id": 29
+      },
+      {
+        "type": "bin",
+        "x": -49.12,
+        "z": -83.94312,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 253469676,
+        "id": 30
+      },
+      {
+        "type": "bin",
+        "x": -52.21,
+        "z": 33.066159999999996,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 258567058,
+        "id": 31
+      },
+      {
+        "type": "bin",
+        "x": 100.005,
+        "z": -166.41648,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 264487501,
+        "id": 32
+      },
+      {
+        "type": "lamp",
+        "x": -150.335,
+        "z": 16.48068,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 307133433,
+        "id": 33
+      },
+      {
+        "type": "lamp",
+        "x": -137.46,
+        "z": -183.49568,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 312902008,
+        "id": 34
+      },
+      {
+        "type": "bin",
+        "x": -114.43,
+        "z": 183.46172,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 337788614,
+        "id": 35
+      },
+      {
+        "type": "lamp",
+        "x": -48.15,
+        "z": 16.512999999999998,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 344782870,
+        "id": 36
+      },
+      {
+        "type": "lamp",
+        "x": -37.44,
+        "z": -33.4834,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 348509012,
+        "id": 37
+      },
+      {
+        "type": "bin",
+        "x": 100.765,
+        "z": 83.25988,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 386224653,
+        "id": 38
+      },
+      {
+        "type": "bin",
+        "x": 183.906,
+        "z": -64.84,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 388508532,
+        "id": 39
+      },
+      {
+        "type": "lamp",
+        "x": 83.5048,
+        "z": 148.78,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 391660256,
+        "id": 40
+      },
+      {
+        "type": "bin",
+        "x": 34.05796,
+        "z": 1.4400000000000013,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 393140788,
+        "id": 41
+      },
+      {
+        "type": "bin",
+        "x": 16.65544,
+        "z": -98.18,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 402907864,
+        "id": 42
+      },
+      {
+        "type": "lamp",
+        "x": -151.715,
+        "z": -183.50884,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 408458157,
+        "id": 43
+      },
+      {
+        "type": "lamp",
+        "x": 33.515,
+        "z": 163.21,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 409091142,
+        "id": 44
+      },
+      {
+        "type": "lamp",
+        "x": 166.4926,
+        "z": -62.525,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 416503995,
+        "id": 45
+      },
+      {
+        "type": "bin",
+        "x": 164.325,
+        "z": 82.98728,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 418032365,
+        "id": 46
+      },
+      {
+        "type": "lamp",
+        "x": 50.045,
+        "z": -83.48084,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 426071509,
+        "id": 47
+      },
+      {
+        "type": "bin",
+        "x": 83.97908,
+        "z": 50.675,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 442014635,
+        "id": 48
+      },
+      {
+        "type": "bin",
+        "x": -37,
+        "z": 183.01976,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 442722100,
+        "id": 49
+      },
+      {
+        "type": "bin",
+        "x": 137.345,
+        "z": 33.61716,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 444830969,
+        "id": 50
+      },
+      {
+        "type": "lamp",
+        "x": 150.93,
+        "z": -116.49876,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 469120686,
+        "id": 51
+      },
+      {
+        "type": "bin",
+        "x": 148.425,
+        "z": 166.01628,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 478893185,
+        "id": 52
+      },
+      {
+        "type": "lamp",
+        "x": -151.925,
+        "z": 83.49768,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 485142115,
+        "id": 53
+      },
+      {
+        "type": "lamp",
+        "x": -133.50752,
+        "z": 151.805,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 510723861,
+        "id": 54
+      },
+      {
+        "type": "lamp",
+        "x": 98.795,
+        "z": 33.511359999999996,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 519310259,
+        "id": 55
+      },
+      {
+        "type": "lamp",
+        "x": 66.51668000000001,
+        "z": 98.33,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 532820166,
+        "id": 56
+      },
+      {
+        "type": "bin",
+        "x": -49.81,
+        "z": 133.15896,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 545614538,
+        "id": 57
+      },
+      {
+        "type": "bin",
+        "x": -99.69,
+        "z": -16.48028,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 550985562,
+        "id": 58
+      },
+      {
+        "type": "bin",
+        "x": 67.051,
+        "z": 101.795,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 553063859,
+        "id": 59
+      },
+      {
+        "type": "bin",
+        "x": 50.555,
+        "z": 16.93848,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 557557611,
+        "id": 60
+      },
+      {
+        "type": "bin",
+        "x": 34.056799999999996,
+        "z": -151.55,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 573360190,
+        "id": 61
+      },
+      {
+        "type": "lamp",
+        "x": -101.41499999999999,
+        "z": 183.48264,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 577807217,
+        "id": 62
+      },
+      {
+        "type": "bin",
+        "x": 166.78652,
+        "z": 48.815,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 578575263,
+        "id": 63
+      },
+      {
+        "type": "lamp",
+        "x": 166.50804,
+        "z": -113.87,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 582856726,
+        "id": 64
+      },
+      {
+        "type": "lamp",
+        "x": -166.48908,
+        "z": 48.99,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 601186298,
+        "id": 65
+      },
+      {
+        "type": "bin",
+        "x": 0.4400000000000013,
+        "z": -183.80624,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 621627588,
+        "id": 66
+      },
+      {
+        "type": "bin",
+        "x": -66.94892,
+        "z": -1.7850000000000001,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 639441143,
+        "id": 67
+      },
+      {
+        "type": "lamp",
+        "x": -133.51232,
+        "z": -48.209999999999994,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 654573858,
+        "id": 68
+      },
+      {
+        "type": "bin",
+        "x": -99.47,
+        "z": -83.4478,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 673609606,
+        "id": 69
+      },
+      {
+        "type": "lamp",
+        "x": 66.50936,
+        "z": 147.98,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 685125096,
+        "id": 70
+      },
+      {
+        "type": "lamp",
+        "x": 83.48096,
+        "z": -164.53,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 692324594,
+        "id": 71
+      },
+      {
+        "type": "lamp",
+        "x": -149.48,
+        "z": 183.49672,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 702130604,
+        "id": 72
+      },
+      {
+        "type": "bin",
+        "x": 164.17000000000002,
+        "z": -116.63224,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 706093334,
+        "id": 73
+      },
+      {
+        "type": "bin",
+        "x": 133.36776,
+        "z": -101.82,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 726573136,
+        "id": 74
+      },
+      {
+        "type": "bin",
+        "x": 52.334999999999994,
+        "z": 166.40488,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 735571967,
+        "id": 75
+      },
+      {
+        "type": "bin",
+        "x": 67.0046,
+        "z": -99.19,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 737549662,
+        "id": 76
+      },
+      {
+        "type": "lamp",
+        "x": 98.285,
+        "z": -183.48488,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 741878157,
+        "id": 77
+      },
+      {
+        "type": "bin",
+        "x": -136.185,
+        "z": 166.55452,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 763714263,
+        "id": 78
+      },
+      {
+        "type": "bin",
+        "x": 101.08,
+        "z": -66.45591999999999,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 784543716,
+        "id": 79
+      },
+      {
+        "type": "bin",
+        "x": 182.99308,
+        "z": 102.345,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 790786969,
+        "id": 80
+      },
+      {
+        "type": "lamp",
+        "x": 33.51044,
+        "z": -99.58500000000001,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 797743583,
+        "id": 81
+      },
+      {
+        "type": "lamp",
+        "x": 183.49716,
+        "z": -151.3,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 804576240,
+        "id": 82
+      },
+      {
+        "type": "lamp",
+        "x": 33.48492,
+        "z": 149.755,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 807419451,
+        "id": 83
+      },
+      {
+        "type": "lamp",
+        "x": 100.435,
+        "z": -133.517,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 810702587,
+        "id": 84
+      },
+      {
+        "type": "bin",
+        "x": 116.26684,
+        "z": 137.05,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 813879910,
+        "id": 85
+      },
+      {
+        "type": "lamp",
+        "x": 52.345,
+        "z": 116.485,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 814593969,
+        "id": 86
+      },
+      {
+        "type": "lamp",
+        "x": 137.335,
+        "z": -66.48928000000001,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 834636967,
+        "id": 87
+      },
+      {
+        "type": "bin",
+        "x": -183.065,
+        "z": -114.275,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 848386645,
+        "id": 88
+      },
+      {
+        "type": "bin",
+        "x": -116.47332,
+        "z": -36.83,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 850015134,
+        "id": 89
+      },
+      {
+        "type": "lamp",
+        "x": 49,
+        "z": 33.516040000000004,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 904812300,
+        "id": 90
+      },
+      {
+        "type": "lamp",
+        "x": -183.49236,
+        "z": 150.06,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 914674512,
+        "id": 91
+      },
+      {
+        "type": "lamp",
+        "x": 116.50072,
+        "z": -13.014999999999999,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 915382897,
+        "id": 92
+      },
+      {
+        "type": "bin",
+        "x": -164.155,
+        "z": -33.2216,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 947242669,
+        "id": 93
+      },
+      {
+        "type": "bin",
+        "x": -150.94,
+        "z": -166.1752,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 953469312,
+        "id": 94
+      },
+      {
+        "type": "bin",
+        "x": -183.31904,
+        "z": -150.145,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 976259471,
+        "id": 95
+      },
+      {
+        "type": "bin",
+        "x": 48.685,
+        "z": -33.35732,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 976392237,
+        "id": 96
+      },
+      {
+        "type": "bin",
+        "x": -183.36892,
+        "z": -163.145,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 976434871,
+        "id": 97
+      },
+      {
+        "type": "bin",
+        "x": -166.23552,
+        "z": 1.1900000000000013,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 977832738,
+        "id": 98
+      },
+      {
+        "type": "lamp",
+        "x": -166.481,
+        "z": 98.36,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 987035172,
+        "id": 99
+      },
+      {
+        "type": "bin",
+        "x": -166.70184,
+        "z": 113.32000000000001,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 992568164,
+        "id": 100
+      },
+      {
+        "type": "lamp",
+        "x": -33.493359999999996,
+        "z": 1.004999999999999,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 992603701,
+        "id": 101
+      },
+      {
+        "type": "lamp",
+        "x": -0.08999999999999986,
+        "z": 66.50188,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 993088482,
+        "id": 102
+      },
+      {
+        "type": "bin",
+        "x": -66.15084,
+        "z": 63.205,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 1006804141,
+        "id": 103
+      },
+      {
+        "type": "bin",
+        "x": 149.93,
+        "z": -182.95828,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 1020042486,
+        "id": 104
+      },
+      {
+        "type": "bin",
+        "x": -148.08,
+        "z": -117.0278,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 1020088884,
+        "id": 105
+      },
+      {
+        "type": "lamp",
+        "x": 66.51976,
+        "z": -63.065,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1024027887,
+        "id": 106
+      },
+      {
+        "type": "lamp",
+        "x": 112.945,
+        "z": -83.49943999999999,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 1042376089,
+        "id": 107
+      },
+      {
+        "type": "bin",
+        "x": -136,
+        "z": -166.64268,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 1050122300,
+        "id": 108
+      },
+      {
+        "type": "lamp",
+        "x": 166.48216,
+        "z": 163.84,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1056550268,
+        "id": 109
+      },
+      {
+        "type": "bin",
+        "x": 63.385000000000005,
+        "z": 116.90832,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 1057378177,
+        "id": 110
+      },
+      {
+        "type": "lamp",
+        "x": -147.735,
+        "z": 133.48224,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1061094953,
+        "id": 111
+      },
+      {
+        "type": "bin",
+        "x": 183.6972,
+        "z": -164.94,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 1079993512,
+        "id": 112
+      },
+      {
+        "type": "bin",
+        "x": -49.864999999999995,
+        "z": -183.56728,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 1083630527,
+        "id": 113
+      },
+      {
+        "type": "lamp",
+        "x": -183.50028,
+        "z": -12.945,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1091614911,
+        "id": 114
+      },
+      {
+        "type": "lamp",
+        "x": 48.42,
+        "z": -66.49343999999999,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1116835184,
+        "id": 115
+      },
+      {
+        "type": "lamp",
+        "x": -183.48108,
+        "z": 36.02,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1122415704,
+        "id": 116
+      },
+      {
+        "type": "lamp",
+        "x": -48.385000000000005,
+        "z": 33.498400000000004,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1132380823,
+        "id": 117
+      },
+      {
+        "type": "bin",
+        "x": -165.97336,
+        "z": -98.11,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 1142598878,
+        "id": 118
+      },
+      {
+        "type": "bin",
+        "x": 101.845,
+        "z": 66.384,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 1145241869,
+        "id": 119
+      },
+      {
+        "type": "bin",
+        "x": -33.71228,
+        "z": -149.245,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 1145582651,
+        "id": 120
+      },
+      {
+        "type": "lamp",
+        "x": -16.48712,
+        "z": 99.15,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 1150248330,
+        "id": 121
+      },
+      {
+        "type": "bin",
+        "x": -99.135,
+        "z": -184.05448,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 1154985673,
+        "id": 122
+      },
+      {
+        "type": "bin",
+        "x": 166.906,
+        "z": -51.36,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 1159784228,
+        "id": 123
+      },
+      {
+        "type": "lamp",
+        "x": 133.50044,
+        "z": -151.93,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 1161265114,
+        "id": 124
+      },
+      {
+        "type": "lamp",
+        "x": 66.48252,
+        "z": -0.8249999999999993,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1167105335,
+        "id": 125
+      },
+      {
+        "type": "bin",
+        "x": -149.115,
+        "z": -133.12763999999999,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 1176285677,
+        "id": 126
+      },
+      {
+        "type": "lamp",
+        "x": 116.50424,
+        "z": -151.695,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1189455161,
+        "id": 127
+      },
+      {
+        "type": "bin",
+        "x": 1.1799999999999962,
+        "z": -133.07659999999998,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 1192490736,
+        "id": 128
+      },
+      {
+        "type": "bin",
+        "x": -33.25408,
+        "z": -47.695,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 1201308961,
+        "id": 129
+      },
+      {
+        "type": "bin",
+        "x": 63.905,
+        "z": 182.92696,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 1204251281,
+        "id": 130
+      },
+      {
+        "type": "bin",
+        "x": 183.12648000000002,
+        "z": 148.85,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 1213146270,
+        "id": 131
+      },
+      {
+        "type": "lamp",
+        "x": -183.50212,
+        "z": -48.99,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1218777702,
+        "id": 132
+      },
+      {
+        "type": "lamp",
+        "x": -50.290000000000006,
+        "z": 83.48948,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1229774442,
+        "id": 133
+      },
+      {
+        "type": "bin",
+        "x": -66.83176,
+        "z": -98.25,
+        "radius": 0.4,
+        "yaw": -1.5707963267948966,
+        "token": 1237871850,
+        "id": 134
+      },
+      {
+        "type": "bin",
+        "x": -149.01,
+        "z": -66.75868,
+        "radius": 0.4,
+        "yaw": 3.141592653589793,
+        "token": 1242222698,
+        "id": 135
+      },
+      {
+        "type": "bin",
+        "x": 166.1636,
+        "z": -0.8450000000000024,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 1244325331,
+        "id": 136
+      },
+      {
+        "type": "lamp",
+        "x": -101.95,
+        "z": -83.48004,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 1245188110,
+        "id": 137
+      },
+      {
+        "type": "lamp",
+        "x": 16.49456,
+        "z": 102.285,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1247791957,
+        "id": 138
+      },
+      {
+        "type": "lamp",
+        "x": 16.48544,
+        "z": -163.06,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1248725888,
+        "id": 139
+      },
+      {
+        "type": "lamp",
+        "x": -151.26,
+        "z": 33.50444,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1251785248,
+        "id": 140
+      },
+      {
+        "type": "bin",
+        "x": 150.86,
+        "z": 16.964,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 1261980672,
+        "id": 141
+      },
+      {
+        "type": "lamp",
+        "x": 133.49176,
+        "z": -48.43,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 1262775814,
+        "id": 142
+      },
+      {
+        "type": "lamp",
+        "x": 98.01,
+        "z": 183.49976,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1271785102,
+        "id": 143
+      },
+      {
+        "type": "bin",
+        "x": -150.56,
+        "z": -83.71924,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 1276679388,
+        "id": 144
+      },
+      {
+        "type": "lamp",
+        "x": 149.445,
+        "z": 116.48084,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 1277866389,
+        "id": 145
+      },
+      {
+        "type": "lamp",
+        "x": 98.94,
+        "z": 116.48668,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 1285463288,
+        "id": 146
+      },
+      {
+        "type": "lamp",
+        "x": -101.025,
+        "z": -66.48656,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1289568295,
+        "id": 147
+      },
+      {
+        "type": "lamp",
+        "x": -49.44,
+        "z": -16.50664,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1291611612,
+        "id": 148
+      },
+      {
+        "type": "bin",
+        "x": -32.95712,
+        "z": 36.17,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 1298565734,
+        "id": 149
+      },
+      {
+        "type": "lamp",
+        "x": -151.82,
+        "z": 66.50476,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 1299995136,
+        "id": 150
+      },
+      {
+        "type": "bin",
+        "x": 166.64384,
+        "z": 150.915,
+        "radius": 0.4,
+        "yaw": 1.5707963267948966,
+        "token": 1304068683,
+        "id": 151
+      },
+      {
+        "type": "lamp",
+        "x": -33.51296,
+        "z": -49.57000000000001,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1326385586,
+        "id": 152
+      },
+      {
+        "type": "bin",
+        "x": 98.57,
+        "z": -33.62296,
+        "radius": 0.4,
+        "yaw": 0,
+        "token": 1329586214,
+        "id": 153
+      },
+      {
+        "type": "lamp",
+        "x": 166.50156,
+        "z": -151.025,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1345378295,
+        "id": 154
+      },
+      {
+        "type": "lamp",
+        "x": 49.56,
+        "z": 83.49056,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1356859412,
+        "id": 155
+      },
+      {
+        "type": "lamp",
+        "x": 51.21,
+        "z": -33.49812,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 1357631742,
+        "id": 156
+      },
+      {
+        "type": "lamp",
+        "x": -66.5078,
+        "z": 150.925,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 1447139685,
+        "id": 157
+      },
+      {
+        "type": "lamp",
+        "x": -166.49728,
+        "z": -50.92,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 1517850316,
+        "id": 158
+      },
+      {
+        "type": "lamp",
+        "x": -133.50012,
+        "z": -2.3100000000000023,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1562640038,
+        "id": 159
+      },
+      {
+        "type": "lamp",
+        "x": -37.235,
+        "z": -133.50424,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 1575349053,
+        "id": 160
+      },
+      {
+        "type": "lamp",
+        "x": 83.49,
+        "z": -97.845,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 1590272931,
+        "id": 161
+      },
+      {
+        "type": "lamp",
+        "x": 162.845,
+        "z": 133.4828,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1618208069,
+        "id": 162
+      },
+      {
+        "type": "lamp",
+        "x": -116.50036,
+        "z": -149.315,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 1632222637,
+        "id": 163
+      },
+      {
+        "type": "lamp",
+        "x": 113.03,
+        "z": -33.509280000000004,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 1633210106,
+        "id": 164
+      },
+      {
+        "type": "lamp",
+        "x": 50.685,
+        "z": -133.49468,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 1644001637,
+        "id": 165
+      },
+      {
+        "type": "lamp",
+        "x": 66.4942,
+        "z": 49.09,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1698389318,
+        "id": 166
+      },
+      {
+        "type": "lamp",
+        "x": -2.120000000000001,
+        "z": -166.50012,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1701878076,
+        "id": 167
+      },
+      {
+        "type": "lamp",
+        "x": 133.51296,
+        "z": 51.879999999999995,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 1715503876,
+        "id": 168
+      },
+      {
+        "type": "lamp",
+        "x": 16.4982,
+        "z": 163.62,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1730745224,
+        "id": 169
+      },
+      {
+        "type": "lamp",
+        "x": 183.50268,
+        "z": -113.5,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 1743122800,
+        "id": 170
+      },
+      {
+        "type": "lamp",
+        "x": -149.535,
+        "z": -16.5186,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1794193593,
+        "id": 171
+      },
+      {
+        "type": "lamp",
+        "x": -163.145,
+        "z": -133.50156,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 1841314871,
+        "id": 172
+      },
+      {
+        "type": "lamp",
+        "x": 150.34,
+        "z": -66.48788,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 1842396568,
+        "id": 173
+      },
+      {
+        "type": "lamp",
+        "x": 166.49832,
+        "z": 50.665,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1890479633,
+        "id": 174
+      },
+      {
+        "type": "lamp",
+        "x": 83.51044,
+        "z": -151.38,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 1907759224,
+        "id": 175
+      },
+      {
+        "type": "lamp",
+        "x": -133.51144,
+        "z": 137.04,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1924243908,
+        "id": 176
+      },
+      {
+        "type": "lamp",
+        "x": -164.37,
+        "z": -83.48756,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 1929992626,
+        "id": 177
+      },
+      {
+        "type": "lamp",
+        "x": 149.805,
+        "z": -33.488839999999996,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 1995659461,
+        "id": 178
+      },
+      {
+        "type": "lamp",
+        "x": 16.5046,
+        "z": -100.445,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 1996330411,
+        "id": 179
+      },
+      {
+        "type": "lamp",
+        "x": 166.48068,
+        "z": -98.895,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 2060218721,
+        "id": 180
+      },
+      {
+        "type": "lamp",
+        "x": -166.49376,
+        "z": 149.005,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 2108031301,
+        "id": 181
+      },
+      {
+        "type": "lamp",
+        "x": -166.5008,
+        "z": -148.52,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 2119598796,
+        "id": 182
+      },
+      {
+        "type": "lamp",
+        "x": 33.49024,
+        "z": -37.224999999999994,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 2143260055,
+        "id": 183
+      },
+      {
+        "type": "lamp",
+        "x": -101.025,
+        "z": 116.49916,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 2181209295,
+        "id": 184
+      },
+      {
+        "type": "lamp",
+        "x": 166.48164,
+        "z": 113.52000000000001,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 2207578204,
+        "id": 185
+      },
+      {
+        "type": "lamp",
+        "x": -183.51576,
+        "z": 100.41,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 2240081582,
+        "id": 186
+      },
+      {
+        "type": "lamp",
+        "x": -152.205,
+        "z": 166.4946,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 2255404059,
+        "id": 187
+      },
+      {
+        "type": "lamp",
+        "x": 16.497880000000002,
+        "z": 149.55,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 2287836410,
+        "id": 188
+      },
+      {
+        "type": "lamp",
+        "x": -116.48492,
+        "z": -48.370000000000005,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 2301449826,
+        "id": 189
+      },
+      {
+        "type": "lamp",
+        "x": -66.51908,
+        "z": 0.8450000000000024,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 2314335669,
+        "id": 190
+      },
+      {
+        "type": "lamp",
+        "x": 183.50696,
+        "z": 12.844999999999999,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 2321099069,
+        "id": 191
+      },
+      {
+        "type": "lamp",
+        "x": 2.384999999999998,
+        "z": 133.4892,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 2323374977,
+        "id": 192
+      },
+      {
+        "type": "lamp",
+        "x": 33.51556,
+        "z": 50.864999999999995,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 2346554673,
+        "id": 193
+      },
+      {
+        "type": "lamp",
+        "x": -52.46,
+        "z": -166.49192,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 2349886008,
+        "id": 194
+      },
+      {
+        "type": "lamp",
+        "x": 166.48548,
+        "z": 98.43,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 2375122186,
+        "id": 195
+      },
+      {
+        "type": "lamp",
+        "x": 62.745,
+        "z": -166.51172,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 2392915049,
+        "id": 196
+      },
+      {
+        "type": "lamp",
+        "x": 100.14,
+        "z": 133.51015999999998,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 2399249528,
+        "id": 197
+      },
+      {
+        "type": "lamp",
+        "x": -33.49912,
+        "z": 98.285,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 2422697157,
+        "id": 198
+      },
+      {
+        "type": "lamp",
+        "x": 66.48208,
+        "z": -49.75,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 2457390550,
+        "id": 199
+      },
+      {
+        "type": "lamp",
+        "x": 166.5086,
+        "z": -137.375,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 2499728025,
+        "id": 200
+      },
+      {
+        "type": "lamp",
+        "x": 101.2,
+        "z": 16.50492,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 2565640740,
+        "id": 201
+      },
+      {
+        "type": "lamp",
+        "x": -101.71000000000001,
+        "z": 166.51051999999999,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 2581453158,
+        "id": 202
+      },
+      {
+        "type": "lamp",
+        "x": 83.51468,
+        "z": 12.865000000000002,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 2584035073,
+        "id": 203
+      },
+      {
+        "type": "lamp",
+        "x": 149.515,
+        "z": 33.4992,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 2607023403,
+        "id": 204
+      },
+      {
+        "type": "lamp",
+        "x": -164.445,
+        "z": 16.49336,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 2632363611,
+        "id": 205
+      },
+      {
+        "type": "lamp",
+        "x": -16.50948,
+        "z": -162.765,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 2675767947,
+        "id": 206
+      },
+      {
+        "type": "lamp",
+        "x": 63.02,
+        "z": -133.50648,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 2718362104,
+        "id": 207
+      },
+      {
+        "type": "lamp",
+        "x": -87.005,
+        "z": -83.5096,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 2730970099,
+        "id": 208
+      },
+      {
+        "type": "lamp",
+        "x": -66.48228,
+        "z": -150.16,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 2821913468,
+        "id": 209
+      },
+      {
+        "type": "lamp",
+        "x": 151.16,
+        "z": -16.493000000000002,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 2849485732,
+        "id": 210
+      },
+      {
+        "type": "lamp",
+        "x": 0.6149999999999984,
+        "z": 166.49908,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 2857055623,
+        "id": 211
+      },
+      {
+        "type": "lamp",
+        "x": 13.54,
+        "z": 183.50164,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 2898088208,
+        "id": 212
+      },
+      {
+        "type": "lamp",
+        "x": -50.614999999999995,
+        "z": -33.48544,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 2933295377,
+        "id": 213
+      },
+      {
+        "type": "lamp",
+        "x": -0.18499999999999872,
+        "z": -33.49588,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 2967133463,
+        "id": 214
+      },
+      {
+        "type": "lamp",
+        "x": 49.92,
+        "z": 166.48452,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 2977329484,
+        "id": 215
+      },
+      {
+        "type": "lamp",
+        "x": -33.50504,
+        "z": 151.57999999999998,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 2984455816,
+        "id": 216
+      },
+      {
+        "type": "lamp",
+        "x": 162.905,
+        "z": -166.4926,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 3001080081,
+        "id": 217
+      },
+      {
+        "type": "lamp",
+        "x": 152.32,
+        "z": -133.49572,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 3020361964,
+        "id": 218
+      },
+      {
+        "type": "lamp",
+        "x": 52.010000000000005,
+        "z": -16.48888,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 3034227902,
+        "id": 219
+      },
+      {
+        "type": "lamp",
+        "x": -98.12,
+        "z": -33.489760000000004,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 3068906876,
+        "id": 220
+      },
+      {
+        "type": "lamp",
+        "x": -47.685,
+        "z": 166.48028,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 3133414963,
+        "id": 221
+      },
+      {
+        "type": "lamp",
+        "x": -16.49264,
+        "z": -99.58500000000001,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 3140339583,
+        "id": 222
+      },
+      {
+        "type": "lamp",
+        "x": -133.51496,
+        "z": -149.07,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 3141118686,
+        "id": 223
+      },
+      {
+        "type": "lamp",
+        "x": 133.50432,
+        "z": -164.09,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 3164603682,
+        "id": 224
+      },
+      {
+        "type": "lamp",
+        "x": -116.50248,
+        "z": 99.19,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 3180291338,
+        "id": 225
+      },
+      {
+        "type": "lamp",
+        "x": -137.01999999999998,
+        "z": 16.49596,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 3185054096,
+        "id": 226
+      },
+      {
+        "type": "lamp",
+        "x": 2.405000000000001,
+        "z": 83.50832,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 3222358981,
+        "id": 227
+      },
+      {
+        "type": "lamp",
+        "x": 83.49492000000001,
+        "z": 100.595,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 3225083619,
+        "id": 228
+      },
+      {
+        "type": "lamp",
+        "x": -183.51808,
+        "z": -62.55,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 3288891990,
+        "id": 229
+      },
+      {
+        "type": "lamp",
+        "x": 16.488599999999998,
+        "z": -49.035,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 3300497693,
+        "id": 230
+      },
+      {
+        "type": "lamp",
+        "x": -116.50924,
+        "z": 148.135,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 3400785127,
+        "id": 231
+      },
+      {
+        "type": "lamp",
+        "x": -148.635,
+        "z": -166.50908,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 3404897773,
+        "id": 232
+      },
+      {
+        "type": "lamp",
+        "x": 99.255,
+        "z": 166.51268,
+        "radius": 0.96,
+        "yaw": 0,
+        "token": 3412718351,
+        "id": 233
+      },
+      {
+        "type": "lamp",
+        "x": -116.5168,
+        "z": 51.43,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 3424585786,
+        "id": 234
+      },
+      {
+        "type": "lamp",
+        "x": -183.4956,
+        "z": 0.09499999999999886,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 3425853519,
+        "id": 235
+      },
+      {
+        "type": "lamp",
+        "x": 2.384999999999998,
+        "z": 33.49344,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 3433824977,
+        "id": 236
+      },
+      {
+        "type": "lamp",
+        "x": -83.506,
+        "z": -1.4050000000000011,
+        "radius": 0.96,
+        "yaw": 1.5707963267948966,
+        "token": 3435113219,
+        "id": 237
+      },
+      {
+        "type": "lamp",
+        "x": 150.895,
+        "z": -166.4848,
+        "radius": 0.96,
+        "yaw": 3.141592653589793,
+        "token": 3436054679,
+        "id": 238
+      },
+      {
+        "type": "lamp",
+        "x": -16.495919999999998,
+        "z": 47.945,
+        "radius": 0.96,
+        "yaw": -1.5707963267948966,
+        "token": 3455394089,
+        "id": 239
+      }
+    ],
+    "batches": 8,
+    "triangles": 22400
+  },
+  "live": {
+    "cold": {
+      "metrics": {
+        "fps": 0,
+        "physicsMs": 29.700000000186265,
+        "renderMs": 1.1999999997206032,
+        "frameCpuMs": 31.600000000093132,
+        "frameIntervalMs": 258.4000000000001,
+        "calls": 80,
+        "triangles": 158771,
+        "quality": "high",
+        "signalBeams": 6,
+        "signalBeamTotal": 144,
+        "signalBeamSamples": 16,
+        "dpr": 1,
+        "droppedSeconds": 0.17916666666666664,
+        "trailSegments": 0
+      },
+      "camera": {
+        "position": [
+          17.64,
+          29.9,
+          -24.99
+        ],
+        "target": [
+          2.583040057751626e-18,
+          0.5,
+          2.316621998689231e-17
+        ],
+        "mode": "follow",
+        "scale": 1,
+        "far": 200,
+        "fogNear": 100,
+        "fogFar": 190,
+        "orientation": [
+          -2.275290391037114,
+          0.42879517690859686,
+          2.6866646933665073,
+          "XYZ"
+        ]
+      },
+      "profile": null
+    },
+    "moved": {
+      "telemetry": {
+        "position": {
+          "x": -1.3552974006862808,
+          "y": 0.8667417281280876,
+          "z": 2.8055816988541302
+        },
+        "speed": 29.6861629684123,
+        "signedSpeed": 8.23200419934737,
+        "heading": -0.4500082624773155,
+        "roll": 0.000008252140119879483,
+        "steer": 0,
+        "grounded": 4,
+        "slip": 0,
+        "gear": "1",
+        "damage": 0,
+        "damageState": "healthy",
+        "traction": 1,
+        "lastImpactSpeed": 0
+      },
+      "camera": {
+        "position": [
+          16.568756781798488,
+          30.32360421986286,
+          -22.606357962527323
+        ],
+        "target": [
+          -1.3254057501192307,
+          0.5,
+          2.743705624356109
+        ],
+        "mode": "follow",
+        "scale": 1.0144083067980565,
+        "far": 200,
+        "fogNear": 100,
+        "fogFar": 190,
+        "orientation": [
+          -2.2752903910371143,
+          0.4287951769085968,
+          2.6866646933665073,
+          "XYZ"
+        ]
+      },
+      "trails": 0
+    },
+    "reset": true,
+    "freeFollow": true,
+    "errors": []
+  }
+}
