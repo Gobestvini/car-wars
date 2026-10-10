@@ -4,7 +4,10 @@ import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomBytes } from 'node:crypto';
 import { newState, ingest, recover, routeMessage, enqueue, replyToJob, nextQueuedJob, describeJob, phaseLabels } from './core.js';
-import { loadState, saveState, makeTelegram, makeAgentRunner } from './runtime.js';
+import { loadState, saveState, makeTelegram } from './runtime.js';
+
+import { makeTaskPlanner } from './planner.js';
+import { statusOf } from '../tasks/queue.js';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const envPath = resolve(process.env.TELEGRAM_ENV_FILE || join(root,'.telegram-bot.env'));
@@ -42,7 +45,7 @@ const telegram = makeTelegram(token);
 const state = recover(await loadState(statePath, () => newState(randomBytes(5).toString('hex').toUpperCase())));
 await saveState(statePath,state);
 if (!state.ownerId && state.pairCode) console.log(`Код привязки сохранён локально. В Telegram отправьте /pair ${state.pairCode} в личный чат этому боту.`);
-const runner = makeAgentRunner({ root, tempRoot: resolve(root,'.telegram-worktrees'),
+const runner = makeTaskPlanner({ root,
   onProgress: async (job, progress) => {
     const previousPhase = job.phase;
     Object.assign(job,progress);
@@ -57,26 +60,34 @@ const runner = makeAgentRunner({ root, tempRoot: resolve(root,'.telegram-worktre
 let stopping = false;
 process.on('SIGINT',()=>{stopping=true;}); process.on('SIGTERM',()=>{stopping=true;});
 
+async function describeCurrentJob(job) {
+  const lines = [describeJob(job)];
+  for (const path of job.taskPaths ?? (job.taskPath && !job.worktree ? [job.taskPath] : [])) {
+    try { lines.push(`${path}: ${statusOf(await readFile(join(root,path),'utf8')) || 'нет статуса'}`); }
+    catch { lines.push(`${path}: файл недоступен`); }
+  }
+  return lines.join('\n');
+}
 async function handleAccepted(item) {
   if (item.type === 'paired') { await telegram.send(item.chatId,'Бот привязан. Отправьте /help, чтобы посмотреть команды.'); return; }
   if (item.type === 'start') return telegram.send(item.chatId,item.paired ? 'Бот привязан. Отправьте /help, чтобы посмотреть команды.' : 'Чтобы привязать личный чат, запустите локальный Telegram listener и отправьте ему выданную в его локальном журнале команду /pair CODE.');
   const message = item.message; const parsed = routeMessage(message);
-  if (parsed.command === 'help') return telegram.send(item.chatId,'Текст — запрос на правку. Фото отправляйте с подписью.\n/help — команды\n/status — очередь и состояние\n/tokens — расход по последним задачам\n/game — ссылка на игру\n/pause — приостановить обработку\n/resume — возобновить\n/reply ID ТЕКСТ — ответ на вопрос заблокированной задачи.\nЗадачу составляет 6.1 Sol, выполняет 6.0 Luna; при проблемах помогает Sol. Проверенные изменения отправляются в GitHub автоматически. Компьютер должен быть включён.');
-  if (parsed.command === 'status') return telegram.send(item.chatId,`Состояние: ${state.paused?'пауза':'работает'}\n`+(state.jobs.length ? state.jobs.slice(-12).map(j=>describeJob(j)).join('\n\n') : 'Очередь пуста.'));
+  if (parsed.command === 'help') return telegram.send(item.chatId,'Отправьте тезисы — бот создаст задания через create-task. Фото отправляйте с подписью.\n/help — команды\n/status — запросы и статусы заданий\n/tokens — расход планировщика\n/game — ссылка на игру\n/pause — приостановить создание заданий\n/resume — возобновить создание\n/reply ID ТЕКСТ — уточнить заблокированный запрос.\nБот только составляет задачи. Разработчик в Codex берёт очередь каждый час, QA — со сдвигом 15 минут.');
+  if (parsed.command === 'status') return telegram.send(item.chatId,`Состояние: ${state.paused?'пауза':'работает'}\n`+(state.jobs.length ? (await Promise.all(state.jobs.slice(-12).map(describeCurrentJob))).join('\n\n') : 'Очередь пуста.'));
   if (parsed.command === 'tokens') return telegram.send(item.chatId, state.jobs.length ? state.jobs.slice(-5).map(j => `#${j.id}: ${formatUsage(j.stages)}`).join('\n\n') : 'Очередь пуста.');
   if (parsed.command === 'game') return telegram.send(item.chatId,'https://gobestvini.github.io/car-wars/');
-  if (parsed.command === 'pause') { state.paused=true; await saveState(statePath,state); return telegram.send(item.chatId,'Новые задачи поставлены на паузу. Текущая задача завершится.'); }
-  if (parsed.command === 'resume') { state.paused=false; await saveState(statePath,state); return telegram.send(item.chatId,'Обработка очереди возобновлена.'); }
+  if (parsed.command === 'pause') { state.paused=true; await saveState(statePath,state); return telegram.send(item.chatId,'Создание заданий приостановлено. Текущее планирование завершится. Автоматизации Codex управляются отдельно.'); }
+  if (parsed.command === 'resume') { state.paused=false; await saveState(statePath,state); return telegram.send(item.chatId,'Создание заданий возобновлено.'); }
   if (parsed.command === 'reply') {
     const job=state.jobs.find(j=>j.id===parsed.id && j.status==='blocked');
     if (!job) return telegram.send(item.chatId,'Не найдена заблокированная задача с таким ID.');
     if (state.jobs.some(j=>j.updateId===message.message_id)) return;
     let previousTask = '';
-    if(job.taskPath && job.worktree) {
-      try { previousTask = await readFile(join(job.worktree,job.taskPath),'utf8'); } catch { /* request text still available */ }
+    if(job.taskPath) {
+      try { previousTask = await readFile(join(job.worktree || root,job.taskPath),'utf8'); } catch { /* request text still available */ }
     }
     replyToJob(state,job.id,parsed.text,item.chatId,message.message_id,previousTask);
-    await saveState(statePath,state); return telegram.send(item.chatId,'Ответ добавлен как новая задача с исходным контекстом.');
+    await saveState(statePath,state); return telegram.send(item.chatId,'Уточнение сохранено. Планировщик подготовит новые задания с исходным контекстом.');
   }
   if (parsed.command === 'unsupported' || parsed.command === 'usage' || parsed.command === 'unknown') return telegram.send(item.chatId,parsed.reason || parsed.text || 'Неизвестная команда. Отправьте /help.');
   if (parsed.command === 'empty') return;
@@ -128,13 +139,13 @@ async function workerLoop() {
       job.status=result.status;
       job.question=result.question ?? null;
       job.summary=result.summary ?? null;
-      job.taskPath=result.taskPath ?? null;
+      job.taskPath=result.taskPath ?? null; job.taskPaths=result.taskPaths ?? [];
       job.branch=result.branch ?? null;
       job.worktree=result.worktree ?? null;
       job.commit=result.commit ?? null;
       job.published=result.published ?? false;
-      job.notification=job.chatId ? (result.status === 'done'
-        ? `Запрос #${job.id} выполнен. ${result.summary || ''}\nЗадача: ${result.taskPath}\nКоммит: ${result.commit?.slice(0,8) || '—'}\n${result.published ? 'Изменения отправлены в GitHub. Публикация игры через GitHub Actions ещё может идти.' : result.question || 'Изменения сохранены локально.'}\nИгра: https://gobestvini.github.io/car-wars/`
+      job.notification=job.chatId ? (result.status === 'prepared'
+        ? `Запрос #${job.id}: задания созданы. ${result.summary || ''}\n${job.taskPaths.join('\n')}\nВыполнение — в Codex по часовой очереди, затем отдельный QA.${result.question ? '\n'+result.question : ''}`
         : `Запрос #${job.id}: ${result.status}. ${result.question || 'Проверьте локальный журнал.'}`) : null;
       await saveState(statePath,state);
       if (job.chatId) {

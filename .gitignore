@@ -8,6 +8,8 @@ tools/bruno-research/
 .telegram-bot.env
 .telegram-bot.state.json
 .telegram-bot.lock
+.telegram-task-queue.lock
+.telegram-task-files.lock
 .telegram-bot.pid
 .telegram-watchdog.pid
 .telegram-schema-*.json

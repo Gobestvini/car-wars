@@ -50,13 +50,13 @@ export function makeTelegram(token, fetchImpl = fetch) {
   };
 }
 
-export function runCodex({ cwd, model, prompt, schema, imagePath, env, logPath, phase = 'planning', onActivity = () => {}, spawnImpl = spawn }) {
+export function runCodex({ cwd, model, prompt, schema, imagePath, env, logPath, sandbox = 'danger-full-access', phase = 'planning', onActivity = () => {}, spawnImpl = spawn }) {
   return new Promise((resolvePromise) => {
     const schemaFile = join(cwd, `.telegram-schema-${randomUUID()}.json`);
     const resultFile = join(cwd, `.telegram-result-${randomUUID()}.json`);
     (async () => {
       await writeFile(schemaFile, JSON.stringify(schema));
-      const args = ['-a','never','exec','--ignore-user-config','--ephemeral','--json','--skip-git-repo-check','-s','danger-full-access','-C',cwd,'-m',model,'--output-schema',schemaFile,'-o',resultFile];
+      const args = ['-a','never','exec','--ignore-user-config','--ephemeral','--json','--skip-git-repo-check','-s',sandbox,'-C',cwd,'-m',model,'--output-schema',schemaFile,'-o',resultFile];
       const settings = economySettings(phase);
       args.push('-c', `model_reasoning_effort="${settings.effort}"`, '-c', `tool_output_token_limit=${settings.toolOutputTokenLimit}`);
       if (imagePath) args.splice(args.length, 0, '--image', imagePath);
