@@ -78,13 +78,13 @@ test('blur control preserves disabled/strong values and migrates older profiles 
 test('blur focus size persists independently and old profiles keep the default', () => {
   const storage = memoryStorage();
   storage.setItem(SETTINGS_DEFAULTS_KEY, JSON.stringify({ version: 1, values: { blurStrength: 1.5 } }));
-  assert.equal(readSettingsDefaults(storage, defaults).blurFocusSize, 68);
-  for (const blurFocusSize of [20, 51, 68, 90]) {
+  assert.equal(readSettingsDefaults(storage, defaults).blurFocusSize, defaults.blurFocusSize);
+  for (const blurFocusSize of [20, 51, defaults.blurFocusSize, 90]) {
     saveSettingsDefaults(storage, { ...defaults, blurFocusSize }, defaults);
     assert.equal(readSettingsDefaults(storage, defaults).blurFocusSize, blurFocusSize);
   }
-  for (const blurFocusSize of [19, 91, 68.5, '68']) {
+  for (const blurFocusSize of [19, 91, defaults.blurFocusSize + 0.5, String(defaults.blurFocusSize)]) {
     storage.setItem(SETTINGS_DEFAULTS_KEY, JSON.stringify({ version: 1, values: { blurFocusSize } }));
-    assert.equal(readSettingsDefaults(storage, defaults).blurFocusSize, 68);
+    assert.equal(readSettingsDefaults(storage, defaults).blurFocusSize, defaults.blurFocusSize);
   }
 });
