@@ -15,8 +15,8 @@
   "objects": [
     {
       "name": "body",
-      "triangles": 1340,
-      "vertices": 748,
+      "triangles": 1308,
+      "vertices": 732,
       "materials": 1,
       "scale": [
         1.0,
@@ -69,8 +69,8 @@
       ]
     }
   ],
-  "triangles": 2092,
-  "glb_bytes": 144868,
+  "triangles": 2060,
+  "glb_bytes": 141444,
   "textures": 1,
   "atlas_size": [
     512,

@@ -1,12 +1,15 @@
 # Машина игрока — текстурированная версия
 
+[Сверка с концептом в семи игровых ракурсах](concept-review/README.md) и
+[сравнение «концепт — было — стало»](concept-review/comparison.png).
+
 Обновлена 2026-10-10. Геометрия и UV-атлас написаны для CarWars скриптом
 `tools/build-player-sedan.py` в Blender 5.2.2 LTS по существующему жёлтому
 концепту `docs/art/vehicles/2026-10-09/01-yellow-getaway.png`.
 Сторонние модели и текстуры не использованы. Концепт и атлас упакованы в
 [редактируемый исходник](player-sedan.blend).
 
-Игровая модель: `public/models/player-sedan.glb`. 2092 треугольника, пять мешей,
+Игровая модель: `public/models/player-sedan.glb`. 2060 треугольников, пять мешей,
 один общий материал и один непрозрачный sRGB-атлас 512×512.
 [Статистика экспорта](asset-report.json), [атлас](sedan-atlas.png),
 [превью Blender](preview.png).

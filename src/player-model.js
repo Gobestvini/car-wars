@@ -15,7 +15,7 @@ export function offsetPlayerWheel(pivot, wheel, car, detached = false) {
   }
   pivot.position.addScaledVector(wheelUp, -(wheel.radius - PLAYER_VISUAL_WHEEL_RADIUS));
   const localY = wheelDelta.copy(pivot.position).sub(car.position).dot(wheelUp);
-  if (localY > -.46) pivot.position.addScaledVector(wheelUp, -.46 - localY);
+  if (localY > -.48) pivot.position.addScaledVector(wheelUp, -.48 - localY);
 }
 export const PLAYER_WHEEL_NAMES = Object.freeze([
   'wheel-front-left', 'wheel-front-right', 'wheel-rear-left', 'wheel-rear-right',

@@ -120,8 +120,9 @@ test('smaller visual tires retain ground contact and fit their arches at full st
     for(let i=0;i<positions.count;i++) {
       p.fromBufferAttribute(positions,i).applyMatrix4(pivot.matrixWorld);
       // Every tire vertex that could meet a body side lies inside the cutout
-      // (16-sided radius .49 cutout has an inscribed radius > .48).
-      if(p.y>-.44 && Math.abs(p.x)>.85) assert.ok(Math.hypot(p.z-1.15,p.y+.54)<.48);
+      // (16-sided radius .42 cutout has an inscribed radius > .41).
+      if(p.y>-.44 && Math.abs(p.x)>.85) assert.ok(Math.hypot(p.z-1.15,p.y+.51)<.41,
+        `Tire clearance at suspension ${localY}, steer ${angle}: ${p.toArray()}`);
     }
   }
   car.position.y=.9;pivot.position.set(-.77,.45,1.15);
