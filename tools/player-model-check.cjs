@@ -31,7 +31,7 @@ fs.mkdirSync(out, { recursive: true });
     assert.equal(initial.model.meshes, 5);
     assert.equal(initial.model.materials, 1);
     assert.equal(initial.model.textures, 1);
-    assert.ok(initial.model.triangles <= 2500);
+    assert.ok(initial.model.triangles <= 4500);
     assert.ok(initial.model.lights.lensVertices.every(count => count > 0));
     assert.equal(initial.model.lights.reverse, false);
     assert.equal(initial.telemetry.grounded, 4);
@@ -111,7 +111,7 @@ fs.mkdirSync(out, { recursive: true });
       const lights = createPlayerLights(body); model.add(lights.glow);
       scene.add(model);
       const floor = new THREE.Mesh(new THREE.PlaneGeometry(100,100), new THREE.MeshStandardMaterial({ color: '#dbd8cf', roughness: 1 }));
-      floor.rotation.x = -Math.PI/2; floor.position.y = -.99; floor.receiveShadow = true; scene.add(floor);
+      floor.rotation.x = -Math.PI/2; floor.position.y = -.87; floor.receiveShadow = true; scene.add(floor);
       const camera = new THREE.PerspectiveCamera(38, innerWidth/innerHeight,.1,100);
       window.preview = { renderer, scene, camera, model, body, wheels, lights, draw: (rear=false, reverse=false) => {
         lights.update({ signedSpeed: reverse ? -2 : 0 });

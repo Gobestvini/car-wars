@@ -16,6 +16,10 @@ async function loadAsset() {
   const json = JSON.parse(bytes.toString('utf8', 20, 20 + length));
   assert.equal(json.images.length, 1);
   assert.equal(json.images[0].mimeType, 'image/png');
+  const imageView=json.bufferViews[json.images[0].bufferView];
+  const pngOffset=20+length+8+(imageView.byteOffset||0);
+  assert.equal(bytes.readUInt32BE(pngOffset+16),1024);
+  assert.equal(bytes.readUInt32BE(pngOffset+20),1024);
   assert.ok(json.materials[0].pbrMetallicRoughness.baseColorTexture);
   delete json.materials[0].pbrMetallicRoughness.baseColorTexture;
   const text = JSON.stringify(json);
@@ -29,7 +33,7 @@ async function loadAsset() {
   const stripped = Buffer.concat([header,padded,binary]);
   const data = stripped.buffer.slice(stripped.byteOffset,stripped.byteOffset+stripped.byteLength);
   const result = preparePlayerModel((await new GLTFLoader().parseAsync(data, '')).scene);
-  result.body.material.map = new THREE.DataTexture(new Uint8Array(512*512*4),512,512);
+  result.body.material.map = new THREE.DataTexture(new Uint8Array(1024*1024*4),1024,1024);
   return result;
 }
 
@@ -43,7 +47,7 @@ test('textured GLB fits simulation mounts and shares one atlas across five meshe
   let triangles = 0;
   for (const mesh of meshes) {
     assert.ok(!Array.isArray(mesh.material));
-    assert.equal(mesh.material.map.image.width, 512);
+    assert.equal(mesh.material.map.image.width, 1024);
     assert.equal(mesh.material.vertexColors, false);
     assert.equal(mesh.material.side, THREE.FrontSide);
     assert.ok(mesh.geometry.attributes.uv);
@@ -52,19 +56,19 @@ test('textured GLB fits simulation mounts and shares one atlas across five meshe
     assert.deepEqual(mesh.scale.toArray(), [1, 1, 1]);
     triangles += (mesh.geometry.index?.count ?? mesh.geometry.attributes.position.count) / 3;
   }
-  assert.ok(triangles <= 2500, `Triangle budget: ${triangles}`);
+  assert.ok(triangles <= 4500, `Triangle budget: ${triangles}`);
   body.geometry.computeBoundingBox();
   const bounds = body.geometry.boundingBox;
   assert.ok(bounds.min.z >= -2.20 && bounds.max.z <= 2.20);
-  assert.ok(bounds.max.y <= .90 && bounds.min.y >= -.48);
+  assert.ok(bounds.max.y <= .90 && bounds.min.y >= -.56);
   assert.ok(bounds.max.x <= 1.06 && bounds.min.x >= -1.06);
   for (const [i, wheel] of wheels.entries()) {
     assert.ok(Math.abs(wheel.position.x - sim.wheels[i].mount.x) < 1e-5);
     assert.ok(Math.abs(wheel.position.z - sim.wheels[i].mount.z) < 1e-5);
     wheel.geometry.computeBoundingBox();
     const size = wheel.geometry.boundingBox.getSize(new THREE.Vector3());
-    assert.ok(Math.abs(size.y / 2 - .36) < 1e-5);
-    assert.ok(Math.abs(size.z / 2 - .36) < 1e-5);
+    assert.ok(Math.abs(size.y / 2 - .43) < 1e-5);
+    assert.ok(Math.abs(size.z / 2 - .43) < 1e-5);
     assert.ok(size.x <= .26);
     assert.ok(wheel.geometry.boundingBox.getCenter(new THREE.Vector3()).length() < 1e-5);
   }
@@ -120,12 +124,12 @@ test('smaller visual tires retain ground contact and fit their arches at full st
     for(let i=0;i<positions.count;i++) {
       p.fromBufferAttribute(positions,i).applyMatrix4(pivot.matrixWorld);
       // Every tire vertex that could meet a body side lies inside the cutout
-      // (16-sided radius .42 cutout has an inscribed radius > .41).
-      if(p.y>-.44 && Math.abs(p.x)>.85) assert.ok(Math.hypot(p.z-1.15,p.y+.51)<.41,
+      // (20-sided radius .49 cutout has an inscribed radius > .48).
+      if(p.y>-.54 && Math.abs(p.x)>.90) assert.ok(Math.hypot(p.z-1.15,p.y+.44)<.48,
         `Tire clearance at suspension ${localY}, steer ${angle}: ${p.toArray()}`);
     }
   }
   car.position.y=.9;pivot.position.set(-.77,.45,1.15);
   offsetPlayerWheel(pivot,sim.wheels[0],car);
-  assert.ok(Math.abs(pivot.position.y-.36)<1e-6);
+  assert.ok(Math.abs(pivot.position.y-.43)<1e-6);
 });

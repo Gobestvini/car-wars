@@ -8,6 +8,7 @@ const base = process.env.CARWARS_BASE_URL || 'http://127.0.0.1:5176/';
 const phase = process.argv[2] || 'after';
 assert.ok(['before','after'].includes(phase));
 const out = `docs/art/models/player-sedan-v2/concept-review/${phase}`;
+const baselineCommit='a0469ae';
 fs.mkdirSync(out,{recursive:true});
 const views = {
   front:[0,.6,13], rear:[0,.6,-13], left:[13,.6,0], right:[-13,.6,0],
@@ -21,8 +22,17 @@ const views = {
     page.on('pageerror',error=>errors.push(error.message));
     page.on('console',message=>{if(message.type()==='error' && /Shader|WebGL/.test(message.text()))errors.push(message.text());});
     if(phase==='before') {
-      const baseline=execFileSync('git',['show','409da4b:public/models/player-sedan.glb'],{maxBuffer:4*1024*1024});
+      const baseline=execFileSync('git',['show',`${baselineCommit}:public/models/player-sedan.glb`],{maxBuffer:4*1024*1024});
       await page.route('**/models/player-sedan.glb',route=>route.fulfill({contentType:'model/gltf-binary',body:baseline}));
+      for (const name of ['player-model','player-lights']) {
+        await page.route(`**/src/${name}.js*`,async route=>{
+          const response=await route.fetch();
+          const current=await response.text();
+          const importedThree=current.match(/^import\s+\*\s+as\s+THREE\s+from\s+[^;]+;/m)[0];
+          const oldSource=execFileSync('git',['show',`${baselineCommit}:src/${name}.js`],{encoding:'utf8'});
+          await route.fulfill({response,body:oldSource.replace(/^import\s+\*\s+as\s+THREE\s+from\s+[^;]+;/m,importedThree)});
+        });
+      }
     }
     await page.addInitScript(()=>localStorage.setItem('carwars.defaults.v1',JSON.stringify({version:1,values:{quality:'Высокая',trafficCount:0,policeCount:0,blurStrength:0}})));
     await page.route('**/src/main.js*',async route=>{
@@ -48,7 +58,7 @@ const views = {
       await page.screenshot({path:`${out}/${name}.png`});
     }
     assert.deepEqual(errors,[]);
-    fs.writeFileSync(`${out}/report.json`,JSON.stringify({views:Object.keys(views),model:await page.evaluate(()=>carLab.playerModel()),errors},null,2)+'\n');
+    fs.writeFileSync(`${out}/report.json`,JSON.stringify({baselineCommit:phase==='before'?baselineCommit:null,views:Object.keys(views),model:await page.evaluate(()=>carLab.playerModel()),errors},null,2)+'\n');
     console.log(`Captured ${Object.keys(views).length} in-game views: ${out}`);
   } finally { await browser.close(); }
 })().catch(error=>{console.error(error);process.exitCode=1});

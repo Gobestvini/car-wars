@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 export const PLAYER_MODEL_URL = 'models/player-sedan.glb';
-export const PLAYER_VISUAL_WHEEL_RADIUS = .36;
+export const PLAYER_VISUAL_WHEEL_RADIUS = .43;
 const wheelUp = new THREE.Vector3();
 const wheelDelta = new THREE.Vector3();
 
@@ -15,7 +15,7 @@ export function offsetPlayerWheel(pivot, wheel, car, detached = false) {
   }
   pivot.position.addScaledVector(wheelUp, -(wheel.radius - PLAYER_VISUAL_WHEEL_RADIUS));
   const localY = wheelDelta.copy(pivot.position).sub(car.position).dot(wheelUp);
-  if (localY > -.48) pivot.position.addScaledVector(wheelUp, -.48 - localY);
+  if (localY > -.42) pivot.position.addScaledVector(wheelUp, -.42 - localY);
 }
 export const PLAYER_WHEEL_NAMES = Object.freeze([
   'wheel-front-left', 'wheel-front-right', 'wheel-rear-left', 'wheel-rear-right',

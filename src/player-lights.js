@@ -5,35 +5,47 @@ const HEAD = 8, TAIL = 10;
 export function createPlayerLights(body) {
   const material = body.material;
   const reverse = { value: 0 };
-  material.roughness = .96;
+  material.roughness = .72;
   material.metalness = 0;
   material.onBeforeCompile = shader => {
     shader.uniforms.playerReverse = reverse;
     shader.fragmentShader = 'uniform float playerReverse;\n' + shader.fragmentShader;
+    shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', `
+      #include <roughnessmap_fragment>
+      #ifdef USE_MAP
+        float surfaceTile = floor(vMapUv.x * 4.0) + 4.0 * (3.0 - floor(vMapUv.y * 4.0));
+        if (surfaceTile >= 1.0 && surfaceTile <= 3.0) roughnessFactor = 1.0;
+      #endif
+    `);
     shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', `
       #include <emissivemap_fragment>
       #ifdef USE_MAP
         float lampTile = floor(vMapUv.x * 4.0) + 4.0 * (3.0 - floor(vMapUv.y * 4.0));
         float headMask = 1.0 - step(0.5, abs(lampTile - 8.0));
         float tailMask = 1.0 - step(0.5, abs(lampTile - 10.0));
+        float pigmentMask = step(0.4, diffuseColor.r) * step(0.15, diffuseColor.g) * (1.0-step(0.10,diffuseColor.b));
         // The rear lens is red in every state. Reversing raises its intensity
         // instead of swapping to a white lens, matching the compact concept.
         // Suppress the lens's blue/green channels under the bright game light
         // so ACES does not wash a glowing red lamp into pink.
         diffuseColor.rgb *= mix(vec3(1.0), vec3(1.0, 0.12, 0.08), tailMask);
-        totalEmissiveRadiance += diffuseColor.rgb * headMask * 3.2
-          + vec3(1.0, 0.002, 0.001) * tailMask * (0.45 + playerReverse * 1.2);
+        totalEmissiveRadiance += diffuseColor.rgb * headMask * 1.8
+          + vec3(1.0, 0.002, 0.001) * diffuseColor.r * tailMask * (0.45 + playerReverse * 1.2)
+          + diffuseColor.rgb * pigmentMask * 0.18;
       #endif
     `);
     // Keep saturated red after the game's ACES highlight desaturation.
     shader.fragmentShader = shader.fragmentShader.replace('#include <tonemapping_fragment>', `
       #include <tonemapping_fragment>
       #ifdef USE_MAP
+        // Keep the concept's golden pigment under the bright city sunlight.
+        float goldMask = step(0.4, diffuseColor.r) * step(0.15, diffuseColor.g) * (1.0-step(0.10,diffuseColor.b));
+        gl_FragColor.rgb *= mix(vec3(1.0),vec3(1.04,0.94,0.58),goldMask);
         gl_FragColor.rgb *= mix(vec3(1.0), vec3(1.0, 0.025, 0.025), tailMask);
       #endif
     `);
   };
-  material.customProgramCacheKey = () => 'car-stars-red-tail-lamps-v3';
+  material.customProgramCacheKey = () => 'car-stars-concept-surface-v4';
   material.needsUpdate = true;
 
   // Four camera-facing soft halos in one draw call. Centres track deformed

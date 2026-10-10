@@ -18,79 +18,32 @@ bpy.ops.object.delete(use_global=False)
 for block in list(bpy.data.materials):
     bpy.data.materials.remove(block)
 
-COLORS = {'paint': '#ffc12f', 'glass': '#202c49', 'trim': '#535a6b',
-          'tire': '#20252e', 'hub': '#afb6c5', 'grille': '#19202d',
-          'lamp': '#fff0b8', 'amber': '#e7a227', 'tail': '#db3345'}
+import sys
+sys.dont_write_bytecode=True
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from sedan_texture import COLORS, TILES, SIZE, shade
 
 def linear(hex_color):
     rgb = [int(hex_color[i:i+2], 16) / 255 for i in (1, 3, 5)]
     return tuple(v / 12.92 if v <= .04045 else ((v + .055) / 1.055)**2.4 for v in rgb) + (1,)
 
-material = bpy.data.materials.new('Car matte vertex palette')
+material = bpy.data.materials.new('Car Stars shared concept atlas')
 material.use_nodes = True
 material.use_backface_culling = True
 shader = material.node_tree.nodes.get('Principled BSDF')
-shader.inputs['Roughness'].default_value = .94
+shader.inputs['Roughness'].default_value = .72
 shader.inputs['Metallic'].default_value = 0
-shader.inputs['Specular IOR Level'].default_value = .08
+shader.inputs['Specular IOR Level'].default_value = .22
 
-# Hand-authored, deterministic UV atlas: no baked illumination or layered glass.
-TILES = ['paint','windshield','rear-glass','side-glass','trim','tire','hub','grille',
-         'lamp','amber','tail','plate','doors','hood','trunk','roof']
-SIZE=512
-atlas=bpy.data.images.new('Car Stars shared sedan atlas 512',width=SIZE,height=SIZE,alpha=True)
+# One shared authored texture. Cell padding keeps mipmaps inside each surface.
+atlas=bpy.data.images.new('Car Stars concept sedan atlas 1024',width=SIZE,height=SIZE,alpha=True)
 atlas.colorspace_settings.name='sRGB'
 pixels=[]
+cell=SIZE//4
 for y in range(SIZE):
     for x in range(SIZE):
-        tile=TILES[(x//128)+4*(y//128)]
-        u,v=(x%128)/127,(y%128)/127
-        color=COLORS.get(tile,COLORS['paint'])
-        factor=1
-        if tile in ['windshield','rear-glass','side-glass']:
-            inside=.09<u<.91 and .13<v<.87
-            pillar=tile=='side-glass' and .48<u<.52 and .13<v<.87
-            if pillar:
-                inside=False
-            color=COLORS['trim'] if pillar else (COLORS['glass'] if inside else COLORS['paint'])
-            if inside:
-                factor=.84+.23*v
-                # A restrained broad blue tint, not a moving/specular reflection.
-                if .60 < u+.35*v < .67:
-                    factor+=.12
-        elif tile=='doors':
-            # Strong, game-scale seams survive mip filtering and motion.
-            # Body side UV spans the whole 4.12m length, including fenders.
-            # Match seams to the longer concept cabin, B pillar at z=-.12.
-            if v<.32:
-                color=COLORS['trim']
-            seam=any(abs(u-edge)<.004 for edge in [.282,.529,.791])
-            if (seam and .10<v<.98) or (.282<u<.791 and .09<v<.115):
-                color='#805b25'
-            elif (.350<u<.386 or .615<u<.651) and .78<v<.835:
-                color=COLORS['trim']
-            factor=.97+.03*v
-        elif tile in ['hood','trunk','roof']:
-            if tile=='hood' and (.10<u<.12 or .88<u<.90) and .08<v<.94:
-                color='#e4a729'
-            elif min(u,1-u,v,1-v)<.025:
-                color='#f4b12e'
-        elif tile=='grille':
-            color=COLORS['trim'] if int(v*9)%3==0 else COLORS['grille']
-        elif tile=='plate':
-            color='#202938' if min(u,1-u,v,1-v)>.07 else '#414958'
-        elif tile in ['lamp','tail']:
-            color=COLORS['lamp'] if tile=='lamp' else COLORS['tail']
-            factor=.88+.12*v
-            if min(u,1-u,v,1-v)<.04:
-                factor=.65
-            elif int(u*10)%3==0:
-                factor*=.94
-        elif tile=='hub':
-            r=math.hypot(u-.5,v-.5)
-            color='#8c95aa' if r>.43 else COLORS['hub']
-        rgb=[int(color[i:i+2],16)/255 for i in (1,3,5)]
-        pixels.extend([min(1,c*factor) for c in rgb]+[1])
+        tile=TILES[(x//cell)+4*(y//cell)]
+        pixels.extend(shade(tile,(x%cell)/(cell-1),(y%cell)/(cell-1)))
 atlas.pixels.foreach_set(pixels)
 atlas.filepath_raw=str(OUT/'sedan-atlas.png')
 atlas.file_format='PNG'
@@ -115,8 +68,26 @@ def uv_tile(obj,tile,face_tiles=None):
         for loop in poly.loop_indices:
             p=obj.data.vertices[obj.data.loops[loop].vertex_index].co
             values=[(p[a]-low[a])/max(high[a]-low[a],1e-6) for a in axes]
-            uv.data[loop].uv=((tid%4+(4+values[0]*119)/128)/4,
-                              (tid//4+(4+values[1]*119)/128)/4)
+            uv.data[loop].uv=((tid%4+.03125+values[0]*.9375)/4,
+                              (tid//4+.03125+values[1]*.9375)/4)
+
+def quad_uv(obj,face_tiles,faces,corners):
+    """Map each cabin quad to its own tile, without world-axis stretching."""
+    uv=obj.data.uv_layers.active
+    for poly in obj.data.polygons:
+        tid=TILES.index(face_tiles[poly.index])
+        by_vertex=dict(zip(faces[poly.index],corners[poly.index]))
+        for loop in poly.loop_indices:
+            index=obj.data.loops[loop].vertex_index
+            p=obj.data.vertices[index].co
+            if face_tiles[poly.index]=='side-glass':
+                u,v=(-p.y+1.10)/2.03,(p.z-.32)/.52
+            elif face_tiles[poly.index] in ['windshield','rear-glass']:
+                u,v=(p.x+.835)/1.67,(p.z-.32)/.52
+            else:
+                u,v=by_vertex[index]
+            uv.data[loop].uv=((tid%4+.03125+u*.9375)/4,
+                              (tid//4+.03125+v*.9375)/4)
 
 def convert(p):
     return (p[0], -p[2], p[1])
@@ -174,19 +145,19 @@ def box(name, center, size, color, bevel=0):
     if bevel:
         mod = obj.modifiers.new('Single segment edge chamfer', 'BEVEL')
         mod.width = bevel
-        mod.segments = 1
+        mod.segments = 2
         bpy.ops.object.modifier_apply(modifier=mod.name)
     return colorize(obj, color)
 
 parts = []
-shell = box('Quarter panels and hood', (0, -.07, 0), (1.74, .74, 4.12), 'paint')
+shell = box('Quarter panels and hood', (0, -.11, 0), (1.82, .86, 4.0), 'paint')
 active(shell)
 sub = shell.modifiers.new('Local impact support grid', 'SUBSURF')
 sub.subdivision_type = 'SIMPLE'
 sub.levels = 2
 bpy.ops.object.modifier_apply(modifier=sub.name)
 for z in [-1.15, 1.15]:
-    bpy.ops.mesh.primitive_cylinder_add(vertices=16, radius=.42, depth=2.4, location=convert((0, -.51, z)), rotation=(0, math.pi/2, 0))
+    bpy.ops.mesh.primitive_cylinder_add(vertices=20, radius=.49, depth=2.4, location=convert((0, -.44, z)), rotation=(0, math.pi/2, 0))
     cutter = bpy.context.object
     active(shell)
     mod = shell.modifiers.new('Wheel clearance', 'BOOLEAN')
@@ -197,13 +168,13 @@ for z in [-1.15, 1.15]:
 for vertex in shell.data.vertices:
     game_z=-vertex.co.y
     if vertex.co.z>.15:
-        slope=max(0,(game_z-.98)/1.08,(-game_z-1.22)/.84)
-        vertex.co.z-=.065*slope
+        slope=max(0,(game_z-.93)/1.07,(-game_z-1.10)/.90)
+        vertex.co.z-=.075*slope
 shell.data.update()
 active(shell)
 edge = shell.modifiers.new('Body edge chamfer', 'BEVEL')
-edge.width = .035
-edge.segments = 1
+edge.width = .055
+edge.segments = 2
 edge.angle_limit = .6
 bpy.ops.object.modifier_apply(modifier=edge.name)
 colorize(shell, 'paint')
@@ -212,7 +183,7 @@ def shell_tile(p):
         return 'doors'
     # Boolean cut surfaces inside the wheel wells should be dark rubber/trim,
     # not yellow body paint visible above the smaller tire.
-    if any(.38<math.hypot(-p.center.y-z,p.center.z+.51)<.45 for z in [-1.15,1.15]):
+    if any(.43<math.hypot(-p.center.y-z,p.center.z+.44)<.53 for z in [-1.15,1.15]):
         return 'trim'
     if p.normal.z>.9:
         return 'hood' if p.center.y<0 else 'trunk'
@@ -221,45 +192,47 @@ uv_tile(shell,'paint',shell_tile)
 parts.append(shell)
 
 # Concept has a long roof and two full doors; opaque windows share cabin faces.
-points = [(-.79,.30,-1.22),(.79,.30,-1.22),(.79,.30,.98),(-.79,.30,.98),
-          (-.66,.83,-.82),(.66,.83,-.82),(.66,.83,.57),(-.66,.83,.57)]
-cab=mesh('Painted cabin with flush textured windows',points,
-         [(0,3,2,1),(4,5,6,7),(0,1,5,4),(3,7,6,2),(0,4,7,3),(1,2,6,5)],'paint')
-uv_tile(cab,'paint',lambda p:'side-glass' if abs(p.normal.x)>.8 else
-        ('windshield' if p.normal.y<-.4 else ('rear-glass' if p.normal.y>.4 else 'roof')))
+points = [(-.835,.32,-1.10),(.835,.32,-1.10),(.835,.32,.93),(-.835,.32,.93),
+          (-.70,.84,-.82),(.70,.84,-.82),(.70,.84,.53),(-.70,.84,.53)]
+cabin_faces=[(0,3,2,1),(4,5,6,7),(0,1,5,4),(3,7,6,2),(0,4,7,3),(1,2,6,5)]
+cab=mesh('Painted cabin with flush textured windows',points,cabin_faces,'paint')
+quad_uv(cab,['paint','roof','rear-glass','windshield','side-glass','side-glass'],cabin_faces,[
+    [(0,0),(0,1),(1,1),(1,0)],[(0,0),(1,0),(1,1),(0,1)],
+    [(0,0),(1,0),(1,1),(0,1)],[(0,0),(0,1),(1,1),(1,0)],
+    [(0,0),(0,1),(1,1),(1,0)],[(0,0),(1,0),(1,1),(0,1)]])
 parts.append(cab)
 for side in [-1,1]:
-    parts.append(box('Side sill', (side*.88,-.345,0), (.045,.17,1.42), 'trim', .008))
+    parts.append(box('Side sill', (side*.918,-.46,0), (.035,.16,1.26), 'trim', .015))
     # Door seams and window pillars are flush atlas details. No floating strips
     # or separate glass sheets that can intersect when the cabin deforms.
     # Dark arch strips, following the actual cutout, without boolean/rig at runtime.
     for z in [-1.15,1.15]:
         ring = []
-        for radius in [.422,.465]:
-            for i in range(9):
-                start = math.asin(.10/radius)
-                angle = start + (math.pi - 2*start)*i/8
-                ring.append((side*.878, -.51+radius*math.sin(angle), z+radius*math.cos(angle)))
-        parts.append(mesh('Wheel arch trim', ring, [(i,i+1,i+10,i+9) for i in range(8)], 'trim'))
+        for radius in [.492,.535]:
+            for i in range(11):
+                start = math.asin(-.08/radius)
+                angle = start + (math.pi - 2*start)*i/10
+                ring.append((side*.918, -.44+radius*math.sin(angle), z+radius*math.cos(angle)))
+        parts.append(mesh('Wheel arch trim', ring, [(i,i+1,i+12,i+11) for i in range(10)], 'trim'))
 for z in [-2.08,2.08]:
-    bumper_z = 2.09 if z > 0 else -2.09
-    parts.append(box('Bumper', (0,-.29,bumper_z), (1.82,.30,.20), 'trim', .028))
+    bumper_z = 2.015 if z > 0 else -2.015
+    parts.append(box('Bumper', (0,-.37,bumper_z), (1.90,.34,.21), 'trim', .035))
     for side in [-1,1]:
-        parts.append(box('Bumper corner return', (side*.878,-.29,(1 if z>0 else -1)*1.96), (.065,.30,.30), 'trim', .015))
+        parts.append(box('Bumper corner return', (side*.920,-.37,(1 if z>0 else -1)*1.88), (.065,.34,.30), 'trim', .025))
     if z>0:
-        parts.append(box('Dark grille', (0,.075,2.065), (.91,.21,.04), 'grille'))
+        parts.append(box('Dark grille', (0,-.01,2.007), (.94,.26,.04), 'grille', .012))
         for x in [-.635,.635]:
-            parts.append(box('Amber headlamp surround', (x,.075,2.075), (.39,.275,.04), 'amber', .012))
-            parts.append(box('Cream square headlamp', (x,.075,2.097), (.32,.215,.014), 'lamp', .006))
+            parts.append(box('Amber headlamp surround', (x,-.005,2.016), (.405,.325,.04), 'amber', .015))
+            parts.append(box('Cream square headlamp', (x,-.005,2.037), (.335,.265,.014), 'lamp', .009))
     else:
-        plate=box('Rear plate recess', (0,.045,-2.065), (.64,.19,.04), 'grille', .01)
+        plate=box('Rear plate recess', (0,-.01,-2.007), (.68,.23,.04), 'grille', .014)
         uv_tile(plate,'plate')
         parts.append(plate)
         for x in [-.64,.64]:
             # Rear lamps are a single red lens. Reverse adds red intensity in
             # the runtime shader instead of introducing a white lens.
-            parts.append(box('Tail lamp', (x,.065,-2.075), (.37,.23,.04), 'tail', .009))
-parts.append(box('Simple underbody', (0,-.435,0), (1.22,.06,2.8), 'grille', .01))
+            parts.append(box('Tail lamp', (x,-.005,-2.016), (.35,.23,.04), 'tail', .014))
+parts.append(box('Simple underbody', (0,-.51,0), (1.22,.06,2.8), 'grille', .01))
 
 active(shell)
 for obj in parts:
@@ -275,8 +248,8 @@ body['deformation'] = 'Grid supports local collision dents; no collider change'
 
 def wheel(name, x, z):
     verts, faces, face_colors = [], [], []
-    steps = 12
-    for axle,radius in [(-.12,.32),(-.09,.36),(.09,.36),(.12,.32)]:
+    steps = 16
+    for axle,radius in [(-.125,.385),(-.085,.43),(.085,.43),(.125,.385)]:
         for i in range(steps):
             a = 2*math.pi*i/steps
             verts.append((axle,radius*math.cos(a),radius*math.sin(a)))
@@ -287,16 +260,16 @@ def wheel(name, x, z):
             face_colors.append('tire')
     for side in [-1,1]:
         offset = len(verts)
-        for radius in [.32,.228,.204]:
+        for radius in [.385,.28,.265,.235]:
             for i in range(steps):
                 a=2*math.pi*i/steps
-                verts.append((side*(.121 + (.006 if radius<.25 else 0)),radius*math.cos(a),radius*math.sin(a)))
-        for ring,col in [(0,'tire'),(1,'trim')]:
+                verts.append((side*(.126 + (.004 if radius<.29 else 0)),radius*math.cos(a),radius*math.sin(a)))
+        for ring,col in [(0,'tire'),(1,'hub'),(2,'hub')]:
             for i in range(steps):
                 j=(i+1)%steps
                 faces.append((offset+ring*steps+i,offset+ring*steps+j,offset+(ring+1)*steps+j,offset+(ring+1)*steps+i))
                 face_colors.append(col)
-        faces.append(tuple(offset+2*steps+i for i in range(steps)))
+        faces.append(tuple(offset+3*steps+i for i in range(steps)))
         face_colors.append('hub')
     obj = mesh(name,verts,faces,'tire')
     attr=obj.data.color_attributes['Color']
@@ -304,7 +277,15 @@ def wheel(name, x, z):
         for loop in poly.loop_indices:
             attr.data[loop].color=linear(COLORS[col])
     uv_tile(obj,'tire',lambda p:face_colors[p.index])
-    obj.location=convert((x,-.63,z))
+    for poly in obj.data.polygons:
+        poly.use_smooth=True
+        if face_colors[poly.index]=='hub':
+            tid=TILES.index('hub')
+            for loop in poly.loop_indices:
+                p=obj.data.vertices[obj.data.loops[loop].vertex_index].co
+                u,v=.5+p.y/.56,.5+p.z/.56
+                obj.data.uv_layers.active.data[loop].uv=((tid%4+.03125+u*.9375)/4,(tid//4+.03125+v*.9375)/4)
+    obj.location=convert((x,-.44,z))
     return obj
 
 wheels=[wheel('wheel-front-left',-.77,1.15),wheel('wheel-front-right',.77,1.15),
@@ -312,6 +293,20 @@ wheels=[wheel('wheel-front-left',-.77,1.15),wheel('wheel-front-right',.77,1.15),
 car_objects = [body]+wheels
 for obj in car_objects:
     active(obj)
+    if obj==body:
+        for poly in obj.data.polygons:
+            poly.use_smooth=True
+        bm=bmesh.new()
+        bm.from_mesh(obj.data)
+        for edge in bm.edges:
+            if edge.is_manifold and edge.calc_face_angle()>.55:
+                edge.smooth=False
+        bm.to_mesh(obj.data)
+        bm.free()
+        normals=obj.modifiers.new('Broad panels and rounded chamfers','WEIGHTED_NORMAL')
+        normals.keep_sharp=True
+        normals.weight=50
+        bpy.ops.object.modifier_apply(modifier=normals.name)
     # Ensure one material primitive per object, even after joining all colored parts.
     obj.data.materials.clear()
     obj.data.materials.append(material)
@@ -339,7 +334,7 @@ bpy.ops.export_scene.gltf(filepath=str(export_path),export_format='GLB',use_sele
     export_texcoords=True,export_cameras=False,export_lights=False)
 
 # Studio objects are only in the .blend; never exported into the game.
-bpy.ops.mesh.primitive_plane_add(size=200, location=(0,0,-.99))
+bpy.ops.mesh.primitive_plane_add(size=200, location=(0,0,-.87))
 floor=bpy.context.object
 floor.name='STUDIO floor (not exported)'
 floor_mat=bpy.data.materials.new('Studio cream')
@@ -399,7 +394,7 @@ report={'generator':'Blender '+bpy.app.version_string,'palette_srgb':COLORS,
                     'materials':len(o.data.materials),'scale':list(o.scale)} for o in car_objects],
         'triangles':sum(len(o.data.polygons) for o in car_objects),
         'glb_bytes':export_path.stat().st_size,'textures':1,'atlas_size':[SIZE,SIZE],
-        'visual_wheel_radius':.36,'visual_wheel_width':.254,
+        'visual_wheel_radius':.43,'visual_wheel_width':.26,
         'physics':'Existing cannon-es bodies, wheel mounts, radius .45 and wheelbase 2.3m preserved'}
 (OUT/'asset-report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
 print('CAR_ASSET_REPORT '+json.dumps(report))

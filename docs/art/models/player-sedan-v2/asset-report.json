@@ -1,22 +1,22 @@
 {
   "generator": "Blender 5.2.2 LTS",
   "palette_srgb": {
-    "paint": "#ffc12f",
+    "paint": "#ffc125",
     "glass": "#202c49",
-    "trim": "#535a6b",
-    "tire": "#20252e",
-    "hub": "#afb6c5",
-    "grille": "#19202d",
-    "lamp": "#fff0b8",
-    "amber": "#e7a227",
-    "tail": "#db3345"
+    "trim": "#747985",
+    "tire": "#232733",
+    "hub": "#c5c8ce",
+    "grille": "#151c26",
+    "lamp": "#fff1bd",
+    "amber": "#dfa01a",
+    "tail": "#d9212f"
   },
   "axes": "Game +X right +Y up +Z nose; Blender x,-z,y",
   "objects": [
     {
       "name": "body",
-      "triangles": 1308,
-      "vertices": 732,
+      "triangles": 2876,
+      "vertices": 1524,
       "materials": 1,
       "scale": [
         1.0,
@@ -26,8 +26,8 @@
     },
     {
       "name": "wheel-front-left",
-      "triangles": 188,
-      "vertices": 120,
+      "triangles": 316,
+      "vertices": 192,
       "materials": 1,
       "scale": [
         1.0,
@@ -37,8 +37,8 @@
     },
     {
       "name": "wheel-front-right",
-      "triangles": 188,
-      "vertices": 120,
+      "triangles": 316,
+      "vertices": 192,
       "materials": 1,
       "scale": [
         1.0,
@@ -48,8 +48,8 @@
     },
     {
       "name": "wheel-rear-left",
-      "triangles": 188,
-      "vertices": 120,
+      "triangles": 316,
+      "vertices": 192,
       "materials": 1,
       "scale": [
         1.0,
@@ -59,8 +59,8 @@
     },
     {
       "name": "wheel-rear-right",
-      "triangles": 188,
-      "vertices": 120,
+      "triangles": 316,
+      "vertices": 192,
       "materials": 1,
       "scale": [
         1.0,
@@ -69,14 +69,14 @@
       ]
     }
   ],
-  "triangles": 2060,
-  "glb_bytes": 141444,
+  "triangles": 4140,
+  "glb_bytes": 184920,
   "textures": 1,
   "atlas_size": [
-    512,
-    512
+    1024,
+    1024
   ],
-  "visual_wheel_radius": 0.36,
-  "visual_wheel_width": 0.254,
+  "visual_wheel_radius": 0.43,
+  "visual_wheel_width": 0.26,
   "physics": "Existing cannon-es bodies, wheel mounts, radius .45 and wheelbase 2.3m preserved"
 }
