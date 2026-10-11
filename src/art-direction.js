@@ -6,7 +6,8 @@ export const ART = Object.freeze({
   traffic: ['#6aafe0', '#df8880', '#ba9bde', '#75bccc', '#d8a677', '#7894d6'],
 });
 export const ART_LIGHT = Object.freeze({ sky: 0xdceaff, ground: 0xc9b4a0, ambient: 1.2,
-  sun: 0xffefd6, intensity: 3.8, exposure: 1.05, offset: Object.freeze([24, 38, -20]) });
+  // Cast shadows toward the follow camera (12, 20, -17), clear of their casters.
+  sun: 0xffefd6, intensity: 3.8, exposure: 1.05, offset: Object.freeze([-24, 38, 20]) });
 
 export function buildingArt(building, seed) {
   // Keep this hash separate from city generation, so art cannot move a collider.

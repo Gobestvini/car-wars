@@ -1,0 +1,414 @@
+{
+  "checks": [
+    {
+      "phase": "before",
+      "width": 390,
+      "height": 844,
+      "view": "follow",
+      "data": {
+        "sun": [
+          24,
+          38,
+          -20
+        ],
+        "paint": {
+          "offset": true,
+          "factor": 0,
+          "units": -1
+        },
+        "shadow": {
+          "left": -54.57031250000001,
+          "right": 33.42968749999999,
+          "bottom": -37.679687499999986,
+          "top": 68.32031250000001,
+          "near": 0.1,
+          "far": 120,
+          "width": 88,
+          "height": 106,
+          "margin": 21.7311570759747,
+          "resolution": 1024,
+          "centreX": -10.5703125,
+          "centreY": 15.3203125,
+          "frustumCorners": 4
+        }
+      },
+      "errors": []
+    },
+    {
+      "phase": "before",
+      "width": 390,
+      "height": 844,
+      "view": "road",
+      "data": {
+        "sun": [
+          24,
+          38,
+          -20
+        ],
+        "paint": {
+          "offset": true,
+          "factor": 0,
+          "units": -1
+        },
+        "shadow": {
+          "left": -51.79458631610497,
+          "right": 32.20541368389503,
+          "bottom": -37.01309160584271,
+          "top": 64.9869083941573,
+          "near": 0.1,
+          "far": 117,
+          "width": 84,
+          "height": 102,
+          "margin": 21.7311570759747,
+          "resolution": 1024,
+          "centreX": -40.5234375,
+          "centreY": 33.767578125,
+          "frustumCorners": 4
+        }
+      },
+      "errors": []
+    },
+    {
+      "phase": "before",
+      "width": 390,
+      "height": 844,
+      "view": "distant-road",
+      "data": {
+        "sun": [
+          24,
+          38,
+          -20
+        ],
+        "paint": {
+          "offset": true,
+          "factor": 0,
+          "units": -1
+        },
+        "shadow": {
+          "left": -85.94107069110497,
+          "right": 44.05892930889503,
+          "bottom": -54.06973223084271,
+          "top": 113.9302677691573,
+          "near": 0.1,
+          "far": 157,
+          "width": 130,
+          "height": 168,
+          "margin": 21.7311570759747,
+          "resolution": 1024,
+          "centreX": -51.669921875,
+          "centreY": 49.7109375,
+          "frustumCorners": 4
+        }
+      },
+      "errors": []
+    },
+    {
+      "phase": "before",
+      "width": 1440,
+      "height": 900,
+      "view": "follow",
+      "data": {
+        "sun": [
+          24,
+          38,
+          -20
+        ],
+        "paint": {
+          "offset": true,
+          "factor": 0,
+          "units": -1
+        },
+        "shadow": {
+          "left": -94.0625,
+          "right": 65.9375,
+          "bottom": -39.632812499999986,
+          "top": 74.36718750000001,
+          "near": 0.1,
+          "far": 125,
+          "width": 160,
+          "height": 114,
+          "margin": 21.7311570759747,
+          "resolution": 1024,
+          "centreX": -14.0625,
+          "centreY": 17.3671875,
+          "frustumCorners": 4
+        }
+      },
+      "errors": []
+    },
+    {
+      "phase": "before",
+      "width": 1440,
+      "height": 900,
+      "view": "road",
+      "data": {
+        "sun": [
+          24,
+          38,
+          -20
+        ],
+        "paint": {
+          "offset": true,
+          "factor": 0,
+          "units": -1
+        },
+        "shadow": {
+          "left": -92.70864881610497,
+          "right": 65.29135118389503,
+          "bottom": -40.26504473084271,
+          "top": 73.7349552691573,
+          "near": 0.1,
+          "far": 124,
+          "width": 158,
+          "height": 114,
+          "margin": 21.7311570759747,
+          "resolution": 1024,
+          "centreX": -44.4375,
+          "centreY": 36.515625,
+          "frustumCorners": 4
+        }
+      },
+      "errors": []
+    },
+    {
+      "phase": "before",
+      "width": 1440,
+      "height": 900,
+      "view": "distant-road",
+      "data": {
+        "sun": [
+          24,
+          38,
+          -20
+        ],
+        "paint": {
+          "offset": true,
+          "factor": 0,
+          "units": -1
+        },
+        "shadow": {
+          "left": -172.31997694110498,
+          "right": 113.68002305889503,
+          "bottom": -60.28066973084271,
+          "top": 131.7193302691573,
+          "near": 0.1,
+          "far": 173,
+          "width": 286,
+          "height": 192,
+          "margin": 21.7311570759747,
+          "resolution": 1024,
+          "centreX": -60.048828125,
+          "centreY": 55.5,
+          "frustumCorners": 4
+        }
+      },
+      "errors": []
+    },
+    {
+      "phase": "after",
+      "width": 390,
+      "height": 844,
+      "view": "follow",
+      "data": {
+        "sun": [
+          -24,
+          38,
+          20
+        ],
+        "paint": {
+          "offset": true,
+          "factor": -1,
+          "units": -2
+        },
+        "shadow": {
+          "left": -33.4296875,
+          "right": 54.5703125,
+          "bottom": -68.3203125,
+          "top": 37.67968750000001,
+          "near": 0.1,
+          "far": 103,
+          "width": 88,
+          "height": 106,
+          "margin": 21.7311570759747,
+          "resolution": 1024,
+          "centreX": 10.5703125,
+          "centreY": -15.3203125,
+          "frustumCorners": 4
+        }
+      },
+      "errors": []
+    },
+    {
+      "phase": "after",
+      "width": 390,
+      "height": 844,
+      "view": "road",
+      "data": {
+        "sun": [
+          -24,
+          38,
+          20
+        ],
+        "paint": {
+          "offset": true,
+          "factor": -1,
+          "units": -2
+        },
+        "shadow": {
+          "left": -32.20541368389503,
+          "right": 51.79458631610497,
+          "bottom": -64.98690839415727,
+          "top": 37.01309160584273,
+          "near": 0.1,
+          "far": 99,
+          "width": 84,
+          "height": 102,
+          "margin": 21.7311570759747,
+          "resolution": 1024,
+          "centreX": 40.5234375,
+          "centreY": -33.767578125,
+          "frustumCorners": 4
+        }
+      },
+      "errors": []
+    },
+    {
+      "phase": "after",
+      "width": 390,
+      "height": 844,
+      "view": "distant-road",
+      "data": {
+        "sun": [
+          -24,
+          38,
+          20
+        ],
+        "paint": {
+          "offset": true,
+          "factor": -1,
+          "units": -2
+        },
+        "shadow": {
+          "left": -44.05892930889503,
+          "right": 85.94107069110497,
+          "bottom": -113.93026776915727,
+          "top": 54.06973223084273,
+          "near": 0.1,
+          "far": 154,
+          "width": 130,
+          "height": 168,
+          "margin": 21.7311570759747,
+          "resolution": 1024,
+          "centreX": 51.669921875,
+          "centreY": -49.7109375,
+          "frustumCorners": 4
+        }
+      },
+      "errors": []
+    },
+    {
+      "phase": "after",
+      "width": 1440,
+      "height": 900,
+      "view": "follow",
+      "data": {
+        "sun": [
+          -24,
+          38,
+          20
+        ],
+        "paint": {
+          "offset": true,
+          "factor": -1,
+          "units": -2
+        },
+        "shadow": {
+          "left": -65.9375,
+          "right": 94.0625,
+          "bottom": -74.3671875,
+          "top": 39.63281250000001,
+          "near": 0.1,
+          "far": 110,
+          "width": 160,
+          "height": 114,
+          "margin": 21.7311570759747,
+          "resolution": 1024,
+          "centreX": 14.0625,
+          "centreY": -17.3671875,
+          "frustumCorners": 4
+        }
+      },
+      "errors": []
+    },
+    {
+      "phase": "after",
+      "width": 1440,
+      "height": 900,
+      "view": "road",
+      "data": {
+        "sun": [
+          -24,
+          38,
+          20
+        ],
+        "paint": {
+          "offset": true,
+          "factor": -1,
+          "units": -2
+        },
+        "shadow": {
+          "left": -65.29135118389503,
+          "right": 92.70864881610497,
+          "bottom": -73.73495526915727,
+          "top": 40.26504473084273,
+          "near": 0.1,
+          "far": 109,
+          "width": 158,
+          "height": 114,
+          "margin": 21.7311570759747,
+          "resolution": 1024,
+          "centreX": 44.4375,
+          "centreY": -36.515625,
+          "frustumCorners": 4
+        }
+      },
+      "errors": []
+    },
+    {
+      "phase": "after",
+      "width": 1440,
+      "height": 900,
+      "view": "distant-road",
+      "data": {
+        "sun": [
+          -24,
+          38,
+          20
+        ],
+        "paint": {
+          "offset": true,
+          "factor": -1,
+          "units": -2
+        },
+        "shadow": {
+          "left": -113.68002305889503,
+          "right": 172.31997694110495,
+          "bottom": -131.71933026915727,
+          "top": 60.28066973084273,
+          "near": 0.1,
+          "far": 173,
+          "width": 286,
+          "height": 192,
+          "margin": 21.7311570759747,
+          "resolution": 1024,
+          "centreX": 60.048828125,
+          "centreY": -55.5,
+          "frustumCorners": 4
+        }
+      },
+      "errors": []
+    }
+  ],
+  "physicalDevice": false,
+  "tests": "29/29 passed; production build passed"
+}

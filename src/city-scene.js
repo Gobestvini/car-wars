@@ -53,8 +53,9 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const marks = createRoadMarkings(plan.roads, plan.bounds, plan.roadWidth);
   // Paint is a surface layer, below sampled tire decals, rather than a raised block.
   const dashGeometry = new THREE.PlaneGeometry(0.16, 2.2).rotateX(-Math.PI / 2);
+  // Slope bias keeps paint above asphalt at shallow angles and long camera ranges.
   const dashMaterial = new THREE.MeshStandardMaterial({ color: ART.marking, roughness: 1,
-    polygonOffset: true, polygonOffsetFactor: 0, polygonOffsetUnits: -1 });
+    polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -2 });
   const dashes = new THREE.InstancedMesh(dashGeometry, dashMaterial, marks.length);
   dashes.receiveShadow = true;
   const matrix = new THREE.Matrix4();
