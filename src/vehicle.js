@@ -43,8 +43,9 @@ export class CarSimulation {
     this.lastImpactSpeed = 0;
     this.impactEvents = [];
     this.impactCooldowns = new Map();
-    this.damageListener = damage ? event => this.recordImpact(event.bodyA, event.bodyB) : null;
-    if (this.damageListener) this.world.addEventListener('beginContact', this.damageListener);
+    this.damageListener = null;
+    this.damageHandler = damage ? event => this.recordImpact(event.bodyA, event.bodyB) : null;
+    this.attachDamageListener();
     this.tuning = { ...DEFAULT_TUNING };
     this.wheels = [v(-0.77, -0.04, 1.15), v(0.77, -0.04, 1.15), v(-0.77, -0.04, -1.15), v(0.77, -0.04, -1.15)].map((mount, i) => ({
       mount, front: i < 2, radius: 0.45, length: 0.5, compression: 0, detached: false, detachedBody: null,
@@ -73,12 +74,16 @@ export class CarSimulation {
     this.body.previousQuaternion.copy(this.body.quaternion);
     this.body.interpolatedQuaternion.copy(this.body.quaternion);
     this.body.aabbNeedsUpdate = true;
+    this.body.wakeUp();
+    this.body.vlambda.setZero(); this.body.wlambda.setZero();
     this.steering = 0; this.previousSteering = 0; this.throttle = 0; this.time = 0;
     this.damage = 0; this.lastImpactSpeed = 0; this.impactEvents.length = 0; this.impactCooldowns.clear();
     for (const wheel of this.wheels) {
       if (wheel.detachedBody) this.world.removeBody(wheel.detachedBody);
       wheel.detached = false; wheel.detachedBody = null;
       wheel.rotation = wheel.previousRotation = 0; wheel.slip = 0; wheel.length = 0.5;
+      wheel.grounded = false; wheel.compression = wheel.load = wheel.lateral = wheel.longitudinal = 0;
+      wheel.contact.setZero(); wheel.result.reset();
     }
     this.syncWheelPositions();
     for (const wheel of this.wheels) wheel.previousPosition.copy(wheel.position);
@@ -174,6 +179,13 @@ export class CarSimulation {
     if (!this.damageListener) return false;
     this.world.removeEventListener('beginContact', this.damageListener);
     this.damageListener = null;
+    return true;
+  }
+
+  attachDamageListener() {
+    if (!this.hasDamage || this.damageListener) return false;
+    this.damageListener = this.damageHandler;
+    this.world.addEventListener('beginContact', this.damageListener);
     return true;
   }
 

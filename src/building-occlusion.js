@@ -54,7 +54,8 @@ export function occludedBuildingIds(buildings, camera, targets) {
 
 /** Keep the opaque instances as one draw call; spawn a transparent proxy only while fading. */
 export class BuildingOcclusion {
-  constructor(THREE, scene, instanced, geometry, entries) {
+  constructor(THREE, scene, instanced, geometry, entries, { idleCapacity = 8 } = {}) {
+    if (!Number.isInteger(idleCapacity) || idleCapacity < 0) throw new RangeError('Invalid idle proxy budget.');
     this.THREE = THREE;
     this.scene = scene;
     this.instanced = instanced;
@@ -64,7 +65,9 @@ export class BuildingOcclusion {
     this.position = new THREE.Vector3();
     this.scale = new THREE.Vector3();
     this.quaternion = new THREE.Quaternion();
-    this.stats = { created: 0, released: 0, active: 0, highWater: 0 };
+    this.cache = new Map(); this.idle = new Map(); this.idleCapacity = idleCapacity; this.disposed = false;
+    this.stats = { created: 0, reused: 0, released: 0, active: 0, free: 0, highWater: 0,
+      capacity: entries.length, idleCapacity, overflow: 0, evicted: 0 };
   }
 
   setInstanceVisible(entry, visible) {
@@ -77,8 +80,18 @@ export class BuildingOcclusion {
   }
 
   startProxy(entry, caps) {
-    this.stats.created++; this.stats.active++;
+    if (this.disposed) throw new Error('Building generation was disposed.');
+    if (entry.proxy) return entry.proxy;
+    if (!this.entries.includes(entry)) throw new RangeError('Proxy belongs to another building generation.');
+    this.stats.active++;
     this.stats.highWater = Math.max(this.stats.highWater, this.stats.active);
+    const cached = this.cache.get(entry);
+    if (cached) {
+      this.idle.delete(entry); this.stats.free = this.idle.size; this.stats.reused++;
+      this.activateProxy(entry, caps, cached);
+      return cached.group;
+    }
+    this.stats.created++;
     const group = new this.THREE.Group();
     group.position.set(entry.x, 0, entry.z);
     const material = new this.THREE.MeshStandardMaterial({ color: entry.color, roughness: 0.88, transparent: true, opacity: 1, depthWrite: false });
@@ -94,7 +107,6 @@ export class BuildingOcclusion {
       proxyCap.material.transparent = true; proxyCap.material.depthWrite = false;
       group.add(proxyCap);
     }
-    entry.art?.hide();
     entry.art?.proxy(group);
     // Resolve the whole building's outer surface before alpha blending any part.
     // Identical opacity alone compounds at overlapping plinths/cornices/roofs.
@@ -111,14 +123,19 @@ export class BuildingOcclusion {
     const depthMesh = new this.THREE.Mesh(new this.THREE.BufferGeometry(), depthMaterial);
     depthMesh.name = 'Whole building depth'; depthMesh.renderOrder = 1;
     depthMesh.userData.buildingDepth = true;
+    group.userData.depthGeometries = new Map();
     group.userData.rebuildDepth = () => {
+      const key = surfaces.map(mesh => Number(mesh.visible)).join('');
+      const existing = group.userData.depthGeometries.get(key);
+      if (existing) { depthMesh.geometry = existing; return; }
       const parts = surfaces.filter(mesh => mesh.visible).map(mesh => {
         mesh.updateMatrix();
         return mesh.geometry.clone().applyMatrix4(mesh.matrix);
       });
       const combined = mergeGeometries(parts, false);
       for (const part of parts) part.dispose();
-      depthMesh.geometry.dispose(); depthMesh.geometry = combined;
+      if (!group.userData.depthGeometries.size) depthMesh.geometry.dispose();
+      group.userData.depthGeometries.set(key, combined); depthMesh.geometry = combined;
     };
     group.userData.rebuildDepth();
     for (const surface of surfaces) {
@@ -126,28 +143,73 @@ export class BuildingOcclusion {
       surface.material.depthFunc = this.THREE.EqualDepth;
     }
     group.add(depthMesh);
+    const record = { group, material };
+    this.cache.set(entry, record);
+    this.activateProxy(entry, caps, record);
+    return group;
+  }
+
+  activateProxy(entry, caps, { group, material }) {
+    entry.art?.hide(); entry.art?.syncProxy?.(group);
+    group.traverse(node => { if (node.isMesh) for (const value of Array.isArray(node.material) ? node.material : [node.material]) value.opacity = 1; });
     this.scene.add(group);
     entry.proxy = group;
+    entry.cachedProxy = group;
     entry.proxyMaterial = material;
     for (const cap of caps) cap.visible = false;
     this.setInstanceVisible(entry, false);
   }
 
   finishProxy(entry, caps) {
+    if (!entry.proxy) return false;
     this.stats.released++; this.stats.active--;
     this.scene.remove(entry.proxy);
-    const materials = new Set();
-    entry.proxy.traverse(node => {
-      if (!node.isMesh) return;
-      materials.add(node.material);
-      if (node.userData.buildingDepth || node.userData.buildingSurface) node.geometry.dispose();
-    });
-    for (const material of materials) material.dispose();
     entry.proxy = null; entry.proxyMaterial = null;
     for (const cap of caps) cap.visible = true;
     entry.art?.restore();
     this.setInstanceVisible(entry, true);
     entry.opacity = 1;
+    this.idle.set(entry, this.cache.get(entry));
+    while (this.idle.size > this.idleCapacity) {
+      const oldest = this.idle.entries().next().value;
+      this.destroyProxy(...oldest); this.stats.overflow++; this.stats.evicted++;
+    }
+    this.stats.free = this.idle.size;
+    return true;
+  }
+
+  destroyProxy(entry, record) {
+    const materials = new Set(), geometries = new Set(record.group.userData.depthGeometries.values());
+    this.scene.remove(record.group);
+    record.group.traverse(node => {
+      if (!node.isMesh) return;
+      for (const material of Array.isArray(node.material) ? node.material : [node.material]) materials.add(material);
+      if (node.userData.buildingDepth || node.userData.buildingSurface) geometries.add(node.geometry);
+    });
+    for (const material of materials) material.dispose();
+    for (const geometry of geometries) geometry.dispose();
+    record.group.userData.depthGeometries.clear();
+    this.cache.delete(entry); this.idle.delete(entry); entry.cachedProxy = null;
+  }
+
+  reset() {
+    for (const entry of this.entries) {
+      if (entry.proxy) this.finishProxy(entry, entry.caps);
+      entry.wasOccluded = false; entry.clearTime = 0;
+    }
+  }
+
+  poolStats() {
+    const arrays = new Set();
+    const collect = geometry => {
+      for (const attribute of Object.values(geometry.attributes)) arrays.add(attribute.array ?? attribute.data?.array);
+      if (geometry.index) arrays.add(geometry.index.array);
+    };
+    for (const { group } of this.cache.values()) {
+      group.traverse(node => { if (node.isMesh) collect(node.geometry); });
+      for (const geometry of group.userData.depthGeometries.values()) collect(geometry);
+    }
+    return { ...this.stats, retainedGeometryBytes: [...arrays].reduce((sum, array) => sum + (array?.byteLength ?? 0), 0), disposed: this.disposed };
   }
 
   update(camera, car, dt) {
@@ -175,19 +237,15 @@ export class BuildingOcclusion {
   }
 
   dispose() {
+    if (this.disposed) return false;
     for (const entry of this.entries) {
-      if (!entry.proxy) continue;
-      this.stats.released++; this.stats.active--;
-      this.scene.remove(entry.proxy);
-      const materials = new Set();
-      entry.proxy.traverse(node => {
-        if (!node.isMesh) return;
-        if (node.userData.buildingDepth || node.userData.buildingSurface) node.geometry.dispose();
-        for (const material of Array.isArray(node.material) ? node.material : [node.material]) materials.add(material);
-      });
-      for (const material of materials) material.dispose();
+      if (entry.proxy) { this.stats.released++; this.stats.active--; }
+      const record = this.cache.get(entry);
+      if (record) this.destroyProxy(entry, record);
       entry.proxy = null;
       entry.proxyMaterial = null;
     }
+    this.stats.free = 0; this.disposed = true;
+    return true;
   }
 }

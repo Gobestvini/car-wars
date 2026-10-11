@@ -1,0 +1,7 @@
+page.evaluate: ReferenceError: buildingEntries is not defined
+    at eval (eval at evaluate (:311:30), <anonymous>:2:13)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at C:\Users\gobes\OneDrive\Документы\CarWars\tools\scene-pooling-check.cjs:96:49 {
+  log: []
+}

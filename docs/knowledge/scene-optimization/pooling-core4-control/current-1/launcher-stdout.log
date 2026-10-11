@@ -1,0 +1,2 @@
+Starting desktop-low-empty repeat 1/1
+{"case":"desktop-low-empty","repeat":1,"frames":3328,"gpu":"available","cpuP95":10.300000000745058,"renderCpuP95":3.100000001490116,"intervalP95":37.80000000000291}

@@ -1,0 +1,903 @@
+{
+  "sourceHash": "c17ffd2c83ce7c9a5d9806a17cd88f3a7df532e0e9d201963f32d552abd5db47",
+  "checks": [
+    {
+      "playerFullDamageRepaired": true
+    }
+  ],
+  "samples": [],
+  "errors": [],
+  "affinity": "1",
+  "trafficCycles": 0,
+  "hiddenMethod": "Controlled getter; not physical OS tab suspension",
+  "teardownMethod": "Synthetic persisted/final pagehide; checks production handler ownership",
+  "environment": {
+    "vendor": "Google Inc. (NVIDIA)",
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4080 (0x00002704) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "dpr": 1,
+    "seed": 20261005
+  },
+  "browser": "155.0.4283.45",
+  "warm": {
+    "telemetry": {
+      "position": {
+        "x": -75,
+        "y": 0.8677570093458047,
+        "z": -50
+      },
+      "speed": 1.951786331764962e-14,
+      "signedSpeed": 1.2595144875392768e-17,
+      "heading": -6.4119154397578805e-34,
+      "roll": 4.516613258628324e-30,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "N",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "routeIndex": 0,
+    "arrest": {
+      "state": "idle",
+      "progress": 0,
+      "remainingSeconds": 5,
+      "holdProgress": 0,
+      "nearbyPoliceIds": [],
+      "cancellationReason": null
+    },
+    "proxies": 0,
+    "occlusion": {
+      "created": 0,
+      "reused": 0,
+      "released": 0,
+      "active": 0,
+      "free": 0,
+      "highWater": 0,
+      "capacity": 192,
+      "idleCapacity": 8,
+      "overflow": 0,
+      "evicted": 0
+    },
+    "traffic": {
+      "count": 60,
+      "requestedCount": 60,
+      "pending": false,
+      "totalCount": 62,
+      "roleCounts": {
+        "civilian": 60,
+        "police": 2
+      },
+      "pendingSpawns": 0,
+      "insertionReason": null,
+      "bodies": 4,
+      "logical": 58,
+      "visible": 5,
+      "reservations": 13
+    },
+    "police": [
+      {
+        "id": "police-300",
+        "x": -82.9481159654788,
+        "z": -59.010163779516226,
+        "heading": -0.2482983609027238,
+        "speed": 0.0016520556458606468,
+        "targetId": "player",
+        "state": "idle",
+        "waitReason": "no-wanted-level",
+        "damage": 0,
+        "operational": true,
+        "damageStage": "healthy",
+        "pursuit": {
+          "state": "pursue",
+          "stateSince": 0,
+          "targetId": "player",
+          "lastContactAt": null,
+          "noProgressTime": 0,
+          "recoveryUntil": 0,
+          "targetStoppedTime": 0,
+          "stalledTime": 0,
+          "escapePhase": null,
+          "wantedLevel": 0,
+          "profile": {
+            "level": 0,
+            "maxSpeed": 0,
+            "leadSeconds": 0,
+            "ramDistance": 0,
+            "canMaintainBlock": false
+          },
+          "desiredSpeedLimit": 0
+        }
+      },
+      {
+        "id": "police-301",
+        "x": -67.0518840345212,
+        "z": -59.010163779516226,
+        "heading": 0.2482983609027238,
+        "speed": 0.0016520556458606344,
+        "targetId": "player",
+        "state": "idle",
+        "waitReason": "no-wanted-level",
+        "damage": 0,
+        "operational": true,
+        "damageStage": "healthy",
+        "pursuit": {
+          "state": "pursue",
+          "stateSince": 0,
+          "targetId": "player",
+          "lastContactAt": null,
+          "noProgressTime": 0,
+          "recoveryUntil": 0,
+          "targetStoppedTime": 0,
+          "stalledTime": 0,
+          "escapePhase": null,
+          "wantedLevel": 0,
+          "profile": {
+            "level": 0,
+            "maxSpeed": 0,
+            "leadSeconds": 0,
+            "ramDistance": 0,
+            "canMaintainBlock": false
+          },
+          "desiredSpeedLimit": 0
+        }
+      }
+    ],
+    "bodies": 738,
+    "worldListeners": {
+      "addBody": 1,
+      "removeBody": 1,
+      "beginContact": 3
+    },
+    "bodyCollisionListeners": 4,
+    "trafficPerformance": {
+      "aiMs": 0.8999999985098839,
+      "aiStepMs": 0,
+      "playerPrepareMs": 0.10000000149011612,
+      "npcPrepareMs": 0.09999999776482582,
+      "prepareMs": 0.09999999776482582,
+      "worldStepMs": 0.7000000029802322,
+      "postMs": 0.09999999776482582,
+      "aiTicks": 87,
+      "aiDecisions": 14784,
+      "vehicleCreated": 302,
+      "vehicleRemoved": 240,
+      "totalBodies": 738,
+      "trafficBodies": 4,
+      "logicalTraffic": 58,
+      "visibleTraffic": 5,
+      "sleepingTrafficBodies": 0,
+      "awakeTrafficBodies": 4
+    },
+    "resources": {
+      "geometries": 52,
+      "textures": 13,
+      "programs": 41
+    },
+    "pools": {
+      "vehicles": {
+        "civilian": {
+          "active": 60,
+          "free": 240,
+          "capacity": 300,
+          "created": 300,
+          "reused": 0,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        },
+        "police": {
+          "active": 2,
+          "free": 0,
+          "capacity": 2,
+          "created": 2,
+          "reused": 0,
+          "highWater": 2,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "policeEffects": {
+        "active": 2,
+        "free": 0,
+        "capacity": 2,
+        "created": 2,
+        "reused": 0,
+        "highWater": 2,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      },
+      "buildings": {
+        "created": 0,
+        "reused": 0,
+        "released": 0,
+        "active": 0,
+        "free": 0,
+        "highWater": 0,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 0,
+        "disposed": false
+      }
+    },
+    "pickups": {
+      "pickups": [
+        {
+          "id": 0,
+          "x": -75,
+          "z": -157.5,
+          "section": "0:0",
+          "status": "available"
+        },
+        {
+          "id": 1,
+          "x": -125,
+          "z": -65,
+          "section": "0:1",
+          "status": "available"
+        },
+        {
+          "id": 2,
+          "x": -75,
+          "z": 107.5,
+          "section": "0:2",
+          "status": "available"
+        },
+        {
+          "id": 3,
+          "x": 42.5,
+          "z": -75,
+          "section": "1:0",
+          "status": "available"
+        },
+        {
+          "id": 4,
+          "x": -25,
+          "z": 50,
+          "section": "1:1",
+          "status": "available"
+        },
+        {
+          "id": 5,
+          "x": -57.5,
+          "z": 175,
+          "section": "1:2",
+          "status": "available"
+        },
+        {
+          "id": 6,
+          "x": 115,
+          "z": -75,
+          "section": "2:0",
+          "status": "available"
+        },
+        {
+          "id": 7,
+          "x": 157.5,
+          "z": -25,
+          "section": "2:1",
+          "status": "available"
+        },
+        {
+          "id": 8,
+          "x": 75,
+          "z": 157.5,
+          "section": "2:2",
+          "status": "available"
+        },
+        {
+          "id": 9,
+          "x": -175,
+          "z": -165,
+          "section": "0:0",
+          "status": "available"
+        },
+        {
+          "id": 10,
+          "x": 57.5,
+          "z": 175,
+          "section": "1:2",
+          "status": "available"
+        },
+        {
+          "id": 11,
+          "x": -135,
+          "z": 25,
+          "section": "0:1",
+          "status": "available"
+        }
+      ],
+      "repairs": 0,
+      "unavailableReason": null
+    },
+    "heap": 41274171,
+    "smoke": {
+      "emitted": 0,
+      "sourceCount": 5,
+      "limitedSources": 0,
+      "highWater": 0,
+      "active": 0,
+      "capacity": 512,
+      "quality": "high",
+      "budget": 512,
+      "emitters": 5
+    },
+    "effects": {
+      "stage": "healthy",
+      "exploded": false,
+      "explosions": 0,
+      "terminalTime": 0,
+      "activeSmoke": 0,
+      "activeFire": 0,
+      "capacity": 288,
+      "origin": [
+        -75,
+        1.2177570093458043,
+        -48.55
+      ]
+    },
+    "lifecycle": {
+      "disposed": false,
+      "frameScheduled": true
+    },
+    "instances": 80,
+    "disposals": null
+  },
+  "repairSetup": {
+    "id": 0,
+    "x": -75,
+    "z": -157.5
+  },
+  "repairAfter": {
+    "telemetry": {
+      "position": {
+        "x": -75,
+        "y": 0.8606202590732943,
+        "z": -157.5
+      },
+      "speed": 0.6727570362968379,
+      "signedSpeed": 4.530760932146917e-16,
+      "heading": -5.26123554651601e-36,
+      "roll": -6.18904016389348e-33,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "N",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "routeIndex": 0,
+    "arrest": {
+      "state": "idle",
+      "progress": 0,
+      "remainingSeconds": 5,
+      "holdProgress": 0,
+      "nearbyPoliceIds": [],
+      "cancellationReason": null
+    },
+    "proxies": 0,
+    "occlusion": {
+      "created": 0,
+      "reused": 0,
+      "released": 0,
+      "active": 0,
+      "free": 0,
+      "highWater": 0,
+      "capacity": 192,
+      "idleCapacity": 8,
+      "overflow": 0,
+      "evicted": 0
+    },
+    "traffic": {
+      "count": 0,
+      "requestedCount": 0,
+      "pending": false,
+      "totalCount": 0,
+      "roleCounts": {
+        "civilian": 0,
+        "police": 0
+      },
+      "pendingSpawns": 0,
+      "insertionReason": null,
+      "bodies": 0,
+      "logical": 0,
+      "visible": 0,
+      "reservations": 0
+    },
+    "police": [],
+    "bodies": 734,
+    "worldListeners": {
+      "addBody": 1,
+      "removeBody": 1,
+      "beginContact": 1
+    },
+    "bodyCollisionListeners": 0,
+    "trafficPerformance": {
+      "aiMs": 0,
+      "aiStepMs": 0,
+      "playerPrepareMs": 0.10000000149011612,
+      "npcPrepareMs": 0,
+      "prepareMs": 0,
+      "worldStepMs": 0.5,
+      "postMs": 0.09999999776482582,
+      "aiTicks": 90,
+      "aiDecisions": 14784,
+      "vehicleCreated": 302,
+      "vehicleRemoved": 302,
+      "totalBodies": 734,
+      "trafficBodies": 0,
+      "logicalTraffic": 0,
+      "visibleTraffic": 0,
+      "sleepingTrafficBodies": 0,
+      "awakeTrafficBodies": 0
+    },
+    "resources": {
+      "geometries": 53,
+      "textures": 13,
+      "programs": 41
+    },
+    "pools": {
+      "vehicles": {
+        "civilian": {
+          "active": 0,
+          "free": 300,
+          "capacity": 300,
+          "created": 300,
+          "reused": 0,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        },
+        "police": {
+          "active": 0,
+          "free": 2,
+          "capacity": 2,
+          "created": 2,
+          "reused": 0,
+          "highWater": 2,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "policeEffects": {
+        "active": 0,
+        "free": 2,
+        "capacity": 2,
+        "created": 2,
+        "reused": 0,
+        "highWater": 2,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      },
+      "buildings": {
+        "created": 0,
+        "reused": 0,
+        "released": 0,
+        "active": 0,
+        "free": 0,
+        "highWater": 0,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 0,
+        "disposed": false
+      }
+    },
+    "pickups": {
+      "pickups": [
+        {
+          "id": 0,
+          "x": -75,
+          "z": -157.5,
+          "section": "0:0",
+          "status": "consumed"
+        },
+        {
+          "id": 1,
+          "x": -125,
+          "z": -65,
+          "section": "0:1",
+          "status": "available"
+        },
+        {
+          "id": 2,
+          "x": -75,
+          "z": 107.5,
+          "section": "0:2",
+          "status": "available"
+        },
+        {
+          "id": 3,
+          "x": 42.5,
+          "z": -75,
+          "section": "1:0",
+          "status": "available"
+        },
+        {
+          "id": 4,
+          "x": -25,
+          "z": 50,
+          "section": "1:1",
+          "status": "available"
+        },
+        {
+          "id": 5,
+          "x": -57.5,
+          "z": 175,
+          "section": "1:2",
+          "status": "available"
+        },
+        {
+          "id": 6,
+          "x": 115,
+          "z": -75,
+          "section": "2:0",
+          "status": "available"
+        },
+        {
+          "id": 7,
+          "x": 157.5,
+          "z": -25,
+          "section": "2:1",
+          "status": "available"
+        },
+        {
+          "id": 8,
+          "x": 75,
+          "z": 157.5,
+          "section": "2:2",
+          "status": "available"
+        },
+        {
+          "id": 9,
+          "x": -175,
+          "z": -165,
+          "section": "0:0",
+          "status": "available"
+        },
+        {
+          "id": 10,
+          "x": 57.5,
+          "z": 175,
+          "section": "1:2",
+          "status": "available"
+        },
+        {
+          "id": 11,
+          "x": -135,
+          "z": 25,
+          "section": "0:1",
+          "status": "available"
+        }
+      ],
+      "repairs": 1,
+      "unavailableReason": null
+    },
+    "heap": 40327748,
+    "smoke": {
+      "emitted": 0,
+      "sourceCount": 1,
+      "limitedSources": 0,
+      "highWater": 0,
+      "active": 0,
+      "capacity": 512,
+      "quality": "high",
+      "budget": 512,
+      "emitters": 1
+    },
+    "effects": {
+      "stage": "healthy",
+      "exploded": false,
+      "explosions": 0,
+      "terminalTime": 0,
+      "activeSmoke": 0,
+      "activeFire": 0,
+      "capacity": 288,
+      "origin": [
+        -75,
+        1.2111808899368748,
+        -156.05
+      ]
+    },
+    "lifecycle": {
+      "disposed": false,
+      "frameScheduled": true
+    },
+    "instances": 18,
+    "disposals": null
+  },
+  "fadeFailure": {
+    "camera": {
+      "position": [
+        -146.60481293918693,
+        5.47213595499958,
+        -141.99999999999997
+      ],
+      "target": [
+        -148.84088091668673,
+        0.9999999999999998,
+        -141.99999999999997
+      ],
+      "mode": "free",
+      "scale": 1,
+      "far": 200,
+      "fogNear": 100,
+      "fogFar": 190,
+      "orientation": [
+        -1.5707963267948963,
+        0.46364760900080815,
+        1.5707963267948963,
+        "XYZ"
+      ]
+    },
+    "state": {
+      "telemetry": {
+        "position": {
+          "x": -148.84088091668673,
+          "y": 0.8677570093458252,
+          "z": -142
+        },
+        "speed": 1.7166359269154056e-14,
+        "signedSpeed": 2.1946015567486093e-17,
+        "heading": -5.015973849210881e-34,
+        "roll": 4.949062061549571e-30,
+        "steer": 0,
+        "grounded": 4,
+        "slip": 0,
+        "gear": "N",
+        "damage": 0,
+        "damageState": "healthy",
+        "traction": 1,
+        "lastImpactSpeed": 0
+      },
+      "routeIndex": 0,
+      "arrest": {
+        "state": "idle",
+        "progress": 0,
+        "remainingSeconds": 5,
+        "holdProgress": 0,
+        "nearbyPoliceIds": [],
+        "cancellationReason": null
+      },
+      "proxies": 1,
+      "occlusion": {
+        "created": 2,
+        "reused": 0,
+        "released": 1,
+        "active": 1,
+        "free": 1,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0
+      },
+      "traffic": {
+        "count": 0,
+        "requestedCount": 0,
+        "pending": false,
+        "totalCount": 0,
+        "roleCounts": {
+          "civilian": 0,
+          "police": 0
+        },
+        "pendingSpawns": 0,
+        "insertionReason": null,
+        "bodies": 0,
+        "logical": 0,
+        "visible": 0,
+        "reservations": 0
+      },
+      "police": [],
+      "bodies": 734,
+      "worldListeners": {
+        "addBody": 1,
+        "removeBody": 1,
+        "beginContact": 1
+      },
+      "bodyCollisionListeners": 0,
+      "trafficPerformance": {
+        "aiMs": 0,
+        "aiStepMs": 0,
+        "playerPrepareMs": 0,
+        "npcPrepareMs": 0,
+        "prepareMs": 0,
+        "worldStepMs": 0.7999999970197678,
+        "postMs": 0.10000000149011612,
+        "aiTicks": 190,
+        "aiDecisions": 14784,
+        "vehicleCreated": 302,
+        "vehicleRemoved": 302,
+        "totalBodies": 734,
+        "trafficBodies": 0,
+        "logicalTraffic": 0,
+        "visibleTraffic": 0,
+        "sleepingTrafficBodies": 0,
+        "awakeTrafficBodies": 0
+      },
+      "resources": {
+        "geometries": 63,
+        "textures": 6,
+        "programs": 43
+      },
+      "pools": {
+        "vehicles": {
+          "civilian": {
+            "active": 0,
+            "free": 300,
+            "capacity": 300,
+            "created": 300,
+            "reused": 0,
+            "highWater": 300,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          },
+          "police": {
+            "active": 0,
+            "free": 2,
+            "capacity": 2,
+            "created": 2,
+            "reused": 0,
+            "highWater": 2,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          }
+        },
+        "policeEffects": {
+          "active": 0,
+          "free": 2,
+          "capacity": 2,
+          "created": 2,
+          "reused": 0,
+          "highWater": 2,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        },
+        "buildings": {
+          "created": 2,
+          "reused": 0,
+          "released": 1,
+          "active": 1,
+          "free": 1,
+          "highWater": 2,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0,
+          "retainedGeometryBytes": 14280,
+          "disposed": false
+        }
+      },
+      "pickups": {
+        "pickups": [
+          {
+            "id": 0,
+            "x": -75,
+            "z": -157.5,
+            "section": "0:0",
+            "status": "consumed"
+          },
+          {
+            "id": 1,
+            "x": -125,
+            "z": -65,
+            "section": "0:1",
+            "status": "available"
+          },
+          {
+            "id": 2,
+            "x": -75,
+            "z": 107.5,
+            "section": "0:2",
+            "status": "available"
+          },
+          {
+            "id": 3,
+            "x": 42.5,
+            "z": -75,
+            "section": "1:0",
+            "status": "available"
+          },
+          {
+            "id": 4,
+            "x": -25,
+            "z": 50,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 5,
+            "x": -57.5,
+            "z": 175,
+            "section": "1:2",
+            "status": "available"
+          },
+          {
+            "id": 6,
+            "x": 115,
+            "z": -75,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 7,
+            "x": 157.5,
+            "z": -25,
+            "section": "2:1",
+            "status": "available"
+          },
+          {
+            "id": 8,
+            "x": 75,
+            "z": 157.5,
+            "section": "2:2",
+            "status": "available"
+          },
+          {
+            "id": 9,
+            "x": -175,
+            "z": -165,
+            "section": "0:0",
+            "status": "available"
+          },
+          {
+            "id": 10,
+            "x": 57.5,
+            "z": 175,
+            "section": "1:2",
+            "status": "available"
+          },
+          {
+            "id": 11,
+            "x": -135,
+            "z": 25,
+            "section": "0:1",
+            "status": "available"
+          }
+        ],
+        "repairs": 1,
+        "unavailableReason": null
+      },
+      "heap": 43587758,
+      "smoke": {
+        "emitted": 0,
+        "sourceCount": 1,
+        "limitedSources": 0,
+        "highWater": 0,
+        "active": 0,
+        "capacity": 512,
+        "quality": "high",
+        "budget": 512,
+        "emitters": 1
+      }
+    },
+    "active": [
+      {
+        "id": 3,
+        "x": -142,
+        "z": -142,
+        "width": 10.090923354960978,
+        "depth": 10.451017103157938,
+        "height": 8.194505616500974,
+        "opacity": 0.2200000000000001,
+        "wasOccluded": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+page.waitForFunction: Timeout 10000ms exceeded.
+    at C:\Users\gobes\OneDrive\Документы\CarWars\tools\scene-pooling-check.cjs:94:58 {
+  log: [],
+  name: 'TimeoutError'
+}

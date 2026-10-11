@@ -193,5 +193,5 @@ export class TireSmoke {
   }
 
   snapshot() { return { ...this.diagnostics, emitters: this.states.size, emitted: this.diagnostics.emitted }; }
-  dispose() { this.reset(); this.mesh.removeFromParent(); this.geometry.dispose(); this.texture.dispose(); this.material.dispose(); }
+  dispose() { this.reset(); this.mesh.removeFromParent(); this.mesh.dispose(); this.geometry.dispose(); this.texture.dispose(); this.material.dispose(); }
 }

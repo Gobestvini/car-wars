@@ -32,10 +32,12 @@ test('batched decoration fades with its building and returns after fade; low hid
   plinth.getMatrixAt(entry.index,matrix);assert.ok(matrix.elements[0]>0);
   assert.equal(entry.proxy.children.filter(c=>c.userData.roofDetail).length,1);
   const depth=entry.proxy.children.find(c=>c.userData.buildingDepth);
-  const highCount=depth.geometry.index.count; let depthDisposed=0;
+  const highGeometry=depth.geometry,highCount=highGeometry.index.count; let depthDisposed=0;
   depth.geometry.addEventListener('dispose',()=>depthDisposed++);
   city.updateSignals({phase:()=>({color:'red'})},0,null,'low');
-  assert.equal(depthDisposed,1); assert.equal(highCount-depth.geometry.index.count,36);
+  const lowGeometry=depth.geometry;
+  assert.equal(depthDisposed,0); assert.notEqual(lowGeometry,highGeometry);
+  assert.equal(highCount-lowGeometry.index.count,36);
   for(const e of city.entries) {
     const plant=e.art.parts.find(p=>p.batch===5);
     assert.equal(Boolean(plant),e.artFamily===1);
@@ -51,9 +53,23 @@ test('batched decoration fades with its building and returns after fade; low hid
   entry.proxy.children.forEach(c=>c.material.addEventListener('dispose',()=>disposed++));
   const expected=entry.proxy.children.length;
   city.occlusion.finishProxy(entry,entry.caps);
-  assert.equal(disposed,expected);assert.equal(geometryDisposed,expected);assert.equal(entry.proxy,null);
+  assert.equal(disposed,0);assert.equal(geometryDisposed,0);assert.equal(entry.proxy,null);
+  const cached=entry.cachedProxy;
+  const retained=city.occlusion.poolStats().retainedGeometryBytes;
+  city.updateSignals({phase:()=>({color:'red'})},0,null,'high');
+  assert.equal(depth.geometry,highGeometry);assert.equal(depthDisposed,0);
+  for(let cycle=0;cycle<20;cycle++) {
+    assert.equal(city.occlusion.startProxy(entry,entry.caps),cached);
+    assert.equal(entry.proxy.children.find(c=>c.userData.roofDetail).visible,true);
+    city.occlusion.finishProxy(entry,entry.caps);
+    assert.equal(city.occlusion.finishProxy(entry,entry.caps),false);
+  }
+  assert.equal(city.occlusion.poolStats().created,1);
+  assert.equal(city.occlusion.poolStats().reused,20);
+  assert.equal(city.occlusion.poolStats().retainedGeometryBytes,retained);
   plinth.getMatrixAt(entry.index,matrix);assert.ok(matrix.elements[0]>0);
   city.dispose();assert.equal(scene.children.length,0);
+  assert.equal(depthDisposed,1);assert.equal(disposed,expected);assert.equal(geometryDisposed,expected);
 });
 
 test('traffic art reuses geometry and stays inside its original collision footprint',()=>{

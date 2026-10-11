@@ -61,16 +61,20 @@ export function createCityArt(group, entries, seed) {
           mesh.visible=p.batch!==5 || high; parent.add(mesh);
         }
       },
+      syncProxy(parent) {
+        let changed = false;
+        for (const child of parent.children) if (child.userData.roofDetail && child.visible !== high) {
+          child.visible = high; changed = true;
+        }
+        if (changed) parent.userData.rebuildDepth?.();
+      },
     };
   }
   for (const batch of batches) { batch.instanceMatrix.needsUpdate=true; batch.instanceColor.needsUpdate=true; batch.computeBoundingSphere(); }
   return {
     setQuality(quality) {
       const next = quality !== 'low'; if (next===high) return; high=next; batches[5].visible=high;
-      for (const entry of entries) if (entry.proxy) {
-        for (const child of entry.proxy.children) if (child.userData.roofDetail) child.visible=high;
-        entry.proxy.userData.rebuildDepth?.();
-      }
+      for (const entry of entries) if (entry.proxy || entry.cachedProxy) entry.art.syncProxy(entry.proxy || entry.cachedProxy);
     },
   };
 }

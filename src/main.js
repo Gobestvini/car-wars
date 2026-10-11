@@ -7,6 +7,7 @@ import { directionalInput } from './driving-input.js';
 import { DonutGesture, donutDriveInput } from './donut-input.js';
 import { FixedStepper, FrameRateLimiter } from './game-loop.js';
 import { SceneProfile, GpuProfile } from './scene-profile.js';
+import { ObjectPool } from './object-pool.js';
 import { FrameIntervals } from './frame-intervals.js';
 import { TireTracks, DEFAULT_SKID_THRESHOLD, DEFAULT_TRACK_INTENSITY } from './tire-tracks.js';
 import { smoothCameraScale, targetCameraScale } from './camera-distance.js';
@@ -125,6 +126,7 @@ try {
   throw error;
 }
 let quality = savedDefaults.quality === 'Лёгкая' ? 'low' : 'high';
+let disposed = false, frameRequest = null;
 renderer.setPixelRatio(Math.min(devicePixelRatio, quality === 'low' ? 1 : 1.75));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -185,6 +187,8 @@ let trafficSpawnObstacles = spawnObstaclesForPlan(cityPlan);
 const car = new THREE.Group(); scene.add(car);
 const damageEffects = new CarDamageEffects(scene);
 const policeDamageVisuals = new Map();
+const policeEffectsPool = new ObjectPool({ capacity: 2, create: () => new CarDamageEffects(scene),
+  acquire: effects => effects.reset(), release: effects => effects.reset(), destroy: effects => effects.dispose() });
 const damagePreview = debug ? Number(new URLSearchParams(location.search).get('damagePreview') || 0) : 0;
 const traffic = createVehicleRuntime(scene, THREE, savedDefaults.trafficCount, cityPlan.roadNetwork,
   cityPlan.roadWidth, trafficSpawnObstacles, { minX: -cityPlan.bounds, maxX: cityPlan.bounds,
@@ -196,6 +200,10 @@ traffic.registerRole('police', { maxCount: 2, physicalOnly: true,
     : (controller.reset(), { state: 'idle', reason: arrest.snapshot().state === 'arrested' ? 'arrest-complete' : 'no-wanted-level',
       control: { steer: 0, throttle: 0, brake: 1 } }),
   onContact: (controller, time) => controller.onContact(time),
+  dispose: (_controller, { id }) => {
+    const runtime = policeDamageVisuals.get(id);
+    if (runtime) { policeEffectsPool.release(runtime.effectLease); policeDamageVisuals.delete(id); }
+  },
   reset: controller => controller.reset() });
 const policeSpawnSpecs = () => [-1, 1].map(side => ({ targetId: 'player', position: {
   x: sim.body.position.x + side * 8, y: 0, z: sim.body.position.z - 9 }, yaw: side * 0.25,
@@ -210,8 +218,23 @@ let loading = false;
 let bodyDeformation = null;
 let playerLights = null;
 let trafficModelsReady = false;
+function disposeModelTrees(roots) {
+  const geometries = new Set(), materials = new Set(), textures = new Set();
+  for (const root of roots) root.traverse(node => {
+    if (!node.isMesh) return;
+    geometries.add(node.geometry);
+    for (const material of Array.isArray(node.material) ? node.material : [node.material]) {
+      if (!material) continue;
+      materials.add(material);
+      for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
+    }
+  });
+  for (const geometry of geometries) geometry?.dispose();
+  for (const material of materials) material.dispose();
+  for (const texture of textures) texture.dispose();
+}
 async function loadCar() {
-  if (loading || modelReady) return;
+  if (disposed || loading || modelReady) return;
   loading = true;
   loadingScreen.update(12, 'Loading cars…');
   startScreen.setReady(false);
@@ -223,9 +246,11 @@ async function loadCar() {
     const gltf = await new GLTFLoader(manager).loadAsync(`${import.meta.env.BASE_URL}${PLAYER_MODEL_URL}`, event => {
       if (event.total > 0) loadingScreen.update(12 + 48 * event.loaded / event.total, 'Loading cars…');
     });
+    if (disposed) { disposeModelTrees([gltf.scene]); return; }
     if (!trafficModelsReady) {
       const loaded = await Promise.all(Object.entries(TRAFFIC_MODEL_URLS).map(async ([name,url]) =>
         [name,(await new GLTFLoader(manager).loadAsync(`${import.meta.env.BASE_URL}${url}`)).scene]));
+      if (disposed) { disposeModelTrees([gltf.scene, ...loaded.map(([,model]) => model)]); return; }
       traffic.setVisualAssets(createConceptTrafficAssets(Object.fromEntries(loaded)));
       traffic.attachPhysics(sim);
       trafficModelsReady = true;
@@ -249,6 +274,7 @@ async function loadCar() {
     // Compile while the loading indicator is visible, before accepting movement.
     loadingScreen.update(68, 'Preparing the city…');
     await loadingScreen.paint();
+    if (disposed) return;
     sim.reset();
     if (Number.isFinite(damagePreview)) sim.damage = Math.max(0, Math.min(1, damagePreview));
     // The wheel test preset starts with the same direct 18 m/s side impact as its physics test.
@@ -258,8 +284,10 @@ async function loadCar() {
     visualWheels.forEach(({ pivot }, i) => { pivot.position.copy(sim.wheels[i].position); pivot.quaternion.copy(car.quaternion); offsetPlayerWheel(pivot, sim.wheels[i], car); });
     updateCamera(1);
     await renderer.compileAsync(scene, camera);
+    if (disposed) return;
     loadingScreen.update(86, 'Polishing lights and shadows…');
     await miniatureBlur.compile();
+    if (disposed) return;
     loadingScreen.update(94, 'Preparing your start screen…');
     const buttonImages = ['button-gold.webp','button-blue.webp'].map(file => {
       const image = new Image();
@@ -271,14 +299,17 @@ async function loadCar() {
       return image.decode();
     }));
     await Promise.all([document.fonts.load('22px "Lilita One"'), document.fonts.load('900 16px "Car Roboto"')]);
+    if (disposed) return;
     // Allocate render targets, upload textures and render shadows before exposing PLAY.
     loadingScreen.update(98, 'Finishing the first frame…');
     miniatureBlur.render(scene, camera, { mode: cameraMode, car });
     await loadingScreen.paint();
+    if (disposed) return;
     modelReady = true;
     startScreen.setReady(true);
     loadingScreen.finish();
   } catch (error) {
+    if (disposed) return;
     console.error('Car model failed to load', error);
     // A retry must not duplicate partially prepared meshes after a compile failure.
     const failedGeometry = new Set(), failedMaterials = new Set(), failedTextures = new Set();
@@ -408,6 +439,7 @@ function reset() {
   lastArrestHudState = ''; renderArrestHud();
   damageEffects.reset();
   tireSmoke.reset();
+  buildingOcclusion.reset();
   tracks.reset();
   repairPickups.reset();
   for (const runtime of policeDamageVisuals.values()) { runtime.deformation.restore(); runtime.effects.reset(); }
@@ -646,7 +678,8 @@ function renderFrame() {
 let metricTime = 0, metricFrames = 0;
 let previousFrameTimestamp = null;
 function frame(now) {
-  requestAnimationFrame(frame);
+  if (disposed) return;
+  frameRequest = requestAnimationFrame(frame);
   if (document.hidden || !modelReady || loadingScreen.isOpen) {
     frameRateLimiter.reset();
     stepper.reset();
@@ -704,18 +737,22 @@ function frame(now) {
       settings.pane.refresh();
     }
     bodyDeformation?.apply(sim.drainImpactEvents());
+    const policeIds = new Set(physicalActors.filter(actor => actor.role === 'police').map(actor => actor.id));
+    for (const [id, runtime] of policeDamageVisuals) if (!policeIds.has(id)) {
+      policeEffectsPool.release(runtime.effectLease); policeDamageVisuals.delete(id);
+    }
     for (const actor of physicalActors) {
       if (actor.role !== 'police' || !actor.damageableBody) continue;
       let runtime = policeDamageVisuals.get(actor.id);
       if (!runtime) {
         actor.damageableBody.updateWorldMatrix(true, false);
-        runtime = { deformation: new CarDeformation(actor.damageableBody.geometry, actor.damageableBody.matrix.clone()),
-          effects: new CarDamageEffects(scene) };
+        actor.mesh.userData.poolDeformation ||= new CarDeformation(actor.damageableBody.geometry, actor.damageableBody.matrix.clone());
+        const effectLease = policeEffectsPool.acquire('police');
+        if (!effectLease) throw new Error('Police effect capacity differs from the role limit.');
+        runtime = { deformation: actor.mesh.userData.poolDeformation, effectLease, effects: effectLease.value };
         policeDamageVisuals.set(actor.id, runtime);
       }
     }
-    const policeIds = new Set(physicalActors.filter(actor => actor.role === 'police').map(actor => actor.id));
-    for (const [id, runtime] of policeDamageVisuals) if (!policeIds.has(id)) { runtime.effects.dispose(); policeDamageVisuals.delete(id); }
     const impactActors = traffic.states.filter(state => state.role === 'police' && !state.logical);
     for (const actor of impactActors) {
       const runtime = policeDamageVisuals.get(actor.id);
@@ -812,7 +849,7 @@ function frame(now) {
     renderStart - physicsStart - metrics.physicsMs, metrics.renderMs, metrics.calls, metrics.triangles,
     steps, stepper.droppedSeconds);
 }
-requestAnimationFrame(frame);
+frameRequest = requestAnimationFrame(frame);
 // Read-only diagnostics for browser smoke tests and future handling comparisons.
 window.carLab = {
   startScreen: () => startScreen.snapshot(),
@@ -827,6 +864,9 @@ window.carLab = {
   sceneProfile: () => ({ ...sceneProfile.snapshot(), gpu: gpuProfile?.snapshot() ?? { status: 'disabled', rows: [] } }),
   stopSceneProfile: () => { sceneProfile.stop(); gpuProfile?.dispose(); gpuProfile = null; },
   trafficPerformance: () => traffic.performance(),
+  pools: () => ({ vehicles: traffic.poolStats(), policeEffects: policeEffectsPool.snapshot(), buildings: buildingOcclusion.poolStats() }),
+  lifecycle: () => ({ disposed, frameScheduled: !disposed && frameRequest !== null,
+    contextLost: renderer.getContext().isContextLost() }),
   resources: () => ({ ...renderer.info.memory, programs: renderer.info.programs?.length ?? 0 }),
   miniatureBlur: () => miniatureBlur.snapshot(),
   setMiniatureBlurBypass: value => miniatureBlur.setDebugBypass(value, debug),
@@ -923,10 +963,28 @@ function applyQuality() {
   resize();
 }
 applyQuality();
-window.addEventListener('pagehide', () => { gpuProfile?.dispose(); miniatureBlur.dispose(); tireSmoke.dispose(); tracks.dispose(); traffic.dispose();
-  repairPickupVisuals.dispose();
-  sim.disposeDamageListener();
-  for (const runtime of policeDamageVisuals.values()) runtime.effects.dispose(); policeDamageVisuals.clear(); }, { once: true });
+window.addEventListener('pagehide', event => {
+  // A BFCache page still owns its scene and will resume with the same storage.
+  if (event.persisted || disposed) return;
+  disposed = true;
+  cancelAnimationFrame(frameRequest); frameRequest = null;
+  releasePointer(); keys.clear();
+  gpuProfile?.dispose(); sceneProfile.stop(); miniatureBlur.dispose();
+  policeEffectsPool.dispose(); policeDamageVisuals.clear(); damageEffects.dispose();
+  tireSmoke.dispose(); tracks.dispose(); repairPickupVisuals.dispose();
+  traffic.dispose(); cityState.dispose(); sim.disposeDamageListener();
+  for (const body of [...sim.world.bodies]) sim.world.removeBody(body);
+  sim.staticBodies.length = 0;
+  disposeModelTrees([car, ...visualWheels.map(({ pivot }) => pivot)]);
+  for (const { pivot } of visualWheels) pivot.removeFromParent();
+  visualWheels.length = 0; car.clear(); car.removeFromParent();
+  bodyDeformation = null; playerLights = null;
+  orbitControls?.dispose(); settings.pane.dispose();
+  sun.shadow.map?.dispose(); sun.shadow.map = null;
+  renderer.dispose();
+  // Three's internal shadow programs outlive material owners until the context ends.
+  renderer.forceContextLoss();
+});
 // All controls, world effects and quality settings exist before warmup starts.
 await loadCar();
 return { retry: loadCar };

@@ -1,0 +1,5696 @@
+{
+  "sourceHash": "e6ed02ed23a957158d92ace009cdc116d5363188b3da1204bcee8807baf38453",
+  "checks": [
+    {
+      "pausedPoliceRelease": {
+        "active": 0,
+        "free": 2,
+        "capacity": 2,
+        "created": 2,
+        "reused": 0,
+        "highWater": 2,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      }
+    },
+    {
+      "playerFullDamageRepaired": true
+    },
+    {
+      "fade": 0,
+      "pools": {
+        "created": 2,
+        "reused": 0,
+        "released": 2,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 1,
+      "pools": {
+        "created": 2,
+        "reused": 2,
+        "released": 4,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 2,
+      "pools": {
+        "created": 2,
+        "reused": 4,
+        "released": 6,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 3,
+      "pools": {
+        "created": 2,
+        "reused": 6,
+        "released": 8,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 4,
+      "pools": {
+        "created": 2,
+        "reused": 8,
+        "released": 10,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 5,
+      "pools": {
+        "created": 2,
+        "reused": 10,
+        "released": 12,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 6,
+      "pools": {
+        "created": 2,
+        "reused": 12,
+        "released": 14,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 7,
+      "pools": {
+        "created": 2,
+        "reused": 14,
+        "released": 16,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 8,
+      "pools": {
+        "created": 2,
+        "reused": 16,
+        "released": 18,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 9,
+      "pools": {
+        "created": 2,
+        "reused": 18,
+        "released": 20,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 10,
+      "pools": {
+        "created": 2,
+        "reused": 20,
+        "released": 22,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 11,
+      "pools": {
+        "created": 2,
+        "reused": 22,
+        "released": 24,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 12,
+      "pools": {
+        "created": 2,
+        "reused": 24,
+        "released": 26,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 13,
+      "pools": {
+        "created": 2,
+        "reused": 26,
+        "released": 28,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 14,
+      "pools": {
+        "created": 2,
+        "reused": 28,
+        "released": 30,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 15,
+      "pools": {
+        "created": 2,
+        "reused": 30,
+        "released": 32,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 16,
+      "pools": {
+        "created": 2,
+        "reused": 32,
+        "released": 34,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 17,
+      "pools": {
+        "created": 2,
+        "reused": 34,
+        "released": 36,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 18,
+      "pools": {
+        "created": 2,
+        "reused": 36,
+        "released": 38,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "fade": 19,
+      "pools": {
+        "created": 2,
+        "reused": 38,
+        "released": 40,
+        "active": 0,
+        "free": 2,
+        "highWater": 2,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 14280,
+        "disposed": false
+      }
+    },
+    {
+      "collision": "civilian",
+      "before": {
+        "role": "civilian",
+        "id": "npc-304",
+        "bodyId": 1032,
+        "contacts": 0
+      },
+      "after": {
+        "role": "civilian",
+        "id": "npc-304",
+        "bodyId": 1032,
+        "contacts": 1,
+        "playerDamage": 0.28452632225463476,
+        "police": [],
+        "playerPosition": {
+          "x": -74.99880974056616,
+          "y": 0.9261038855898251,
+          "z": -48.88900556815957
+        }
+      }
+    },
+    {
+      "collision": "police",
+      "before": {
+        "role": "police",
+        "id": "police-305",
+        "bodyId": 1034,
+        "contacts": 0
+      },
+      "after": {
+        "role": "police",
+        "id": "police-305",
+        "bodyId": 1034,
+        "contacts": 1,
+        "playerDamage": 0.30044195767070425,
+        "police": [
+          {
+            "id": "police-305",
+            "x": -74.99999964548304,
+            "z": -44.773572012973325,
+            "heading": -0.0000012976463923691313,
+            "speed": 6.83168714250033,
+            "targetId": "player",
+            "state": "idle",
+            "waitReason": "no-wanted-level",
+            "damage": 0.6008839153414085,
+            "operational": true,
+            "damageStage": "dark-smoke",
+            "pursuit": {
+              "state": "pursue",
+              "stateSince": 0,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 0,
+              "profile": {
+                "level": 0,
+                "maxSpeed": 0,
+                "leadSeconds": 0,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "playerPosition": {
+          "x": -75.00000065574103,
+          "y": 0.9268187454117384,
+          "z": -48.9219203566028
+        }
+      }
+    },
+    {
+      "rebuild": 0,
+      "state": {
+        "telemetry": {
+          "position": {
+            "x": -75,
+            "y": 0.8574065920699376,
+            "z": -50
+          },
+          "speed": 0.19662134966239664,
+          "signedSpeed": -8.074004392762226e-17,
+          "heading": -8.623593817023388e-35,
+          "roll": 7.25574157510298e-33,
+          "steer": 0,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "N",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "reused": 0,
+          "released": 0,
+          "active": 0,
+          "free": 0,
+          "highWater": 0,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0
+        },
+        "traffic": {
+          "count": 0,
+          "requestedCount": 0,
+          "pending": false,
+          "totalCount": 0,
+          "roleCounts": {
+            "civilian": 0,
+            "police": 0
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 0,
+          "logical": 0,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [],
+        "bodies": 734,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 1
+        },
+        "bodyCollisionListeners": 0,
+        "trafficPerformance": {
+          "aiMs": 0,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.09999999776482582,
+          "npcPrepareMs": 0,
+          "prepareMs": 0,
+          "worldStepMs": 0.7000000029802322,
+          "postMs": 0,
+          "aiTicks": 509,
+          "aiDecisions": 14852,
+          "vehicleCreated": 302,
+          "vehicleRemoved": 306,
+          "totalBodies": 734,
+          "trafficBodies": 0,
+          "logicalTraffic": 0,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 0
+        },
+        "resources": {
+          "geometries": 53,
+          "textures": 13,
+          "programs": 33
+        },
+        "pools": {
+          "vehicles": {
+            "civilian": {
+              "active": 0,
+              "free": 300,
+              "capacity": 300,
+              "created": 300,
+              "reused": 1,
+              "highWater": 300,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            },
+            "police": {
+              "active": 0,
+              "free": 2,
+              "capacity": 2,
+              "created": 2,
+              "reused": 3,
+              "highWater": 2,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            }
+          },
+          "policeEffects": {
+            "active": 0,
+            "free": 2,
+            "capacity": 2,
+            "created": 2,
+            "reused": 3,
+            "highWater": 2,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          },
+          "buildings": {
+            "created": 0,
+            "reused": 0,
+            "released": 0,
+            "active": 0,
+            "free": 0,
+            "highWater": 0,
+            "capacity": 192,
+            "idleCapacity": 8,
+            "overflow": 0,
+            "evicted": 0,
+            "retainedGeometryBytes": 0,
+            "disposed": false
+          }
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 38479231,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 1,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "high",
+          "budget": 512,
+          "emitters": 1
+        },
+        "effects": {
+          "stage": "healthy",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 0,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -75,
+            1.2074047715018845,
+            -48.55
+          ]
+        },
+        "lifecycle": {
+          "disposed": false,
+          "frameScheduled": true
+        },
+        "instances": 18,
+        "disposals": null
+      }
+    },
+    {
+      "rebuild": 1,
+      "state": {
+        "telemetry": {
+          "position": {
+            "x": -75,
+            "y": 0.8616163292467958,
+            "z": -50
+          },
+          "speed": 0.1928040754139483,
+          "signedSpeed": -1.2285368024234248e-16,
+          "heading": -1.4717020110064572e-34,
+          "roll": 1.6511020372655878e-32,
+          "steer": 0,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "N",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "reused": 0,
+          "released": 0,
+          "active": 0,
+          "free": 0,
+          "highWater": 0,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0
+        },
+        "traffic": {
+          "count": 0,
+          "requestedCount": 0,
+          "pending": false,
+          "totalCount": 0,
+          "roleCounts": {
+            "civilian": 0,
+            "police": 0
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 0,
+          "logical": 0,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [],
+        "bodies": 734,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 1
+        },
+        "bodyCollisionListeners": 0,
+        "trafficPerformance": {
+          "aiMs": 0,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0,
+          "prepareMs": 0,
+          "worldStepMs": 0.6000000014901161,
+          "postMs": 0,
+          "aiTicks": 515,
+          "aiDecisions": 14852,
+          "vehicleCreated": 302,
+          "vehicleRemoved": 306,
+          "totalBodies": 734,
+          "trafficBodies": 0,
+          "logicalTraffic": 0,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 0
+        },
+        "resources": {
+          "geometries": 53,
+          "textures": 13,
+          "programs": 33
+        },
+        "pools": {
+          "vehicles": {
+            "civilian": {
+              "active": 0,
+              "free": 300,
+              "capacity": 300,
+              "created": 300,
+              "reused": 1,
+              "highWater": 300,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            },
+            "police": {
+              "active": 0,
+              "free": 2,
+              "capacity": 2,
+              "created": 2,
+              "reused": 3,
+              "highWater": 2,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            }
+          },
+          "policeEffects": {
+            "active": 0,
+            "free": 2,
+            "capacity": 2,
+            "created": 2,
+            "reused": 3,
+            "highWater": 2,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          },
+          "buildings": {
+            "created": 0,
+            "reused": 0,
+            "released": 0,
+            "active": 0,
+            "free": 0,
+            "highWater": 0,
+            "capacity": 192,
+            "idleCapacity": 8,
+            "overflow": 0,
+            "evicted": 0,
+            "retainedGeometryBytes": 0,
+            "disposed": false
+          }
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 38832679,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 1,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "high",
+          "budget": 512,
+          "emitters": 1
+        },
+        "effects": {
+          "stage": "healthy",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 0,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -75,
+            1.2116091883551132,
+            -48.55
+          ]
+        },
+        "lifecycle": {
+          "disposed": false,
+          "frameScheduled": true
+        },
+        "instances": 18,
+        "disposals": null
+      }
+    },
+    {
+      "rebuild": 2,
+      "state": {
+        "telemetry": {
+          "position": {
+            "x": -75,
+            "y": 0.8602485716433322,
+            "z": -50
+          },
+          "speed": 0.20371394121805925,
+          "signedSpeed": -1.3788554797899474e-16,
+          "heading": -1.3394185907872804e-34,
+          "roll": 1.3338454186415912e-32,
+          "steer": 0,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "N",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "reused": 0,
+          "released": 0,
+          "active": 0,
+          "free": 0,
+          "highWater": 0,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0
+        },
+        "traffic": {
+          "count": 0,
+          "requestedCount": 0,
+          "pending": false,
+          "totalCount": 0,
+          "roleCounts": {
+            "civilian": 0,
+            "police": 0
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 0,
+          "logical": 0,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [],
+        "bodies": 734,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 1
+        },
+        "bodyCollisionListeners": 0,
+        "trafficPerformance": {
+          "aiMs": 0,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.09999999776482582,
+          "npcPrepareMs": 0,
+          "prepareMs": 0,
+          "worldStepMs": 0.5,
+          "postMs": 0.10000000149011612,
+          "aiTicks": 521,
+          "aiDecisions": 14852,
+          "vehicleCreated": 302,
+          "vehicleRemoved": 306,
+          "totalBodies": 734,
+          "trafficBodies": 0,
+          "logicalTraffic": 0,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 0
+        },
+        "resources": {
+          "geometries": 53,
+          "textures": 13,
+          "programs": 33
+        },
+        "pools": {
+          "vehicles": {
+            "civilian": {
+              "active": 0,
+              "free": 300,
+              "capacity": 300,
+              "created": 300,
+              "reused": 1,
+              "highWater": 300,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            },
+            "police": {
+              "active": 0,
+              "free": 2,
+              "capacity": 2,
+              "created": 2,
+              "reused": 3,
+              "highWater": 2,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            }
+          },
+          "policeEffects": {
+            "active": 0,
+            "free": 2,
+            "capacity": 2,
+            "created": 2,
+            "reused": 3,
+            "highWater": 2,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          },
+          "buildings": {
+            "created": 0,
+            "reused": 0,
+            "released": 0,
+            "active": 0,
+            "free": 0,
+            "highWater": 0,
+            "capacity": 192,
+            "idleCapacity": 8,
+            "overflow": 0,
+            "evicted": 0,
+            "retainedGeometryBytes": 0,
+            "disposed": false
+          }
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 38794935,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 1,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "high",
+          "budget": 512,
+          "emitters": 1
+        },
+        "effects": {
+          "stage": "healthy",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 0,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -75,
+            1.210005246657988,
+            -48.55
+          ]
+        },
+        "lifecycle": {
+          "disposed": false,
+          "frameScheduled": true
+        },
+        "instances": 18,
+        "disposals": null
+      }
+    },
+    {
+      "rebuild": 3,
+      "state": {
+        "telemetry": {
+          "position": {
+            "x": -75,
+            "y": 0.8583459746497935,
+            "z": -50
+          },
+          "speed": 0.20446591860458194,
+          "signedSpeed": -1.177406906822555e-16,
+          "heading": -1.0396457549568291e-34,
+          "roll": 9.207758564129778e-33,
+          "steer": 0,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "N",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "reused": 0,
+          "released": 0,
+          "active": 0,
+          "free": 0,
+          "highWater": 0,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0
+        },
+        "traffic": {
+          "count": 0,
+          "requestedCount": 0,
+          "pending": false,
+          "totalCount": 0,
+          "roleCounts": {
+            "civilian": 0,
+            "police": 0
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 0,
+          "logical": 0,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [],
+        "bodies": 734,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 1
+        },
+        "bodyCollisionListeners": 0,
+        "trafficPerformance": {
+          "aiMs": 0.10000000149011612,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.6000000014901161,
+          "npcPrepareMs": 0,
+          "prepareMs": 0,
+          "worldStepMs": 0.6999999992549419,
+          "postMs": 0.10000000149011612,
+          "aiTicks": 525,
+          "aiDecisions": 14852,
+          "vehicleCreated": 302,
+          "vehicleRemoved": 306,
+          "totalBodies": 734,
+          "trafficBodies": 0,
+          "logicalTraffic": 0,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 0
+        },
+        "resources": {
+          "geometries": 53,
+          "textures": 13,
+          "programs": 33
+        },
+        "pools": {
+          "vehicles": {
+            "civilian": {
+              "active": 0,
+              "free": 300,
+              "capacity": 300,
+              "created": 300,
+              "reused": 1,
+              "highWater": 300,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            },
+            "police": {
+              "active": 0,
+              "free": 2,
+              "capacity": 2,
+              "created": 2,
+              "reused": 3,
+              "highWater": 2,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            }
+          },
+          "policeEffects": {
+            "active": 0,
+            "free": 2,
+            "capacity": 2,
+            "created": 2,
+            "reused": 3,
+            "highWater": 2,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          },
+          "buildings": {
+            "created": 0,
+            "reused": 0,
+            "released": 0,
+            "active": 0,
+            "free": 0,
+            "highWater": 0,
+            "capacity": 192,
+            "idleCapacity": 8,
+            "overflow": 0,
+            "evicted": 0,
+            "retainedGeometryBytes": 0,
+            "disposed": false
+          }
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 38708507,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 1,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "high",
+          "budget": 512,
+          "emitters": 1
+        },
+        "effects": {
+          "stage": "healthy",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 0,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -75,
+            1.208342188243893,
+            -48.55
+          ]
+        },
+        "lifecycle": {
+          "disposed": false,
+          "frameScheduled": true
+        },
+        "instances": 18,
+        "disposals": null
+      }
+    },
+    {
+      "rebuild": 4,
+      "state": {
+        "telemetry": {
+          "position": {
+            "x": -75,
+            "y": 0.8636519438351797,
+            "z": -50
+          },
+          "speed": 0.16323013217852497,
+          "signedSpeed": -1.0534842376201045e-16,
+          "heading": -1.3897310227884357e-34,
+          "roll": 2.1983212480147638e-32,
+          "steer": 0,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "N",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "reused": 0,
+          "released": 0,
+          "active": 0,
+          "free": 0,
+          "highWater": 0,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0
+        },
+        "traffic": {
+          "count": 0,
+          "requestedCount": 0,
+          "pending": false,
+          "totalCount": 0,
+          "roleCounts": {
+            "civilian": 0,
+            "police": 0
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 0,
+          "logical": 0,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [],
+        "bodies": 734,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 1
+        },
+        "bodyCollisionListeners": 0,
+        "trafficPerformance": {
+          "aiMs": 0,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.09999999776482582,
+          "npcPrepareMs": 0,
+          "prepareMs": 0,
+          "worldStepMs": 0.5,
+          "postMs": 0.10000000149011612,
+          "aiTicks": 531,
+          "aiDecisions": 14852,
+          "vehicleCreated": 302,
+          "vehicleRemoved": 306,
+          "totalBodies": 734,
+          "trafficBodies": 0,
+          "logicalTraffic": 0,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 0
+        },
+        "resources": {
+          "geometries": 53,
+          "textures": 13,
+          "programs": 33
+        },
+        "pools": {
+          "vehicles": {
+            "civilian": {
+              "active": 0,
+              "free": 300,
+              "capacity": 300,
+              "created": 300,
+              "reused": 1,
+              "highWater": 300,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            },
+            "police": {
+              "active": 0,
+              "free": 2,
+              "capacity": 2,
+              "created": 2,
+              "reused": 3,
+              "highWater": 2,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            }
+          },
+          "policeEffects": {
+            "active": 0,
+            "free": 2,
+            "capacity": 2,
+            "created": 2,
+            "reused": 3,
+            "highWater": 2,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          },
+          "buildings": {
+            "created": 0,
+            "reused": 0,
+            "released": 0,
+            "active": 0,
+            "free": 0,
+            "highWater": 0,
+            "capacity": 192,
+            "idleCapacity": 8,
+            "overflow": 0,
+            "evicted": 0,
+            "retainedGeometryBytes": 0,
+            "disposed": false
+          }
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 38941834,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 1,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "high",
+          "budget": 512,
+          "emitters": 1
+        },
+        "effects": {
+          "stage": "healthy",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 0,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -75,
+            1.2136504324450668,
+            -48.55
+          ]
+        },
+        "lifecycle": {
+          "disposed": false,
+          "frameScheduled": true
+        },
+        "instances": 18,
+        "disposals": null
+      }
+    },
+    {
+      "rebuild": 5,
+      "state": {
+        "telemetry": {
+          "position": {
+            "x": -75,
+            "y": 0.8611700235166709,
+            "z": -50
+          },
+          "speed": 0.197197722768127,
+          "signedSpeed": -1.293778111330454e-16,
+          "heading": -1.4363599959006007e-34,
+          "roll": 1.5448188411050702e-32,
+          "steer": 0,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "N",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "reused": 0,
+          "released": 0,
+          "active": 0,
+          "free": 0,
+          "highWater": 0,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0
+        },
+        "traffic": {
+          "count": 0,
+          "requestedCount": 0,
+          "pending": false,
+          "totalCount": 0,
+          "roleCounts": {
+            "civilian": 0,
+            "police": 0
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 0,
+          "logical": 0,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [],
+        "bodies": 734,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 1
+        },
+        "bodyCollisionListeners": 0,
+        "trafficPerformance": {
+          "aiMs": 0,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0,
+          "prepareMs": 0,
+          "worldStepMs": 1.2999999970197678,
+          "postMs": 0.10000000149011612,
+          "aiTicks": 536,
+          "aiDecisions": 14852,
+          "vehicleCreated": 302,
+          "vehicleRemoved": 306,
+          "totalBodies": 734,
+          "trafficBodies": 0,
+          "logicalTraffic": 0,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 0
+        },
+        "resources": {
+          "geometries": 53,
+          "textures": 13,
+          "programs": 33
+        },
+        "pools": {
+          "vehicles": {
+            "civilian": {
+              "active": 0,
+              "free": 300,
+              "capacity": 300,
+              "created": 300,
+              "reused": 1,
+              "highWater": 300,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            },
+            "police": {
+              "active": 0,
+              "free": 2,
+              "capacity": 2,
+              "created": 2,
+              "reused": 3,
+              "highWater": 2,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            }
+          },
+          "policeEffects": {
+            "active": 0,
+            "free": 2,
+            "capacity": 2,
+            "created": 2,
+            "reused": 3,
+            "highWater": 2,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          },
+          "buildings": {
+            "created": 0,
+            "reused": 0,
+            "released": 0,
+            "active": 0,
+            "free": 0,
+            "highWater": 0,
+            "capacity": 192,
+            "idleCapacity": 8,
+            "overflow": 0,
+            "evicted": 0,
+            "retainedGeometryBytes": 0,
+            "disposed": false
+          }
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 39557559,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 1,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "high",
+          "budget": 512,
+          "emitters": 1
+        },
+        "effects": {
+          "stage": "healthy",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 0,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -75,
+            1.2111389831343826,
+            -48.55
+          ]
+        },
+        "lifecycle": {
+          "disposed": false,
+          "frameScheduled": true
+        },
+        "instances": 18,
+        "disposals": null
+      }
+    },
+    {
+      "rebuild": 6,
+      "state": {
+        "telemetry": {
+          "position": {
+            "x": -75,
+            "y": 0.8632740963069887,
+            "z": -50
+          },
+          "speed": 0.1698843003669129,
+          "signedSpeed": -1.1181116796498452e-16,
+          "heading": -1.4060279088942705e-34,
+          "roll": 2.08733189876558e-32,
+          "steer": 0,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "N",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "reused": 0,
+          "released": 0,
+          "active": 0,
+          "free": 0,
+          "highWater": 0,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0
+        },
+        "traffic": {
+          "count": 0,
+          "requestedCount": 0,
+          "pending": false,
+          "totalCount": 0,
+          "roleCounts": {
+            "civilian": 0,
+            "police": 0
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 0,
+          "logical": 0,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [],
+        "bodies": 734,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 1
+        },
+        "bodyCollisionListeners": 0,
+        "trafficPerformance": {
+          "aiMs": 0,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.10000000149011612,
+          "npcPrepareMs": 0,
+          "prepareMs": 0,
+          "worldStepMs": 0.6999999992549419,
+          "postMs": 0,
+          "aiTicks": 541,
+          "aiDecisions": 14852,
+          "vehicleCreated": 302,
+          "vehicleRemoved": 306,
+          "totalBodies": 734,
+          "trafficBodies": 0,
+          "logicalTraffic": 0,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 0
+        },
+        "resources": {
+          "geometries": 53,
+          "textures": 13,
+          "programs": 33
+        },
+        "pools": {
+          "vehicles": {
+            "civilian": {
+              "active": 0,
+              "free": 300,
+              "capacity": 300,
+              "created": 300,
+              "reused": 1,
+              "highWater": 300,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            },
+            "police": {
+              "active": 0,
+              "free": 2,
+              "capacity": 2,
+              "created": 2,
+              "reused": 3,
+              "highWater": 2,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            }
+          },
+          "policeEffects": {
+            "active": 0,
+            "free": 2,
+            "capacity": 2,
+            "created": 2,
+            "reused": 3,
+            "highWater": 2,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          },
+          "buildings": {
+            "created": 0,
+            "reused": 0,
+            "released": 0,
+            "active": 0,
+            "free": 0,
+            "highWater": 0,
+            "capacity": 192,
+            "idleCapacity": 8,
+            "overflow": 0,
+            "evicted": 0,
+            "retainedGeometryBytes": 0,
+            "disposed": false
+          }
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 38766279,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 1,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "high",
+          "budget": 512,
+          "emitters": 1
+        },
+        "effects": {
+          "stage": "healthy",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 0,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -75,
+            1.2128839916172567,
+            -48.55
+          ]
+        },
+        "lifecycle": {
+          "disposed": false,
+          "frameScheduled": true
+        },
+        "instances": 18,
+        "disposals": null
+      }
+    },
+    {
+      "rebuild": 7,
+      "state": {
+        "telemetry": {
+          "position": {
+            "x": -75,
+            "y": 0.8588231152506587,
+            "z": -50
+          },
+          "speed": 0.20612473957378535,
+          "signedSpeed": -1.390576291358072e-16,
+          "heading": -1.1278940928106898e-34,
+          "roll": 1.0226104435324126e-32,
+          "steer": 0,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "N",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "reused": 0,
+          "released": 0,
+          "active": 0,
+          "free": 0,
+          "highWater": 0,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0
+        },
+        "traffic": {
+          "count": 0,
+          "requestedCount": 0,
+          "pending": false,
+          "totalCount": 0,
+          "roleCounts": {
+            "civilian": 0,
+            "police": 0
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 0,
+          "logical": 0,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [],
+        "bodies": 734,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 1
+        },
+        "bodyCollisionListeners": 0,
+        "trafficPerformance": {
+          "aiMs": 0,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0,
+          "prepareMs": 0,
+          "worldStepMs": 0.6000000014901161,
+          "postMs": 0.09999999776482582,
+          "aiTicks": 546,
+          "aiDecisions": 14852,
+          "vehicleCreated": 302,
+          "vehicleRemoved": 306,
+          "totalBodies": 734,
+          "trafficBodies": 0,
+          "logicalTraffic": 0,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 0
+        },
+        "resources": {
+          "geometries": 53,
+          "textures": 13,
+          "programs": 33
+        },
+        "pools": {
+          "vehicles": {
+            "civilian": {
+              "active": 0,
+              "free": 300,
+              "capacity": 300,
+              "created": 300,
+              "reused": 1,
+              "highWater": 300,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            },
+            "police": {
+              "active": 0,
+              "free": 2,
+              "capacity": 2,
+              "created": 2,
+              "reused": 3,
+              "highWater": 2,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            }
+          },
+          "policeEffects": {
+            "active": 0,
+            "free": 2,
+            "capacity": 2,
+            "created": 2,
+            "reused": 3,
+            "highWater": 2,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          },
+          "buildings": {
+            "created": 0,
+            "reused": 0,
+            "released": 0,
+            "active": 0,
+            "free": 0,
+            "highWater": 0,
+            "capacity": 192,
+            "idleCapacity": 8,
+            "overflow": 0,
+            "evicted": 0,
+            "retainedGeometryBytes": 0,
+            "disposed": false
+          }
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 38862283,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 1,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "high",
+          "budget": 512,
+          "emitters": 1
+        },
+        "effects": {
+          "stage": "healthy",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 0,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -75,
+            1.2085864535126292,
+            -48.55
+          ]
+        },
+        "lifecycle": {
+          "disposed": false,
+          "frameScheduled": true
+        },
+        "instances": 18,
+        "disposals": null
+      }
+    },
+    {
+      "rebuild": 8,
+      "state": {
+        "telemetry": {
+          "position": {
+            "x": -75,
+            "y": 0.8658380180722317,
+            "z": -50
+          },
+          "speed": 0.11339853876515583,
+          "signedSpeed": -8.823522482396853e-17,
+          "heading": -1.482080664849339e-34,
+          "roll": 3.003158959672721e-32,
+          "steer": 0,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "N",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "reused": 0,
+          "released": 0,
+          "active": 0,
+          "free": 0,
+          "highWater": 0,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0
+        },
+        "traffic": {
+          "count": 0,
+          "requestedCount": 0,
+          "pending": false,
+          "totalCount": 0,
+          "roleCounts": {
+            "civilian": 0,
+            "police": 0
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 0,
+          "logical": 0,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [],
+        "bodies": 734,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 1
+        },
+        "bodyCollisionListeners": 0,
+        "trafficPerformance": {
+          "aiMs": 0,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0,
+          "prepareMs": 0,
+          "worldStepMs": 0.5,
+          "postMs": 0.10000000149011612,
+          "aiTicks": 553,
+          "aiDecisions": 14852,
+          "vehicleCreated": 302,
+          "vehicleRemoved": 306,
+          "totalBodies": 734,
+          "trafficBodies": 0,
+          "logicalTraffic": 0,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 0
+        },
+        "resources": {
+          "geometries": 53,
+          "textures": 13,
+          "programs": 33
+        },
+        "pools": {
+          "vehicles": {
+            "civilian": {
+              "active": 0,
+              "free": 300,
+              "capacity": 300,
+              "created": 300,
+              "reused": 1,
+              "highWater": 300,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            },
+            "police": {
+              "active": 0,
+              "free": 2,
+              "capacity": 2,
+              "created": 2,
+              "reused": 3,
+              "highWater": 2,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            }
+          },
+          "policeEffects": {
+            "active": 0,
+            "free": 2,
+            "capacity": 2,
+            "created": 2,
+            "reused": 3,
+            "highWater": 2,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          },
+          "buildings": {
+            "created": 0,
+            "reused": 0,
+            "released": 0,
+            "active": 0,
+            "free": 0,
+            "highWater": 0,
+            "capacity": 192,
+            "idleCapacity": 8,
+            "overflow": 0,
+            "evicted": 0,
+            "retainedGeometryBytes": 0,
+            "disposed": false
+          }
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 39343850,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 1,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "high",
+          "budget": 512,
+          "emitters": 1
+        },
+        "effects": {
+          "stage": "healthy",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 0,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -75,
+            1.2157088697364153,
+            -48.55
+          ]
+        },
+        "lifecycle": {
+          "disposed": false,
+          "frameScheduled": true
+        },
+        "instances": 18,
+        "disposals": null
+      }
+    },
+    {
+      "rebuild": 9,
+      "state": {
+        "telemetry": {
+          "position": {
+            "x": -75,
+            "y": 0.8650008893392848,
+            "z": -50
+          },
+          "speed": 0.13493953417698692,
+          "signedSpeed": -9.18754745696416e-17,
+          "heading": -1.4538879048473779e-34,
+          "roll": 2.652145377261409e-32,
+          "steer": 0,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "N",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "reused": 0,
+          "released": 0,
+          "active": 0,
+          "free": 0,
+          "highWater": 0,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0
+        },
+        "traffic": {
+          "count": 0,
+          "requestedCount": 0,
+          "pending": false,
+          "totalCount": 0,
+          "roleCounts": {
+            "civilian": 0,
+            "police": 0
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 0,
+          "logical": 0,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [],
+        "bodies": 734,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 1
+        },
+        "bodyCollisionListeners": 0,
+        "trafficPerformance": {
+          "aiMs": 0.30000000074505806,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0,
+          "prepareMs": 0,
+          "worldStepMs": 0.7000000029802322,
+          "postMs": 0,
+          "aiTicks": 558,
+          "aiDecisions": 14852,
+          "vehicleCreated": 302,
+          "vehicleRemoved": 306,
+          "totalBodies": 734,
+          "trafficBodies": 0,
+          "logicalTraffic": 0,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 0
+        },
+        "resources": {
+          "geometries": 53,
+          "textures": 13,
+          "programs": 33
+        },
+        "pools": {
+          "vehicles": {
+            "civilian": {
+              "active": 0,
+              "free": 300,
+              "capacity": 300,
+              "created": 300,
+              "reused": 1,
+              "highWater": 300,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            },
+            "police": {
+              "active": 0,
+              "free": 2,
+              "capacity": 2,
+              "created": 2,
+              "reused": 3,
+              "highWater": 2,
+              "overflow": 0,
+              "evicted": 0,
+              "disposed": false
+            }
+          },
+          "policeEffects": {
+            "active": 0,
+            "free": 2,
+            "capacity": 2,
+            "created": 2,
+            "reused": 3,
+            "highWater": 2,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          },
+          "buildings": {
+            "created": 0,
+            "reused": 0,
+            "released": 0,
+            "active": 0,
+            "free": 0,
+            "highWater": 0,
+            "capacity": 192,
+            "idleCapacity": 8,
+            "overflow": 0,
+            "evicted": 0,
+            "retainedGeometryBytes": 0,
+            "disposed": false
+          }
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 39823859,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 1,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "high",
+          "budget": 512,
+          "emitters": 1
+        },
+        "effects": {
+          "stage": "healthy",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 0,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -75,
+            1.2148459587630072,
+            -48.55
+          ]
+        },
+        "lifecycle": {
+          "disposed": false,
+          "frameScheduled": true
+        },
+        "instances": 18,
+        "disposals": null
+      }
+    },
+    {
+      "hidden": true
+    }
+  ],
+  "samples": [],
+  "errors": [],
+  "affinity": "1",
+  "trafficCycles": 0,
+  "hiddenMethod": "Controlled getter; not physical OS tab suspension",
+  "teardownMethod": "Synthetic persisted/final pagehide; checks production handler ownership",
+  "environment": {
+    "vendor": "Google Inc. (NVIDIA)",
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4080 (0x00002704) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "dpr": 1,
+    "seed": 20261005
+  },
+  "browser": "155.0.4283.45",
+  "warm": {
+    "telemetry": {
+      "position": {
+        "x": -75,
+        "y": 0.8677570093458047,
+        "z": -50
+      },
+      "speed": 1.9452855486524923e-14,
+      "signedSpeed": 5.80147645717485e-18,
+      "heading": -6.3355148404034945e-34,
+      "roll": 4.494110106148744e-30,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "N",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "routeIndex": 0,
+    "arrest": {
+      "state": "idle",
+      "progress": 0,
+      "remainingSeconds": 5,
+      "holdProgress": 0,
+      "nearbyPoliceIds": [],
+      "cancellationReason": null
+    },
+    "proxies": 0,
+    "occlusion": {
+      "created": 0,
+      "reused": 0,
+      "released": 0,
+      "active": 0,
+      "free": 0,
+      "highWater": 0,
+      "capacity": 192,
+      "idleCapacity": 8,
+      "overflow": 0,
+      "evicted": 0
+    },
+    "traffic": {
+      "count": 60,
+      "requestedCount": 60,
+      "pending": false,
+      "totalCount": 62,
+      "roleCounts": {
+        "civilian": 60,
+        "police": 2
+      },
+      "pendingSpawns": 0,
+      "insertionReason": null,
+      "bodies": 4,
+      "logical": 58,
+      "visible": 5,
+      "reservations": 13
+    },
+    "police": [
+      {
+        "id": "police-302",
+        "x": -83,
+        "z": -59,
+        "heading": -0.25002572419147256,
+        "speed": 1.1136924715776078e-18,
+        "targetId": "player",
+        "state": "idle",
+        "waitReason": "no-wanted-level",
+        "damage": 0,
+        "operational": true,
+        "damageStage": "healthy",
+        "pursuit": {
+          "state": "pursue",
+          "stateSince": 0,
+          "targetId": "player",
+          "lastContactAt": null,
+          "noProgressTime": 0,
+          "recoveryUntil": 0,
+          "targetStoppedTime": 0,
+          "stalledTime": 0,
+          "escapePhase": null,
+          "wantedLevel": 0,
+          "profile": {
+            "level": 0,
+            "maxSpeed": 0,
+            "leadSeconds": 0,
+            "ramDistance": 0,
+            "canMaintainBlock": false
+          },
+          "desiredSpeedLimit": 0
+        }
+      },
+      {
+        "id": "police-303",
+        "x": -67,
+        "z": -59,
+        "heading": 0.25002572419147256,
+        "speed": 1.1136924715776078e-18,
+        "targetId": "player",
+        "state": "idle",
+        "waitReason": "no-wanted-level",
+        "damage": 0,
+        "operational": true,
+        "damageStage": "healthy",
+        "pursuit": {
+          "state": "pursue",
+          "stateSince": 0,
+          "targetId": "player",
+          "lastContactAt": null,
+          "noProgressTime": 0,
+          "recoveryUntil": 0,
+          "targetStoppedTime": 0,
+          "stalledTime": 0,
+          "escapePhase": null,
+          "wantedLevel": 0,
+          "profile": {
+            "level": 0,
+            "maxSpeed": 0,
+            "leadSeconds": 0,
+            "ramDistance": 0,
+            "canMaintainBlock": false
+          },
+          "desiredSpeedLimit": 0
+        }
+      }
+    ],
+    "bodies": 738,
+    "worldListeners": {
+      "addBody": 1,
+      "removeBody": 1,
+      "beginContact": 3
+    },
+    "bodyCollisionListeners": 4,
+    "trafficPerformance": {
+      "aiMs": 0.5,
+      "aiStepMs": 0.5,
+      "playerPrepareMs": 0.10000000149011612,
+      "npcPrepareMs": 0.19999999925494194,
+      "prepareMs": 0.7999999970197678,
+      "worldStepMs": 0.7000000029802322,
+      "postMs": 0.19999999925494194,
+      "aiTicks": 87,
+      "aiDecisions": 14784,
+      "vehicleCreated": 302,
+      "vehicleRemoved": 242,
+      "totalBodies": 738,
+      "trafficBodies": 4,
+      "logicalTraffic": 58,
+      "visibleTraffic": 5,
+      "sleepingTrafficBodies": 0,
+      "awakeTrafficBodies": 4
+    },
+    "resources": {
+      "geometries": 52,
+      "textures": 13,
+      "programs": 41
+    },
+    "pools": {
+      "vehicles": {
+        "civilian": {
+          "active": 60,
+          "free": 240,
+          "capacity": 300,
+          "created": 300,
+          "reused": 0,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        },
+        "police": {
+          "active": 2,
+          "free": 0,
+          "capacity": 2,
+          "created": 2,
+          "reused": 2,
+          "highWater": 2,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "policeEffects": {
+        "active": 2,
+        "free": 0,
+        "capacity": 2,
+        "created": 2,
+        "reused": 2,
+        "highWater": 2,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      },
+      "buildings": {
+        "created": 0,
+        "reused": 0,
+        "released": 0,
+        "active": 0,
+        "free": 0,
+        "highWater": 0,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 0,
+        "disposed": false
+      }
+    },
+    "pickups": {
+      "pickups": [
+        {
+          "id": 0,
+          "x": -75,
+          "z": -157.5,
+          "section": "0:0",
+          "status": "available"
+        },
+        {
+          "id": 1,
+          "x": -125,
+          "z": -65,
+          "section": "0:1",
+          "status": "available"
+        },
+        {
+          "id": 2,
+          "x": -75,
+          "z": 107.5,
+          "section": "0:2",
+          "status": "available"
+        },
+        {
+          "id": 3,
+          "x": 42.5,
+          "z": -75,
+          "section": "1:0",
+          "status": "available"
+        },
+        {
+          "id": 4,
+          "x": -25,
+          "z": 50,
+          "section": "1:1",
+          "status": "available"
+        },
+        {
+          "id": 5,
+          "x": -57.5,
+          "z": 175,
+          "section": "1:2",
+          "status": "available"
+        },
+        {
+          "id": 6,
+          "x": 115,
+          "z": -75,
+          "section": "2:0",
+          "status": "available"
+        },
+        {
+          "id": 7,
+          "x": 157.5,
+          "z": -25,
+          "section": "2:1",
+          "status": "available"
+        },
+        {
+          "id": 8,
+          "x": 75,
+          "z": 157.5,
+          "section": "2:2",
+          "status": "available"
+        },
+        {
+          "id": 9,
+          "x": -175,
+          "z": -165,
+          "section": "0:0",
+          "status": "available"
+        },
+        {
+          "id": 10,
+          "x": 57.5,
+          "z": 175,
+          "section": "1:2",
+          "status": "available"
+        },
+        {
+          "id": 11,
+          "x": -135,
+          "z": 25,
+          "section": "0:1",
+          "status": "available"
+        }
+      ],
+      "repairs": 0,
+      "unavailableReason": null
+    },
+    "heap": 40643494,
+    "smoke": {
+      "emitted": 0,
+      "sourceCount": 5,
+      "limitedSources": 0,
+      "highWater": 0,
+      "active": 0,
+      "capacity": 512,
+      "quality": "high",
+      "budget": 512,
+      "emitters": 5
+    },
+    "effects": {
+      "stage": "healthy",
+      "exploded": false,
+      "explosions": 0,
+      "terminalTime": 0,
+      "activeSmoke": 0,
+      "activeFire": 0,
+      "capacity": 288,
+      "origin": [
+        -75,
+        1.2177570093458043,
+        -48.55
+      ]
+    },
+    "lifecycle": {
+      "disposed": false,
+      "frameScheduled": true
+    },
+    "instances": 80,
+    "disposals": null
+  },
+  "repairSetup": {
+    "id": 0,
+    "x": -75,
+    "z": -157.5
+  },
+  "repairAfter": {
+    "telemetry": {
+      "position": {
+        "x": -75,
+        "y": 0.857976172720919,
+        "z": -157.5
+      },
+      "speed": 0.5378556617817671,
+      "signedSpeed": 4.1902601080649314e-16,
+      "heading": -4.907226471645061e-36,
+      "roll": -5.7011849181739564e-33,
+      "steer": 0,
+      "grounded": 4,
+      "slip": 0,
+      "gear": "N",
+      "damage": 0,
+      "damageState": "healthy",
+      "traction": 1,
+      "lastImpactSpeed": 0
+    },
+    "routeIndex": 0,
+    "arrest": {
+      "state": "idle",
+      "progress": 0,
+      "remainingSeconds": 5,
+      "holdProgress": 0,
+      "nearbyPoliceIds": [],
+      "cancellationReason": null
+    },
+    "proxies": 0,
+    "occlusion": {
+      "created": 0,
+      "reused": 0,
+      "released": 0,
+      "active": 0,
+      "free": 0,
+      "highWater": 0,
+      "capacity": 192,
+      "idleCapacity": 8,
+      "overflow": 0,
+      "evicted": 0
+    },
+    "traffic": {
+      "count": 0,
+      "requestedCount": 0,
+      "pending": false,
+      "totalCount": 0,
+      "roleCounts": {
+        "civilian": 0,
+        "police": 0
+      },
+      "pendingSpawns": 0,
+      "insertionReason": null,
+      "bodies": 0,
+      "logical": 0,
+      "visible": 0,
+      "reservations": 0
+    },
+    "police": [],
+    "bodies": 734,
+    "worldListeners": {
+      "addBody": 1,
+      "removeBody": 1,
+      "beginContact": 1
+    },
+    "bodyCollisionListeners": 0,
+    "trafficPerformance": {
+      "aiMs": 0,
+      "aiStepMs": 0,
+      "playerPrepareMs": 0,
+      "npcPrepareMs": 0,
+      "prepareMs": 0,
+      "worldStepMs": 0.5,
+      "postMs": 0.09999999776482582,
+      "aiTicks": 91,
+      "aiDecisions": 14844,
+      "vehicleCreated": 302,
+      "vehicleRemoved": 304,
+      "totalBodies": 734,
+      "trafficBodies": 0,
+      "logicalTraffic": 0,
+      "visibleTraffic": 0,
+      "sleepingTrafficBodies": 0,
+      "awakeTrafficBodies": 0
+    },
+    "resources": {
+      "geometries": 53,
+      "textures": 13,
+      "programs": 41
+    },
+    "pools": {
+      "vehicles": {
+        "civilian": {
+          "active": 0,
+          "free": 300,
+          "capacity": 300,
+          "created": 300,
+          "reused": 0,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        },
+        "police": {
+          "active": 0,
+          "free": 2,
+          "capacity": 2,
+          "created": 2,
+          "reused": 2,
+          "highWater": 2,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "policeEffects": {
+        "active": 0,
+        "free": 2,
+        "capacity": 2,
+        "created": 2,
+        "reused": 2,
+        "highWater": 2,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      },
+      "buildings": {
+        "created": 0,
+        "reused": 0,
+        "released": 0,
+        "active": 0,
+        "free": 0,
+        "highWater": 0,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 0,
+        "disposed": false
+      }
+    },
+    "pickups": {
+      "pickups": [
+        {
+          "id": 0,
+          "x": -75,
+          "z": -157.5,
+          "section": "0:0",
+          "status": "consumed"
+        },
+        {
+          "id": 1,
+          "x": -125,
+          "z": -65,
+          "section": "0:1",
+          "status": "available"
+        },
+        {
+          "id": 2,
+          "x": -75,
+          "z": 107.5,
+          "section": "0:2",
+          "status": "available"
+        },
+        {
+          "id": 3,
+          "x": 42.5,
+          "z": -75,
+          "section": "1:0",
+          "status": "available"
+        },
+        {
+          "id": 4,
+          "x": -25,
+          "z": 50,
+          "section": "1:1",
+          "status": "available"
+        },
+        {
+          "id": 5,
+          "x": -57.5,
+          "z": 175,
+          "section": "1:2",
+          "status": "available"
+        },
+        {
+          "id": 6,
+          "x": 115,
+          "z": -75,
+          "section": "2:0",
+          "status": "available"
+        },
+        {
+          "id": 7,
+          "x": 157.5,
+          "z": -25,
+          "section": "2:1",
+          "status": "available"
+        },
+        {
+          "id": 8,
+          "x": 75,
+          "z": 157.5,
+          "section": "2:2",
+          "status": "available"
+        },
+        {
+          "id": 9,
+          "x": -175,
+          "z": -165,
+          "section": "0:0",
+          "status": "available"
+        },
+        {
+          "id": 10,
+          "x": 57.5,
+          "z": 175,
+          "section": "1:2",
+          "status": "available"
+        },
+        {
+          "id": 11,
+          "x": -135,
+          "z": 25,
+          "section": "0:1",
+          "status": "available"
+        }
+      ],
+      "repairs": 1,
+      "unavailableReason": null
+    },
+    "heap": 40300835,
+    "smoke": {
+      "emitted": 0,
+      "sourceCount": 1,
+      "limitedSources": 0,
+      "highWater": 0,
+      "active": 0,
+      "capacity": 512,
+      "quality": "high",
+      "budget": 512,
+      "emitters": 1
+    },
+    "effects": {
+      "stage": "healthy",
+      "exploded": false,
+      "explosions": 0,
+      "terminalTime": 0,
+      "activeSmoke": 0,
+      "activeFire": 0,
+      "capacity": 288,
+      "origin": [
+        -75,
+        1.2092162288300266,
+        -156.05
+      ]
+    },
+    "lifecycle": {
+      "disposed": false,
+      "frameScheduled": true
+    },
+    "instances": 18,
+    "disposals": null
+  },
+  "teardown": {
+    "before": {
+      "telemetry": {
+        "position": {
+          "x": -75,
+          "y": 0.8683247904360972,
+          "z": -50
+        },
+        "speed": 0.007782742214906025,
+        "signedSpeed": 5.038030724767388e-17,
+        "heading": -1.5511147815658167e-34,
+        "roll": 5.831629820255201e-32,
+        "steer": 0,
+        "grounded": 4,
+        "slip": 0,
+        "gear": "N",
+        "damage": 0,
+        "damageState": "healthy",
+        "traction": 1,
+        "lastImpactSpeed": 0
+      },
+      "routeIndex": 0,
+      "arrest": {
+        "state": "idle",
+        "progress": 0,
+        "remainingSeconds": 5,
+        "holdProgress": 0,
+        "nearbyPoliceIds": [],
+        "cancellationReason": null
+      },
+      "proxies": 0,
+      "occlusion": {
+        "created": 0,
+        "reused": 0,
+        "released": 0,
+        "active": 0,
+        "free": 0,
+        "highWater": 0,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0
+      },
+      "traffic": {
+        "count": 0,
+        "requestedCount": 0,
+        "pending": false,
+        "totalCount": 0,
+        "roleCounts": {
+          "civilian": 0,
+          "police": 0
+        },
+        "pendingSpawns": 0,
+        "insertionReason": null,
+        "bodies": 0,
+        "logical": 0,
+        "visible": 0,
+        "reservations": 0
+      },
+      "police": [],
+      "bodies": 734,
+      "worldListeners": {
+        "addBody": 1,
+        "removeBody": 1,
+        "beginContact": 1
+      },
+      "bodyCollisionListeners": 0,
+      "trafficPerformance": {
+        "aiMs": 0,
+        "aiStepMs": 0,
+        "playerPrepareMs": 0.19999999925494194,
+        "npcPrepareMs": 0,
+        "prepareMs": 0,
+        "worldStepMs": 0.7000000029802322,
+        "postMs": 0.09999999776482582,
+        "aiTicks": 560,
+        "aiDecisions": 14852,
+        "vehicleCreated": 302,
+        "vehicleRemoved": 306,
+        "totalBodies": 734,
+        "trafficBodies": 0,
+        "logicalTraffic": 0,
+        "visibleTraffic": 0,
+        "sleepingTrafficBodies": 0,
+        "awakeTrafficBodies": 0
+      },
+      "resources": {
+        "geometries": 53,
+        "textures": 13,
+        "programs": 33
+      },
+      "pools": {
+        "vehicles": {
+          "civilian": {
+            "active": 0,
+            "free": 300,
+            "capacity": 300,
+            "created": 300,
+            "reused": 1,
+            "highWater": 300,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          },
+          "police": {
+            "active": 0,
+            "free": 2,
+            "capacity": 2,
+            "created": 2,
+            "reused": 3,
+            "highWater": 2,
+            "overflow": 0,
+            "evicted": 0,
+            "disposed": false
+          }
+        },
+        "policeEffects": {
+          "active": 0,
+          "free": 2,
+          "capacity": 2,
+          "created": 2,
+          "reused": 3,
+          "highWater": 2,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        },
+        "buildings": {
+          "created": 0,
+          "reused": 0,
+          "released": 0,
+          "active": 0,
+          "free": 0,
+          "highWater": 0,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0,
+          "retainedGeometryBytes": 0,
+          "disposed": false
+        }
+      },
+      "pickups": {
+        "pickups": [
+          {
+            "id": 0,
+            "x": -75,
+            "z": -157.5,
+            "section": "0:0",
+            "status": "available"
+          },
+          {
+            "id": 1,
+            "x": -125,
+            "z": -65,
+            "section": "0:1",
+            "status": "available"
+          },
+          {
+            "id": 2,
+            "x": -75,
+            "z": 107.5,
+            "section": "0:2",
+            "status": "available"
+          },
+          {
+            "id": 3,
+            "x": 42.5,
+            "z": -75,
+            "section": "1:0",
+            "status": "available"
+          },
+          {
+            "id": 4,
+            "x": -25,
+            "z": 50,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 5,
+            "x": -57.5,
+            "z": 175,
+            "section": "1:2",
+            "status": "available"
+          },
+          {
+            "id": 6,
+            "x": 115,
+            "z": -75,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 7,
+            "x": 157.5,
+            "z": -25,
+            "section": "2:1",
+            "status": "available"
+          },
+          {
+            "id": 8,
+            "x": 75,
+            "z": 157.5,
+            "section": "2:2",
+            "status": "available"
+          },
+          {
+            "id": 9,
+            "x": -175,
+            "z": -165,
+            "section": "0:0",
+            "status": "available"
+          },
+          {
+            "id": 10,
+            "x": 57.5,
+            "z": 175,
+            "section": "1:2",
+            "status": "available"
+          },
+          {
+            "id": 11,
+            "x": -135,
+            "z": 25,
+            "section": "0:1",
+            "status": "available"
+          }
+        ],
+        "repairs": 0,
+        "unavailableReason": null
+      },
+      "heap": 39445023,
+      "smoke": {
+        "emitted": 0,
+        "sourceCount": 1,
+        "limitedSources": 0,
+        "highWater": 0,
+        "active": 0,
+        "capacity": 512,
+        "quality": "high",
+        "budget": 512,
+        "emitters": 1
+      },
+      "effects": {
+        "stage": "healthy",
+        "exploded": false,
+        "explosions": 0,
+        "terminalTime": 0,
+        "activeSmoke": 0,
+        "activeFire": 0,
+        "capacity": 288,
+        "origin": [
+          -75,
+          1.2183246463112412,
+          -48.55
+        ]
+      },
+      "lifecycle": {
+        "disposed": false,
+        "frameScheduled": true
+      },
+      "instances": 18,
+      "disposals": [
+        {
+          "type": "BufferGeometry",
+          "uuid": "69fca0e0-dbbe-4aa7-ad75-c101721d71eb",
+          "count": 0
+        },
+        {
+          "type": "MeshPhysicalMaterial",
+          "uuid": "072ce098-4a8e-4835-9384-2af490decc77",
+          "count": 0
+        },
+        {
+          "type": 1009,
+          "uuid": "c65785c1-e20f-4712-9f3a-876c0bf5e2cf",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "5bb31463-de34-4c4e-800c-6c99cc7f8bda",
+          "count": 0
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "330e8aa2-a6fa-4e1f-b8f2-db9e05b0a76c",
+          "count": 0
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "e614e5ae-bc6a-4f07-a4db-ade5eb607a54",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "7893a681-ba7c-4cd2-9dac-790d4ab081d8",
+          "count": 0
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "4515fa5a-0082-4c88-918c-85e0124f5638",
+          "count": 0
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "e8115a19-b483-4426-b9f4-98288d7d1ff7",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "b0ddb7d3-5d2d-4d7b-9424-95cf79be5705",
+          "count": 0
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "00097481-cc49-41d3-a78d-38d1fde8e2d8",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "ece0a202-d386-47c2-9798-b64d1b5e6715",
+          "count": 0
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "d783cd83-f5c2-4c60-b7d1-e8f0fdeeef16",
+          "count": 0
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "79ee7e14-d872-4245-aa62-cb7d079516e5",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "63ee7691-1750-4409-910e-3347116ad841",
+          "count": 0
+        },
+        {
+          "type": "MeshBasicMaterial",
+          "uuid": "5b8ba937-7ab6-4b11-b740-f3862ce51a38",
+          "count": 0
+        },
+        {
+          "type": 1009,
+          "uuid": "fc2bcfab-e32c-440e-8ec5-65630e993f97",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "8dde4d80-b5b6-49da-8b65-ff9594999f93",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "8a377c40-9b30-4777-804b-386f4c6cc6a9",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "5c75581a-e20e-4ac4-b56e-7d7808dcfb24",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "befca3cf-e06c-4cc3-918b-c4930e263840",
+          "count": 0
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "2b727992-af0e-4be6-b274-91ea586ea86b",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "cc1d7090-6560-4a4e-9e9e-22b874360096",
+          "count": 0
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "5fa64b26-2a35-4dff-90fb-e6a800d734c2",
+          "count": 0
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "f190184e-3c43-49fc-bc72-8843478d44b1",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "d916ac15-b1f4-4ac8-aa17-2616d9cddc28",
+          "count": 0
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "5ef9085b-f3e9-424d-9a32-ea9f6bf0d158",
+          "count": 0
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "cb2be8ab-f096-43f5-b768-cc1fe53f23b1",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "a016d551-d5e4-49fd-91ae-d75a8075a1c9",
+          "count": 0
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "2b704b0d-a46c-4947-98a4-bb23accd7449",
+          "count": 0
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "229cd9bf-c69b-44b6-911b-c2e6c0739659",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "8ac5e710-5c33-43d3-9251-0298fd018635",
+          "count": 0
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "f80ccbdb-01b9-4a61-9e63-95092ba6d928",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "c9eb6cde-6c41-4c44-91ff-794bbc016fb0",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "77ba5b3d-7422-4ca7-8f0c-012e7295f74b",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "5a8437e2-be22-499c-bc33-5cc425e8c041",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "1ac2fcc5-09da-4e40-a822-e66f602d2e2b",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "5376d1ee-14e1-4af4-b04a-e1aa631b478c",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "49f21e7c-bed9-4227-acac-8186b1eda73e",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "8c3fe549-6028-4a6f-8dee-0e7cb8f0f2db",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "b1e4f158-cde0-4bb0-858a-66a00b1ed84a",
+          "count": 0
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "07a84092-b9e7-4fff-8e4d-4469e14c38c7",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "51daf732-1c6c-4a4f-bf60-0fd507ed4f17",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "a5a1469c-0ac0-4288-a686-bff7c9777f68",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "1de691a5-bb3b-4b49-8bdd-5cf3a5a5e1c3",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "6b67b4aa-a8a1-49ec-9ce8-736f1518648d",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "8ca18161-fd9a-41c6-8f3a-aa2f613a1dea",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "1d81b16f-c70f-4b59-afbe-3e2750f639a9",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "d7c1f39c-6c7f-40f8-abce-677f061a5ad1",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "4b6c284e-7484-410b-9b82-629fc921c759",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "632cddca-db87-4e86-8540-1daa3bbd5f00",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "1f63d311-5f11-472f-9c28-77ed850a18ee",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "06f7cd71-fe60-4769-97a5-7873a137338b",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "9c2172e2-4843-414b-a795-462f25e5e088",
+          "count": 0
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "139676aa-37c9-4fc5-a8fe-e51473bf809b",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "cc64985c-6b0f-4414-8fd2-a58e65ad55a4",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "712e1d1b-17e8-4db9-94e1-f6d603fcde49",
+          "count": 0
+        },
+        {
+          "type": "CylinderGeometry",
+          "uuid": "686cddbd-d64f-40dc-9714-2223bc3c7b6e",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "49d3d5d9-7bb9-457c-9503-95e7b8fa8e2c",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "e406af44-3438-42f0-80a0-861af1b14854",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "3d486681-c445-4bf9-8c06-f85ad880222c",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "0991fb73-d3ab-405d-8613-4c700f32e908",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "f4c8d47a-4728-4dda-b93f-98db3338ae24",
+          "count": 0
+        },
+        {
+          "type": "SphereGeometry",
+          "uuid": "677d4fc7-5e13-45b4-b055-f2a1d19cb2bc",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "90b993cf-d5e1-4f39-b5ad-2bf2b6c38bb1",
+          "count": 0
+        },
+        {
+          "type": "MeshBasicMaterial",
+          "uuid": "34735823-6037-45ae-ab97-29649fcd9ae5",
+          "count": 0
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "89910de9-3db9-4912-83c0-a843b2105713",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "4e084a95-ee3a-406c-81e6-e1df2274e0fa",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "2390f8bd-f3ca-48ad-8402-76fa574ce2d6",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "ff080e93-51f1-46e4-9bb6-13d1976ac125",
+          "count": 0
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "589fdc36-d87d-40a4-a319-d11826d6287a",
+          "count": 0
+        },
+        {
+          "type": "ConeGeometry",
+          "uuid": "6c73416f-f406-4140-a7d6-939bec8eaed8",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "4a655a98-932b-4376-afe3-b08785ef8247",
+          "count": 0
+        },
+        {
+          "type": "ConeGeometry",
+          "uuid": "6f1f38f0-15d4-4630-8fc3-74e8d805b0be",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "ce855e8e-9889-45be-8cc0-b2475c2e98ac",
+          "count": 0
+        },
+        {
+          "type": "ConeGeometry",
+          "uuid": "09eaccc3-9a21-4fb4-944c-2af2cc09df0a",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "1769bccf-6a9a-42df-abf7-2383a83c62d8",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "bfe4f942-9aef-4369-b6ca-c9868bae9c4c",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "c8e206f5-69c1-41d2-a125-b6392f968e16",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "eeae9ba3-5933-499d-bade-aa713cdf0b84",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "4fc376ec-879a-45b2-ac90-b3bfa976d548",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "22e455a1-8a87-45fa-8247-234b33d2b717",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "4dfe6c37-b4ce-4b93-9893-6d53850202eb",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "75dba331-a3e9-417d-bea7-b38e0bf29b3b",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "08cd5c6d-f93f-435b-83e9-d6613594b004",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "1315bf86-d5cc-4976-9096-0e7a91f57968",
+          "count": 0
+        },
+        {
+          "type": "ConeGeometry",
+          "uuid": "06e2cc62-db1f-41fe-9908-9297baa5cd89",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "8997b860-086a-4c43-bcf2-8d97a26a1d60",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "d97b2e56-d768-4634-9176-9a839fd40df4",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "57151d0a-38ca-4055-8699-3f3519b404f5",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "81eb3e81-dd8f-4518-9cb4-4cd6fd243f8f",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "e8e91d3a-8303-42c0-8af3-7191633a030c",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "e52a3515-ca4e-46bf-a6a8-142d909db2a8",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "8aae12a7-2a3d-49c7-a9cc-0e6cdb63ba16",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "047789a7-ff29-45e2-b551-8dad4ba2bcca",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "55f31ac5-1d9a-45d2-b7ab-b9c088180f61",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "80f91a64-d468-4736-91e7-05952c5538c4",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "6990d9a5-64a4-4521-8e8e-d488ec3f4937",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "419c85d6-dca9-4c97-af47-8ae0d4311a1b",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "1e3a4fa1-7a8a-4098-bbaf-fec555505c6b",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "2f59bfa8-24da-4ca2-bb52-2b6234bf26ad",
+          "count": 0
+        },
+        {
+          "type": "CylinderGeometry",
+          "uuid": "c9d4e75e-fd8e-4c12-a3f6-f329775b0899",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "e4e4b5d5-791d-4573-ab4e-904c4aaf6c94",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "99cf4d1a-7242-4745-ac35-a7db6bee1eb5",
+          "count": 0
+        },
+        {
+          "type": "IcosahedronGeometry",
+          "uuid": "20e6629d-016f-4f50-8805-59025308fb2c",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "1643acd1-9c09-42b4-b4bf-b76dc7de460e",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "3949e75f-c216-4fb4-8f0f-613541354703",
+          "count": 0
+        },
+        {
+          "type": "DodecahedronGeometry",
+          "uuid": "32097dce-af66-49bb-9628-1b635a9eadcf",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "92135ca7-74f2-4624-ab99-03ea2a010e07",
+          "count": 0
+        },
+        {
+          "type": "ConeGeometry",
+          "uuid": "53c2a97f-1197-4b81-97b6-aedb052e73e1",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "29549d38-5fa4-400b-9c36-7967dda5880c",
+          "count": 0
+        },
+        {
+          "type": "CylinderGeometry",
+          "uuid": "abf6b028-caee-412e-b29e-06bc4598f837",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "dfc6b3ec-5a0a-4eb5-a382-a4d82f287336",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "755554db-252f-46b8-aa8a-7191be7b55ec",
+          "count": 0
+        },
+        {
+          "type": "CylinderGeometry",
+          "uuid": "10f04622-a046-4f83-9383-4a5a9901eda5",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "19600480-0885-4931-a088-a6bc17f3e506",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "a7ebfbdd-b413-4566-be50-f2d4f2abce43",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "8b09bcd7-8945-4d64-a616-684611bc8b97",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "743c5d0f-d9bd-49f1-b94a-4902e8427e42",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "ef6fcbcc-986d-42cd-ba34-230942fc136c",
+          "count": 0
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "f3bd4ee0-caeb-4e29-bc84-7d431dca3437",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "61c7cd7d-6d99-4bf4-a801-82c301f58e87",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "b8188e1d-5883-4c11-b2b7-b07850459ecb",
+          "count": 0
+        },
+        {
+          "type": "CylinderGeometry",
+          "uuid": "f3f94253-af4f-4033-9b27-bbead5922f0f",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "952abaef-24a4-4ce6-93c5-9aad3584b0b7",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "dd01a3dc-6a03-4927-b409-d53bcb5a65c6",
+          "count": 0
+        },
+        {
+          "type": "TorusGeometry",
+          "uuid": "a764b455-971c-41cf-a8c0-82c6802d643a",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "928b0fa0-13ee-4a8d-8cf5-ed321d97469f",
+          "count": 0
+        },
+        {
+          "type": "CylinderGeometry",
+          "uuid": "61724778-d780-430e-9b5a-89c523ddd6c2",
+          "count": 0
+        },
+        {
+          "type": "Mesh",
+          "uuid": "cf6c8c46-4aaa-483a-972f-18fb46256f85",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "b2ea5524-f7c4-49ff-8bae-a281f09e2901",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "6063ac5b-8c37-49eb-9d95-ec3cb8843509",
+          "count": 0
+        },
+        {
+          "type": "MeshPhysicalMaterial",
+          "uuid": "66e5d369-2b55-4d84-9d34-1d6e28c82e80",
+          "count": 0
+        },
+        {
+          "type": 1009,
+          "uuid": "c6af6fa1-8a78-48a8-ab77-0d73c9a42305",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "89f000bb-11ea-4fcd-9c34-c05513d99e81",
+          "count": 0
+        },
+        {
+          "type": "MeshPhysicalMaterial",
+          "uuid": "319fb58f-3348-4f21-8319-7136822a362f",
+          "count": 0
+        },
+        {
+          "type": 1009,
+          "uuid": "d5779b4a-3247-428d-b602-627c7cb72084",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "8043e4bf-e946-4e99-a6ee-cd19697039eb",
+          "count": 0
+        },
+        {
+          "type": "MeshPhysicalMaterial",
+          "uuid": "59429e61-188a-4f7f-9f82-f6f10780347e",
+          "count": 0
+        },
+        {
+          "type": 1009,
+          "uuid": "ad2d800d-8ffb-41e5-8272-17eda055ef3f",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "478b86b2-448b-4207-96a5-e77035a761c3",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "2a033b1d-9743-427c-891d-44c59b4cb7fc",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "da3a68fd-5430-4bc5-9ba9-28e6a99ad239",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "94d5d857-c522-402c-ba0a-ce6e4e2938dd",
+          "count": 0
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "92032add-2648-4fd5-87c6-e7a99c54c327",
+          "count": 0
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "7f25deca-2179-403c-800a-e13169102165",
+          "count": 0
+        }
+      ]
+    },
+    "final": {
+      "telemetry": {
+        "position": {
+          "x": -75,
+          "y": 0.8677006775109933,
+          "z": -50
+        },
+        "speed": 0.00321217276055078,
+        "signedSpeed": 3.5668049978831578e-19,
+        "heading": -2.010592337393509e-34,
+        "roll": 1.2482014483381383e-31,
+        "steer": 0,
+        "grounded": 4,
+        "slip": 0,
+        "gear": "N",
+        "damage": 0,
+        "damageState": "healthy",
+        "traction": 1,
+        "lastImpactSpeed": 0
+      },
+      "routeIndex": 0,
+      "arrest": {
+        "state": "idle",
+        "progress": 0,
+        "remainingSeconds": 5,
+        "holdProgress": 0,
+        "nearbyPoliceIds": [],
+        "cancellationReason": null
+      },
+      "proxies": 0,
+      "occlusion": {
+        "created": 0,
+        "reused": 0,
+        "released": 0,
+        "active": 0,
+        "free": 0,
+        "highWater": 0,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0
+      },
+      "traffic": {
+        "count": 0,
+        "requestedCount": 0,
+        "pending": false,
+        "totalCount": 0,
+        "roleCounts": {
+          "civilian": 0,
+          "police": 0
+        },
+        "pendingSpawns": 0,
+        "insertionReason": null,
+        "bodies": 0,
+        "logical": 0,
+        "visible": 0,
+        "reservations": 0
+      },
+      "police": [],
+      "bodies": 0,
+      "worldListeners": {
+        "addBody": 1,
+        "removeBody": 1,
+        "beginContact": 0
+      },
+      "bodyCollisionListeners": 0,
+      "trafficPerformance": {
+        "aiMs": 0.10000000149011612,
+        "aiStepMs": 0,
+        "playerPrepareMs": 0,
+        "npcPrepareMs": 0,
+        "prepareMs": 0,
+        "worldStepMs": 0.6000000014901161,
+        "postMs": 0.09999999776482582,
+        "aiTicks": 564,
+        "aiDecisions": 14852,
+        "vehicleCreated": 302,
+        "vehicleRemoved": 306,
+        "totalBodies": 0,
+        "trafficBodies": 0,
+        "logicalTraffic": 0,
+        "visibleTraffic": 0,
+        "sleepingTrafficBodies": 0,
+        "awakeTrafficBodies": 0
+      },
+      "resources": {
+        "geometries": 0,
+        "textures": 0,
+        "programs": 4
+      },
+      "pools": {
+        "vehicles": {},
+        "policeEffects": {
+          "active": 0,
+          "free": 0,
+          "capacity": 2,
+          "created": 2,
+          "reused": 3,
+          "highWater": 2,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": true
+        },
+        "buildings": {
+          "created": 0,
+          "reused": 0,
+          "released": 0,
+          "active": 0,
+          "free": 0,
+          "highWater": 0,
+          "capacity": 192,
+          "idleCapacity": 8,
+          "overflow": 0,
+          "evicted": 0,
+          "retainedGeometryBytes": 0,
+          "disposed": true
+        }
+      },
+      "pickups": {
+        "pickups": [
+          {
+            "id": 0,
+            "x": -75,
+            "z": -157.5,
+            "section": "0:0",
+            "status": "available"
+          },
+          {
+            "id": 1,
+            "x": -125,
+            "z": -65,
+            "section": "0:1",
+            "status": "available"
+          },
+          {
+            "id": 2,
+            "x": -75,
+            "z": 107.5,
+            "section": "0:2",
+            "status": "available"
+          },
+          {
+            "id": 3,
+            "x": 42.5,
+            "z": -75,
+            "section": "1:0",
+            "status": "available"
+          },
+          {
+            "id": 4,
+            "x": -25,
+            "z": 50,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 5,
+            "x": -57.5,
+            "z": 175,
+            "section": "1:2",
+            "status": "available"
+          },
+          {
+            "id": 6,
+            "x": 115,
+            "z": -75,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 7,
+            "x": 157.5,
+            "z": -25,
+            "section": "2:1",
+            "status": "available"
+          },
+          {
+            "id": 8,
+            "x": 75,
+            "z": 157.5,
+            "section": "2:2",
+            "status": "available"
+          },
+          {
+            "id": 9,
+            "x": -175,
+            "z": -165,
+            "section": "0:0",
+            "status": "available"
+          },
+          {
+            "id": 10,
+            "x": 57.5,
+            "z": 175,
+            "section": "1:2",
+            "status": "available"
+          },
+          {
+            "id": 11,
+            "x": -135,
+            "z": 25,
+            "section": "0:1",
+            "status": "available"
+          }
+        ],
+        "repairs": 0,
+        "unavailableReason": null
+      },
+      "heap": 31005631,
+      "smoke": {
+        "emitted": 0,
+        "sourceCount": 1,
+        "limitedSources": 0,
+        "highWater": 0,
+        "active": 0,
+        "capacity": 512,
+        "quality": "high",
+        "budget": 512,
+        "emitters": 0
+      },
+      "effects": {
+        "stage": "healthy",
+        "exploded": false,
+        "explosions": 0,
+        "terminalTime": 0,
+        "activeSmoke": 0,
+        "activeFire": 0,
+        "capacity": 288,
+        "origin": [
+          -75,
+          1.21770439530354,
+          -48.55
+        ]
+      },
+      "lifecycle": {
+        "disposed": true,
+        "frameScheduled": false
+      },
+      "instances": 3,
+      "disposals": [
+        {
+          "type": "BufferGeometry",
+          "uuid": "69fca0e0-dbbe-4aa7-ad75-c101721d71eb",
+          "count": 1
+        },
+        {
+          "type": "MeshPhysicalMaterial",
+          "uuid": "072ce098-4a8e-4835-9384-2af490decc77",
+          "count": 1
+        },
+        {
+          "type": 1009,
+          "uuid": "c65785c1-e20f-4712-9f3a-876c0bf5e2cf",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "5bb31463-de34-4c4e-800c-6c99cc7f8bda",
+          "count": 1
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "330e8aa2-a6fa-4e1f-b8f2-db9e05b0a76c",
+          "count": 1
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "e614e5ae-bc6a-4f07-a4db-ade5eb607a54",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "7893a681-ba7c-4cd2-9dac-790d4ab081d8",
+          "count": 1
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "4515fa5a-0082-4c88-918c-85e0124f5638",
+          "count": 1
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "e8115a19-b483-4426-b9f4-98288d7d1ff7",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "b0ddb7d3-5d2d-4d7b-9424-95cf79be5705",
+          "count": 1
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "00097481-cc49-41d3-a78d-38d1fde8e2d8",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "ece0a202-d386-47c2-9798-b64d1b5e6715",
+          "count": 1
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "d783cd83-f5c2-4c60-b7d1-e8f0fdeeef16",
+          "count": 1
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "79ee7e14-d872-4245-aa62-cb7d079516e5",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "63ee7691-1750-4409-910e-3347116ad841",
+          "count": 1
+        },
+        {
+          "type": "MeshBasicMaterial",
+          "uuid": "5b8ba937-7ab6-4b11-b740-f3862ce51a38",
+          "count": 1
+        },
+        {
+          "type": 1009,
+          "uuid": "fc2bcfab-e32c-440e-8ec5-65630e993f97",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "8dde4d80-b5b6-49da-8b65-ff9594999f93",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "8a377c40-9b30-4777-804b-386f4c6cc6a9",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "5c75581a-e20e-4ac4-b56e-7d7808dcfb24",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "befca3cf-e06c-4cc3-918b-c4930e263840",
+          "count": 1
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "2b727992-af0e-4be6-b274-91ea586ea86b",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "cc1d7090-6560-4a4e-9e9e-22b874360096",
+          "count": 1
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "5fa64b26-2a35-4dff-90fb-e6a800d734c2",
+          "count": 1
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "f190184e-3c43-49fc-bc72-8843478d44b1",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "d916ac15-b1f4-4ac8-aa17-2616d9cddc28",
+          "count": 1
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "5ef9085b-f3e9-424d-9a32-ea9f6bf0d158",
+          "count": 1
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "cb2be8ab-f096-43f5-b768-cc1fe53f23b1",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "a016d551-d5e4-49fd-91ae-d75a8075a1c9",
+          "count": 1
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "2b704b0d-a46c-4947-98a4-bb23accd7449",
+          "count": 1
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "229cd9bf-c69b-44b6-911b-c2e6c0739659",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "8ac5e710-5c33-43d3-9251-0298fd018635",
+          "count": 1
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "f80ccbdb-01b9-4a61-9e63-95092ba6d928",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "c9eb6cde-6c41-4c44-91ff-794bbc016fb0",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "77ba5b3d-7422-4ca7-8f0c-012e7295f74b",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "5a8437e2-be22-499c-bc33-5cc425e8c041",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "1ac2fcc5-09da-4e40-a822-e66f602d2e2b",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "5376d1ee-14e1-4af4-b04a-e1aa631b478c",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "49f21e7c-bed9-4227-acac-8186b1eda73e",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "8c3fe549-6028-4a6f-8dee-0e7cb8f0f2db",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "b1e4f158-cde0-4bb0-858a-66a00b1ed84a",
+          "count": 1
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "07a84092-b9e7-4fff-8e4d-4469e14c38c7",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "51daf732-1c6c-4a4f-bf60-0fd507ed4f17",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "a5a1469c-0ac0-4288-a686-bff7c9777f68",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "1de691a5-bb3b-4b49-8bdd-5cf3a5a5e1c3",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "6b67b4aa-a8a1-49ec-9ce8-736f1518648d",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "8ca18161-fd9a-41c6-8f3a-aa2f613a1dea",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "1d81b16f-c70f-4b59-afbe-3e2750f639a9",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "d7c1f39c-6c7f-40f8-abce-677f061a5ad1",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "4b6c284e-7484-410b-9b82-629fc921c759",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "632cddca-db87-4e86-8540-1daa3bbd5f00",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "1f63d311-5f11-472f-9c28-77ed850a18ee",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "06f7cd71-fe60-4769-97a5-7873a137338b",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "9c2172e2-4843-414b-a795-462f25e5e088",
+          "count": 1
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "139676aa-37c9-4fc5-a8fe-e51473bf809b",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "cc64985c-6b0f-4414-8fd2-a58e65ad55a4",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "712e1d1b-17e8-4db9-94e1-f6d603fcde49",
+          "count": 1
+        },
+        {
+          "type": "CylinderGeometry",
+          "uuid": "686cddbd-d64f-40dc-9714-2223bc3c7b6e",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "49d3d5d9-7bb9-457c-9503-95e7b8fa8e2c",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "e406af44-3438-42f0-80a0-861af1b14854",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "3d486681-c445-4bf9-8c06-f85ad880222c",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "0991fb73-d3ab-405d-8613-4c700f32e908",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "f4c8d47a-4728-4dda-b93f-98db3338ae24",
+          "count": 1
+        },
+        {
+          "type": "SphereGeometry",
+          "uuid": "677d4fc7-5e13-45b4-b055-f2a1d19cb2bc",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "90b993cf-d5e1-4f39-b5ad-2bf2b6c38bb1",
+          "count": 1
+        },
+        {
+          "type": "MeshBasicMaterial",
+          "uuid": "34735823-6037-45ae-ab97-29649fcd9ae5",
+          "count": 1
+        },
+        {
+          "type": "PlaneGeometry",
+          "uuid": "89910de9-3db9-4912-83c0-a843b2105713",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "4e084a95-ee3a-406c-81e6-e1df2274e0fa",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "2390f8bd-f3ca-48ad-8402-76fa574ce2d6",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "ff080e93-51f1-46e4-9bb6-13d1976ac125",
+          "count": 1
+        },
+        {
+          "type": "ShaderMaterial",
+          "uuid": "589fdc36-d87d-40a4-a319-d11826d6287a",
+          "count": 1
+        },
+        {
+          "type": "ConeGeometry",
+          "uuid": "6c73416f-f406-4140-a7d6-939bec8eaed8",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "4a655a98-932b-4376-afe3-b08785ef8247",
+          "count": 1
+        },
+        {
+          "type": "ConeGeometry",
+          "uuid": "6f1f38f0-15d4-4630-8fc3-74e8d805b0be",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "ce855e8e-9889-45be-8cc0-b2475c2e98ac",
+          "count": 1
+        },
+        {
+          "type": "ConeGeometry",
+          "uuid": "09eaccc3-9a21-4fb4-944c-2af2cc09df0a",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "1769bccf-6a9a-42df-abf7-2383a83c62d8",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "bfe4f942-9aef-4369-b6ca-c9868bae9c4c",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "c8e206f5-69c1-41d2-a125-b6392f968e16",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "eeae9ba3-5933-499d-bade-aa713cdf0b84",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "4fc376ec-879a-45b2-ac90-b3bfa976d548",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "22e455a1-8a87-45fa-8247-234b33d2b717",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "4dfe6c37-b4ce-4b93-9893-6d53850202eb",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "75dba331-a3e9-417d-bea7-b38e0bf29b3b",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "08cd5c6d-f93f-435b-83e9-d6613594b004",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "1315bf86-d5cc-4976-9096-0e7a91f57968",
+          "count": 1
+        },
+        {
+          "type": "ConeGeometry",
+          "uuid": "06e2cc62-db1f-41fe-9908-9297baa5cd89",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "8997b860-086a-4c43-bcf2-8d97a26a1d60",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "d97b2e56-d768-4634-9176-9a839fd40df4",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "57151d0a-38ca-4055-8699-3f3519b404f5",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "81eb3e81-dd8f-4518-9cb4-4cd6fd243f8f",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "e8e91d3a-8303-42c0-8af3-7191633a030c",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "e52a3515-ca4e-46bf-a6a8-142d909db2a8",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "8aae12a7-2a3d-49c7-a9cc-0e6cdb63ba16",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "047789a7-ff29-45e2-b551-8dad4ba2bcca",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "55f31ac5-1d9a-45d2-b7ab-b9c088180f61",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "80f91a64-d468-4736-91e7-05952c5538c4",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "6990d9a5-64a4-4521-8e8e-d488ec3f4937",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "419c85d6-dca9-4c97-af47-8ae0d4311a1b",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "1e3a4fa1-7a8a-4098-bbaf-fec555505c6b",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "2f59bfa8-24da-4ca2-bb52-2b6234bf26ad",
+          "count": 1
+        },
+        {
+          "type": "CylinderGeometry",
+          "uuid": "c9d4e75e-fd8e-4c12-a3f6-f329775b0899",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "e4e4b5d5-791d-4573-ab4e-904c4aaf6c94",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "99cf4d1a-7242-4745-ac35-a7db6bee1eb5",
+          "count": 1
+        },
+        {
+          "type": "IcosahedronGeometry",
+          "uuid": "20e6629d-016f-4f50-8805-59025308fb2c",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "1643acd1-9c09-42b4-b4bf-b76dc7de460e",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "3949e75f-c216-4fb4-8f0f-613541354703",
+          "count": 1
+        },
+        {
+          "type": "DodecahedronGeometry",
+          "uuid": "32097dce-af66-49bb-9628-1b635a9eadcf",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "92135ca7-74f2-4624-ab99-03ea2a010e07",
+          "count": 1
+        },
+        {
+          "type": "ConeGeometry",
+          "uuid": "53c2a97f-1197-4b81-97b6-aedb052e73e1",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "29549d38-5fa4-400b-9c36-7967dda5880c",
+          "count": 1
+        },
+        {
+          "type": "CylinderGeometry",
+          "uuid": "abf6b028-caee-412e-b29e-06bc4598f837",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "dfc6b3ec-5a0a-4eb5-a382-a4d82f287336",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "755554db-252f-46b8-aa8a-7191be7b55ec",
+          "count": 1
+        },
+        {
+          "type": "CylinderGeometry",
+          "uuid": "10f04622-a046-4f83-9383-4a5a9901eda5",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "19600480-0885-4931-a088-a6bc17f3e506",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "a7ebfbdd-b413-4566-be50-f2d4f2abce43",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "8b09bcd7-8945-4d64-a616-684611bc8b97",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "743c5d0f-d9bd-49f1-b94a-4902e8427e42",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "ef6fcbcc-986d-42cd-ba34-230942fc136c",
+          "count": 1
+        },
+        {
+          "type": "BoxGeometry",
+          "uuid": "f3bd4ee0-caeb-4e29-bc84-7d431dca3437",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "61c7cd7d-6d99-4bf4-a801-82c301f58e87",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "b8188e1d-5883-4c11-b2b7-b07850459ecb",
+          "count": 1
+        },
+        {
+          "type": "CylinderGeometry",
+          "uuid": "f3f94253-af4f-4033-9b27-bbead5922f0f",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "952abaef-24a4-4ce6-93c5-9aad3584b0b7",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "dd01a3dc-6a03-4927-b409-d53bcb5a65c6",
+          "count": 1
+        },
+        {
+          "type": "TorusGeometry",
+          "uuid": "a764b455-971c-41cf-a8c0-82c6802d643a",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "928b0fa0-13ee-4a8d-8cf5-ed321d97469f",
+          "count": 1
+        },
+        {
+          "type": "CylinderGeometry",
+          "uuid": "61724778-d780-430e-9b5a-89c523ddd6c2",
+          "count": 1
+        },
+        {
+          "type": "Mesh",
+          "uuid": "cf6c8c46-4aaa-483a-972f-18fb46256f85",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "b2ea5524-f7c4-49ff-8bae-a281f09e2901",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "6063ac5b-8c37-49eb-9d95-ec3cb8843509",
+          "count": 1
+        },
+        {
+          "type": "MeshPhysicalMaterial",
+          "uuid": "66e5d369-2b55-4d84-9d34-1d6e28c82e80",
+          "count": 1
+        },
+        {
+          "type": 1009,
+          "uuid": "c6af6fa1-8a78-48a8-ab77-0d73c9a42305",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "89f000bb-11ea-4fcd-9c34-c05513d99e81",
+          "count": 1
+        },
+        {
+          "type": "MeshPhysicalMaterial",
+          "uuid": "319fb58f-3348-4f21-8319-7136822a362f",
+          "count": 1
+        },
+        {
+          "type": 1009,
+          "uuid": "d5779b4a-3247-428d-b602-627c7cb72084",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "8043e4bf-e946-4e99-a6ee-cd19697039eb",
+          "count": 1
+        },
+        {
+          "type": "MeshPhysicalMaterial",
+          "uuid": "59429e61-188a-4f7f-9f82-f6f10780347e",
+          "count": 1
+        },
+        {
+          "type": 1009,
+          "uuid": "ad2d800d-8ffb-41e5-8272-17eda055ef3f",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "478b86b2-448b-4207-96a5-e77035a761c3",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "2a033b1d-9743-427c-891d-44c59b4cb7fc",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "da3a68fd-5430-4bc5-9ba9-28e6a99ad239",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "94d5d857-c522-402c-ba0a-ce6e4e2938dd",
+          "count": 1
+        },
+        {
+          "type": "MeshStandardMaterial",
+          "uuid": "92032add-2648-4fd5-87c6-e7a99c54c327",
+          "count": 1
+        },
+        {
+          "type": "BufferGeometry",
+          "uuid": "7f25deca-2179-403c-800a-e13169102165",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "passed": true
+}

@@ -1,0 +1,4 @@
+Starting desktop-low-empty repeat 1/1
+{"case":"desktop-low-empty","repeat":1,"frames":3302,"gpu":"available","cpuP95":10.399999998509884,"renderCpuP95":3.199999999254942,"intervalP95":37.79999999999927}
+Starting desktop-high-60 repeat 1/1
+{"case":"desktop-high-60","repeat":1,"frames":3376,"gpu":"available","cpuP95":11.199999999254942,"renderCpuP95":2.900000000372529,"intervalP95":33.40000000000873}

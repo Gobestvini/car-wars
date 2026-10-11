@@ -1,0 +1,86 @@
+[
+  {
+    "start": "2026-10-11T11:13:38.4831913Z",
+    "end": "2026-10-11T11:14:57.5042507Z",
+    "pair": 1,
+    "exitCode": 0,
+    "version": "reference",
+    "hostCpu": {
+      "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+      "CurrentClockSpeed": 3000,
+      "MaxClockSpeed": 3000,
+      "LoadPercentage": 65
+    },
+    "output": "docs\\knowledge\\scene-optimization\\pooling-paired-control\\reference-1"
+  },
+  {
+    "start": "2026-10-11T11:14:58.5350956Z",
+    "end": "2026-10-11T11:16:15.4159963Z",
+    "pair": 1,
+    "exitCode": 0,
+    "version": "current",
+    "hostCpu": {
+      "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+      "CurrentClockSpeed": 3000,
+      "MaxClockSpeed": 3000,
+      "LoadPercentage": 80
+    },
+    "output": "docs\\knowledge\\scene-optimization\\pooling-paired-control\\current-1"
+  },
+  {
+    "start": "2026-10-11T11:16:16.4544595Z",
+    "end": "2026-10-11T11:17:34.2903589Z",
+    "pair": 2,
+    "exitCode": 0,
+    "version": "current",
+    "hostCpu": {
+      "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+      "CurrentClockSpeed": 3000,
+      "MaxClockSpeed": 3000,
+      "LoadPercentage": 24
+    },
+    "output": "docs\\knowledge\\scene-optimization\\pooling-paired-control\\current-2"
+  },
+  {
+    "start": "2026-10-11T11:17:35.3339627Z",
+    "end": "2026-10-11T11:18:57.8900246Z",
+    "pair": 2,
+    "exitCode": 0,
+    "version": "reference",
+    "hostCpu": {
+      "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+      "CurrentClockSpeed": 3000,
+      "MaxClockSpeed": 3000,
+      "LoadPercentage": 90
+    },
+    "output": "docs\\knowledge\\scene-optimization\\pooling-paired-control\\reference-2"
+  },
+  {
+    "start": "2026-10-11T11:18:58.9195200Z",
+    "end": "2026-10-11T11:20:20.1408754Z",
+    "pair": 3,
+    "exitCode": 0,
+    "version": "reference",
+    "hostCpu": {
+      "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+      "CurrentClockSpeed": 3000,
+      "MaxClockSpeed": 3000,
+      "LoadPercentage": 57
+    },
+    "output": "docs\\knowledge\\scene-optimization\\pooling-paired-control\\reference-3"
+  },
+  {
+    "start": "2026-10-11T11:20:21.1716739Z",
+    "end": "2026-10-11T11:21:42.0563574Z",
+    "pair": 3,
+    "exitCode": 0,
+    "version": "current",
+    "hostCpu": {
+      "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+      "CurrentClockSpeed": 3000,
+      "MaxClockSpeed": 3000,
+      "LoadPercentage": 97
+    },
+    "output": "docs\\knowledge\\scene-optimization\\pooling-paired-control\\current-3"
+  }
+]

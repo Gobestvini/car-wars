@@ -1,0 +1,197 @@
+import * as THREE from 'three';
+
+export const TIRE_SMOKE_CONFIG = Object.freeze({ capacity: 512, lowCapacity: 256,
+  lifetimeMin: 0.8, lifetimeMax: 1.6, alphaFadeIn: 0.12, thresholdMultiplier: 1.35, highSources: 24, lowSources: 12,
+  highDistance: 80, lowDistance: 50, rate: 12 });
+
+export function tireSmokeAlpha(progress, fadeIn = TIRE_SMOKE_CONFIG.alphaFadeIn) {
+  if (!Number.isFinite(progress) || progress <= 0 || progress >= 1 || !Number.isFinite(fadeIn) || fadeIn <= 0 || fadeIn >= 1) return 0;
+  const fadeOut = (1 - progress) / (1 - fadeIn);
+  return Math.max(0, Math.min(1, progress / fadeIn, fadeOut));
+}
+
+const finiteWheel = wheel => wheel?.grounded && !wheel.detached
+  && [wheel.longitudinal, wheel.lateral, wheel.contact?.x, wheel.contact?.y, wheel.contact?.z].every(Number.isFinite);
+
+export function tireSmokeIntensity(wheel, threshold = 1.25, continuing = false) {
+  if (!finiteWheel(wheel)) return 0;
+  const factor = TIRE_SMOKE_CONFIG.thresholdMultiplier * Math.max(0.5, Math.min(3, Number.isFinite(threshold) ? threshold : 1.25));
+  const speed = Math.abs(wheel.longitudinal), lateral = Math.abs(wheel.lateral);
+  const speedLimit = (continuing ? 4 : 6) * factor;
+  const lateralLimit = (continuing ? 1.5 : 2.2) * factor;
+  const angleLimit = (continuing ? 0.2 : 0.28) * factor;
+  const angle = Math.atan2(lateral, Math.max(speed, 2.5));
+  if (speed < speedLimit || lateral < lateralLimit || angle < angleLimit) return 0;
+  return Math.max(0, Math.min(1, Math.min(speed / (speedLimit * 2.5), lateral / (lateralLimit * 2.5), angle / (angleLimit * 2.5))));
+}
+
+function createSoftSmokeTexture() {
+  const size = 32, data = new Uint8Array(size * size * 4);
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    const nx = (x + 0.5 - size / 2) / (size / 2), ny = (y + 0.5 - size / 2) / (size / 2);
+    let cloud = 0;
+    for (const [cx, cy, rx, ry, strength] of [[-.28, -.12, .48, .4, 1], [.25, -.2, .43, .38, .9],
+      [-.06, .27, .4, .47, .85], [.38, .22, .29, .32, .65]]) {
+      const dx = (nx - cx) / rx, dy = (ny - cy) / ry;
+      cloud += strength * Math.exp(-3 * (dx * dx + dy * dy));
+    }
+    const alpha = Math.round(255 * Math.max(0, Math.min(1, 1 - Math.exp(-cloud * 1.8))));
+    const offset = (y * size + x) * 4;
+    data[offset] = 232; data[offset + 1] = 235; data[offset + 2] = 232; data[offset + 3] = alpha;
+  }
+  const texture = new THREE.DataTexture(data, size, size, THREE.RGBAFormat);
+  texture.needsUpdate = true;
+  return texture;
+}
+
+function sourcePriority(source) { return source.id === 'player' ? 0 : source.role === 'police' ? 1 : 2; }
+
+/** Fixed-size shared billboard pool. Skid qualification is sampled at physics rate, rendering at frame rate. */
+export class TireSmoke {
+  constructor(scene, { capacity = TIRE_SMOKE_CONFIG.capacity, seed = 0x51D3A9B7 } = {}) {
+    this.capacity = capacity;
+    this.randomState = seed >>> 0;
+    this.states = new Map();
+    this.particles = Array.from({ length: capacity }, () => ({ active: false, age: 0, life: 1,
+      x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, size: 0, aspect: 1, rotation: 0, spinSpeed: 0 }));
+    this.texture = createSoftSmokeTexture();
+    this.material = new THREE.MeshBasicMaterial({ map: this.texture, transparent: true,
+      opacity: 0.52, depthWrite: false, toneMapped: false, side: THREE.DoubleSide, color: '#f1f2ee' });
+    this.material.onBeforeCompile = shader => {
+      shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nattribute float instanceAlpha;\nvarying float vInstanceAlpha;');
+      shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvInstanceAlpha = instanceAlpha;');
+      shader.fragmentShader = shader.fragmentShader.replace('#include <common>', '#include <common>\nvarying float vInstanceAlpha;');
+      shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', '#include <color_fragment>\ndiffuseColor.a *= vInstanceAlpha;');
+    };
+    this.material.customProgramCacheKey = () => 'tire-smoke-instance-alpha-v1';
+    this.geometry = new THREE.PlaneGeometry(1, 1);
+    this.mesh = new THREE.InstancedMesh(this.geometry, this.material, capacity);
+    this.alpha = new THREE.InstancedBufferAttribute(new Float32Array(capacity), 1);
+    this.alpha.setUsage(THREE.DynamicDrawUsage);
+    this.mesh.geometry.setAttribute('instanceAlpha', this.alpha);
+    this.mesh.name = 'Tire skid smoke';
+    this.mesh.frustumCulled = false;
+    this.mesh.count = 0;
+    scene.add(this.mesh);
+    this.position = new THREE.Vector3(); this.scale = new THREE.Vector3(); this.matrix = new THREE.Matrix4();
+    this.zeroScale = new THREE.Vector3(0, 0, 0); this.rotation = new THREE.Quaternion();
+    this.particleRotation = new THREE.Quaternion(); this.particleSpin = new THREE.Quaternion();
+    this.spinAxis = new THREE.Vector3(0, 0, 1);
+    this.diagnostics = { emitted: 0, sourceCount: 0, limitedSources: 0, highWater: 0 };
+  }
+
+  random() {
+    this.randomState = (this.randomState + 0x6D2B79F5) >>> 0;
+    let value = this.randomState;
+    value = Math.imul(value ^ value >>> 15, value | 1);
+    value ^= value + Math.imul(value ^ value >>> 7, value | 61);
+    return ((value ^ value >>> 14) >>> 0) / 4294967296;
+  }
+
+  sample(sources, dt, { enabled = true, threshold = 1.25, quality = 'high', cameraPosition = { x: 0, y: 0, z: 0 } } = {}) {
+    const low = quality === 'low', budget = low ? TIRE_SMOKE_CONFIG.lowCapacity : this.capacity;
+    const maxSources = low ? TIRE_SMOKE_CONFIG.lowSources : TIRE_SMOKE_CONFIG.highSources;
+    const distanceLimit = low ? TIRE_SMOKE_CONFIG.lowDistance : TIRE_SMOKE_CONFIG.highDistance;
+    const candidates = (enabled ? sources : []).filter(source => source && source.id != null && Array.isArray(source.wheels)
+      && (source.id === 'player' || Math.hypot((source.x ?? source.body?.position?.x ?? 0) - cameraPosition.x,
+        (source.z ?? source.body?.position?.z ?? 0) - cameraPosition.z) <= distanceLimit))
+      .sort((a, b) => sourcePriority(a) - sourcePriority(b)
+        || Math.hypot((a.x ?? 0) - cameraPosition.x, (a.z ?? 0) - cameraPosition.z)
+          - Math.hypot((b.x ?? 0) - cameraPosition.x, (b.z ?? 0) - cameraPosition.z));
+    const selected = candidates.slice(0, maxSources);
+    const liveIds = new Set(selected.map(source => String(source.id)));
+    for (const id of this.states.keys()) if (!liveIds.has(id)) this.states.delete(id);
+    this.diagnostics.sourceCount = selected.length;
+    this.diagnostics.limitedSources = Math.max(0, candidates.length - selected.length);
+    let remaining = Math.min(budget, this.capacity) - this.activeCount;
+    for (const source of selected) {
+      const id = String(source.id);
+      let wheelStates = this.states.get(id);
+      if (!wheelStates) { wheelStates = Array.from({ length: 4 }, () => ({ active: false, pending: 0, release: 0,
+        credit: this.random() * 0.8, interval: 0.65 + this.random() * 0.7 })); this.states.set(id, wheelStates); }
+      source.wheels.slice(0, 4).forEach((wheel, index) => {
+        const state = wheelStates[index];
+        const strength = tireSmokeIntensity(wheel, threshold, state.active);
+        if (strength > 0) { state.pending += dt; state.release = 0; }
+        else if (state.active) state.release += dt;
+        else { state.pending = 0; state.credit = 0; return; }
+        if (!state.active && state.pending >= 0.08) state.active = true;
+        if (state.active && strength > 0) {
+          state.credit += dt * TIRE_SMOKE_CONFIG.rate * strength;
+          while (state.credit >= state.interval && remaining > 0) {
+            state.credit -= state.interval;
+            state.interval = 0.65 + this.random() * 0.7;
+            this.emit(wheel.contact); remaining--;
+          }
+        }
+        if (state.active && state.release >= 0.12) {
+          state.active = false; state.pending = 0; state.release = 0; state.credit = 0;
+        }
+      });
+      for (let index = source.wheels.length; index < 4; index++) wheelStates[index] = { active: false, pending: 0, release: 0, credit: 0, interval: 1 };
+    }
+    this.diagnostics.highWater = Math.max(this.diagnostics.highWater, this.activeCount);
+  }
+
+  emit(contact) {
+    if (!contact || ![contact.x, contact.y, contact.z].every(Number.isFinite)) return false;
+    const particle = this.particles.find(item => !item.active);
+    if (!particle) return false;
+    particle.active = true; particle.age = 0;
+    particle.life = TIRE_SMOKE_CONFIG.lifetimeMin + this.random() * (TIRE_SMOKE_CONFIG.lifetimeMax - TIRE_SMOKE_CONFIG.lifetimeMin);
+    const drift = 0.7 + this.random() * 0.8;
+    particle.x = contact.x + (this.random() - 0.5) * 0.16; particle.y = contact.y + 0.1; particle.z = contact.z + (this.random() - 0.5) * 0.16;
+    particle.vx = (this.random() - 0.5) * drift; particle.vy = 0.3 + this.random() * 0.65; particle.vz = (this.random() - 0.5) * drift;
+    particle.size = 0.42 + this.random() * 0.38;
+    particle.aspect = 0.72 + this.random() * 0.62;
+    particle.rotation = this.random() * Math.PI * 2;
+    particle.spinSpeed = (this.random() - 0.5) * 0.9;
+    this.diagnostics.emitted++;
+    return true;
+  }
+
+  get activeCount() { let count = 0; for (const particle of this.particles) if (particle.active) count++; return count; }
+
+  update(dt, camera, { quality = 'high' } = {}) {
+    const low = quality === 'low', active = [];
+    this.rotation.copy(camera?.quaternion || new THREE.Quaternion());
+    for (let index = 0; index < this.capacity; index++) {
+      const particle = this.particles[index];
+      if (!particle.active) { this.alpha.setX(index, 0); this.matrix.compose(this.position.set(0, -1000, 0), this.rotation, this.zeroScale); this.mesh.setMatrixAt(index, this.matrix); continue; }
+      particle.age += dt;
+      if (particle.age >= particle.life) { particle.active = false; this.alpha.setX(index, 0); this.matrix.compose(this.position.set(0, -1000, 0), this.rotation, this.zeroScale); this.mesh.setMatrixAt(index, this.matrix); continue; }
+      const progress = particle.age / particle.life;
+      particle.x += particle.vx * dt; particle.y += particle.vy * dt; particle.z += particle.vz * dt;
+      particle.size += dt * (0.32 + particle.aspect * 0.18);
+      particle.rotation += dt * particle.spinSpeed;
+      const scale = particle.size + progress * (0.56 + particle.aspect * 0.2);
+      this.alpha.setX(index, tireSmokeAlpha(progress));
+      this.particleSpin.setFromAxisAngle(this.spinAxis, particle.rotation);
+      this.particleRotation.copy(this.rotation).multiply(this.particleSpin);
+      this.matrix.compose(this.position.set(particle.x, particle.y, particle.z), this.particleRotation,
+        this.scale.set(scale * particle.aspect, scale, scale));
+      this.mesh.setMatrixAt(index, this.matrix); active.push(index);
+    }
+    this.mesh.instanceMatrix.needsUpdate = true;
+    this.alpha.needsUpdate = true;
+    this.mesh.count = this.capacity;
+    this.mesh.visible = active.length > 0;
+    this.diagnostics.active = active.length;
+    this.diagnostics.capacity = this.capacity;
+    this.diagnostics.quality = quality;
+    this.diagnostics.budget = low ? Math.min(TIRE_SMOKE_CONFIG.lowCapacity, this.capacity) : this.capacity;
+    this.diagnostics.highWater = Math.max(this.diagnostics.highWater, active.length);
+    return this.snapshot();
+  }
+
+  reset() {
+    for (const state of this.states.values()) for (const wheel of state) { wheel.active = false; wheel.pending = 0; wheel.release = 0; wheel.credit = 0; }
+    this.states.clear();
+    for (let i = 0; i < this.particles.length; i++) { this.particles[i].active = false; this.alpha.setX(i, 0); }
+    this.alpha.needsUpdate = true;
+    this.mesh.visible = false; this.diagnostics.active = 0; this.diagnostics.highWater = 0;
+  }
+
+  snapshot() { return { ...this.diagnostics, emitters: this.states.size, emitted: this.diagnostics.emitted }; }
+  dispose() { this.reset(); this.mesh.removeFromParent(); this.geometry.dispose(); this.texture.dispose(); this.material.dispose(); }
+}

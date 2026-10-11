@@ -1,0 +1,376 @@
+import * as THREE from 'three';
+import { conformTrackSegment } from './track-surface.js';
+
+export const DEFAULT_TRACK_CAPACITY = 6000;
+export const TRACK_WIDTH = 0.29;
+export const TRACK_END_FADE_LENGTH = 0.5;
+export const TRACK_LIFETIME = 45;
+const MIN_POINT_DISTANCE = 0.08;
+const MAX_POINT_DISTANCE = 4;
+export const SKID_START_SPEED = 6;
+export const SKID_START_LATERAL = 2.2;
+export const SKID_START_ANGLE = 0.28;
+const SKID_CONTINUE_SPEED = 4;
+const SKID_CONTINUE_LATERAL = 1.5;
+const SKID_CONTINUE_ANGLE = 0.20;
+const SKID_CONFIRM_TIME = 0.08;
+const SKID_RELEASE_TIME = 0.12;
+export const DEFAULT_SKID_THRESHOLD = 1.25;
+export const DEFAULT_TRACK_INTENSITY = 1;
+
+export function isHardSkid(wheel, continuing = false, threshold = DEFAULT_SKID_THRESHOLD) {
+  const speed = Math.abs(wheel?.longitudinal || 0);
+  const lateral = Math.abs(wheel?.lateral || 0);
+  if (!wheel || !wheel.grounded || wheel.detached || !Number.isFinite(speed + lateral)) return false;
+  const minimumSpeed = continuing ? SKID_CONTINUE_SPEED : SKID_START_SPEED;
+  const minimumLateral = continuing ? SKID_CONTINUE_LATERAL : SKID_START_LATERAL;
+  const minimumAngle = continuing ? SKID_CONTINUE_ANGLE : SKID_START_ANGLE;
+  const slipAngle = Math.atan2(lateral, Math.max(speed, 2.5));
+  const sensitivity = Number.isFinite(threshold) ? Math.max(0.5, Math.min(3, threshold)) : DEFAULT_SKID_THRESHOLD;
+  return speed >= minimumSpeed * sensitivity && lateral >= minimumLateral * sensitivity
+    && slipAngle >= minimumAngle * sensitivity;
+}
+
+const finitePoint = point => Number.isFinite(point.x) && Number.isFinite(point.z);
+
+/** Build a quad from two shared cross-sections. Returns null for invalid geometry. */
+export function buildTrackSegment(start, end, startBirth, endBirth, startFade, endFade, width = TRACK_WIDTH, startCap = false, endCap = false, startNormal = null) {
+  const dx = end.x - start.x;
+  const dz = end.z - start.z;
+  const length = Math.hypot(dx, dz);
+  if (!finitePoint(start) || !finitePoint(end) || !Number.isFinite(length) || length <= 1e-8) return null;
+  const ox = startNormal ? startNormal.x * width / 2 : -dz / length * width / 2;
+  const oz = startNormal ? startNormal.z * width / 2 : dx / length * width / 2;
+  const endNormal = { x: -dz / length, z: dx / length };
+  return {
+    positions: [
+      start.x + ox, 0.025, start.z + oz, start.x - ox, 0.025, start.z - oz,
+      end.x + ox, 0.025, end.z + oz,
+      start.x - ox, 0.025, start.z - oz, end.x - ox, 0.025, end.z - oz,
+      end.x + ox, 0.025, end.z + oz,
+    ],
+    births: [startBirth, startBirth, endBirth, startBirth, endBirth, endBirth],
+    fades: [startCap ? 0 : startFade, startCap ? 0 : startFade, endCap ? 0 : endFade,
+      startCap ? 0 : startFade, endCap ? 0 : endFade, endCap ? 0 : endFade],
+    startNormal: { x: ox / (width / 2), z: oz / (width / 2) },
+    endNormal,
+    length,
+  };
+}
+
+export function createTrackSection(point, normal, width = TRACK_WIDTH, y = 0.025) {
+  if (!finitePoint(point) || !finitePoint(normal)) return null;
+  const magnitude = Math.hypot(normal.x, normal.z);
+  if (magnitude <= 1e-8 || !Number.isFinite(magnitude)) return null;
+  const half = width / 2;
+  const ox = normal.x / magnitude * half;
+  const oz = normal.z / magnitude * half;
+  return { left: { x: point.x + ox, y, z: point.z + oz }, right: { x: point.x - ox, y, z: point.z - oz },
+    normal: { x: normal.x / magnitude, z: normal.z / magnitude }, width };
+}
+
+export function buildSectionSegment(start, end, startBirth, endBirth, startFade = 1, endFade = 1, startCap = false, endCap = false) {
+  if (!start || !end || !finitePoint(start.left) || !finitePoint(start.right) || !finitePoint(end.left) || !finitePoint(end.right)) return null;
+  const positions = [start.left.x, start.left.y ?? 0.025, start.left.z, start.right.x, start.right.y ?? 0.025, start.right.z,
+    end.left.x, end.left.y ?? 0.025, end.left.z, start.right.x, start.right.y ?? 0.025, start.right.z,
+    end.right.x, end.right.y ?? 0.025, end.right.z, end.left.x, end.left.y ?? 0.025, end.left.z];
+  return { positions, births: [startBirth, startBirth, endBirth, startBirth, endBirth, endBirth],
+    fades: [startCap ? 0 : startFade, startCap ? 0 : startFade, endCap ? 0 : endFade,
+      startCap ? 0 : startFade, endCap ? 0 : endFade, endCap ? 0 : endFade] };
+}
+
+// One draw call and bounded storage. A segment is retained for at least 45s;
+// at 120 segments/s the 6000-slot ring cannot overwrite a still-visible point.
+export class TireTracks {
+  constructor(scene, capacity = DEFAULT_TRACK_CAPACITY, { surfaceHeight = null, threshold = DEFAULT_SKID_THRESHOLD,
+    intensity = DEFAULT_TRACK_INTENSITY } = {}) {
+    this.capacity = capacity;
+    this.surfaceHeight = typeof surfaceHeight === 'function' ? surfaceHeight : () => 0.025;
+    this.threshold = threshold;
+    this.intensity = Math.max(0, Math.min(1, Number.isFinite(intensity) ? intensity : DEFAULT_TRACK_INTENSITY));
+    this.positions = new Float32Array(capacity * 18);
+    this.births = new Float32Array(capacity * 6);
+    this.fades = new Float32Array(capacity * 6);
+    const uv = new Float32Array(capacity * 12);
+    this.uvs = uv;
+    for (let i = 0; i < capacity; i++) uv.set([0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1], i * 12);
+    this.geometry = new THREE.BufferGeometry();
+    this.geometry.setAttribute('position', new THREE.BufferAttribute(this.positions, 3).setUsage(THREE.DynamicDrawUsage));
+    this.geometry.setAttribute('birth', new THREE.BufferAttribute(this.births, 1).setUsage(THREE.DynamicDrawUsage));
+    this.geometry.setAttribute('fade', new THREE.BufferAttribute(this.fades, 1).setUsage(THREE.DynamicDrawUsage));
+    this.geometry.setAttribute('uv', new THREE.BufferAttribute(uv, 2).setUsage(THREE.DynamicDrawUsage));
+    this.material = new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, side: THREE.DoubleSide,
+      // Match the coplanar curb trim's slope bias, then place the decal in front.
+      polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -2,
+      uniforms: { time: { value: 0 }, intensity: { value: this.intensity }, color: { value: new THREE.Color('#45574d') } },
+      vertexShader: `attribute float birth; attribute float fade; varying float vBirth; varying float vFade; varying vec2 vUv;
+        void main() { vBirth = birth; vFade = fade; vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+      fragmentShader: `uniform float time; uniform float intensity; uniform vec3 color; varying float vBirth; varying float vFade; varying vec2 vUv;
+        void main() {
+          float edge = smoothstep(0.0, 0.16, vUv.x) * smoothstep(0.0, 0.16, 1.0 - vUv.x);
+          float age = 1.0 - smoothstep(30.0, 45.0, time - vBirth);
+          gl_FragColor = vec4(color, 0.52 * intensity * edge * age * vFade);
+          #include <tonemapping_fragment>
+          #include <colorspace_fragment>
+        }`,
+    });
+    this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.mesh.frustumCulled = false;
+    scene.add(this.mesh);
+    this.sourceStates = new Map();
+    this.previous = this.createWheelStates();
+    this.sourceStates.set('player', this.previous);
+    this.time = 0;
+    this.tick = 0;
+    this.pendingRanges = { position: [], birth: [], fade: [], uv: [] };
+    this.reset();
+  }
+
+  setSurfaceHeightSampler(surfaceHeight) {
+    this.surfaceHeight = typeof surfaceHeight === 'function' ? surfaceHeight : () => 0.025;
+    this.reset();
+  }
+
+  setConfig({ threshold = this.threshold, intensity = this.intensity } = {}) {
+    this.threshold = Number.isFinite(threshold) ? Math.max(0.5, Math.min(3, threshold)) : DEFAULT_SKID_THRESHOLD;
+    this.intensity = Number.isFinite(intensity) ? Math.max(0, Math.min(1, intensity)) : DEFAULT_TRACK_INTENSITY;
+    this.material.uniforms.intensity.value = this.intensity;
+    if (this.intensity === 0) this.reset();
+  }
+
+  reset() {
+    this.cursor = this.count = 0;
+    this.geometry.setDrawRange(0, 0);
+    for (const point of this.previous) {
+      point.active = false; point.slipping = false; point.direction = 0; point.strip = null; point.pendingSlipTime = 0; point.releaseTime = 0;
+    }
+    for (const state of this.sourceStates.values()) for (const point of state) {
+      point.active = false; point.slipping = false; point.direction = 0; point.strip = null; point.pendingSlipTime = 0; point.releaseTime = 0;
+    }
+    this.sourceStates.clear(); this.sourceStates.set('player', this.previous);
+    this.pendingRanges = { position: [], birth: [], fade: [], uv: [] };
+    for (const name of ['position', 'birth', 'fade', 'uv']) this.geometry.attributes[name].clearUpdateRanges();
+  }
+
+  addRange(name, start, count) { this.pendingRanges[name].push([start, count]); }
+
+  flushRanges() {
+    for (const [name, ranges] of Object.entries(this.pendingRanges)) {
+      const attribute = this.geometry.attributes[name];
+      if (!ranges.length) continue;
+      ranges.sort((a, b) => a[0] - b[0]);
+      let [start, end] = [ranges[0][0], ranges[0][0] + ranges[0][1]];
+      for (const [nextStart, nextCount] of ranges.slice(1)) {
+        const nextEnd = nextStart + nextCount;
+        if (nextStart <= end) end = Math.max(end, nextEnd);
+        else { attribute.addUpdateRange(start, end - start); [start, end] = [nextStart, nextEnd]; }
+      }
+      attribute.addUpdateRange(start, end - start);
+      attribute.needsUpdate = true;
+      ranges.length = 0;
+    }
+  }
+
+  setVertexData(segmentIndex, segment) {
+    const offset = segmentIndex * 18;
+    const dataOffset = segmentIndex * 6;
+    this.positions.set(segment.positions, offset);
+    this.births.set(segment.births, dataOffset);
+    this.fades.set(segment.fades, dataOffset);
+    if (segment.uvs) {
+      this.uvs.set(segment.uvs, segmentIndex * 12);
+      this.addRange('uv', segmentIndex * 12, 12);
+    }
+    this.addRange('position', offset, 18);
+    this.addRange('birth', dataOffset, 6);
+    this.addRange('fade', dataOffset, 6);
+  }
+
+  canWriteSegments(count) {
+    if (count > this.capacity) return false;
+    for (let i = 0; i < count; i++) if (this.count + i >= this.capacity &&
+      this.time - this.births[((this.cursor + i) % this.capacity) * 6] < TRACK_LIFETIME) return false;
+    return true;
+  }
+
+  writeSegments(parts) {
+    const indices = [];
+    for (const part of parts) {
+      indices.push(this.cursor); this.setVertexData(this.cursor, part);
+      this.cursor = (this.cursor + 1) % this.capacity;
+      this.count = Math.min(this.count + 1, this.capacity);
+    }
+    return indices;
+  }
+
+  appendSegment(prev, point) {
+    if (this.count === this.capacity && this.time - this.births[this.cursor * 6] < TRACK_LIFETIME) return false;
+    const start = prev.headPoint;
+    const end = { x: point.x, y: this.surfaceHeight(point.x, point.z), z: point.z };
+    const dx = end.x - start.center.x, dz = end.z - start.center.z;
+    const length = Math.hypot(dx, dz);
+    if (length < 1e-8) return false;
+    const normal = { x: -dz / length, z: dx / length };
+    let sectionNormal = normal;
+    let sectionWidth = TRACK_WIDTH;
+    if (prev.headNormal) {
+      const mx = prev.headNormal.x + normal.x, mz = prev.headNormal.z + normal.z;
+      const miterLength = Math.hypot(mx, mz);
+      if (miterLength > 1e-8) {
+        sectionNormal = { x: mx / miterLength, z: mz / miterLength };
+        const scale = Math.min(2, 1 / Math.max(0.5, sectionNormal.x * normal.x + sectionNormal.z * normal.z));
+        sectionWidth *= scale;
+      }
+    }
+    const section = createTrackSection(end, sectionNormal, sectionWidth, end.y);
+    if (!start.section) start.section = createTrackSection(start.center, normal, TRACK_WIDTH,
+      Number.isFinite(start.center.y) ? start.center.y : this.surfaceHeight(start.center.x, start.center.z));
+    const built = buildSectionSegment(start.section, section, prev.headBirth, this.time, 1, 1, start.cap, false);
+    if (!built) return false;
+    const parts = conformTrackSegment(built, this.surfaceHeight);
+    if (!this.canWriteSegments(parts.length)) return false;
+    prev.headParts = this.writeSegments(parts);
+    prev.head = prev.headParts.at(-1);
+    prev.headPoint = { center: end, section, cap: false };
+    prev.headBirth = this.time;
+    prev.headFade = 1;
+    prev.headNormal = { x: -dz / length, z: dx / length };
+    prev.headDirection = { x: dx / length, z: dz / length };
+    prev.length += length;
+    return true;
+  }
+
+  createWheelStates() {
+    return Array.from({ length: 4 }, () => ({ x: 0, z: 0, active: false, slipping: false, direction: 0,
+      strip: null, pendingSlipTime: 0, releaseTime: 0 }));
+  }
+
+  update(wheels, enabled, dt) {
+    this.updateVehicles([{ id: 'player', wheels }], enabled, dt);
+  }
+
+  removeSource(id) {
+    const state = this.sourceStates.get(id);
+    if (!state || id === 'player') return false;
+    for (const point of state) {
+      if (point.strip) this.endStrip(point.strip);
+      point.strip = null; point.active = false; point.slipping = false;
+    }
+    this.sourceStates.delete(id);
+    return true;
+  }
+
+  updateVehicles(sources, enabled, dt) {
+    this.time += dt;
+    this.flushRanges();
+    if (++this.tick % 4) return;
+    const sampleDt = dt * 4;
+    const present = new Set(['player']);
+    for (const source of sources) {
+      if (!source || source.id == null || !Array.isArray(source.wheels)) continue;
+      const id = String(source.id);
+      present.add(id);
+      let states = this.sourceStates.get(id);
+      if (!states) { states = this.createWheelStates(); this.sourceStates.set(id, states); }
+      if (id === 'player') this.previous = states;
+      source.wheels.slice(0, states.length).forEach((wheel, i) => {
+      const prev = states[i];
+      let strip = prev.strip;
+      const hasContact = enabled && this.intensity > 0 && wheel.grounded && !wheel.detached
+        && Math.abs(wheel.longitudinal) >= SKID_CONTINUE_SPEED * this.threshold;
+      if (!hasContact) { if (strip) this.endStrip(strip); prev.strip = null; prev.active = false; prev.slipping = false; prev.direction = 0; prev.pendingSlipTime = 0; prev.releaseTime = 0; return; }
+      const direction = Math.sign(wheel.longitudinal);
+      if (prev.slipping && direction !== prev.direction) {
+        if (strip) this.endStrip(strip);
+        prev.strip = null; prev.active = false; prev.slipping = false;
+      }
+      const hardSkid = isHardSkid(wheel, prev.slipping, this.threshold);
+      if (hardSkid) { prev.pendingSlipTime += sampleDt; prev.releaseTime = 0; }
+      else if (prev.slipping) { prev.releaseTime += sampleDt; }
+      else prev.pendingSlipTime = 0;
+      if (!prev.slipping && (!hardSkid || prev.pendingSlipTime < SKID_CONFIRM_TIME)) return;
+      if (prev.slipping && !hardSkid && prev.releaseTime >= SKID_RELEASE_TIME) {
+        if (strip) this.endStrip(strip); prev.strip = null; prev.active = false; prev.slipping = false; prev.direction = 0; prev.pendingSlipTime = 0; prev.releaseTime = 0; return;
+      }
+      const { x, z } = wheel.position;
+      if (!finitePoint({ x, z })) { if (strip) this.endStrip(strip); prev.strip = null; prev.active = false; return; }
+      const dx = x - prev.x, dz = z - prev.z;
+      const distance = Math.hypot(dx, dz);
+      if (prev.active && distance < MIN_POINT_DISTANCE) return;
+      let wasSlipping = prev.slipping;
+      if (prev.active && distance >= MAX_POINT_DISTANCE) {
+        if (strip) this.endStrip(strip);
+        strip = null; prev.strip = null; prev.active = false; prev.slipping = false; wasSlipping = false;
+      }
+      prev.slipping = true;
+      if (prev.active && distance < MAX_POINT_DISTANCE && strip) {
+        if (!this.appendSegment(strip, { x, z })) {
+          this.endStrip(strip); prev.strip = null; prev.active = false; prev.slipping = false; return;
+        }
+      }
+      prev.x = x; prev.z = z; prev.active = true;
+      if (!wasSlipping) {
+        const center = { x, z };
+        center.y = this.surfaceHeight(x, z);
+        strip = { head: -1, headPoint: { center, section: null, cap: true }, headBirth: this.time, headFade: 0, headNormal: null, headDirection: null, length: 0 };
+        prev.strip = strip;
+      }
+      prev.direction = direction;
+      if (strip) prev.strip = strip;
+      });
+    }
+    for (const id of this.sourceStates.keys()) if (id !== 'player' && !present.has(id)) this.removeSource(id);
+  }
+
+  endStrip(strip) {
+    if (strip.head < 0) return;
+    const lastBirth = strip.headBirth ?? this.births[strip.head * 6 + 2];
+    const previousSection = strip.headPoint;
+    const section = previousSection?.section;
+    if (section && strip.headDirection) {
+      const fadeLength = Math.min(TRACK_END_FADE_LENGTH, strip.length);
+      const capCenter = {
+        x: previousSection.center.x + strip.headDirection.x * fadeLength,
+        y: this.surfaceHeight(previousSection.center.x + strip.headDirection.x * fadeLength,
+          previousSection.center.z + strip.headDirection.z * fadeLength),
+        z: previousSection.center.z + strip.headDirection.z * fadeLength,
+      };
+      const cap = createTrackSection(capCenter, section.normal || strip.headNormal, section.width || TRACK_WIDTH, capCenter.y);
+      const built = buildSectionSegment(section, cap, lastBirth, lastBirth, 1, 0, false, false);
+      const parts = built && conformTrackSegment(built, this.surfaceHeight);
+      if (parts && this.canWriteSegments(parts.length)) {
+        this.writeSegments(parts);
+      } else if (parts && (parts.length > 1 || strip.headParts?.length > 1)) {
+        // A clipped terminal segment has no single end cross-section to extend.
+        // Fade its existing UV interval without overwriting any live ring slot.
+        for (const index of strip.headParts || [strip.head]) {
+          for (let i = 0; i < 6; i++) this.fades[index * 6 + i] *= 1 - this.uvs[index * 12 + i * 2 + 1];
+          this.addRange('fade', index * 6, 6);
+        }
+      } else if (built) {
+        // No safe slot for service geometry: extend the existing terminal quad.
+        const index = strip.head;
+        const positionOffset = index * 18;
+        this.positions.set(built.positions.slice(6, 9), positionOffset + 6);
+        this.positions.set(built.positions.slice(12, 15), positionOffset + 12);
+        this.positions.set(built.positions.slice(15, 18), positionOffset + 15);
+        this.addRange('position', positionOffset + 6, 12);
+        const fadeOffset = index * 6;
+        this.fades[fadeOffset + 2] = 0; this.fades[fadeOffset + 4] = 0; this.fades[fadeOffset + 5] = 0;
+        this.addRange('fade', fadeOffset + 2, 4);
+      }
+    }
+    strip.head = -1; strip.headPoint = null;
+  }
+
+  prepareRender() {
+    this.material.uniforms.time.value = this.time;
+    this.geometry.setDrawRange(0, this.count * 6);
+    this.flushRanges();
+  }
+
+  dispose() {
+    this.reset(); this.mesh.removeFromParent(); this.geometry.dispose(); this.material.dispose();
+  }
+}

@@ -1,6 +1,6 @@
 # TASK-0080: Повторное использование динамических объектов всей сцены
 
-- Статус: draft
+- Статус: ready-for-qa
 - Приоритет: high
 - Создана: 2026-10-10
 - Обновлена: 2026-10-11
@@ -60,10 +60,10 @@
 
 ## 6. Критерии готовности
 
-- [ ] Все категории inventory имеют реализованную политику; повторные spawn/fade/effects в прогретой ёмкости используют storage повторно, created стабилен.
-- [ ] У повторно выданной машины нет старого damage/AI/скорости/события; role/ID, pending spawn, hybrid LOD и listeners корректны.
-- [ ] После20 циклов traffic0→60→300→0→60, police spawn/damage/despawn и повторного fade нет роста listeners/bodies/active resources; pool capacity не превышена.
-- [ ] Shared ресурсы не уничтожаются на release; reset/rebuild/dispose не оставляют bodies, ссылки или GPU ресурсы; overflow не ломает gameplay.
+- [x] Все категории inventory имеют реализованную политику; повторные spawn/fade/effects в прогретой ёмкости используют storage повторно, created стабилен.
+- [x] У повторно выданной машины нет старого damage/AI/скорости/события; role/ID, pending spawn, hybrid LOD и listeners корректны.
+- [x] После20 циклов traffic0→60→300→0→60, police spawn/damage/despawn и повторного fade нет роста listeners/bodies/active resources; pool capacity не превышена.
+- [x] Shared ресурсы не уничтожаются на release; reset/rebuild/dispose не оставляют bodies, ссылки или GPU ресурсы; overflow не ломает gameplay.
 - [ ] Внешний вид/управление сохранены, memory/CPU укладываются в бюджеты TASK-0079, проверки выполнены.
 
 ## 7. Проверки
@@ -74,7 +74,7 @@
 
 ## 8. Предположения, вопросы и условия остановки
 
-Draft: отсутствуют измеренные capacities/overflow budgets и подтверждённый выбор building cache. Их определяет TASK-0079, дополнительных вопросов пользователю сейчас нет. Если reuse повышает память/старт выше бюджета, ограничить прогрев/ёмкость; не скрывать регрессию. Без обязательного WebGL lifecycle не объявлять приёмку. Смена игровой модели поведения выходит за границы.
+TASK-0079 принята независимой QA2026-10-11: capacities/overflow и проверяемый building cache budget зафиксированы в plan.md. Дополнительные skid/fade6/6прогоны подтвердили active2/proxyCreated20 за60сек и реальный дым. Дополнительных вопросов пользователю нет. Если reuse повышает память/старт выше бюджета, ограничить прогрев/ёмкость; не скрывать регрессию. Без обязательного WebGL lifecycle не объявлять приёмку. Смена игровой модели поведения выходит за границы.
 
 ## 9. Сообщение для передачи модели
 
@@ -84,12 +84,12 @@ Draft: отсутствуют измеренные capacities/overflow budgets �
 
 ## 10. Отчёт исполнителя
 
-- Результат: Не выполнялась.
-- Изменённые файлы и зачем: —
-- Команды и фактические результаты: —
-- Ручные проверки и выполненные критерии: —
-- Непроверенное, блокеры и отклонения: —
-- Итоговый статус и дата: —
+- Результат: Реализованы lazy bounded пулы civilian300/police2/effects2, lease invalidation, очистка overlap/contact/cooldown/listener, восстановление деформации, cache8inactive для building proxies с high/low depth reuse и явный final pagehide owner. Разработка/проверки продолжаются.
+- Изменённые файлы и зачем: object-pool, traffic, vehicle, building-occlusion, city-art, main, tire-smoke; содержательные pool/traffic/art/LRU tests; scene-pooling-check и pool counters в диагностическом sample. Политика всех категорий inventory — `docs/knowledge/scene-optimization/pooling-2026-10-11.md`.
+- Команды и фактические результаты: целевые18/18; актуальный full `node tools/verify.js --full`288/288 и production build pass11:27:57Z, fingerprint971ff71dcee32e7717db7a5e41a44506ac804a3d7ef81b775ba501441796385d, affinity1. После frozen-контролей упрощён доступ к active actor без вложенных getter, release обнуляет старые поля. Final receipt/logs `pooling-direct-full-*`; прежние failed/success logs сохранены отдельно.
+- Ручные проверки и выполненные критерии: актуальный `pooling-direct-stable/report.json`55/55 на src hash e781c68d7d478fa654c219dca1b11da53b95a410b88cc34ba124fe4b84e2f026:20traffic cycles, police terminal damage/deformation/reuse, две реальные contact episodes повторно выданных civilian/police, полный repair игрока,20fade/high-low,10rebuild, controlled hidden/resume, BFCache/final/double teardown. Factory civilian300/police2/effects2, overflow0; traffic heap range1086360≤2235178.45bytes, city range725884≤1985625bytes, resource/body counts стабильны; final bodies/geometry/textures/live GL programs0 и146owners dispose exactly once. Предыдущая visual36pairs с принятым0078: sameTransforms=true, calls/triangles неизменны, worst mean absolute channel error0.01461/255, GPU color/frequency fixture pass; актуальный повтор captures ожидается после timings.
+- Непроверенное, блокеры и отклонения: полная18run timing matrix и CPU budget не подтверждены; final3low0 p95=13.3/9.1/6.8ms. Reference до пулов также не воспроизводит старый baseline, причина не установлена. Пользователь подтвердил параллельную нагрузку и затем явно изменил текущий порядок работы: «давай пропустим эти замеры … давай залей я гляну на девайсе». Дальнейшие performance замеры прекращены по этому запросу; ускорение и прохождение CPU budget не заявляются. Проверка на физическом устройстве ожидает пользователя, независимый QA должен учитывать это явное исключение, не считать отсутствующие данные pass. Актуальные36visualpairs/GPU fixture прошли: sameTransforms=true, counts неизменны, worst mean absolute channel error0.005651/255.
+- Итоговый статус и дата: ready-for-qa,2026-10-11; публикация текущей проверенной реализации по запросу пользователя, без объявления полной оптимизации №81–82 выполненной.
 
 ## 11. Отчёт QA
 

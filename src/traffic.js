@@ -1,5 +1,6 @@
 import { ROAD_WIDTH, createCityPlan } from './city-generator.js';
-import { CarSimulation, STEP } from './vehicle.js';
+import { CarSimulation, DEFAULT_TUNING, STEP } from './vehicle.js';
+import { ObjectPool } from './object-pool.js';
 import { chooseRoadGoal, createRoadGraph, createSeededRandom, findRoadRoute, laneTarget } from './traffic-ai.js';
 import { createTrafficSignals } from './traffic-signals.js';
 import { getStopLineLayout } from './signal-layout.js';
@@ -19,6 +20,10 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
   const states = [], cars = [], simulations = [];
   let requestedCount = 0, pendingCount = null, pendingReason = null, physics = null, serial = 0;
   let visualAssets = null;
+  const vehiclePools = new Map();
+  const actorStorage = new WeakMap();
+  let disposed = false;
+  const requireOwner = () => { if (disposed) throw new Error('Vehicle runtime was disposed.'); };
   const getLaneOffset = width => Math.min(5.2, width * 0.25);
   let graph = createRoadGraph(roadNetwork, getLaneOffset(roadWidth));
   let spawnObstacles = obstacles, spawnSlots = [], spawnSearchCursor = 0;
@@ -146,17 +151,78 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     ai.reservationNode = null;
   };
 
+  const retireContacts = simulation => {
+    const world = simulation.world, body = simulation.body;
+    const bodyIds = new Set([body.id]), shapeIds = new Set(body.shapes.map(shape => shape.id));
+    for (const [keeper, ids] of [[world.bodyOverlapKeeper, bodyIds], [world.shapeOverlapKeeper, shapeIds]]) {
+      for (const list of [keeper.current, keeper.previous]) {
+        for (let i = list.length - 1; i >= 0; i--) if (ids.has(list[i] >>> 16) || ids.has(list[i] & 65535)) list.splice(i, 1);
+      }
+    }
+    for (const list of [world.contacts, world.frictionEquations]) {
+      for (let i = list.length - 1; i >= 0; i--) if (list[i].bi === body || list[i].bj === body) list.splice(i, 1);
+    }
+    const prefix = `${body.id}:`;
+    for (const observer of [physics, ...simulations]) {
+      for (const key of observer.impactCooldowns.keys()) if (key.startsWith(prefix)) observer.impactCooldowns.delete(key);
+    }
+  };
+
+  const poolFor = role => {
+    if (vehiclePools.has(role)) return vehiclePools.get(role);
+    const pool = new ObjectPool({ capacity: roleRegistry.get(role).maxCount,
+      create: (key, context) => {
+        const simulation = new CarSimulation({ world: physics.world, materials: physics.materials,
+          spawn: context.spawn, damage: role === 'police', damageMultiplier: role === 'police' ? 2 : 1,
+          allowWheelDetachment: role !== 'police' });
+        simulation.disposeDamageListener(); physics.world.removeBody(simulation.body);
+        const mesh = makeTrafficCar(THREE, visualAssets, context.index, role);
+        profile.vehicleCreated++;
+        return { simulation, mesh };
+      },
+      acquire: ({ simulation, mesh }, context) => {
+        Object.assign(simulation.spawn, context.spawn);
+        Object.assign(simulation.tuning, role === 'civilian' ? DEFAULT_TUNING : physics.tuning);
+        simulation.reset(); mesh.userData.poolDeformation?.restore();
+        simulation.attachDamageListener(); physics.world.addBody(simulation.body);
+        mesh.visible = true; scene.add(mesh);
+      },
+      release: ({ simulation, mesh }, context) => {
+        if (context.state) {
+          context.state.active = false;
+          context.state.simulation = null; context.state.mesh = null;
+        }
+        if (context.state?.collideListener) simulation.body.removeEventListener('collide', context.state.collideListener);
+        retireContacts(simulation);
+        simulation.disposeDamageListener(); simulation.world.removeBody(simulation.body);
+        for (const wheel of simulation.wheels) {
+          if (wheel.detachedBody) simulation.world.removeBody(wheel.detachedBody);
+          wheel.detachedBody = null; wheel.detached = false; wheel.result.reset();
+        }
+        simulation.impactEvents.length = 0; simulation.impactCooldowns.clear();
+        mesh.userData.poolDeformation?.restore(); mesh.visible = false; scene.remove(mesh);
+      },
+      destroy: ({ simulation, mesh }) => {
+        simulation.disposeDamageListener(); simulation.world.removeBody(simulation.body);
+        mesh.userData.damageableBody?.geometry.dispose();
+        delete mesh.userData.poolDeformation;
+      },
+    });
+    vehiclePools.set(role, pool); return pool;
+  };
+
+  const clearPools = () => { for (const pool of vehiclePools.values()) pool.dispose(); vehiclePools.clear(); };
+
   const add = (index, slot, role = 'civilian', options = {}) => {
     const { edge, t, x, z, heading } = slot;
-    const id = `${role === 'civilian' ? 'npc' : role}-${String(serial++).padStart(2, '0')}`;
-    const simulation = new CarSimulation({ world: physics.world, materials: physics.materials,
-      spawn: { x, y: Number.isFinite(slot.y) ? slot.y + 0.96 : 0.96, z, yaw: heading },
-      damage: role === 'police', damageMultiplier: role === 'police' ? 2 : 1,
-      allowWheelDetachment: role !== 'police' });
-    if (role !== 'civilian') Object.assign(simulation.tuning, physics.tuning);
     visualAssets ||= createTrafficAssets(THREE);
-    const mesh = makeTrafficCar(THREE, visualAssets, index, role);
-    scene.add(mesh);
+    const key = role === 'police' ? role : visualAssets.concept ? String(index % 2)
+      : `${index % visualAssets.civilian.length}:${index % 2}`;
+    const context = { index, spawn: { x, y: Number.isFinite(slot.y) ? slot.y + 0.96 : 0.96, z, yaw: heading }, state: null };
+    const pool = poolFor(role), lease = pool.acquire(key, context);
+    if (!lease) return null;
+    const { simulation, mesh } = lease.value;
+    const id = `${role === 'civilian' ? 'npc' : role}-${String(serial++).padStart(2, '0')}`;
     const seed = (0xC4A7 + serial * 0x9E3779B1) >>> 0;
     const ai = { id, seed, random: createSeededRandom(seed), state: 'following', fromNode: edge.from, targetNode: edge.to,
       role, roleState: null, route: [], routeIndex: 0, goalId: null, previousGoal: null, control: { steer: 0, throttle: 0.5, brake: 0 },
@@ -169,12 +235,14 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       ai.roleState = roleDefinition.create?.({ id, targetId: ai.targetId, spawn: { x, y: slot.y ?? 0, z, yaw: heading } }) || {};
       ai.control = { steer: 0, throttle: 1, brake: 0 };
     }
-    const state = { id, role, x, z, heading, speed: 0, previousX: x, previousZ: z, previousHeading: heading,
+    const state = { id, role, active: true, x, z, heading, speed: 0, previousX: x, previousZ: z, previousHeading: heading,
       spawnPose: { x, y: slot.y ?? 0, z, yaw: heading },
-      spawnEdge: { from: edge.from, to: edge.to }, spawnFraction: t, simulation, mesh, ai, logical: false,
+      spawnEdge: { from: edge.from, to: edge.to }, spawnFraction: t,
+      simulation, mesh, ai, logical: false,
       occupancyItem: { id, x, z, heading, vx: 0, vz: 0, state: null },
       renderQuaternion: new THREE.Quaternion(), currentQuaternion: new THREE.Quaternion() };
     const collide = event => {
+      if (!state.active || !lease.value) return;
       if (role === 'civilian' && event.body === physics.body
         && Math.abs(event.contact.getImpactVelocityAlongNormal()) >= TRAFFIC_EVASION.impactSpeed) {
         ai.playerImpactPending = true;
@@ -182,10 +250,11 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       if (role !== 'civilian' && event.body === physics.body) roleRegistry.get(role)?.onContact?.(ai.roleState, aiTime, event);
     };
     state.collideListener = collide;
+    context.state = state;
+    actorStorage.set(state, { pool, lease });
     simulation.body.addEventListener('collide', collide);
     state.occupancyItem.state = state;
     states.push(state); simulations.push(simulation); cars.push(mesh); syncState(state);
-    profile.vehicleCreated++;
     return state;
   };
 
@@ -193,16 +262,17 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     const [state] = states.splice(index, 1);
     if (!state) return;
     profile.vehicleRemoved++;
+    const { simulation, mesh } = state;
     releaseReservation(state.ai);
-    state.simulation.body.removeEventListener('collide', state.collideListener);
-    roleRegistry.get(state.role)?.dispose?.(state.ai.roleState);
-    state.simulation.disposeDamageListener();
-    physics.world.removeBody(state.simulation.body);
-    for (const wheel of state.simulation.wheels) if (wheel.detachedBody) physics.world.removeBody(wheel.detachedBody);
-    simulations.splice(simulations.indexOf(state.simulation), 1);
-    if (state.role === 'police') state.mesh.userData.damageableBody?.geometry.dispose();
-    cars.splice(cars.indexOf(state.mesh), 1);
-    scene.remove(state.mesh);
+    roleRegistry.get(state.role)?.dispose?.(state.ai.roleState, { id: state.id });
+    for (const bucket of occupancy.values()) {
+      const occupiedIndex = bucket.indexOf(state.occupancyItem);
+      if (occupiedIndex >= 0) bucket.splice(occupiedIndex, 1);
+    }
+    const storage = actorStorage.get(state);
+    storage.pool.release(storage.lease); actorStorage.delete(state);
+    simulations.splice(simulations.indexOf(simulation), 1);
+    cars.splice(cars.indexOf(mesh), 1);
   };
 
   const insertOccupancyItem = item => {
@@ -232,6 +302,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
         break;
       }
       const state = add(states.length, result.slot, 'civilian');
+      if (!state) break;
       insertOccupancyItem(state.occupancyItem);
       added++;
     }
@@ -258,6 +329,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     const slot = nearestDirectedSlot({ ...pose, yaw: options.yaw ?? 0 });
     if (!slot) return { status: 'rejected', reason: 'no-road-graph' };
     const state = add(states.length, slot, role, options);
+    if (!state) return { status: 'pending', reason: 'capacity' };
     insertOccupancyItem(state.occupancyItem);
     return { status: 'created', id: state.id, pose: { x: pose.x, y: pose.y, z: pose.z, yaw: options.yaw ?? 0 } };
   };
@@ -276,6 +348,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       if (result.status === 'pending') { record.result = { status: 'pending', requestId, reason: result.reason }; continue; }
       const created = createRoleActor(record.input.role, result.pose, { targetId: record.input.targetId, yaw: result.pose.yaw });
       record.result = { ...created, requestId, pose: result.pose, distance: result.distance };
+      if (created.status === 'pending') continue;
       spawnResults.set(requestId, record.result);
       spawnRequests.delete(requestId); budget--;
     }
@@ -750,12 +823,19 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
   return {
     states, cars, simulations, reservations,
     registerRole(name, definition) {
+      requireOwner();
       if (typeof name !== 'string' || !name || name === 'civilian' || !definition || typeof definition.update !== 'function') {
         throw new TypeError('A non-civilian role needs a name and update hook.');
+      }
+      const maximum = definition.maxCount ?? 2;
+      if (!Number.isInteger(maximum) || maximum < 0) throw new RangeError('Role capacity must be a nonnegative integer.');
+      if (vehiclePools.has(name)) {
+        vehiclePools.get(name).setCapacity(maximum);
       }
       roleRegistry.set(name, { maxCount: 2, physicalOnly: true, ...definition });
     },
     requestSpawn(input) {
+      requireOwner();
       const definition = roleRegistry.get(input?.role);
       if (!definition) return { status: 'rejected', reason: 'unknown-role' };
       if (input.targetId && input.targetId !== 'player' && !states.some(state => state.id === input.targetId)) {
@@ -787,6 +867,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       for (const state of roleStates(name)) Object.assign(state.simulation.tuning, tuning);
     },
     setRoleCount(name, count, spawnList = []) {
+      requireOwner();
       const definition = roleRegistry.get(name);
       if (!definition || name === 'civilian') throw new RangeError(`Unknown configurable role: ${name}`);
       if (!Number.isInteger(count) || count < 0 || count > definition.maxCount) throw new RangeError(`Invalid ${name} count.`);
@@ -806,12 +887,19 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       return results;
     },
     attachPhysics(simulation) {
+      requireOwner();
+      if (physics) {
+        while (states.length) removeAt(states.length - 1);
+        clearPools(); reservations.clear(); occupancy.clear(); spawnRequests.clear(); spawnResults.clear();
+      }
       physics = simulation; graph = createRoadGraph(roadNetwork, getLaneOffset(roadWidth)); rebuildSpawnSlots();
       requestedCount = count; pendingCount = count; pendingReason = 'Поиск безопасных мест';
       servicePending(8, 512);
     },
     setVisualAssets(assets) {
+      requireOwner();
       if (states.length) throw new Error('Install traffic visuals before attaching physics');
+      clearPools();
       visualAssets?.dispose();
       visualAssets = assets;
     },
@@ -819,10 +907,12 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     signalPhase(nodeId, fromId, time = aiTime) { return signalController.phase(nodeId, fromId, time); },
     simulationTime() { return aiTime; },
     setCount(value) {
+      requireOwner();
       if (!Number.isInteger(value) || value < 0 || value > 300) throw new RangeError('Traffic count must be an integer from 0 to 300.');
       requestedCount = value; pendingCount = value; pendingReason = 'Запрос применяется';
     },
     setRoadNetwork(network, width = roadWidth, obstacles = spawnObstacles) {
+      requireOwner();
       roadNetwork = network; roadWidth = width; graph = createRoadGraph(network, getLaneOffset(width));
       movementCache.clear();
       spawnObstacles = obstacles; rebuildSpawnSlots();
@@ -924,18 +1014,22 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       pendingReason = pendingCount === null ? null : 'Нет свободных безопасных мест';
     },
     dispose() {
+      if (disposed) return false;
       while (states.length) removeAt(states.length - 1);
+      clearPools(); occupancy.clear();
       reservations.clear(); spawnRequests.clear(); spawnResults.clear(); requestedCount = 0; pendingCount = null;
       if (visualAssets) {
         visualAssets.dispose();
         visualAssets = null;
       }
+      disposed = true; return true;
     },
     status() { return { count: roleStates('civilian').length, requestedCount, pending: pendingCount !== null,
       totalCount: states.length, roleCounts: Object.fromEntries([...roleRegistry.keys()].map(role => [role, roleStates(role).length])),
       pendingSpawns: spawnRequests.size, insertionReason: pendingReason,
       bodies: states.filter(state => !state.logical).length, logical: states.filter(state => state.logical).length,
       visible: visibleCount, reservations: reservations.size }; },
+    poolStats() { return Object.fromEntries([...vehiclePools].map(([role, pool]) => [role, pool.snapshot()])); },
     physicalActors() { return states.filter(state => !state.logical).map(state => ({
       id: state.id, role: state.role, body: state.simulation.body, logical: state.logical,
       mesh: state.mesh, damageableBody: state.mesh.userData.damageableBody || null,

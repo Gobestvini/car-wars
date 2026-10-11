@@ -4,6 +4,43 @@ import { occludedBuildingIds, segmentIntersectsAabb, smoothBuildingOpacity, vehi
 import * as THREE from 'three';
 
 const box = { id: 1, bounds: { min: { x: 4, y: 0, z: -1 }, max: { x: 6, y: 8, z: 1 } } };
+test('proxy cache evicts only idle entries and releases private resources exactly once', () => {
+  const geometry = new THREE.BoxGeometry(), material = new THREE.MeshStandardMaterial();
+  const instanced = new THREE.InstancedMesh(geometry, material, 12), scene = new THREE.Scene();
+  const entries = Array.from({length:12}, (_, index) => ({ ...box, id:index, index, x:index*3, z:0,
+    height:8, width:2, depth:2, opacity:1, caps:[], color:'#888888' }));
+  const fade = new BuildingOcclusion(THREE, scene, instanced, geometry, entries);
+  let sharedDisposals=0;
+  geometry.addEventListener('dispose',()=>sharedDisposals++);
+  material.addEventListener('dispose',()=>sharedDisposals++);
+  const live=fade.startProxy(entries[0],[]);
+  const counts=[];
+  for (const entry of entries.slice(1)) {
+    const group=fade.startProxy(entry,[]);
+    const countsForEntry={geometry:0,material:0}; counts.push(countsForEntry);
+    for (const mesh of group.children) {
+      mesh.geometry.addEventListener('dispose',()=>countsForEntry.geometry++);
+      mesh.material.addEventListener('dispose',()=>countsForEntry.material++);
+    }
+    fade.finishProxy(entry,[]);
+    assert.equal(entries[0].proxy,live);
+    assert.ok(fade.poolStats().free<=8);
+  }
+  assert.equal(fade.poolStats().active,1);assert.equal(fade.poolStats().evicted,3);
+  assert.deepEqual(counts.slice(0,3),Array.from({length:3},()=>({geometry:2,material:2})));
+  assert.equal(sharedDisposals,0);
+  fade.reset();assert.equal(fade.poolStats().active,0);assert.equal(fade.poolStats().free,8);
+  const retained=fade.poolStats().retainedGeometryBytes,created=fade.poolStats().created;
+  for(let cycle=0;cycle<20;cycle++) { fade.startProxy(entries[0],[]); fade.finishProxy(entries[0],[]); }
+  assert.equal(fade.poolStats().created,created);assert.equal(fade.poolStats().retainedGeometryBytes,retained);
+  assert.equal(fade.dispose(),true);assert.equal(fade.dispose(),false);
+  assert.equal(fade.poolStats().retainedGeometryBytes,0);assert.equal(scene.children.length,0);
+  assert.ok(counts.every(value=>value.geometry===2&&value.material===2));
+  assert.equal(sharedDisposals,0);
+  assert.throws(()=>fade.startProxy(entries[0],[]),/disposed/);
+  geometry.dispose();material.dispose();instanced.dispose();
+  assert.equal(sharedDisposals,2);
+});
 test('camera segment detects a building only in front of its endpoint', () => {
   assert.equal(segmentIntersectsAabb({ x: 0, y: 2, z: 0 }, { x: 10, y: 2, z: 0 }, box.bounds), true);
   assert.equal(segmentIntersectsAabb({ x: 0, y: 10, z: 0 }, { x: 10, y: 10, z: 0 }, box.bounds), false);

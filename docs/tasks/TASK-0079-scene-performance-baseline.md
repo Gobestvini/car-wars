@@ -1,6 +1,6 @@
 # TASK-0079: Измерить сцену и зафиксировать план полной оптимизации
 
-- Статус: qa-in-progress
+- Статус: done
 - Приоритет: high
 - Создана: 2026-10-10
 - Обновлена: 2026-10-11
@@ -96,7 +96,19 @@
 
 ## 11. Отчёт QA
 
-Не проводилась.
+2026-10-11, независимый QA-подагент, решение: **принято (`done`)**. Проверен HEAD `0a5a3163cda6ba1c907bac1747cbb00cf50f1c42` и диагностические файлы79; исходники игры SHA-256 `21600b167027e5e71452809668b349851a1d57dd4dffd917dd9c24d4c39f1351` совпадают с supplemental raw. Документальная правка устаревшего абзаца plan.md рассмотрена отдельно. Реализация в ходе QA не изменялась, чужие staged/unstaged правки сохранены.
+
+Сопоставление раздела6 с доказательствами:
+
+- Inventory покрывает статические и динамические категории, physics/CPU transient данные, UI и reset/rebuild/dispose. Проверены factory/owner/sharing/disposal в текущем коде; выявленные отсутствующие final teardown остаются явными кандидатами последующего этапа, а не объявлены исправленными. В0080–0082 зафиксированы bounded capacities, overflow/invalidation и риски эквивалентности.
+- SceneProfile вызывается после принятия кадра и реального render; bounded typed ring создаётся только start(), stop() освобождает data/stages. Тест120/144callbacks подтверждает600 отдельных accepted/rendered rows за10сек. Интервалы идут по принятым timestamp, stage totals суммируют fixed steps без повторного добавления AI. renderFrame сохраняет autoReset=false на полный кадр; проверен порядок shadowMap.render/info.reset установленного Three.js и прямой/blur пути. GPU queries отделены от CPU submission, bounded/disjoint-aware; unavailable имеет явный статус.
+- Независимый валидатор `docs/knowledge/scene-optimization/qa-0079-validate.cjs` подтвердил18full raw reports:6сцен×3повтора,60/300сек,10сек warm-up, один sourceHash, без errors/overwritten/duplicate IDs. Проверены монотонность IDs/timestamp, точные интервалы строк, actual mask1 всех живых процессов, валидные GPU rows. Все30lifecycle циклов имеют pickup consumed и restore available; отдельные6effects reports содержат60samples, skid tireSmoke10/damageSmoke69–70 и fade active2/proxyCreated20. Allocation raw содержит отдельный collected-object sampling; результаты не смешаны с timing. Повторное reduction через tools/scene-profile-summary.cjs воспроизводит опубликованные диапазоны/медианы.
+- План измеренно ранжирует physics/gameplay и sampled churn, сохраняет осторожность для неподтверждённых GPU/raycast кандидатов. Бюджеты−20% stress physics, regression max baseline×1.05, allocation−50% подтверждённых источников, storage300civilian/2police/2effects/8inactive proxies заданы до оптимизаций. Следующие задачи актуализированы и остаются draft до зависимостей.
+- Diff79 добавляет диагностику/counters без изменения gameplay/quality/blur/traffic defaults/STEP/AI cadence. Независимые live free/follow/menu/controlled hidden/loading/drive-reset/ordinary HUD сценарии прошли; screenshots free/follow/driving просмотрены, рендер сцены и HUD корректны.
+
+Команды/результаты: `node tools/verify.js --full` с process affinity1, elevated после sandbox-отказа esbuild: **281/281 tests, production build pass**, receipt2026-10-11T10:01:19.786Z, fingerprint `2f76d8c8bc87c59aba7c5eee65c0b2d9fad305080e227d0311362043203a44b9`. Включены game-loop и scene-profile тесты раздела7. Журналы/квитанция: `qa0079-full-tests.log`, `qa0079-full-build.log`, `qa0079-full-receipt.json` в scene-optimization. Предыдущий независимый sandbox full имел281passed, но build Access denied при чтении родительского каталога: этот запуск не считается общим pass; повтор без ограничения прошёл. `node .../qa-0079-validate.cjs` — passed; `node tools/scene-profile-summary.cjs .../baseline-stable` — passed. Независимый Edge запуск tools/scene-regression.cjs с отдельными QA output filenames — **7/7, errors[]**, `qa0079-regression-regression.json` и три `qa0079-regression-*.png`.
+
+Ограничения: длительная матрица не переснималась QA; её полнота и данные проверены независимо по raw/collector/source, а live regression и full suite/build повторены отдельно. Affinity1 — ограниченная воспроизводимая среда, не обычный multicore baseline; viewport390×844 наRTX4080 не аппаратный телефон. Supplemental helper объявляет/наследуетmask1, но не содержит собственного повторного CDP/OS inventory; actual inventory подтверждён основной18runсерией. Controlled document.hidden getter проверяет production обработчик паузы и не доказывает OS suspension. Задача79 не принимает/не заменяет отдельную blocked QA77 и не объявляет выполненными оптимизации80–82. Существенных дефектов критериев79 не найдено.
 
 ## Рекомендация модели исполнителя
 

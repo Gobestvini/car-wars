@@ -1,5 +1,5 @@
 param(
-  [ValidateSet(0, 1)][int]$CpuAffinity = 0,
+  [ValidateSet(0, 1, 16)][int]$CpuAffinity = 0,
   [ValidateRange(1, 10)][int]$Repeats = 3,
   [string]$BaseUrl = 'http://127.0.0.1:5173/',
   [string]$Output = 'docs/knowledge/scene-optimization/baseline',
@@ -8,6 +8,7 @@ param(
   [switch]$Resume,
   [switch]$Allocation,
   [switch]$DrivingOnly,
+  [string]$Reference = '',
   [ValidateRange(0, 300000)][int]$DurationMs = 0
 )
 $ErrorActionPreference = 'Stop'
@@ -27,6 +28,7 @@ $taskEnvironment = @{
   SCENE_PROFILE_RESUME = $(if ($Resume) { '1' } else { $null })
   SCENE_PROFILE_ALLOCATION = $(if ($Allocation) { '1' } else { $null })
   SCENE_PROFILE_DRIVING_ONLY = $(if ($DrivingOnly) { '1' } else { $null })
+  SCENE_PROFILE_REFERENCE = $(if ($Reference) { $Reference } else { $null })
   SCENE_PROFILE_CPU_AFFINITY = $(if ($CpuAffinity) { [string]$CpuAffinity } else { $null })
   SCENE_PROFILE_DURATION_MS = $(if ($DurationMs) { [string]$DurationMs } else { $null })
 }

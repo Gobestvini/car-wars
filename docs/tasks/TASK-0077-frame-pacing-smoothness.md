@@ -144,4 +144,6 @@ gpt-6.1-sol, high. Задача ограничена планировщиком 
 
 ### Итоговые проверки исполнителя,2026-10-11
 
+Дополнение после QA: полный актуальный suite281/281 и build прошли09:55:53Z, fingerprint2f76d8c8bc87c59aba7c5eee65c0b2d9fad305080e227d0311362043203a44b9; независимая QA0079 повторила их10:01:19Z. Сохранены четыре новых60s continuous raw в `docs/knowledge/frame-pacing/continuous-before` и `continuous-after`, одинаковый collector hash49f0a9903710a35c42a9e03e655a84599af03221ffa2ae83a54452ae5dd402cd, affinity1, DrivingOnly, без ареста. Low:297.9/292.3м и3поворота; high60NPC:164.5/165.0м и2поворота из-за взаимодействия с трафиком. p95interval before/after low26.2/37.8ms, high20.8/33.4ms; p95CPU4.5/10.4 и9.1/11.2ms. Эти headless-прогоны **не подтверждают улучшение плавности** и high не закрывает полностью непрерывный маршрут. Ошибка большого JSON export больше не воспроизводится. Аппаратные60Гц/настоящее OS hidden по-прежнему не подтверждены; статус blocked сохранён до повторной независимой приёмки.
+
 node tools/telegram/verify.js --full:318/318 tests и production build прошли; fingerprint14214a5c955fa60f47fc23f9a6a9dc75faa9b3d9b727ee986119760866ee3caa,06:40:46.905Z. Передано ready-for-qa. Подробный отчёт и raw в docs/knowledge/frame-pacing-2026-10-10.md.

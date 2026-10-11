@@ -11,6 +11,24 @@ const repeats = Number(process.env.SCENE_PROFILE_REPEATS || 3);
 const quick = process.env.SCENE_PROFILE_QUICK === '1';
 const allocationRun = process.env.SCENE_PROFILE_ALLOCATION === '1';
 const drivingOnly = process.env.SCENE_PROFILE_DRIVING_ONLY === '1';
+let referenceRevision = process.env.SCENE_PROFILE_REFERENCE || null;
+let sourceRoot = 'src', referenceMain = null;
+if (referenceRevision) {
+  assert.ok(/^[0-9a-f]{7,40}$/.test(referenceRevision), 'Reference must be a commit SHA');
+  const git = args => execFileSync('git', ['-c','safe.directory='+process.cwd().replaceAll('\\','/'),...args], {encoding:'utf8'});
+  referenceRevision = git(['rev-parse','--verify',referenceRevision+'^{commit}']).trim();
+  const directory = 'docs/knowledge/scene-optimization/reference-'+referenceRevision.slice(0,12);
+  const files = git(['ls-tree','-r','--name-only',referenceRevision,'--','src','package.json']).trim().split('\n');
+  for (const file of files) {
+    const target = path.join(directory, file), content = git(['show',referenceRevision+':'+file]);
+    fs.mkdirSync(path.dirname(target), {recursive:true});
+    fs.writeFileSync(target, content);
+  }
+  sourceRoot = path.join(directory, 'src');
+  referenceMain = directory+'/src/main.js';
+  fs.writeFileSync(path.join(directory,'reference.json'),JSON.stringify({revision:referenceRevision,files,
+    purpose:'Read-only Git source snapshot served by Vite for controlled pre-pooling comparisons; working src is untouched.'},null,2)+'\n');
+}
 let partial = null;
 const matrix = [
   { id: 'desktop-low-empty', width: 1440, height: 900, quality: 'low', count: 0, police: 1, blur: 0, duration: 60000 },
@@ -25,11 +43,11 @@ const cases = selected ? matrix.filter(item => selected.includes(item.id)) : mat
 assert.ok(cases.length && (!selected || selected.every(id=>matrix.some(item=>item.id===id))), 'Unknown or empty cases');
 assert.ok(Number.isInteger(repeats)&&repeats>0&&repeats<=10,'Repeats must be1..10');
 const protocolFor=cfg=>({quick,allocationRun,durationMs:quick?3000:Number(process.env.SCENE_PROFILE_DURATION_MS||cfg.duration),
-  requestedAffinity:process.env.SCENE_PROFILE_CPU_AFFINITY||null,effectsSeed:0x5c3e2026,drivingOnly});
+  requestedAffinity:process.env.SCENE_PROFILE_CPU_AFFINITY||null,effectsSeed:0x5c3e2026,drivingOnly,referenceRevision});
 function sourceDigest() {
   const hash=createHash('sha256');
-  for(const file of fs.readdirSync('src').filter(file=>fs.statSync(path.join('src',file)).isFile()).sort())
-    hash.update(file+'\0').update(fs.readFileSync(path.join('src',file)));
+  for(const file of fs.readdirSync(sourceRoot).filter(file=>fs.statSync(path.join(sourceRoot,file)).isFile()).sort())
+    hash.update(file+'\0').update(fs.readFileSync(path.join(sourceRoot,file)));
   return hash.update(fs.readFileSync(__filename)).digest('hex');
 }
 async function affinityMetadata(browser) {
@@ -99,7 +117,7 @@ window.sceneBench = {
     police:carLab.police(),bodies:sim.world.bodies.length,
     worldListeners:Object.fromEntries(Object.entries(sim.world._listeners||{}).map(([k,v])=>[k,v.length])),
     bodyCollisionListeners:sim.world.bodies.reduce((n,b)=>n+(b._listeners?.collide?.length||0),0),
-    trafficPerformance:traffic.performance(),resources:carLab.resources(),pickups:repairPickups.snapshot(),
+    trafficPerformance:traffic.performance(),resources:carLab.resources(),pools:carLab.pools?.()??null,pickups:repairPickups.snapshot(),
     heap:performance.memory?.usedJSHeapSize??null,smoke:carLab.tireSmoke()}),
   stop: () => {keys.clear();releasePointer();sceneBench.running=false;},
   environment: () => {
@@ -123,7 +141,7 @@ function summary(profile) {
 (async()=> {
   fs.mkdirSync(out,{recursive:true});
   const revision=execFileSync('git',['-c','safe.directory='+process.cwd().replaceAll('\\','/'),'rev-parse','HEAD'],{encoding:'utf8'}).trim();
-  const code={sourceHash:sourceDigest(),legacyLimiterFrom:process.env.FRAME_PACING_LEGACY==='1'?'1bc8c94:src/game-loop.js':null};
+  const code={sourceHash:sourceDigest(),referenceRevision,legacyLimiterFrom:process.env.FRAME_PACING_LEGACY==='1'?'1bc8c94:src/game-loop.js':null};
   const args=['--enable-webgl'];
   if(process.env.SCENE_PROFILE_SOFTWARE==='1') args.push('--use-angle=swiftshader','--enable-unsafe-swiftshader');
   const browser=await chromium.launch({channel:'msedge',headless:true,args});
@@ -150,9 +168,10 @@ function summary(profile) {
           n=Math.imul(n^n>>>15,n|1);n^=n+Math.imul(n^n>>>7,n|61);return((n^n>>>14)>>>0)/4294967296;};
       });
       await page.route('**/src/main.js*',async route=>{
-        const response=await route.fetch(), source=await response.text();
+        const response=await route.fetch(referenceMain ? {url:new URL(referenceMain,base).href} : {}), source=await response.text();
         assert.ok(source.includes('window.carLab = {'));
-        const imports="import {JOYSTICK_RADIUS as benchRadius,JOYSTICK_DEAD_ZONE as benchDeadZone} from './joystick.js';\n";
+        const joystickUrl=referenceMain ? '/'+referenceMain.replace(/main\.js$/,'joystick.js') : './joystick.js';
+        const imports="import {JOYSTICK_RADIUS as benchRadius,JOYSTICK_DEAD_ZONE as benchDeadZone} from '"+joystickUrl+"';\n";
         await route.fulfill({response,body:imports+source.replace('window.carLab = {',hook+'window.carLab = {')});
       });
       if(process.env.FRAME_PACING_LEGACY==='1') await page.route('**/src/game-loop.js*',async route=>{

@@ -1,0 +1,575 @@
+{
+  "purpose": "Alternating-order control to diagnose changing host timings; acceptance budgets remain unchanged.",
+  "sequence": [
+    {
+      "start": "2026-10-11T11:22:15.0391589Z",
+      "end": "2026-10-11T11:23:35.1667961Z",
+      "affinity": 16,
+      "hostCores": [
+        {
+          "Name": "0",
+          "PercentProcessorTime": 56,
+          "PercentUserTime": 6,
+          "PercentPrivilegedTime": 49
+        },
+        {
+          "Name": "1",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "10",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "11",
+          "PercentProcessorTime": 25,
+          "PercentUserTime": 24,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "12",
+          "PercentProcessorTime": 25,
+          "PercentUserTime": 24,
+          "PercentPrivilegedTime": 6
+        },
+        {
+          "Name": "13",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "14",
+          "PercentProcessorTime": 25,
+          "PercentUserTime": 18,
+          "PercentPrivilegedTime": 12
+        },
+        {
+          "Name": "15",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "16",
+          "PercentProcessorTime": 1,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "17",
+          "PercentProcessorTime": 1,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "18",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "19",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "2",
+          "PercentProcessorTime": 13,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 12
+        },
+        {
+          "Name": "20",
+          "PercentProcessorTime": 1,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "21",
+          "PercentProcessorTime": 1,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "22",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "23",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "24",
+          "PercentProcessorTime": 13,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 12
+        },
+        {
+          "Name": "25",
+          "PercentProcessorTime": 19,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 18
+        },
+        {
+          "Name": "26",
+          "PercentProcessorTime": 1,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "27",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "28",
+          "PercentProcessorTime": 13,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 12
+        },
+        {
+          "Name": "29",
+          "PercentProcessorTime": 1,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "3",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "30",
+          "PercentProcessorTime": 1,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "31",
+          "PercentProcessorTime": 1,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "4",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 6,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "5",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "6",
+          "PercentProcessorTime": 1,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "7",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "8",
+          "PercentProcessorTime": 7,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "9",
+          "PercentProcessorTime": 38,
+          "PercentUserTime": 18,
+          "PercentPrivilegedTime": 12
+        },
+        {
+          "Name": "_Total",
+          "PercentProcessorTime": 10,
+          "PercentUserTime": 3,
+          "PercentPrivilegedTime": 4
+        }
+      ],
+      "pair": 1,
+      "version": "reference",
+      "hostCpu": {
+        "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+        "CurrentClockSpeed": 3000,
+        "MaxClockSpeed": 3000,
+        "LoadPercentage": 60
+      },
+      "exitCode": 0,
+      "output": "docs\\knowledge\\scene-optimization\\pooling-core4-control\\reference-1"
+    },
+    {
+      "start": "2026-10-11T11:23:36.4902500Z",
+      "end": "2026-10-11T11:24:55.2030420Z",
+      "affinity": 16,
+      "hostCores": [
+        {
+          "Name": "0",
+          "PercentProcessorTime": 87,
+          "PercentUserTime": 6,
+          "PercentPrivilegedTime": 84
+        },
+        {
+          "Name": "1",
+          "PercentProcessorTime": 3,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "10",
+          "PercentProcessorTime": 21,
+          "PercentUserTime": 6,
+          "PercentPrivilegedTime": 6
+        },
+        {
+          "Name": "11",
+          "PercentProcessorTime": 45,
+          "PercentUserTime": 24,
+          "PercentPrivilegedTime": 24
+        },
+        {
+          "Name": "12",
+          "PercentProcessorTime": 21,
+          "PercentUserTime": 12,
+          "PercentPrivilegedTime": 6
+        },
+        {
+          "Name": "13",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "14",
+          "PercentProcessorTime": 15,
+          "PercentUserTime": 18,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "15",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "16",
+          "PercentProcessorTime": 15,
+          "PercentUserTime": 12,
+          "PercentPrivilegedTime": 6
+        },
+        {
+          "Name": "17",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "18",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "19",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "2",
+          "PercentProcessorTime": 3,
+          "PercentUserTime": 6,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "20",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "21",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "22",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "23",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "24",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "25",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "26",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "27",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "28",
+          "PercentProcessorTime": 3,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 6
+        },
+        {
+          "Name": "29",
+          "PercentProcessorTime": 3,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 6
+        },
+        {
+          "Name": "3",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "30",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "31",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "4",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "5",
+          "PercentProcessorTime": 0,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "6",
+          "PercentProcessorTime": 15,
+          "PercentUserTime": 6,
+          "PercentPrivilegedTime": 12
+        },
+        {
+          "Name": "7",
+          "PercentProcessorTime": 3,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "8",
+          "PercentProcessorTime": 9,
+          "PercentUserTime": 12,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "9",
+          "PercentProcessorTime": 3,
+          "PercentUserTime": 0,
+          "PercentPrivilegedTime": 0
+        },
+        {
+          "Name": "_Total",
+          "PercentProcessorTime": 5,
+          "PercentUserTime": 3,
+          "PercentPrivilegedTime": 4
+        }
+      ],
+      "pair": 1,
+      "version": "current",
+      "hostCpu": {
+        "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+        "CurrentClockSpeed": 3000,
+        "MaxClockSpeed": 3000,
+        "LoadPercentage": 85
+      },
+      "exitCode": 0,
+      "output": "docs\\knowledge\\scene-optimization\\pooling-core4-control\\current-1"
+    }
+  ],
+  "pairs": [
+    {
+      "pair": 1,
+      "case": "desktop-low-empty",
+      "referenceCode": {
+        "sourceHash": "3b4776abaea6cdc17201cb84d93cb02fc9c4fc4d1f190245cb636f140067209d",
+        "referenceRevision": "0a5a3163cda6ba1c907bac1747cbb00cf50f1c42",
+        "legacyLimiterFrom": null
+      },
+      "candidateCode": {
+        "sourceHash": "b80e4b011dfdb0d56cebd6e756dd7357a2dcd9ac45077bb7255b86613e68cd5b",
+        "referenceRevision": null,
+        "legacyLimiterFrom": null
+      },
+      "measurements": {
+        "cpuMs": {
+          "before": 7.399999998509884,
+          "after": 10.300000000745058,
+          "ratio": 1.3918918922728565
+        },
+        "physicsMs": {
+          "before": 4.900000002235174,
+          "after": 7.599999997764826,
+          "ratio": 1.551020406999597
+        },
+        "renderCpuMs": {
+          "before": 1.800000000745058,
+          "after": 3.100000001490116,
+          "ratio": 1.7222222223372003
+        },
+        "intervalMs": {
+          "before": 31.799999999999272,
+          "after": 37.80000000000291,
+          "ratio": 1.1886792452831376
+        },
+        "worldStepMs": {
+          "before": 2.9999999962747097,
+          "after": 4.50000000372529,
+          "ratio": 1.5000000031044085
+        }
+      },
+      "gpuP95": {
+        "before": 3.899392,
+        "after": 4.158464
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "desktop-low-empty",
+      "pairs": 1,
+      "metrics": {
+        "cpuMs": {
+          "before": {
+            "min": 7.399999998509884,
+            "median": 7.399999998509884,
+            "max": 7.399999998509884
+          },
+          "after": {
+            "min": 10.300000000745058,
+            "median": 10.300000000745058,
+            "max": 10.300000000745058
+          },
+          "pairedRatios": {
+            "min": 1.3918918922728565,
+            "median": 1.3918918922728565,
+            "max": 1.3918918922728565
+          }
+        },
+        "physicsMs": {
+          "before": {
+            "min": 4.900000002235174,
+            "median": 4.900000002235174,
+            "max": 4.900000002235174
+          },
+          "after": {
+            "min": 7.599999997764826,
+            "median": 7.599999997764826,
+            "max": 7.599999997764826
+          },
+          "pairedRatios": {
+            "min": 1.551020406999597,
+            "median": 1.551020406999597,
+            "max": 1.551020406999597
+          }
+        },
+        "renderCpuMs": {
+          "before": {
+            "min": 1.800000000745058,
+            "median": 1.800000000745058,
+            "max": 1.800000000745058
+          },
+          "after": {
+            "min": 3.100000001490116,
+            "median": 3.100000001490116,
+            "max": 3.100000001490116
+          },
+          "pairedRatios": {
+            "min": 1.7222222223372003,
+            "median": 1.7222222223372003,
+            "max": 1.7222222223372003
+          }
+        },
+        "intervalMs": {
+          "before": {
+            "min": 31.799999999999272,
+            "median": 31.799999999999272,
+            "max": 31.799999999999272
+          },
+          "after": {
+            "min": 37.80000000000291,
+            "median": 37.80000000000291,
+            "max": 37.80000000000291
+          },
+          "pairedRatios": {
+            "min": 1.1886792452831376,
+            "median": 1.1886792452831376,
+            "max": 1.1886792452831376
+          }
+        },
+        "worldStepMs": {
+          "before": {
+            "min": 2.9999999962747097,
+            "median": 2.9999999962747097,
+            "max": 2.9999999962747097
+          },
+          "after": {
+            "min": 4.50000000372529,
+            "median": 4.50000000372529,
+            "max": 4.50000000372529
+          },
+          "pairedRatios": {
+            "min": 1.5000000031044085,
+            "median": 1.5000000031044085,
+            "max": 1.5000000031044085
+          }
+        }
+      }
+    }
+  ]
+}

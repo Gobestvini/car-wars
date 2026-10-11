@@ -1,0 +1,319 @@
+{
+  "purpose": "Alternating-order control to diagnose changing host timings; acceptance budgets remain unchanged.",
+  "sequence": [
+    {
+      "start": "2026-10-11T11:13:38.4831913Z",
+      "end": "2026-10-11T11:14:57.5042507Z",
+      "pair": 1,
+      "exitCode": 0,
+      "version": "reference",
+      "hostCpu": {
+        "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+        "CurrentClockSpeed": 3000,
+        "MaxClockSpeed": 3000,
+        "LoadPercentage": 65
+      },
+      "output": "docs\\knowledge\\scene-optimization\\pooling-paired-control\\reference-1"
+    },
+    {
+      "start": "2026-10-11T11:14:58.5350956Z",
+      "end": "2026-10-11T11:16:15.4159963Z",
+      "pair": 1,
+      "exitCode": 0,
+      "version": "current",
+      "hostCpu": {
+        "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+        "CurrentClockSpeed": 3000,
+        "MaxClockSpeed": 3000,
+        "LoadPercentage": 80
+      },
+      "output": "docs\\knowledge\\scene-optimization\\pooling-paired-control\\current-1"
+    },
+    {
+      "start": "2026-10-11T11:16:16.4544595Z",
+      "end": "2026-10-11T11:17:34.2903589Z",
+      "pair": 2,
+      "exitCode": 0,
+      "version": "current",
+      "hostCpu": {
+        "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+        "CurrentClockSpeed": 3000,
+        "MaxClockSpeed": 3000,
+        "LoadPercentage": 24
+      },
+      "output": "docs\\knowledge\\scene-optimization\\pooling-paired-control\\current-2"
+    },
+    {
+      "start": "2026-10-11T11:17:35.3339627Z",
+      "end": "2026-10-11T11:18:57.8900246Z",
+      "pair": 2,
+      "exitCode": 0,
+      "version": "reference",
+      "hostCpu": {
+        "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+        "CurrentClockSpeed": 3000,
+        "MaxClockSpeed": 3000,
+        "LoadPercentage": 90
+      },
+      "output": "docs\\knowledge\\scene-optimization\\pooling-paired-control\\reference-2"
+    },
+    {
+      "start": "2026-10-11T11:18:58.9195200Z",
+      "end": "2026-10-11T11:20:20.1408754Z",
+      "pair": 3,
+      "exitCode": 0,
+      "version": "reference",
+      "hostCpu": {
+        "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+        "CurrentClockSpeed": 3000,
+        "MaxClockSpeed": 3000,
+        "LoadPercentage": 57
+      },
+      "output": "docs\\knowledge\\scene-optimization\\pooling-paired-control\\reference-3"
+    },
+    {
+      "start": "2026-10-11T11:20:21.1716739Z",
+      "end": "2026-10-11T11:21:42.0563574Z",
+      "pair": 3,
+      "exitCode": 0,
+      "version": "current",
+      "hostCpu": {
+        "Name": "13th Gen Intel(R) Core(TM) i9-13900KF",
+        "CurrentClockSpeed": 3000,
+        "MaxClockSpeed": 3000,
+        "LoadPercentage": 97
+      },
+      "output": "docs\\knowledge\\scene-optimization\\pooling-paired-control\\current-3"
+    }
+  ],
+  "pairs": [
+    {
+      "pair": 1,
+      "case": "desktop-low-empty",
+      "referenceCode": {
+        "sourceHash": "3b4776abaea6cdc17201cb84d93cb02fc9c4fc4d1f190245cb636f140067209d",
+        "referenceRevision": "0a5a3163cda6ba1c907bac1747cbb00cf50f1c42",
+        "legacyLimiterFrom": null
+      },
+      "candidateCode": {
+        "sourceHash": "b80e4b011dfdb0d56cebd6e756dd7357a2dcd9ac45077bb7255b86613e68cd5b",
+        "referenceRevision": null,
+        "legacyLimiterFrom": null
+      },
+      "measurements": {
+        "cpuMs": {
+          "before": 4.100000001490116,
+          "after": 3.699999999254942,
+          "ratio": 0.9024390238805373
+        },
+        "physicsMs": {
+          "before": 2.600000001490116,
+          "after": 2.400000002235174,
+          "ratio": 0.9230769234075702
+        },
+        "renderCpuMs": {
+          "before": 1.3999999985098839,
+          "after": 1.300000000745058,
+          "ratio": 0.9285714300919552
+        },
+        "intervalMs": {
+          "before": 20.80000000000291,
+          "after": 20.69999999999709,
+          "ratio": 0.9951923076920285
+        },
+        "worldStepMs": {
+          "before": 1.6000000014901161,
+          "after": 1.5000000037252903,
+          "ratio": 0.9375000014551915
+        }
+      },
+      "gpuP95": {
+        "before": 3.36896,
+        "after": 3.794944
+      }
+    },
+    {
+      "pair": 2,
+      "case": "desktop-low-empty",
+      "referenceCode": {
+        "sourceHash": "3b4776abaea6cdc17201cb84d93cb02fc9c4fc4d1f190245cb636f140067209d",
+        "referenceRevision": "0a5a3163cda6ba1c907bac1747cbb00cf50f1c42",
+        "legacyLimiterFrom": null
+      },
+      "candidateCode": {
+        "sourceHash": "b80e4b011dfdb0d56cebd6e756dd7357a2dcd9ac45077bb7255b86613e68cd5b",
+        "referenceRevision": null,
+        "legacyLimiterFrom": null
+      },
+      "measurements": {
+        "cpuMs": {
+          "before": 11.199999999254942,
+          "after": 4.300000000745058,
+          "ratio": 0.3839285715206346
+        },
+        "physicsMs": {
+          "before": 8.200000002980232,
+          "after": 2.899999998509884,
+          "ratio": 0.3536585362751097
+        },
+        "renderCpuMs": {
+          "before": 3.099999997764826,
+          "after": 1.4000000022351742,
+          "ratio": 0.4516129042724541
+        },
+        "intervalMs": {
+          "before": 37.5,
+          "after": 20.89999999999418,
+          "ratio": 0.5573333333331781
+        },
+        "worldStepMs": {
+          "before": 4.99999999627471,
+          "after": 1.7999999970197678,
+          "ratio": 0.35999999967217444
+        }
+      },
+      "gpuP95": {
+        "before": 4.04992,
+        "after": 2.883584
+      }
+    },
+    {
+      "pair": 3,
+      "case": "desktop-low-empty",
+      "referenceCode": {
+        "sourceHash": "3b4776abaea6cdc17201cb84d93cb02fc9c4fc4d1f190245cb636f140067209d",
+        "referenceRevision": "0a5a3163cda6ba1c907bac1747cbb00cf50f1c42",
+        "legacyLimiterFrom": null
+      },
+      "candidateCode": {
+        "sourceHash": "b80e4b011dfdb0d56cebd6e756dd7357a2dcd9ac45077bb7255b86613e68cd5b",
+        "referenceRevision": null,
+        "legacyLimiterFrom": null
+      },
+      "measurements": {
+        "cpuMs": {
+          "before": 8.700000002980232,
+          "after": 7.900000002235174,
+          "ratio": 0.9080459769573548
+        },
+        "physicsMs": {
+          "before": 6.199999999254942,
+          "after": 5.600000001490116,
+          "ratio": 0.9032258068004955
+        },
+        "renderCpuMs": {
+          "before": 3,
+          "after": 2.800000000745058,
+          "ratio": 0.933333333581686
+        },
+        "intervalMs": {
+          "before": 22.099999999998545,
+          "after": 23.5,
+          "ratio": 1.0633484162896627
+        },
+        "worldStepMs": {
+          "before": 3.7999999970197678,
+          "after": 3.2999999970197678,
+          "ratio": 0.8684210525283853
+        }
+      },
+      "gpuP95": {
+        "before": 4.084736,
+        "after": 3.88096
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "desktop-low-empty",
+      "pairs": 3,
+      "metrics": {
+        "cpuMs": {
+          "before": {
+            "min": 4.100000001490116,
+            "median": 8.700000002980232,
+            "max": 11.199999999254942
+          },
+          "after": {
+            "min": 3.699999999254942,
+            "median": 4.300000000745058,
+            "max": 7.900000002235174
+          },
+          "pairedRatios": {
+            "min": 0.3839285715206346,
+            "median": 0.9024390238805373,
+            "max": 0.9080459769573548
+          }
+        },
+        "physicsMs": {
+          "before": {
+            "min": 2.600000001490116,
+            "median": 6.199999999254942,
+            "max": 8.200000002980232
+          },
+          "after": {
+            "min": 2.400000002235174,
+            "median": 2.899999998509884,
+            "max": 5.600000001490116
+          },
+          "pairedRatios": {
+            "min": 0.3536585362751097,
+            "median": 0.9032258068004955,
+            "max": 0.9230769234075702
+          }
+        },
+        "renderCpuMs": {
+          "before": {
+            "min": 1.3999999985098839,
+            "median": 3,
+            "max": 3.099999997764826
+          },
+          "after": {
+            "min": 1.300000000745058,
+            "median": 1.4000000022351742,
+            "max": 2.800000000745058
+          },
+          "pairedRatios": {
+            "min": 0.4516129042724541,
+            "median": 0.9285714300919552,
+            "max": 0.933333333581686
+          }
+        },
+        "intervalMs": {
+          "before": {
+            "min": 20.80000000000291,
+            "median": 22.099999999998545,
+            "max": 37.5
+          },
+          "after": {
+            "min": 20.69999999999709,
+            "median": 20.89999999999418,
+            "max": 23.5
+          },
+          "pairedRatios": {
+            "min": 0.5573333333331781,
+            "median": 0.9951923076920285,
+            "max": 1.0633484162896627
+          }
+        },
+        "worldStepMs": {
+          "before": {
+            "min": 1.6000000014901161,
+            "median": 3.7999999970197678,
+            "max": 4.99999999627471
+          },
+          "after": {
+            "min": 1.5000000037252903,
+            "median": 1.7999999970197678,
+            "max": 3.2999999970197678
+          },
+          "pairedRatios": {
+            "min": 0.35999999967217444,
+            "median": 0.8684210525283853,
+            "max": 0.9375000014551915
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,334 @@
+{
+  "sameTransforms": true,
+  "comparisons": [
+    {
+      "file": "1440x900-low-blur0-follow.png",
+      "meanAbsoluteError": 8.333333333333333e-05,
+      "maxChannelError": 21,
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 109744,
+      "trianglesAfter": 109744
+    },
+    {
+      "file": "1440x900-low-blur0-free.png",
+      "meanAbsoluteError": 8.23045267489712e-05,
+      "maxChannelError": 21,
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 109744,
+      "trianglesAfter": 109744
+    },
+    {
+      "file": "1440x900-low-blur1-follow.png",
+      "meanAbsoluteError": 6.91872427983539e-05,
+      "maxChannelError": 42,
+      "callsBefore": 79,
+      "callsAfter": 79,
+      "trianglesBefore": 154611,
+      "trianglesAfter": 154611
+    },
+    {
+      "file": "1440x900-low-blur1-free.png",
+      "meanAbsoluteError": 8.23045267489712e-05,
+      "maxChannelError": 21,
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 109744,
+      "trianglesAfter": 109744
+    },
+    {
+      "file": "1440x900-high-blur0-follow.png",
+      "meanAbsoluteError": 0.00014171810699588477,
+      "maxChannelError": 23,
+      "callsBefore": 46,
+      "callsAfter": 46,
+      "trianglesBefore": 112048,
+      "trianglesAfter": 112048
+    },
+    {
+      "file": "1440x900-high-blur0-free.png",
+      "meanAbsoluteError": 0.00014171810699588477,
+      "maxChannelError": 23,
+      "callsBefore": 46,
+      "callsAfter": 46,
+      "trianglesBefore": 112048,
+      "trianglesAfter": 112048
+    },
+    {
+      "file": "1440x900-high-blur1-follow.png",
+      "meanAbsoluteError": 0.00010596707818930041,
+      "maxChannelError": 42,
+      "callsBefore": 81,
+      "callsAfter": 81,
+      "trianglesBefore": 159219,
+      "trianglesAfter": 159219
+    },
+    {
+      "file": "1440x900-high-blur1-free.png",
+      "meanAbsoluteError": 0.00014171810699588477,
+      "maxChannelError": 23,
+      "callsBefore": 46,
+      "callsAfter": 46,
+      "trianglesBefore": 112048,
+      "trianglesAfter": 112048
+    },
+    {
+      "file": "1440x900-near-low-blur0.png",
+      "meanAbsoluteError": 0.000967335390946502,
+      "maxChannelError": 37,
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109384,
+      "trianglesAfter": 109384
+    },
+    {
+      "file": "1440x900-near-low-blur1.png",
+      "meanAbsoluteError": 0.0006311728395061729,
+      "maxChannelError": 3,
+      "callsBefore": 77,
+      "callsAfter": 77,
+      "trianglesBefore": 154235,
+      "trianglesAfter": 154235
+    },
+    {
+      "file": "1440x900-near-high-blur0.png",
+      "meanAbsoluteError": 0.0003191872427983539,
+      "maxChannelError": 37,
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111688,
+      "trianglesAfter": 111688
+    },
+    {
+      "file": "1440x900-near-high-blur1.png",
+      "meanAbsoluteError": 0.0001718106995884774,
+      "maxChannelError": 2,
+      "callsBefore": 79,
+      "callsAfter": 79,
+      "trianglesBefore": 158843,
+      "trianglesAfter": 158843
+    },
+    {
+      "file": "1440x900-player-side-1.png",
+      "meanAbsoluteError": 0.0008145576131687243,
+      "maxChannelError": 13,
+      "callsBefore": 52,
+      "callsAfter": 52,
+      "trianglesBefore": 116592,
+      "trianglesAfter": 116592
+    },
+    {
+      "file": "1440x900-player-side1.png",
+      "meanAbsoluteError": 0.00021064814814814817,
+      "maxChannelError": 39,
+      "callsBefore": 46,
+      "callsAfter": 46,
+      "trianglesBefore": 116006,
+      "trianglesAfter": 116006
+    },
+    {
+      "file": "1440x900-civilian-side-1.png",
+      "meanAbsoluteError": 5.1440329218107e-06,
+      "maxChannelError": 2,
+      "callsBefore": 74,
+      "callsAfter": 74,
+      "trianglesBefore": 121060,
+      "trianglesAfter": 121060
+    },
+    {
+      "file": "1440x900-civilian-side1.png",
+      "meanAbsoluteError": 0.0,
+      "maxChannelError": 0,
+      "callsBefore": 41,
+      "callsAfter": 41,
+      "trianglesBefore": 111584,
+      "trianglesAfter": 111584
+    },
+    {
+      "file": "1440x900-police-side-1.png",
+      "meanAbsoluteError": 0.0024940843621399176,
+      "maxChannelError": 13,
+      "callsBefore": 47,
+      "callsAfter": 47,
+      "trianglesBefore": 115300,
+      "trianglesAfter": 115300
+    },
+    {
+      "file": "1440x900-police-side1.png",
+      "meanAbsoluteError": 0.00397145061728395,
+      "maxChannelError": 58,
+      "callsBefore": 49,
+      "callsAfter": 49,
+      "trianglesBefore": 117470,
+      "trianglesAfter": 117470
+    },
+    {
+      "file": "390x844-low-blur0-follow.png",
+      "meanAbsoluteError": 1.721553854255276e-05,
+      "maxChannelError": 4,
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109444,
+      "trianglesAfter": 109444
+    },
+    {
+      "file": "390x844-low-blur0-free.png",
+      "meanAbsoluteError": 1.721553854255276e-05,
+      "maxChannelError": 4,
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109444,
+      "trianglesAfter": 109444
+    },
+    {
+      "file": "390x844-low-blur1-follow.png",
+      "meanAbsoluteError": 2.0253574755944423e-06,
+      "maxChannelError": 1,
+      "callsBefore": 77,
+      "callsAfter": 77,
+      "trianglesBefore": 154295,
+      "trianglesAfter": 154295
+    },
+    {
+      "file": "390x844-low-blur1-free.png",
+      "meanAbsoluteError": 1.721553854255276e-05,
+      "maxChannelError": 4,
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109444,
+      "trianglesAfter": 109444
+    },
+    {
+      "file": "390x844-high-blur0-follow.png",
+      "meanAbsoluteError": 2.430428970713331e-05,
+      "maxChannelError": 5,
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111748,
+      "trianglesAfter": 111748
+    },
+    {
+      "file": "390x844-high-blur0-free.png",
+      "meanAbsoluteError": 2.430428970713331e-05,
+      "maxChannelError": 5,
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111748,
+      "trianglesAfter": 111748
+    },
+    {
+      "file": "390x844-high-blur1-follow.png",
+      "meanAbsoluteError": 0.0,
+      "maxChannelError": 0,
+      "callsBefore": 79,
+      "callsAfter": 79,
+      "trianglesBefore": 158903,
+      "trianglesAfter": 158903
+    },
+    {
+      "file": "390x844-high-blur1-free.png",
+      "meanAbsoluteError": 2.430428970713331e-05,
+      "maxChannelError": 5,
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111748,
+      "trianglesAfter": 111748
+    },
+    {
+      "file": "390x844-near-low-blur0.png",
+      "meanAbsoluteError": 0.0,
+      "maxChannelError": 0,
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109300,
+      "trianglesAfter": 109300
+    },
+    {
+      "file": "390x844-near-low-blur1.png",
+      "meanAbsoluteError": 0.0,
+      "maxChannelError": 0,
+      "callsBefore": 76,
+      "callsAfter": 76,
+      "trianglesBefore": 154139,
+      "trianglesAfter": 154139
+    },
+    {
+      "file": "390x844-near-high-blur0.png",
+      "meanAbsoluteError": 0.0,
+      "maxChannelError": 0,
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111604,
+      "trianglesAfter": 111604
+    },
+    {
+      "file": "390x844-near-high-blur1.png",
+      "meanAbsoluteError": 0.0,
+      "maxChannelError": 0,
+      "callsBefore": 78,
+      "callsAfter": 78,
+      "trianglesBefore": 158747,
+      "trianglesAfter": 158747
+    },
+    {
+      "file": "390x844-player-side-1.png",
+      "meanAbsoluteError": 0.0031372787296957915,
+      "maxChannelError": 15,
+      "callsBefore": 50,
+      "callsAfter": 50,
+      "trianglesBefore": 116112,
+      "trianglesAfter": 116112
+    },
+    {
+      "file": "390x844-player-side1.png",
+      "meanAbsoluteError": 0.0,
+      "maxChannelError": 0,
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 113070,
+      "trianglesAfter": 113070
+    },
+    {
+      "file": "390x844-civilian-side-1.png",
+      "meanAbsoluteError": 1.620285980475554e-05,
+      "maxChannelError": 2,
+      "callsBefore": 74,
+      "callsAfter": 74,
+      "trianglesBefore": 120700,
+      "trianglesAfter": 120700
+    },
+    {
+      "file": "390x844-civilian-side1.png",
+      "meanAbsoluteError": 0.0,
+      "maxChannelError": 0,
+      "callsBefore": 41,
+      "callsAfter": 41,
+      "trianglesBefore": 111584,
+      "trianglesAfter": 111584
+    },
+    {
+      "file": "390x844-police-side-1.png",
+      "meanAbsoluteError": 0.010165269170008507,
+      "maxChannelError": 15,
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111960,
+      "trianglesAfter": 111960
+    },
+    {
+      "file": "390x844-police-side1.png",
+      "meanAbsoluteError": 0.014610928828938307,
+      "maxChannelError": 15,
+      "callsBefore": 48,
+      "callsAfter": 48,
+      "trianglesBefore": 117082,
+      "trianglesAfter": 117082
+    }
+  ],
+  "maxMeanAbsoluteError": 0.014610928828938307,
+  "sourceBefore": "docs\\art\\verification\\mockup-light-materials-followup\\after\\app",
+  "sourceAfter": "docs\\art\\verification\\scene-optimization\\pooling\\after\\app",
+  "environment": "Actual game, injected capture-only camera/freeze hooks, isolated traffic=0; desktop SwiftShader, DPR1, not a physical phone",
+  "note": "Unedited captures with identical seed/pose/settings; pixel differences are reported, not thresholded into visual acceptance."
+}
