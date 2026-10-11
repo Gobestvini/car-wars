@@ -7,7 +7,7 @@ export const TRAFFIC_MODEL_URLS = Object.freeze({
 });
 
 function surfaceMaterial(material) {
-  material.roughness = .62;
+  material.roughness = .48;
   material.metalness = 0;
   material.onBeforeCompile = shader => {
     shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', VEHICLE_ROUGHNESS_FRAGMENT);

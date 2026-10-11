@@ -1,0 +1,3090 @@
+{
+  "phase": "before",
+  "kind": "Actual game, injected capture-only camera/freeze hooks, isolated traffic=0; desktop SwiftShader, DPR1, not a physical phone",
+  "scenes": [
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 0,
+      "mode": "follow",
+      "calls": 45,
+      "triangles": 109744,
+      "resources": {
+        "geometries": 45,
+        "textures": 3,
+        "programs": 22
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          360,
+          225
+        ],
+        "estimatedMiB": 48.2
+      },
+      "shadow": {
+        "left": -78.65390625,
+        "right": 167.34609375,
+        "bottom": -106.65609923095958,
+        "top": 139.34390076904043,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 67.74609375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 0,
+      "mode": "free",
+      "calls": 45,
+      "triangles": 109744,
+      "resources": {
+        "geometries": 45,
+        "textures": 3,
+        "programs": 22
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          360,
+          225
+        ],
+        "estimatedMiB": 48.2
+      },
+      "shadow": {
+        "left": -72.85390625,
+        "right": 173.14609375,
+        "bottom": -107.09382155344363,
+        "top": 138.90617844655637,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 67.74609375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 1,
+      "mode": "follow",
+      "calls": 78,
+      "triangles": 154595,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 1,
+        "radiiCss": [
+          4,
+          8,
+          12
+        ],
+        "debugBypass": false,
+        "draws": 78,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          360,
+          225
+        ],
+        "estimatedMiB": 48.2
+      },
+      "shadow": {
+        "left": -78.65390625,
+        "right": 167.34609375,
+        "bottom": -106.65609923095958,
+        "top": 139.34390076904043,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 67.74609375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 1,
+      "mode": "free",
+      "calls": 45,
+      "triangles": 109744,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 1,
+        "radiiCss": [
+          4,
+          8,
+          12
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          360,
+          225
+        ],
+        "estimatedMiB": 48.2
+      },
+      "shadow": {
+        "left": -72.85390625,
+        "right": 173.14609375,
+        "bottom": -107.09382155344363,
+        "top": 138.90617844655637,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 67.74609375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "follow",
+      "calls": 46,
+      "triangles": 112048,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -78.894140625,
+        "right": 167.105859375,
+        "bottom": -106.65609923095958,
+        "top": 139.34390076904043,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 67.505859375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "free",
+      "calls": 46,
+      "triangles": 112048,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -73.094140625,
+        "right": 172.905859375,
+        "bottom": -107.09382155344363,
+        "top": 138.90617844655637,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 67.505859375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 1,
+      "mode": "follow",
+      "calls": 80,
+      "triangles": 159203,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 80,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -78.894140625,
+        "right": 167.105859375,
+        "bottom": -106.65609923095958,
+        "top": 139.34390076904043,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 67.505859375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 1,
+      "mode": "free",
+      "calls": 46,
+      "triangles": 112048,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -73.094140625,
+        "right": 172.905859375,
+        "bottom": -107.09382155344363,
+        "top": 138.90617844655637,
+        "near": 0.1,
+        "far": 234,
+        "width": 246,
+        "height": 246,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 67.505859375,
+        "centreY": -55.734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 0,
+      "mode": "near",
+      "calls": 44,
+      "triangles": 109384,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          360,
+          225
+        ],
+        "estimatedMiB": 48.2
+      },
+      "shadow": {
+        "left": -48.47812500000001,
+        "right": 71.521875,
+        "bottom": -53.07797423095958,
+        "top": 66.92202576904042,
+        "near": 0.1,
+        "far": 116,
+        "width": 120,
+        "height": 120,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 34.921875,
+        "centreY": -65.15625,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -57,
+        23,
+        -86
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 1,
+      "mode": "near",
+      "calls": 77,
+      "triangles": 154235,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 1,
+        "radiiCss": [
+          4,
+          8,
+          12
+        ],
+        "debugBypass": false,
+        "draws": 77,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          360,
+          225
+        ],
+        "estimatedMiB": 48.2
+      },
+      "shadow": {
+        "left": -48.47812500000001,
+        "right": 71.521875,
+        "bottom": -53.07797423095958,
+        "top": 66.92202576904042,
+        "near": 0.1,
+        "far": 116,
+        "width": 120,
+        "height": 120,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 34.921875,
+        "centreY": -65.15625,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -57,
+        23,
+        -86
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "near",
+      "calls": 45,
+      "triangles": 111688,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -48.47812500000001,
+        "right": 71.521875,
+        "bottom": -53.19516173095958,
+        "top": 66.80483826904042,
+        "near": 0.1,
+        "far": 116,
+        "width": 120,
+        "height": 120,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 34.921875,
+        "centreY": -65.2734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -57,
+        23,
+        -86
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 1,
+      "mode": "near",
+      "calls": 79,
+      "triangles": 158843,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 79,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -48.47812500000001,
+        "right": 71.521875,
+        "bottom": -53.19516173095958,
+        "top": 66.80483826904042,
+        "near": 0.1,
+        "far": 116,
+        "width": 120,
+        "height": 120,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 34.921875,
+        "centreY": -65.2734375,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -57,
+        23,
+        -86
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "player--1",
+      "actors": [
+        {
+          "id": "npc-00",
+          "role": "civilian"
+        },
+        {
+          "id": "npc-01",
+          "role": "civilian"
+        },
+        {
+          "id": "police-02",
+          "role": "police"
+        }
+      ],
+      "calls": 52,
+      "triangles": 116592,
+      "resources": {
+        "geometries": 52,
+        "textures": 11,
+        "programs": 39
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -29.903906250000013,
+        "right": 30.096093749999987,
+        "bottom": -30.224626566794612,
+        "top": 19.775373433205388,
+        "near": 0.1,
+        "far": 80,
+        "width": 60,
+        "height": 50,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 23.49609375,
+        "centreY": -76.3671875,
+        "frustumCorners": 2,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -85,
+        5.368121898686677,
+        -74
+      ],
+      "target": [
+        -78,
+        1.368121898686678,
+        -65
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "player-1",
+      "actors": [
+        {
+          "id": "npc-00",
+          "role": "civilian"
+        },
+        {
+          "id": "npc-01",
+          "role": "civilian"
+        },
+        {
+          "id": "police-02",
+          "role": "police"
+        }
+      ],
+      "calls": 46,
+      "triangles": 116006,
+      "resources": {
+        "geometries": 53,
+        "textures": 12,
+        "programs": 39
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -30.079687500000013,
+        "right": 29.920312499999987,
+        "bottom": -21.630876566794612,
+        "top": 28.369123433205388,
+        "near": 0.1,
+        "far": 81,
+        "width": 60,
+        "height": 50,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 23.3203125,
+        "centreY": -67.7734375,
+        "frustumCorners": 2,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -71,
+        5.368121898686677,
+        -56
+      ],
+      "target": [
+        -78,
+        1.368121898686678,
+        -65
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "civilian--1",
+      "actors": [
+        {
+          "id": "npc-00",
+          "role": "civilian"
+        },
+        {
+          "id": "npc-01",
+          "role": "civilian"
+        },
+        {
+          "id": "police-02",
+          "role": "police"
+        }
+      ],
+      "calls": 74,
+      "triangles": 121060,
+      "resources": {
+        "geometries": 79,
+        "textures": 12,
+        "programs": 41
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -28.875000000000014,
+        "right": 29.124999999999986,
+        "bottom": -30.310973874800823,
+        "top": 19.689026125199177,
+        "near": 0.1,
+        "far": 80,
+        "width": 58,
+        "height": 50,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 25.375,
+        "centreY": -174.951171875,
+        "frustumCorners": 2,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -167,
+        4.5,
+        -180.25
+      ],
+      "target": [
+        -160,
+        0.5,
+        -171.25
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "civilian-1",
+      "actors": [
+        {
+          "id": "npc-00",
+          "role": "civilian"
+        },
+        {
+          "id": "npc-01",
+          "role": "civilian"
+        },
+        {
+          "id": "police-02",
+          "role": "police"
+        }
+      ],
+      "calls": 41,
+      "triangles": 111584,
+      "resources": {
+        "geometries": 79,
+        "textures": 12,
+        "programs": 41
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -29.101562500000014,
+        "right": 28.898437499999986,
+        "bottom": -20.398864499800823,
+        "top": 29.601135500199177,
+        "near": 0.1,
+        "far": 81,
+        "width": 58,
+        "height": 50,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 25.1484375,
+        "centreY": -165.0390625,
+        "frustumCorners": 2,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -153,
+        4.5,
+        -162.25
+      ],
+      "target": [
+        -160,
+        0.5,
+        -171.25
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "police--1",
+      "actors": [
+        {
+          "id": "npc-00",
+          "role": "civilian"
+        },
+        {
+          "id": "npc-01",
+          "role": "civilian"
+        },
+        {
+          "id": "police-02",
+          "role": "police"
+        }
+      ],
+      "calls": 47,
+      "triangles": 115300,
+      "resources": {
+        "geometries": 79,
+        "textures": 12,
+        "programs": 41
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -28.86914062500003,
+        "right": 29.13085937499997,
+        "bottom": -30.286206270973096,
+        "top": 19.713793729026904,
+        "near": 0.1,
+        "far": 80,
+        "width": 58,
+        "height": 50,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 27.130859375,
+        "centreY": -69.873046875,
+        "frustumCorners": 2,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -82,
+        4.499999999999999,
+        -63.99999999999999
+      ],
+      "target": [
+        -75,
+        0.49999999999999994,
+        -54.99999999999999
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "police-1",
+      "actors": [
+        {
+          "id": "npc-00",
+          "role": "civilian"
+        },
+        {
+          "id": "npc-01",
+          "role": "civilian"
+        },
+        {
+          "id": "police-02",
+          "role": "police"
+        }
+      ],
+      "calls": 49,
+      "triangles": 117470,
+      "resources": {
+        "geometries": 54,
+        "textures": 12,
+        "programs": 39
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          1440,
+          900
+        ],
+        "blurSize": [
+          720,
+          450
+        ],
+        "estimatedMiB": 88.99
+      },
+      "shadow": {
+        "left": -29.09570312500003,
+        "right": 28.90429687499997,
+        "bottom": -20.374096895973096,
+        "top": 29.625903104026904,
+        "near": 0.1,
+        "far": 81,
+        "width": 58,
+        "height": 50,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 26.904296875,
+        "centreY": -59.9609375,
+        "frustumCorners": 2,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -68,
+        4.499999999999999,
+        -45.99999999999999
+      ],
+      "target": [
+        -75,
+        0.49999999999999994,
+        -54.99999999999999
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 0,
+      "mode": "follow",
+      "calls": 44,
+      "triangles": 109444,
+      "resources": {
+        "geometries": 45,
+        "textures": 3,
+        "programs": 22
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -73.275,
+        "right": 150.725,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 0,
+      "mode": "free",
+      "calls": 44,
+      "triangles": 109444,
+      "resources": {
+        "geometries": 45,
+        "textures": 3,
+        "programs": 22
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -67.475,
+        "right": 156.525,
+        "bottom": -39.10163405344363,
+        "top": 68.89836594655637,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 1,
+      "mode": "follow",
+      "calls": 77,
+      "triangles": 154295,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 1,
+        "radiiCss": [
+          4,
+          8,
+          12
+        ],
+        "debugBypass": false,
+        "draws": 77,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -73.275,
+        "right": 150.725,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 1,
+      "mode": "free",
+      "calls": 44,
+      "triangles": 109444,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 1,
+        "radiiCss": [
+          4,
+          8,
+          12
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -67.475,
+        "right": 156.525,
+        "bottom": -39.10163405344363,
+        "top": 68.89836594655637,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 62.125,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "follow",
+      "calls": 45,
+      "triangles": 111748,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -73.49375,
+        "right": 150.50625,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "free",
+      "calls": 45,
+      "triangles": 111748,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -67.69375,
+        "right": 156.30625,
+        "bottom": -39.10163405344363,
+        "top": 68.89836594655637,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 1,
+      "mode": "follow",
+      "calls": 79,
+      "triangles": 158903,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 79,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -73.49375,
+        "right": 150.50625,
+        "bottom": -38.66391173095958,
+        "top": 69.33608826904042,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 1,
+      "mode": "free",
+      "calls": 45,
+      "triangles": 111748,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -67.69375,
+        "right": 156.30625,
+        "bottom": -39.10163405344363,
+        "top": 68.89836594655637,
+        "near": 0.1,
+        "far": 118,
+        "width": 224,
+        "height": 108,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 61.90625,
+        "centreY": -56.7421875,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -28,
+        59.99999999999999,
+        -116
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 0,
+      "mode": "near",
+      "calls": 44,
+      "triangles": 109300,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -46.80625000000001,
+        "right": 65.19375,
+        "bottom": -30.156099230959583,
+        "top": 41.84390076904042,
+        "near": 0.1,
+        "far": 92,
+        "width": 112,
+        "height": 72,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 32.59375,
+        "centreY": -66.234375,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -57,
+        23,
+        -86
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 1,
+      "mode": "near",
+      "calls": 77,
+      "triangles": 154151,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 1,
+        "radiiCss": [
+          4,
+          8,
+          12
+        ],
+        "debugBypass": false,
+        "draws": 77,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          98,
+          211
+        ],
+        "estimatedMiB": 12.25
+      },
+      "shadow": {
+        "left": -46.80625000000001,
+        "right": 65.19375,
+        "bottom": -30.156099230959583,
+        "top": 41.84390076904042,
+        "near": 0.1,
+        "far": 92,
+        "width": 112,
+        "height": 72,
+        "margin": 24.500000000000007,
+        "resolution": 512,
+        "centreX": 32.59375,
+        "centreY": -66.234375,
+        "frustumCorners": 4,
+        "mapSize": [
+          512,
+          512
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -57,
+        23,
+        -86
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "near",
+      "calls": 45,
+      "triangles": 111604,
+      "resources": {
+        "geometries": 46,
+        "textures": 3,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -46.80625000000001,
+        "right": 65.19375,
+        "bottom": -30.156099230959583,
+        "top": 41.84390076904042,
+        "near": 0.1,
+        "far": 92,
+        "width": 112,
+        "height": 72,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 32.59375,
+        "centreY": -66.234375,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -57,
+        23,
+        -86
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 1,
+      "mode": "near",
+      "calls": 79,
+      "triangles": 158759,
+      "resources": {
+        "geometries": 46,
+        "textures": 10,
+        "programs": 36
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 1,
+        "radiiCss": [
+          6,
+          12,
+          18
+        ],
+        "debugBypass": false,
+        "draws": 79,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -46.80625000000001,
+        "right": 65.19375,
+        "bottom": -30.156099230959583,
+        "top": 41.84390076904042,
+        "near": 0.1,
+        "far": 92,
+        "width": 112,
+        "height": 72,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 32.59375,
+        "centreY": -66.234375,
+        "frustumCorners": 4,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -57,
+        23,
+        -86
+      ],
+      "target": [
+        -73,
+        0,
+        -68
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "player--1",
+      "actors": [
+        {
+          "id": "npc-00",
+          "role": "civilian"
+        },
+        {
+          "id": "npc-01",
+          "role": "civilian"
+        },
+        {
+          "id": "police-02",
+          "role": "police"
+        }
+      ],
+      "calls": 50,
+      "triangles": 116112,
+      "resources": {
+        "geometries": 50,
+        "textures": 11,
+        "programs": 39
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -25.888281250000013,
+        "right": 26.111718749999987,
+        "bottom": -30.224626566794612,
+        "top": 19.775373433205388,
+        "near": 0.1,
+        "far": 80,
+        "width": 52,
+        "height": 50,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 23.51171875,
+        "centreY": -76.3671875,
+        "frustumCorners": 2,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -85,
+        5.368121898686677,
+        -74
+      ],
+      "target": [
+        -78,
+        1.368121898686678,
+        -65
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "player-1",
+      "actors": [
+        {
+          "id": "npc-00",
+          "role": "civilian"
+        },
+        {
+          "id": "npc-01",
+          "role": "civilian"
+        },
+        {
+          "id": "police-02",
+          "role": "police"
+        }
+      ],
+      "calls": 45,
+      "triangles": 113070,
+      "resources": {
+        "geometries": 51,
+        "textures": 12,
+        "programs": 39
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -26.091406250000013,
+        "right": 25.908593749999987,
+        "bottom": -21.630876566794612,
+        "top": 28.369123433205388,
+        "near": 0.1,
+        "far": 81,
+        "width": 52,
+        "height": 50,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 23.30859375,
+        "centreY": -67.7734375,
+        "frustumCorners": 2,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -71,
+        5.368121898686677,
+        -56
+      ],
+      "target": [
+        -78,
+        1.368121898686678,
+        -65
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "civilian--1",
+      "actors": [
+        {
+          "id": "npc-00",
+          "role": "civilian"
+        },
+        {
+          "id": "npc-01",
+          "role": "civilian"
+        },
+        {
+          "id": "police-02",
+          "role": "police"
+        }
+      ],
+      "calls": 74,
+      "triangles": 120700,
+      "resources": {
+        "geometries": 77,
+        "textures": 12,
+        "programs": 41
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -25.859375000000014,
+        "right": 26.140624999999986,
+        "bottom": -30.310973874800823,
+        "top": 19.689026125199177,
+        "near": 0.1,
+        "far": 80,
+        "width": 52,
+        "height": 50,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 25.390625,
+        "centreY": -174.951171875,
+        "frustumCorners": 2,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -167,
+        4.5,
+        -180.25
+      ],
+      "target": [
+        -160,
+        0.5,
+        -171.25
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "civilian-1",
+      "actors": [
+        {
+          "id": "npc-00",
+          "role": "civilian"
+        },
+        {
+          "id": "npc-01",
+          "role": "civilian"
+        },
+        {
+          "id": "police-02",
+          "role": "police"
+        }
+      ],
+      "calls": 41,
+      "triangles": 111584,
+      "resources": {
+        "geometries": 77,
+        "textures": 12,
+        "programs": 41
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -26.113281250000014,
+        "right": 25.886718749999986,
+        "bottom": -20.398864499800823,
+        "top": 29.601135500199177,
+        "near": 0.1,
+        "far": 81,
+        "width": 52,
+        "height": 50,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 25.13671875,
+        "centreY": -165.0390625,
+        "frustumCorners": 2,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -153,
+        4.5,
+        -162.25
+      ],
+      "target": [
+        -160,
+        0.5,
+        -171.25
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "police--1",
+      "actors": [
+        {
+          "id": "npc-00",
+          "role": "civilian"
+        },
+        {
+          "id": "npc-01",
+          "role": "civilian"
+        },
+        {
+          "id": "police-02",
+          "role": "police"
+        }
+      ],
+      "calls": 45,
+      "triangles": 111960,
+      "resources": {
+        "geometries": 77,
+        "textures": 12,
+        "programs": 41
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -25.88281250000003,
+        "right": 26.11718749999997,
+        "bottom": -30.286206270973096,
+        "top": 19.713793729026904,
+        "near": 0.1,
+        "far": 80,
+        "width": 52,
+        "height": 50,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 27.1171875,
+        "centreY": -69.873046875,
+        "frustumCorners": 2,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -82,
+        4.499999999999999,
+        -63.99999999999999
+      ],
+      "target": [
+        -75,
+        0.49999999999999994,
+        -54.99999999999999
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "police-1",
+      "actors": [
+        {
+          "id": "npc-00",
+          "role": "civilian"
+        },
+        {
+          "id": "npc-01",
+          "role": "civilian"
+        },
+        {
+          "id": "police-02",
+          "role": "police"
+        }
+      ],
+      "calls": 48,
+      "triangles": 117082,
+      "resources": {
+        "geometries": 52,
+        "textures": 12,
+        "programs": 39
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 4,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "high",
+        "strength": 0,
+        "radiiCss": [
+          0,
+          0,
+          0
+        ],
+        "debugBypass": false,
+        "draws": 0,
+        "size": [
+          390,
+          844
+        ],
+        "blurSize": [
+          195,
+          422
+        ],
+        "estimatedMiB": 22.6
+      },
+      "shadow": {
+        "left": -26.13671875000003,
+        "right": 25.86328124999997,
+        "bottom": -20.374096895973096,
+        "top": 29.625903104026904,
+        "near": 0.1,
+        "far": 81,
+        "width": 52,
+        "height": 50,
+        "margin": 24.500000000000007,
+        "resolution": 1024,
+        "centreX": 26.86328125,
+        "centreY": -59.9609375,
+        "frustumCorners": 2,
+        "mapSize": [
+          1024,
+          1024
+        ],
+        "enabled": true
+      },
+      "camera": [
+        -68,
+        4.499999999999999,
+        -45.99999999999999
+      ],
+      "target": [
+        -75,
+        0.49999999999999994,
+        -54.99999999999999
+      ],
+      "car": [
+        -78,
+        0.8681218986866783,
+        -65
+      ],
+      "seed": 20261005,
+      "props": {
+        "lamp": 160,
+        "bin": 80
+      }
+    }
+  ]
+}

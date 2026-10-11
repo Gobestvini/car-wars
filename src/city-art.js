@@ -17,7 +17,7 @@ export function createCityArt(group, entries, seed) {
   for (let i = 0; i < pos.count; i++) if (pos.getY(i) > 0) pos.setZ(i, pos.getZ(i) * .12);
   ridge.computeVertexNormals();
   const material = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .95 });
-  const roofMaterial = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .62, metalness: .04 });
+  const roofMaterial = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .48, metalness: 0 });
   const boundaryMaterial = material.clone(); boundaryMaterial.side = THREE.DoubleSide;
   const batches = [plinth, box, hip, box, ridge, box].map((geometry, index) => {
     const mesh = new THREE.InstancedMesh(geometry, index === 0 ? boundaryMaterial : index >= 2 && index <= 4 ? roofMaterial : material, entries.length);

@@ -1,0 +1,503 @@
+{
+  "sameTransforms": true,
+  "comparisons": 36,
+  "cropPolicy": "independent semantic reference/game crops; identical game crops before/after; contain, no color edits",
+  "crops": {
+    "roof": [
+      [
+        15,
+        200,
+        190,
+        270
+      ],
+      [
+        210,
+        15,
+        380,
+        100
+      ]
+    ],
+    "facade": [
+      [
+        20,
+        310,
+        105,
+        440
+      ],
+      [
+        230,
+        104,
+        350,
+        190
+      ]
+    ],
+    "road": [
+      [
+        290,
+        320,
+        490,
+        440
+      ],
+      [
+        70,
+        480,
+        270,
+        600
+      ]
+    ],
+    "sidewalk": [
+      [
+        280,
+        212,
+        405,
+        244
+      ],
+      [
+        220,
+        215,
+        270,
+        240
+      ]
+    ],
+    "tree": [
+      [
+        430,
+        180,
+        580,
+        325
+      ],
+      [
+        138,
+        85,
+        186,
+        185
+      ]
+    ],
+    "car-glass": [
+      [
+        410,
+        980,
+        740,
+        1160
+      ],
+      [
+        190,
+        270,
+        290,
+        360
+      ]
+    ],
+    "shadow": [
+      [
+        550,
+        1150,
+        760,
+        1200
+      ],
+      [
+        150,
+        315,
+        250,
+        370
+      ]
+    ]
+  },
+  "renderCost": [
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 0,
+      "mode": "follow",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 109744,
+      "trianglesAfter": 109744
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 0,
+      "mode": "free",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 109744,
+      "trianglesAfter": 109744
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 1,
+      "mode": "follow",
+      "callsBefore": 78,
+      "callsAfter": 79,
+      "trianglesBefore": 154595,
+      "trianglesAfter": 154611
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 1,
+      "mode": "free",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 109744,
+      "trianglesAfter": 109744
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "follow",
+      "callsBefore": 46,
+      "callsAfter": 46,
+      "trianglesBefore": 112048,
+      "trianglesAfter": 112048
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "free",
+      "callsBefore": 46,
+      "callsAfter": 46,
+      "trianglesBefore": 112048,
+      "trianglesAfter": 112048
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 1,
+      "mode": "follow",
+      "callsBefore": 80,
+      "callsAfter": 81,
+      "trianglesBefore": 159203,
+      "trianglesAfter": 159219
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 1,
+      "mode": "free",
+      "callsBefore": 46,
+      "callsAfter": 46,
+      "trianglesBefore": 112048,
+      "trianglesAfter": 112048
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 0,
+      "mode": "near",
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109384,
+      "trianglesAfter": 109384
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "low",
+      "b": 1,
+      "mode": "near",
+      "callsBefore": 77,
+      "callsAfter": 77,
+      "trianglesBefore": 154235,
+      "trianglesAfter": 154235
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "near",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111688,
+      "trianglesAfter": 111688
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 1,
+      "mode": "near",
+      "callsBefore": 79,
+      "callsAfter": 79,
+      "trianglesBefore": 158843,
+      "trianglesAfter": 158843
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "player--1",
+      "callsBefore": 52,
+      "callsAfter": 52,
+      "trianglesBefore": 116592,
+      "trianglesAfter": 116592
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "player-1",
+      "callsBefore": 46,
+      "callsAfter": 46,
+      "trianglesBefore": 116006,
+      "trianglesAfter": 116006
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "civilian--1",
+      "callsBefore": 74,
+      "callsAfter": 74,
+      "trianglesBefore": 121060,
+      "trianglesAfter": 121060
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "civilian-1",
+      "callsBefore": 41,
+      "callsAfter": 41,
+      "trianglesBefore": 111584,
+      "trianglesAfter": 111584
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "police--1",
+      "callsBefore": 47,
+      "callsAfter": 47,
+      "trianglesBefore": 115300,
+      "trianglesAfter": 115300
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "q": "high",
+      "b": 0,
+      "mode": "police-1",
+      "callsBefore": 49,
+      "callsAfter": 49,
+      "trianglesBefore": 117470,
+      "trianglesAfter": 117470
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 0,
+      "mode": "follow",
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109444,
+      "trianglesAfter": 109444
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 0,
+      "mode": "free",
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109444,
+      "trianglesAfter": 109444
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 1,
+      "mode": "follow",
+      "callsBefore": 77,
+      "callsAfter": 77,
+      "trianglesBefore": 154295,
+      "trianglesAfter": 154295
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 1,
+      "mode": "free",
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109444,
+      "trianglesAfter": 109444
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "follow",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111748,
+      "trianglesAfter": 111748
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "free",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111748,
+      "trianglesAfter": 111748
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 1,
+      "mode": "follow",
+      "callsBefore": 79,
+      "callsAfter": 79,
+      "trianglesBefore": 158903,
+      "trianglesAfter": 158903
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 1,
+      "mode": "free",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111748,
+      "trianglesAfter": 111748
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 0,
+      "mode": "near",
+      "callsBefore": 44,
+      "callsAfter": 44,
+      "trianglesBefore": 109300,
+      "trianglesAfter": 109300
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "low",
+      "b": 1,
+      "mode": "near",
+      "callsBefore": 77,
+      "callsAfter": 76,
+      "trianglesBefore": 154151,
+      "trianglesAfter": 154139
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "near",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111604,
+      "trianglesAfter": 111604
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 1,
+      "mode": "near",
+      "callsBefore": 79,
+      "callsAfter": 78,
+      "trianglesBefore": 158759,
+      "trianglesAfter": 158747
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "player--1",
+      "callsBefore": 50,
+      "callsAfter": 50,
+      "trianglesBefore": 116112,
+      "trianglesAfter": 116112
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "player-1",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 113070,
+      "trianglesAfter": 113070
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "civilian--1",
+      "callsBefore": 74,
+      "callsAfter": 74,
+      "trianglesBefore": 120700,
+      "trianglesAfter": 120700
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "civilian-1",
+      "callsBefore": 41,
+      "callsAfter": 41,
+      "trianglesBefore": 111584,
+      "trianglesAfter": 111584
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "police--1",
+      "callsBefore": 45,
+      "callsAfter": 45,
+      "trianglesBefore": 111960,
+      "trianglesAfter": 111960
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "q": "high",
+      "b": 0,
+      "mode": "police-1",
+      "callsBefore": 48,
+      "callsAfter": 48,
+      "trianglesBefore": 117082,
+      "trianglesAfter": 117082
+    }
+  ]
+}

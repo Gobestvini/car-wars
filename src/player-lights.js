@@ -6,7 +6,7 @@ const HEAD = 8, TAIL = 10;
 export function createPlayerLights(body) {
   const material = body.material;
   const reverse = { value: 0 };
-  material.roughness = .58;
+  material.roughness = .42;
   material.metalness = 0;
   material.onBeforeCompile = shader => {
     shader.uniforms.playerReverse = reverse;

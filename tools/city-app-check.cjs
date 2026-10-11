@@ -3,7 +3,8 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const fs = require('node:fs');
 const assert = require('node:assert/strict');
 const phase=process.argv[2]||'after',base=process.env.CARWARS_BASE_URL||'http://127.0.0.1:5173/';
-const out=`docs/art/verification/mockup-light-materials/${phase}/app`;
+const reviewRoot=process.env.ART_REVIEW_ROOT||'docs/art/verification/mockup-light-materials';
+const out=`${reviewRoot}/${phase}/app`;
 fs.mkdirSync(out,{recursive:true});
 const hook=`
 window.cityReview = {
@@ -25,6 +26,13 @@ window.cityReview = {
       camera:camera.position.toArray(),target:orbitControls.target.toArray(),car:car.position.toArray(),
       seed:cityPlan.seed,props:cityState.streetProps?.counts};
   },
+  nearPose: () => { orbitControls.target.set(-73,0,-68); camera.position.set(-57,23,-86); camera.lookAt(orbitControls.target); },
+  setupVehicles: () => { traffic.setCount(2); for(let i=0;i<120;i++) traffic.stepWorld({brake:1},STEP);
+    for(const x of [-75,-25,25,75]) for(const z of [-55,-5,45]) if(!traffic.roleCount('police')) traffic.requestSpawn({role:'police',position:{x,y:0,z},yaw:0,options:{placement:'nearest-safe'}});
+    return traffic.states.map(s=>({id:s.id,role:s.role})); },
+  closeVehicle: (role,side) => { const obj=role==='player'?car:traffic.states.find(s=>s.role===role)?.mesh;
+    if(!obj) throw new Error('Missing role '+role); orbitControls.target.copy(obj.position).add(new THREE.Vector3(0,.5,0));
+    camera.position.copy(orbitControls.target).add(new THREE.Vector3(side*7,4,side*9)); camera.lookAt(orbitControls.target); },
   rebuild: w => rebuildCity(w),
   closeProp: type => { const p=cityState.streetProps.placements.find(p=>p.type===type && Math.abs(p.x)<100);
     orbitControls.target.set(p.x,type==='lamp'?1.8:.4,p.z);
@@ -63,6 +71,21 @@ window.cityReview = {
     assert.deepEqual(data.props,{lamp:160,bin:80});
     assert.equal(data.blur.draws>0,b>0&&mode==='follow');report.scenes.push({width,height,q,b,mode,...data});
    }
+   if(process.env.ART_REVIEW_ROOT) {
+    await page.evaluate(()=>cityReview.nearPose());
+    for(const q of ['low','high']) for(const b of [0,1]) {
+      const data=await page.evaluate(({q,b})=>cityReview.draw(q,b,'follow'),{q,b});
+      await page.screenshot({path:out+'/'+width+'x'+height+'-near-'+q+'-blur'+b+'.png'});
+      report.scenes.push({width,height,q,b,mode:'near',...data});
+    }
+    const actors=await page.evaluate(()=>cityReview.setupVehicles());
+    for(const role of ['player','civilian','police']) for(const side of [-1,1]) {
+      await page.evaluate(({role,side})=>cityReview.closeVehicle(role,side),{role,side});
+      const data=await page.evaluate(()=>cityReview.draw('high',0,'free'));
+      await page.screenshot({path:out+'/'+width+'x'+height+'-'+role+'-side'+side+'.png'});
+      report.scenes.push({width,height,q:'high',b:0,mode:role+'-'+side,actors,...data});
+    }
+   }
    if(phase==='after') {
     const propCost=[];
     for(const q of ['low','high']) {
@@ -73,7 +96,7 @@ window.cityReview = {
     }
     for(const type of ['lamp','bin']) {
      await page.evaluate(type=>cityReview.closeProp(type),type);await page.evaluate(()=>cityReview.draw('high',0,'free'));
-     const dir='docs/art/verification/street-props';fs.mkdirSync(dir,{recursive:true});
+     const dir=process.env.ART_REVIEW_ROOT ? reviewRoot+'/props' : 'docs/art/verification/street-props';fs.mkdirSync(dir,{recursive:true});
      await page.screenshot({path:dir+'/'+width+'x'+height+'-'+type+'.png'});
     }
     for(const side of [-1,1]) {
@@ -87,7 +110,7 @@ window.cityReview = {
     }
     for(let i=6;i<10;i++) assert.deepEqual(lifecycle[i].resources,lifecycle[4+i%2].resources);
     report.lifecycle=lifecycle;report.props=await page.evaluate(()=>cityReview.props());
-    fs.writeFileSync('docs/art/verification/street-props/report.json',JSON.stringify({environment:report.kind,counts:report.props.counts,batches:report.props.batches,geometryTriangles:report.props.triangles,propCost,lifecycle},null,2)+'\n');
+    fs.writeFileSync((process.env.ART_REVIEW_ROOT ? reviewRoot+'/props/report.json' : 'docs/art/verification/street-props/report.json'),JSON.stringify({environment:report.kind,counts:report.props.counts,batches:report.props.batches,geometryTriangles:report.props.triangles,propCost,lifecycle},null,2)+'\n');
    }
    assert.deepEqual(errors,[]);await page.close();
   }
@@ -112,7 +135,7 @@ window.cityReview = {
    const gpu=await browser.newPage();await gpu.goto(base+'tools/miniature-blur-regression.html');
    await gpu.waitForFunction(()=>document.querySelector('#results').textContent.trim().startsWith('{'),null,{timeout:60000});
    const color=await gpu.locator('#results').textContent();assert.equal(JSON.parse(color).pass,true);
-   fs.writeFileSync('docs/art/verification/mockup-light-materials/gpu-color-report.json',color+'\n');await gpu.close();
+   fs.writeFileSync(reviewRoot+'/gpu-color-report.json',color+'\n');await gpu.close();
   }
   fs.writeFileSync(out+'/report.json',JSON.stringify(report,null,2)+'\n');
   console.log(JSON.stringify({phase,scenes:report.scenes.length,props:report.props?.counts,lifecycle:report.lifecycle?.map(x=>x.resources)}));
