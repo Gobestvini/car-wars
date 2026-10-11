@@ -18,8 +18,21 @@ export const taskPlanSchema = {
   }, required: ['status', 'question', 'summary', 'tasks'],
 };
 
-export function taskOnlyPrompt(text, imagePath) {
-  return `Ты составляешь задания CarWars по тезисам пользователя. Сначала прочитай .agents/skills/find-skills/SKILL.md, затем .agents/skills/create-task/SKILL.md и примени create-task, прочитай AGENTS.md, docs/tasks/README.md, INDEX.md, TEMPLATE.md и релевантный текущий код. Работай в read-only: не изменяй никакие файлы, не реализуй задания, не запускай разработчика, QA, чаты, автоматизации, git commit/push или установку навыков. Инструкция read-only имеет приоритет над шагом навыка о сохранении файлов: верни полное содержимое новых заданий в tasks[].content, относительный путь в path и готовую строку таблицы INDEX в indexRow. Файлы запишет бот. Номера уникальны по всем TASK-файлам и INDEX. Одна цель на задание; несколько заданий допустимы с явными зависимостями. Используй русский язык и точные тезисы. В каждом задании: статус ready или draft, зависимости, критерии, реальные команды проверки, раздел 10 с «Не выполнялась», последний раздел с конкретной рекомендацией модели. Незавершённые зависимости означают draft. Исполнитель передаёт ready-for-qa, done ставит отдельный QA. Не читай .telegram-bot.env и секреты. Если необходим ответ пользователя, верни blocked и question; задачи при этом могут быть только draft. ${imagePath ? 'Изучи приложенное изображение как часть запроса.' : ''}\nИсходные тезисы:\n${text}`;
+export function plannerQueueContext(tasks, index = '') {
+  const indexIds = [...index.matchAll(/TASK-(\d+)/g)].map(match => Number(match[1]));
+  const maxId = Math.max(0, ...tasks.map(task => task.id), ...indexIds);
+  const done = tasks.filter(task => task.status === 'done').map(task => task.id).sort((a, b) => a - b);
+  const active = tasks.filter(task => task.status !== 'done').sort((a, b) => a.id - b.id);
+  const lines = active.map(task => {
+    const title = task.text.match(/^# TASK-\d+[: ]+(.+)$/m)?.[1]?.trim() ?? task.path;
+    const deps = task.dependencies?.length ? ` deps:${task.dependencies.join(',')}` : '';
+    return `${task.id} ${task.status ?? 'unknown'} ${title}${deps}`;
+  });
+  return `maxId=${maxId}; done=[${done.join(',')}]; active=[${lines.join('; ')}]`;
+}
+
+export function taskOnlyPrompt(text, imagePath, queueContext = '') {
+  return `Ты составляешь задания CarWars по тезисам пользователя. Проверяй только релевантный текущий код; не открывай целиком AGENTS.md, README очереди, INDEX.md или TEMPLATE.md — нужные правила и краткая очередь даны ниже. Не запускай поиск или установку навыков для обычного планирования. Работай в read-only: не изменяй файлы, не реализуй задания, не запускай разработчика, QA, чаты, автоматизации или git commit/push. Верни содержимое каждой задачи в tasks[].content, относительный путь в path и строку INDEX в indexRow. Файлы сохранит бот. Выбери уникальный номер больше maxId; зависимости должны ссылаться на существующие ID со статусом done. Одна цель на задачу; несколько допустимы с явными зависимостями. Пиши по-русски, сохраняя точные тезисы. Используй короткий формат: метаданные задачи; разделы цель, проверенный контекст, границы, поведение, план, критерии, проверки, предположения, передача, отчёт исполнителя и отчёт QA; последним добавь рекомендацию модели. Отчёт исполнителя оставь незаполненным. Исполнитель передаёт ready-for-qa, done ставит независимый QA. Незавершённые зависимости означают draft. Не читай .telegram-bot.env и секреты. Если нужен ответ пользователя, верни blocked с вопросом, а задачи оставь draft. ${imagePath ? 'Изучи приложенное изображение как часть запроса.' : ''}\nКомпактное состояние очереди: ${queueContext}\nИсходные тезисы:\n${text}`;
 }
 
 export async function savePlan(root, plan, expectedIndex, afterSave = async () => {}) {
@@ -79,7 +92,7 @@ export function makeTaskPlanner({ root, env = process.env, invoke = runCodex, on
     const index = await readFile(join(root, 'docs/tasks/INDEX.md'), 'utf8');
     await onProgress(job, { phase: 'planning', model: 'gpt-6.1-sol' });
     const answer = await invoke({ cwd: root, model: 'gpt-6.1-sol', sandbox: 'read-only', phase: 'planning',
-      prompt: taskOnlyPrompt(job.text, job.imagePath), schema: taskPlanSchema, imagePath: job.imagePath, env,
+      prompt: taskOnlyPrompt(job.text, job.imagePath, plannerQueueContext(await readTasks(root), index)), schema: taskPlanSchema, imagePath: job.imagePath, env,
       logPath: join(root, 'tools/telegram', `job-${job.id}.log`),
       onActivity: () => onProgress(job, { lastActivityAt: new Date().toISOString() }),
     });

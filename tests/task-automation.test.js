@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { selectTask, dependenciesOf, claimTask, releaseTask, setTaskStatus, readTasks } from '../tools/tasks/queue.js';
-import { savePlan, makeTaskPlanner, taskOnlyPrompt } from '../tools/telegram/planner.js';
+import { savePlan, makeTaskPlanner, plannerQueueContext, taskOnlyPrompt } from '../tools/telegram/planner.js';
 
 const taskPath = 'docs/tasks/TASK-0001-fixture.md';
 const content = (status = 'ready', dependencies = 'нет') => `# TASK-0001\n- Статус: ${status}\n- Приоритет: normal\n- Зависимости: ${dependencies}\n## 10. Отчёт исполнителя\nНе выполнялась.\n## Рекомендация модели исполнителя\ngpt-6-luna, medium\n`;
@@ -55,7 +55,8 @@ test('planner only invokes planning in read-only, commits docs and preserves dir
   const calls = [];
   const result = await makeTaskPlanner({ root, invoke: async options => {
     calls.push(options); assert.equal(options.sandbox, 'read-only');
-    assert.match(options.prompt, /create-task/);
+    assert.match(options.prompt, /maxId=0/);
+    assert.doesNotMatch(options.prompt, /Сначала прочитай .*TEMPLATE\.md|\.agents\/skills\/find-skills/);
     return { exitCode: 0, result: plan(), usage: { input_tokens: 10, output_tokens: 20 } };
   } })({ id: 1, text: 'Добавить тормоз', imagePath: null });
   assert.equal(calls.length, 1);
@@ -67,6 +68,7 @@ test('planner only invokes planning in read-only, commits docs and preserves dir
   assert.equal(await readFile(join(root, 'game.js'), 'utf8'), 'somebody else\n');
   assert.match(await readFile(join(root, 'docs/tasks/INDEX.md'), 'utf8'), /TASK-0001[\s\S]*Текст после таблицы/);
   assert.match(taskOnlyPrompt('точные тезисы'), /точные тезисы/);
+  assert.match(plannerQueueContext([{ id: 3, path: 'docs/tasks/TASK-0003-active.md', status: 'ready', dependencies: [2], text: '# TASK-0003: Example' }], 'TASK-0007'), /maxId=7; done=\[\]; active=\[3 ready Example deps:2\]/);
 });
 
 test('planner rejects collisions, path escapes, ready dependencies and dirty INDEX without writing', async t => {

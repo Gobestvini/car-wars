@@ -6,6 +6,7 @@ test('phase policy keeps medium effort except helping and caps tool output', () 
   assert.deepEqual(economySettings('planning'), { effort: 'medium', toolOutputTokenLimit: 2000 });
   assert.deepEqual(economySettings('implementing'), { effort: 'medium', toolOutputTokenLimit: 2000 });
   assert.deepEqual(economySettings('helping'), { effort: 'high', toolOutputTokenLimit: 2000 });
+  assert.deepEqual(economySettings('qa'), { effort: 'medium', toolOutputTokenLimit: 2000 });
   assert.equal(economySettings('other').effort, 'medium');
 });
 
