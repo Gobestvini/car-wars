@@ -4,6 +4,7 @@ const PHASE_EFFORT = Object.freeze({
   planning: 'medium',
   implementing: 'medium',
   helping: 'high',
+  qa: 'medium',
 });
 
 export function economySettings(phase) {
