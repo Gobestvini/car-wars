@@ -1,6 +1,6 @@
 # TASK-0080: Повторное использование динамических объектов всей сцены
 
-- Статус: ready-for-qa
+- Статус: blocked
 - Приоритет: high
 - Создана: 2026-10-10
 - Обновлена: 2026-10-11
@@ -93,7 +93,16 @@ TASK-0079 принята независимой QA2026-10-11: capacities/overflo
 
 ## 11. Отчёт QA
 
-Не проводилась.
+Независимая проверка 2026-10-11, QA-подагент `qa_0080`, навык `.agents/skills/qa-tasks/SKILL.md`. Проверенная ревизия `934421a120ac2f74c5905f1d01c9839b1d30610c`; изучены изменения object-pool, traffic/vehicle, building-occlusion/city-art, main/teardown, lifecycle-тесты и исходник браузерного проверяющего инструмента. Реализация QA не изменялась.
+
+- Актуальность доказательств: повторное вычисление src-only SHA256 дало `e781c68d7d478fa654c219dca1b11da53b95a410b88cc34ba124fe4b84e2f026`, совпадающий с `pooling-direct-stable/report.json`. Вызов экспортированной `fingerprint()` из актуального `tools/verify.js` дал `971ff71dcee32e7717db7a5e41a44506ac804a3d7ef81b775ba501441796385d`, совпадающий с успешной `pooling-direct-full-receipt.json`. Квитанция неизменённого кода переиспользована: журнал содержит288/288pass,0fail; production build прошёл. Старый путь `tools/telegram/verify.js` отсутствует после отдельной миграции; это расхождение инструкции, а не отказ проверки. Новый full/browser запуск не выполнялся.
+- Критерий1 подтверждён: политика категорий inventory описана в `pooling-2026-10-11.md`; runtime имеет lazy bounded300/2, эффекты2, здания8idle LRU. Raw содержит20traffic-состояний,55проверок, `passed=true`, пустой список pageerrors; created после прогрева стабилен. Одновременная выдача и несовместимые варианты защищены lease/active map, active storage не вытесняется при exhaustion.
+- Критерий2 подтверждён кодом и содержательными тестами из принятой квитанции: новый actor/AI/ID, invalidation старого lease, обнуление старого actor.simulation/mesh, active guard старого collide closure, восстановление deformer, очистка overlap/contact/cooldown и один актуальный listener. Тест повторно выданной police включает реальную world-contact episode и новое повреждение; браузерный raw включает отдельные production collisions civilian/police и полный repair игрока.
+- Критерии3–4 подтверждены имеющимися актуальными WebGL доказательствами:20traffic циклов0→60→300→0→60,20police terminal damage/deformation/release,20fade high/low,10city rebuild. Отдельно проверены немедленный release полиции при controlled hidden, persisted/final/double pagehide. Final bodies/geometries/textures0, contextLost=true; все146наблюдавшихся resource owners dispose exactly once. Четыре JS program descriptors остаются в renderer.info, это не скрывается; проверяющий инструмент отдельно требует0live GL programs после context loss. Shared owner освобождается при final teardown, не при release.
+- Часть критерия5 подтверждена:36visualpairs `pooling-direct/comparison.json`, одинаковые transforms/calls/triangles, максимальный mean absolute channel error0.005650747/255. Просмотрены мобильный high/blur/follow и настоящий fade-high кадр; крышa/цоколь сохраняют целостный fade. GPU color/frequency fixture и bounded quality/rebuild counters сохранены. По независимому пересчёту последних пяти raw traffic heap range1086360≤2235178.45bytes; city range725884≤1985625bytes, resources56/13/33 и bodies734 стабильны.
+- Ограничения: hidden и pagehide синтетические/контролируемые; физическая OS suspension и игра на физическом телефоне не проверены. Прохождение CPU budget и полная18run матрица не подтверждены: финальные3low0p95=13.3/9.1/6.8ms при budget3.15ms. Сравнение причин и влияния пулов недостоверно из-за невоспроизводимого старого baseline и подтверждённой пользователем параллельной нагрузки; это не трактуется как воспроизводимый дефект именно пулов и не является доказательством ускорения.
+
+Решение: **blocked — полная приёмка ограничена неподтверждённым performance-критерием и ожидаемой проверкой пользователя на девайсе**. Последний прямой запрос «давай пропустим эти замеры … давай залей я гляну на девайсе» имеет приоритет: дополнительные timing серии отменены, возвращаться к ним в рамках текущего запроса не требуется. Публикация текущего варианта разрешена пользователем и не означает `done`/прохождение CPU budget. Воспроизводимых функциональных дефектов в проверенном объёме не выявлено. Для полной приёмки требуется результат проверки на устройстве и согласованное решение по отложенному performance-критерию; отсутствующие данные не отмечены pass.
 
 ## Рекомендация модели исполнителя
 
