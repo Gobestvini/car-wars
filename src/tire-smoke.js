@@ -71,10 +71,11 @@ export class TireSmoke {
     this.mesh.geometry.setAttribute('instanceAlpha', this.alpha);
     this.mesh.name = 'Tire skid smoke';
     this.mesh.frustumCulled = false;
+    this.mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
     this.mesh.count = 0;
     scene.add(this.mesh);
     this.position = new THREE.Vector3(); this.scale = new THREE.Vector3(); this.matrix = new THREE.Matrix4();
-    this.zeroScale = new THREE.Vector3(0, 0, 0); this.rotation = new THREE.Quaternion();
+    this.rotation = new THREE.Quaternion();
     this.particleRotation = new THREE.Quaternion(); this.particleSpin = new THREE.Quaternion();
     this.spinAxis = new THREE.Vector3(0, 0, 1);
     this.diagnostics = { emitted: 0, sourceCount: 0, limitedSources: 0, highWater: 0 };
@@ -153,34 +154,41 @@ export class TireSmoke {
   get activeCount() { let count = 0; for (const particle of this.particles) if (particle.active) count++; return count; }
 
   update(dt, camera, { quality = 'high' } = {}) {
-    const low = quality === 'low', active = [];
-    this.rotation.copy(camera?.quaternion || new THREE.Quaternion());
+    const low = quality === 'low';
+    let active = 0;
+    if (camera) this.rotation.copy(camera.quaternion);
+    else this.rotation.identity();
     for (let index = 0; index < this.capacity; index++) {
       const particle = this.particles[index];
-      if (!particle.active) { this.alpha.setX(index, 0); this.matrix.compose(this.position.set(0, -1000, 0), this.rotation, this.zeroScale); this.mesh.setMatrixAt(index, this.matrix); continue; }
+      if (!particle.active) continue;
       particle.age += dt;
-      if (particle.age >= particle.life) { particle.active = false; this.alpha.setX(index, 0); this.matrix.compose(this.position.set(0, -1000, 0), this.rotation, this.zeroScale); this.mesh.setMatrixAt(index, this.matrix); continue; }
+      if (particle.age >= particle.life) { particle.active = false; continue; }
       const progress = particle.age / particle.life;
       particle.x += particle.vx * dt; particle.y += particle.vy * dt; particle.z += particle.vz * dt;
       particle.size += dt * (0.32 + particle.aspect * 0.18);
       particle.rotation += dt * particle.spinSpeed;
       const scale = particle.size + progress * (0.56 + particle.aspect * 0.2);
-      this.alpha.setX(index, tireSmokeAlpha(progress));
+      this.alpha.setX(active, tireSmokeAlpha(progress));
       this.particleSpin.setFromAxisAngle(this.spinAxis, particle.rotation);
       this.particleRotation.copy(this.rotation).multiply(this.particleSpin);
       this.matrix.compose(this.position.set(particle.x, particle.y, particle.z), this.particleRotation,
         this.scale.set(scale * particle.aspect, scale, scale));
-      this.mesh.setMatrixAt(index, this.matrix); active.push(index);
+      // Compact GPU instances in slot order, preserving transparent blend order.
+      this.mesh.setMatrixAt(active++, this.matrix);
     }
-    this.mesh.instanceMatrix.needsUpdate = true;
-    this.alpha.needsUpdate = true;
-    this.mesh.count = this.capacity;
-    this.mesh.visible = active.length > 0;
-    this.diagnostics.active = active.length;
+    if (active > 0) {
+      this.mesh.instanceMatrix.clearUpdateRanges(); this.mesh.instanceMatrix.addUpdateRange(0, active * 16);
+      this.alpha.clearUpdateRanges(); this.alpha.addUpdateRange(0, active);
+      this.mesh.instanceMatrix.needsUpdate = true;
+      this.alpha.needsUpdate = true;
+    }
+    this.mesh.count = active;
+    this.mesh.visible = active > 0;
+    this.diagnostics.active = active;
     this.diagnostics.capacity = this.capacity;
     this.diagnostics.quality = quality;
     this.diagnostics.budget = low ? Math.min(TIRE_SMOKE_CONFIG.lowCapacity, this.capacity) : this.capacity;
-    this.diagnostics.highWater = Math.max(this.diagnostics.highWater, active.length);
+    this.diagnostics.highWater = Math.max(this.diagnostics.highWater, active);
     return this.snapshot();
   }
 
@@ -189,6 +197,7 @@ export class TireSmoke {
     this.states.clear();
     for (let i = 0; i < this.particles.length; i++) { this.particles[i].active = false; this.alpha.setX(i, 0); }
     this.alpha.needsUpdate = true;
+    this.mesh.count = 0;
     this.mesh.visible = false; this.diagnostics.active = 0; this.diagnostics.highWater = 0;
   }
 

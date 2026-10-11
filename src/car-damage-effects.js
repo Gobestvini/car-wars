@@ -48,6 +48,7 @@ class ParticlePool {
     this.capacity = capacity;
     const geometry = new THREE.PlaneGeometry(1, 1);
     this.alpha = new THREE.InstancedBufferAttribute(new Float32Array(capacity), 1);
+    this.alpha.setUsage(THREE.DynamicDrawUsage);
     geometry.setAttribute('particleAlpha', this.alpha);
     const material = new THREE.ShaderMaterial({
       transparent: true, depthWrite: false, toneMapped: false,
@@ -80,6 +81,8 @@ class ParticlePool {
     this.rotation = new THREE.Quaternion(); this.cursor = 0;
     // Allocate instanceColor once, including before the first shader compilation.
     for (let i = 0; i < capacity; i++) this.mesh.setColorAt(i, this.color);
+    this.mesh.instanceColor.setUsage(THREE.DynamicDrawUsage);
+    this.dynamicAttributes = [this.mesh.instanceMatrix, this.mesh.instanceColor, this.alpha];
     scene.add(this.mesh); this.reset();
   }
   emit(origin, kind, darkness, burst = false) {
@@ -96,10 +99,11 @@ class ParticlePool {
     this.rotation.copy(camera.quaternion);
     let active = 0;
     for (let i = 0; i < this.capacity; i++) {
-      const p = this.particles[i]; p.age += dt;
+      const p = this.particles[i];
+      if (p.life <= 0) continue;
+      p.age += dt;
       const alive = p.life > p.age && i < limit;
       if (alive) {
-        active++;
         p.position.addScaledVector(p.velocity, dt);
         if (p.kind === 'spark') p.velocity.y -= dt * 7;
         else p.velocity.multiplyScalar(Math.exp(-dt * .3));
@@ -107,21 +111,29 @@ class ParticlePool {
         const size = p.size * (p.kind === 'smoke' ? 1 + progress * 2.5 : p.kind === 'flash' ? 1 + progress : 1 + progress * .7);
         this.scale.set(size, p.kind === 'spark' ? size * 3 : p.kind === 'fire' ? size * 1.6 : size, 1);
         const fade = Math.sin(Math.PI * progress);
-        this.alpha.setX(i, p.kind === 'flash' ? 1 - progress : fade * (p.kind === 'smoke' ? .23 + p.shade * .25 : .95));
+        this.alpha.setX(active, p.kind === 'flash' ? 1 - progress : fade * (p.kind === 'smoke' ? .23 + p.shade * .25 : .95));
         if (p.kind === 'smoke') { const grey=.38-p.shade*.30; this.color.setRGB(grey*.94,grey,grey*1.07); }
         else this.color.setRGB(1, p.kind === 'flash' ? .85 : .2 + (1 - progress) * .55, p.kind === 'flash' ? .35 : .015);
-        this.mesh.setColorAt(i, this.color);
-      } else { this.scale.setScalar(0); this.alpha.setX(i, 0); }
-      this.matrix.compose(p.position, this.rotation, this.scale); this.mesh.setMatrixAt(i, this.matrix);
+        this.mesh.setColorAt(active, this.color);
+        this.matrix.compose(p.position, this.rotation, this.scale);
+        // Keep the ring buffer's order while submitting only living particles.
+        this.mesh.setMatrixAt(active++, this.matrix);
+      } else if (p.age >= p.life) p.life = 0;
     }
     this.mesh.visible = active > 0;
-    this.mesh.instanceMatrix.needsUpdate = true; this.mesh.instanceColor.needsUpdate = true; this.alpha.needsUpdate = true;
+    this.mesh.count = active;
+    if (active > 0) {
+      for (const attribute of this.dynamicAttributes) {
+        attribute.clearUpdateRanges(); attribute.addUpdateRange(0, active * attribute.itemSize); attribute.needsUpdate = true;
+      }
+    }
     return active;
   }
   reset() {
     this.cursor = 0;
     for (const p of this.particles) { p.life = 0; p.age = 0; }
     this.mesh.visible = false;
+    this.mesh.count = 0;
   }
   dispose() { this.mesh.removeFromParent(); this.mesh.dispose(); this.mesh.geometry.dispose(); this.mesh.material.dispose(); }
 }

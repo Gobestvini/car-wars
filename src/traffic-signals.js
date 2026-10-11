@@ -16,13 +16,15 @@ export function createTrafficSignals(network, timing = SIGNAL_TIMING) {
     if (degree >= 4 && Number.isFinite(x + z)) controlled.add(node.id);
   }
   const cycle = (timing.green + timing.yellow + timing.allRed) * 2;
+  // The city is fixed for this controller's lifetime; hash each node only once.
+  const offsets = new Map([...nodes.keys()].map(id => [id, stableOffset(id)]));
   return {
     timing, controlled,
     phase(nodeId, fromId, time) {
       if (!controlled.has(nodeId) || !nodes.has(nodeId) || !nodes.has(fromId)) return { color: 'priority', canEnter: true, controlled: false };
       const node = nodes.get(nodeId), from = nodes.get(fromId);
       const axis = node.x === from.x ? 'ns' : 'ew';
-      const local = ((time + stableOffset(nodeId)) % cycle + cycle) % cycle;
+      const local = ((time + offsets.get(nodeId)) % cycle + cycle) % cycle;
       const green = timing.green, yellow = timing.yellow, allRed = timing.allRed;
       const inFirstAxis = local < green + yellow + allRed;
       const activeAxis = inFirstAxis ? 'ns' : 'ew';
