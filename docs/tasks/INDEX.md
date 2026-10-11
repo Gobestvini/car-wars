@@ -78,6 +78,11 @@
 | [TASK-0075](TASK-0075-sidewalk-lamps-and-bins.md) | Модели уличных фонарей и урн на тротуарах | done | normal | 160 фонарей/80 урн, placement и lifecycle проверены; QA после0074 | gpt-6.1-sol, high |
 | [TASK-0076](TASK-0076-match-mockup-light-materials.md) | Свет и материалы по прямому сравнению игры с мокапом | done | normal | actual-game before/after, GPU и resource matrix готовы; QA после0074/0075 | gpt-6.1-sol, high |
 | [TASK-0077](TASK-0077-frame-pacing-smoothness.md) | Плавность движения после ограничения FPS и диагностика интервалов кадров | ready | high | нет; последовательно с правками main.js | gpt-6.1-sol, high |
+| [TASK-0078](TASK-0078-mockup-light-materials-followup.md) | Повторная доводка света и материалов по мокапу игры | ready | high | нет; новое продолжение после done0076, последовательно с оптимизацией | gpt-6.1-sol, high |
+| [TASK-0079](TASK-0079-scene-performance-baseline.md) | Измерить сцену и зафиксировать план полной оптимизации | ready | high | нет; после изменения света переснять baseline | gpt-6.1-sol, high |
+| [TASK-0080](TASK-0080-scene-object-pools.md) | Повторное использование динамических объектов всей сцены | draft | high | TASK-0079 — требуется done и измеренные capacities | gpt-6.1-sol, high |
+| [TASK-0081](TASK-0081-scene-render-optimization.md) | Оптимизация рендера сцены с сохранением вида мокапа | draft | high | TASK-0078, TASK-0080 — требуется done | gpt-6.1-sol, high |
+| [TASK-0082](TASK-0082-scene-cpu-optimization.md) | Оптимизация CPU и итоговая проверка всей сцены | draft | high | TASK-0081 — требуется done | gpt-6.1-sol, high |
 
 TASK-0073 реализована 2026-10-10 и переведена в review: синтетические 30/60/120/144/165 Hz cadence и jitter/reset прошли; `npm test` — 292/292 после обновления устаревшего blurFocusSize expectation; build прошёл. Браузерный debug HUD показывал 60 FPS в low/high, 30 секунд проверено с активным трафиком. Физический дисплей >60 Hz и длительное управление игроком не проверены; см. отчёт задачи.
 
