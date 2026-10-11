@@ -1,0 +1,352 @@
+{
+  "checks": [
+    {
+      "mode": "free",
+      "state": {
+        "pacing": {
+          "sampleCount": 125,
+          "durationMs": 2233.5,
+          "mean": 17.868,
+          "p50": 16.699999999999818,
+          "p95": 16.800000000000182,
+          "p99": 79.09999999999991,
+          "max": 125.09999999999991,
+          "over25": 2,
+          "over33_34": 2,
+          "over50": 2
+        },
+        "counters": {
+          "accepted": 126,
+          "rendered": 126
+        },
+        "dropped": 0.04589999999999987,
+        "position": {
+          "x": 5.984922736462736e-17,
+          "y": 0.867756455870887,
+          "z": 2.588846242907784e-16
+        },
+        "camera": "free"
+      }
+    },
+    {
+      "mode": "follow",
+      "state": {
+        "pacing": {
+          "sampleCount": 186,
+          "durationMs": 3250.2999999999997,
+          "mean": 17.474731182795697,
+          "p50": 16.699999999999818,
+          "p95": 16.800000000000182,
+          "p99": 79.09999999999991,
+          "max": 125.09999999999991,
+          "over25": 2,
+          "over33_34": 2,
+          "over50": 2
+        },
+        "counters": {
+          "accepted": 187,
+          "rendered": 187
+        },
+        "dropped": 0.04589999999999987,
+        "position": {
+          "x": 7.368691268052862e-17,
+          "y": 0.867757007534528,
+          "z": 2.8443037209376794e-16
+        },
+        "camera": "follow"
+      }
+    },
+    {
+      "pause": "hidden",
+      "before": {
+        "pacing": {
+          "sampleCount": 0,
+          "durationMs": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "max": null,
+          "over25": 0,
+          "over33_34": 0,
+          "over50": 0
+        },
+        "counters": {
+          "accepted": 187,
+          "rendered": 187
+        },
+        "dropped": 0.04589999999999987,
+        "position": {
+          "x": 7.368691268052862e-17,
+          "y": 0.867757007534528,
+          "z": 2.8443037209376794e-16
+        },
+        "camera": "follow"
+      },
+      "during": {
+        "pacing": {
+          "sampleCount": 0,
+          "durationMs": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "max": null,
+          "over25": 0,
+          "over33_34": 0,
+          "over50": 0
+        },
+        "counters": {
+          "accepted": 187,
+          "rendered": 187
+        },
+        "dropped": 0.04589999999999987,
+        "position": {
+          "x": 7.368691268052862e-17,
+          "y": 0.867757007534528,
+          "z": 2.8443037209376794e-16
+        },
+        "camera": "follow"
+      },
+      "after": {
+        "pacing": {
+          "sampleCount": 12,
+          "durationMs": 200,
+          "mean": 16.666666666666668,
+          "p50": 16.69999999999891,
+          "p95": 16.80000000000109,
+          "p99": 16.80000000000109,
+          "max": 16.80000000000109,
+          "over25": 0,
+          "over33_34": 0,
+          "over50": 0
+        },
+        "counters": {
+          "accepted": 200,
+          "rendered": 200
+        },
+        "dropped": 0.04589999999999987,
+        "position": {
+          "x": 7.679351077793227e-17,
+          "y": 0.8677570093290504,
+          "z": 2.8805119941282726e-16
+        },
+        "camera": "follow"
+      }
+    },
+    {
+      "pause": "loading",
+      "before": {
+        "pacing": {
+          "sampleCount": 0,
+          "durationMs": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "max": null,
+          "over25": 0,
+          "over33_34": 0,
+          "over50": 0
+        },
+        "counters": {
+          "accepted": 201,
+          "rendered": 201
+        },
+        "dropped": 0.04589999999999987,
+        "position": {
+          "x": 7.683322727672647e-17,
+          "y": 0.8677570093560232,
+          "z": 2.8810550848260163e-16
+        },
+        "camera": "follow"
+      },
+      "during": {
+        "pacing": {
+          "sampleCount": 0,
+          "durationMs": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "max": null,
+          "over25": 0,
+          "over33_34": 0,
+          "over50": 0
+        },
+        "counters": {
+          "accepted": 201,
+          "rendered": 201
+        },
+        "dropped": 0.04589999999999987,
+        "position": {
+          "x": 7.683322727672647e-17,
+          "y": 0.8677570093560232,
+          "z": 2.8810550848260163e-16
+        },
+        "camera": "follow"
+      },
+      "after": {
+        "pacing": {
+          "sampleCount": 12,
+          "durationMs": 200.10000000000036,
+          "mean": 16.67500000000003,
+          "p50": 16.69999999999891,
+          "p95": 16.700000000000728,
+          "p99": 16.700000000000728,
+          "max": 16.700000000000728,
+          "over25": 0,
+          "over33_34": 0,
+          "over50": 0
+        },
+        "counters": {
+          "accepted": 214,
+          "rendered": 214
+        },
+        "dropped": 0.04589999999999987,
+        "position": {
+          "x": 7.891374520943722e-17,
+          "y": 0.8677570094705463,
+          "z": 2.950571317874744e-16
+        },
+        "camera": "follow"
+      }
+    },
+    {
+      "menu": {
+        "before": {
+          "pacing": {
+            "sampleCount": 0,
+            "durationMs": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null,
+            "over25": 0,
+            "over33_34": 0,
+            "over50": 0
+          },
+          "counters": {
+            "accepted": 228,
+            "rendered": 217
+          },
+          "dropped": 0.04589999999999987,
+          "position": {
+            "x": 7.996376507232342e-17,
+            "y": 0.8677570094330838,
+            "z": 2.974284533767123e-16
+          },
+          "camera": "follow"
+        },
+        "during": {
+          "pacing": {
+            "sampleCount": 0,
+            "durationMs": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null,
+            "over25": 0,
+            "over33_34": 0,
+            "over50": 0
+          },
+          "counters": {
+            "accepted": 289,
+            "rendered": 217
+          },
+          "dropped": 0.04589999999999987,
+          "position": {
+            "x": 7.996376507232342e-17,
+            "y": 0.8677570094330838,
+            "z": 2.974284533767123e-16
+          },
+          "camera": "follow"
+        },
+        "after": {
+          "pacing": {
+            "sampleCount": 22,
+            "durationMs": 366.7999999999993,
+            "mean": 16.67272727272724,
+            "p50": 16.600000000002183,
+            "p95": 16.799999999999272,
+            "p99": 16.900000000001455,
+            "max": 16.900000000001455,
+            "over25": 0,
+            "over33_34": 0,
+            "over50": 0
+          },
+          "counters": {
+            "accepted": 341,
+            "rendered": 268
+          },
+          "dropped": 0.04589999999999987,
+          "position": {
+            "x": 5.621504639158347e-17,
+            "y": 0.8542246559125694,
+            "z": 2.330927295867196e-16
+          },
+          "camera": "follow"
+        }
+      }
+    },
+    {
+      "driveAndReset": {
+        "driven": {
+          "pacing": {
+            "sampleCount": 113,
+            "durationMs": 1883.5,
+            "mean": 16.668141592920353,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999999272,
+            "p99": 16.899999999997817,
+            "max": 16.900000000001455,
+            "over25": 0,
+            "over33_34": 0,
+            "over50": 0
+          },
+          "counters": {
+            "accepted": 432,
+            "rendered": 359
+          },
+          "dropped": 0.04589999999999987,
+          "position": {
+            "x": -4.763675904417468,
+            "y": 0.8664124122578754,
+            "z": 9.860124850353687
+          },
+          "camera": "follow"
+        },
+        "reset": {
+          "pacing": {
+            "sampleCount": 6,
+            "durationMs": 95.80000000000291,
+            "mean": 15.966666666667152,
+            "p50": 16.600000000002183,
+            "p95": 16.799999999999272,
+            "p99": 16.799999999999272,
+            "max": 16.799999999999272,
+            "over25": 0,
+            "over33_34": 0,
+            "over50": 0
+          },
+          "counters": {
+            "accepted": 439,
+            "rendered": 366
+          },
+          "dropped": 0.04589999999999987,
+          "position": {
+            "x": 1.467704122793404e-17,
+            "y": 0.9238791668818991,
+            "z": 5.36377711977133e-17
+          },
+          "camera": "follow"
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "hiddenMethod": "Controlled document.hidden getter + visibilitychange in the real game; browser tab suspension is not claimed.",
+  "passed": true
+}

@@ -1,0 +1,24 @@
+Проверки не прошли: not ok 3 - checks receipt avoids identical checks but invalidates code, test and dependency edits
+  ---
+  duration_ms: 166.2244
+  type: 'test'
+  location: 'C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\agent-knowledge.test.js:50:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tests/agent-knowledge.test.js:56:10)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+
+Полные журналы: .check-logs/

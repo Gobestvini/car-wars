@@ -6,6 +6,9 @@ export const MAX_RENDER_FPS = 60;
 export class FrameRateLimiter {
   constructor(maxFps = MAX_RENDER_FPS) {
     this.intervalMs = 1000 / Math.max(1, Number.isFinite(maxFps) ? maxFps : MAX_RENDER_FPS);
+    // Up to 1 ms accommodates sub-millisecond callback jitter without admitting
+    // adjacent callbacks at high refresh rates. Keep the deadline on its grid.
+    this.toleranceMs = Math.min(1, this.intervalMs * .06);
     this.nextFrameTime = null;
   }
 
@@ -17,11 +20,11 @@ export class FrameRateLimiter {
       this.nextFrameTime = timestamp + this.intervalMs;
       return true;
     }
-    if (timestamp + 1e-6 < this.nextFrameTime) return false;
+    if (timestamp + this.toleranceMs < this.nextFrameTime) return false;
 
     // Skip missed slots after a stall but keep the cadence grid during normal jitter.
     const lateness = Math.max(0, timestamp - this.nextFrameTime);
-    const missedIntervals = Math.floor(lateness / this.intervalMs) + 1;
+    const missedIntervals = Math.floor(lateness / this.intervalMs + 1e-9) + 1;
     this.nextFrameTime += missedIntervals * this.intervalMs;
     return true;
   }

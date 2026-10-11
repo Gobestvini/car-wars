@@ -1,0 +1,28 @@
+# Кандидаты после аудита — TASK-0079
+
+2026-10-11. Это проверенные точки кода и проектные варианты, **не уже реализованные оптимизации**. Полный baseline18runs собран, численные бюджеты/ёмкости зафиксированы в plan.md и baseline-2026-10-11.md. По отдельному allocation sampling первыми CPU кандидатами стали scalar/scratch SAT footprintsOverlap и slab segmentHitsRect: их стеки дают основной sampled churn. Каждое изменение ещё требует собственного сравнения и регрессий.
+
+## Повторное использование
+
+- Traffic.add создаёт simulation/mesh, затем отдельный logical state/AI/listener; removeAt снимает body/listener и уничтожает уникальную police geometry. В reuse дорогой storage отделяется от новой logical жизни. Старый state помечается неактивным, старый callback проверяет lease, logical id остаётся новым. Возвращённый stale lease не может освободить уже переизданный storage. Role/asset/world ключи несовместимы; bounded capacity включает все варианты, а не умножается на них.
+- CarSimulation.reset сейчас сбрасывает позу/движение/повреждения, но не полностью suspension result/grounded/load/lateral/longitudinal и sleep state. Acquire потребует полноценного сброса и одного damage listener. Civilian tuning возвращается к defaults, police получает актуальную player tuning. Detached bodies удаляются на release. Shared ground/static owner остаётся у player/city.
+- CarSimulation.impactCooldowns индексирует контакты через other.body.id. Повторно выданный Cannon body сохраняет id: при despawn нужно удалить cooldown старой жизни у наблюдателей, иначе новое столкновение может подавляться старым таймером. Traffic violations используют actor.id; новый logical id сохраняет их семантику. Broadphase/contact state после remove→add проверяется реальными столкновениями.
+- Police deformation привязана к уникальной geometry и хранит исходные attributes. Её можно удерживать вместе со storage и restore перед acquire. Effect containers ограничиваются количеством police, reset перед новой жизнью. Shared materials/textures не уничтожаются на release.
+- Building proxies: baseline-счётчики created/released/active/highWater добавлены. Совместимый lazy cache по entry с LRU только неактивных — кандидат; точный idle budget зависит от measured overlap/memory. Quality влияет и на inactive cached roof/depth. Активный proxy нельзя отнять ради лимита, opaque instance/caps/art восстанавливаются согласованно. Полный dispose освобождает active и cached части.
+- TireSmoke/ParticlePool/TireTracks/pickups уже bounded/instanced. Новый дублирующий pool не нужен. Проверяются final owner/dispose и reuse существующих буферов. Player damageEffects и player model/light glow пока не имеют явного полного pagehide owner teardown.
+- TireSmoke.dispose удаляет geometry/material/texture, но не вызывает InstancedMesh.dispose для instance buffer; ParticlePool.dispose это уже делает. Финальный owner должен остановить RAF и освободить player model/glow/wheel pivots, city/static colliders, active/free traffic/effects и GPU profiler ровно один раз. Pagehide.persisted=true означает временное сохранение страницы: уничтожать reusable сцену в этой ветке нельзя. Once-listener с ранним return также не подходит, иначе он пропустит последующий постоянный уход. Нужны отдельные проверки сохранения при persisted и конечного dispose.
+
+## CPU
+
+- main fixed-step повторно создаёт actor snapshots, Map velocitiesBefore, Set police IDs, source arrays, policeForArrest и делает find по id. Один внутренний view на шаг и ID index должны сохранять before-velocity значения и порядок контактов. Public snapshots не становятся scratch-объектами со скрытой мутацией при следующем шаге.
+- TireSmoke sample сортирует все источники, создаёт selected/liveIds и повторно сканирует capacity для activeCount; update обходит512 и загружает все instances даже при малом active. При free/active lists нужно сохранить исходный порядок выбора свободного slot, random stream, priority/distance tie order и alpha. GPU compaction не меняет lifecycle/emission.
+- RepairPickupVisuals.update создаёт transform/axis/clone для каждого элемента и заново вызывает surfaceHeight. Persistent scratch и кэш высот на city generation эквивалентны исходному bob/rotation; rebuild создаёт новую визуализацию/кэш.
+- Physics raycasts — кандидат для подробного CPU profile: prepare и syncWheelPositions используют world.raycastClosest для каждого колеса; Cannon SAP.aabbQuery сканирует body list. Если профиль подтвердит доминирование, допустим специализированный индекс support colliders для выбора **кандидатов**, с прежним Cannon narrow phase. Ground plane, rounded/rotated curbs, reset/rebuild/remove, динамический support и порядок равноудалённых hits требуют отдельной регрессии. Частоту raycasts/physics и физический результат снижать нельзя. Это ещё не решение применять индекс.
+
+## Рендер
+
+- Статическая сцена уже сильно instanced/merged. Сначала измерить оставшиеся matrix updates и отдельные walls/landmarks; большой batch может ухудшить culling. Entry→instance mapping и bounds сохраняются.
+- MiniatureBlur при autoClear=true выполняет явные clear перед renderer.render/fullscreen.render. Эквивалентность удаления дублирующих clears проверяется renderer-state tests, fallback/MSAA, GPU color/frequency fixture и одинаковыми captures. Векторы/Color для сохранения состояния можно переиспользовать; reentrancy/state restoration остаются корректными.
+- Прозрачные damage/skid effects могут отправлять только активные instances; сохранить порядок blending и low-quality limit, не терять fades. Bounds включают всю анимацию. Culling машины не должен убирать её нужную offscreen тень.
+
+Каждый принятый candidate обязан получить измерение до/после и regression evidence. Код этих оптимизаций ещё не реализован.

@@ -1,0 +1,6 @@
+{"scenario":"skid","repeat":1,"frames":3502,"max":{"tireSmoke":10,"damageSmoke":69,"proxies":0,"proxyCreated":0}}
+{"scenario":"fade","repeat":1,"frames":3532,"max":{"tireSmoke":0,"damageSmoke":70,"proxies":2,"proxyCreated":20}}
+{"scenario":"skid","repeat":2,"frames":3471,"max":{"tireSmoke":10,"damageSmoke":70,"proxies":0,"proxyCreated":0}}
+{"scenario":"fade","repeat":2,"frames":3507,"max":{"tireSmoke":0,"damageSmoke":70,"proxies":2,"proxyCreated":20}}
+{"scenario":"skid","repeat":3,"frames":3582,"max":{"tireSmoke":10,"damageSmoke":70,"proxies":0,"proxyCreated":0}}
+{"scenario":"fade","repeat":3,"frames":3505,"max":{"tireSmoke":0,"damageSmoke":72,"proxies":2,"proxyCreated":20}}

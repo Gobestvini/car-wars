@@ -64,6 +64,7 @@ export class BuildingOcclusion {
     this.position = new THREE.Vector3();
     this.scale = new THREE.Vector3();
     this.quaternion = new THREE.Quaternion();
+    this.stats = { created: 0, released: 0, active: 0, highWater: 0 };
   }
 
   setInstanceVisible(entry, visible) {
@@ -76,6 +77,8 @@ export class BuildingOcclusion {
   }
 
   startProxy(entry, caps) {
+    this.stats.created++; this.stats.active++;
+    this.stats.highWater = Math.max(this.stats.highWater, this.stats.active);
     const group = new this.THREE.Group();
     group.position.set(entry.x, 0, entry.z);
     const material = new this.THREE.MeshStandardMaterial({ color: entry.color, roughness: 0.88, transparent: true, opacity: 1, depthWrite: false });
@@ -131,6 +134,7 @@ export class BuildingOcclusion {
   }
 
   finishProxy(entry, caps) {
+    this.stats.released++; this.stats.active--;
     this.scene.remove(entry.proxy);
     const materials = new Set();
     entry.proxy.traverse(node => {
@@ -173,6 +177,7 @@ export class BuildingOcclusion {
   dispose() {
     for (const entry of this.entries) {
       if (!entry.proxy) continue;
+      this.stats.released++; this.stats.active--;
       this.scene.remove(entry.proxy);
       const materials = new Set();
       entry.proxy.traverse(node => {

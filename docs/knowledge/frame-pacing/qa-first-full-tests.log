@@ -1,0 +1,2244 @@
+TAP version 13
+# Subtest: arrest requires wanted level, stopped player and assigned nearby physical police
+ok 1 - arrest requires wanted level, stopped player and assigned nearby physical police
+  ---
+  duration_ms: 0.7146
+  type: 'test'
+  ...
+# Subtest: continuous hold enters a five-second countdown, then completes once
+ok 2 - continuous hold enters a five-second countdown, then completes once
+  ---
+  duration_ms: 1.7208
+  type: 'test'
+  ...
+# Subtest: physical escape cancels immediately and a new attempt must complete a fresh hold
+ok 3 - physical escape cancels immediately and a new attempt must complete a fresh hold
+  ---
+  duration_ms: 0.7753
+  type: 'test'
+  ...
+# Subtest: two police do not shorten the timer, and losing all valid police cancels
+ok 4 - two police do not shorten the timer, and losing all valid police cancels
+  ---
+  duration_ms: 0.651
+  type: 'test'
+  ...
+# Subtest: hidden, free camera, destroyed vehicle, reset, and invalid time do not complete an arrest
+ok 5 - hidden, free camera, destroyed vehicle, reset, and invalid time do not complete an arrest
+  ---
+  duration_ms: 0.8726
+  type: 'test'
+  ...
+# Subtest: destroyed police cannot hold or finish an arrest, while an operational partner can
+ok 6 - destroyed police cannot hold or finish an arrest, while an operational partner can
+  ---
+  duration_ms: 0.622
+  type: 'test'
+  ...
+# Subtest: art variation never mutates the plan or physical city dimensions
+ok 7 - art variation never mutates the plan or physical city dimensions
+  ---
+  duration_ms: 165.1288
+  type: 'test'
+  ...
+# Subtest: batched decoration fades with its building and returns after fade; low hides optional proxies
+ok 8 - batched decoration fades with its building and returns after fade; low hides optional proxies
+  ---
+  duration_ms: 126.3068
+  type: 'test'
+  ...
+# Subtest: traffic art reuses geometry and stays inside its original collision footprint
+ok 9 - traffic art reuses geometry and stays inside its original collision footprint
+  ---
+  duration_ms: 13.5441
+  type: 'test'
+  ...
+# Subtest: varied street trees connect to their trunks, use four batches and dispose
+ok 10 - varied street trees connect to their trunks, use four batches and dispose
+  ---
+  duration_ms: 1003.9636
+  type: 'test'
+  ...
+# Subtest: decorative trees remain fixed and add no collisions while a physical car drives through
+ok 11 - decorative trees remain fixed and add no collisions while a physical car drives through
+  ---
+  duration_ms: 33.6509
+  type: 'test'
+  ...
+# Subtest: camera segment detects a building only in front of its endpoint
+ok 12 - camera segment detects a building only in front of its endpoint
+  ---
+  duration_ms: 0.5684
+  type: 'test'
+  ...
+# Subtest: any visible vehicle sample detects the blocker; unrelated buildings remain opaque
+ok 13 - any visible vehicle sample detects the blocker; unrelated buildings remain opaque
+  ---
+  duration_ms: 0.4584
+  type: 'test'
+  ...
+# Subtest: a wall behind the near body surface does not fade at bumper contact
+ok 14 - a wall behind the near body surface does not fade at bumper contact
+  ---
+  duration_ms: 0.5226
+  type: 'test'
+  ...
+# Subtest: sight targets follow the tilted body and stop at its near surface
+ok 15 - sight targets follow the tilted body and stop at its near surface
+  ---
+  duration_ms: 0.3884
+  type: 'test'
+  ...
+# Subtest: fade smoothing has equal results at 30/60/120fps
+ok 16 - fade smoothing has equal results at 30/60/120fps
+  ---
+  duration_ms: 0.1636
+  type: 'test'
+  ...
+# Subtest: nearby clear buildings stay opaque; actual blockers fade and restore as a whole
+ok 17 - nearby clear buildings stay opaque; actual blockers fade and restore as a whole
+  ---
+  duration_ms: 7.5398
+  type: 'test'
+  ...
+# Subtest: camera target scale follows the bounded smooth speed range
+ok 18 - camera target scale follows the bounded smooth speed range
+  ---
+  duration_ms: 0.8226
+  type: 'test'
+  ...
+# Subtest: zooming out is monotone, bounded, and frame-rate independent
+ok 19 - zooming out is monotone, bounded, and frame-rate independent
+  ---
+  duration_ms: 0.8033
+  type: 'test'
+  ...
+# Subtest: zooming in is monotone, bounded, and frame-rate independent
+ok 20 - zooming in is monotone, bounded, and frame-rate independent
+  ---
+  duration_ms: 0.179
+  type: 'test'
+  ...
+# Subtest: zero, negative, and non-finite dt leave camera state unchanged
+ok 21 - zero, negative, and non-finite dt leave camera state unchanged
+  ---
+  duration_ms: 0.0828
+  type: 'test'
+  ...
+# Subtest: visual damage boundaries distinguish every stage
+ok 22 - visual damage boundaries distinguish every stage
+  ---
+  duration_ms: 1.5968
+  type: 'test'
+  ...
+# Subtest: healthy idle produces no emission; darker damage increases smoke and fire
+ok 23 - healthy idle produces no emission; darker damage increases smoke and fire
+  ---
+  duration_ms: 0.8124
+  type: 'test'
+  ...
+# Subtest: direct terminal jump burns for 0.6s and bursts exactly once at all frame rates
+ok 24 - direct terminal jump burns for 0.6s and bursts exactly once at all frame rates
+  ---
+  duration_ms: 1.7892
+  type: 'test'
+  ...
+# Subtest: reset before the flash cancels terminal time and repeats the full warning
+ok 25 - reset before the flash cancels terminal time and repeats the full warning
+  ---
+  duration_ms: 0.1864
+  type: 'test'
+  ...
+# Subtest: impact severity has a quiet threshold, grows monotonically, and saturates
+ok 26 - impact severity has a quiet threshold, grows monotonically, and saturates
+  ---
+  duration_ms: 1.1233
+  type: 'test'
+  ...
+# Subtest: damage is bounded and traction fades only after half damage
+ok 27 - damage is bounded and traction fades only after half damage
+  ---
+  duration_ms: 0.204
+  type: 'test'
+  ...
+# Subtest: wheel detaches only after a severe direct hit near its mount
+ok 28 - wheel detaches only after a severe direct hit near its mount
+  ---
+  duration_ms: 0.1384
+  type: 'test'
+  ...
+# Subtest: detached wheel becomes a dynamic body and reset restores it
+ok 29 - detached wheel becomes a dynamic body and reset restores it
+  ---
+  duration_ms: 8.9861
+  type: 'test'
+  ...
+# Subtest: a direct high-speed wheel-zone impact detaches only the struck wheel
+ok 30 - a direct high-speed wheel-zone impact detaches only the struck wheel
+  ---
+  duration_ms: 5.7412
+  type: 'test'
+  ...
+# Subtest: a real chassis impact against a static box creates one fixed-step impact event
+ok 31 - a real chassis impact against a static box creates one fixed-step impact event
+  ---
+  duration_ms: 3.0402
+  type: 'test'
+  ...
+# Subtest: front, rear, side, and rotated-front impacts keep their local contact direction
+ok 32 - front, rear, side, and rotated-front impacts keep their local contact direction
+  ---
+  duration_ms: 6.4983
+  type: 'test'
+  ...
+# Subtest: a 17 m/s frontal hit dents more than a 6 m/s frontal hit
+ok 33 - a 17 m/s frontal hit dents more than a 6 m/s frontal hit
+  ---
+  duration_ms: 3.1052
+  type: 'test'
+  ...
+# Subtest: holding against a wall does not repeat damage; a later separated hit counts
+ok 34 - holding against a wall does not repeat damage; a later separated hit counts
+  ---
+  duration_ms: 23.5393
+  type: 'test'
+  ...
+# Subtest: repeated real frontal impacts accumulate to the destroyed state
+ok 35 - repeated real frontal impacts accumulate to the destroyed state
+  ---
+  duration_ms: 6.1471
+  type: 'test'
+  ...
+# Subtest: reset clears impact and damage state
+ok 36 - reset clears impact and damage state
+  ---
+  duration_ms: 0.5992
+  type: 'test'
+  ...
+# Subtest: thirty seconds of simulation without contact causes no damage
+ok 37 - thirty seconds of simulation without contact causes no damage
+  ---
+  duration_ms: 43.5695
+  type: 'test'
+  ...
+# Subtest: destroyed engine loses throttle while chassis still steps and brakes
+ok 38 - destroyed engine loses throttle while chassis still steps and brakes
+  ---
+  duration_ms: 2.7245
+  type: 'test'
+  ...
+# Subtest: deformation is local in metres across rotated nonuniform transforms and restores exactly
+ok 39 - deformation is local in metres across rotated nonuniform transforms and restores exactly
+  ---
+  duration_ms: 2.0021
+  type: 'test'
+  ...
+# Subtest: hard-edge mode does not weld normals across perpendicular body panels after damage
+ok 40 - hard-edge mode does not weld normals across perpendicular body panels after damage
+  ---
+  duration_ms: 0.6195
+  type: 'test'
+  ...
+# Subtest: city plans are deterministic for a seed and vary with seed/road width
+ok 41 - city plans are deterministic for a seed and vary with seed/road width
+  ---
+  duration_ms: 4.2504
+  type: 'test'
+  ...
+# Subtest: default district expands to a deterministic grid with connected street intersections
+ok 42 - default district expands to a deterministic grid with connected street intersections
+  ---
+  duration_ms: 0.4841
+  type: 'test'
+  ...
+# Subtest: buildings fit their blocks, stay inside walls, and clear streets at all supported widths
+ok 43 - buildings fit their blocks, stay inside walls, and clear streets at all supported widths
+  ---
+  duration_ms: 2.5857
+  type: 'test'
+  ...
+# Subtest: invalid width options fail before a city plan can be used
+ok 44 - invalid width options fail before a city plan can be used
+  ---
+  duration_ms: 0.3604
+  type: 'test'
+  ...
+# Subtest: city dimensions are configurable and wider footprints keep seeded heights stable
+ok 45 - city dimensions are configurable and wider footprints keep seeded heights stable
+  ---
+  duration_ms: 0.6539
+  type: 'test'
+  ...
+# Subtest: circular joystick motion activates only after a deliberate fast rotation
+ok 46 - circular joystick motion activates only after a deliberate fast rotation
+  ---
+  duration_ms: 0.5741
+  type: 'test'
+  ...
+# Subtest: angle wrapping, speed gate, weak input, and stale gestures are handled
+ok 47 - angle wrapping, speed gate, weak input, and stale gestures are handled
+  ---
+  duration_ms: 0.1429
+  type: 'test'
+  ...
+# Subtest: one-finger drift command completes two compact physical circles in either direction
+ok 48 - one-finger drift command completes two compact physical circles in either direction
+  ---
+  duration_ms: 59.9773
+  type: 'test'
+  ...
+# Subtest: opposite joystick direction brakes before reverse, then forward
+ok 49 - opposite joystick direction brakes before reverse, then forward
+  ---
+  duration_ms: 1.064
+  type: 'test'
+  ...
+# Subtest: reverse steering is inverted and sideways direction keeps its current gear
+ok 50 - reverse steering is inverted and sideways direction keeps its current gear
+  ---
+  duration_ms: 0.1776
+  type: 'test'
+  ...
+# Subtest: reverse engages only within a 15%-of-half-turn sector around the car rear
+ok 51 - reverse engages only within a 15%-of-half-turn sector around the car rear
+  ---
+  duration_ms: 0.2063
+  type: 'test'
+  ...
+# Subtest: normal corner assist brakes at high turn demand while intentional drift keeps the chosen gear
+ok 52 - normal corner assist brakes at high turn demand while intentional drift keeps the chosen gear
+  ---
+  duration_ms: 0.1536
+  type: 'test'
+  ...
+# Subtest: corner assist reduces lateral speed without sacrificing turn progress at city speeds
+ok 53 - corner assist reduces lateral speed without sacrificing turn progress at city speeds
+  ---
+  duration_ms: 129.3944
+  type: 'test'
+  ...
+# Subtest: physical forward-reverse-forward transition and coasting
+ok 54 - physical forward-reverse-forward transition and coasting
+  ---
+  duration_ms: 32.9412
+  type: 'test'
+  ...
+# Subtest: first frame and paused time do not form intervals
+ok 55 - first frame and paused time do not form intervals
+  ---
+  duration_ms: 0.5858
+  type: 'test'
+  ...
+# Subtest: known percentile thresholds, duration and bounded eviction
+ok 56 - known percentile thresholds, duration and bounded eviction
+  ---
+  duration_ms: 1.0562
+  type: 'test'
+  ...
+# Subtest: render limiter caps high-refresh callbacks at 60 while preserving 30 FPS
+ok 57 - render limiter caps high-refresh callbacks at 60 while preserving 30 FPS
+  ---
+  duration_ms: 1.8249
+  type: 'test'
+  ...
+# Subtest: render limiter retains cadence under jitter and resets after a pause
+ok 58 - render limiter retains cadence under jitter and resets after a pause
+  ---
+  duration_ms: 0.2758
+  type: 'test'
+  ...
+# Subtest: render frequency does not change fixed simulation time
+ok 59 - render frequency does not change fixed simulation time
+  ---
+  duration_ms: 2.1723
+  type: 'test'
+  ...
+# Subtest: long stalls have bounded catch-up and pause discards remainder
+ok 60 - long stalls have bounded catch-up and pause discards remainder
+  ---
+  duration_ms: 0.2538
+  type: 'test'
+  ...
+# Subtest: 60Hz early callbacks and seeded jitter preserve cadence over a minute
+ok 61 - 60Hz early callbacks and seeded jitter preserve cadence over a minute
+  ---
+  duration_ms: 3.5808
+  type: 'test'
+  ...
+# Subtest: near60Hz and jittered discrete refresh rates keep the long-window cap
+ok 62 - near60Hz and jittered discrete refresh rates keep the long-window cap
+  ---
+  duration_ms: 4.0109
+  type: 'test'
+  ...
+# Subtest: invalid timestamp and a late stall cannot cause catch-up render bursts
+ok 63 - invalid timestamp and a late stall cannot cause catch-up render bursts
+  ---
+  duration_ms: 0.1577
+  type: 'test'
+  ...
+# Subtest: first touch is neutral regardless of its screen position
+ok 64 - first touch is neutral regardless of its screen position
+  ---
+  duration_ms: 0.9984
+  type: 'test'
+  ...
+# Subtest: same drag gives the same direction and throttle anywhere on screen
+ok 65 - same drag gives the same direction and throttle anywhere on screen
+  ---
+  duration_ms: 0.6941
+  type: 'test'
+  ...
+# Subtest: dead zone, analog throttle and knob radius are bounded
+ok 66 - dead zone, analog throttle and knob radius are bounded
+  ---
+  duration_ms: 0.1288
+  type: 'test'
+  ...
+# Subtest: loader keeps progress monotonic and only releases the menu after completion
+ok 67 - loader keeps progress monotonic and only releases the menu after completion
+  ---
+  duration_ms: 2.0506
+  type: 'test'
+  ...
+# Subtest: failure cancels dismissal and ignores late resource events until Retry
+ok 68 - failure cancels dismissal and ignores late resource events until Retry
+  ---
+  duration_ms: 0.5965
+  type: 'test'
+  ...
+# Subtest: fatal WebGL failure offers no retry
+ok 69 - fatal WebGL failure offers no retry
+  ---
+  duration_ms: 0.3795
+  type: 'test'
+  ...
+# Subtest: completed boot cannot reopen a loading screen during gameplay
+ok 70 - completed boot cannot reopen a loading screen during gameplay
+  ---
+  duration_ms: 0.2974
+  type: 'test'
+  ...
+# Subtest: blur targets follow CSS size, DPR and portrait or landscape aspect ratios
+ok 71 - blur targets follow CSS size, DPR and portrait or landscape aspect ratios
+  ---
+  duration_ms: 1.5725
+  type: 'test'
+  ...
+# Subtest: blur strength supports direct-render zero and bounded intensity without invalid uniforms
+ok 72 - blur strength supports direct-render zero and bounded intensity without invalid uniforms
+  ---
+  duration_ms: 0.3013
+  type: 'test'
+  ...
+# Subtest: vertical blur mask is independent of screen width and grows symmetrically above and below focus
+ok 73 - vertical blur mask is independent of screen width and grows symmetrically above and below focus
+  ---
+  duration_ms: 0.405
+  type: 'test'
+  ...
+# Subtest: scene MSAA request respects quality and available maximum samples
+ok 74 - scene MSAA request respects quality and available maximum samples
+  ---
+  duration_ms: 0.214
+  type: 'test'
+  ...
+# Subtest: focus band has a fixed screen center and user-sized screen-space coverage
+ok 75 - focus band has a fixed screen center and user-sized screen-space coverage
+  ---
+  duration_ms: 0.2505
+  type: 'test'
+  ...
+# Subtest: textured GLB fits simulation mounts and shares one atlas across five meshes
+ok 76 - textured GLB fits simulation mounts and shares one atlas across five meshes
+  ---
+  duration_ms: 23.3447
+  type: 'test'
+  ...
+# Subtest: authored body has local impact geometry and restores exact positions and normals
+ok 77 - authored body has local impact geometry and restores exact positions and normals
+  ---
+  duration_ms: 22.85
+  type: 'test'
+  ...
+# Subtest: reverse lamps track actual motion and reverse drive request; lens anchors survive dents
+ok 78 - reverse lamps track actual motion and reverse drive request; lens anchors survive dents
+  ---
+  duration_ms: 21.5062
+  type: 'test'
+  ...
+# Subtest: smaller visual tires retain ground contact and fit their arches at full steering/compression
+ok 79 - smaller visual tires retain ground contact and fit their arches at full steering/compression
+  ---
+  duration_ms: 12.3472
+  type: 'test'
+  ...
+# Subtest: police take twice the normalized damage from the same real impact and keep their wheels attached
+ok 80 - police take twice the normalized damage from the same real impact and keep their wheels attached
+  ---
+  duration_ms: 21.8758
+  type: 'test'
+  ...
+# Subtest: police damage listener is explicitly removable without disabling another vehicle
+ok 81 - police damage listener is explicitly removable without disabling another vehicle
+  ---
+  duration_ms: 0.7002
+  type: 'test'
+  ...
+# Subtest: wanted level profiles normalize safely and monotonically scale distant chase speed
+ok 82 - wanted level profiles normalize safely and monotonically scale distant chase speed
+  ---
+  duration_ms: 2.3585
+  type: 'test'
+  ...
+# Subtest: pending stars do not activate police; a confirmed wanted star applies without resetting pursuit
+ok 83 - pending stars do not activate police; a confirmed wanted star applies without resetting pursuit
+  ---
+  duration_ms: 0.4778
+  type: 'test'
+  ...
+# Subtest: recovery survives a wanted-level change and retains the active star profile
+ok 84 - recovery survives a wanted-level change and retains the active star profile
+  ---
+  duration_ms: 12.9291
+  type: 'test'
+  ...
+# Subtest: ram thresholds escalate by stars while low levels keep a six-metre follow distance
+ok 85 - ram thresholds escalate by stars while low levels keep a six-metre follow distance
+  ---
+  duration_ms: 0.3142
+  type: 'test'
+  ...
+# Subtest: stalled police reverse away from a building and another police car, even near the player
+ok 86 - stalled police reverse away from a building and another police car, even near the player
+  ---
+  duration_ms: 19.1486
+  type: 'test'
+  ...
+# Subtest: rear traffic and walls prevent reversing into a second collision
+ok 87 - rear traffic and walls prevent reversing into a second collision
+  ---
+  duration_ms: 2.6842
+  type: 'test'
+  ...
+# Subtest: reverse speed is bounded and a newly occupied rear corridor cancels throttle
+ok 88 - reverse speed is bounded and a newly occupied rear corridor cancels throttle
+  ---
+  duration_ms: 0.8954
+  type: 'test'
+  ...
+# Subtest: an approaching target does not hide a police car stuck at the same position
+ok 89 - an approaching target does not hide a police car stuck at the same position
+  ---
+  duration_ms: 0.7068
+  type: 'test'
+  ...
+# Subtest: recovery completes, brakes reverse motion before pursuit and resets cleanly
+ok 90 - recovery completes, brakes reverse motion before pursuit and resets cleanly
+  ---
+  duration_ms: 0.7325
+  type: 'test'
+  ...
+# Subtest: moving police and police holding a stopped target do not trigger reverse recovery
+ok 91 - moving police and police holding a stopped target do not trigger reverse recovery
+  ---
+  duration_ms: 1.4675
+  type: 'test'
+  ...
+# Subtest: shared vehicle physics actually back a stalled police car away from a wall
+ok 92 - shared vehicle physics actually back a stalled police car away from a wall
+  ---
+  duration_ms: 81.1933
+  type: 'test'
+  ...
+# Subtest: exact spawn rejects bad geometry while explicit nearest-safe reports its moved pose
+ok 93 - exact spawn rejects bad geometry while explicit nearest-safe reports its moved pose
+  ---
+  duration_ms: 1.4705
+  type: 'test'
+  ...
+# Subtest: spawn safety reports occupied exact poses as pending and blocks closing followers
+ok 94 - spawn safety reports occupied exact poses as pending and blocks closing followers
+  ---
+  duration_ms: 0.4253
+  type: 'test'
+  ...
+# Subtest: police plans a real corridor detour around a rotated building
+ok 95 - police plans a real corridor detour around a rotated building
+  ---
+  duration_ms: 0.7678
+  type: 'test'
+  ...
+# Subtest: police role uses the shared world, pursues through collision, and disposes cleanly
+ok 96 - police role uses the shared world, pursues through collision, and disposes cleanly
+  ---
+  duration_ms: 278.0676
+  type: 'test'
+  ...
+# Subtest: police role retains at least 90% of player acceleration on a clear straight
+ok 97 - police role retains at least 90% of player acceleration on a clear straight
+  ---
+  duration_ms: 60.8433
+  type: 'test'
+  ...
+# Subtest: 12 deterministic road pickups cover all nine map sectors at each supported road width
+ok 98 - 12 deterministic road pickups cover all nine map sectors at each supported road width
+  ---
+  duration_ms: 28.6635
+  type: 'test'
+  ...
+# Subtest: swept pickup trigger catches high speed crossings, rejects healthy/high/flying/inactive cases, and consumes once
+ok 99 - swept pickup trigger catches high speed crossings, rejects healthy/high/flying/inactive cases, and consumes once
+  ---
+  duration_ms: 4.0072
+  type: 'test'
+  ...
+# Subtest: dashes align their long axis with both directions of the street grid
+ok 100 - dashes align their long axis with both directions of the street grid
+  ---
+  duration_ms: 1.2003
+  type: 'test'
+  ...
+# Subtest: mark spacing, bounds, and junction gaps derive from the current road plan
+ok 101 - mark spacing, bounds, and junction gaps derive from the current road plan
+  ---
+  duration_ms: 1.1994
+  type: 'test'
+  ...
+# Subtest: both paint batches receive shadows below continuous tire decals in either road direction
+ok 102 - both paint batches receive shadows below continuous tire decals in either road direction
+  ---
+  duration_ms: 258.3378
+  type: 'test'
+  ...
+# Subtest: sidewalk corners are disjoint and never cover the asphalt plaza
+ok 103 - sidewalk corners are disjoint and never cover the asphalt plaza
+  ---
+  duration_ms: 14.6328
+  type: 'test'
+  ...
+# Subtest: road grid and spawn plaza form a continuous, non-overlapping surface
+ok 104 - road grid and spawn plaza form a continuous, non-overlapping surface
+  ---
+  duration_ms: 49.93
+  type: 'test'
+  ...
+# Subtest: rounded sidewalk cuts the acute intersection point and preserves the block-facing corner in all quadrants
+ok 105 - rounded sidewalk cuts the acute intersection point and preserves the block-facing corner in all quadrants
+  ---
+  duration_ms: 1.594
+  type: 'test'
+  ...
+# Subtest: every real road-grid corner is rounded consistently for supported widths and zero width is unchanged
+ok 106 - every real road-grid corner is rounded consistently for supported widths and zero width is unchanged
+  ---
+  duration_ms: 2498.3574
+  type: 'test'
+  ...
+# Subtest: rounded top, asphalt patch, curved wall and curb are batched and have upward top normals
+ok 107 - rounded top, asphalt patch, curved wall and curb are batched and have upward top normals
+  ---
+  duration_ms: 46.7388
+  type: 'test'
+  ...
+# Subtest: straight curb trim stays on the sidewalk and shares both tangent endpoints with the curved trim
+ok 108 - straight curb trim stays on the sidewalk and shares both tangent endpoints with the curved trim
+  ---
+  duration_ms: 1.944
+  type: 'test'
+  ...
+# Subtest: rounded convex support ends at its arc and leaves the cut corner clear for a raycast
+ok 109 - rounded convex support ends at its arc and leaves the cut corner clear for a raycast
+  ---
+  duration_ms: 3.8198
+  type: 'test'
+  ...
+# Subtest: profile records actual accepted renders at 120/144 Hz, never external callbacks
+ok 110 - profile records actual accepted renders at 120/144 Hz, never external callbacks
+  ---
+  duration_ms: 4.842
+  type: 'test'
+  ...
+# Subtest: bounded profile retains chronological rows; stopped profiling still counts renders
+ok 111 - bounded profile retains chronological rows; stopped profiling still counts renders
+  ---
+  duration_ms: 0.8795
+  type: 'test'
+  ...
+# Subtest: GPU absence is explicit, not CPU time reported as GPU
+ok 112 - GPU absence is explicit, not CPU time reported as GPU
+  ---
+  duration_ms: 0.3252
+  type: 'test'
+  ...
+# Subtest: disjoint query results are discarded and GPU queries are bounded
+ok 113 - disjoint query results are discarded and GPU queries are bounded
+  ---
+  duration_ms: 0.3099
+  type: 'test'
+  ...
+# Subtest: saved defaults persist only validated user settings and can be cleared
+ok 114 - saved defaults persist only validated user settings and can be cleared
+  ---
+  duration_ms: 2.6338
+  type: 'test'
+  ...
+# Subtest: draw distance is persisted independently per camera mode and invalid values fall back
+ok 115 - draw distance is persisted independently per camera mode and invalid values fall back
+  ---
+  duration_ms: 0.3606
+  type: 'test'
+  ...
+# Subtest: missing or invalid fields use their own factory fallback
+ok 116 - missing or invalid fields use their own factory fallback
+  ---
+  duration_ms: 0.2034
+  type: 'test'
+  ...
+# Subtest: unsupported versions, corrupt JSON, and unavailable storage safely fall back
+ok 117 - unsupported versions, corrupt JSON, and unavailable storage safely fall back
+  ---
+  duration_ms: 0.345
+  type: 'test'
+  ...
+# Subtest: skid controls validate, persist, and default for profiles created before the controls existed
+ok 118 - skid controls validate, persist, and default for profiles created before the controls existed
+  ---
+  duration_ms: 0.3531
+  type: 'test'
+  ...
+# Subtest: blur control preserves disabled/strong values and migrates older profiles without changing other settings
+ok 119 - blur control preserves disabled/strong values and migrates older profiles without changing other settings
+  ---
+  duration_ms: 0.3957
+  type: 'test'
+  ...
+# Subtest: blur focus size persists independently and old profiles keep the default
+ok 120 - blur focus size persists independently and old profiles keep the default
+  ---
+  duration_ms: 0.4494
+  type: 'test'
+  ...
+# Subtest: shadow coverage contains the visible ground footprint plus caster margin
+ok 121 - shadow coverage contains the visible ground footprint plus caster margin
+  ---
+  duration_ms: 2.3471
+  type: 'test'
+  ...
+# Subtest: shadow centre snaps to stable world-space texels as the camera moves
+ok 122 - shadow centre snaps to stable world-space texels as the camera moves
+  ---
+  duration_ms: 0.7735
+  type: 'test'
+  ...
+# Subtest: current art sun covers road receivers and high casters after camera and city translations
+ok 123 - current art sun covers road receivers and high casters after camera and city translations
+  ---
+  duration_ms: 2.8203
+  type: 'test'
+  ...
+# Subtest: sidewalk supports match the elevated footprint across road widths without reaching the road or plaza
+ok 124 - sidewalk supports match the elevated footprint across road widths without reaching the road or plaza
+  ---
+  duration_ms: 20.0156
+  type: 'test'
+  ...
+# Subtest: union walls remove internal seams, road-facing caps stay on top, and zero-width sidewalks are empty
+ok 125 - union walls remove internal seams, road-facing caps stay on top, and zero-width sidewalks are empty
+  ---
+  duration_ms: 21.0192
+  type: 'test'
+  ...
+# Subtest: sidewalk tops, union faces, and road-facing caps are rendered in at most three batches
+ok 126 - sidewalk tops, union faces, and road-facing caps are rendered in at most three batches
+  ---
+  duration_ms: 2.3657
+  type: 'test'
+  ...
+# Subtest: surface sampler follows the raised slab while road and ground levels remain unchanged
+ok 127 - surface sampler follows the raised slab while road and ground levels remain unchanged
+  ---
+  duration_ms: 12.6361
+  type: 'test'
+  ...
+# Subtest: the live city scene adds raycastable raised slabs and removes every support collider on dispose
+ok 128 - the live city scene adds raycastable raised slabs and removes every support collider on dispose
+  ---
+  duration_ms: 668.9676
+  type: 'test'
+  ...
+# Subtest: detached wheels use the raised support group and physically land on a sidewalk slab
+ok 129 - detached wheels use the raised support group and physically land on a sidewalk slab
+  ---
+  duration_ms: 35.1417
+  type: 'test'
+  ...
+# Subtest: ten city rebuilds across supported road widths release every sidewalk support body
+ok 130 - ten city rebuilds across supported road widths release every sidewalk support body
+  ---
+  duration_ms: 807.4161
+  type: 'test'
+  ...
+# Subtest: a vehicle settles at the same suspension height above road and sidewalk tops
+ok 131 - a vehicle settles at the same suspension height above road and sidewalk tops
+  ---
+  duration_ms: 11.4289
+  type: 'test'
+  ...
+# Subtest: a 14.4 km/h approach and retreat cross a 15 cm curb without launching or losing wheel contact
+ok 132 - a 14.4 km/h approach and retreat cross a 15 cm curb without launching or losing wheel contact
+  ---
+  duration_ms: 10.9654
+  type: 'test'
+  ...
+# Subtest: signals and stop lines use independently expected right-hand world coordinates
+ok 133 - signals and stop lines use independently expected right-hand world coordinates
+  ---
+  duration_ms: 2.6973
+  type: 'test'
+  ...
+# Subtest: signal assemblies sit fully inside approach sidewalks for every cardinal direction and road width
+ok 134 - signal assemblies sit fully inside approach sidewalks for every cardinal direction and road width
+  ---
+  duration_ms: 4.4088
+  type: 'test'
+  ...
+# Subtest: fog beams originate at the active bulb and point down the incoming approach
+ok 135 - fog beams originate at the active bulb and point down the incoming approach
+  ---
+  duration_ms: 0.5798
+  type: 'test'
+  ...
+# Subtest: four signal assemblies persist and fog beam colors follow the controller on the real city
+ok 136 - four signal assemblies persist and fog beam colors follow the controller on the real city
+  ---
+  duration_ms: 214.3039
+  type: 'test'
+  ...
+# Subtest: stop lines span only the incoming half-road and share an approach plane
+ok 137 - stop lines span only the incoming half-road and share an approach plane
+  ---
+  duration_ms: 0.3511
+  type: 'test'
+  ...
+# Subtest: fog renders only active volumes in the camera frustum, and restores their latest phase on return
+ok 138 - fog renders only active volumes in the camera frustum, and restores their latest phase on return
+  ---
+  duration_ms: 1.651
+  type: 'test'
+  ...
+# Subtest: a visible fog volume is retained when its source lamp is outside the frame
+ok 139 - a visible fog volume is retained when its source lamp is outside the frame
+  ---
+  duration_ms: 0.5414
+  type: 'test'
+  ...
+# Subtest: whole prop footprints fit sidewalks and avoid roads, buildings, signals, trees and rotated obstacles
+ok 140 - whole prop footprints fit sidewalks and avoid roads, buildings, signals, trees and rotated obstacles
+  ---
+  duration_ms: 813.346
+  type: 'test'
+  ...
+# Subtest: narrow and completely occupied sidewalks skip impossible placements
+ok 141 - narrow and completely occupied sidewalks skip impossible placements
+  ---
+  duration_ms: 31.4811
+  type: 'test'
+  ...
+# Subtest: eight shared model batches fit declared envelopes, stand on the surface, and dispose once over ten rebuilds
+ok 142 - eight shared model batches fit declared envelopes, stand on the surface, and dispose once over ten rebuilds
+  ---
+  duration_ms: 809.4096
+  type: 'test'
+  ...
+# Subtest: selection uses file statuses, priorities, done dependencies and explicit QA rework
+ok 143 - selection uses file statuses, priorities, done dependencies and explicit QA rework
+  ---
+  duration_ms: 1.0673
+  type: 'test'
+  ...
+# Subtest: dependency metadata is required and parsed by ID
+ok 144 - dependency metadata is required and parsed by ID
+  ---
+  duration_ms: 0.9686
+  type: 'test'
+  ...
+# Subtest: planner only invokes planning in read-only, commits docs and preserves dirty source
+ok 145 - planner only invokes planning in read-only, commits docs and preserves dirty source
+  ---
+  duration_ms: 989.8859
+  type: 'test'
+  ...
+# Subtest: planner rejects collisions, path escapes, ready dependencies and dirty INDEX without writing
+ok 146 - planner rejects collisions, path escapes, ready dependencies and dirty INDEX without writing
+  ---
+  duration_ms: 403.537
+  type: 'test'
+  ...
+# Subtest: dev/QA claims exclude each other; rejection returns to dev; status and index stay aligned for CRLF
+ok 147 - dev/QA claims exclude each other; rejection returns to dev; status and index stay aligned for CRLF
+  ---
+  duration_ms: 309.0868
+  type: 'test'
+  ...
+# Subtest: blocked planning preserves a draft and never starts a worker
+ok 148 - blocked planning preserves a draft and never starts a worker
+  ---
+  duration_ms: 440.2963
+  type: 'test'
+  ...
+# Subtest: pairing accepts only a one-time code in the owner private chat
+ok 149 - pairing accepts only a one-time code in the owner private chat
+  ---
+  duration_ms: 1.8397
+  type: 'test'
+  ...
+# Subtest: offset and pending updates persist together; replay-safe recovery marks running jobs interrupted
+ok 150 - offset and pending updates persist together; replay-safe recovery marks running jobs interrupted
+  ---
+  duration_ms: 1.1361
+  type: 'test'
+  ...
+# Subtest: message router handles commands, replies, images and unsupported media explicitly
+ok 151 - message router handles commands, replies, images and unsupported media explicitly
+  ---
+  duration_ms: 0.5935
+  type: 'test'
+  ...
+# Subtest: model prompts preserve scope and constrain task path
+ok 152 - model prompts preserve scope and constrain task path
+  ---
+  duration_ms: 1.3877
+  type: 'test'
+  ...
+# Subtest: pause preserves incoming requests and replies carry original screenshot and task context
+ok 153 - pause preserves incoming requests and replies carry original screenshot and task context
+  ---
+  duration_ms: 0.4965
+  type: 'test'
+  ...
+# Subtest: running status identifies the actual phase, task and elapsed time
+ok 154 - running status identifies the actual phase, task and elapsed time
+  ---
+  duration_ms: 0.2601
+  type: 'test'
+  ...
+# Subtest: QA reply resumes the same task and worktree with the original user request
+ok 155 - QA reply resumes the same task and worktree with the original user request
+  ---
+  duration_ms: 0.1963
+  type: 'test'
+  ...
+# Subtest: QA task status is visible while the job remains running for crash recovery
+ok 156 - QA task status is visible while the job remains running for crash recovery
+  ---
+  duration_ms: 0.1234
+  type: 'test'
+  ...
+# Subtest: phase policy keeps medium effort except helping and caps tool output
+ok 157 - phase policy keeps medium effort except helping and caps tool output
+  ---
+  duration_ms: 1.6056
+  type: 'test'
+  ...
+# Subtest: instructions are role-specific and retain concise-work guidance
+ok 158 - instructions are role-specific and retain concise-work guidance
+  ---
+  duration_ms: 0.3522
+  type: 'test'
+  ...
+# Subtest: normalizes token aliases, cache and reasoning without inventing missing fields
+ok 159 - normalizes token aliases, cache and reasoning without inventing missing fields
+  ---
+  duration_ms: 1.2102
+  type: 'test'
+  ...
+# Subtest: sums stages once and counts stages with missing usage as unknown
+ok 160 - sums stages once and counts stages with missing usage as unknown
+  ---
+  duration_ms: 0.3839
+  type: 'test'
+  ...
+# Subtest: event reader parses JSONL across arbitrary chunks and ignores non-JSON lines
+ok 161 - event reader parses JSONL across arbitrary chunks and ignores non-JSON lines
+  ---
+  duration_ms: 0.5334
+  type: 'test'
+  ...
+# Subtest: memory stores verified outcome, hides stale facts and does not learn failures
+ok 162 - memory stores verified outcome, hides stale facts and does not learn failures
+  ---
+  duration_ms: 425.7911
+  type: 'test'
+  ...
+# Subtest: memory context remains bounded for long reports
+ok 163 - memory context remains bounded for long reports
+  ---
+  duration_ms: 718.0987
+  type: 'test'
+  ...
+# Subtest: checks receipt avoids identical checks but invalidates code, test and dependency edits
+ok 164 - checks receipt avoids identical checks but invalidates code, test and dependency edits
+  ---
+  duration_ms: 812.2007
+  type: 'test'
+  ...
+# Subtest: failed or changing checks cannot produce a reusable success receipt
+ok 165 - failed or changing checks cannot produce a reusable success receipt
+  ---
+  duration_ms: 252.5649
+  type: 'test'
+  ...
+# Subtest: publishes only worker changes and preserves foreign instructions
+ok 166 - publishes only worker changes and preserves foreign instructions
+  ---
+  duration_ms: 1805.6253
+  type: 'test'
+  ...
+# Subtest: preserves worker commit when main advances during the job
+ok 167 - preserves worker commit when main advances during the job
+  ---
+  duration_ms: 982.7897
+  type: 'test'
+  ...
+# Subtest: preserves worker commit and local game edits without merging over them
+ok 168 - preserves worker commit and local game edits without merging over them
+  ---
+  duration_ms: 674.4571
+  type: 'test'
+  ...
+# Subtest: push rejection retains the completed local commit
+ok 169 - push rejection retains the completed local commit
+  ---
+  duration_ms: 855.1748
+  type: 'test'
+  ...
+# Subtest: phase notifications keep ready-for-qa visible, serialize senders, and retry after network failure
+ok 170 - phase notifications keep ready-for-qa visible, serialize senders, and retry after network failure
+  ---
+  duration_ms: 2.4135
+  type: 'test'
+  ...
+# Subtest: state writes are durable and Telegram API transport accepts an injected fake fetch
+ok 171 - state writes are durable and Telegram API transport accepts an injected fake fetch
+  ---
+  duration_ms: 14.6201
+  type: 'test'
+  ...
+# Subtest: pipeline runs planner, Luna, then Sol fallback, and requires successful external checks
+ok 172 - pipeline runs planner, Luna, then Sol fallback, and requires successful external checks
+  ---
+  duration_ms: 1150.5485
+  type: 'test'
+  ...
+# Subtest: pipeline refuses to report done after fallback checks fail
+ok 173 - pipeline refuses to report done after fallback checks fail
+  ---
+  duration_ms: 460.2809
+  type: 'test'
+  ...
+# Subtest: native check process crash stops expensive fallback and preserves the task
+ok 174 - native check process crash stops expensive fallback and preserves the task
+  ---
+  duration_ms: 406.1009
+  type: 'test'
+  ...
+# Subtest: complete pipeline commits and pushes the task after verification
+ok 175 - complete pipeline commits and pushes the task after verification
+  ---
+  duration_ms: 1142.4717
+  type: 'test'
+  ...
+# Subtest: schema ready-for-qa without completed task report cannot publish
+ok 176 - schema ready-for-qa without completed task report cannot publish
+  ---
+  duration_ms: 304.8662
+  type: 'test'
+  ...
+# Subtest: blocked planner retains its draft and never starts implementation
+ok 177 - blocked planner retains its draft and never starts implementation
+  ---
+  duration_ms: 316.5598
+  type: 'test'
+  ...
+# Subtest: Codex runner streams both outputs to a log and reports activity before completion
+ok 178 - Codex runner streams both outputs to a log and reports activity before completion
+  ---
+  duration_ms: 222.3021
+  type: 'test'
+  ...
+# Subtest: deliberately resumed request preserves its worktree and does not create another task
+ok 179 - deliberately resumed request preserves its worktree and does not create another task
+  ---
+  duration_ms: 559.597
+  type: 'test'
+  ...
+# Subtest: QA rejection returns the same task to development and a separate recheck can approve the repair
+ok 180 - QA rejection returns the same task to development and a separate recheck can approve the repair
+  ---
+  duration_ms: 653.6001
+  type: 'test'
+  ...
+# Subtest: second QA rejection stops repair loop, preserves findings, and prevents publishing
+ok 181 - second QA rejection stops repair loop, preserves findings, and prevents publishing
+  ---
+  duration_ms: 672.9334
+  type: 'test'
+  ...
+# Subtest: unavailable required manual QA check blocks publication without an automatic repair
+ok 182 - unavailable required manual QA check blocks publication without an automatic repair
+  ---
+  duration_ms: 457.4182
+  type: 'test'
+  ...
+# Subtest: QA passed claim with failed checks cannot publish
+ok 183 - QA passed claim with failed checks cannot publish
+  ---
+  duration_ms: 449.2012
+  type: 'test'
+  ...
+# Subtest: QA modifying implementation or documentation invalidates its approval
+ok 184 - QA modifying implementation or documentation invalidates its approval
+  ---
+  duration_ms: 1354.3356
+  type: 'test'
+  ...
+# Subtest: tire smoke requires a stronger grounded slip than ordinary track skidding
+ok 185 - tire smoke requires a stronger grounded slip than ordinary track skidding
+  ---
+  duration_ms: 0.9653
+  type: 'test'
+  ...
+# Subtest: cloud particles fade in alpha while growing instead of shrinking into points
+ok 186 - cloud particles fade in alpha while growing instead of shrinking into points
+  ---
+  duration_ms: 5.9847
+  type: 'test'
+  ...
+# Subtest: emitters confirm slip, honor role/distance budgets, and retain particles when sources vanish
+ok 187 - emitters confirm slip, honor role/distance budgets, and retain particles when sources vanish
+  ---
+  duration_ms: 9.7656
+  type: 'test'
+  ...
+# Subtest: low quality and invalid/distant emitters stay within fixed particle budgets
+ok 188 - low quality and invalid/distant emitters stay within fixed particle budgets
+  ---
+  duration_ms: 11.0249
+  type: 'test'
+  ...
+# Subtest: segment cross sections share identical edges and remain finite on straight and curved paths
+ok 189 - segment cross sections share identical edges and remain finite on straight and curved paths
+  ---
+  duration_ms: 1.871
+  type: 'test'
+  ...
+# Subtest: sections follow the visible road and sidewalk elevations, including transitions
+ok 190 - sections follow the visible road and sidewalk elevations, including transitions
+  ---
+  duration_ms: 24.4188
+  type: 'test'
+  ...
+# Subtest: threshold calibration rejects a measured gentle turn and accepts a sustained physical skid
+ok 191 - threshold calibration rejects a measured gentle turn and accepts a sustained physical skid
+  ---
+  duration_ms: 141.6321
+  type: 'test'
+  ...
+# Subtest: zero movement and invalid positions create no non-finite geometry
+ok 192 - zero movement and invalid positions create no non-finite geometry
+  ---
+  duration_ms: 1.1435
+  type: 'test'
+  ...
+# Subtest: real discontinuities and disable/reset terminate strips
+ok 193 - real discontinuities and disable/reset terminate strips
+  ---
+  duration_ms: 2.2447
+  type: 'test'
+  ...
+# Subtest: position jump of at least 4m closes the old strip and starts a fresh one
+ok 194 - position jump of at least 4m closes the old strip and starts a fresh one
+  ---
+  duration_ms: 1.5472
+  type: 'test'
+  ...
+# Subtest: slip hysteresis keeps a strip connected across threshold fluctuations
+ok 195 - slip hysteresis keeps a strip connected across threshold fluctuations
+  ---
+  duration_ms: 4.3498
+  type: 'test'
+  ...
+# Subtest: straight acceleration and mild cornering do not leave tracks; sustained hard slides do
+ok 196 - straight acceleration and mild cornering do not leave tracks; sustained hard slides do
+  ---
+  duration_ms: 1.7546
+  type: 'test'
+  ...
+# Subtest: reverse starts a new strip instead of connecting across the direction change
+ok 197 - reverse starts a new strip instead of connecting across the direction change
+  ---
+  duration_ms: 0.8915
+  type: 'test'
+  ...
+# Subtest: simulation time advances with stopped wheels and prepareRender publishes it
+ok 198 - simulation time advances with stopped wheels and prepareRender publishes it
+  ---
+  duration_ms: 0.5298
+  type: 'test'
+  ...
+# Subtest: multiple vehicle sources share one clock and retain independent wheel strips
+ok 199 - multiple vehicle sources share one clock and retain independent wheel strips
+  ---
+  duration_ms: 1.0161
+  type: 'test'
+  ...
+# Subtest: prepareRender publishes changed geometry attributes and the bounded draw range
+ok 200 - prepareRender publishes changed geometry attributes and the bounded draw range
+  ---
+  duration_ms: 0.3669
+  type: 'test'
+  ...
+# Subtest: actual end caps fade, internal joins do not, and age is interpolated per cross section
+ok 201 - actual end caps fade, internal joins do not, and age is interpolated per cross section
+  ---
+  duration_ms: 1.979
+  type: 'test'
+  ...
+# Subtest: terminal cap uses up to 0.5m and limits short-strip fade to strip length
+ok 202 - terminal cap uses up to 0.5m and limits short-strip fade to strip length
+  ---
+  duration_ms: 0.7453
+  type: 'test'
+  ...
+# Subtest: full live buffer embeds terminal fade without overwriting its visible segment
+ok 203 - full live buffer embeds terminal fade without overwriting its visible segment
+  ---
+  duration_ms: 0.4307
+  type: 'test'
+  ...
+# Subtest: four-wheel maximum-rate ring does not overwrite a visible segment before 45 seconds
+ok 204 - four-wheel maximum-rate ring does not overwrite a visible segment before 45 seconds
+  ---
+  duration_ms: 56.8586
+  type: 'test'
+  ...
+# Subtest: curb subdivision covers both flat surfaces without bridging, in either direction and obliquely
+ok 205 - curb subdivision covers both flat surfaces without bridging, in either direction and obliquely
+  ---
+  duration_ms: 11.6116
+  type: 'test'
+  ...
+# Subtest: surface-aware terminal caps cross the curb, and clipping cannot overwrite a live ring slot
+ok 206 - surface-aware terminal caps cross the curb, and clipping cannot overwrite a live ring slot
+  ---
+  duration_ms: 4.7926
+  type: 'test'
+  ...
+# Subtest: right lanes have independent world coordinates in all four directions
+ok 207 - right lanes have independent world coordinates in all four directions
+  ---
+  duration_ms: 10.3008
+  type: 'test'
+  ...
+# Subtest: city street graph is connected, directed into right-side lanes, and supports varied seeded destinations
+ok 208 - city street graph is connected, directed into right-side lanes, and supports varied seeded destinations
+  ---
+  duration_ms: 28.9709
+  type: 'test'
+  ...
+# Subtest: no-path and invalid destinations fail safely without non-finite route points
+ok 209 - no-path and invalid destinations fail safely without non-finite route points
+  ---
+  duration_ms: 0.2562
+  type: 'test'
+  ...
+# Subtest: detour search avoids returning through the blocked junction while retaining the destination
+ok 210 - detour search avoids returning through the blocked junction while retaining the destination
+  ---
+  duration_ms: 0.723
+  type: 'test'
+  ...
+# Subtest: six hybrid AI cars follow varied road paths and replan for two simulated minutes
+ok 211 - six hybrid AI cars follow varied road paths and replan for two simulated minutes
+  ---
+  duration_ms: 458.9924
+  type: 'test'
+  ...
+# Subtest: AI brakes for a stationary player sharing its lane
+ok 212 - AI brakes for a stationary player sharing its lane
+  ---
+  duration_ms: 64.131
+  type: 'test'
+  ...
+# Subtest: AI detects a stationary leader independently of its commanded speed and passes when a corridor is clear
+ok 213 - AI detects a stationary leader independently of its commanded speed and passes when a corridor is clear
+  ---
+  duration_ms: 53.5677
+  type: 'test'
+  ...
+# Subtest: AI waits instead of entering occupied passing lanes when the route corridor is blocked
+ok 214 - AI waits instead of entering occupied passing lanes when the route corridor is blocked
+  ---
+  duration_ms: 117.0397
+  type: 'test'
+  ...
+# Subtest: conflicting paths reserve the same junction for one car with stable id priority
+ok 215 - conflicting paths reserve the same junction for one car with stable id priority
+  ---
+  duration_ms: 6.7266
+  type: 'test'
+  ...
+# Subtest: conflicting physical traffic crosses a reserved junction without chassis contact
+ok 216 - conflicting physical traffic crosses a reserved junction without chassis contact
+  ---
+  duration_ms: 32.338
+  type: 'test'
+  ...
+# Subtest: escape destination prefers cover and avoids an immediate turn back into the player
+ok 217 - escape destination prefers cover and avoids an immediate turn back into the player
+  ---
+  duration_ms: 12.2859
+  type: 'test'
+  ...
+# Subtest: a real player impact triggers fast escape, survives logical LOD, then resumes normal driving
+ok 218 - a real player impact triggers fast escape, survives logical LOD, then resumes normal driving
+  ---
+  duration_ms: 139.871
+  type: 'test'
+  ...
+# Subtest: touching without an impact does not trigger escape, reset cancels an active escape
+ok 219 - touching without an impact does not trigger escape, reset cancels an active escape
+  ---
+  duration_ms: 12.9738
+  type: 'test'
+  ...
+# Subtest: escape ignores a red light while normal driving resumes signal compliance
+ok 220 - escape ignores a red light while normal driving resumes signal compliance
+  ---
+  duration_ms: 38.4884
+  type: 'test'
+  ...
+# Subtest: front and side player impacts release contact before the NPC accelerates away
+ok 221 - front and side player impacts release contact before the NPC accelerates away
+  ---
+  duration_ms: 202.2576
+  type: 'test'
+  ...
+# Subtest: ignoring signs during escape does not disable braking for an occupied lane
+ok 222 - ignoring signs during escape does not disable braking for an occupied lane
+  ---
+  duration_ms: 22.7186
+  type: 'test'
+  ...
+# TRAFFIC_STOP_AUDIT {"count":709,"unexplained":0,"reasonCounts":{"intersection-reservation":70,"turn-staging":41,"signal-red":480,"queue-wait":161,"blocked-by-leader":160,"oncoming-priority":32,"signal-yellow":35,"blocked-junction-exit":5},"controllerStall":[],"stagingOnly":[]}
+# TRAFFIC_FLOW_PROFILE {"samples":300,"aiMsP95":1.1369999999997162,"prepareMsP95":1.3294999999998254,"worldStepMsP95":0.5071000000025379,"physicalMax":10,"logicalMax":58,"physicalAndLogicalBothObserved":true}
+# Subtest: overhead city traffic stays alive for five minutes, including offscreen cars
+ok 223 - overhead city traffic stays alive for five minutes, including offscreen cars
+  ---
+  duration_ms: 30826.6764
+  type: 'test'
+  ...
+# Subtest: cause-aware traffic waits hold across city seeds and road widths
+ok 224 - cause-aware traffic waits hold across city seeds and road widths
+  ---
+  duration_ms: 8004.2213
+  type: 'test'
+  ...
+# Subtest: traffic resumes after reducing a full 300-car congestion load
+ok 225 - traffic resumes after reducing a full 300-car congestion load
+  ---
+  duration_ms: 4492.3112
+  type: 'test'
+  ...
+# Subtest: opposing straight traffic and four right turns can share a junction, crossing traffic cannot
+ok 226 - opposing straight traffic and four right turns can share a junction, crossing traffic cannot
+  ---
+  duration_ms: 8.4449
+  type: 'test'
+  ...
+# Subtest: left turns yield to opposing straight traffic independently of request age
+ok 227 - left turns yield to opposing straight traffic independently of request age
+  ---
+  duration_ms: 0.8809
+  type: 'test'
+  ...
+# Subtest: smooth turn paths join the correct lanes and lookahead advances monotonically
+ok 228 - smooth turn paths join the correct lanes and lookahead advances monotonically
+  ---
+  duration_ms: 3.0918
+  type: 'test'
+  ...
+# Subtest: turn staging preserves a safe pass-by gap on the curb side at all road widths
+ok 229 - turn staging preserves a safe pass-by gap on the curb side at all road widths
+  ---
+  duration_ms: 0.5026
+  type: 'test'
+  ...
+# Subtest: opposing straight cars start together and occupy the junction concurrently in both LOD modes
+ok 230 - opposing straight cars start together and occupy the junction concurrently in both LOD modes
+  ---
+  duration_ms: 176.3607
+  type: 'test'
+  ...
+# Subtest: an older left-turn request yields to opposing straight traffic then resumes safely
+ok 231 - an older left-turn request yields to opposing straight traffic then resumes safely
+  ---
+  duration_ms: 159.8631
+  type: 'test'
+  ...
+# Subtest: a same-lane platoon starts its follower before the leader has left the junction
+ok 232 - a same-lane platoon starts its follower before the leader has left the junction
+  ---
+  duration_ms: 30.416
+  type: 'test'
+  ...
+# Subtest: followers enter behind left and right turns without waiting for the whole maneuver
+ok 233 - followers enter behind left and right turns without waiting for the whole maneuver
+  ---
+  duration_ms: 196.3056
+  type: 'test'
+  ...
+# Subtest: four simultaneous right turns clear onto their own lanes without contact
+ok 234 - four simultaneous right turns clear onto their own lanes without contact
+  ---
+  duration_ms: 99.43
+  type: 'test'
+  ...
+# Subtest: a left turn gives up an unentered permit when oncoming straight traffic approaches
+ok 235 - a left turn gives up an unentered permit when oncoming straight traffic approaches
+  ---
+  duration_ms: 82.8978
+  type: 'test'
+  ...
+# Subtest: a following straight car passes the staged left-turn vehicle on its curb side
+ok 236 - a following straight car passes the staged left-turn vehicle on its curb side
+  ---
+  duration_ms: 31.7122
+  type: 'test'
+  ...
+# Subtest: a stationary upstream oncoming queue does not deadlock an otherwise clear left turn
+ok 237 - a stationary upstream oncoming queue does not deadlock an otherwise clear left turn
+  ---
+  duration_ms: 8.0645
+  type: 'test'
+  ...
+# Subtest: a cruising left turn brakes in its lane when the staging point is too close or behind
+ok 238 - a cruising left turn brakes in its lane when the staging point is too close or behind
+  ---
+  duration_ms: 130.5821
+  type: 'test'
+  ...
+# Subtest: a right turn has priority over an older unentered conflicting straight permit
+ok 239 - a right turn has priority over an older unentered conflicting straight permit
+  ---
+  duration_ms: 48.4055
+  type: 'test'
+  ...
+# Subtest: right priority does not drive into an already entered conflicting vehicle
+ok 240 - right priority does not drive into an already entered conflicting vehicle
+  ---
+  duration_ms: 5.8116
+  type: 'test'
+  ...
+# Subtest: left and right turns retain the straight cruise target and clear at cruising speed
+ok 241 - left and right turns retain the straight cruise target and clear at cruising speed
+  ---
+  duration_ms: 52.3213
+  type: 'test'
+  ...
+# Subtest: U-turns have straight lead-ins and one semicircle with monotone heading, entirely within the junction
+ok 242 - U-turns have straight lead-ins and one semicircle with monotone heading, entirely within the junction
+  ---
+  duration_ms: 1.3873
+  type: 'test'
+  ...
+# Subtest: physical and logical U-turns exit aligned in the opposite lane without reversing or extra loops
+ok 243 - physical and logical U-turns exit aligned in the opposite lane without reversing or extra loops
+  ---
+  duration_ms: 61.8685
+  type: 'test'
+  ...
+# Subtest: an escaping left turn ignores oncoming priority but retains collision exclusion
+ok 244 - an escaping left turn ignores oncoming priority but retains collision exclusion
+  ---
+  duration_ms: 12.0857
+  type: 'test'
+  ...
+# Subtest: following uses bumper orientation, headway, and reaction closing speed
+ok 245 - following uses bumper orientation, headway, and reaction closing speed
+  ---
+  duration_ms: 1.5855
+  type: 'test'
+  ...
+# Subtest: traffic diagnostics tie a long stationary wait to the measured leader footprint
+ok 246 - traffic diagnostics tie a long stationary wait to the measured leader footprint
+  ---
+  duration_ms: 64.5549
+  type: 'test'
+  ...
+# Subtest: sideways displacement is not route progress, lawful waits reset the stall clock
+ok 247 - sideways displacement is not route progress, lawful waits reset the stall clock
+  ---
+  duration_ms: 0.2591
+  type: 'test'
+  ...
+# Subtest: swept passing checks rear traffic, oncoming traffic, and occupied return corridor
+ok 248 - swept passing checks rear traffic, oncoming traffic, and occupied return corridor
+  ---
+  duration_ms: 0.92
+  type: 'test'
+  ...
+# Subtest: passing keeps the entire rotated chassis inside narrow road boundaries
+ok 249 - passing keeps the entire rotated chassis inside narrow road boundaries
+  ---
+  duration_ms: 0.7235
+  type: 'test'
+  ...
+# Subtest: passing cannot return with its front bumper beyond the junction stop plane
+ok 250 - passing cannot return with its front bumper beyond the junction stop plane
+  ---
+  duration_ms: 0.2092
+  type: 'test'
+  ...
+# Subtest: red queues never pass and resume within three seconds of green in both LOD modes
+ok 251 - red queues never pass and resume within three seconds of green in both LOD modes
+  ---
+  duration_ms: 115.5004
+  type: 'test'
+  ...
+# Subtest: recovery sees oncoming cars beyond the immediate following cells
+ok 252 - recovery sees oncoming cars beyond the immediate following cells
+  ---
+  duration_ms: 19.4898
+  type: 'test'
+  ...
+# Subtest: two touching physical cars separate and regain route progress within fifteen seconds
+ok 253 - two touching physical cars separate and regain route progress within fifteen seconds
+  ---
+  duration_ms: 111.9789
+  type: 'test'
+  ...
+# Subtest: stalled vehicle without a leader reevaluates its directed route after three seconds
+ok 254 - stalled vehicle without a leader reevaluates its directed route after three seconds
+  ---
+  duration_ms: 9.5451
+  type: 'test'
+  ...
+# Subtest: a physically displaced NPC returns to its directed lane without resetting its identity
+ok 255 - a physically displaced NPC returns to its directed lane without resetting its identity
+  ---
+  duration_ms: 42.0363
+  type: 'test'
+  ...
+# Subtest: a clear passing maneuver moves past its blocker and returns to the right lane
+ok 256 - a clear passing maneuver moves past its blocker and returns to the right lane
+  ---
+  duration_ms: 57.4132
+  type: 'test'
+  ...
+# Subtest: a fully occupied retreat corridor keeps a contact jam waiting and is retried
+ok 257 - a fully occupied retreat corridor keeps a contact jam waiting and is retried
+  ---
+  duration_ms: 11.023
+  type: 'test'
+  ...
+# Subtest: physical and logical followers move within three seconds of their leader clearing
+ok 258 - physical and logical followers move within three seconds of their leader clearing
+  ---
+  duration_ms: 42.3239
+  type: 'test'
+  ...
+# Subtest: blocked dead-end exit waits when no alternative exists and resumes when cleared
+ok 259 - blocked dead-end exit waits when no alternative exists and resumes when cleared
+  ---
+  duration_ms: 13.9896
+  type: 'test'
+  ...
+# Subtest: blocked junction exit selects a clear detour to the same goal in physical and logical traffic
+ok 260 - blocked junction exit selects a clear detour to the same goal in physical and logical traffic
+  ---
+  duration_ms: 61.6461
+  type: 'test'
+  ...
+# Subtest: all four occupied exits wait and a newly cleared side street is retried
+ok 261 - all four occupied exits wait and a newly cleared side street is retried
+  ---
+  duration_ms: 10.515
+  type: 'test'
+  ...
+# Subtest: blocked exit never changes a red-light decision or an already entered junction path
+ok 262 - blocked exit never changes a red-light decision or an already entered junction path
+  ---
+  duration_ms: 10.0976
+  type: 'test'
+  ...
+# Subtest: entered reservation survives timeouts and route advancement until rear bumper clears
+ok 263 - entered reservation survives timeouts and route advancement until rear bumper clears
+  ---
+  duration_ms: 4.7082
+  type: 'test'
+  ...
+# Subtest: reservation decisions are independent of state iteration order and honor request age
+ok 264 - reservation decisions are independent of state iteration order and honor request age
+  ---
+  duration_ms: 12.9326
+  type: 'test'
+  ...
+# Subtest: a junction owner finishes turning instead of following the opposing waiting lane
+ok 265 - a junction owner finishes turning instead of following the opposing waiting lane
+  ---
+  duration_ms: 28.4994
+  type: 'test'
+  ...
+# Subtest: followers close a large gap to a lawful queue instead of stopping with the leader
+ok 266 - followers close a large gap to a lawful queue instead of stopping with the leader
+  ---
+  duration_ms: 23.1549
+  type: 'test'
+  ...
+# Subtest: real-city NPC spawn and reset retain the independently expected right side at every width
+ok 267 - real-city NPC spawn and reset retain the independently expected right side at every width
+  ---
+  duration_ms: 200.1402
+  type: 'test'
+  ...
+# Subtest: split single-car stepping matches the standalone solver and uses one world integration
+ok 268 - split single-car stepping matches the standalone solver and uses one world integration
+  ---
+  duration_ms: 31.5238
+  type: 'test'
+  ...
+# Subtest: two shared-world cars exchange momentum in a real chassis contact
+ok 269 - two shared-world cars exchange momentum in a real chassis contact
+  ---
+  duration_ms: 12.1683
+  type: 'test'
+  ...
+# Subtest: front, rear, and side contacts transfer momentum through the same chassis solver
+ok 270 - front, rear, and side contacts transfer momentum through the same chassis solver
+  ---
+  duration_ms: 14.2531
+  type: 'test'
+  ...
+# Subtest: traffic count changes are fixed-step queued and repeated resizing cleans up bodies
+ok 271 - traffic count changes are fixed-step queued and repeated resizing cleans up bodies
+  ---
+  duration_ms: 77.6698
+  type: 'test'
+  ...
+# Subtest: traffic count configuration supports the tenfold 60 default and 300 maximum
+ok 272 - traffic count configuration supports the tenfold 60 default and 300 maximum
+  ---
+  duration_ms: 275.3983
+  type: 'test'
+  ...
+# Subtest: blocked insertion retains pending count, retries after clearance, and cancels on reduction
+ok 273 - blocked insertion retains pending count, retries after clearance, and cancels on reduction
+  ---
+  duration_ms: 7.1987
+  type: 'test'
+  ...
+# Subtest: repeated resets preserve NPC identities and place every oriented footprint safely
+ok 274 - repeated resets preserve NPC identities and place every oriented footprint safely
+  ---
+  duration_ms: 6.3912
+  type: 'test'
+  ...
+# Subtest: distant traffic swaps to logical route motion and becomes physical near the player
+ok 275 - distant traffic swaps to logical route motion and becomes physical near the player
+  ---
+  duration_ms: 9.2258
+  type: 'test'
+  ...
+# Subtest: physical LOD does not cascade across remote neighbors or retain a ground-only contact
+ok 276 - physical LOD does not cascade across remote neighbors or retain a ground-only contact
+  ---
+  duration_ms: 5.767
+  type: 'test'
+  ...
+# Subtest: traffic signals control internal intersections and leave boundary nodes on priority rules
+ok 277 - traffic signals control internal intersections and leave boundary nodes on priority rules
+  ---
+  duration_ms: 3.5393
+  type: 'test'
+  ...
+# Subtest: signal phases are deterministic and conflicting axes never have green together
+ok 278 - signal phases are deterministic and conflicting axes never have green together
+  ---
+  duration_ms: 7.5605
+  type: 'test'
+  ...
+# Subtest: each green lasts sixteen seconds and budgets a full city block with start and turn allowance
+ok 279 - each green lasts sixteen seconds and budgets a full city block with start and turn allowance
+  ---
+  duration_ms: 4.729
+  type: 'test'
+  ...
+# Stacktrace:
+#     ptr0=0000034453BC0CF9
+#     ptr1=0000000000000000
+#     ptr2=0000000000000000
+#     ptr3=0000000000000000
+#     ptr4=0000000000000000
+#     ptr5=0000000000000000
+#     failure_message_object=00000090FF7F5B70
+# ==== JS stack trace =========================================
+#     0: ExitFrame [pc: 00000232ED8775FA]
+#     1: StubFrame [pc: 00000232ED8D084D]
+#     2: StubFrame [pc: 00000232ED8EB3DC]
+#     3: StubFrame [pc: 00000232ED978105]
+# Security context: 0
+#     4: /* anonymous */(aka /* anonymous */) [0000009A3EAFE8B1] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/src/traffic-spawn.js:76] [bytecode=00000079CBA07379 offset=170](this=0x034453bc0011 <undefined>,0x009a3eafe979 <String[836]: u\#\\xe959\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\xbff0\\x5c07\\x3314\\xa626\\xbca1\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xe999\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x3ff0\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xe9d9\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\x909\\x53bc\\x344\\x00\\x00\\x8ee8\\x22f9\\x4014\\x1459\\xbb5c\\x217\\x00\\x00\\x00\\x05\\x00\\xdb01\\xe43d\\x26c\\x00\\xe61\\xe43c\\x26c\\x00\\x4d79\\x7cff<\\x00\\x2a61\\x7cff<\\x00\\x5399\\x8211\\x35c\\x00\\x31d9\\xbb5c\\x217\\x00\\x00\\x00\\x04\\x00\\xdb81\\xe43d\\x26c\\x00\\xea29\\x3eaf\\x9a\\x00\\x00\\x00\\xff68\\xffff\\xebe1\\x3eaf\\x9a\\x00\\x999\\x53bc\\x344\\x00\\x00\\x00\\x04\\x00\\xeb01\\x3eaf\\x9a\\x00\\xeb41\\x3eaf\\x9a\\x00\\xeb81\\x3eaf\\x9a\\x00\\xebc1\\x3eaf\\x9a\\x00\\x2bb9\\xbb5c\\x217\\x00\\xcf9\\x53bc\\x344\\x00\\xea91\\x3eaf\\x9a\\x00\\x00\\x00\\x04\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\xbff0\\x5c07\\x3314\\xa626\\x3c91\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xeae1\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x5c07\\x3314\\xa626\\x3c91\\x00\\x00\\x00\\x3ff0\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xeb21\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x3ff0\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xeb61\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x3ff0\\x00\\x00\\x00\\x8000\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xeba1\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\x909\\x53bc\\x344\\x00\\x00\\x00\\x2800\\xc060\\x1099\\xbb5c\\x217\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\x78006\\x9a\\x00\\xdbd9\\xe43d\\x26c\\x00\\xea61\\x3eaf\\x9a\\x00\\xdd99\\xe43d\\x26c\\x00\\xd9e1\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xeb01\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x909\\x53bc\\x344\\x00\\x00\\x00\\x00\\xbff0\\xf6c9\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xec59\\x3eaf\\x9a\\x00\\x81\\x53bc\\x344\\x00\\x909\\x53bc\\x344\\x00\\x5c07\\x3314\\xa626\\x3c91\\xf6c9\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xec91\\x3eaf\\x9a\\x00\\x81\\x53bc\\x344\\x00\\x909\\x53bc\\x344\\x00\\x2d18\\x5444\\x21fb\\xbff9\\x909\\x53bc\\x344\\x00\\x70a4\\xa3d\\xa3d7\\x4000\\x909\\x53bc\\x344\\x00\\xa3d7\\x3d70\\xd70a\\x3feb\\x909\\x53bc\\x344\\x00\\x00\\xce44\\x11a2\\x4014\\x909\\x53bc\\x344\\x00\\x00\\x1328\\x388c\\x4017\\x1459\\xbb5c\\x217\\x00\\x00\\x00\\x05\\x00\\xdb01\\xe43d\\x26c\\x00\\xe61\\xe43c\\x26c\\x00\\x4d79\\x7cff<\\x00\\x2a99\\x7cff<\\x00\\x5399\\x8211\\x35c\\x00\\x31d9\\xbb5c\\x217\\x00\\x00\\x00\\x04\\x00\\xdb81\\xe43d\\x26c\\x00\\xed19\\x3eaf\\x9a\\x00\\x00\\x00\\xff68\\xffff\\xeed1\\x3eaf\\x9a\\x00\\x999\\x53bc\\x344\\x00\\x00\\x00\\x04\\x00\\xedf1\\x3eaf\\x9a\\x00\\xee31\\x3eaf\\x9a\\x00\\xee71\\x3eaf\\x9a\\x00\\xeeb1\\x3eaf\\x9a\\x00\\x2bb9\\xbb5c\\x217\\x00\\xcf9\\x53bc\\x344\\x00\\xed81\\x3eaf\\x9a\\x00\\x00\\x00\\x04\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\xbff0\\x5c07\\x3314\\xa626\\x3c91\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xedd1\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x5c07\\x3314\\xa626\\x3c91\\x00\\x00\\x00\\x3ff0\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xee11\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x3ff0\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xee51\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x3ff0\\x00\\x00\\x00\\x8000\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xee91\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\x909\\x53bc\\x344\\x00\\x00\\x00\\x5000\\xc05c\\x1099\\xbb5c\\x217\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\x78006\\x344\\x00\\xdbd9\\xe43d\\x26c\\x00\\xed51\\x3eaf\\x9a\\x00\\xdd99\\xe43d\\x26c\\x00\\xd9e1\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xedf1\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x909\\x53bc\\x344\\x00\\x00\\x00\\x00\\xbff0\\xf6c9\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xef49\\x3eaf\\x9a\\x00\\x81\\x53bc\\x344\\x00\\x909\\x53bc\\x344\\x00\\x5c07\\x3314\\xa626\\x3c91\\xf6c9\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xef81\\x3eaf\\x9a\\x00\\x81\\x53bc\\x344\\x00\\x909\\x53bc\\x344\\x00\\x2d18\\x5444\\x21fb\\xbff9\\x909\\x53bc\\x344\\x00\\x70a4\\xa3d\\xa3d7\\x4000\\x909\\x53bc\\x344\\x00\\xa3d7\\x3d70\\xd70a\\x3feb\\x909\\x53bc\\x344\\x00\\x00\\xff84\\x20d9\\x4014\\x909\\x53bc\\x344\\x00\\x00\\x2c80\\xa479\\x4015\\x1459\\xbb5c\\x217\\x00>)
+#     5: JavaScriptBuiltinContinuationFrame [pc: 00000232ED7CF580]
+#     6: footprintsOverlap(aka footprintsOverlap) [0000026CE43C0FF1] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/src/traffic-spawn.js:75] [bytecode=00000079CBA070C1 offset=362](this=0x034453bc0011 <undefined>,0x003c7cff5939 <Object map = 0000026CE43D6749>,0x003c7cff4271 <Object map = 000003D152B34369>,0x035c82115399 <HeapNumber 0.2>)
+#     7: /* anonymous */(aka /* anonymous */) [0000025603793DD1] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tests/traffic-spawn.test.js:~51] [pc=00000232CDAAA5AB](this=0x034453bc0011 <undefined>,0x003c7cff5939 <Object map = 0000026CE43D6749>)
+#     8: find [00000320F9487569](this=0x02560378ced9 <JSArray[672]>,0x025603793dd1 <JSFunction (sfi = 0000026CE43DF049)>)
+#     9: /* anonymous */ [0000026CE43E6BB9] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tests/traffic-spawn.test.js:~38] [pc=00000232CDAA4B5F](this=0x03d152b34ce1 <TestContext map = 0000026CE43D5069>)
+#    10: runInAsyncScope [0000037A03330C69] [node:async_hooks:227] [bytecode=00000110E5206B99 offset=98](this=0x026ce43e6bf1 <AsyncResource map = 0000026CE43CA2D9>,0x026ce43e6bb9 <JSFunction (sfi = 00000156D5912AE9)>,0x03d152b34ce1 <TestContext map = 0000026CE43D5069>)
+#    11: run [0000026CE43E6F79] [node:internal/test_runner/test:1382] [bytecode=000001848C139A21 offset=934](this=0x026ce43e6bf1 <AsyncResource map = 0000026CE43CA2D9>)
+#    12: processPendingSubtests [0000026CE43E70A1] [node:internal/test_runner/test:960] [bytecode=00000079CBA06B81 offset=125](this=0x026ce43e70d9 <AsyncResource map = 0000026CE43C6D99>)
+#    13: postRun [0000026CE43E7421] [node:internal/test_runner/test:1522] [bytecode=000001848C13F6C9 offset=526](this=0x026ce43e7459 <AsyncResource map = 0000026CE43CA2D9>,0x034453bc0011 <undefined>)
+#    14: run [0000026CE43E6F79] [node:internal/test_runner/test:1447] [bytecode=000001848C139A21 offset=1775](this=0x026ce43e7459 <AsyncResource map = 0000026CE43CA2D9>)
+#    15: /* anonymous */ [000003D152B35241](this=0x0217bb5c0059 <JSGlobalProxy>,0x034453bc0011 <undefined>)
+#    16: StubFrame [pc: 00000232ED8FB5F5]
+#    17: StubFrame [pc: 00000232ED7FEEC7]
+#    18: EntryFrame [pc: 00000232ED7CB67B]
+# ==== Details ================================================
+# [0]: ExitFrame [pc: 00000232ED8775FA]
+# [1]: StubFrame [pc: 00000232ED8D084D]
+# [2]: StubFrame [pc: 00000232ED8EB3DC]
+# [3]: StubFrame [pc: 00000232ED978105]
+# Security context: 0
+# [4]: /* anonymous */(aka /* anonymous */) [0000009A3EAFE8B1] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/src/traffic-spawn.js:76] [bytecode=00000079CBA07379 offset=170](this=0x034453bc0011 <undefined>,0x009a3eafe979 <String[836]: u\#\\xe959\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\xbff0\\x5c07\\x3314\\xa626\\xbca1\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xe999\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x3ff0\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xe9d9\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\x909\\x53bc\\x344\\x00\\x00\\x8ee8\\x22f9\\x4014\\x1459\\xbb5c\\x217\\x00\\x00\\x00\\x05\\x00\\xdb01\\xe43d\\x26c\\x00\\xe61\\xe43c\\x26c\\x00\\x4d79\\x7cff<\\x00\\x2a61\\x7cff<\\x00\\x5399\\x8211\\x35c\\x00\\x31d9\\xbb5c\\x217\\x00\\x00\\x00\\x04\\x00\\xdb81\\xe43d\\x26c\\x00\\xea29\\x3eaf\\x9a\\x00\\x00\\x00\\xff68\\xffff\\xebe1\\x3eaf\\x9a\\x00\\x999\\x53bc\\x344\\x00\\x00\\x00\\x04\\x00\\xeb01\\x3eaf\\x9a\\x00\\xeb41\\x3eaf\\x9a\\x00\\xeb81\\x3eaf\\x9a\\x00\\xebc1\\x3eaf\\x9a\\x00\\x2bb9\\xbb5c\\x217\\x00\\xcf9\\x53bc\\x344\\x00\\xea91\\x3eaf\\x9a\\x00\\x00\\x00\\x04\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\xbff0\\x5c07\\x3314\\xa626\\x3c91\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xeae1\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x5c07\\x3314\\xa626\\x3c91\\x00\\x00\\x00\\x3ff0\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xeb21\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x3ff0\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xeb61\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x3ff0\\x00\\x00\\x00\\x8000\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xeba1\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\x909\\x53bc\\x344\\x00\\x00\\x00\\x2800\\xc060\\x1099\\xbb5c\\x217\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\x78006\\x9a\\x00\\xdbd9\\xe43d\\x26c\\x00\\xea61\\x3eaf\\x9a\\x00\\xdd99\\xe43d\\x26c\\x00\\xd9e1\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xeb01\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x909\\x53bc\\x344\\x00\\x00\\x00\\x00\\xbff0\\xf6c9\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xec59\\x3eaf\\x9a\\x00\\x81\\x53bc\\x344\\x00\\x909\\x53bc\\x344\\x00\\x5c07\\x3314\\xa626\\x3c91\\xf6c9\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xec91\\x3eaf\\x9a\\x00\\x81\\x53bc\\x344\\x00\\x909\\x53bc\\x344\\x00\\x2d18\\x5444\\x21fb\\xbff9\\x909\\x53bc\\x344\\x00\\x70a4\\xa3d\\xa3d7\\x4000\\x909\\x53bc\\x344\\x00\\xa3d7\\x3d70\\xd70a\\x3feb\\x909\\x53bc\\x344\\x00\\x00\\xce44\\x11a2\\x4014\\x909\\x53bc\\x344\\x00\\x00\\x1328\\x388c\\x4017\\x1459\\xbb5c\\x217\\x00\\x00\\x00\\x05\\x00\\xdb01\\xe43d\\x26c\\x00\\xe61\\xe43c\\x26c\\x00\\x4d79\\x7cff<\\x00\\x2a99\\x7cff<\\x00\\x5399\\x8211\\x35c\\x00\\x31d9\\xbb5c\\x217\\x00\\x00\\x00\\x04\\x00\\xdb81\\xe43d\\x26c\\x00\\xed19\\x3eaf\\x9a\\x00\\x00\\x00\\xff68\\xffff\\xeed1\\x3eaf\\x9a\\x00\\x999\\x53bc\\x344\\x00\\x00\\x00\\x04\\x00\\xedf1\\x3eaf\\x9a\\x00\\xee31\\x3eaf\\x9a\\x00\\xee71\\x3eaf\\x9a\\x00\\xeeb1\\x3eaf\\x9a\\x00\\x2bb9\\xbb5c\\x217\\x00\\xcf9\\x53bc\\x344\\x00\\xed81\\x3eaf\\x9a\\x00\\x00\\x00\\x04\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\xbff0\\x5c07\\x3314\\xa626\\x3c91\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xedd1\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x5c07\\x3314\\xa626\\x3c91\\x00\\x00\\x00\\x3ff0\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xee11\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x3ff0\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xee51\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x3ff0\\x00\\x00\\x00\\x8000\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xee91\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\x909\\x53bc\\x344\\x00\\x00\\x00\\x5000\\xc05c\\x1099\\xbb5c\\x217\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\x78006\\x344\\x00\\xdbd9\\xe43d\\x26c\\x00\\xed51\\x3eaf\\x9a\\x00\\xdd99\\xe43d\\x26c\\x00\\xd9e1\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xedf1\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x909\\x53bc\\x344\\x00\\x00\\x00\\x00\\xbff0\\xf6c9\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xef49\\x3eaf\\x9a\\x00\\x81\\x53bc\\x344\\x00\\x909\\x53bc\\x344\\x00\\x5c07\\x3314\\xa626\\x3c91\\xf6c9\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xef81\\x3eaf\\x9a\\x00\\x81\\x53bc\\x344\\x00\\x909\\x53bc\\x344\\x00\\x2d18\\x5444\\x21fb\\xbff9\\x909\\x53bc\\x344\\x00\\x70a4\\xa3d\\xa3d7\\x4000\\x909\\x53bc\\x344\\x00\\xa3d7\\x3d70\\xd70a\\x3feb\\x909\\x53bc\\x344\\x00\\x00\\xff84\\x20d9\\x4014\\x909\\x53bc\\x344\\x00\\x00\\x2c80\\xa479\\x4015\\x1459\\xbb5c\\x217\\x00>) {
+#   // expression stack (top to bottom)
+#   [14] : 0x034453bc8ee1 <optimized_out>
+#   [13] : 0x034453bc8ee1 <optimized_out>
+#   [12] : 0x034453bc8ee1 <optimized_out>
+#   [11] : 0x034453bc8ee1 <optimized_out>
+#   [10] : 0x034453bc8ee1 <optimized_out>
+#   [09] : 0x034453bc8ee1 <optimized_out>
+#   [08] : 0x034453bc8ee1 <optimized_out>
+#   [07] : 0x034453bc8ee1 <optimized_out>
+#   [06] : 0x034453bc8ee1 <optimized_out>
+#   [05] : 0x034453bc0cf9 <FixedArray[0]>
+#   [04] : 0x0217bb5ffc39 <Object map = 00000213D0ADB5B9>
+#   [03] : 0x0320f94803c9 <JSFunction abs (sfi = 0000034453BD7279)>
+#   [02] : 0x034453bc8ee1 <optimized_out>
+#   [01] : 0x009a3eafe951 <HeapNumber -1.0>
+#   [00] : 0x009a3eafe919 <HeapNumber 1.22465e-16>
+# --------- s o u r c e   c o d e ---------
+# function ([axisX, axisZ]) => {\\x0a    const separation = Math.abs(dx * axisX + dz * axisZ);\\x0a    return separation < projectedHalfExtent(a, axisX, axisZ) + projectedHalfExtent(b, axisX, axisZ) + clearance;\\x0a  }
+# -----------------------------------------
+# }
+# [5]: JavaScriptBuiltinContinuationFrame [pc: 00000232ED7CF580]
+# [6]: footprintsOverlap(aka footprintsOverlap) [0000026CE43C0FF1] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/src/traffic-spawn.js:75] [bytecode=00000079CBA070C1 offset=362](this=0x034453bc0011 <undefined>,0x003c7cff5939 <Object map = 0000026CE43D6749>,0x003c7cff4271 <Object map = 000003D152B34369>,0x035c82115399 <HeapNumber 0.2>) {
+#   // heap-allocated locals
+#   var a = // warning: no context found - inconsistent frame?
+#   var b = // warning: no context found - inconsistent frame?
+#   var clearance = // warning: no context found - inconsistent frame?
+#   // expression stack (top to bottom)
+#   [16] : 0x009a3eafe939 <String[154]: u\#\\x81\\x53bc\\x344\\x00\\x909\\x53bc\\x344\\x00\\x00\\x00\\x00\\xbff0\\xf6c9\\xf94a\\x320\\x00\\xcf9\\x53bc\\x344\\x00\\xcf9\\x53bc\\x344\\x00\\xe951\\x3eaf\\x9a\\x00\\x81\\x53bc\\x344\\x00\\xe959\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\xbff0\\x5c07\\x3314\\xa626\\xbca1\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xe999\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\xf69\\x53bc\\x344\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x3ff0\\xebc9\\x5393\\x3a3\\x00\\xcf9\\x53bc\\x344\\x00\\xe9d9\\x3eaf\\x9a\\x00\\x00\\x00\\x02\\x00\\x909\\x53bc\\x344\\x00\\x00\\x8ee8\\x22f9\\x4014\\x1459\\xbb5c\\x217\\x00\\x00\\x00\\x05\\x00\\xdb01\\xe43d\\x26c\\x00\\xe61\\xe43c\\x26c\\x00\\x4d79\\x7cff<\\x00\\x2a61\\x7cff<\\x00\\x5399\\x8211\\x35c\\x00\\x31d9\\xbb5c\\x217\\x00\\x00\\x00\\x04\\x00\\xdb81\\xe43d\\x26c\\x00\\xea29\\x3eaf>
+#   [15] : 0x009a3eafe8b1 <JSFunction (sfi = 0000026CE43DDBD9)>
+#   [14] : 0x034453bc0011 <undefined>
+#   [13] : 0
+#   [12] : 4
+#   [11] : 0x034453bc0d31 <the_hole_value>
+#   [10] : 0x034453bc8ee1 <optimized_out>
+#   [09] : 0x034453bc8ee1 <optimized_out>
+#   [08] : 0x034453bc8ee1 <optimized_out>
+#   [07] : 0x034453bc8ee1 <optimized_out>
+#   [06] : 0x034453bc8ee1 <optimized_out>
+#   [05] : 0x034453bc8ee1 <optimized_out>
+#   [04] : 0x034453bc8ee1 <optimized_out>
+#   [03] : 0x034453bc8ee1 <optimized_out>
+#   [02] : 0x034453bc8ee1 <optimized_out>
+#   [01] : 0x034453bc8ee1 <optimized_out>
+#   [00] : 0x034453bc8ee1 <optimized_out>
+# --------- s o u r c e   c o d e ---------
+# function footprintsOverlap(a, b, clearance = 0) {\\x0a  const headingA = a.heading ?? 0, headingB = b.heading ?? 0;\\x0a  const axes = [[Math.sin(headingA), Math.cos(headingA)], [Math.cos(headingA), -Math.sin(headingA)],\\x0a    [Math.sin(headingB), Math.cos(headingB)], [Math.cos(headingB), -Math.sin(headingB)]];\\x0a  const dx = b.x - a.x,...
+# -----------------------------------------
+# }
+# [7]: /* anonymous */(aka /* anonymous */) [0000025603793DD1] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tests/traffic-spawn.test.js:~51] [pc=00000232CDAAA5AB](this=0x034453bc0011 <undefined>,0x003c7cff5939 <Object map = 0000026CE43D6749>) {
+# // optimized frame
+# --------- s o u r c e   c o d e ---------
+# function candidate => isTrafficSpawnSafe(candidate, occupied, buildings)
+# -----------------------------------------
+# }
+# [8]: find [00000320F9487569](this=0x02560378ced9 <JSArray[672]>,0x025603793dd1 <JSFunction (sfi = 0000026CE43DF049)>) {
+# // optimized frame
+# --------- s o u r c e   c o d e ---------
+# <No Source>
+# -----------------------------------------
+# }
+# [9]: /* anonymous */ [0000026CE43E6BB9] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tests/traffic-spawn.test.js:~38] [pc=00000232CDAA4B5F](this=0x03d152b34ce1 <TestContext map = 0000026CE43D5069>) {
+#   // expression stack (top to bottom)
+#   [51] : 0x02560378ced9 <JSArray[672]>
+#   [50] : 0x025603793dd1 <JSFunction (sfi = 0000026CE43DF049)>
+#   [49] : 175
+#   [48] : -175
+#   [47] : 0x035c8210fe71 <HeapNumber -21.25>
+#   [46] : 0x035c8210fe81 <HeapNumber -140.0>
+#   [45] : 0
+#   [44] : 1
+#   [43] : 0x035c8210fe91 <Object map = 00000320F94AF6C9>
+#   [42] : 0x035c8210feb9 <BlockContext[3]>
+#   [41] : 0x034453bc0d31 <the_hole_value>
+#   [40] : 0x035c8210fee1 <JSFunction (sfi = 0000026CE43DF1F9)>
+#   [39] : 0x02560378ce91 <JSArray[261]>
+#   [38] : 0x025603793e09 <String[41]: c"width 15 exhausted spawn slots at 260/300">
+#   [37] : 0x025603793dd1 <JSFunction (sfi = 0000026CE43DF049)>
+#   [36] : 0x02560378ced9 <JSArray[672]>
+#   [35] : 0x0320f9487569 <JSFunction find (sfi = 0000034453BD2C71)>
+#   [34] : 0x02560378cef9 <BlockContext[5]>
+#   [33] : 0x02560378cef9 <BlockContext[5]>
+#   [32] : 0x034453bc0d31 <the_hole_value>
+#   [31] : 0x026ce43df351 <HeapNumber 5.2>
+#   [30] : 0x02560378cf31 <JSArray[64]>
+#   [29] : 0x034453bc0081 <false>
+#   [28] : 0x02560378cf51 <Array Iterator map = 00000320F94AD9E1>
+#   [27] : 0x0320f94ada61 <JSFunction next (sfi = 0000034453BD3601)>
+#   [26] : 0x026ce43c15e9 <ModuleContext[3]>
+#   [25] : 0x026ce43c15e9 <ModuleContext[3]>
+#   [24] : 0x034453bc0d31 <the_hole_value>
+#   [23] : 0x034453bc0011 <undefined>
+#   [22] : 0x034453bc0011 <undefined>
+#   [21] : 0x034453bc0081 <false>
+#   [20] : 0x03d152b34c39 <Array Iterator map = 00000320F94AD9E1>
+#   [19] : 0x0320f94ada61 <JSFunction next (sfi = 0000034453BD3601)>
+#   [18] : 0x003c7cff8b79 <Object map = 0000026CE43D6749>
+#   [17] : 0x003c7cfff239 <Object map = 0000026CE43D6749>
+#   [16] : 0x034453bc0011 <undefined>
+#   [15] : 0x003c7cff5939 <Object map = 0000026CE43D6749>
+#   [14] : 0x034453bc0011 <undefined>
+#   [13] : 0x035c8210ff39 <JSArray[9]>
+#   [12] : 0x035c8210ff59 <JSFunction sector (sfi = 0000026CE43DF169)>
+#   [11] : 300
+#   [10] : 0x034453bc0011 <undefined>
+#   [09] : 0x02560378cfc1 <Object map = 000003D152B333C9>
+#   [08] : 0x02560378cff9 <JSArray[64]>
+#   [07] : 0x02560378d019 <Object map = 000002560378CC21>
+#   [06] : 0x02560378d051 <Object map = 0000026CE43E2819>
+#   [05] : 15
+#   [04] : 0x034453bc0011 <undefined>
+#   [03] : 15
+#   [02] : 300
+#   [01] : 0x003c7cff5939 <Object map = 0000026CE43D6749>
+#   [00] : 0x003c7cfff239 <Object map = 0000026CE43D6749>
+# --------- s o u r c e   c o d e ---------
+# function () => {\\x0a  for (const width of [12, 15, 30]) {\\x0a    const plan = createCityPlan(undefined, { roadWidth: width });\\x0a    const graph = createRoadGraph(plan.roadNetwork, Math.min(5.2, width * 0.25));\\x0a    const nodes = [...graph.nodes.values()];\\x0a    const bounds = { minX: Math.min(...nodes.map(node => node...
+# -----------------------------------------
+# }
+# [10]: runInAsyncScope [0000037A03330C69] [node:async_hooks:227] [bytecode=00000110E5206B99 offset=98](this=0x026ce43e6bf1 <AsyncResource map = 0000026CE43CA2D9>,0x026ce43e6bb9 <JSFunction (sfi = 00000156D5912AE9)>,0x03d152b34ce1 <TestContext map = 0000026CE43D5069>) {
+#   // expression stack (top to bottom)
+#   [16] : 0x03d152b34ce1 <TestContext map = 0000026CE43D5069>
+#   [15] : 0x03d152b34ce1 <TestContext map = 0000026CE43D5069>
+#   [14] : 0x03d152b34d51 <JSArray[1]>
+#   [13] : 0x03d152b34ce1 <TestContext map = 0000026CE43D5069>
+#   [12] : 0x026ce43e6bb9 <JSFunction (sfi = 00000156D5912AE9)>
+#   [11] : 0x0213d0ac2f31 <JSFunction apply (sfi = 0000034453BDC691)>
+#   [10] : 0x037a03330e11 <BlockContext[3]>
+#   [09] : 0x034453bc0d31 <the_hole_value>
+#   [08] : 0x0217bb5c62e1 <JSFunction AsyncContextFrame (sfi = 000002CD669EF729)>
+#   [07] : 0x037a03330a69 <JSFunction exchange (sfi = 000002CD669EF519)>
+#   [06] : 0x034453bc0011 <undefined>
+#   [05] : 0x034453bc0011 <undefined>
+#   [04] : 0x03d152b34d71 <HeapNumber 26.0>
+#   [03] : 0x03d152b34d51 <JSArray[1]>
+#   [02] : 0x03d152b34d51 <JSArray[1]>
+#   [01] : 0x03d152b34ce1 <TestContext map = 0000026CE43D5069>
+#   [00] : 0x026ce43e6bb9 <JSFunction (sfi = 00000156D5912AE9)>
+# --------- s o u r c e   c o d e ---------
+# function runInAsyncScope(fn, thisArg, ...args) {\\x0d\\x0a    const asyncId = this[async_id_symbol];\\x0d\\x0a    emitBefore(asyncId, this[trigger_async_id_symbol], this);\\x0d\\x0a\\x0d\\x0a    const contextFrame = this[contextFrameSymbol];\\x0d\\x0a    const prior = AsyncContextFrame.exchange(contextFrame);\\x0d\\x0a    try {\\x0d\\x0a      return ReflectApply(fn, thisArg, ar...
+# -----------------------------------------
+# }
+# [11]: run [0000026CE43E6F79] [node:internal/test_runner/test:1382] [bytecode=000001848C139A21 offset=934](this=0x026ce43e6bf1 <AsyncResource map = 0000026CE43CA2D9>) {
+#   // heap-allocated locals
+#   var this = 0x026ce43e6bf1 <AsyncResource map = 0000026CE43CA2D9>
+#   var channelContext = 0x003c7cfc0871 <Object map = 00000217BB5C33B9>
+#   var hookArgs = 0x003c7cfc0889 <Object map = 00000217BB5C33B9>
+#   var wasSkippedBeforeRun = 0x034453bc0081 <false>
+#   var publishEnd = 0x003c7cfc08a1 <JSFunction publishEnd (sfi = 0000026CE43D4939)>
+#   var publishError = 0x003c7cfc08d9 <JSFunction publishError (sfi = 0000026CE43D4981)>
+#   // expression stack (top to bottom)
+#   [36] : 0x026ce43e6bf1 <AsyncResource map = 0000026CE43CA2D9>
+#   [35] : 0x026ce43e6bb9 <JSFunction (sfi = 00000156D5912AE9)>
+#   [34] : 0x03d152b34ce1 <TestContext map = 0000026CE43D5069>
+#   [33] : 0x03d152b34ce1 <TestContext map = 0000026CE43D5069>
+#   [32] : 0x034453bc0011 <undefined>
+#   [31] : 0x034453bc0011 <undefined>
+#   [30] : 0x03d152b34d81 <JSArray[3]>
+#   [29] : 0x026ce43e6bf1 <AsyncResource map = 0000026CE43CA2D9>
+#   [28] : 0x037a03330c69 <JSFunction runInAsyncScope (sfi = 000003C1DE60EF89)>
+#   [27] : 0x0213d0ac2f31 <JSFunction apply (sfi = 0000034453BDC691)>
+#   [26] : 0x03d152b34da1 <FunctionContext[8]>
+#   [25] : 0x03d152b34da1 <FunctionContext[8]>
+#   [24] : 0x034453bc0d31 <the_hole_value>
+#   [23] : 0x03d152b34df1 <JSFunction (sfi = 0000026CE43D48F1)>
+#   [22] : 0x037a03308ac9 <JSFunction once (sfi = 000002CD669E0321)>
+#   [21] : 0x03d152b34da1 <FunctionContext[8]>
+#   [20] : 0x026ce43e6f21 <BlockContext[9]>
+#   [19] : 0x034453bc0011 <undefined>
+#   [18] : 0x034453bc0011 <undefined>
+#   [17] : 0x034453bc0011 <undefined>
+#   [16] : 0x034453bc0011 <undefined>
+#   [15] : 0x034453bc0011 <undefined>
+#   [14] : 0x03d152b34e29 <JSArray[0]>
+#   [13] : 0x026ce43e6bb9 <JSFunction (sfi = 00000156D5912AE9)>
+#   [12] : 0x03d152b34d81 <JSArray[3]>
+#   [11] : 0x034453bc0011 <undefined>
+#   [10] : 0x034453bc0011 <undefined>
+#   [09] : 0x034453bc0011 <undefined>
+#   [08] : 0x034453bc0011 <undefined>
+#   [07] : 0x034453bc0011 <undefined>
+#   [06] : 0x034453bc0011 <undefined>
+#   [05] : 0x03d152b34e49 <Promise map = 0000026CE43D5979>
+#   [04] : 0x03d152b34e79 <JSFunction (sfi = 000002CD669E0441)>
+#   [03] : 0x03d152b34eb9 <JSFunction after (sfi = 0000026CE43D48A9)>
+#   [02] : 0x03d152b34ce1 <TestContext map = 0000026CE43D5069>
+#   [01] : 0x03d152b34ef1 <JSArray[1]>
+#   [00] : 0x03d152b34f11 <JSAsyncFunctionObject>
+# --------- s o u r c e   c o d e ---------
+# function run() {\\x0d\\x0a    if (this.parent !== null) {\\x0d\\x0a      this.parent.activeSubtests++;\\x0d\\x0a      this.computeInheritedHooks();\\x0d\\x0a    }\\x0d\\x0a    this.startTime ??= hrtime();\\x0d\\x0a\\x0d\\x0a    // Channel context object shared across all lifecycle events for this test run.\\x0d\\x0a    // Only tests emit events; hooks do not. This way, the ...
+# -----------------------------------------
+# }
+# [12]: processPendingSubtests [0000026CE43E70A1] [node:internal/test_runner/test:960] [bytecode=00000079CBA06B81 offset=125](this=0x026ce43e70d9 <AsyncResource map = 0000026CE43C6D99>) {
+#   // expression stack (top to bottom)
+#   [13] : 0x026ce43e6bf1 <AsyncResource map = 0000026CE43CA2D9>
+#   [12] : 0x026ce43e6fb1 <JSArray[0]>
+#   [11] : 0
+#   [10] : 4
+#   [09] : 0x034453bce7c1 <String[4]: \#test>
+#   [08] : 0x0156d5912029 <String[106]: \#deterministic spawn allocation fits 6, 60 and 300 cars without footprint conflicts at widths 12, 15 and 30>
+#   [07] : 0x026ce43e6fd1 <Object map = 00000217BB5C33B9>
+#   [06] : 0
+#   [05] : 0x026ce43e6fe9 <Readable map = 0000026CE43C7E81>
+#   [04] : 0x026ce43e6f79 <JSFunction run (sfi = 00000156D591AB91)>
+#   [03] : 0x026ce43e6f21 <BlockContext[9]>
+#   [02] : 0x026ce43e6bf1 <AsyncResource map = 0000026CE43CA2D9>
+#   [01] : 0x03d152b34f69 <Object map = 0000026CE43DB571>
+#   [00] : 0x03d152b34f99 <JSAsyncFunctionObject>
+# --------- s o u r c e   c o d e ---------
+# function processPendingSubtests() {\\x0d\\x0a    while (this.pendingSubtests.length > 0 && this.hasConcurrency()) {\\x0d\\x0a      const deferred = this.dequeuePendingSubtest();\\x0d\\x0a      const test = deferred.test;\\x0d\\x0a      this.assignReportOrder(test);\\x0d\\x0a      test.reporter.dequeue(test.nesting, test.loc, test.name, this.reportedType, test.testId, t...
+# -----------------------------------------
+# }
+# [13]: postRun [0000026CE43E7421] [node:internal/test_runner/test:1522] [bytecode=000001848C13F6C9 offset=526](this=0x026ce43e7459 <AsyncResource map = 0000026CE43CA2D9>,0x034453bc0011 <undefined>) {
+#   // expression stack (top to bottom)
+#   [30] : 0x026ce43e70d9 <AsyncResource map = 0000026CE43C6D99>
+#   [29] : 0x026ce43e6fb1 <JSArray[0]>
+#   [28] : 0
+#   [27] : 3
+#   [26] : 0x034453bc0011 <undefined>
+#   [25] : 0x03d152b34ff1 <Object map = 00000217BB5C33B9>
+#   [24] : 0x0156d5911f51 <String[82]: \#a fast follower needs braking space and static obstacle footprints block insertion>
+#   [23] : 3
+#   [22] : 0x026ce43e7409 <Object map = 00000217BB5C33B9>
+#   [21] : 0x034453bc0081 <false>
+#   [20] : 0x026ce43e70d9 <AsyncResource map = 0000026CE43C6D99>
+#   [19] : 0x026ce43e70a1 <JSFunction processPendingSubtests (sfi = 00000156D591A4F1)>
+#   [18] : 0x034453bc0011 <undefined>
+#   [17] : 0
+#   [16] : 0x034453bc0011 <undefined>
+#   [15] : 0x034453bc0011 <undefined>
+#   [14] : 0x03d152b35009 <Object map = 00000217BB5C33B9>
+#   [13] : 0x034453bc0011 <undefined>
+#   [12] : 0x034453bc0011 <undefined>
+#   [11] : 0x034453bc0011 <undefined>
+#   [10] : 0x034453bc0011 <undefined>
+#   [09] : 0x034453bc0011 <undefined>
+#   [08] : 0x034453bc0011 <undefined>
+#   [07] : 0x034453bc0011 <undefined>
+#   [06] : 0x034453bc0011 <undefined>
+#   [05] : 0x034453bc0011 <undefined>
+#   [04] : 0x034453bc0011 <undefined>
+#   [03] : 0x034453bc0011 <undefined>
+#   [02] : 0x034453bc0011 <undefined>
+#   [01] : 0x034453bc0011 <undefined>
+#   [00] : 0
+# --------- s o u r c e   c o d e ---------
+# function postRun(pendingSubtestsError) {\\x0d\\x0a    // If the test was cancelled before it started, then the start and end\\x0d\\x0a    // times need to be corrected.\\x0d\\x0a    this.endTime ??= hrtime();\\x0d\\x0a    this.startTime ??= this.endTime;\\x0d\\x0a\\x0d\\x0a    // The test has run, so recursively cancel any outstanding subtests and\\x0d\\x0a    // mark t...
+# -----------------------------------------
+# }
+# [14]: run [0000026CE43E6F79] [node:internal/test_runner/test:1447] [bytecode=000001848C139A21 offset=1775](this=0x026ce43e7459 <AsyncResource map = 0000026CE43CA2D9>) {
+#   // heap-allocated locals
+#   var this = 0x026ce43e7459 <AsyncResource map = 0000026CE43CA2D9>
+#   var channelContext = 0x003c7cfc0369 <Object map = 00000217BB5C33B9>
+#   var hookArgs = 0x003c7cfc0381 <Object map = 00000217BB5C33B9>
+#   var wasSkippedBeforeRun = 0x034453bc0081 <false>
+#   var publishEnd = 0x003c7cfc0399 <JSFunction publishEnd (sfi = 0000026CE43D4939)>
+#   var publishError = 0x003c7cfc03d1 <JSFunction publishError (sfi = 0000026CE43D4981)>
+#   // expression stack (top to bottom)
+#   [34] : 0x026ce43e7459 <AsyncResource map = 0000026CE43CA2D9>
+#   [33] : 0x034453bc0011 <undefined>
+#   [32] : 0x034453bc0011 <undefined>
+#   [31] : 0x034453bc0011 <undefined>
+#   [30] : 0x034453bc0011 <undefined>
+#   [29] : 0x034453bc0011 <undefined>
+#   [28] : 0
+#   [27] : 0x026ce43e7789 <AbortController map = 0000026CE43C5E09>
+#   [26] : 0x026ce43e77a9 <Channel map = 00000217BB5D7FD9>
+#   [25] : 0x03d152b35021 <FunctionContext[8]>
+#   [24] : 0x034453bc0d31 <the_hole_value>
+#   [23] : 0x026ce43e7459 <AsyncResource map = 0000026CE43CA2D9>
+#   [22] : 0x026ce43e7421 <JSFunction postRun (sfi = 00000156D591ABF1)>
+#   [21] : 0x03d152b35021 <FunctionContext[8]>
+#   [20] : 0x026ce43e6f21 <BlockContext[9]>
+#   [19] : 0x034453bc0011 <undefined>
+#   [18] : 0x034453bc0011 <undefined>
+#   [17] : 0x034453bc0011 <undefined>
+#   [16] : 0x034453bc0011 <undefined>
+#   [15] : 0x034453bc0011 <undefined>
+#   [14] : 0x03d152b35071 <JSArray[2]>
+#   [13] : 0x026ce43e77e1 <JSFunction (sfi = 00000156D5912AA1)>
+#   [12] : 0x03d152b35091 <JSArray[3]>
+#   [11] : 0x034453bc0011 <undefined>
+#   [10] : 0x034453bc0011 <undefined>
+#   [09] : 0x034453bc0011 <undefined>
+#   [08] : 0x034453bc0011 <undefined>
+#   [07] : 0x034453bc0011 <undefined>
+#   [06] : 0x034453bc0011 <undefined>
+#   [05] : 0x03d152b350b1 <Promise map = 0000026CE43D5979>
+#   [04] : 0x03d152b350e1 <JSFunction (sfi = 000002CD669E0441)>
+#   [03] : 0x03d152b35121 <JSFunction after (sfi = 0000026CE43D48A9)>
+#   [02] : 0x03d152b35159 <TestContext map = 0000026CE43D5069>
+#   [01] : 0x03d152b351c9 <JSArray[1]>
+#   [00] : 0x03d152b351e9 <JSAsyncFunctionObject>
+# --------- s o u r c e   c o d e ---------
+# function run() {\\x0d\\x0a    if (this.parent !== null) {\\x0d\\x0a      this.parent.activeSubtests++;\\x0d\\x0a      this.computeInheritedHooks();\\x0d\\x0a    }\\x0d\\x0a    this.startTime ??= hrtime();\\x0d\\x0a\\x0d\\x0a    // Channel context object shared across all lifecycle events for this test run.\\x0d\\x0a    // Only tests emit events; hooks do not. This way, the ...
+# -----------------------------------------
+# }
+# [15]: /* anonymous */ [000003D152B35241](this=0x0217bb5c0059 <JSGlobalProxy>,0x034453bc0011 <undefined>) {
+# // optimized frame
+# --------- s o u r c e   c o d e ---------
+# <No Source>
+# -----------------------------------------
+# }
+# [16]: StubFrame [pc: 00000232ED8FB5F5]
+# [17]: StubFrame [pc: 00000232ED7FEEC7]
+# [18]: EntryFrame [pc: 00000232ED7CB67B]
+# =====================
+# Subtest: C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\traffic-spawn.test.js
+not ok 45 - C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\traffic-spawn.test.js
+  ---
+  duration_ms: 2781.0714
+  type: 'test'
+  location: 'C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\traffic-spawn.test.js:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 2147483651
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: speeding requires one continuous second and resets before activation in the hysteresis band
+ok 281 - speeding requires one continuous second and resets before activation in the hysteresis band
+  ---
+  duration_ms: 3.2576
+  type: 'test'
+  ...
+# Subtest: speeding repeats after five seconds and clears below the reset threshold
+ok 282 - speeding repeats after five seconds and clears below the reset threshold
+  ---
+  duration_ms: 1.6138
+  type: 'test'
+  ...
+# Subtest: red light offense is detected only while crossing its stop plane in the lane
+ok 283 - red light offense is detected only while crossing its stop plane in the lane
+  ---
+  duration_ms: 0.3393
+  type: 'test'
+  ...
+# Subtest: red light crossing works in all four cardinal directions and ignores wrong lanes and green
+ok 284 - red light crossing works in all four cardinal directions and ignores wrong lanes and green
+  ---
+  duration_ms: 0.713
+  type: 'test'
+  ...
+# Subtest: collision event requires the player to contribute sufficient closing speed and is one per contact episode
+ok 285 - collision event requires the player to contribute sufficient closing speed and is one per contact episode
+  ---
+  duration_ms: 0.3979
+  type: 'test'
+  ...
+# Subtest: collision normal is oriented correctly when the player is the second body
+ok 286 - collision normal is oriented correctly when the player is the second body
+  ---
+  duration_ms: 0.2108
+  type: 'test'
+  ...
+# Subtest: a moving police car that hits a stationary player does not blame the player
+ok 287 - a moving police car that hits a stationary player does not blame the player
+  ---
+  duration_ms: 0.1876
+  type: 'test'
+  ...
+# Subtest: detector reset removes speed and collision state
+ok 288 - detector reset removes speed and collision state
+  ---
+  duration_ms: 0.1884
+  type: 'test'
+  ...
+# Subtest: traffic initializes repeatable AI routes on actual city streets
+ok 289 - traffic initializes repeatable AI routes on actual city streets
+  ---
+  duration_ms: 61.9088
+  type: 'test'
+  ...
+# Subtest: traffic waits at a controlled red signal before reserving the intersection
+ok 290 - traffic waits at a controlled red signal before reserving the intersection
+  ---
+  duration_ms: 11.0587
+  type: 'test'
+  ...
+# Subtest: red signal stops the NPC front bumper before its stop plane and green releases it
+ok 291 - red signal stops the NPC front bumper before its stop plane and green releases it
+  ---
+  duration_ms: 75.5832
+  type: 'test'
+  ...
+# Subtest: red signal does not stop an NPC whose front bumper has entered the junction
+ok 292 - red signal does not stop an NPC whose front bumper has entered the junction
+  ---
+  duration_ms: 8.4944
+  type: 'test'
+  ...
+# Subtest: tree placements are deterministic, spread across town and do not mutate the city plan
+ok 293 - tree placements are deterministic, spread across town and do not mutate the city plan
+  ---
+  duration_ms: 121.2907
+  type: 'test'
+  ...
+# Subtest: tree crowns and trunks fit sidewalk pockets clear of asphalt, buildings, spawn and signals
+ok 294 - tree crowns and trunks fit sidewalk pockets clear of asphalt, buildings, spawn and signals
+  ---
+  duration_ms: 58.3526
+  type: 'test'
+  ...
+# Subtest: rotated damage obstacles exclude nearby tree crowns
+ok 295 - rotated damage obstacles exclude nearby tree crowns
+  ---
+  duration_ms: 39.5566
+  type: 'test'
+  ...
+# Subtest: repair restores damage and detached wheels without resetting chassis, motion, time, or tuning
+ok 296 - repair restores damage and detached wheels without resetting chassis, motion, time, or tuning
+  ---
+  duration_ms: 7.4523
+  type: 'test'
+  ...
+# Subtest: four springs hold the chassis above the ground without idle drift
+ok 297 - four springs hold the chassis above the ground without idle drift
+  ---
+  duration_ms: 78.725
+  type: 'test'
+  ...
+# Subtest: accelerates, physically turns with body roll, brakes to a stop
+ok 298 - accelerates, physically turns with body roll, brakes to a stop
+  ---
+  duration_ms: 50.0031
+  type: 'test'
+  ...
+# Subtest: medium-speed steering responds quickly and holds a stable arcade turn
+ok 299 - medium-speed steering responds quickly and holds a stable arcade turn
+  ---
+  duration_ms: 17.5439
+  type: 'test'
+  ...
+# Subtest: 50 km/h steering meets response, heading, and lateral-slip targets
+ok 300 - 50 km/h steering meets response, heading, and lateral-slip targets
+  ---
+  duration_ms: 9.354
+  type: 'test'
+  ...
+# Subtest: coasting from 50 km/h retains 60–90% speed over one second
+ok 301 - coasting from 50 km/h retains 60–90% speed over one second
+  ---
+  duration_ms: 9.3521
+  type: 'test'
+  ...
+# Subtest: partial damage still reduces throttle response
+ok 302 - partial damage still reduces throttle response
+  ---
+  duration_ms: 22.7599
+  type: 'test'
+  ...
+# Subtest: handbrake keeps a controllable, grounded rear slide
+ok 303 - handbrake keeps a controllable, grounded rear slide
+  ---
+  duration_ms: 23.1032
+  type: 'test'
+  ...
+# Subtest: three-wheel handling keeps stepping without support or drive from the detached wheel
+ok 304 - three-wheel handling keeps stepping without support or drive from the detached wheel
+  ---
+  duration_ms: 29.7988
+  type: 'test'
+  ...
+# Subtest: steering and tire forces do not add yaw while the car is airborne
+ok 305 - steering and tire forces do not add yaw while the car is airborne
+  ---
+  duration_ms: 1.0242
+  type: 'test'
+  ...
+# Subtest: full-lock arcade turn at top speed keeps all tires close to the ground
+ok 306 - full-lock arcade turn at top speed keeps all tires close to the ground
+  ---
+  duration_ms: 30.791
+  type: 'test'
+  ...
+# Subtest: reverse and reset remain functional after a hard maneuver
+ok 307 - reverse and reset remain functional after a hard maneuver
+  ---
+  duration_ms: 21.9286
+  type: 'test'
+  ...
+# Subtest: fixed step has similar acceleration at 60 Hz and 120 Hz
+ok 308 - fixed step has similar acceleration at 60 Hz and 120 Hz
+  ---
+  duration_ms: 19.299
+  type: 'test'
+  ...
+# Subtest: tuning extremes stay finite through prolonged steering and braking
+ok 309 - tuning extremes stay finite through prolonged steering and braking
+  ---
+  duration_ms: 179.7451
+  type: 'test'
+  ...
+# Subtest: first offense blinks as a warning, then a repeat confirms one star
+ok 310 - first offense blinks as a warning, then a repeat confirms one star
+  ---
+  duration_ms: 0.9923
+  type: 'test'
+  ...
+# Subtest: warning expires and the next offense starts a fresh warning
+ok 311 - warning expires and the next offense starts a fresh warning
+  ---
+  duration_ms: 0.1918
+  type: 'test'
+  ...
+# Subtest: only one event is accepted per cooldown and collision severity wins ties
+ok 312 - only one event is accepted per cooldown and collision severity wins ties
+  ---
+  duration_ms: 0.1524
+  type: 'test'
+  ...
+# Subtest: wanted system caps at six stars and reset clears its state
+ok 313 - wanted system caps at six stars and reset clears its state
+  ---
+  duration_ms: 13.8634
+  type: 'test'
+  ...
+# Subtest: warning at its exact deadline expires before a new offense, and snapshots are isolated
+ok 314 - warning at its exact deadline expires before a new offense, and snapshots are isolated
+  ---
+  duration_ms: 0.2604
+  type: 'test'
+  ...
+1..314
+# tests 314
+# suites 0
+# pass 313
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 43797.5461

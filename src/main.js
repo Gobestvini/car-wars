@@ -6,6 +6,8 @@ import { joystickVector } from './joystick.js';
 import { directionalInput } from './driving-input.js';
 import { DonutGesture, donutDriveInput } from './donut-input.js';
 import { FixedStepper, FrameRateLimiter } from './game-loop.js';
+import { SceneProfile, GpuProfile } from './scene-profile.js';
+import { FrameIntervals } from './frame-intervals.js';
 import { TireTracks, DEFAULT_SKID_THRESHOLD, DEFAULT_TRACK_INTENSITY } from './tire-tracks.js';
 import { smoothCameraScale, targetCameraScale } from './camera-distance.js';
 import { createCityPlan, ROAD_WIDTH } from './city-generator.js';
@@ -355,6 +357,7 @@ document.addEventListener('visibilitychange', () => {
   frameRateLimiter.reset();
   previousTime = performance.now();
   previousFrameTimestamp = null;
+  frameIntervals.reset();
   metricTime = 0; metricFrames = 0;
 });
 window.addEventListener('keydown', event => {
@@ -399,6 +402,7 @@ function getInput() {
 }
 
 function reset() {
+  frameIntervals.reset();
   releasePointer(); keys.clear(); sim.reset(); traffic.reset(); driveDirection = 1;
   violations.reset(); wanted.reset(); arrest.reset(); wantedRenderKey = ''; renderWantedHud();
   lastArrestHudState = ''; renderArrestHud();
@@ -628,6 +632,17 @@ let previousTime = performance.now();
 let input = { brake: 0, handbrake: false };
 $('performance').hidden = !debug;
 const metrics = { fps: 0, physicsMs: 0, renderMs: 0, frameCpuMs: 0, frameIntervalMs: 0, calls: 0, triangles: 0, quality };
+const sceneProfile = new SceneProfile();
+const frameIntervals = new FrameIntervals();
+let gpuProfile = null;
+function renderFrame() {
+  // Three otherwise resets info AFTER rendering shadows, losing their cost.
+  const autoReset = renderer.info.autoReset;
+  renderer.info.reset(); renderer.info.autoReset = false;
+  gpuProfile?.begin(sceneProfile.rendered + 1);
+  try { miniatureBlur.render(scene, camera, { mode: cameraMode, car }); }
+  finally { gpuProfile?.end(); renderer.info.autoReset = autoReset; }
+}
 let metricTime = 0, metricFrames = 0;
 let previousFrameTimestamp = null;
 function frame(now) {
@@ -637,9 +652,13 @@ function frame(now) {
     stepper.reset();
     previousTime = now;
     previousFrameTimestamp = null;
+    frameIntervals.reset();
+    sceneProfile.lastTimestamp = null;
     return;
   }
   if (!frameRateLimiter.shouldRender(now)) return;
+  sceneProfile.accept();
+  sceneProfile.resetStages();
 
   const cpuStart = performance.now();
   if (previousFrameTimestamp !== null) metrics.frameIntervalMs = now - previousFrameTimestamp;
@@ -647,12 +666,19 @@ function frame(now) {
   const elapsed = Math.max(0, (now - previousTime) / 1000); previousTime = now;
   const dt = Math.min(elapsed, 0.08);
   if (startScreen.isOpen) {
+    frameIntervals.reset();
+    sceneProfile.lastTimestamp = null;
     // Keep the WebGL buffer populated throughout the menu's translucent exit.
-    if (startScreen.isLaunching) miniatureBlur.render(scene, camera, { mode: cameraMode, car });
+    if (startScreen.isLaunching) {
+      const started = performance.now(); renderFrame();
+      sceneProfile.record(now, performance.now() - cpuStart, 0, 0, performance.now() - started,
+        renderer.info.render.calls, renderer.info.render.triangles, 0, stepper.droppedSeconds);
+    }
     stepper.reset(); return;
   }
   const physicsStart = performance.now();
-  const { alpha } = stepper.advance(elapsed, () => {
+  frameIntervals.push(now);
+  const { alpha, steps } = stepper.advance(elapsed, () => {
     input = getInput();
     const enabled = cameraMode !== 'free';
     const playerBefore = { x: sim.body.position.x, z: sim.body.position.z };
@@ -660,6 +686,7 @@ function frame(now) {
     const velocitiesBefore = new Map([[sim.body, { ...sim.body.velocity }],
       ...actorsBefore.map(actor => [actor.body, { ...actor.body.velocity }])]);
     traffic.stepWorld(input, STEP);
+    if (sceneProfile.stages) traffic.accumulateTimings(sceneProfile.stages);
     const physicalActors = traffic.physicalActors();
     const observed = violations.update({ dt: STEP, enabled, player: { x: sim.body.position.x, z: sim.body.position.z,
       heading: Math.atan2(2 * (sim.body.quaternion.x * sim.body.quaternion.z + sim.body.quaternion.w * sim.body.quaternion.y),
@@ -720,6 +747,9 @@ function frame(now) {
       quality, cameraPosition: camera.position });
   });
   metrics.physicsMs = performance.now() - physicsStart;
+  const stages = sceneProfile.stages;
+  if (stages) stages.stepGameplayMs = Math.max(0, metrics.physicsMs - stages.playerPrepareMs
+    - stages.trafficPrepareMs - stages.worldStepMs - stages.postMs);
   speedDisplay.textContent = String(Math.round(Math.hypot(sim.body.velocity.x, sim.body.velocity.z) * 3.6));
   car.position.lerpVectors(sim.body.previousPosition, sim.body.position, alpha);
   currentChassisQuaternion.copy(sim.body.quaternion);
@@ -740,19 +770,26 @@ function frame(now) {
   playerLights?.update({ signedSpeed: sim.signedSpeed, throttle: input.throttle });
   if (cameraMode === 'free') moveFreeCamera(dt);
   updateCamera(dt);
+  let stageStart = stages ? performance.now() : 0;
   cityState.updateSignals(trafficSignals, traffic.simulationTime(), camera, quality);
+  if (stages) { stages.signalMs = performance.now() - stageStart; stageStart = performance.now(); }
   traffic.render(alpha, camera);
+  if (stages) { stages.trafficVisualMs = performance.now() - stageStart; stageStart = performance.now(); }
   buildingOcclusion.update(camera, car, dt);
+  if (stages) { stages.occlusionMs = performance.now() - stageStart; stageStart = performance.now(); }
   damageEffects.update({ damage: sim.damage, car, camera, dt, quality });
   for (const [id, runtime] of policeDamageVisuals) {
     const actor = traffic.states.find(state => state.id === id);
     if (actor) runtime.effects.update({ damage: actor.simulation.damage, car: actor.mesh, camera, dt, quality });
   }
+  if (stages) { stages.damageVisualMs = performance.now() - stageStart; stageStart = performance.now(); }
   tireSmoke.update(dt, camera, { quality });
+  if (stages) { stages.smokeVisualMs = performance.now() - stageStart; stageStart = performance.now(); }
   repairPickupVisuals.update(dt);
+  if (stages) stages.pickupVisualMs = performance.now() - stageStart;
   tracks.prepareRender();
   const renderStart = performance.now();
-  miniatureBlur.render(scene, camera, { mode: cameraMode, car });
+  renderFrame();
   metrics.renderMs = performance.now() - renderStart;
   metrics.frameCpuMs = performance.now() - cpuStart;
   metrics.calls = renderer.info.render.calls;
@@ -765,15 +802,30 @@ function frame(now) {
     metrics.fps = metricFrames / metricTime;
     metricFrames = 0; metricTime = 0;
     Object.assign(metrics, traffic.performance());
-    if (debug) $('performance').textContent = `${metrics.fps.toFixed(0)} FPS · CPU ${metrics.frameCpuMs.toFixed(1)} ms · рендер ${metrics.renderMs.toFixed(1)} ms · физика ${metrics.physicsMs.toFixed(1)} ms · AI ${metrics.aiMs.toFixed(2)} ms\n${metrics.calls} draw calls · ${metrics.triangles} triangles · bodies ${metrics.totalBodies} · traffic ${metrics.trafficBodies} · ${quality} · DPR ${renderer.getPixelRatio()} · beams ${metrics.signalBeams}/${metrics.signalBeamTotal} · ${metrics.signalBeamSamples} samples`;
+    const pacing = debug ? frameIntervals.snapshot() : null;
+    if (debug) $('performance').dataset.pacing = `p95 ${pacing.p95?.toFixed(1) ?? '—'} · p99 ${pacing.p99?.toFixed(1) ?? '—'} ms · >25 ${pacing.over25} · >50 ${pacing.over50}`;
+    if (debug) $('performance').textContent = `${metrics.fps.toFixed(0)} FPS · CPU ${metrics.frameCpuMs.toFixed(1)} ms · рендер ${metrics.renderMs.toFixed(1)} ms · физика ${metrics.physicsMs.toFixed(1)} ms · AI ${metrics.aiMs.toFixed(2)} ms\n${metrics.calls} draw calls · ${metrics.triangles} triangles · bodies ${metrics.totalBodies} · traffic ${metrics.trafficBodies} · ${quality} · DPR ${renderer.getPixelRatio()} · beams ${metrics.signalBeams}/${metrics.signalBeamTotal} · ${metrics.signalBeamSamples} samples\n${$('performance').dataset.pacing}`;
   }
+  // Include HUD/reporting work in the frame CPU budget; storing the row itself is excluded.
+  metrics.frameCpuMs = performance.now() - cpuStart;
+  sceneProfile.record(now, metrics.frameCpuMs, metrics.physicsMs,
+    renderStart - physicsStart - metrics.physicsMs, metrics.renderMs, metrics.calls, metrics.triangles,
+    steps, stepper.droppedSeconds);
 }
 requestAnimationFrame(frame);
 // Read-only diagnostics for browser smoke tests and future handling comparisons.
 window.carLab = {
   startScreen: () => startScreen.snapshot(),
   version: packageInfo.version,
-  performance: () => ({ ...metrics, dpr: renderer.getPixelRatio(), droppedSeconds: stepper.droppedSeconds, trailSegments: tracks.count }),
+  performance: () => ({ ...metrics, frameIntervals: frameIntervals.snapshot(), dpr: renderer.getPixelRatio(), droppedSeconds: stepper.droppedSeconds, trailSegments: tracks.count }),
+  frameCounters: () => ({ accepted: sceneProfile.accepted, rendered: sceneProfile.rendered }),
+  startSceneProfile: () => {
+    if (!debug) return false;
+    sceneProfile.start(); gpuProfile?.dispose(); gpuProfile = new GpuProfile(renderer.getContext());
+    return true;
+  },
+  sceneProfile: () => ({ ...sceneProfile.snapshot(), gpu: gpuProfile?.snapshot() ?? { status: 'disabled', rows: [] } }),
+  stopSceneProfile: () => { sceneProfile.stop(); gpuProfile?.dispose(); gpuProfile = null; },
   trafficPerformance: () => traffic.performance(),
   resources: () => ({ ...renderer.info.memory, programs: renderer.info.programs?.length ?? 0 }),
   miniatureBlur: () => miniatureBlur.snapshot(),
@@ -871,7 +923,7 @@ function applyQuality() {
   resize();
 }
 applyQuality();
-window.addEventListener('pagehide', () => { miniatureBlur.dispose(); tireSmoke.dispose(); tracks.dispose(); traffic.dispose();
+window.addEventListener('pagehide', () => { gpuProfile?.dispose(); miniatureBlur.dispose(); tireSmoke.dispose(); tracks.dispose(); traffic.dispose();
   repairPickupVisuals.dispose();
   sim.disposeDamageListener();
   for (const runtime of policeDamageVisuals.values()) runtime.effects.dispose(); policeDamageVisuals.clear(); }, { once: true });

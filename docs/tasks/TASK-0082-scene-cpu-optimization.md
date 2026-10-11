@@ -33,6 +33,8 @@
 
 ## 3. Область изменений
 
+Актуализация по baseline0079,2026-10-11:18full runs, отдельный60s allocation sampling32KB в `docs/knowledge/scene-optimization/allocation-stable`. Physics/gameplay p95 median desktop30022.9ms/mobile30023.4ms; бюджет серии≤18.32/18.72ms, CPU остальных случаев≤baseline maximum×1.05 (точные числа plan.md). Подтверждённые крупные источники sampled churn: `footprintsOverlap`/SAT axes/corners минимум3.56GB, `segmentHitsRect` минимум3.47GB; это оценка созданного объёма включая collected objects, не retained heap. Первые изменения — эквивалентные scalar/scratch проверки в `src/traffic-spawn.js` и `src/main.js`, с тестами границ/случайных OBB fixtures и сохранением contact/order semantics. Budget:≥50% снижения sampled sizes этих двух источников при одинаковом отдельном профиле; не сравнивать sampling-overhead CPU с обычной матрицей. Raycast candidate требует отдельного подтверждения CPU; actor views/pickup scratch/smoke остаются следующими кандидатами. После0081 актуализировать профиль, статус draft сохраняется до зависимости.
+
 CPU части перечисленных модулей, специализированные scratch buffers/index helpers при необходимости, соответствующие tests и отчёты `docs/knowledge/scene-optimization/`. Допустимы read-only диагностические API. Смена движка/физики, Web Workers/WASM, новые зависимости и широкая архитектурная переработка исключены.
 
 Сохранить STEP1/120, потолок60, catch-up/hidden/menu semantics, seeded AI, безопасный spawn, junction reservations, police pursuit/wanted/arrest/damage/repair, traffic LOD, эффекты/арт. Не уменьшать число физически необходимых автомобилей или частоту контактной физики ради бенчмарка.

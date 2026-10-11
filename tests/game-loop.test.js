@@ -46,3 +46,43 @@ test('long stalls have bounded catch-up and pause discards remainder', () => {
   loop.advance(.003, () => ticks++); loop.reset();
   assert.equal(loop.advance(.006, () => ticks++).steps, 0);
 });
+
+test('60Hz early callbacks and seeded jitter preserve cadence over a minute', () => {
+  for (const phase of [0, 231.57]) for (const pattern of ['alternating', 'random']) {
+    const limiter = new FrameRateLimiter(); let seed = 104729, timestamps = [];
+    for (let i = 0; i < 3600; i++) {
+      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+      const jitter = pattern === 'alternating' ? (i % 2 ? -.4 : .4) : (seed / 2 ** 32 - .5) * .8;
+      const timestamp = phase + i * 1000 / 60 + jitter;
+      if (limiter.shouldRender(timestamp)) timestamps.push(timestamp);
+    }
+    assert.equal(timestamps.length, 3600, `${pattern}, phase ${phase}`);
+    const intervals = timestamps.slice(1).map((stamp, i) => stamp - timestamps[i]);
+    assert.ok(Math.max(...intervals) < 17.48);
+    assert.ok(Math.min(...intervals) > 15.86);
+  }
+});
+test('near60Hz and jittered discrete refresh rates keep the long-window cap', () => {
+  for (const hz of [30, 59.94, 60, 60.06, 120, 144, 165]) for (const jitter of [0, .4]) {
+    const limiter = new FrameRateLimiter(), stamps = [];
+    const callbacks = Math.floor(hz * 60);
+    for (let i = 0; i < callbacks; i++) {
+      const stamp = 19.7 + i * 1000 / hz + (i % 2 ? -jitter : 0);
+      if (limiter.shouldRender(stamp)) stamps.push(stamp);
+    }
+    const expected = Math.min(callbacks, 3600);
+    assert.ok(Math.abs(stamps.length - expected) <= 1, `${hz}Hz jitter${jitter}: ${stamps.length}`);
+    if ([30, 60, 120].includes(hz)) {
+      assert.ok(stamps.slice(1).every((stamp, i) => Math.abs(stamp - stamps[i] - 1000 / Math.min(hz, 60)) < .81));
+    }
+  }
+});
+test('invalid timestamp and a late stall cannot cause catch-up render bursts', () => {
+  const limiter = new FrameRateLimiter();
+  assert.equal(limiter.shouldRender(NaN), false);
+  assert.equal(limiter.shouldRender(0), true);
+  assert.equal(limiter.shouldRender(5000), true);
+  assert.equal(limiter.shouldRender(5000), false);
+  assert.equal(limiter.shouldRender(Infinity), false);
+  limiter.reset(); assert.equal(limiter.shouldRender(5000), true);
+});

@@ -33,6 +33,8 @@
 
 ## 3. Область изменений
 
+Актуализация по baseline0079,2026-10-11:18full runs в `docs/knowledge/scene-optimization/baseline-stable`, сводка/бюджеты в `baseline-2026-10-11.md` и `plan.md`. Lazy capacities: civilian300 суммарно по вариантам, police2/effects2; другие роли bounded по registry maxCount. Building cache8inactive/current-generation entry, LRU только inactive; измеренный lifecycle active highWater2. Factory count достигает790 за10циклов, listeners пока bounded1/3beginContact. Memory критерий последних5равных post-GC состояний и CPU регрессионные пределы определены в plan.md; после зависимости проверить supplemental fade/high-water и актуальность этих чисел. Это конкретизация задания, статус draft сохраняется до независимой приёмки0079.
+
 Перечисленные runtime/visual/lifecycle исходники, содержательные тесты пулов и существующих подсистем, отчёты `docs/knowledge/scene-optimization/`. Допустимы небольшой `src/object-pool.js`, специализированные scene/vehicle pools и tests. Не создавать универсальный framework или новую зависимость.
 
 Сохранить внешний API createVehicleRuntime, семантику actor IDs/ролей, безопасный spawn/pending count, logical/physical переходы, управление/физику STEP, damage/repair, fade/целостный depth, арт и quality. Не менять статусы исторических задач.

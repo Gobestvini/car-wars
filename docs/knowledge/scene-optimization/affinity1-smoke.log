@@ -1,0 +1,6 @@
+Starting desktop-low-empty repeat 1/1
+{"case":"desktop-low-empty","repeat":1,"frames":181,"gpu":"available","cpuP95":2.7999999998137355,"renderCpuP95":1,"intervalP95":16.800000000000182}
+Starting desktop-high-300 repeat 1/1
+{"case":"desktop-high-300","repeat":1,"frames":183,"gpu":"available","cpuP95":9.800000000745058,"renderCpuP95":1.7000000001862645,"intervalP95":16.80000000000109}
+Starting lifecycle repeat 1/1
+{"case":"lifecycle","repeat":1,"frames":255,"gpu":"available","cpuP95":5,"renderCpuP95":1.599999999627471,"intervalP95":16.900000000000546}

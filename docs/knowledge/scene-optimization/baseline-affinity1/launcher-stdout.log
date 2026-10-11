@@ -1,0 +1,7 @@
+Starting desktop-low-empty repeat 1/3
+{"case":"desktop-low-empty","repeat":1,"frames":3500,"gpu":"available","cpuP95":2.900000000372529,"renderCpuP95":0.7000000001862645,"intervalP95":21.59999999999127}
+Starting mobile-low-60 repeat 1/3
+{"case":"mobile-low-60","repeat":1,"frames":3151,"gpu":"available","cpuP95":6.599999999627471,"renderCpuP95":1.2000000001862645,"intervalP95":40.5}
+Starting desktop-high-60 repeat 1/3
+{"case":"desktop-high-60","repeat":1,"frames":3182,"gpu":"available","cpuP95":7,"renderCpuP95":1.099999999627471,"intervalP95":40.599999999998545}
+Starting mobile-high-300 repeat 1/3

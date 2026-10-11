@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: spawn slots stay clear of intersections and are spread across directed lanes deterministically
+ok 1 - spawn slots stay clear of intersections and are spread across directed lanes deterministically
+  ---
+  duration_ms: 1.5216
+  type: 'test'
+  ...
+# Subtest: oriented spawn footprint rejects collision and preserves a two-metre same-lane gap
+ok 2 - oriented spawn footprint rejects collision and preserves a two-metre same-lane gap
+  ---
+  duration_ms: 0.279
+  type: 'test'
+  ...
+# Subtest: a fast follower needs braking space and static obstacle footprints block insertion
+ok 3 - a fast follower needs braking space and static obstacle footprints block insertion
+  ---
+  duration_ms: 0.1109
+  type: 'test'
+  ...
+# Subtest: deterministic spawn allocation fits 6, 60 and 300 cars without footprint conflicts at widths 12, 15 and 30
+ok 4 - deterministic spawn allocation fits 6, 60 and 300 cars without footprint conflicts at widths 12, 15 and 30
+  ---
+  duration_ms: 2960.9157
+  type: 'test'
+  ...
+# Subtest: city-wide spawn slots use every available sector and are deterministic
+ok 5 - city-wide spawn slots use every available sector and are deterministic
+  ---
+  duration_ms: 6.4886
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3030.8221

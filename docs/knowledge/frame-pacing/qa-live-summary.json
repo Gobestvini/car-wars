@@ -1,0 +1,26 @@
+[
+  {
+    "name": "desktop-high-60-1.json",
+    "elapsedMs": 60275,
+    "frames": 3563,
+    "intervalP95": 16.900000000001455,
+    "intervalP99": 32.20000000000073,
+    "cpuP95": 6.400000000372529,
+    "gpu": "available",
+    "raf": 13673,
+    "distance": 296.1638509461498,
+    "errors": []
+  },
+  {
+    "name": "desktop-low-empty-1.json",
+    "elapsedMs": 60253,
+    "frames": 3546,
+    "intervalP95": 18.700000000004366,
+    "intervalP99": 32.900000000001455,
+    "cpuP95": 6,
+    "gpu": "available",
+    "raf": 13469,
+    "distance": 295.9325434993868,
+    "errors": []
+  }
+]

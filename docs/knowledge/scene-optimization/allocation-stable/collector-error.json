@@ -1,0 +1,4 @@
+{
+  "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5180/?play=1#debug\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5180/?play=1#debug\", waiting until \"load\"\u001b[22m\n\n    at C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tools\\scene-performance.cjs:163:18",
+  "partial": null
+}

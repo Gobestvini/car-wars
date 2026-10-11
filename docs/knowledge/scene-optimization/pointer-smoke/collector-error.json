@@ -1,0 +1,4 @@
+{
+  "error": "page.waitForFunction: Timeout 120000ms exceeded.\n    at C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tools\\scene-performance.cjs:158:18",
+  "partial": null
+}

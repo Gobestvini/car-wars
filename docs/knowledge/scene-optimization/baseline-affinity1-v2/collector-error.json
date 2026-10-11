@@ -1,0 +1,5439 @@
+{
+  "error": "page.waitForTimeout: Target page, context or browser has been closed\n    at C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tools\\scene-performance.cjs:203:20",
+  "partial": {
+    "code": {
+      "sourceHash": "7826a97ea99828bf4b59276a44740599eefb7cf09bd13025d57322ee51b7cab2",
+      "legacyLimiterFrom": null
+    },
+    "cfg": {
+      "id": "mobile-low-60",
+      "width": 390,
+      "height": 844,
+      "quality": "low",
+      "count": 60,
+      "police": 1,
+      "blur": 1,
+      "duration": 60000
+    },
+    "repeat": 1,
+    "before": {
+      "resources": {
+        "geometries": 47,
+        "textures": 12,
+        "programs": 40
+      },
+      "counters": {
+        "accepted": 691,
+        "rendered": 691
+      },
+      "performance": {
+        "fps": 60.15913060353199,
+        "physicsMs": 1.2000000001862645,
+        "renderMs": 0.5,
+        "frameCpuMs": 2.1000000005587935,
+        "frameIntervalMs": 12,
+        "calls": 77,
+        "triangles": 154139,
+        "quality": "low",
+        "signalBeams": 5,
+        "signalBeamTotal": 144,
+        "signalBeamSamples": 8,
+        "aiMs": 0.7000000001862645,
+        "aiStepMs": 0,
+        "playerPrepareMs": 0.09999999962747097,
+        "npcPrepareMs": 0,
+        "prepareMs": 0,
+        "worldStepMs": 0.6000000005587935,
+        "postMs": 0.09999999962747097,
+        "aiTicks": 108,
+        "aiDecisions": 6276,
+        "vehicleCreated": 61,
+        "vehicleRemoved": 0,
+        "totalBodies": 736,
+        "trafficBodies": 2,
+        "logicalTraffic": 59,
+        "visibleTraffic": 1,
+        "sleepingTrafficBodies": 0,
+        "awakeTrafficBodies": 2,
+        "frameIntervals": {
+          "sampleCount": 1,
+          "durationMs": 12,
+          "mean": 12,
+          "p50": 12,
+          "p95": 12,
+          "p99": 12,
+          "max": 12,
+          "over25": 0,
+          "over33_34": 0,
+          "over50": 0
+        },
+        "dpr": 1,
+        "droppedSeconds": 0.011833333333334736,
+        "trailSegments": 0
+      },
+      "environment": {
+        "vendor": "Google Inc. (NVIDIA)",
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4080 (0x00002704) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "dpr": 1,
+        "seed": 20261005
+      },
+      "heap": 34646538,
+      "position": {
+        "x": -75.00000005972568,
+        "y": 0.9570829658493969,
+        "z": -49.99954179077651
+      }
+    },
+    "samples": [
+      {
+        "elapsed": 0,
+        "telemetry": {
+          "position": {
+            "x": -75.00000029701701,
+            "y": 0.9479074262474749,
+            "z": -49.99636547675456
+          },
+          "speed": 1.2895526584959873,
+          "signedSpeed": 0.1408675436799387,
+          "heading": -0.00001344350852418767,
+          "roll": 5.359659420064855e-7,
+          "steer": 0.000026890245096105407,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 2,
+          "logical": 59,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -8,
+            "z": -9,
+            "heading": -0.2500000000000001,
+            "speed": 5.212832098973311e-16,
+            "targetId": "player",
+            "state": "idle",
+            "waitReason": "no-wanted-level",
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "pursue",
+              "stateSince": 0,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 0,
+              "profile": {
+                "level": 0,
+                "maxSpeed": 0,
+                "leadSeconds": 0,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 736,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 2,
+        "trafficPerformance": {
+          "aiMs": 0.5,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.10000000055879354,
+          "npcPrepareMs": 0.09999999962747097,
+          "prepareMs": 0.09999999962747097,
+          "worldStepMs": 0.40000000037252903,
+          "postMs": 0,
+          "aiTicks": 109,
+          "aiDecisions": 6337,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 736,
+          "trafficBodies": 2,
+          "logicalTraffic": 59,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 2
+        },
+        "resources": {
+          "geometries": 47,
+          "textures": 12,
+          "programs": 40
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 34646538,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 2,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 2
+        }
+      },
+      {
+        "elapsed": 1008,
+        "telemetry": {
+          "position": {
+            "x": -74.99999977048668,
+            "y": 0.8654331471549362,
+            "z": -46.02882564626759
+          },
+          "speed": 19.374519914057604,
+          "signedSpeed": 5.381791816121677,
+          "heading": -1.0833621783129348e-7,
+          "roll": -1.1169729314590078e-7,
+          "steer": 2.1227581813308705e-7,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 2,
+          "logical": 59,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -8,
+            "z": -9,
+            "heading": -0.25,
+            "speed": 7.096143317439884e-17,
+            "targetId": "player",
+            "state": "idle",
+            "waitReason": "no-wanted-level",
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "pursue",
+              "stateSince": 0,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 0,
+              "profile": {
+                "level": 0,
+                "maxSpeed": 0,
+                "leadSeconds": 0,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 736,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 2,
+        "trafficPerformance": {
+          "aiMs": 0.39999999944120646,
+          "aiStepMs": 0.39999999944120646,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.20000000018626451,
+          "prepareMs": 0.599999999627471,
+          "worldStepMs": 0.2999999998137355,
+          "postMs": 0.10000000055879354,
+          "aiTicks": 119,
+          "aiDecisions": 6947,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 736,
+          "trafficBodies": 2,
+          "logicalTraffic": 59,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 2
+        },
+        "resources": {
+          "geometries": 47,
+          "textures": 12,
+          "programs": 40
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 40576522,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 2,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 2
+        }
+      },
+      {
+        "elapsed": 2022,
+        "telemetry": {
+          "position": {
+            "x": -74.99999992480026,
+            "y": 0.8677258155573362,
+            "z": -40.76535715864588
+          },
+          "speed": 18.690557028824124,
+          "signedSpeed": 5.191800395913383,
+          "heading": -4.60478605684224e-9,
+          "roll": -1.2315429451775736e-9,
+          "steer": -3.579191495567421e-10,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 2,
+          "logical": 59,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -8,
+            "z": -9,
+            "heading": -0.2500000000000001,
+            "speed": 8.975480363084817e-18,
+            "targetId": "player",
+            "state": "idle",
+            "waitReason": "no-wanted-level",
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "pursue",
+              "stateSince": 0,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 0,
+              "profile": {
+                "level": 0,
+                "maxSpeed": 0,
+                "leadSeconds": 0,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 736,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 2,
+        "trafficPerformance": {
+          "aiMs": 0.39999999944120646,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0,
+          "prepareMs": 0.09999999962747097,
+          "worldStepMs": 0.40000000037252903,
+          "postMs": 0.09999999962747097,
+          "aiTicks": 128,
+          "aiDecisions": 7496,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 736,
+          "trafficBodies": 2,
+          "logicalTraffic": 59,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 2
+        },
+        "resources": {
+          "geometries": 47,
+          "textures": 12,
+          "programs": 40
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 42311854,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 2,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 2
+        }
+      },
+      {
+        "elapsed": 3033,
+        "telemetry": {
+          "position": {
+            "x": -74.9999999506853,
+            "y": 0.8677527433137887,
+            "z": -35.52789914785108
+          },
+          "speed": 18.696779744568726,
+          "signedSpeed": 5.1935322455648345,
+          "heading": -4.682113097552425e-9,
+          "roll": -1.3019993378530052e-11,
+          "steer": -4.517813321735867e-12,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 0,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 2,
+          "logical": 59,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -8,
+            "z": -9,
+            "heading": -0.25,
+            "speed": 3.857865350152946e-17,
+            "targetId": "player",
+            "state": "idle",
+            "waitReason": "no-wanted-level",
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "pursue",
+              "stateSince": 0,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 0,
+              "profile": {
+                "level": 0,
+                "maxSpeed": 0,
+                "leadSeconds": 0,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 736,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 2,
+        "trafficPerformance": {
+          "aiMs": 0.39999999944120646,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0,
+          "prepareMs": 0.10000000055879354,
+          "worldStepMs": 0.2999999998137355,
+          "postMs": 0.20000000018626451,
+          "aiTicks": 137,
+          "aiDecisions": 8045,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 736,
+          "trafficBodies": 2,
+          "logicalTraffic": 59,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 2
+        },
+        "resources": {
+          "geometries": 47,
+          "textures": 12,
+          "programs": 40
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 40967750,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 2,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 2
+        }
+      },
+      {
+        "elapsed": 4079,
+        "telemetry": {
+          "position": {
+            "x": -74.92928853979052,
+            "y": 0.8648075916102029,
+            "z": -30.28808183786646
+          },
+          "speed": 10.471078498981242,
+          "signedSpeed": 2.844567934843361,
+          "heading": 0.060298505943829545,
+          "roll": 0.03195770219005913,
+          "steer": 0.9071449850829312,
+          "grounded": 4,
+          "slip": 8.959763816627799,
+          "gear": "1",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 2,
+          "logical": 59,
+          "visible": 0,
+          "reservations": 0
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -8,
+            "z": -9,
+            "heading": -0.25,
+            "speed": 2.0712103414144705e-17,
+            "targetId": "player",
+            "state": "idle",
+            "waitReason": "no-wanted-level",
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "pursue",
+              "stateSince": 0,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 0,
+              "profile": {
+                "level": 0,
+                "maxSpeed": 0,
+                "leadSeconds": 0,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 736,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 2,
+        "trafficPerformance": {
+          "aiMs": 0.2999999998137355,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.09999999962747097,
+          "prepareMs": 0.09999999962747097,
+          "worldStepMs": 0.40000000037252903,
+          "postMs": 0.09999999962747097,
+          "aiTicks": 147,
+          "aiDecisions": 8655,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 736,
+          "trafficBodies": 2,
+          "logicalTraffic": 59,
+          "visibleTraffic": 0,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 2
+        },
+        "resources": {
+          "geometries": 47,
+          "textures": 12,
+          "programs": 40
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 42692630,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 2,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 2
+        }
+      },
+      {
+        "elapsed": 5090,
+        "telemetry": {
+          "position": {
+            "x": -73.16740140411747,
+            "y": 0.8669339729631177,
+            "z": -29.019750926304972
+          },
+          "speed": 10.301407871991245,
+          "signedSpeed": 2.6027466369398167,
+          "heading": 0.885754353066677,
+          "roll": 0.02768189940525189,
+          "steer": 0.9122469216808949,
+          "grounded": 4,
+          "slip": 0.27090087998106305,
+          "gear": "1",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 2,
+          "logical": 59,
+          "visible": 1,
+          "reservations": 27
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -8,
+            "z": -9,
+            "heading": -0.25,
+            "speed": 3.905854985698133e-17,
+            "targetId": "player",
+            "state": "idle",
+            "waitReason": "no-wanted-level",
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "pursue",
+              "stateSince": 0,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 0,
+              "profile": {
+                "level": 0,
+                "maxSpeed": 0,
+                "leadSeconds": 0,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 736,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 2,
+        "trafficPerformance": {
+          "aiMs": 2.2999999998137355,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.09999999962747097,
+          "prepareMs": 0.09999999962747097,
+          "worldStepMs": 0.5,
+          "postMs": 0,
+          "aiTicks": 156,
+          "aiDecisions": 9204,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 736,
+          "trafficBodies": 2,
+          "logicalTraffic": 59,
+          "visibleTraffic": 1,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 2
+        },
+        "resources": {
+          "geometries": 47,
+          "textures": 12,
+          "programs": 40
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 42298952,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 2,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 2
+        }
+      },
+      {
+        "elapsed": 6104,
+        "telemetry": {
+          "position": {
+            "x": -68.76162928411073,
+            "y": 0.8666962509726225,
+            "z": -28.841784828376507
+          },
+          "speed": 18.79726094070197,
+          "signedSpeed": 5.221433745571705,
+          "heading": 1.5261657524185954,
+          "roll": -0.0013668931537997972,
+          "steer": 0.007930393642621929,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 2,
+          "logical": 59,
+          "visible": 1,
+          "reservations": 24
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -8,
+            "z": -9,
+            "heading": -0.2500000000000001,
+            "speed": 2.2138326315443824e-17,
+            "targetId": "player",
+            "state": "idle",
+            "waitReason": "no-wanted-level",
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "pursue",
+              "stateSince": 0,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 0,
+              "profile": {
+                "level": 0,
+                "maxSpeed": 0,
+                "leadSeconds": 0,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 736,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 2,
+        "trafficPerformance": {
+          "aiMs": 1.599999999627471,
+          "aiStepMs": 1.599999999627471,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.10000000055879354,
+          "prepareMs": 1.7000000001862645,
+          "worldStepMs": 0.39999999944120646,
+          "postMs": 0.10000000055879354,
+          "aiTicks": 166,
+          "aiDecisions": 9814,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 736,
+          "trafficBodies": 2,
+          "logicalTraffic": 59,
+          "visibleTraffic": 1,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 2
+        },
+        "resources": {
+          "geometries": 47,
+          "textures": 12,
+          "programs": 40
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 42985180,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 2,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 2
+        }
+      },
+      {
+        "elapsed": 7120,
+        "telemetry": {
+          "position": {
+            "x": -63.908663508821114,
+            "y": 0.8689021114507597,
+            "z": -28.637685395496472
+          },
+          "speed": 8.076806909131529,
+          "signedSpeed": 2.242931262326121,
+          "heading": 1.5675814068780636,
+          "roll": 0.003655220964835032,
+          "steer": -0.08103975621899664,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.036048309242597686,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 2,
+          "logical": 59,
+          "visible": 1,
+          "reservations": 24
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -8,
+            "z": -9,
+            "heading": -0.2500000000000001,
+            "speed": 1.830857239320998e-17,
+            "targetId": "player",
+            "state": "idle",
+            "waitReason": "no-wanted-level",
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "pursue",
+              "stateSince": 0,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 0,
+              "profile": {
+                "level": 0,
+                "maxSpeed": 0,
+                "leadSeconds": 0,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 736,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 2,
+        "trafficPerformance": {
+          "aiMs": 3.400000000372529,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0,
+          "prepareMs": 0.09999999962747097,
+          "worldStepMs": 0.7000000001862645,
+          "postMs": 0.10000000055879354,
+          "aiTicks": 175,
+          "aiDecisions": 10363,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 736,
+          "trafficBodies": 2,
+          "logicalTraffic": 59,
+          "visibleTraffic": 1,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 2
+        },
+        "resources": {
+          "geometries": 47,
+          "textures": 12,
+          "programs": 40
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 41814866,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 2,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 2
+        }
+      },
+      {
+        "elapsed": 8139,
+        "telemetry": {
+          "position": {
+            "x": -61.710460398621215,
+            "y": 0.8637944158663344,
+            "z": -28.565672977051587
+          },
+          "speed": 8.718231075044084,
+          "signedSpeed": 2.418578925071232,
+          "heading": 1.5563743184129406,
+          "roll": -0.0008320802239047064,
+          "steer": -0.05600615838361996,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.036048309242597686,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 2,
+          "logical": 59,
+          "visible": 1,
+          "reservations": 13
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -8,
+            "z": -9,
+            "heading": -0.2500000000000001,
+            "speed": 7.665319395163066e-18,
+            "targetId": "player",
+            "state": "idle",
+            "waitReason": "no-wanted-level",
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "pursue",
+              "stateSince": 0,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 0,
+              "profile": {
+                "level": 0,
+                "maxSpeed": 0,
+                "leadSeconds": 0,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 736,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 2,
+        "trafficPerformance": {
+          "aiMs": 0.6000000005587935,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.09999999962747097,
+          "prepareMs": 0.09999999962747097,
+          "worldStepMs": 0.40000000037252903,
+          "postMs": 0.09999999962747097,
+          "aiTicks": 184,
+          "aiDecisions": 10912,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 736,
+          "trafficBodies": 2,
+          "logicalTraffic": 59,
+          "visibleTraffic": 1,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 2
+        },
+        "resources": {
+          "geometries": 47,
+          "textures": 12,
+          "programs": 40
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 42578276,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 2,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 2
+        }
+      },
+      {
+        "elapsed": 9189,
+        "telemetry": {
+          "position": {
+            "x": -58.871595280335086,
+            "y": 0.8642062377165066,
+            "z": -28.486093680040007
+          },
+          "speed": 10.477990404315962,
+          "signedSpeed": 2.90686389355305,
+          "heading": 1.5638777476206314,
+          "roll": -0.0013134143072158321,
+          "steer": -0.07213832240055075,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.036048309242597686,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 2,
+          "logical": 59,
+          "visible": 1,
+          "reservations": 14
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -8,
+            "z": -9,
+            "heading": -0.2500000000000001,
+            "speed": 1.9232120680807346e-17,
+            "targetId": "player",
+            "state": "idle",
+            "waitReason": "no-wanted-level",
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "pursue",
+              "stateSince": 0,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 0,
+              "profile": {
+                "level": 0,
+                "maxSpeed": 0,
+                "leadSeconds": 0,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 736,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 2,
+        "trafficPerformance": {
+          "aiMs": 0.6999999992549419,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.09999999962747097,
+          "npcPrepareMs": 0.09999999962747097,
+          "prepareMs": 0.09999999962747097,
+          "worldStepMs": 0.40000000037252903,
+          "postMs": 0.09999999962747097,
+          "aiTicks": 194,
+          "aiDecisions": 11522,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 736,
+          "trafficBodies": 2,
+          "logicalTraffic": 59,
+          "visibleTraffic": 1,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 2
+        },
+        "resources": {
+          "geometries": 47,
+          "textures": 12,
+          "programs": 40
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 41746264,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 2,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 2
+        }
+      },
+      {
+        "elapsed": 10207,
+        "telemetry": {
+          "position": {
+            "x": -55.91814699460861,
+            "y": 0.8649378360489659,
+            "z": -28.413872859469432
+          },
+          "speed": 10.388496173981109,
+          "signedSpeed": 2.881865802870307,
+          "heading": 1.5726857377752612,
+          "roll": -0.00198265839031671,
+          "steer": -0.09184280507684672,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 2,
+          "logical": 59,
+          "visible": 1,
+          "reservations": 17
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -8,
+            "z": -9,
+            "heading": -0.2500000000000001,
+            "speed": 3.307364153687992e-17,
+            "targetId": "player",
+            "state": "idle",
+            "waitReason": "no-wanted-level",
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "pursue",
+              "stateSince": 0,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 0,
+              "profile": {
+                "level": 0,
+                "maxSpeed": 0,
+                "leadSeconds": 0,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 736,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 2,
+        "trafficPerformance": {
+          "aiMs": 0.6000000005587935,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.10000000055879354,
+          "prepareMs": 0.20000000018626451,
+          "worldStepMs": 0.39999999944120646,
+          "postMs": 0.10000000055879354,
+          "aiTicks": 203,
+          "aiDecisions": 12071,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 736,
+          "trafficBodies": 2,
+          "logicalTraffic": 59,
+          "visibleTraffic": 1,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 2
+        },
+        "resources": {
+          "geometries": 47,
+          "textures": 12,
+          "programs": 40
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 43421372,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 2,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 2
+        }
+      },
+      {
+        "elapsed": 11220,
+        "telemetry": {
+          "position": {
+            "x": -53.23015697815769,
+            "y": 0.8654480862436853,
+            "z": -28.35895022860862
+          },
+          "speed": 8.93391862622151,
+          "signedSpeed": 2.478218089265994,
+          "heading": 1.5817677767208584,
+          "roll": -0.002874852375427909,
+          "steer": -0.1130691693352811,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 3,
+          "logical": 58,
+          "visible": 1,
+          "reservations": 30
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -10.720738173452979,
+            "z": -7.585682459493487,
+            "heading": -1.2282543914708977,
+            "speed": 6.555877696622415,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 21.383192354772255
+            }
+          }
+        ],
+        "bodies": 737,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 3,
+        "trafficPerformance": {
+          "aiMs": 0.5,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.10000000055879354,
+          "prepareMs": 0.20000000018626451,
+          "worldStepMs": 0.5,
+          "postMs": 0.09999999962747097,
+          "aiTicks": 213,
+          "aiDecisions": 12681,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 737,
+          "trafficBodies": 3,
+          "logicalTraffic": 58,
+          "visibleTraffic": 1,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 3
+        },
+        "resources": {
+          "geometries": 48,
+          "textures": 12,
+          "programs": 41
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 43761470,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 3,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 3
+        }
+      },
+      {
+        "elapsed": 12237,
+        "telemetry": {
+          "position": {
+            "x": -50.854648182342636,
+            "y": 0.8654540554577151,
+            "z": -28.32012833734043
+          },
+          "speed": 7.8955506066499925,
+          "signedSpeed": 2.189805699914766,
+          "heading": 1.5909776259814405,
+          "roll": -0.003924608896490068,
+          "steer": -0.13476119582977303,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 3,
+          "logical": 58,
+          "visible": 2,
+          "reservations": 25
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -19.61926934738437,
+            "z": -11.839409626847829,
+            "heading": -2.0733056809052246,
+            "speed": 14.181439836563548,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 18.317697438053983
+            }
+          }
+        ],
+        "bodies": 737,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 3,
+        "trafficPerformance": {
+          "aiMs": 0.40000000037252903,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.09999999962747097,
+          "prepareMs": 0.09999999962747097,
+          "worldStepMs": 0.40000000037252903,
+          "postMs": 0.09999999962747097,
+          "aiTicks": 222,
+          "aiDecisions": 13230,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 737,
+          "trafficBodies": 3,
+          "logicalTraffic": 58,
+          "visibleTraffic": 2,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 3
+        },
+        "resources": {
+          "geometries": 48,
+          "textures": 12,
+          "programs": 41
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 43804172,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 4,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 4
+        }
+      },
+      {
+        "elapsed": 13256,
+        "telemetry": {
+          "position": {
+            "x": -48.626444045362874,
+            "y": 0.8633987119029706,
+            "z": -28.294046622330352
+          },
+          "speed": 8.529261521360647,
+          "signedSpeed": 2.3662723602787112,
+          "heading": 1.6002060269693004,
+          "roll": -0.008248507742923655,
+          "steer": -0.15581933922238056,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 3,
+          "logical": 58,
+          "visible": 2,
+          "reservations": 21
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -33.38573937483677,
+            "z": -19.339389352151752,
+            "heading": -2.1173521342037196,
+            "speed": 12.815814461930026,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 11.393282894904287
+            }
+          }
+        ],
+        "bodies": 737,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 3,
+        "trafficPerformance": {
+          "aiMs": 0.5,
+          "aiStepMs": 0.5,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.20000000018626451,
+          "prepareMs": 0.7000000001862645,
+          "worldStepMs": 0.39999999944120646,
+          "postMs": 0.10000000055879354,
+          "aiTicks": 232,
+          "aiDecisions": 13840,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 737,
+          "trafficBodies": 3,
+          "logicalTraffic": 58,
+          "visibleTraffic": 2,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 3
+        },
+        "resources": {
+          "geometries": 48,
+          "textures": 12,
+          "programs": 41
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 44752506,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 4,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 4
+        }
+      },
+      {
+        "elapsed": 14269,
+        "telemetry": {
+          "position": {
+            "x": -46.1906297006704,
+            "y": 0.8675198112770047,
+            "z": -28.27897858522011
+          },
+          "speed": 8.36869413783239,
+          "signedSpeed": 2.3201832433313703,
+          "heading": 1.6100840448703424,
+          "roll": -0.012227903393319124,
+          "steer": -0.1794775793258502,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 3,
+          "logical": 58,
+          "visible": 3,
+          "reservations": 14
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -40.940367830329315,
+            "z": -24.457612739516573,
+            "heading": -2.2977526272523376,
+            "speed": 4.662768507571723,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 3.0236820389935635
+            }
+          }
+        ],
+        "bodies": 737,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 3,
+        "trafficPerformance": {
+          "aiMs": 0.6000000005587935,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.10000000055879354,
+          "npcPrepareMs": 0.09999999962747097,
+          "prepareMs": 0.09999999962747097,
+          "worldStepMs": 0.5,
+          "postMs": 0.20000000018626451,
+          "aiTicks": 241,
+          "aiDecisions": 14389,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 737,
+          "trafficBodies": 3,
+          "logicalTraffic": 58,
+          "visibleTraffic": 3,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 3
+        },
+        "resources": {
+          "geometries": 52,
+          "textures": 13,
+          "programs": 43
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 42400501,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 4,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 4
+        }
+      },
+      {
+        "elapsed": 15278,
+        "telemetry": {
+          "position": {
+            "x": -44.13988679655684,
+            "y": 0.8671034721222807,
+            "z": -28.276653285326415
+          },
+          "speed": 6.299548395091874,
+          "signedSpeed": 1.7458058669440584,
+          "heading": 1.6214815331157442,
+          "roll": -0.01223757272981892,
+          "steer": -0.2081685439058006,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [
+            "police-12"
+          ],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 3,
+          "logical": 58,
+          "visible": 3,
+          "reservations": 15
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -41.24753907997829,
+            "z": -25.104574610483148,
+            "heading": -2.4850769730849245,
+            "speed": 0.02804092572510986,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 737,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 3,
+        "trafficPerformance": {
+          "aiMs": 0.6999999992549419,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.09999999962747097,
+          "npcPrepareMs": 0.10000000055879354,
+          "prepareMs": 0.10000000055879354,
+          "worldStepMs": 0.5,
+          "postMs": 0.09999999962747097,
+          "aiTicks": 250,
+          "aiDecisions": 14938,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 737,
+          "trafficBodies": 3,
+          "logicalTraffic": 58,
+          "visibleTraffic": 3,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 3
+        },
+        "resources": {
+          "geometries": 52,
+          "textures": 13,
+          "programs": 43
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 44740503,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 4,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 4
+        }
+      },
+      {
+        "elapsed": 16292,
+        "telemetry": {
+          "position": {
+            "x": -42.631965235903266,
+            "y": 0.8666536898794979,
+            "z": -28.273991267367997
+          },
+          "speed": 4.749548633643227,
+          "signedSpeed": 1.3150551718078785,
+          "heading": 1.6321990568701854,
+          "roll": -0.011701407888714198,
+          "steer": -0.23496190693471183,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [
+            "police-12"
+          ],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 3,
+          "logical": 58,
+          "visible": 3,
+          "reservations": 19
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -41.249074305959724,
+            "z": -25.109602665968822,
+            "heading": -2.485020436429901,
+            "speed": 0.00037341019946467087,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0.8666666666666665,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 737,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 3,
+        "trafficPerformance": {
+          "aiMs": 1.099999999627471,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.09999999962747097,
+          "npcPrepareMs": 0.09999999962747097,
+          "prepareMs": 0.09999999962747097,
+          "worldStepMs": 0.5,
+          "postMs": 0.10000000055879354,
+          "aiTicks": 260,
+          "aiDecisions": 15548,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 737,
+          "trafficBodies": 3,
+          "logicalTraffic": 58,
+          "visibleTraffic": 3,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 3
+        },
+        "resources": {
+          "geometries": 52,
+          "textures": 13,
+          "programs": 43
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 45018581,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 3,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 3
+        }
+      },
+      {
+        "elapsed": 17312,
+        "telemetry": {
+          "position": {
+            "x": -40.311930517636455,
+            "y": 0.869042162233597,
+            "z": -28.305896879992023
+          },
+          "speed": 7.856393904007061,
+          "signedSpeed": 2.177325240970113,
+          "heading": 1.6454696191901714,
+          "roll": -0.017095250648322013,
+          "steer": -0.26413036254634625,
+          "grounded": 4,
+          "slip": 0.08826401703055464,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [
+            "police-12"
+          ],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 4,
+          "logical": 57,
+          "visible": 3,
+          "reservations": 23
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -41.24911925640173,
+            "z": -25.109684516241785,
+            "heading": -2.4850202879302605,
+            "speed": 0.0000032773929165970535,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 1.8416666666666668,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 738,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 4,
+        "trafficPerformance": {
+          "aiMs": 0.5,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.09999999962747097,
+          "npcPrepareMs": 0,
+          "prepareMs": 0,
+          "worldStepMs": 0.599999999627471,
+          "postMs": 0.10000000055879354,
+          "aiTicks": 269,
+          "aiDecisions": 16097,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 738,
+          "trafficBodies": 4,
+          "logicalTraffic": 57,
+          "visibleTraffic": 3,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 4
+        },
+        "resources": {
+          "geometries": 52,
+          "textures": 13,
+          "programs": 43
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 43227471,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 4,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 4
+        }
+      },
+      {
+        "elapsed": 18319,
+        "telemetry": {
+          "position": {
+            "x": -38.17730252299437,
+            "y": 0.8682801998941388,
+            "z": -28.347660231795242
+          },
+          "speed": 5.995961147473365,
+          "signedSpeed": 1.6598980287528897,
+          "heading": 1.6613346237621862,
+          "roll": -0.013597911723470732,
+          "steer": -0.30506691215411885,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [
+            "police-12"
+          ],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 5,
+          "logical": 56,
+          "visible": 3,
+          "reservations": 26
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -41.24912021366272,
+            "z": -25.109685794351073,
+            "heading": -2.4850202879226546,
+            "speed": 2.7488594521746168e-8,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 2.8166666666666673,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 739,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 5,
+        "trafficPerformance": {
+          "aiMs": 0.7999999998137355,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.20000000018626451,
+          "prepareMs": 0.20000000018626451,
+          "worldStepMs": 0.5,
+          "postMs": 0.19999999925494194,
+          "aiTicks": 278,
+          "aiDecisions": 16646,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 739,
+          "trafficBodies": 5,
+          "logicalTraffic": 56,
+          "visibleTraffic": 3,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 5
+        },
+        "resources": {
+          "geometries": 52,
+          "textures": 13,
+          "programs": 43
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 44808798,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 4,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 4
+        }
+      },
+      {
+        "elapsed": 19332,
+        "telemetry": {
+          "position": {
+            "x": -36.93844242461485,
+            "y": 0.8675988631205027,
+            "z": -28.363972097884403
+          },
+          "speed": 3.000477267553386,
+          "signedSpeed": 0.8283300017366795,
+          "heading": 1.6742896391969124,
+          "roll": -0.012816013716270487,
+          "steer": -0.33993264448361105,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [
+            "police-12"
+          ],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 5,
+          "logical": 56,
+          "visible": 3,
+          "reservations": 19
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -41.24912022986957,
+            "z": -25.109685813773876,
+            "heading": -2.4850202879019867,
+            "speed": 1.6833260814347484e-9,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 3.9000000000000012,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 739,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 5,
+        "trafficPerformance": {
+          "aiMs": 0.5,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.09999999962747097,
+          "npcPrepareMs": 0.20000000018626451,
+          "prepareMs": 0.20000000018626451,
+          "worldStepMs": 0.39999999944120646,
+          "postMs": 0.20000000018626451,
+          "aiTicks": 288,
+          "aiDecisions": 17256,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 739,
+          "trafficBodies": 5,
+          "logicalTraffic": 56,
+          "visibleTraffic": 3,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 5
+        },
+        "resources": {
+          "geometries": 52,
+          "textures": 13,
+          "programs": 43
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 44162480,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 4,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 4
+        }
+      },
+      {
+        "elapsed": 20346,
+        "telemetry": {
+          "position": {
+            "x": -35.48323550604561,
+            "y": 0.8658953137884203,
+            "z": -28.39665559467684
+          },
+          "speed": 8.160811042908746,
+          "signedSpeed": 2.2605582337260555,
+          "heading": 1.6774641482225179,
+          "roll": -0.015738994873453864,
+          "steer": -0.34117223644729633,
+          "grounded": 4,
+          "slip": 0.4276450878275546,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 5,
+          "logical": 56,
+          "visible": 3,
+          "reservations": 16
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -41.29386924372134,
+            "z": -25.25060651867244,
+            "heading": -2.534327106493584,
+            "speed": 1.2744685934920577,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 4.875000000000002,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0.21666666666666665,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 2.3963864179310326
+            }
+          }
+        ],
+        "bodies": 739,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 5,
+        "trafficPerformance": {
+          "aiMs": 0.5,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.19999999925494194,
+          "prepareMs": 0.19999999925494194,
+          "worldStepMs": 0.40000000037252903,
+          "postMs": 0.2999999998137355,
+          "aiTicks": 297,
+          "aiDecisions": 17805,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 739,
+          "trafficBodies": 5,
+          "logicalTraffic": 56,
+          "visibleTraffic": 3,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 5
+        },
+        "resources": {
+          "geometries": 52,
+          "textures": 13,
+          "programs": 43
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 44016471,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 4,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 4
+        }
+      },
+      {
+        "elapsed": 21361,
+        "telemetry": {
+          "position": {
+            "x": -33.148027928505016,
+            "y": 0.8673520271031553,
+            "z": -28.55599869159759
+          },
+          "speed": 7.806901555210038,
+          "signedSpeed": 2.159284824414648,
+          "heading": 1.706970748123767,
+          "roll": -0.018228509794705142,
+          "steer": -0.41540224974634077,
+          "grounded": 4,
+          "slip": 0.41749027049184506,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 5,
+          "logical": 56,
+          "visible": 3,
+          "reservations": 16
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -40.204793804852784,
+            "z": -28.060636353630056,
+            "heading": 2.624338785257677,
+            "speed": 3.0845589971747174,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 5.850000000000002,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 3.4827126972344704
+            }
+          }
+        ],
+        "bodies": 739,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 5,
+        "trafficPerformance": {
+          "aiMs": 0.2999999998137355,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.10000000055879354,
+          "npcPrepareMs": 0.20000000018626451,
+          "prepareMs": 0.20000000018626451,
+          "worldStepMs": 0.599999999627471,
+          "postMs": 0.09999999962747097,
+          "aiTicks": 306,
+          "aiDecisions": 18354,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 739,
+          "trafficBodies": 5,
+          "logicalTraffic": 56,
+          "visibleTraffic": 3,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 5
+        },
+        "resources": {
+          "geometries": 52,
+          "textures": 13,
+          "programs": 43
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 44784297,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 4,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 4
+        }
+      },
+      {
+        "elapsed": 22374,
+        "telemetry": {
+          "position": {
+            "x": -31.807980745729242,
+            "y": 0.868217455992757,
+            "z": -28.62420721819448
+          },
+          "speed": 2.2855460056479524,
+          "signedSpeed": 0.6264786181923055,
+          "heading": 1.733622142972528,
+          "roll": -0.011327864056674448,
+          "steer": -0.48975241359896166,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [
+            "police-12"
+          ],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 3,
+          "logical": 58,
+          "visible": 2,
+          "reservations": 18
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -37.770688262413444,
+            "z": -28.5366430550698,
+            "heading": 1.7977434478059884,
+            "speed": 0.11749579618674154,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 4.983333333333335,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 737,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 3,
+        "trafficPerformance": {
+          "aiMs": 0.599999999627471,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0.09999999962747097,
+          "npcPrepareMs": 0,
+          "prepareMs": 0.10000000055879354,
+          "worldStepMs": 0.599999999627471,
+          "postMs": 0.09999999962747097,
+          "aiTicks": 316,
+          "aiDecisions": 18964,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 737,
+          "trafficBodies": 3,
+          "logicalTraffic": 58,
+          "visibleTraffic": 2,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 3
+        },
+        "resources": {
+          "geometries": 52,
+          "textures": 13,
+          "programs": 43
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 47100484,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 4,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 4
+        }
+      },
+      {
+        "elapsed": 23384,
+        "telemetry": {
+          "position": {
+            "x": -31.423110697170348,
+            "y": 0.8590891872819841,
+            "z": -28.619394348218083
+          },
+          "speed": 3.969843371847663,
+          "signedSpeed": 1.096691769810109,
+          "heading": 1.7393100360298581,
+          "roll": -0.02175716191108119,
+          "steer": -0.501087983954008,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0.55,
+          "damageState": "damaged",
+          "traction": 0.8999999999999999,
+          "lastImpactSpeed": 5.188647346872002
+        },
+        "routeIndex": 1,
+        "arrest": {
+          "state": "idle",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [
+            "police-12"
+          ],
+          "cancellationReason": null
+        },
+        "proxies": 0,
+        "occlusion": {
+          "created": 0,
+          "released": 0,
+          "active": 0,
+          "highWater": 0
+        },
+        "traffic": {
+          "count": 60,
+          "requestedCount": 60,
+          "pending": false,
+          "totalCount": 61,
+          "roleCounts": {
+            "civilian": 60,
+            "police": 1
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 3,
+          "logical": 58,
+          "visible": 2,
+          "reservations": 22
+        },
+        "police": [
+          {
+            "id": "police-12",
+            "x": -37.317275299434634,
+            "z": -28.56142444721224,
+            "heading": 1.7338077864958072,
+            "speed": 0.07707795857597075,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 10.291666666666652,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 5.6333333333333355,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 0
+            }
+          }
+        ],
+        "bodies": 737,
+        "worldListeners": {
+          "addBody": 1,
+          "removeBody": 1,
+          "beginContact": 2
+        },
+        "bodyCollisionListeners": 3,
+        "trafficPerformance": {
+          "aiMs": 0.7000000001862645,
+          "aiStepMs": 0,
+          "playerPrepareMs": 0,
+          "npcPrepareMs": 0.19999999925494194,
+          "prepareMs": 0.19999999925494194,
+          "worldStepMs": 0.5,
+          "postMs": 0.10000000055879354,
+          "aiTicks": 325,
+          "aiDecisions": 19513,
+          "vehicleCreated": 61,
+          "vehicleRemoved": 0,
+          "totalBodies": 737,
+          "trafficBodies": 3,
+          "logicalTraffic": 58,
+          "visibleTraffic": 2,
+          "sleepingTrafficBodies": 0,
+          "awakeTrafficBodies": 3
+        },
+        "resources": {
+          "geometries": 52,
+          "textures": 13,
+          "programs": 43
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -157.5,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -65,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 107.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 42.5,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -25,
+              "z": 50,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 115,
+              "z": -75,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 157.5,
+              "z": -25,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 157.5,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -175,
+              "z": -165,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 57.5,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 0,
+          "unavailableReason": null
+        },
+        "heap": 42418864,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 4,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 4
+        }
+      }
+    ],
+    "events": [
+      {
+        "elapsed": 10206,
+        "event": "pursuit-damage"
+      }
+    ]
+  }
+}

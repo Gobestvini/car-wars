@@ -77,9 +77,9 @@
 | [TASK-0074](TASK-0074-tire-tracks-over-markings.md) | Видимые следы шин поверх дорожной разметки | done | normal | реализация и WebGL проверки завершены; независимый QA | gpt-6.1-sol, high |
 | [TASK-0075](TASK-0075-sidewalk-lamps-and-bins.md) | Модели уличных фонарей и урн на тротуарах | done | normal | 160 фонарей/80 урн, placement и lifecycle проверены; QA после0074 | gpt-6.1-sol, high |
 | [TASK-0076](TASK-0076-match-mockup-light-materials.md) | Свет и материалы по прямому сравнению игры с мокапом | done | normal | actual-game before/after, GPU и resource matrix готовы; QA после0074/0075 | gpt-6.1-sol, high |
-| [TASK-0077](TASK-0077-frame-pacing-smoothness.md) | Плавность движения после ограничения FPS и диагностика интервалов кадров | ready | high | нет; последовательно с правками main.js | gpt-6.1-sol, high |
+| [TASK-0077](TASK-0077-frame-pacing-smoothness.md) | Плавность движения после ограничения FPS и диагностика интервалов кадров | blocked | high | нет; последовательно с правками main.js | gpt-6.1-sol, high |
 | [TASK-0078](TASK-0078-mockup-light-materials-followup.md) | Повторная доводка света и материалов по мокапу игры | done | high | нет; новое продолжение после done0076, последовательно с оптимизацией | gpt-6.1-sol, high |
-| [TASK-0079](TASK-0079-scene-performance-baseline.md) | Измерить сцену и зафиксировать план полной оптимизации | ready | high | нет; после изменения света переснять baseline | gpt-6.1-sol, high |
+| [TASK-0079](TASK-0079-scene-performance-baseline.md) | Измерить сцену и зафиксировать план полной оптимизации | qa-in-progress | high | нет; после изменения света переснять baseline | gpt-6.1-sol, high |
 | [TASK-0080](TASK-0080-scene-object-pools.md) | Повторное использование динамических объектов всей сцены | draft | high | TASK-0079 — требуется done и измеренные capacities | gpt-6.1-sol, high |
 | [TASK-0081](TASK-0081-scene-render-optimization.md) | Оптимизация рендера сцены с сохранением вида мокапа | draft | high | TASK-0078, TASK-0080 — требуется done | gpt-6.1-sol, high |
 | [TASK-0082](TASK-0082-scene-cpu-optimization.md) | Оптимизация CPU и итоговая проверка всей сцены | draft | high | TASK-0081 — требуется done | gpt-6.1-sol, high |

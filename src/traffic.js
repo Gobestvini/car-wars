@@ -23,8 +23,8 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
   let graph = createRoadGraph(roadNetwork, getLaneOffset(roadWidth));
   let spawnObstacles = obstacles, spawnSlots = [], spawnSearchCursor = 0;
   let thinkTime = 0, aiTime = 0, signalController = createTrafficSignals(roadNetwork);
-  const profile = { aiMs: 0, playerPrepareMs: 0, npcPrepareMs: 0, prepareMs: 0,
-    worldStepMs: 0, postMs: 0, aiTicks: 0, aiDecisions: 0 };
+  const profile = { aiMs: 0, aiStepMs: 0, playerPrepareMs: 0, npcPrepareMs: 0, prepareMs: 0,
+    worldStepMs: 0, postMs: 0, aiTicks: 0, aiDecisions: 0, vehicleCreated: 0, vehicleRemoved: 0 };
   const reservations = new Map();
   const roleRegistry = new Map([['civilian', { maxCount: 300, physicalOnly: false }]]);
   const spawnRequests = new Map();
@@ -185,12 +185,14 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     simulation.body.addEventListener('collide', collide);
     state.occupancyItem.state = state;
     states.push(state); simulations.push(simulation); cars.push(mesh); syncState(state);
+    profile.vehicleCreated++;
     return state;
   };
 
   const removeAt = index => {
     const [state] = states.splice(index, 1);
     if (!state) return;
+    profile.vehicleRemoved++;
     releaseReservation(state.ai);
     state.simulation.body.removeEventListener('collide', state.collideListener);
     roleRegistry.get(state.role)?.dispose?.(state.ai.roleState);
@@ -832,12 +834,14 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     },
     setSpawnObstacles(obstacles = []) { spawnObstacles = obstacles; },
     prepare(dt = STEP) {
+      profile.aiStepMs = 0;
       if (pendingCount !== null) applyCount(pendingCount);
       stepLogical(dt);
       thinkTime += dt;
       if (thinkTime >= 0.1) {
         const thinkDt = thinkTime; thinkTime = 0;
         const started = now(); updateControllers(thinkDt); servicePending(); serviceRoleSpawnRequests(); profile.aiMs = now() - started;
+        profile.aiStepMs = profile.aiMs;
         profile.aiTicks++; profile.aiDecisions += states.length;
       }
       const prepareStarted = now();
@@ -855,7 +859,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     stepWorld(input = {}, dt = STEP) {
       let started = now();
       physics.prepare(input, dt); profile.playerPrepareMs = now() - started;
-      this.prepare(dt); profile.prepareMs = profile.playerPrepareMs + profile.npcPrepareMs + profile.aiMs;
+      started = now(); this.prepare(dt); profile.prepareMs = now() - started;
       started = now(); physics.world.step(dt); profile.worldStepMs = now() - started;
       started = now(); physics.postStep(dt); this.postStep(dt); profile.postMs = now() - started;
     },
@@ -943,6 +947,14 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     physicalTireSources() { return states.filter(state => !state.logical).map(state => ({
       id: state.id, role: state.role, x: state.x, z: state.z, body: state.simulation.body, wheels: state.simulation.wheels,
     })); },
+    accumulateTimings(target) {
+      target.aiMs += profile.aiStepMs;
+      target.playerPrepareMs += profile.playerPrepareMs;
+      target.trafficPrepareMs += profile.prepareMs;
+      target.npcPrepareMs += profile.npcPrepareMs;
+      target.worldStepMs += profile.worldStepMs;
+      target.postMs += profile.postMs;
+    },
     performance() { return { ...profile, totalBodies: physics?.world.bodies.length ?? 0,
       trafficBodies: states.filter(state => !state.logical).length,
       logicalTraffic: states.filter(state => state.logical).length,

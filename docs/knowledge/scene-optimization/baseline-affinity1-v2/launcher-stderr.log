@@ -1,0 +1,4 @@
+page.waitForTimeout: Target page, context or browser has been closed
+    at C:\Users\gobes\OneDrive\Документы\CarWars\tools\scene-performance.cjs:203:20 {
+  log: []
+}

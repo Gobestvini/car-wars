@@ -31,6 +31,8 @@
 
 ## 3. Область изменений
 
+Актуализация по baseline0079,2026-10-11: полный GPU timer p95 median desktop3006.284288ms (повторы6.185984–6.358016), mobile3004.636672ms (4.619264–4.690944), CPU submission desktop1.9–2.1ms. Raw18runs и сводка находятся в `docs/knowledge/scene-optimization/baseline-stable`/`baseline-summary.json`. Первые кандидаты — redundant postprocess clears/state scratch и active transparent upload; GPU методы должны дать улучшение за пределами исходного разброса, остальные GPU p95≤baseline max×1.05. Calls/triangles учитывают тени и все passes;36visualpairs и color/frequency обязательны. Статическая сцена уже instanced/merged, batching/culling принимается только после индивидуального замера. Общий CPU bottleneck этой сцене находится в physics/gameplay; этот этап не объявляет всю оптимизацию законченной. После0080 переснять профиль и проверить применимость кандидатов, draft сохраняется до зависимостей.
+
 Рендерные части перечисленных исходников, небольшой модуль spatial batches при необходимости, релевантные tests/tools, сравнительные артефакты `docs/knowledge/scene-optimization/` и `docs/art/verification/scene-optimization/`. Новые зависимости, смена движка/WebGPU, геометрии/моделей/дизайна исключены.
 
 Сохранить gameplay/fixed step/AI, коллизии, полную карту, реальное количество объектов, default DPR/quality/blur и принятые ART/ART_LIGHT. Нельзя ускорять отключением теней, дыма, fade, blur или удалением машин/props. LOD допустим только с прежним силуэтом и без заметных переключений.

@@ -1,6 +1,6 @@
 # TASK-0079: Измерить сцену и зафиксировать план полной оптимизации
 
-- Статус: ready
+- Статус: qa-in-progress
 - Приоритет: high
 - Создана: 2026-10-10
 - Обновлена: 2026-10-11
@@ -63,11 +63,11 @@
 
 ## 6. Критерии готовности
 
-- [ ] Все подсистемы покрыты inventory; определены reuse/sharing/dispose и проверяемые решения следующих этапов.
-- [ ] Частота рендера и samples корректны при callbacks120/144 и рендере60; полный кадр считается единожды, GPU/CPU разделены.
-- [ ] Сохранены воспроизводимые baseline, три повтора, stress/lifecycle и ограничения среды; данные позволяют повторить сравнение.
-- [ ] Бюджеты/ёмкости/приоритеты следующих этапов определены; отсутствие замера не выдано за отсутствие bottleneck.
-- [ ] Gameplay/визуальные defaults сохранены; проверки пройдены, profiling отключается без постоянного allocation overhead.
+- [x] Все подсистемы покрыты inventory; определены reuse/sharing/dispose и проверяемые решения следующих этапов.
+- [x] Частота рендера и samples корректны при callbacks120/144 и рендере60; полный кадр считается единожды, GPU/CPU разделены.
+- [x] Сохранены воспроизводимые baseline, три повтора, stress/lifecycle и ограничения среды; данные позволяют повторить сравнение.
+- [x] Бюджеты/ёмкости/приоритеты следующих этапов определены; отсутствие замера не выдано за отсутствие bottleneck.
+- [x] Gameplay/визуальные defaults сохранены; проверки пройдены, profiling отключается без постоянного allocation overhead.
 
 ## 7. Проверки
 
@@ -87,12 +87,12 @@
 
 ## 10. Отчёт исполнителя
 
-- Результат: Не выполнялась.
-- Изменённые файлы и зачем: —
-- Команды и фактические результаты: —
-- Ручные проверки и выполненные критерии: —
-- Непроверенное, блокеры и отклонения: —
-- Итоговый статус и дата: —
+- Результат: Основной baseline завершён:18full runs, три повтора каждой из6сцен. Inventory26категорий, CPU/GPU/stage collector, allocation profile и измеренные бюджеты/ёмкости определены до изменения алгоритмов;0080–0082 актуализированы. Дополнительные эффекты/актуальные full checks и независимый QA завершают этот этап. Оптимизации0080–0082 ещё не реализованы.
+- Изменённые файлы и зачем: src/scene-profile.js (typed ring32768, actual frame IDs, stage totals, bounded/disjoint-aware GPU queries), src/main.js (полный кадр shadow/postprocess и stage profiling, CPU включаяHUD), src/traffic.js (actual AI-step timing, factory counters), src/building-occlusion.js (proxy churn/highWater counters), tests/scene-profile.test.js, tools/scene-performance.cjs и tools/run-scene-profile.ps1; docs/knowledge/scene-optimization/{inventory,plan,candidates,environment-2026-10-11}.md и raw artifacts.
+- Команды и фактические результаты: целевые game-loop/frame-intervals/scene-profile14/14; scene-profile/building-occlusion/traffic/traffic-physics25/25. Финальный node tools/verify.js --full с process affinity1:281/281 и production build passed,09:55:53Z, fingerprint2f76d8c8bc87c59aba7c5eee65c0b2d9fad305080e227d0311362043203a44b9. Прежний tools/telegram/verify.js удалён параллельной миграцией; ранние native/agent-knowledge отказы сохранены в environment report и не выдаются за актуальный pass. Финальные журналы скопированы в scene-optimization/.
+- Ручные проверки и выполненные критерии: baseline-stable18/18 прошёл без page/WebGL errors, overwritten или duplicate frame IDs; GPU queries available/discarded0/skipped0. По300сек×3 stressdesktop/mobile и lifecycle;10reset/rebuild/quality/pickup collect+restore циклов в каждом lifecycle. Actual masks1 всех живых benchmark processes проверены. Separate allocation-stable60s/32KB показал крупный churn footprintsOverlap/segmentHitsRect. Raw/агрегаты/точный протокол и ограничения — docs/knowledge/scene-optimization/{baseline-stable,baseline-summary.json,baseline-2026-10-11.md,allocation-stable,plan.md}. Supplemental keyboard skid/fade три повтора выполняются отдельным tools/scene-effects-profile.cjs.
+- Непроверенное, блокеры и отклонения: независимыйQA ожидается. Supplemental skid/fade6/6pass,7integration checks menu/free/follow/reset/controlled hidden/loading/ordinaryHUDpass; controlled hidden getter не выдан за OS tab suspension. Process affinity1 — явное ограничение среды после native failures default-affinity; данные не выдаются за обычный многоядерный запуск или физический телефон. Cadence77 зафиксирован, полная QA77 blocked;79не требует done77. Budget physics p95−20%, CPU/GPU regression≤baseline max×1.05; civilian300/police2/effects2/building8inactive с bounded active entries. Чужие изменения автоматизации и staging сохранены; исходный agent-knowledge fixture исправлен параллельной миграцией, здесь не менялся.
+- Итоговый статус и дата: ready-for-qa,2026-10-11; оптимизация80–82 не объявлена выполненной.
 
 ## 11. Отчёт QA
 

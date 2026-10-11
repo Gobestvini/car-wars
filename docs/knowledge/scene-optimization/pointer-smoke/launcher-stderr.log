@@ -1,0 +1,5 @@
+page.waitForFunction: Timeout 120000ms exceeded.
+    at C:\Users\gobes\OneDrive\Документы\CarWars\tools\scene-performance.cjs:158:18 {
+  log: [],
+  name: 'TimeoutError'
+}

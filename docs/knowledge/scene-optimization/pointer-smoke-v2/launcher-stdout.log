@@ -1,0 +1,3 @@
+Starting desktop-low-empty repeat 1/1
+{"case":"desktop-low-empty","repeat":1,"frames":179,"gpu":"available","cpuP95":3,"renderCpuP95":1.099999999627471,"intervalP95":18.900000000000546}
+Starting lifecycle repeat 1/1

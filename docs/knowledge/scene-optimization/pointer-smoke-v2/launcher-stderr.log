@@ -1,0 +1,10 @@
+AssertionError [ERR_ASSERTION]: All benchmark processes must inherit the declared affinity: {"requested":"1","processes":[{"type":"collector","id":34628,"affinity":1},{"type":"browser","id":32216,"affinity":1},{"type":"renderer","id":34268,"affinity":1},{"type":"renderer","id":45696,"affinity":1},{"type":"GPU","id":13748,"affinity":1},{"type":"network.mojom.NetworkService","id":37704,"affinity":1},{"type":"storage.mojom.StorageService","id":7828,"affinity":1},{"type":"entity_extraction_service.mojom.Extractor","id":41068,"affinity":1},{"type":"winrt_app_id.mojom.WinrtAppIdService","id":20916,"affinity":null}]}
+    at affinityMetadata (C:\Users\gobes\OneDrive\Документы\CarWars\tools\scene-performance.cjs:45:30)
+    at async C:\Users\gobes\OneDrive\Документы\CarWars\tools\scene-performance.cjs:163:25 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

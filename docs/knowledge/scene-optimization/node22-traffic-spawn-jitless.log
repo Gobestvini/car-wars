@@ -1,0 +1,53 @@
+Warning: disabling flag --expose_wasm due to conflicting flags
+
+
+#
+# Fatal error in , line 0
+# Check failed: maybe_code.has_value().
+#
+#
+#
+#FailureMessage Object: 000000CD039FDA30
+----- Native stack trace -----
+
+ 1: 00007FF64F0F59D7 node::SetCppgcReference+21127
+ 2: 00007FF64EFC555F node::TriggerNodeReport+71455
+ 3: 00007FF6502CAC85 V8_Fatal+197
+ 4: 00007FF64FAADA4E v8::internal::StrongRootAllocatorBase::StrongRootAllocatorBase+34654
+ 5: 00007FF64FB2EE5A v8::ModuleRequest::GetSourceOffset+2554
+ 6: 00007FF64FB2E192 v8::base::CPU::has_sse41+133714
+ 7: 00007FF64FB2D823 v8::base::CPU::has_sse41+131299
+ 8: 00007FF64FB2D7B8 v8::base::CPU::has_sse41+131192
+ 9: 00007FF64F7A3C03 v8::base::AddressSpaceReservation::AddressSpaceReservation+349219
+10: 00007FF64FD203A3 v8::PropertyDescriptor::writable+728371
+11: 00007FF64FE044E6 v8::PropertyDescriptor::writable+1662582
+12: 00007FF64FC80302 v8::PropertyDescriptor::writable+72850
+13: 00007FF64FC80302 v8::PropertyDescriptor::writable+72850
+14: 00007FF64FC80302 v8::PropertyDescriptor::writable+72850
+15: 00007FF64FD3A0B2 v8::PropertyDescriptor::writable+834114
+16: 00007FF64FC80302 v8::PropertyDescriptor::writable+72850
+17: 00007FF64FC80302 v8::PropertyDescriptor::writable+72850
+18: 00007FF64FC80302 v8::PropertyDescriptor::writable+72850
+19: 00007FF64FC80302 v8::PropertyDescriptor::writable+72850
+20: 00007FF64FC80302 v8::PropertyDescriptor::writable+72850
+21: 00007FF64FC80302 v8::PropertyDescriptor::writable+72850
+22: 00007FF64FCBFCE7 v8::PropertyDescriptor::writable+333431
+23: 00007FF64FDA0299 v8::PropertyDescriptor::writable+1252393
+24: 00007FF64FCAFB93 v8::PropertyDescriptor::writable+267555
+25: 00007FF64FC7DDFB v8::PropertyDescriptor::writable+63371
+26: 00007FF64FB35FE4 v8::Isolate::NumberOfHeapSpaces+2580
+27: 00007FF64FB360BB v8::Isolate::NumberOfHeapSpaces+2795
+28: 00007FF64FB36CE4 v8::Isolate::NumberOfHeapSpaces+5908
+29: 00007FF64FB0DD66 v8::base::CPU::has_sse41+1574
+30: 00007FF64FB0DA80 v8::base::CPU::has_sse41+832
+31: 00007FF64F137A1F node::CallbackScope::~CallbackScope+527
+32: 00007FF64F13789E node::CallbackScope::~CallbackScope+142
+33: 00007FF64F09EECC node::Start+1084
+34: 00007FF64F13436A node::LoadEnvironment+234
+35: 00007FF64EFF79B8 v8_inspector::protocol::Binary::operator=+129912
+36: 00007FF64F09FD93 node::Start+4867
+37: 00007FF64F09EAAE node::Start+30
+38: 00007FF64EDFB1EC AES_cbc_encrypt+152028
+39: 00007FF6509BFA64 inflateValidate+41028
+40: 00007FFE82CB259D BaseThreadInitThunk+29
+41: 00007FFE833EAF78 RtlUserThreadStart+40
