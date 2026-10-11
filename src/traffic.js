@@ -14,6 +14,8 @@ import { createTrafficAssets, makeTrafficCar } from './vehicle-visuals.js';
 
 const headingOf = q => Math.atan2(2 * (q.x * q.z + q.w * q.y), 1 - 2 * (q.x * q.x + q.y * q.y));
 const now = () => globalThis.performance?.now?.() ?? Date.now();
+export const TRAFFIC_PHYSICS_ZONE = Object.freeze({ enter: 24, leave: 36, retainContact: 60,
+  predictionSeconds: 0.8, interval: 0.05 });
 
 export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = createCityPlan().roadNetwork,
   roadWidth = ROAD_WIDTH, obstacles = [], mapBounds = null) {
@@ -28,6 +30,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
   let graph = createRoadGraph(roadNetwork, getLaneOffset(roadWidth));
   let spawnObstacles = obstacles, spawnSlots = [], spawnSearchCursor = 0;
   let thinkTime = 0, aiTime = 0, signalController = createTrafficSignals(roadNetwork);
+  let lodElapsed = 0;
   const profile = { aiMs: 0, aiStepMs: 0, playerPrepareMs: 0, npcPrepareMs: 0, prepareMs: 0,
     worldStepMs: 0, postMs: 0, aiTicks: 0, aiDecisions: 0, vehicleCreated: 0, vehicleRemoved: 0 };
   const reservations = new Map();
@@ -387,7 +390,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
   };
 
   const updateLod = () => {
-    const player = physics.body.position;
+    const player = physics.body.position, playerVelocity = physics.body.velocity;
     buildOccupancy();
     const touching = new Set();
     const physicalBodies = new Map(states.filter(state => !state.logical).map(state => [state.simulation.body, state]));
@@ -407,11 +410,18 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       const candidate = { x: state.x, z: state.z, heading: headingOf(state.simulation.body.quaternion),
         vx: state.simulation.body.velocity.x, vz: state.simulation.body.velocity.z };
       const neighbors = nearbyOccupants(candidate).filter(other => other.id !== state.id);
+      const dx = state.x - player.x, dz = state.z - player.z;
+      const vx = candidate.vx - playerVelocity.x, vz = candidate.vz - playerVelocity.z;
+      const speedSquared = vx * vx + vz * vz;
+      const closestTime = speedSquared > 1e-6
+        ? clamp(-(dx * vx + dz * vz) / speedSquared, 0, TRAFFIC_PHYSICS_ZONE.predictionSeconds) : 0;
+      const approaching = Math.hypot(dx + vx * closestTime, dz + vz * closestTime) < TRAFFIC_PHYSICS_ZONE.enter;
       const nearPhysical = neighbors.some(other => other.state && physicalBodies.has(other.state.simulation.body)
-        && Math.hypot(other.x - player.x, other.z - player.z) < 45
+        && Math.hypot(other.x - player.x, other.z - player.z) < TRAFFIC_PHYSICS_ZONE.leave
         && Math.hypot(other.x - candidate.x, other.z - candidate.z) < 10);
-      if (!state.logical && distance > 45 && !nearPhysical && !state.ai.maneuver && !touching.has(state)) setLogical(state, true);
-      else if (state.logical && (distance < 30 || nearPhysical)
+      const retainingContact = touching.has(state) && distance < TRAFFIC_PHYSICS_ZONE.retainContact;
+      if (!state.logical && distance > TRAFFIC_PHYSICS_ZONE.leave && !approaching && !nearPhysical && !retainingContact) setLogical(state, true);
+      else if (state.logical && (approaching || nearPhysical)
         && isTrafficSpawnSafe(candidate, neighbors, spawnObstacles, 0)) setLogical(state, false);
     }
   };
@@ -463,7 +473,6 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
 
   const updateControllers = dt => {
     aiTime += dt;
-    updateLod();
     const cells = buildOccupancy();
     const plans = [], byId = new Map();
     // Route changes do not move bodies. Every hazard uses this tick's occupancy snapshot.
@@ -927,6 +936,8 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       profile.aiStepMs = 0;
       if (pendingCount !== null) applyCount(pendingCount);
       stepLogical(dt);
+      lodElapsed += dt;
+      if (lodElapsed >= TRAFFIC_PHYSICS_ZONE.interval) { lodElapsed = 0; updateLod(); }
       thinkTime += dt;
       if (thinkTime >= 0.1) {
         const thinkDt = thinkTime; thinkTime = 0;
@@ -970,7 +981,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     },
     reset() {
       if (pendingCount !== null) applyCount(pendingCount);
-      reservations.clear(); thinkTime = 0; aiTime = 0;
+      reservations.clear(); thinkTime = 0; aiTime = 0; lodElapsed = 0;
       const reserved = [updatePlayerOccupancy()];
       let resetCursor = 0;
       for (const state of [...states]) {

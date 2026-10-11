@@ -1,4 +1,5 @@
 import * as C from 'cannon-es';
+import { CityBroadphase } from './city-broadphase.js';
 import { accumulateDamage, damageFromImpact, damageState, tractionForDamage, wheelCanDetach } from './car-damage.js';
 
 export const DEFAULT_TUNING = Object.freeze({ softness: 0.45, grip: 1.8, power: 1 });
@@ -13,7 +14,7 @@ export class CarSimulation {
     this.ownsWorld = world === null;
     this.world = world || new C.World({ gravity: v(0, -9.81, 0) });
     if (this.ownsWorld) {
-      this.world.broadphase = new C.SAPBroadphase(this.world);
+      this.world.broadphase = new CityBroadphase(this.world);
       this.world.solver.iterations = 10;
       const asphalt = new C.Material('asphalt');
       const chassis = new C.Material('chassis');
