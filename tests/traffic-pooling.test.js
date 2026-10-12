@@ -1,3 +1,4 @@
+import { attachForTrafficTest, framePrepare, frameStep } from './traffic-frame-helpers.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
@@ -6,7 +7,7 @@ import { createVehicleRuntime } from '../src/traffic.js';
 
 const settle = (runtime, count) => {
   runtime.setCount(count);
-  for (let i = 0; i < 300 && runtime.status().pending; i++) runtime.prepare(.11);
+  for (let i = 0; i < 300 && runtime.status().pending; i++) framePrepare(runtime, .11);
   assert.equal(runtime.status().pending, false);
   assert.equal(runtime.status().count, count);
 };
@@ -14,7 +15,7 @@ const settle = (runtime, count) => {
 test('twenty traffic cycles reuse bounded storage and invalidate old actors/listeners', () => {
   const player = new CarSimulation();
   const scene = new THREE.Scene(), runtime = createVehicleRuntime(scene, THREE, 0);
-  runtime.attachPhysics(player); settle(runtime, 300);
+  attachForTrafficTest(runtime, player); settle(runtime, 300);
   const bodies = new Set(runtime.simulations.map(sim => sim.body));
   const old = runtime.states[0], simulation = old.simulation, mesh = old.mesh;
   simulation.damage = .9; simulation.body.velocity.set(8, 2, 1);
@@ -50,9 +51,9 @@ test('twenty traffic cycles reuse bounded storage and invalidate old actors/list
 test('new world and visual generations retire both active and idle vehicle storage', () => {
   const firstWorld=new CarSimulation(),secondWorld=new CarSimulation(),scene=new THREE.Scene();
   const runtime=createVehicleRuntime(scene,THREE,4);
-  runtime.attachPhysics(firstWorld);settle(runtime,4);
+  attachForTrafficTest(runtime, firstWorld);settle(runtime,4);
   const old=runtime.states[0],storage=old.simulation;
-  runtime.attachPhysics(secondWorld);settle(runtime,4);
+  attachForTrafficTest(runtime, secondWorld);settle(runtime,4);
   assert.equal(firstWorld.world.bodies.length,2);assert.equal(old.simulation,null);
   assert.ok(runtime.simulations.every(sim=>sim.world===secondWorld.world&&sim!==storage));
   settle(runtime,0);
@@ -68,7 +69,7 @@ test('a reused police body has fresh contact episodes, damage and one listener',
   const player = new CarSimulation({ spawn: { x: 0, y: .96, z: 0, yaw: 0 } });
   const runtime = createVehicleRuntime(new THREE.Scene(), THREE, 0);
   runtime.registerRole('police', { maxCount: 2, update: () => ({ control: { brake: 1 } }) });
-  runtime.attachPhysics(player);
+  attachForTrafficTest(runtime, player);
   const request = () => runtime.requestSpawn({ role: 'police', position: { x: 0, y: 0, z: 10 }, yaw: 0 });
   const first = request(); assert.equal(first.status, 'created');
   const old = runtime.states[0], storage = old.simulation;
@@ -92,7 +93,7 @@ test('a reused police body has fresh contact episodes, damage and one listener',
   });
   storage.body.position.set(0, .96, 5); storage.body.aabbNeedsUpdate = true;
   player.body.velocity.set(0, 0, 10);
-  for (let i = 0; i < 60; i++) runtime.stepWorld({ throttle: 1 }, STEP);
+  for (let i = 0; i < 60; i++) frameStep(runtime, { throttle: 1 }, STEP);
   assert.ok(contacts > 0); assert.ok(storage.damage > 0);
   runtime.dispose(); assert.equal(storage.body._listeners.collide.length, 0);
 });

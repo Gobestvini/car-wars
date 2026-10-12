@@ -46,6 +46,25 @@ export class ObjectPool {
     return lease;
   }
 
+  /** Create idle storage only; never run actor acquire/release hooks or evict owners. */
+  prepareOne(key, context, targetCount) {
+    if (this.disposed) throw new Error('Cannot prepare disposed storage.');
+    if (!Number.isInteger(targetCount) || targetCount < 0) throw new RangeError('Invalid preparation count.');
+    let count = 0;
+    for (const record of this.records) if (record.key === key) count++;
+    if (count >= targetCount || this.records.size >= this.capacity) return false;
+    const record = { key, value: this.create(key, context), lease: null, context: null };
+    this.records.add(record); this.free.push(record); this.created++;
+    return true;
+  }
+
+  hasFree(key) { return this.free.some(record => record.key === key); }
+
+  preparedValue(key) {
+    for (const record of this.records) if (record.key === key) return record.value;
+    return null;
+  }
+
   release(lease) {
     const record = this.active.get(lease);
     if (!record) return false;

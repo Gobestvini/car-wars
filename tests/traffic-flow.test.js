@@ -1,3 +1,4 @@
+import { attachForTrafficTest, frameStep } from './traffic-frame-helpers.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
@@ -13,7 +14,7 @@ test('overhead city traffic stays alive for five minutes, including offscreen ca
   const city = createCityScene(scene, player, plan);
   const obstacles = plan.buildings.map(b => ({ x: b.x, z: b.z, halfX: b.width / 2, halfZ: b.depth / 2 }));
   const traffic = createTraffic(scene, THREE, 60, plan.roadNetwork, plan.roadWidth, obstacles);
-  traffic.attachPhysics(player);
+  attachForTrafficTest(traffic, player);
   const camera = new THREE.PerspectiveCamera(50, 1.5, 0.5, 1000);
   camera.position.set(0, 450, 0); camera.up.set(0, 0, -1); camera.lookAt(0, 0, 0); camera.updateMatrixWorld();
   const previous = new Map(), distance = new Map(), total = new Map();
@@ -36,7 +37,7 @@ test('overhead city traffic stays alive for five minutes, including offscreen ca
   };
   try {
     for (let tick = 0; tick < 300 / STEP; tick++) {
-      traffic.stepWorld({ brake: 1 }, STEP);
+      frameStep(traffic, { brake: 1 }, STEP);
       let moving = 0;
       for (const car of traffic.states) {
         const now = (tick + 1) * STEP;
@@ -148,7 +149,7 @@ test('cause-aware traffic waits hold across city seeds and road widths', () => {
     const city = createCityScene(scene, player, plan);
     const obstacles = plan.buildings.map(b => ({ x: b.x, z: b.z, halfX: b.width / 2, halfZ: b.depth / 2 }));
     const traffic = createTraffic(scene, THREE, 60, plan.roadNetwork, roadWidth, obstacles);
-    traffic.attachPhysics(player);
+    attachForTrafficTest(traffic, player);
     const camera = new THREE.PerspectiveCamera(50, 1.5, 0.5, 1000);
     camera.position.set(0, 450, 0); camera.up.set(0, 0, -1); camera.lookAt(0, 0, 0); camera.updateMatrixWorld();
     const distance = new Map(), previous = new Map(), waiting = new Map(), clearSince = new Map();
@@ -157,7 +158,7 @@ test('cause-aware traffic waits hold across city seeds and road widths', () => {
       'turn-staging', 'maneuver', 'maneuver-blocked']);
     try {
       for (let tick = 0; tick < 30 / STEP; tick++) {
-        traffic.stepWorld({ brake: 1 }, STEP);
+        frameStep(traffic, { brake: 1 }, STEP);
         for (const car of traffic.states) {
           const now = (tick + 1) * STEP;
           const before = previous.get(car.id);
@@ -204,11 +205,11 @@ test('traffic resumes after reducing a full 300-car congestion load', () => {
   const city = createCityScene(scene, player, plan);
   const obstacles = plan.buildings.map(b => ({ x: b.x, z: b.z, halfX: b.width / 2, halfZ: b.depth / 2 }));
   const traffic = createTraffic(scene, THREE, 300, plan.roadNetwork, plan.roadWidth, obstacles);
-  traffic.attachPhysics(player);
+  attachForTrafficTest(traffic, player);
   const previous = new Map(), distance = new Map();
   try {
     for (let tick = 0; tick < 15 / STEP; tick++) {
-      traffic.stepWorld({ brake: 1 }, STEP);
+      frameStep(traffic, { brake: 1 }, STEP);
       for (const car of traffic.states) {
         const before = previous.get(car.id);
         if (before) distance.set(car.id, (distance.get(car.id) || 0) + Math.hypot(car.x - before.x, car.z - before.z));
@@ -218,7 +219,7 @@ test('traffic resumes after reducing a full 300-car congestion load', () => {
     assert.equal(traffic.states.length, 300, 'the full congestion load did not finish spawning');
     traffic.setCount(60);
     for (let tick = 0; tick < 15 / STEP; tick++) {
-      traffic.stepWorld({ brake: 1 }, STEP);
+      frameStep(traffic, { brake: 1 }, STEP);
       for (const car of traffic.states) {
         const before = previous.get(car.id);
         if (before) {

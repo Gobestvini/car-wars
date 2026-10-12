@@ -283,6 +283,34 @@ async function loadCar() {
     car.quaternion.copy(sim.body.quaternion);
     visualWheels.forEach(({ pivot }, i) => { pivot.position.copy(sim.wheels[i].position); pivot.quaternion.copy(car.quaternion); offsetPlayerWheel(pivot, sim.wheels[i], car); });
     updateCamera(1);
+    loadingScreen.update(69, 'Preparing cars…');
+    const prepared = await traffic.warmupVehicles({
+      yieldFrame: () => loadingScreen.paint(),
+      onProgress: (done, total) => loadingScreen.update(69 + 14 * done / Math.max(1, total), 'Preparing cars…'),
+      prepareVisual: async mesh => {
+        // Upload each shared visual variant, including both LOD levels, before PLAY.
+        // Only temporary idle meshes are shown; they never become physics actors.
+        const lods = [];
+        mesh.traverse(node => { if (node.isLOD) {
+          lods.push({ node, autoUpdate: node.autoUpdate, visible: node.levels.map(level => level.object.visible) });
+          node.autoUpdate = false; node.levels.forEach(level => { level.object.visible = true; });
+        } });
+        mesh.position.copy(sim.body.position); mesh.position.y -= .96;
+        mesh.visible = true; scene.add(mesh);
+        try {
+          await renderer.compileAsync(scene, camera);
+          if (!disposed) renderer.render(scene, camera);
+        } finally {
+          scene.remove(mesh); mesh.visible = false;
+          for (const {node, autoUpdate, visible} of lods) {
+            node.autoUpdate = autoUpdate;
+            node.levels.forEach((level, index) => { level.object.visible = visible[index]; });
+          }
+        }
+      },
+    });
+    if (disposed || prepared.cancelled) return;
+    loadingScreen.update(84, 'Preparing the city…');
     await renderer.compileAsync(scene, camera);
     if (disposed) return;
     loadingScreen.update(86, 'Polishing lights and shadows…');
@@ -384,6 +412,7 @@ canvas.addEventListener('lostpointercapture', releasePointer);
 window.addEventListener('blur', () => { releasePointer(); keys.clear(); });
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) { releasePointer(); keys.clear(); }
+  if (!disposed) traffic.advanceSpawnFrame(0, { active: false });
   stepper.reset();
   frameRateLimiter.reset();
   previousTime = performance.now();
@@ -681,6 +710,7 @@ function frame(now) {
   if (disposed) return;
   frameRequest = requestAnimationFrame(frame);
   if (document.hidden || !modelReady || loadingScreen.isOpen) {
+    traffic.advanceSpawnFrame(0, { active: false });
     frameRateLimiter.reset();
     stepper.reset();
     previousTime = now;
@@ -699,6 +729,7 @@ function frame(now) {
   const elapsed = Math.max(0, (now - previousTime) / 1000); previousTime = now;
   const dt = Math.min(elapsed, 0.08);
   if (startScreen.isOpen) {
+    traffic.advanceSpawnFrame(0, { active: false });
     frameIntervals.reset();
     sceneProfile.lastTimestamp = null;
     // Keep the WebGL buffer populated throughout the menu's translucent exit.
@@ -710,6 +741,7 @@ function frame(now) {
     stepper.reset(); return;
   }
   const physicsStart = performance.now();
+  traffic.advanceSpawnFrame(elapsed);
   frameIntervals.push(now);
   const { alpha, steps } = stepper.advance(elapsed, () => {
     input = getInput();

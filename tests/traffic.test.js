@@ -1,3 +1,4 @@
+import { attachForTrafficTest, framePrepare, frameStep } from './traffic-frame-helpers.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
@@ -10,7 +11,7 @@ test('traffic initializes repeatable AI routes on actual city streets', () => {
   const create = () => {
     const simulation = new CarSimulation();
     const traffic = createTraffic(new THREE.Scene(), THREE, 6, plan.roadNetwork, plan.roadWidth);
-    traffic.attachPhysics(simulation);
+    attachForTrafficTest(traffic, simulation);
     return { simulation, traffic };
   };
   const first = create(), second = create();
@@ -26,7 +27,7 @@ test('traffic waits at a controlled red signal before reserving the intersection
   const plan = createCityPlan();
   const simulation = new CarSimulation();
   const traffic = createTraffic(new THREE.Scene(), THREE, 1, plan.roadNetwork, plan.roadWidth);
-  traffic.attachPhysics(simulation);
+  attachForTrafficTest(traffic, simulation);
   const state = traffic.states[0];
   state.ai.fromNode = '-25:25'; state.ai.targetNode = '25:25';
   state.ai.route = ['-25:25', '25:25', '25:75']; state.ai.routeIndex = 1;
@@ -34,12 +35,12 @@ test('traffic waits at a controlled red signal before reserving the intersection
   state.simulation.body.quaternion.setFromEuler(0, Math.PI / 2, 0);
   state.simulation.body.velocity.setZero(); state.simulation.body.aabbNeedsUpdate = true;
   traffic.setSignalController({ phase: () => ({ color: 'red', controlled: true, canEnter: false }) });
-  traffic.prepare(0.11);
+  framePrepare(traffic, 0.11);
   assert.equal(state.ai.state, 'signal-wait');
   assert.equal(traffic.reservations.size, 0);
   assert.equal(traffic.debug()[0].reason, 'signal-red');
   traffic.setSignalController({ phase: () => ({ color: 'green', controlled: true, canEnter: true }) });
-  traffic.prepare(0.11);
+  framePrepare(traffic, 0.11);
   assert.equal(state.ai.state, 'following');
   traffic.dispose();
 });
@@ -48,7 +49,7 @@ test('red signal stops the NPC front bumper before its stop plane and green rele
   const plan = createCityPlan();
   const simulation = new CarSimulation();
   const traffic = createTraffic(new THREE.Scene(), THREE, 1, plan.roadNetwork, plan.roadWidth);
-  traffic.attachPhysics(simulation);
+  attachForTrafficTest(traffic, simulation);
   const state = traffic.states[0];
   const stopX = 25 - (plan.roadWidth / 2 + 1.5);
   const laneZ = 25 + plan.roadWidth / 4;
@@ -58,13 +59,13 @@ test('red signal stops the NPC front bumper before its stop plane and green rele
   state.simulation.body.quaternion.setFromEuler(0, Math.PI / 2, 0);
   state.simulation.body.velocity.set(8, 0, 0); state.simulation.body.aabbNeedsUpdate = true;
   traffic.setSignalController({ phase: () => ({ color: 'red', controlled: true, canEnter: false }) });
-  for (let i = 0; i < 240; i++) traffic.stepWorld({ brake: 1 }, 1 / 120);
+  for (let i = 0; i < 240; i++) frameStep(traffic, { brake: 1 }, 1 / 120);
   const stoppedFront = state.simulation.body.position.x + 2.08;
   assert.ok(stoppedFront <= stopX + 0.12, `front bumper ${stoppedFront} crossed stop plane ${stopX}`);
   assert.ok(Math.abs(state.simulation.body.velocity.x) < 0.8);
   assert.equal(state.ai.state, 'signal-wait');
   traffic.setSignalController({ phase: () => ({ color: 'green', controlled: true, canEnter: true }) });
-  for (let i = 0; i < 360; i++) traffic.stepWorld({}, 1 / 120);
+  for (let i = 0; i < 360; i++) frameStep(traffic, {}, 1 / 120);
   assert.ok(state.simulation.body.position.x > stopX + 1,
     `green should release the stopped NPC through the intersection: ${state.simulation.body.position.x}, v=${state.simulation.body.velocity.x}, ${state.ai.state}, ${JSON.stringify(state.ai.control)}`);
   assert.notEqual(state.ai.state, 'signal-wait');
@@ -75,7 +76,7 @@ test('red signal does not stop an NPC whose front bumper has entered the junctio
   const plan = createCityPlan();
   const simulation = new CarSimulation();
   const traffic = createTraffic(new THREE.Scene(), THREE, 1, plan.roadNetwork, plan.roadWidth);
-  traffic.attachPhysics(simulation);
+  attachForTrafficTest(traffic, simulation);
   const state = traffic.states[0];
   const laneZ = 25 + plan.roadWidth / 4;
   state.ai.fromNode = '-25:25'; state.ai.targetNode = '25:25';
@@ -84,7 +85,7 @@ test('red signal does not stop an NPC whose front bumper has entered the junctio
   state.simulation.body.quaternion.setFromEuler(0, Math.PI / 2, 0);
   state.simulation.body.velocity.setZero(); state.simulation.body.aabbNeedsUpdate = true;
   traffic.setSignalController({ phase: () => ({ color: 'red', controlled: true, canEnter: false }) });
-  traffic.prepare(0.11);
+  framePrepare(traffic, 0.11);
   assert.notEqual(state.ai.state, 'signal-wait');
   assert.equal(traffic.reservations.get('25:25')?.id, state.id);
   traffic.dispose();

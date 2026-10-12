@@ -1,0 +1,273 @@
+{
+  "matrix": [],
+  "cycles": [],
+  "errors": [],
+  "resetRebuild": {
+    "status": {
+      "count": 0,
+      "requestedCount": 0,
+      "pending": false,
+      "totalCount": 0,
+      "roleCounts": {
+        "civilian": 0,
+        "police": 0
+      },
+      "pendingSpawns": 2,
+      "insertionReason": null,
+      "bodies": 0,
+      "logical": 0,
+      "visible": 0,
+      "reservations": 0
+    },
+    "pools": {
+      "civilian": {
+        "active": 0,
+        "free": 300,
+        "capacity": 300,
+        "created": 300,
+        "reused": 0,
+        "highWater": 0,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      },
+      "police": {
+        "active": 0,
+        "free": 2,
+        "capacity": 2,
+        "created": 2,
+        "reused": 0,
+        "highWater": 0,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      }
+    },
+    "bodies": 734,
+    "listeners": 1,
+    "heap": 50102438,
+    "gpu": {
+      "geometries": 15,
+      "textures": 6
+    }
+  },
+  "menu": {
+    "status": {
+      "count": 0,
+      "requestedCount": 0,
+      "pending": false,
+      "totalCount": 0,
+      "roleCounts": {
+        "civilian": 0,
+        "police": 0
+      },
+      "pendingSpawns": 2,
+      "insertionReason": null,
+      "bodies": 0,
+      "logical": 0,
+      "visible": 0,
+      "reservations": 0
+    },
+    "pools": {
+      "civilian": {
+        "active": 0,
+        "free": 300,
+        "capacity": 300,
+        "created": 300,
+        "reused": 0,
+        "highWater": 0,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      },
+      "police": {
+        "active": 0,
+        "free": 2,
+        "capacity": 2,
+        "created": 2,
+        "reused": 0,
+        "highWater": 0,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      }
+    },
+    "bodies": 734,
+    "listeners": 1,
+    "heap": 70051196,
+    "gpu": {
+      "geometries": 52,
+      "textures": 6
+    }
+  },
+  "hiddenResume": {
+    "status": {
+      "count": 0,
+      "requestedCount": 0,
+      "pending": false,
+      "totalCount": 0,
+      "roleCounts": {
+        "civilian": 0,
+        "police": 0
+      },
+      "pendingSpawns": 2,
+      "insertionReason": null,
+      "bodies": 0,
+      "logical": 0,
+      "visible": 0,
+      "reservations": 0
+    },
+    "pools": {
+      "civilian": {
+        "active": 0,
+        "free": 300,
+        "capacity": 300,
+        "created": 300,
+        "reused": 0,
+        "highWater": 0,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      },
+      "police": {
+        "active": 0,
+        "free": 2,
+        "capacity": 2,
+        "created": 2,
+        "reused": 0,
+        "highWater": 0,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      }
+    },
+    "bodies": 734,
+    "listeners": 1,
+    "heap": 70794503,
+    "gpu": {
+      "geometries": 52,
+      "textures": 6
+    }
+  },
+  "partialRetry": {
+    "status": {
+      "count": 0,
+      "requestedCount": 60,
+      "pending": true,
+      "totalCount": 0,
+      "roleCounts": {
+        "civilian": 0,
+        "police": 0
+      },
+      "pendingSpawns": 2,
+      "insertionReason": "Ожидание безопасного размещения",
+      "bodies": 0,
+      "logical": 0,
+      "visible": 0,
+      "reservations": 0
+    },
+    "pools": {
+      "civilian": {
+        "active": 0,
+        "free": 150,
+        "capacity": 300,
+        "created": 150,
+        "reused": 0,
+        "highWater": 0,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      }
+    },
+    "bodies": 734,
+    "listeners": 1,
+    "heap": 32429202,
+    "gpu": {
+      "geometries": 0,
+      "textures": 0
+    }
+  },
+  "retry": {
+    "status": {
+      "count": 60,
+      "requestedCount": 60,
+      "pending": false,
+      "totalCount": 62,
+      "roleCounts": {
+        "civilian": 60,
+        "police": 2
+      },
+      "pendingSpawns": 0,
+      "insertionReason": null,
+      "bodies": 6,
+      "logical": 56,
+      "visible": 3,
+      "reservations": 0
+    },
+    "pools": {
+      "civilian": {
+        "active": 60,
+        "free": 240,
+        "capacity": 300,
+        "created": 300,
+        "reused": 60,
+        "highWater": 60,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      },
+      "police": {
+        "active": 2,
+        "free": 0,
+        "capacity": 2,
+        "created": 2,
+        "reused": 2,
+        "highWater": 2,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      }
+    },
+    "bodies": 740,
+    "listeners": 3,
+    "heap": 63857099,
+    "gpu": {
+      "geometries": 52,
+      "textures": 6
+    },
+    "loadingPaints": 389
+  },
+  "dispose": {
+    "state": {
+      "status": {
+        "count": 0,
+        "requestedCount": 0,
+        "pending": false,
+        "totalCount": 0,
+        "roleCounts": {
+          "civilian": 0,
+          "police": 0
+        },
+        "pendingSpawns": 0,
+        "insertionReason": null,
+        "bodies": 0,
+        "logical": 0,
+        "visible": 0,
+        "reservations": 0
+      },
+      "pools": {},
+      "bodies": 0,
+      "listeners": 0,
+      "heap": 45393279,
+      "gpu": {
+        "geometries": 0,
+        "textures": 0
+      }
+    },
+    "lifecycle": {
+      "disposed": true,
+      "frameScheduled": false,
+      "contextLost": true
+    }
+  }
+}

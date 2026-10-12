@@ -1,12 +1,12 @@
 # TASK-0083: Прогрев пула машин при загрузке и равномерный спавн
 
-- Статус: ready
+- Статус: done
 - Приоритет: high
 - Создана: 2026-10-12
 - Обновлена: 2026-10-12
 - Проект: CarWars, Gobestvini/car-wars
 - Рекомендуемый исполнитель: gpt-6.1-sol, high; согласование загрузки, планировщика кадров, вариантов пула и lifecycle физики.
-- Зависимости: нет; использовать существующую реализацию пулов. Выполнять последовательно с TASK-0080–0082 из-за общих файлов.
+- Зависимости: нет
 
 ## 1. Цель и запрос пользователя
 
@@ -106,17 +106,40 @@ TASK-0080 имеет blocked и историческое ограничение 
 
 ## 10. Отчёт исполнителя
 
-- Результат: Не выполнялась.
-- Изменённые файлы и зачем: —
-- Команды и фактические результаты: —
-- Ручные проверки и измерения до/после: —
-- Выполненные критерии: —
-- Непроверенное, блокеры и отклонения от плана: —
-- Итоговый статус и дата: —
+- Результат: Реализованы idle прогрев 300 civilian +2 police до PLAY, GPU подготовка вариантов/уникальной police geometry и кадровая выдача civilian (25 мс, максимум1/кадр, поиск≤256). Прежние attach/AI пачки удалены; скрытая вкладка/меню/loading не накапливают долг. Пулы, поколения, retry/dispose, safe placement и police immediate/pending contract сохранены.
+- Изменённые файлы и зачем: `src/object-pool.js` — подготовка idle storage; `src/traffic.js` — прогрев/варианты/scheduler/метрики; `src/main.js` — загрузка GPU и кадровая интеграция. `tests/object-pool.test.js`, `tests/vehicle-spawn-scheduling.test.js` — новые поведенческие проверки; прежние traffic/police tests и `tests/traffic-frame-helpers.js` — явные синтетические display frames вместо предположения о синхронном attach. Два browser runner и отчёты/снимки в `docs/knowledge/vehicle-spawn-*`.
+- Команды и фактические результаты: `npm run build` pass; `node --test --test-isolation=none tests/*.test.js` —304/304 до последнего уточнения GPU police; после уточнения `node --no-opt --no-maglev --test --test-isolation=none tests/vehicle-spawn-scheduling.test.js tests/object-pool.test.js` —11/11. Обычный `npm test` не прошёл из-за аварий test-workers Node24: exit3221225477/0xC0000005, также воспроизведён V8 Fatal Check failed. Это не замаскировано как pass.
+- Ручные проверки и измерения до/после: headless Edge/WebGL: matrix12 (оба viewport/high-low/count0-60-300),10 циклов300→0→300 с police damage/remove/reuse, menu pause, hidden5с, count cancellation/reset/rebuild, compile failure/retry и dispose во время прогрева —pass, page errors0. В одинаковых финальных состояниях bodies736/listeners3/GPU52geometries+6textures стабильны. Сравнение до/после с seed и исходным snapshot9f71cfe — см. [отчёт](../knowledge/vehicle-spawn-2026-10-12.md) и controlled JSON; трактовать frame p95 с учётом разброса повторов.
+- Выполненные критерии: idle storage/без новых фабрик; bounded cadence на30/60/120Hz/jitter/длинных кадрах; безопасный bounded search/count cancellation; поколения/retry/dispose; browser matrix/lifecycle. Окончательную приёмку каждого критерия выполняет независимый QA.
+- Непроверенное, блокеры и отклонения от плана: обычный npm test нестабилен на локальном Node24; альтернативный полный режим без workers подтверждён. Физический телефон и длительный браузерный driving маршрут не проверены. Hidden моделировался через настоящий document.hidden/visibilitychange branch. Стоимость прогрева оценена в controlled профиле; не утверждается устранение всех источников hitch всей сцены.
+- Итоговый статус и дата: ready-for-qa, 2026-10-12; done самостоятельно не ставится. Сравнительный профиль завершён: median frame p95 одинаковый16,8мс, mean p95 для60 +4,8%, для300 без изменения; один парный повтор60 +13,7%. Median spawn service max60:1,3→0,4мс,300:2,0→0,7мс; вывод о выполнении performance критерия с этим разбросом оставлен QA. Загрузка +1,289с, post-GC heap доPLAY +5,16MiB.
 
 ## 11. Отчёт QA
 
-Не проводилась.
+### Независимая приёмка 2026-10-12
+
+- Решение: **принято, done**. Проверен HEAD `9f71cfee9496f421e850cabae0434d5689472b48` плюс актуальный локальный diff TASK-0083; исходники и тесты QA не изменял. Итоговый fingerprint полного verification: `e53d56f65976e081a807a64cc9740297491bb1e2846530fac044d66f3c164bdb`.
+- Прочитаны задание целиком, AGENTS, README очереди, qa-tasks, роль game-qa, diff ObjectPool/runtime/main и соответствующие регрессии. Статусы изменены штатным `tools/tasks/queue.js`; соседние задачи не принимались.
+
+Критерии раздела 6:
+
+1. Подтверждён idle прогрев 300 civilian + 2 police: варианты распределяются в одном bounded pool, тело/mesh не становятся actor до acquire. Каждый storage имеет yield; generation/dispose проверяются после yield. В отдельном browser probe при created=2 PLAY/modelReady ещё false, count=0. Загрузка не зависит от physics ticks. GPU callback готовит оба civilian LOD и обе уникальные police geometry; временные meshes удаляются в finally.
+2. Полная ёмкость и reuse без factory/eviction подтверждены поведенческими тестами, 12-entry browser matrix и 10-cycle JSON исполнителя. В равных финальных состояниях bodies/listeners/resources стабильны; после отдельной browser проверки управления created=300, police.created=2, evicted=0. Новый actor ID и очищенные contact episodes проверены runtime регрессиями.
+3. Кадровый сервис находится перед fixed-step loop и вызывается один раз на принятый кадр. Тесты 30/60/120 Hz, jitter, четыре prepare за кадр, long dt и inactive frame прошли в полном verification. Долг сбрасывается, максимум spawnMaxAdds=1 подтверждён также отдельным browser probe. Browser menu/hidden/retry/dispose повторены QA на финальном коде.
+4. 300 машин за <=12 с при 30 Hz подтверждены синтетическим тестом свободной карты. В отдельном browser probe после закрытия loading overlay сплошное препятствие оставило count=0/pending=true при работающих AI ticks; за 60 sample frames maxChecks=256, после освобождения получено count=60/pending=false. Проверки ориентированных footprints/gap не ослаблены.
+5. Count cancellation, reset/rebuild, asset/world generation, error/retry/dispose, leases/listeners и police contact/damage подтверждены тестами и lifecycle артефактами. QA отдельно повторил browser reset во время pending, фактическое KeyW управление после PLAY/reset (перемещение около 11 м), exact police spawn на занятой позиции вернул pending/occupied; cancel=true и pendingSpawns=0.
+6. Проверены оба controlled JSON: по три равных прогона 0→60 и 0→300, заполнение +10 с, seed/camera/quality/browser совпадают. Медиана общего frame p95 не изменилась (16,8 мс); средний p95 для60 +4,8%, для300 без изменения — общий агрегат укладывается в предел10%. Медиана максимума spawn service60 1,3→0,4 мс,300 2,0→0,7 мс; холодный первый60 4,5→1,1 мс. Стоимость загрузки682→1971 мс и post-GC heap +5,16 MiB записаны. Принята ограниченная причинная формулировка об устранении runtime factory и меньшей обычной цене spawn service, без обещания устранить все hitch.
+7. `node tools/verify.js --full` **exit0:305/305 tests и production build**, актуальная `.checks.json` ok=true. Старый путь `tools/telegram/verify.js` отсутствует из-за чужих изменений; использован фактический общий verifier проекта. Browser matrix/cycles/control/lifecycle доказательства изучены; QA самостоятельно повторил menu/retry/dispose и дополнительные gate/driving/blocked-search/police-cancel probes (exit0). Desktop-high/mobile-low PNG просмотрены: сцена, HUD и машины видны, чёрного кадра/остаточных тестовых экземпляров нет.
+
+Команды и ограничения:
+
+- Штатный целевой запуск всех семи файлов завершился exit1:43 pass/1 file failure (`traffic-spawn.test.js`, worker завершился без assertion detail). **Этот отдельный прогон не объявляется успешным.** Немедленный `node --test --test-isolation=none tests/traffic-spawn.test.js` дал5/5 pass; независимо до него полный актуальный verifier уже дал305/305+build. Вместе с ранее воспроизведёнными V8 worker crashes это зафиксировано как нестабильность локальной Node24 среды, а не воспроизводимый дефект spawn assertions.
+- Дублирующий тяжёлый `--no-opt --no-maglev --test-isolation=none` целевой запуск прекращён QA после зелёного общего verifier; он не считается пройденным. Production flags не менялись.
+- `tests/vehicle-spawn-browser-check.cjs --menu-only` exit0 обновил штатный `vehicle-spawn-menu-check.json`. Полные matrix/10cycles повторно целиком не запускались QA: проверены содержимое runner, фактические JSON и снимки; изменение после matrix ограничено подготовкой второй police geometry, отдельно покрытой новым visual test и актуальным browser lifecycle запуском.
+- Один парный repeat60 p95 вырос18,2→20,7 мс (+13,7%), а один300 service выброс достиг3,2 мс. Это разброс отдельных запусков; приёмка относительного критерия относится к общему агрегату трёх повторов. Нельзя утверждать улучшение каждого кадра или каждого отдельного прогона.
+- Physical mobile device и реальный дисплей120 Hz не проверены и не требуются как обязательные средства этой задачи; mobile viewport не выдаётся за мобильное железо. Hidden моделируется document.hidden/visibilitychange; VRAM bytes не измеряются. Длительный browser driving маршрут не повторён, сравнение использует одинаковый неподвижный сценарий, а работоспособность управления проверена отдельно. Эти ограничения сохранены без расширения заявленного результата.
+
+Воспроизводимых дефектов реализации в области TASK-0083 не найдено. Отчёт исполнителя и история измерений сохранены.
 
 ## Рекомендация модели исполнителя
 

@@ -1,3 +1,4 @@
+import { attachForTrafficTest, framePrepare, frameStep } from './traffic-frame-helpers.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
@@ -10,7 +11,7 @@ import { footprintsOverlap, TRAFFIC_SPAWN } from '../src/traffic-spawn.js';
 
 function integrate(physics, traffic, input = {}) {
   physics.prepare(input, STEP);
-  traffic.prepare(STEP);
+  framePrepare(traffic, STEP);
   physics.world.step(STEP);
   physics.postStep(STEP);
   traffic.postStep(STEP);
@@ -21,8 +22,8 @@ test('real-city NPC spawn and reset retain the independently expected right side
     const plan = createCityPlan(undefined, { roadWidth: width });
     const player = new CarSimulation();
     const traffic = createTraffic(new THREE.Scene(), THREE, 60, plan.roadNetwork, width);
-    traffic.attachPhysics(player);
-    for (let tick = 0; tick < 100 && traffic.status().pending; tick++) traffic.prepare(0.1);
+    attachForTrafficTest(traffic, player);
+    for (let tick = 0; tick < 100 && traffic.status().pending; tick++) framePrepare(traffic, 0.1);
     const check = () => {
       const directions = new Set();
       for (const state of traffic.states) {
@@ -44,14 +45,14 @@ test('split single-car stepping matches the standalone solver and uses one world
   const shared = new CarSimulation();
   const scene = new THREE.Scene();
   const traffic = createTraffic(scene, THREE, 0);
-  traffic.attachPhysics(shared);
+  attachForTrafficTest(traffic, shared);
   const originalStep = shared.world.step.bind(shared.world);
   let steps = 0;
   shared.world.step = (...args) => { steps++; return originalStep(...args); };
   for (let i = 0; i < 240; i++) {
     const input = { throttle: i < 160 ? 0.7 : 0, steer: i > 90 && i < 170 ? 0.3 : 0 };
     standalone.step(input, STEP);
-    traffic.stepWorld(input, STEP);
+    frameStep(traffic, input, STEP);
   }
   assert.equal(steps, 240);
   assert.ok(shared.body.position.distanceTo(standalone.body.position) < 1e-8);
@@ -105,18 +106,18 @@ test('traffic count changes are fixed-step queued and repeated resizing cleans u
   const physics = new CarSimulation({ spawn: { x: 500, y: 0.96, z: 0, yaw: 0 } });
   const scene = new THREE.Scene();
   const traffic = createTraffic(scene, THREE, 6);
-  traffic.attachPhysics(physics);
+  attachForTrafficTest(traffic, physics);
   const baseBodies = physics.world.bodies.length - traffic.status().count;
   assert.equal(traffic.status().count, 6);
   traffic.setCount(0);
   assert.equal(traffic.status().count, 6, 'requested count is applied at next tick');
   assert.equal(traffic.status().requestedCount, 0);
-  traffic.stepWorld({}, STEP);
+  frameStep(traffic, {}, STEP);
   assert.equal(traffic.status().count, 0);
   for (let round = 0; round < 10; round++) {
     for (const count of [30, 1, 6]) {
       traffic.setCount(count);
-      for (let tick = 0; tick < 100 && (traffic.status().pending || traffic.status().count !== count); tick++) traffic.stepWorld({}, 0.1);
+      for (let tick = 0; tick < 100 && (traffic.status().pending || traffic.status().count !== count); tick++) frameStep(traffic, {}, 0.1);
       assert.equal(traffic.status().count, count);
       assert.equal(traffic.status().pending, false);
       assert.equal(physics.world.bodies.length, baseBodies + traffic.status().bodies);
@@ -129,7 +130,7 @@ test('traffic count changes are fixed-step queued and repeated resizing cleans u
     }
   }
   traffic.reset();
-  traffic.setCount(0); traffic.stepWorld({}, STEP);
+  traffic.setCount(0); frameStep(traffic, {}, STEP);
   assert.equal(physics.world.bodies.length, baseBodies);
   assert.throws(() => traffic.setCount(301), RangeError);
   assert.throws(() => traffic.setCount(NaN), RangeError);
@@ -139,18 +140,18 @@ test('traffic count changes are fixed-step queued and repeated resizing cleans u
 test('traffic count configuration supports the tenfold 60 default and 300 maximum', () => {
   const physics = new CarSimulation();
   const traffic = createTraffic(new THREE.Scene(), THREE, 60);
-  traffic.attachPhysics(physics);
+  attachForTrafficTest(traffic, physics);
   assert.equal(traffic.status().requestedCount, 60);
   assert.equal(traffic.status().pending, true);
-  for (let tick = 0; tick < 100 && traffic.status().pending; tick++) traffic.prepare(0.1);
+  for (let tick = 0; tick < 400 && traffic.status().pending; tick++) framePrepare(traffic, 0.1);
   assert.equal(traffic.status().count, 60);
   assert.equal(traffic.debug().length, 60);
   traffic.setCount(300);
-  for (let tick = 0; tick < 100 && traffic.status().pending; tick++) traffic.prepare(0.1);
+  for (let tick = 0; tick < 400 && traffic.status().pending; tick++) framePrepare(traffic, 0.1);
   assert.equal(traffic.status().count, 300);
   assert.equal(traffic.status().logical + traffic.status().bodies, 300);
   assert.ok(traffic.states.every(state => [state.x, state.z, state.speed].every(Number.isFinite)));
-  traffic.setCount(0); traffic.prepare(STEP);
+  traffic.setCount(0); framePrepare(traffic, STEP);
   assert.equal(traffic.status().count, 0);
   traffic.dispose();
 });
@@ -162,16 +163,16 @@ test('blocked insertion retains pending count, retries after clearance, and canc
   const blockers = createTrafficSpawnSlots(graph.directed).map(slot => ({ x: slot.x, z: slot.z, halfX: 2, halfZ: 2 }));
   const physics = new CarSimulation({ spawn: { x: 500, y: 0.96, z: 0, yaw: 0 } });
   const traffic = createTraffic(new THREE.Scene(), THREE, 4, network, 20, blockers);
-  traffic.attachPhysics(physics);
+  attachForTrafficTest(traffic, physics);
   assert.deepEqual(traffic.status(), { count: 0, requestedCount: 4, pending: true,
     totalCount: 0, roleCounts: { civilian: 0 }, pendingSpawns: 0,
     insertionReason: 'Нет свободного безопасного места', bodies: 0, logical: 0, visible: 0, reservations: 0 });
   traffic.setSpawnObstacles([]);
-  traffic.prepare(0.11);
+  for (let frame = 0; frame < 4; frame++) framePrepare(traffic, 0.11);
   assert.equal(traffic.status().count, 4);
   assert.equal(traffic.status().pending, false);
   traffic.setCount(0);
-  traffic.prepare(STEP);
+  framePrepare(traffic, STEP);
   assert.equal(traffic.status().count, 0);
   assert.equal(traffic.status().pending, false);
   traffic.dispose();
@@ -182,7 +183,7 @@ test('repeated resets preserve NPC identities and place every oriented footprint
     edges: [{ from: 'a', to: 'b', length: 500 }] };
   const physics = new CarSimulation({ spawn: { x: 250, y: 0.96, z: 100, yaw: 0 } });
   const traffic = createTraffic(new THREE.Scene(), THREE, 60, network, 20);
-  traffic.attachPhysics(physics);
+  attachForTrafficTest(traffic, physics);
   const ids = traffic.states.map(state => state.id);
   const playerBodies = physics.world.bodies.length - traffic.status().bodies;
   for (let round = 0; round < 10; round++) {
@@ -206,13 +207,13 @@ test('distant traffic swaps to logical route motion and becomes physical near th
     edges: [{ from: 'a', to: 'b', length: 1000 }] };
   const physics = new CarSimulation({ spawn: { x: 500, y: 0.96, z: 0, yaw: 0 } });
   const traffic = createTraffic(new THREE.Scene(), THREE, 1, network, 20);
-  traffic.attachPhysics(physics);
-  traffic.prepare(0.11);
+  attachForTrafficTest(traffic, physics);
+  framePrepare(traffic, 0.11);
   assert.equal(traffic.status().logical, 1);
   assert.equal(traffic.status().bodies, 0);
   const state = traffic.states[0];
   const start = state.simulation.body.position.clone();
-  for (let i = 0; i < 120; i++) traffic.stepWorld({}, STEP);
+  for (let i = 0; i < 120; i++) frameStep(traffic, {}, STEP);
   assert.ok(state.simulation.body.position.distanceTo(start) > 0.5, 'logical NPC should continue along its route');
   assert.ok(Math.abs(state.z - 5) < 0.01, 'logical eastbound car stays on the independently expected right lane');
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
@@ -222,7 +223,7 @@ test('distant traffic swaps to logical route motion and becomes physical near th
   physics.body.position.set(state.x - 20, 0.96, state.z); physics.body.aabbNeedsUpdate = true;
   const beforeSwitch = state.simulation.body.position.clone();
   const beforeHeading = state.heading;
-  traffic.prepare(0.11);
+  framePrepare(traffic, 0.11);
   assert.equal(traffic.status().logical, 0);
   assert.equal(traffic.status().bodies, 1);
   assert.ok(physics.world.bodies.includes(state.simulation.body));
@@ -241,13 +242,13 @@ test('physical LOD does not cascade across remote neighbors or retain a ground-o
     edges: [{ from: 'a', to: 'b', length: 500 }] };
   const player = new CarSimulation({ spawn: { x: 15, y: 0.96, z: 5, yaw: Math.PI / 2 } });
   const traffic = createTraffic(new THREE.Scene(), THREE, 6, network, 20);
-  traffic.attachPhysics(player);
+  attachForTrafficTest(traffic, player);
   const remote = traffic.states.find(state => state.x > 100);
   assert.ok(remote && !remote.logical);
   const sidewalk = player.addStaticBox({ x: -100, y: 0.0675, z: 0, halfX: 1, halfY: 0.0825, halfZ: 1, wheelSupport: true });
   player.world.contacts.push({ bi: player.ground, bj: remote.simulation.body });
   player.world.contacts.push({ bi: sidewalk, bj: remote.simulation.body });
-  traffic.prepare(0.11);
+  framePrepare(traffic, 0.11);
   assert.equal(remote.logical, true, 'remote ground/support contacts are not traffic interactions');
   assert.ok(traffic.states.filter(state => !state.logical).every(state =>
     Math.hypot(state.x - player.body.position.x, state.z - player.body.position.z) < 55));

@@ -1,3 +1,4 @@
+import { attachForTrafficTest, frameStep } from './traffic-frame-helpers.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
@@ -12,14 +13,14 @@ const green = { phase: () => ({ color: 'green', controlled: true, canEnter: true
 function fixture() {
   const player = new CarSimulation({ damage: false });
   const traffic = createTraffic(new THREE.Scene(), THREE, 1, straight, 20);
-  traffic.attachPhysics(player); traffic.setSignalController(green);
+  attachForTrafficTest(traffic, player); traffic.setSignalController(green);
   const state = traffic.states[0], body = state.simulation.body;
   body.position.set(30, 0.96, 5); body.quaternion.setFromEuler(0, Math.PI / 2, 0);
   Object.assign(state, { x: 30, z: 5, heading: Math.PI / 2 });
   Object.assign(state.ai, { fromNode: 'a', targetNode: 'b', route: ['b', 'a'], routeIndex: 0 });
   return { player, traffic, state };
 }
-function step(traffic, seconds) { for (let i = 0; i < seconds / STEP; i++) traffic.stepWorld({ brake: 1 }, STEP); }
+function step(traffic, seconds) { for (let i = 0; i < seconds / STEP; i++) frameStep(traffic, { brake: 1 }, STEP); }
 
 test('escape destination prefers cover and avoids an immediate turn back into the player', () => {
   const network = { intersections: [{ id: 'a', x: 0, z: 0 }, { id: 'b', x: 50, z: 0 },
@@ -43,7 +44,7 @@ test('a real player impact triggers fast escape, survives logical LOD, then resu
     player.body.position.set(10, 0.96, 5); player.body.velocity.setZero(); player.body.aabbNeedsUpdate = true;
     let maximumSpeed = 0, sawFleeing = false, sawLogical = false, previous = [state.x, state.z];
     for (let i = 0; i < 12 / STEP; i++) {
-      traffic.stepWorld({ brake: 1 }, STEP);
+      frameStep(traffic, { brake: 1 }, STEP);
       maximumSpeed = Math.max(maximumSpeed, state.speed);
       sawFleeing ||= state.ai.state === 'fleeing'; sawLogical ||= state.logical;
       assert.ok(Math.hypot(state.x - previous[0], state.z - previous[1]) < 0.2, 'escape teleported the car');
@@ -108,7 +109,7 @@ test('front and side player impacts release contact before the NPC accelerates a
       player.body.aabbNeedsUpdate = true;
       let triggered = false, maximumSpeed = 0;
       for (let i = 0; i < 15 / STEP; i++) {
-        traffic.stepWorld({ brake: 1 }, STEP);
+        frameStep(traffic, { brake: 1 }, STEP);
         triggered ||= Boolean(state.ai.evasion);
         maximumSpeed = Math.max(maximumSpeed, state.speed);
       }

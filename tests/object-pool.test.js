@@ -43,3 +43,23 @@ test('capacity changes retire only free storage and preserve current leases', ()
   pool.dispose();assert.equal(active.value,null);assert.equal(destroyed,3);
   assert.throws(()=>pool.setCapacity(1),/disposed/);
 });
+
+test('preparation is idle, bounded, idempotent and retryable after a factory error', () => {
+  let fail = true, acquired = 0, released = 0, destroyed = 0;
+  const pool = new ObjectPool({ capacity: 2, create: key => {
+    if (fail) throw Error('factory');
+    return {key};
+  }, acquire: () => acquired++, release: () => released++, destroy: () => destroyed++ });
+  assert.throws(() => pool.prepareOne('green', {}, 1), /factory/);
+  assert.equal(pool.snapshot().created,0);assert.equal(pool.snapshot().free,0);
+  fail = false;
+  assert.equal(pool.prepareOne('green', {}, 1),true);
+  assert.equal(pool.prepareOne('green', {}, 1),false);
+  assert.equal(pool.prepareOne('grey', {}, 1),true);
+  assert.equal(pool.prepareOne('police', {}, 1),false);
+  assert.equal(acquired,0);assert.equal(released,0);assert.equal(pool.snapshot().active,0);
+  const value=pool.preparedValue('green'), lease=pool.acquire('green');
+  assert.equal(value,lease.value);assert.equal(pool.snapshot().created,2);
+  pool.dispose();assert.equal(destroyed,2);assert.equal(released,1);
+  assert.throws(()=>pool.prepareOne('green',{},1),/disposed/);
+});

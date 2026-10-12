@@ -1,3 +1,4 @@
+import { attachForTrafficTest, framePrepare, frameStep } from './traffic-frame-helpers.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { junctionMovement, movementsConflict, pathProgress, pathTarget, turnStagingTarget, yieldsToOncoming } from '../src/traffic-junction.js';
@@ -64,7 +65,7 @@ function fixture(logical, count = 2, width = 15) {
   player.body.position.set(logical ? 500 : 5, 0.96, logical ? 500 : 25);
   player.body.aabbNeedsUpdate = true;
   const traffic = createTraffic(new THREE.Scene(), THREE, count, plan.roadNetwork, width);
-  traffic.attachPhysics(player);
+  attachForTrafficTest(traffic, player);
   traffic.setSignalController({ phase: () => ({ color: 'green', controlled: true, canEnter: true }) });
   return { traffic, player };
 }
@@ -83,12 +84,12 @@ test('opposing straight cars start together and occupy the junction concurrently
     place(a, '25:-25', '25:75', 21.25, 11, 0);
     place(b, '25:75', '25:-25', 28.75, 39, Math.PI);
     try {
-      traffic.prepare(0.11);
+      framePrepare(traffic, 0.11);
       assert.equal(traffic.reservations.size, 2);
       assert.ok(a.ai.control.throttle > 0 && b.ai.control.throttle > 0);
       let concurrent = false;
       for (let tick = 0; tick < 8 / STEP; tick++) {
-        traffic.stepWorld({ brake: 1 }, STEP);
+        frameStep(traffic, { brake: 1 }, STEP);
         concurrent ||= [...traffic.reservations.values()].filter(r => r.nodeId === '25:25' && r.entered).length === 2;
         assert.equal(footprintsOverlap(a, b), false);
       }
@@ -106,13 +107,13 @@ test('an older left-turn request yields to opposing straight traffic then resume
     Object.assign(left.ai, { requestNode: '25:25', requestedAt: -20 });
     Object.assign(straight.ai, { requestNode: '25:25', requestedAt: -1 });
     try {
-      traffic.prepare(0.11);
+      framePrepare(traffic, 0.11);
       assert.equal(left.ai.waitReason, 'turn-staging');
       assert.ok(left.ai.control.throttle > 0);
       assert.ok(straight.ai.control.throttle > 0);
       let started = false;
       for (let tick = 0; tick < 15 / STEP; tick++) {
-        traffic.stepWorld({ brake: 1 }, STEP);
+        frameStep(traffic, { brake: 1 }, STEP);
         if (left.ai.control.throttle > 0) started = true;
         assert.equal(footprintsOverlap(left, straight), false, `left turn crossed oncoming at ${tick * STEP}s`);
       }
@@ -129,7 +130,7 @@ test('a same-lane platoon starts its follower before the leader has left the jun
   let concurrent = false;
   try {
     for (let tick = 0; tick < 10 / STEP; tick++) {
-      traffic.stepWorld({ brake: 1 }, STEP);
+      frameStep(traffic, { brake: 1 }, STEP);
       concurrent ||= [...traffic.reservations.values()].filter(r => r.nodeId === '25:25').length === 2;
       assert.equal(footprintsOverlap(leader, follower), false);
     }
@@ -147,7 +148,7 @@ test('followers enter behind left and right turns without waiting for the whole 
       let followedIntoJunction = false;
       try {
         for (let tick = 0; tick < 5 / STEP; tick++) {
-          traffic.stepWorld({ brake: 1 }, STEP);
+          frameStep(traffic, { brake: 1 }, STEP);
           const permits = [...traffic.reservations.values()];
           followedIntoJunction ||= permits.some(r => r.id === leader.id && r.entered && r.nodeId === '25:25')
             && permits.some(r => r.id === follower.id && r.nodeId === '25:25') && follower.speed > 0.5;
@@ -173,12 +174,12 @@ test('four simultaneous right turns clear onto their own lanes without contact',
     ];
     traffic.states.forEach((state, index) => place(state, ...cases[index].slice(0, 5)));
     try {
-      traffic.prepare(0.11);
+      framePrepare(traffic, 0.11);
       assert.equal(traffic.reservations.size, 4);
       assert.ok(traffic.states.every(state => state.ai.control.throttle > 0));
       const cleared = new Set();
       for (let tick = 0; tick < 8 / STEP; tick++) {
-        traffic.stepWorld({ brake: 1 }, STEP);
+        frameStep(traffic, { brake: 1 }, STEP);
         for (let a = 0; a < 4; a++) for (let b = a + 1; b < 4; b++) {
           assert.equal(footprintsOverlap(traffic.states[a], traffic.states[b]), false);
         }
@@ -197,24 +198,24 @@ test('a left turn gives up an unentered permit when oncoming straight traffic ap
     place(left, '25:-25', '75:25', 21.25, 11, 0);
     place(straight, '25:75', '25:-25', 28.75, 65, Math.PI);
     try {
-      traffic.prepare(0.11);
+      framePrepare(traffic, 0.11);
       assert.equal(traffic.reservations.get('25:25')?.id, left.id);
       place(straight, '25:75', '25:-25', 28.75, 45, Math.PI);
       straight.simulation.body.velocity.set(0, 0, -5);
-      traffic.prepare(0.11);
+      framePrepare(traffic, 0.11);
       assert.equal(left.ai.waitReason, 'turn-staging');
       assert.ok(left.ai.control.throttle > 0);
       assert.equal(left.ai.reservationNode, null);
       const stage = left.ai.staging.target;
       for (let tick = 0; tick < 6 / STEP && (Math.hypot(left.x - stage.x, left.z - stage.z) > 0.65 || left.speed > 0.5); tick++) {
-        traffic.stepWorld({ brake: 1 }, STEP);
+        frameStep(traffic, { brake: 1 }, STEP);
         assert.equal(footprintsOverlap(left, straight), false);
       }
       assert.ok(Math.hypot(left.x - stage.x, left.z - stage.z) <= 0.9, 'left car did not reach staging point');
       assert.ok(left.speed < 0.6, `left car did not settle at staging: pos=${left.x},${left.z} target=${stage.x},${stage.z} speed=${left.speed} reason=${left.ai.waitReason}`);
       let resumed = false;
       for (let tick = 0; tick < 15 / STEP; tick++) {
-        traffic.stepWorld({ brake: 1 }, STEP);
+        frameStep(traffic, { brake: 1 }, STEP);
         resumed ||= left.ai.control.throttle > 0;
         assert.equal(footprintsOverlap(left, straight), false);
       }
@@ -230,15 +231,15 @@ test('a following straight car passes the staged left-turn vehicle on its curb s
     place(oncoming, '25:75', '25:-25', 28.75, 65, Math.PI);
     place(follower, '25:-25', '25:75', 21.25, 3, 0);
     try {
-      traffic.prepare(0.11);
+      framePrepare(traffic, 0.11);
       place(oncoming, '25:75', '25:-25', 28.75, 45, Math.PI);
       oncoming.simulation.body.velocity.set(0, 0, -5);
-      traffic.prepare(0.11);
+      framePrepare(traffic, 0.11);
       const stage = left.ai.staging?.target;
       assert.ok(stage, 'left turn did not enter staging');
       let advanced = false;
       for (let tick = 0; tick < 4 / STEP; tick++) {
-        traffic.stepWorld({ brake: 1 }, STEP);
+        frameStep(traffic, { brake: 1 }, STEP);
         advanced ||= follower.z > 6;
         assert.equal(footprintsOverlap(left, follower), false);
         assert.equal(footprintsOverlap(left, oncoming), false);
@@ -255,7 +256,7 @@ test('a stationary upstream oncoming queue does not deadlock an otherwise clear 
     place(left, '25:-25', '75:25', 21.25, 11, 0);
     place(straight, '25:75', '25:-25', 28.75, 45, Math.PI);
     try {
-      traffic.prepare(0.11);
+      framePrepare(traffic, 0.11);
       assert.equal(traffic.reservations.get('25:25')?.id, left.id);
       assert.ok(left.ai.control.throttle > 0);
     } finally { traffic.dispose(); }
@@ -277,13 +278,13 @@ test('a cruising left turn brakes in its lane when the staging point is too clos
       left.simulation.body.velocity.set(fx * 8, 0, fz * 8);
       oncoming.simulation.body.velocity.set(-fx * 5, 0, -fz * 5);
       try {
-        traffic.prepare(0.11);
+        framePrepare(traffic, 0.11);
         assert.equal(left.ai.staging, null, `unsafe staging: logical=${logical}, approach=${index}, room=${room}`);
         assert.equal(left.ai.waitReason, 'oncoming-priority');
         assert.equal(left.ai.control.throttle, 0);
         assert.equal(left.ai.control.brake, 1);
         for (let tick = 0; tick < 2 / STEP; tick++) {
-          traffic.stepWorld({ brake: 1 }, STEP);
+          frameStep(traffic, { brake: 1 }, STEP);
           assert.equal(footprintsOverlap(left, oncoming), false);
           assert.ok(Math.cos(left.heading - heading) > 0.95, 'waiting car circled a missed staging point');
           const lateral = (left.x - 25) * rightX + (left.z - 25) * rightZ;
@@ -300,16 +301,16 @@ test('a right turn has priority over an older unentered conflicting straight per
     place(straight, '75:25', '-25:25', 39, 21.25, -Math.PI / 2);
     place(right, '25:-25', '-25:25', 21.25, -15, 0);
     try {
-      traffic.prepare(0.11);
+      framePrepare(traffic, 0.11);
       assert.equal(traffic.reservations.get('25:25')?.id, straight.id);
       place(right, '25:-25', '-25:25', 21.25, 11, 0);
-      traffic.prepare(0.11);
+      framePrepare(traffic, 0.11);
       assert.equal(straight.ai.waitReason, 'junction-priority');
       assert.equal(right.ai.waitReason, null);
       assert.ok(right.ai.control.throttle > 0);
       assert.equal(traffic.reservations.get('25:25')?.id, right.id);
       for (let tick = 0; tick < 8 / STEP; tick++) {
-        traffic.stepWorld({ brake: 1 }, STEP);
+        frameStep(traffic, { brake: 1 }, STEP);
         assert.equal(footprintsOverlap(right, straight), false);
       }
     } finally { traffic.dispose(); }
@@ -321,10 +322,10 @@ test('right priority does not drive into an already entered conflicting vehicle'
   place(straight, '75:25', '-25:25', 33, 21.25, -Math.PI / 2);
   place(right, '25:-25', '-25:25', 21.25, -15, 0);
   try {
-    traffic.prepare(0.11);
+    framePrepare(traffic, 0.11);
     assert.equal(traffic.reservations.get('25:25')?.entered, true);
     place(right, '25:-25', '-25:25', 21.25, 11, 0);
-    traffic.prepare(0.11);
+    framePrepare(traffic, 0.11);
     assert.equal(traffic.reservations.get('25:25')?.id, straight.id);
     assert.equal(right.ai.control.throttle, 0);
   } finally { traffic.dispose(); }
@@ -338,7 +339,7 @@ test('left and right turns retain the straight cruise target and clear at cruisi
     let minimumSpeed = Infinity, targets = 0, cleared = false;
     try {
       for (let tick = 0; tick < 7 / STEP; tick++) {
-        traffic.stepWorld({ brake: 1 }, STEP);
+        frameStep(traffic, { brake: 1 }, STEP);
         if (car.ai.reservationNode === '25:25') {
           assert.equal(car.ai.targetSpeed, 8);
           minimumSpeed = Math.min(minimumSpeed, car.speed); targets++;
@@ -381,7 +382,7 @@ test('physical and logical U-turns exit aligned in the opposite lane without rev
     let reachedExit = false, totalTurn = 0, previous = car.heading;
     try {
       for (let tick = 0; tick < 8 / STEP && !reachedExit; tick++) {
-        traffic.stepWorld({ brake: 1 }, STEP);
+        frameStep(traffic, { brake: 1 }, STEP);
         totalTurn += Math.atan2(Math.sin(car.heading - previous), Math.cos(car.heading - previous)); previous = car.heading;
         assert.ok(car.ai.control.throttle >= 0, 'U-turn reversed instead of following the arc');
         if (car.ai.fromNode === '25:25' && car.z < 10 && Math.cos(car.heading - Math.PI) > 0.98) reachedExit = true;
@@ -399,12 +400,12 @@ test('an escaping left turn ignores oncoming priority but retains collision excl
   place(straight, '25:75', '25:-25', 28.75, 39, Math.PI);
   left.ai.evasion = { startedAt: 0, lastImpactAt: 0, nextReplanAt: Infinity };
   try {
-    traffic.prepare(0.11);
+    framePrepare(traffic, 0.11);
     assert.equal(left.ai.waitReason, null); assert.equal(left.ai.targetSpeed, 16);
     assert.equal(traffic.reservations.get('25:25')?.id, left.id);
     assert.equal(straight.ai.waitReason, 'intersection-reservation');
     for (let tick = 0; tick < 5 / STEP; tick++) {
-      traffic.stepWorld({ brake: 1 }, STEP);
+      frameStep(traffic, { brake: 1 }, STEP);
       assert.equal(footprintsOverlap(left, straight), false);
     }
   } finally { traffic.dispose(); }

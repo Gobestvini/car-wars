@@ -1,0 +1,2064 @@
+{
+  "phase": "before",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "quality": "low",
+  "runs": [
+    {
+      "repeat": 1,
+      "count": 60,
+      "filledMs": 1621.099999999814,
+      "before": {},
+      "after": {
+        "civilian": {
+          "active": 60,
+          "free": 0,
+          "capacity": 300,
+          "created": 60,
+          "reused": 0,
+          "highWater": 60,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "frame": {
+        "p95": 4.300000000001091,
+        "p99": 4.399999999999636,
+        "max": 41.70000000000027,
+        "over50": 0
+      },
+      "maxAdds": 4,
+      "maxSpawnMs": 0,
+      "rows": [
+        {
+          "ms": -1.864464138634503e-10,
+          "count": 0,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999999909,
+          "count": 4,
+          "spawn": null
+        },
+        {
+          "ms": 4.300000000000182,
+          "count": 8,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999999909,
+          "count": 12,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999999909,
+          "count": 16,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999999909,
+          "count": 20,
+          "spawn": null
+        },
+        {
+          "ms": 41.70000000000027,
+          "count": 20,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 24,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000000364,
+          "count": 28,
+          "spawn": null
+        },
+        {
+          "ms": 4.400000000000546,
+          "count": 32,
+          "spawn": null
+        },
+        {
+          "ms": 4.300000000000182,
+          "count": 36,
+          "spawn": null
+        },
+        {
+          "ms": 4.199999999999818,
+          "count": 40,
+          "spawn": null
+        },
+        {
+          "ms": 4.199999999999818,
+          "count": 44,
+          "spawn": null
+        },
+        {
+          "ms": 4.199999999999818,
+          "count": 48,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999999454,
+          "count": 52,
+          "spawn": null
+        },
+        {
+          "ms": 4.199999999999818,
+          "count": 56,
+          "spawn": null
+        },
+        {
+          "ms": 4.400000000000546,
+          "count": 60,
+          "spawn": null
+        }
+      ],
+      "samples": 2780,
+      "intervalHistogram": {
+        "4.1": 895,
+        "4.2": 1115,
+        "4.0": 260,
+        "4.3": 451,
+        "41.7": 1,
+        "4.4": 42,
+        "3.9": 12,
+        "4.5": 2,
+        "3.8": 2
+      }
+    },
+    {
+      "repeat": 1,
+      "count": 300,
+      "filledMs": 8093.400000000187,
+      "before": {
+        "civilian": {
+          "active": 0,
+          "free": 60,
+          "capacity": 300,
+          "created": 60,
+          "reused": 0,
+          "highWater": 60,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "after": {
+        "civilian": {
+          "active": 300,
+          "free": 0,
+          "capacity": 300,
+          "created": 300,
+          "reused": 60,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "frame": {
+        "p95": 4.30000000000291,
+        "p99": 8.400000000001455,
+        "max": 50.099999999998545,
+        "over50": 1
+      },
+      "maxAdds": 4,
+      "maxSpawnMs": 0,
+      "rows": [
+        {
+          "ms": 1.000000000185537,
+          "count": 0,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 4,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000000364,
+          "count": 8,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 12,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 16,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 20,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000000364,
+          "count": 24,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 28,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 32,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 36,
+          "spawn": null
+        },
+        {
+          "ms": 4.199999999998909,
+          "count": 40,
+          "spawn": null
+        },
+        {
+          "ms": 4.199999999998909,
+          "count": 44,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 48,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 52,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 56,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000002183,
+          "count": 60,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 64,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 68,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 72,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 76,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 80,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 84,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 88,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000002183,
+          "count": 92,
+          "spawn": null
+        },
+        {
+          "ms": 4.299999999999272,
+          "count": 96,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 100,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 104,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 108,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 112,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000002183,
+          "count": 116,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 120,
+          "spawn": null
+        },
+        {
+          "ms": 32.900000000001455,
+          "count": 120,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 124,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 128,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 132,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 136,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000002183,
+          "count": 140,
+          "spawn": null
+        },
+        {
+          "ms": 4.299999999999272,
+          "count": 144,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 148,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 152,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000002183,
+          "count": 156,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 160,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 164,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000002183,
+          "count": 168,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000002183,
+          "count": 172,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 176,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 180,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 184,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 188,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 192,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 196,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000002183,
+          "count": 200,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 204,
+          "spawn": null
+        },
+        {
+          "ms": 32.5,
+          "count": 204,
+          "spawn": null
+        },
+        {
+          "ms": 4.299999999999272,
+          "count": 208,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 212,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 216,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 220,
+          "spawn": null
+        },
+        {
+          "ms": 4.299999999999272,
+          "count": 224,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000002183,
+          "count": 228,
+          "spawn": null
+        },
+        {
+          "ms": 4.299999999999272,
+          "count": 232,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000002183,
+          "count": 236,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 240,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 244,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 248,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 252,
+          "spawn": null
+        },
+        {
+          "ms": 4.299999999999272,
+          "count": 256,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 260,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 264,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 268,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 272,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 276,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 280,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 284,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000002183,
+          "count": 288,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000002183,
+          "count": 292,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 296,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000000728,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 29.600000000002183,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 29.299999999999272,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 30.299999999999272,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 16.700000000000728,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 28.299999999999272,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 20.80000000000291,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 50.099999999998545,
+          "count": 300,
+          "spawn": null
+        }
+      ],
+      "samples": 4206,
+      "intervalHistogram": {
+        "4.2": 1731,
+        "4.1": 1355,
+        "4.3": 520,
+        "4.0": 325,
+        "4.4": 90,
+        "4.5": 17,
+        "3.9": 42,
+        "4.6": 10,
+        "3.8": 13,
+        "32.9": 1,
+        "5.8": 1,
+        "11.2": 1,
+        "8.3": 14,
+        "32.5": 1,
+        "6.2": 3,
+        "3.0": 2,
+        "3.7": 2,
+        "8.4": 22,
+        "12.6": 5,
+        "4.8": 4,
+        "3.6": 4,
+        "5.0": 2,
+        "3.5": 6,
+        "4.7": 5,
+        "4.9": 2,
+        "12.4": 1,
+        "5.5": 1,
+        "2.8": 1,
+        "29.6": 1,
+        "8.5": 2,
+        "29.3": 1,
+        "16.5": 1,
+        "12.5": 5,
+        "8.2": 1,
+        "30.3": 1,
+        "3.1": 1,
+        "16.7": 2,
+        "15.6": 1,
+        "5.3": 1,
+        "14.2": 1,
+        "15.0": 1,
+        "28.3": 1,
+        "6.3": 1,
+        "8.7": 1,
+        "20.8": 1,
+        "8.6": 1,
+        "50.1": 1
+      }
+    },
+    {
+      "repeat": 2,
+      "count": 60,
+      "filledMs": 1613,
+      "before": {
+        "civilian": {
+          "active": 0,
+          "free": 300,
+          "capacity": 300,
+          "created": 300,
+          "reused": 60,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "after": {
+        "civilian": {
+          "active": 60,
+          "free": 240,
+          "capacity": 300,
+          "created": 300,
+          "reused": 120,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "frame": {
+        "p95": 4.30000000000291,
+        "p99": 4.400000000001455,
+        "max": 50,
+        "over50": 0
+      },
+      "maxAdds": 4,
+      "maxSpawnMs": 0,
+      "rows": [
+        {
+          "ms": 0.3000000000029104,
+          "count": 0,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 4,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 8,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 12,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 16,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 20,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 24,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 28,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 32,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 36,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 40,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 44,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 48,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 52,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 56,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 60,
+          "spawn": null
+        },
+        {
+          "ms": 24.299999999995634,
+          "count": 60,
+          "spawn": null
+        },
+        {
+          "ms": 50,
+          "count": 60,
+          "spawn": null
+        },
+        {
+          "ms": 29.200000000004366,
+          "count": 60,
+          "spawn": null
+        }
+      ],
+      "samples": 2760,
+      "intervalHistogram": {
+        "4.2": 1196,
+        "4.1": 924,
+        "4.3": 364,
+        "4.4": 46,
+        "3.9": 16,
+        "12.4": 1,
+        "4.0": 195,
+        "8.3": 1,
+        "4.5": 4,
+        "3.8": 3,
+        "24.3": 1,
+        "6.0": 1,
+        "2.9": 1,
+        "50.0": 1,
+        "8.4": 1,
+        "29.2": 1,
+        "4.6": 1,
+        "8.5": 1,
+        "5.5": 1,
+        "2.5": 1
+      }
+    },
+    {
+      "repeat": 2,
+      "count": 300,
+      "filledMs": 8104.699999999626,
+      "before": {
+        "civilian": {
+          "active": 0,
+          "free": 300,
+          "capacity": 300,
+          "created": 300,
+          "reused": 120,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "after": {
+        "civilian": {
+          "active": 300,
+          "free": 0,
+          "capacity": 300,
+          "created": 300,
+          "reused": 420,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "frame": {
+        "p95": 4.30000000000291,
+        "p99": 8.400000000001455,
+        "max": 54.30000000000291,
+        "over50": 1
+      },
+      "maxAdds": 4,
+      "maxSpawnMs": 0,
+      "rows": [
+        {
+          "ms": 3.999999999628926,
+          "count": 0,
+          "spawn": null
+        },
+        {
+          "ms": 4.400000000001455,
+          "count": 4,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 8,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 12,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 16,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 20,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 24,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 28,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 32,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 36,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 40,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 44,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 48,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 52,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 56,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 60,
+          "spawn": null
+        },
+        {
+          "ms": 4.299999999995634,
+          "count": 64,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 68,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 72,
+          "spawn": null
+        },
+        {
+          "ms": 19.60000000000582,
+          "count": 72,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 76,
+          "spawn": null
+        },
+        {
+          "ms": 4.400000000001455,
+          "count": 80,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 84,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 88,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 92,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 96,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 100,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 104,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 108,
+          "spawn": null
+        },
+        {
+          "ms": 4.400000000001455,
+          "count": 112,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 116,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 120,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 124,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 128,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 132,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 136,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 140,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 144,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 148,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 152,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 156,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 160,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 164,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 168,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 172,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 176,
+          "spawn": null
+        },
+        {
+          "ms": 25.099999999998545,
+          "count": 180,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 184,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 188,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 192,
+          "spawn": null
+        },
+        {
+          "ms": 32.5,
+          "count": 192,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 196,
+          "spawn": null
+        },
+        {
+          "ms": 20.799999999995634,
+          "count": 196,
+          "spawn": null
+        },
+        {
+          "ms": 37.39999999999418,
+          "count": 200,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 204,
+          "spawn": null
+        },
+        {
+          "ms": 29.30000000000291,
+          "count": 204,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 208,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 212,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 216,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 220,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 224,
+          "spawn": null
+        },
+        {
+          "ms": 27.5,
+          "count": 224,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 228,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 232,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 236,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 240,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 244,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 248,
+          "spawn": null
+        },
+        {
+          "ms": 23.69999999999709,
+          "count": 248,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 252,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 256,
+          "spawn": null
+        },
+        {
+          "ms": 4.299999999995634,
+          "count": 260,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 264,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 268,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 272,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 276,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 280,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 284,
+          "spawn": null
+        },
+        {
+          "ms": 4.299999999995634,
+          "count": 288,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 292,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 296,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 54.30000000000291,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 20.89999999999418,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 49.900000000001455,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 20.799999999995634,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 41.69999999999709,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 20.700000000004366,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 29.30000000000291,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 29.30000000000291,
+          "count": 300,
+          "spawn": null
+        }
+      ],
+      "samples": 4162,
+      "intervalHistogram": {
+        "4.1": 1330,
+        "4.3": 547,
+        "4.0": 325,
+        "4.2": 1733,
+        "4.4": 91,
+        "3.9": 28,
+        "19.6": 1,
+        "1.2": 1,
+        "3.8": 11,
+        "8.3": 18,
+        "8.4": 15,
+        "4.5": 8,
+        "25.1": 1,
+        "12.4": 2,
+        "32.5": 1,
+        "6.2": 1,
+        "3.0": 1,
+        "20.8": 2,
+        "37.4": 1,
+        "12.5": 9,
+        "29.3": 3,
+        "27.5": 1,
+        "5.8": 1,
+        "23.7": 1,
+        "6.9": 1,
+        "2.5": 1,
+        "8.5": 1,
+        "12.6": 4,
+        "54.3": 1,
+        "20.9": 1,
+        "4.7": 1,
+        "3.7": 2,
+        "49.9": 1,
+        "4.6": 3,
+        "16.6": 2,
+        "16.7": 1,
+        "16.5": 1,
+        "41.7": 1,
+        "20.7": 1,
+        "9.1": 1,
+        "3.4": 1,
+        "5.0": 1,
+        "3.3": 1,
+        "12.7": 1,
+        "8.2": 3
+      }
+    },
+    {
+      "repeat": 3,
+      "count": 60,
+      "filledMs": 1537.3999999994412,
+      "before": {
+        "civilian": {
+          "active": 0,
+          "free": 300,
+          "capacity": 300,
+          "created": 300,
+          "reused": 420,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "after": {
+        "civilian": {
+          "active": 60,
+          "free": 240,
+          "capacity": 300,
+          "created": 300,
+          "reused": 480,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "frame": {
+        "p95": 4.30000000000291,
+        "p99": 4.400000000008731,
+        "max": 21.80000000000291,
+        "over50": 0
+      },
+      "maxAdds": 4,
+      "maxSpawnMs": 0,
+      "rows": [
+        {
+          "ms": 3.9999999994397513,
+          "count": 0,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 4,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 8,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 12,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 16,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 20,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 24,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 28,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 32,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 36,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 40,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999998545,
+          "count": 44,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 48,
+          "spawn": null
+        },
+        {
+          "ms": 4.200000000004366,
+          "count": 52,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 56,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 60,
+          "spawn": null
+        },
+        {
+          "ms": 17.19999999999709,
+          "count": 60,
+          "spawn": null
+        },
+        {
+          "ms": 21.80000000000291,
+          "count": 60,
+          "spawn": null
+        }
+      ],
+      "samples": 2752,
+      "intervalHistogram": {
+        "4.0": 254,
+        "4.3": 456,
+        "4.1": 905,
+        "4.2": 1036,
+        "4.4": 59,
+        "3.9": 26,
+        "4.5": 5,
+        "3.7": 2,
+        "16.7": 2,
+        "17.2": 1,
+        "3.8": 1,
+        "12.6": 1,
+        "4.6": 1,
+        "21.8": 1,
+        "3.3": 1,
+        "8.2": 1
+      }
+    },
+    {
+      "repeat": 3,
+      "count": 300,
+      "filledMs": 8105.499999999447,
+      "before": {
+        "civilian": {
+          "active": 0,
+          "free": 300,
+          "capacity": 300,
+          "created": 300,
+          "reused": 480,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "after": {
+        "civilian": {
+          "active": 300,
+          "free": 0,
+          "capacity": 300,
+          "created": 300,
+          "reused": 780,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "frame": {
+        "p95": 4.30000000000291,
+        "p99": 4.69999999999709,
+        "max": 24.19999999999709,
+        "over50": 0
+      },
+      "maxAdds": 4,
+      "maxSpawnMs": 0,
+      "rows": [
+        {
+          "ms": 0.6999999994441168,
+          "count": 0,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 4,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 8,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 12,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 16,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 20,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 24,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 28,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999991269,
+          "count": 32,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 36,
+          "spawn": null
+        },
+        {
+          "ms": 4.2000000000116415,
+          "count": 40,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 44,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999991269,
+          "count": 48,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999991269,
+          "count": 52,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 56,
+          "spawn": null
+        },
+        {
+          "ms": 4.2000000000116415,
+          "count": 60,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 64,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 68,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 72,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 76,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 80,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 84,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 88,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999991269,
+          "count": 92,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 96,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 100,
+          "spawn": null
+        },
+        {
+          "ms": 4.2000000000116415,
+          "count": 104,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 108,
+          "spawn": null
+        },
+        {
+          "ms": 18.30000000000291,
+          "count": 108,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999991269,
+          "count": 112,
+          "spawn": null
+        },
+        {
+          "ms": 4.400000000008731,
+          "count": 116,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 120,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 124,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 128,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 132,
+          "spawn": null
+        },
+        {
+          "ms": 4.2999999999883585,
+          "count": 136,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 140,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 144,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 148,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 152,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 156,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 160,
+          "spawn": null
+        },
+        {
+          "ms": 4.2000000000116415,
+          "count": 164,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 168,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 172,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999991269,
+          "count": 176,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 180,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 184,
+          "spawn": null
+        },
+        {
+          "ms": 4.2000000000116415,
+          "count": 188,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 192,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 196,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 200,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 204,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 208,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 212,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 216,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 220,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 224,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 228,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 232,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 236,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 240,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999991269,
+          "count": 244,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 248,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 252,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 256,
+          "spawn": null
+        },
+        {
+          "ms": 4.099999999991269,
+          "count": 260,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 264,
+          "spawn": null
+        },
+        {
+          "ms": 4.30000000000291,
+          "count": 268,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 272,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 276,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 280,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 284,
+          "spawn": null
+        },
+        {
+          "ms": 4,
+          "count": 288,
+          "spawn": null
+        },
+        {
+          "ms": 4.19999999999709,
+          "count": 292,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 296,
+          "spawn": null
+        },
+        {
+          "ms": 4.100000000005821,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 24.19999999999709,
+          "count": 300,
+          "spawn": null
+        },
+        {
+          "ms": 20.80000000000291,
+          "count": 300,
+          "spawn": null
+        }
+      ],
+      "samples": 4283,
+      "intervalHistogram": {
+        "4.2": 1815,
+        "4.3": 568,
+        "4.0": 303,
+        "4.1": 1419,
+        "4.4": 71,
+        "3.9": 32,
+        "4.5": 9,
+        "3.6": 2,
+        "8.7": 2,
+        "8.0": 1,
+        "4.6": 2,
+        "3.8": 4,
+        "18.3": 1,
+        "2.7": 1,
+        "12.5": 5,
+        "8.4": 9,
+        "8.3": 10,
+        "4.7": 6,
+        "3.7": 6,
+        "8.2": 2,
+        "4.8": 1,
+        "12.4": 1,
+        "5.3": 1,
+        "3.2": 1,
+        "16.7": 1,
+        "12.8": 1,
+        "3.5": 1,
+        "16.6": 1,
+        "16.5": 1,
+        "24.2": 1,
+        "6.0": 1,
+        "3.1": 1,
+        "20.8": 1,
+        "8.6": 1,
+        "12.2": 1
+      }
+    }
+  ],
+  "errors": [],
+  "loadMs": 1737,
+  "ready": {
+    "pools": {
+      "vehicles": {},
+      "policeEffects": {
+        "active": 0,
+        "free": 0,
+        "capacity": 2,
+        "created": 0,
+        "reused": 0,
+        "highWater": 0,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      },
+      "buildings": {
+        "created": 0,
+        "reused": 0,
+        "released": 0,
+        "active": 0,
+        "free": 0,
+        "highWater": 0,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 0,
+        "disposed": false
+      }
+    },
+    "heap": 31554408,
+    "gpu": {
+      "geometries": 45,
+      "textures": 3
+    },
+    "start": {
+      "open": false,
+      "side": "racer",
+      "ready": true,
+      "launching": false
+    }
+  },
+  "final": {
+    "pools": {
+      "vehicles": {
+        "civilian": {
+          "active": 300,
+          "free": 0,
+          "capacity": 300,
+          "created": 300,
+          "reused": 780,
+          "highWater": 300,
+          "overflow": 0,
+          "evicted": 0,
+          "disposed": false
+        }
+      },
+      "policeEffects": {
+        "active": 0,
+        "free": 0,
+        "capacity": 2,
+        "created": 0,
+        "reused": 0,
+        "highWater": 0,
+        "overflow": 0,
+        "evicted": 0,
+        "disposed": false
+      },
+      "buildings": {
+        "created": 0,
+        "reused": 0,
+        "released": 0,
+        "active": 0,
+        "free": 0,
+        "highWater": 0,
+        "capacity": 192,
+        "idleCapacity": 8,
+        "overflow": 0,
+        "evicted": 0,
+        "retainedGeometryBytes": 0,
+        "disposed": false
+      }
+    },
+    "heap": 71977432,
+    "gpu": {
+      "geometries": 46,
+      "textures": 5
+    }
+  }
+}

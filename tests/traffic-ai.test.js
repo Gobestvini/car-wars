@@ -1,3 +1,4 @@
+import { attachForTrafficTest, framePrepare, frameStep } from './traffic-frame-helpers.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createCityPlan } from '../src/city-generator.js';
@@ -65,13 +66,13 @@ test('six hybrid AI cars follow varied road paths and replan for two simulated m
   const plan = createCityPlan();
   const player = new CarSimulation();
   const traffic = createTraffic(new THREE.Scene(), THREE, 6, plan.roadNetwork, plan.roadWidth);
-  traffic.attachPhysics(player);
+  attachForTrafficTest(traffic, player);
   const initial = traffic.debug();
   assert.ok(new Set(initial.map(car => car.goal)).size >= 3);
   const start = traffic.states.map(state => [state.simulation.body.position.x, state.simulation.body.position.z]);
   const previous = start.map(point => [...point]), travel = start.map(() => 0);
   for (let tick = 0; tick < 120 * 120; tick++) {
-    traffic.stepWorld({}, STEP);
+    frameStep(traffic, {}, STEP);
     traffic.states.forEach((state, index) => {
       travel[index] += Math.hypot(state.x - previous[index][0], state.z - previous[index][1]);
       previous[index] = [state.x, state.z];
@@ -87,7 +88,7 @@ test('six hybrid AI cars follow varied road paths and replan for two simulated m
     return [body.position.x, body.position.y, body.position.z, body.velocity.x, body.velocity.y, body.velocity.z].every(Number.isFinite)
       && travel[index] > 100;
   }), `each car should travel through the district, distances: ${travel}; ${JSON.stringify(final)}`);
-  traffic.setCount(0); traffic.stepWorld({}, STEP);
+  traffic.setCount(0); frameStep(traffic, {}, STEP);
   assert.equal(traffic.status().reservations, 0);
   traffic.dispose();
 });
@@ -96,7 +97,7 @@ test('AI brakes for a stationary player sharing its lane', () => {
   const plan = createCityPlan();
   const player = new CarSimulation();
   const traffic = createTraffic(new THREE.Scene(), THREE, 1, plan.roadNetwork, plan.roadWidth);
-  traffic.attachPhysics(player);
+  attachForTrafficTest(traffic, player);
   traffic.setSignalController({ phase: () => ({ color: 'green', controlled: true, canEnter: true }) });
   const npc = traffic.states[0].simulation.body;
   const yaw = Math.atan2(2 * (npc.quaternion.x * npc.quaternion.z + npc.quaternion.w * npc.quaternion.y),
@@ -107,7 +108,7 @@ test('AI brakes for a stationary player sharing its lane', () => {
   player.body.velocity.setZero(); player.body.angularVelocity.setZero(); player.body.aabbNeedsUpdate = true;
   let minimumGap = Infinity;
   for (let tick = 0; tick < 8 * 120; tick++) {
-    traffic.stepWorld({}, STEP);
+    frameStep(traffic, {}, STEP);
     const dx = player.body.position.x - npc.position.x, dz = player.body.position.z - npc.position.z;
     minimumGap = Math.min(minimumGap, Math.hypot(dx, dz));
   }
@@ -122,7 +123,7 @@ test('AI detects a stationary leader independently of its commanded speed and pa
     edges: [{ from: 'a', to: 'b', length: 500 }] };
   const player = new CarSimulation();
   const traffic = createTraffic(new THREE.Scene(), THREE, 1, network, 20);
-  traffic.attachPhysics(player);
+  attachForTrafficTest(traffic, player);
   const npc = traffic.states[0].simulation.body;
   const yaw = Math.atan2(2 * (npc.quaternion.x * npc.quaternion.z + npc.quaternion.w * npc.quaternion.y),
     1 - 2 * (npc.quaternion.x ** 2 + npc.quaternion.y ** 2));
@@ -132,7 +133,7 @@ test('AI detects a stationary leader independently of its commanded speed and pa
   const blockerX = player.body.position.x, blockerZ = player.body.position.z;
   let sawManeuver = false, stalledAge = 0;
   for (let tick = 0; tick < 9 * 120; tick++) {
-    traffic.stepWorld({}, STEP);
+    frameStep(traffic, {}, STEP);
     player.body.position.set(blockerX, 0.96, blockerZ);
     player.body.quaternion.setFromEuler(0, yaw, 0); player.body.velocity.setZero(); player.body.aabbNeedsUpdate = true;
     sawManeuver ||= Boolean(traffic.states[0].ai.maneuver);
@@ -151,7 +152,7 @@ test('AI waits instead of entering occupied passing lanes when the route corrido
     edges: [{ from: 'a', to: 'b', length: 500 }] };
   const player = new CarSimulation();
   const traffic = createTraffic(new THREE.Scene(), THREE, 4, network, 20);
-  traffic.attachPhysics(player);
+  attachForTrafficTest(traffic, player);
   const primary = traffic.states[0], npc = primary.simulation.body;
   const yaw = Math.atan2(2 * (npc.quaternion.x * npc.quaternion.z + npc.quaternion.w * npc.quaternion.y),
     1 - 2 * (npc.quaternion.x ** 2 + npc.quaternion.y ** 2));
@@ -165,7 +166,7 @@ test('AI waits instead of entering occupied passing lanes when the route corrido
   setPosition(player.body, 8, 0);
   traffic.states.slice(1).forEach((state, index) => setPosition(state.simulation.body, 8, blockedOffsets[index]));
   for (let tick = 0; tick < 9 * 120; tick++) {
-    traffic.stepWorld({}, STEP);
+    frameStep(traffic, {}, STEP);
     setPosition(player.body, 8, 0);
     traffic.states.slice(1).forEach((state, index) => setPosition(state.simulation.body, 8, blockedOffsets[index]));
   }
@@ -180,7 +181,7 @@ test('conflicting paths reserve the same junction for one car with stable id pri
   const plan = createCityPlan();
   const player = new CarSimulation();
   const traffic = createTraffic(new THREE.Scene(), THREE, 2, plan.roadNetwork, plan.roadWidth);
-  traffic.attachPhysics(player);
+  attachForTrafficTest(traffic, player);
   traffic.setSignalController({ phase: () => ({ color: 'green', controlled: true, canEnter: true }) });
   const [first, second] = traffic.states;
   const configure = (state, id, from, to, goal, x, z, yaw) => {
@@ -193,7 +194,7 @@ test('conflicting paths reserve the same junction for one car with stable id pri
   };
   configure(first, 'npc-02', '-25:25', '25:25', '75:25', 17, 28.75, Math.PI / 2);
   configure(second, 'npc-01', '25:-25', '25:25', '25:75', 21.25, 17, 0);
-  traffic.prepare(0.11);
+  framePrepare(traffic, 0.11);
   assert.equal(traffic.reservations.size, 1, JSON.stringify(traffic.debug()));
   assert.equal(traffic.reservations.get('25:25').id, 'npc-01', 'lower stable id wins an unentered conflict');
   assert.equal(second.ai.state, 'following');
@@ -206,7 +207,7 @@ test('conflicting physical traffic crosses a reserved junction without chassis c
   const plan = createCityPlan();
   const player = new CarSimulation();
   const traffic = createTraffic(new THREE.Scene(), THREE, 2, plan.roadNetwork, plan.roadWidth);
-  traffic.attachPhysics(player);
+  attachForTrafficTest(traffic, player);
   traffic.setSignalController({ phase: () => ({ color: 'green', controlled: true, canEnter: true }) });
   const configure = (state, from, to, goal, x, z, yaw) => {
     state.ai.fromNode = from; state.ai.targetNode = to; state.ai.goalId = goal;
@@ -220,7 +221,7 @@ test('conflicting physical traffic crosses a reserved junction without chassis c
   configure(traffic.states[1], '25:-25', '25:25', '-25:25', 21.25, 17, 0);
   let closest = Infinity, crossedAt = null;
   for (let tick = 0; tick < 10 * 120; tick++) {
-    traffic.stepWorld({}, STEP);
+    frameStep(traffic, {}, STEP);
     const a = traffic.states[0].simulation.body.position, b = traffic.states[1].simulation.body.position;
     closest = Math.min(closest, Math.hypot(a.x - b.x, a.z - b.z));
     if (crossedAt === null && traffic.states.some(state => state.ai.fromNode === '25:25')) crossedAt = tick / 120;

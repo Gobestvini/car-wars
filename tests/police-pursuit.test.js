@@ -1,3 +1,4 @@
+import { attachForTrafficTest, frameStep } from './traffic-frame-helpers.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
@@ -226,7 +227,7 @@ test('police plans a real corridor detour around a rotated building', () => {
 test('police role uses the shared world, pursues through collision, and disposes cleanly', () => {
   const plan = createCityPlan(), scene = new THREE.Scene(), player = new CarSimulation();
   const runtime = createVehicleRuntime(scene, THREE, 0, plan.roadNetwork, plan.roadWidth, [], bounds);
-  runtime.attachPhysics(player);
+  attachForTrafficTest(runtime, player);
   runtime.registerRole('police', { maxCount: 1, physicalOnly: true,
     create: ({ targetId }) => createPolicePursuit({ targetId }),
     update: (controller, context) => controller.update({ ...context, wantedLevel: 6 }),
@@ -243,7 +244,7 @@ test('police role uses the shared world, pursues through collision, and disposes
     let stoppedFor = 0;
     let maxPoliceSpeed = 0;
     for (let tick = 0; tick < 40 / STEP; tick++) {
-      runtime.stepWorld({}, STEP);
+      frameStep(runtime, {}, STEP);
       const speed = Math.hypot(player.body.velocity.x, player.body.velocity.z);
       stoppedFor = police.ai.roleState.diagnostics().lastContactAt > 0 && speed < 0.5 ? stoppedFor + STEP : 0;
       maxPoliceSpeed = Math.max(maxPoliceSpeed, police.speed);
@@ -278,7 +279,7 @@ test('police role uses the shared world, pursues through collision, and disposes
 test('police role retains at least 90% of player acceleration on a clear straight', () => {
   const plan = createCityPlan(), scene = new THREE.Scene(), player = new CarSimulation();
   const runtime = createVehicleRuntime(scene, THREE, 0, plan.roadNetwork, plan.roadWidth, [], { minX: -200, maxX: 200, minZ: -200, maxZ: 200 });
-  runtime.attachPhysics(player);
+  attachForTrafficTest(runtime, player);
   runtime.registerRole('police', { maxCount: 1, physicalOnly: true,
     create: ({ targetId }) => createPolicePursuit({ targetId }),
     update: (controller, context) => controller.update({ ...context, wantedLevel: 6 }),
@@ -287,7 +288,7 @@ test('police role retains at least 90% of player acceleration on a clear straigh
     const result = runtime.requestSpawn({ role: 'police', targetId: 'player', position: carPose(0, -80), yaw: 0 });
     assert.equal(result.status, 'created');
     const police = runtime.states.find(state => state.role === 'police');
-    for (let tick = 0; tick < 10 / STEP; tick++) runtime.stepWorld({ throttle: 1 }, STEP);
+    for (let tick = 0; tick < 10 / STEP; tick++) frameStep(runtime, { throttle: 1 }, STEP);
     const playerSpeed = Math.hypot(player.body.velocity.x, player.body.velocity.z);
     assert.ok(playerSpeed > 10, `player acceleration fixture invalid: ${playerSpeed}`);
     assert.ok(police.speed >= playerSpeed * 0.9,

@@ -1,3 +1,4 @@
+import { attachForTrafficTest, framePrepare, frameStep } from './traffic-frame-helpers.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
@@ -14,7 +15,7 @@ function fixture(count = 1, network = straight, width = 20) {
   const player = new CarSimulation();
   player.body.position.set(20, 0.96, -20); player.body.aabbNeedsUpdate = true;
   const traffic = createTraffic(new THREE.Scene(), THREE, count, network, width);
-  traffic.attachPhysics(player); traffic.setSignalController(green);
+  attachForTrafficTest(traffic, player); traffic.setSignalController(green);
   return { player, traffic };
 }
 function place(state, x, z, heading, from = 'a', to = 'b') {
@@ -25,7 +26,7 @@ function place(state, x, z, heading, from = 'a', to = 'b') {
   body.velocity.setZero(); body.angularVelocity.setZero(); body.aabbNeedsUpdate = true;
   state.x = x; state.z = z;
 }
-function step(traffic, seconds) { for (let i = 0; i < seconds / STEP; i++) traffic.stepWorld({ brake: 1 }, STEP); }
+function step(traffic, seconds) { for (let i = 0; i < seconds / STEP; i++) frameStep(traffic, { brake: 1 }, STEP); }
 
 test('following uses bumper orientation, headway, and reaction closing speed', () => {
   const car = { x: 0, z: 0, heading: Math.PI / 2, vx: 8, vz: 0 };
@@ -120,7 +121,7 @@ test('recovery sees oncoming cars beyond the immediate following cells', () => {
   for (let i = 0; i < 4 / 0.11; i++) {
     place(oncoming, 64, -3.75, -Math.PI / 2, 'b', 'a');
     oncoming.simulation.body.velocity.set(-8.5, 0, 0);
-    traffic.prepare(0.11);
+    framePrepare(traffic, 0.11);
   }
   assert.equal(car.ai.maneuver, null, JSON.stringify(traffic.debug()));
   assert.ok(car.ai.reevaluations > 0);
@@ -135,7 +136,7 @@ test('two touching physical cars separate and regain route progress within fifte
   let maximumStep = 0, previous = traffic.states.map(state => [state.x, state.z]);
   let furthestA = a.x, furthestB = b.x;
   for (let i = 0; i < 15 / STEP; i++) {
-    traffic.stepWorld({ brake: 1 }, STEP);
+    frameStep(traffic, { brake: 1 }, STEP);
     furthestA = Math.max(furthestA, a.x); furthestB = Math.min(furthestB, b.x);
     traffic.states.forEach((state, index) => {
       maximumStep = Math.max(maximumStep, Math.hypot(state.x - previous[index][0], state.z - previous[index][1]));
@@ -154,7 +155,7 @@ test('two touching physical cars separate and regain route progress within fifte
 test('stalled vehicle without a leader reevaluates its directed route after three seconds', () => {
   const { traffic } = fixture();
   const state = traffic.states[0]; place(state, 20, 5, Math.PI / 2);
-  for (let i = 0; i < 4 / 0.11; i++) traffic.prepare(0.11);
+  for (let i = 0; i < 4 / 0.11; i++) framePrepare(traffic, 0.11);
   assert.ok(state.ai.reevaluations >= 1, JSON.stringify(traffic.debug()));
   assert.ok(state.ai.targetNode && state.ai.control.throttle > 0);
   traffic.dispose();
@@ -175,7 +176,7 @@ test('a clear passing maneuver moves past its blocker and returns to the right l
   player.body.position.set(23, 0.96, 5); player.body.quaternion.setFromEuler(0, Math.PI / 2, 0);
   let overlap = false, chassisContact = false;
   for (let i = 0; i < 20 / STEP; i++) {
-    traffic.stepWorld({ brake: 1 }, STEP);
+    frameStep(traffic, { brake: 1 }, STEP);
     const position = player.body.position;
     overlap ||= footprintsOverlap({ x: state.x, z: state.z, heading: state.heading },
       { x: position.x, z: position.z, heading: player.telemetry().heading });
@@ -194,11 +195,11 @@ test('a fully occupied retreat corridor keeps a contact jam waiting and is retri
   const { traffic } = fixture(2); const [a, b] = traffic.states;
   place(a, 20, 5, Math.PI / 2); place(b, 24.1, 5, -Math.PI / 2, 'b', 'a');
   traffic.setSpawnObstacles([{ x: 29, z: 5, heading: 0, halfX: 3, halfZ: 12 }]);
-  for (let i = 0; i < 5 / 0.11; i++) traffic.prepare(0.11);
+  for (let i = 0; i < 5 / 0.11; i++) framePrepare(traffic, 0.11);
   assert.equal(b.ai.maneuver, null);
   assert.equal(b.ai.control.throttle, 0);
   assert.ok(b.ai.reevaluations > 0);
-  traffic.setSpawnObstacles([]); traffic.prepare(0.6);
+  traffic.setSpawnObstacles([]); framePrepare(traffic, 0.6);
   assert.equal(b.ai.maneuver?.kind, 'contact-retreat');
   traffic.dispose();
 });
@@ -210,7 +211,7 @@ test('physical and logical followers move within three seconds of their leader c
     if (logical) { player.body.position.set(0, 0.96, -500); player.body.aabbNeedsUpdate = true; }
     place(follower, origin, 5, Math.PI / 2); place(leader, origin + 7, 5, Math.PI / 2);
     for (let i = 0; i < 2 / STEP; i++) {
-      traffic.stepWorld({ brake: 1 }, STEP);
+      frameStep(traffic, { brake: 1 }, STEP);
       leader.simulation.body.position.set(origin + 7, 0.96, 5);
       leader.simulation.body.velocity.setZero(); leader.simulation.body.aabbNeedsUpdate = true;
     }
@@ -249,7 +250,7 @@ test('blocked junction exit selects a clear detour to the same goal in physical 
     place(state, 9, 30, Math.PI / 2, '-25:25', '25:25');
     Object.assign(state.ai, { route: ['25:25', '75:25'], routeIndex: 0, goalId: '75:25' });
     const park = () => place(blocker, 40, 30, Math.PI / 2, '25:25', '75:25');
-    park(); traffic.prepare(0.11);
+    park(); framePrepare(traffic, 0.11);
     const detour = [...state.ai.route];
     assert.notEqual(detour[1], '75:25');
     assert.notEqual(detour[1], '-25:25', 'should prefer a side street to reversing');
@@ -258,7 +259,7 @@ test('blocked junction exit selects a clear detour to the same goal in physical 
     assert.equal(state.ai.exitReplans, 1);
     let previous = [state.x, state.z], distance = 0;
     for (let i = 0; i < 6 / STEP; i++) {
-      park(); traffic.stepWorld({ brake: 1 }, STEP);
+      park(); frameStep(traffic, { brake: 1 }, STEP);
       const delta = Math.hypot(state.x - previous[0], state.z - previous[1]);
       assert.ok(delta < 0.2, `reroute teleported a body: ${delta}`);
       distance += delta; previous = [state.x, state.z];
@@ -286,12 +287,12 @@ test('all four occupied exits wait and a newly cleared side street is retried', 
     place(blockers[1], 30, 10, Math.PI, '25:25', '25:-25');
     place(blockers[2], 10, 20, -Math.PI / 2, '25:25', '-25:25');
   };
-  for (let i = 0; i < 30; i++) { park(); traffic.prepare(0.11); }
+  for (let i = 0; i < 30; i++) { park(); framePrepare(traffic, 0.11); }
   assert.equal(state.ai.waitReason, 'blocked-junction-exit');
   assert.equal(state.ai.exitReplans, 0);
   assert.equal(state.ai.reservationNode, null);
   for (let i = 0; i < 20; i++) {
-    park(); place(blockers[0], 20, 80, 0, '25:75', '25:125'); traffic.prepare(0.11);
+    park(); place(blockers[0], 20, 80, 0, '25:75', '25:125'); framePrepare(traffic, 0.11);
   }
   assert.equal(state.ai.route[1], '25:75');
   assert.equal(state.ai.exitReplans, 1);
@@ -312,12 +313,12 @@ test('blocked exit never changes a red-light decision or an already entered junc
   assert.equal(state.ai.waitReason, 'signal-red');
   assert.equal(state.ai.exitReplans, 0);
   // Acquire the original path before its exit becomes occupied.
-  player.body.position.z = -40; traffic.setSignalController(green); traffic.prepare(0.11);
+  player.body.position.z = -40; traffic.setSignalController(green); framePrepare(traffic, 0.11);
   const held = [...traffic.reservations.values()].find(item => item.id === state.id);
   assert.ok(held); held.entered = true;
   place(state, 17, 30, Math.PI / 2, '-25:25', '25:25');
   Object.assign(state.ai, { route: ['25:25', '75:25'], routeIndex: 0 });
-  player.body.position.z = 30; traffic.prepare(0.11);
+  player.body.position.z = 30; framePrepare(traffic, 0.11);
   assert.deepEqual(state.ai.route, ['25:25', '75:25']);
   assert.equal(state.ai.exitReplans, 0);
   assert.equal([...traffic.reservations.values()].find(item => item.id === state.id), held);
@@ -329,11 +330,11 @@ test('entered reservation survives timeouts and route advancement until rear bum
   const state = traffic.states[0]; place(state, 25, 30, Math.PI / 2, '-25:25', '25:25');
   Object.assign(state.ai, { route: ['25:25', '75:25'], routeIndex: 0 });
   traffic.reservations.set('25:25', { id: state.id, entered: true, time: -100 }); state.ai.reservationNode = '25:25';
-  traffic.prepare(0.11);
+  framePrepare(traffic, 0.11);
   assert.equal(traffic.reservations.get('25:25')?.id, state.id);
   assert.equal(state.ai.fromNode, '25:25');
   place(state, 40, 30, Math.PI / 2, '25:25', '75:25');
-  traffic.prepare(0.11);
+  framePrepare(traffic, 0.11);
   assert.equal(traffic.reservations.has('25:25'), false);
   traffic.dispose();
 });
@@ -347,7 +348,7 @@ test('reservation decisions are independent of state iteration order and honor r
     Object.assign(a.ai, { route: ['25:25', '75:25'], routeIndex: 0, requestNode: '25:25', requestedAt: -1 });
     Object.assign(b.ai, { route: ['25:25', '25:75'], routeIndex: 0, requestNode: '25:25', requestedAt: -2 });
     if (reverse) traffic.states.reverse();
-    traffic.prepare(0.11);
+    framePrepare(traffic, 0.11);
     const result = { owner: traffic.reservations.get('25:25')?.id,
       controls: traffic.states.map(state => [state.id, state.ai.control]).sort((x, y) => x[0].localeCompare(y[0])) };
     assert.equal(result.owner, b.id); traffic.dispose(); return result;
