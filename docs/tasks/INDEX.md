@@ -83,6 +83,7 @@
 | [TASK-0080](TASK-0080-scene-object-pools.md) | Повторное использование динамических объектов всей сцены | blocked | high | TASK-0079 — требуется done и измеренные capacities | gpt-6.1-sol, high |
 | [TASK-0081](TASK-0081-scene-render-optimization.md) | Оптимизация рендера сцены с сохранением вида мокапа | draft | high | TASK-0078, TASK-0080 — требуется done | gpt-6.1-sol, high |
 | [TASK-0082](TASK-0082-scene-cpu-optimization.md) | Оптимизация CPU и итоговая проверка всей сцены | draft | high | TASK-0081 — требуется done | gpt-6.1-sol, high |
+| [TASK-0083](TASK-0083-staggered-vehicle-spawn.md) | Прогрев пула машин при загрузке и равномерный спавн | ready | high | нет; последовательно с TASK-0080–0082 | gpt-6.1-sol, high |
 
 TASK-0073 реализована 2026-10-10 и переведена в review: синтетические 30/60/120/144/165 Hz cadence и jitter/reset прошли; `npm test` — 292/292 после обновления устаревшего blurFocusSize expectation; build прошёл. Браузерный debug HUD показывал 60 FPS в low/high, 30 секунд проверено с активным трафиком. Физический дисплей >60 Hz и длительное управление игроком не проверены; см. отчёт задачи.
 
