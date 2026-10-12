@@ -12,6 +12,16 @@ export const ROAD_SURFACE_HEIGHTS = Object.freeze({
 
 /** Partition the road grid and spawn plaza into non-overlapping horizontal tiles. */
 export function createRoadSurfaceRectangles(roadCenters, bounds, roadWidth, plaza = null) {
+  if (!Array.isArray(roadCenters) && roadCenters.roadSegments) {
+    const plan = roadCenters;
+    const half=roadWidth/2;
+    const rectangles=plan.roadSegments.map(({from,to})=>({minX:Math.min(from.x,to.x)-half,
+      maxX:Math.max(from.x,to.x)+half,minZ:Math.min(from.z,to.z)-half,maxZ:Math.max(from.z,to.z)+half}));
+    if(plaza) rectangles.push({minX:plaza.centerX-plaza.width/2,maxX:plaza.centerX+plaza.width/2,
+      minZ:plaza.centerZ-plaza.depth/2,maxZ:plaza.centerZ+plaza.depth/2});
+    return unionRectangles(rectangles);
+  }
+  if (!Array.isArray(roadCenters)) roadCenters = roadCenters.roads;
   const cuts = [-bounds, bounds];
   const halfRoad = roadWidth / 2;
   for (const center of roadCenters) {
@@ -85,7 +95,9 @@ export function createRoundedSidewalkLayout(roadCenters, bounds, roadWidth, side
   let rectangles = source;
   const corners = [];
   const halfRoad = roadWidth / 2;
-  for (const xCenter of roadCenters) for (const zCenter of roadCenters) {
+  const nodes = Array.isArray(roadCenters) ? roadCenters.flatMap(x=>roadCenters.map(z=>({x,z})))
+    : roadCenters.roadNetwork.intersections;
+  for (const {x:xCenter,z:zCenter} of nodes) {
     for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
       const pointX = xCenter + sx * halfRoad, pointZ = zCenter + sz * halfRoad;
       const centerX = pointX + sx * radius, centerZ = pointZ + sz * radius;
@@ -281,12 +293,29 @@ export function createSurfaceHeightSampler(plan, offset = 0.004) {
   const centreIndex = Math.floor(plan.roads.length / 2);
   const plazaSpan = Math.abs(plan.roads[centreIndex] - plan.roads[centreIndex - 1]);
   const plaza = { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan };
-  const roads = createRoadSurfaceRectangles(plan.roads, plan.bounds, plan.roadWidth, plaza);
-  const sidewalks = createRoundedSidewalkLayout(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plaza);
+  const roads = createRoadSurfaceRectangles(plan, plan.bounds, plan.roadWidth, plaza);
+  const sidewalks = createRoundedSidewalkLayout(plan, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plaza);
   return (x, z) => {
     if (containsRoundedSidewalk(sidewalks, x, z)) return ROAD_SURFACE_HEIGHTS.sidewalkVisual + offset;
     if (sidewalks.patches.some(rect => containsSurface([rect], x, z))) return ROAD_SURFACE_HEIGHTS.road + offset;
     if (containsSurface(roads, x, z)) return ROAD_SURFACE_HEIGHTS.road + offset;
     return -0.015 + offset;
   };
+}
+
+/** Setup-time union as disjoint x intervals in z strips. */
+export function unionRectangles(source) {
+  const cuts=[...new Set(source.flatMap(r=>[r.minZ,r.maxZ]))].sort((a,b)=>a-b), result=[];
+  for(let i=0;i<cuts.length-1;i++) {
+    const minZ=cuts[i],maxZ=cuts[i+1],z=(minZ+maxZ)/2;
+    const spans=source.filter(r=>z>r.minZ&&z<r.maxZ).map(r=>[r.minX,r.maxX]).sort((a,b)=>a[0]-b[0]);
+    const merged=[];
+    for(const [min,max] of spans) {
+      const last=merged.at(-1);
+      if(last&&min<=last[1]+1e-8) last[1]=Math.max(last[1],max);
+      else merged.push([min,max]);
+    }
+    for(const [minX,maxX] of merged) result.push({minX,maxX,minZ,maxZ});
+  }
+  return result;
 }

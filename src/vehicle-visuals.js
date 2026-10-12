@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { ART } from './art-direction.js';
 import { makeConceptTrafficCar } from './traffic-models.js';
+import { createPoliceBeaconAssets } from './police-beacons.js';
 
 function vehicleGeometry(color, estate, police) {
   const parts = [];
@@ -55,9 +56,10 @@ export function createTrafficAssets() {
   const police = vehicleGeometry('#e6e9e6',false,true);
   const lightGeometry = new THREE.BoxGeometry(.38,.13,.3);
   const lights = ['#ef344a','#438eff'].map(color=>new THREE.MeshStandardMaterial({ color,emissive:color,emissiveIntensity:.65,roughness:.5 }));
-  return { civilian,police,material,lightGeometry,lights,
-    dispose() { civilian.flat().forEach(g=>g.dispose()); police.body.dispose(); police.static.dispose();lightGeometry.dispose();material.dispose();lights.forEach(m=>m.dispose()); },
-    animate(time) { lights.forEach((m,i)=>{m.emissiveIntensity=.35+.55*(.5+.5*Math.sin(time*6+i*Math.PI));}); },
+  const beaconEffects = createPoliceBeaconAssets();
+  return { civilian,police,material,lightGeometry,lights,beaconEffects,
+    dispose() { beaconEffects.dispose(); civilian.flat().forEach(g=>g.dispose()); police.body.dispose(); police.static.dispose();lightGeometry.dispose();material.dispose();lights.forEach(m=>m.dispose()); },
+    animate(time, quality) { beaconEffects.animate(time, lights, quality); },
   };
 }
 
@@ -81,6 +83,7 @@ export function makeTrafficCar(THREE, assets, index, role='civilian') {
       const lamp = new THREE.Mesh(assets.lightGeometry,assets.lights[i]);lamp.position.set(i ? .24 : -.24,1.68,-.08);lamps.add(lamp);
     }
     group.add(lamps);
+    assets.beaconEffects.attach(group, [-.24,.24].map(x => new THREE.Vector3(x,1.68,-.08)));
   }
   return group;
 }

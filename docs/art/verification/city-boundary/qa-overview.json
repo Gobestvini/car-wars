@@ -1,0 +1,158 @@
+[
+  {
+    "seed": 1,
+    "quality": "high",
+    "width": 390,
+    "height": 844,
+    "camera": [
+      0,
+      1700,
+      300
+    ],
+    "far": 3000,
+    "towers": 112
+  },
+  {
+    "seed": 2,
+    "quality": "high",
+    "width": 390,
+    "height": 844,
+    "camera": [
+      0,
+      1700,
+      300
+    ],
+    "far": 3000,
+    "towers": 116
+  },
+  {
+    "seed": 3,
+    "quality": "high",
+    "width": 390,
+    "height": 844,
+    "camera": [
+      0,
+      1700,
+      300
+    ],
+    "far": 3000,
+    "towers": 106
+  },
+  {
+    "seed": 4,
+    "quality": "high",
+    "width": 390,
+    "height": 844,
+    "camera": [
+      0,
+      1700,
+      300
+    ],
+    "far": 3000,
+    "towers": 104
+  },
+  {
+    "seed": 5,
+    "quality": "high",
+    "width": 390,
+    "height": 844,
+    "camera": [
+      0,
+      1700,
+      300
+    ],
+    "far": 3000,
+    "towers": 116
+  },
+  {
+    "seed": 6,
+    "quality": "high",
+    "width": 390,
+    "height": 844,
+    "camera": [
+      0,
+      1700,
+      300
+    ],
+    "far": 3000,
+    "towers": 120
+  },
+  {
+    "seed": 1,
+    "quality": "low",
+    "width": 390,
+    "height": 844,
+    "camera": [
+      0,
+      1700,
+      300
+    ],
+    "far": 3000,
+    "towers": 112
+  },
+  {
+    "seed": 2,
+    "quality": "low",
+    "width": 390,
+    "height": 844,
+    "camera": [
+      0,
+      1700,
+      300
+    ],
+    "far": 3000,
+    "towers": 116
+  },
+  {
+    "seed": 3,
+    "quality": "low",
+    "width": 390,
+    "height": 844,
+    "camera": [
+      0,
+      1700,
+      300
+    ],
+    "far": 3000,
+    "towers": 106
+  },
+  {
+    "seed": 4,
+    "quality": "low",
+    "width": 390,
+    "height": 844,
+    "camera": [
+      0,
+      1700,
+      300
+    ],
+    "far": 3000,
+    "towers": 104
+  },
+  {
+    "seed": 5,
+    "quality": "low",
+    "width": 390,
+    "height": 844,
+    "camera": [
+      0,
+      1700,
+      300
+    ],
+    "far": 3000,
+    "towers": 116
+  },
+  {
+    "seed": 6,
+    "quality": "low",
+    "width": 390,
+    "height": 844,
+    "camera": [
+      0,
+      1700,
+      300
+    ],
+    "far": 3000,
+    "towers": 120
+  }
+]

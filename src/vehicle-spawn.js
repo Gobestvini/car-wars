@@ -16,6 +16,9 @@ export function validateSpawnGeometry({ position, yaw = 0, bounds, obstacles = [
   const fx = Math.sin(yaw), fz = Math.cos(yaw), rx = Math.cos(yaw), rz = -Math.sin(yaw);
   const halfX = TRAFFIC_SPAWN.halfLength * Math.abs(fx) + TRAFFIC_SPAWN.halfWidth * Math.abs(rx);
   const halfZ = TRAFFIC_SPAWN.halfLength * Math.abs(fz) + TRAFFIC_SPAWN.halfWidth * Math.abs(rz);
+  if(bounds?.contains && ![-1,1].every(sx=>[-1,1].every(sz=>bounds.contains(position.x+sx*halfX,position.z+sz*halfZ)))) {
+    return {ok:false,reason:'out-of-bounds'};
+  }
   if (bounds && (position.x - halfX < bounds.minX || position.x + halfX > bounds.maxX
     || position.z - halfZ < bounds.minZ || position.z + halfZ > bounds.maxZ)) {
     return { ok: false, reason: 'out-of-bounds' };

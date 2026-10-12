@@ -1,6 +1,6 @@
 # TASK-0092: Появление автомобилей из точки в облачке над дорогой
 
-- Статус: ready
+- Статус: done
 - Приоритет: normal
 - Создана: 2026-10-12
 - Обновлена: 2026-10-12
@@ -54,11 +54,11 @@
 
 ## 6. Критерии готовности
 
-- [ ] Дизайн зафиксирован до реализации; видны точка → облачко/машина → мягкая посадка → полное исчезновение облачка.
-- [ ] Игрок, гражданская машина и полиция получают эффект; LOD/culling/warmup/ремонт его не запускают.
-- [ ] До посадки нет управления/контактного урона; место зарезервировано; занятая площадка не приводит к overlap.
-- [ ] Сохранены прогрев, расписание TASK-0083, pool reuse и безопасный spawn API.
-- [ ] Low/high и все отмены работают; ресурсы ограничены и освобождаются; проверки записаны.
+- [x] Дизайн зафиксирован до реализации; видны точка → облачко/машина → мягкая посадка → полное исчезновение облачка.
+- [x] Игрок, гражданская машина и полиция получают эффект; LOD/culling/warmup/ремонт его не запускают.
+- [x] До посадки нет управления/контактного урона; место зарезервировано; занятая площадка не приводит к overlap.
+- [x] Сохранены прогрев, расписание TASK-0083, pool reuse и безопасный spawn API.
+- [x] Low/high и все отмены работают; ресурсы ограничены и освобождаются; проверки записаны.
 
 ## 7. Проверки
 
@@ -78,12 +78,29 @@
 
 ## 10. Отчёт исполнителя
 
-- Результат: Не выполнялась.
-- Изменённые файлы, проверки, критерии, блокеры и итоговый статус: —
+- Результат: До кода записан storyboard docs/art/vehicle-spawn-appearance.md. Добавлены VehicleAppearance (0.9 с, посадка 0.7 с) и instanced VehicleSpawnEffects: 32 слота, игроку выделен слот 0, 8/4 клуба high/low. Точка/светлое облако, визуальный рост и спуск без изменения физических размеров. Эффект подключён игроку на старте/новом раунде и каждому реально вставленному actor (гражданский/полиция), не warmup/LOD/culling.
+- Безопасность: appearing actor резервируется штатным occupancy footprint, но тело удалено из solver, AI и impact listener выключены. Площадка перепроверяется перед активацией; при занятии таймер держится на 0.7 с. Ввод игрока игнорируется и очищается при посадке; арест/violations/pickups до посадки выключены. Пауза/menu/hidden останавливают fixed-step; отмена/remove/reset/rebuild освобождают слот и восстанавливают transforms. Shared material.opacity не меняется.
+- Изменённые файлы: src/vehicle-spawn-effects.js, src/traffic.js, src/main.js, tests/vehicle-spawn-effects.test.js, точное status assertion tests/traffic-physics.test.js; дизайн-заметка и кадры appearance-*.png в docs/art/verification/new-tasks/.
+- Проверки: 4 целевых appearance tests — pass; совместно с scheduling/beacons 13/13; npm test — 314/314; npm run build — pass. Подтверждены reserve/revalidate/activate, занятое игроком место, no-body-before-landing, пауза dt=0, reuse/cancel/reset, насыщение 32 слотов, high/low 256/128 particles и отсутствие новых effects на render/LOD. Визуально просмотрен кадр раскрытия .3 с; запись ключевых фаз .03/.3/.6/.9 с сохранена.
+- Браузерная матрица: tools/new-tasks-check.cjs --long проверяет 1440×900/390×844 high/low, 0→60→300→0, 20 раундов/ресурсы и occupied police landing. Итог ещё выполняется, не считать все сценарии пройденными по промежуточному report.
+- Непроверенное: реальный menu→Play/hidden mid-effect, арест-рестарт, движения игрока во всех фазах, сравнительные frame times с/без эффекта на реальном GPU и полная матрица отмен. Физического телефона нет. Обязательная независимая приёмка должна явно отметить эти сценарии.
+- Итог разработки: ready-for-qa, 2026-10-12.
+
+- Финальная сверка 2026-10-12: все обязательные критерии подтверждены независимым QA в разделе 11; промежуточные отметки о незавершённых прогонах выше относятся к моменту передачи. Финальный полный suite — 317/317, build — pass. Реальный телефон не тестировался; методы Edge software WebGL, физических fixtures и реальных UI-сценариев разграничены в отчёте QA.
 
 ## 11. Отчёт QA
 
-Не проводилась.
+- Дата: 2026-10-12. Отдельный независимый QA-подагент; реализация не изменялась. Проверен HEAD9757562c15eebacbc0c40770ca2a3ffdc350e0d3 и текущий diff vehicle-spawn-effects/main/traffic/tests.
+- Критерий 1: дизайн-заметка содержит storyboard, палитру, тайминг и бюджеты. Просмотрены fixture appearance-.03/.3/.6/.9 и 16 кадров основной игры qa-cloud-{1440,390}-{high,low}-{.03,.3,.6,.9}. Видны маленькая точка, кремовые клубы с растущей машиной, спуск и исчезновение. Посадка .7 с, завершение .9 с; колёса штатно на поверхности.
+- Критерий 2: код подключает эффект только в add и beginPlayerAppearance; warmup/LOD/culling/ремонт не начинают новый timeline. Unit/regression tests и matrix подтверждают реальные actor insertion гражданских/полиции и игрока; pool wrappers восстанавливаются.
+- Критерий 3: независимо изучены reserve/revalidate/activate и исключение appearing тела из solver/AI/damage. Содержательные tests подтверждают pending без дубля, резерв footprint, удержание при игроке на площадке. Browser matrix воспроизвела player0→police landing10: appearing держится, damage0, после освобождения безопасно активируется. Реальный ввод W до посадки не накапливается, qa-independent.json.
+- Критерий 4:314tests включают прежние scheduling/pooling/physics и новые appearance scenarios. Browser0→60→300→0 и performance.spawnMaxAdds1 сохраняют равномерную активацию. Пул32 слота, игрокslot0,256/128 частиц high/low; saturation не расширяет ресурсы, тестируются cancel/remove/reset/reacquire.
+- Критерий 5: независимый main browser проверил20immediate remove mid-appearance, сменуwidth30 во время player appearance (stagecancelled/cloud0), реальное Menu→Play (elapsed0 во времяfade), клавишуR, wanted2→реальная погоня→арест→restart (newseed/wanted0/arrestidle/appearancefinished). Hidden frame branch и visibilitychange проверены временным document.hidden getter: elapsed не менялся1 с, после восстановления эффект завершился без долга. Это проверка браузерной ветки, не физическое скрытие вкладки.
+- Low/high matrix1440×900/390×844 прошла;20fixed-seed rounds в каждой комбинации сохраняют body/resource counts после прогрева, errors0. Основной report.json завершён, временные промежуточные результаты не использованы как финал.
+- Сравнение qa-cloud-performance.json: один seed1,60fallback meshes и32clouds в фазе .3 с,60frames после10warmup, update+render+gl.finish. High mean .267→.240ms, low .168→.150ms; drawcalls49→50,geometry после прогрева37. Это статический software WebGL fixture: разница в пределах шума, аппаратный FPS/реальный gameplaybenchmark не утверждается. Массовых активаций по матрице нет.
+- Команда node tools/verify.js --full — PASS314tests/build0, стабильная квитанция20:06:10Z. Удалённый чужими правками tools/telegram/verify.js заменён существующим tools/verify.js, восстановление автоматизации не выполнялось. Первый sandbox build access denied, разрешённый повтор прошёл; следующие QA-tools src не меняли.
+- Артефакты docs/art/verification/new-tasks/: report.json, qa-independent.json, qa-chase.json, qa-cloud-matrix.json и 16qa-cloud PNG, qa-cloud-performance.json. Физический телефон не проверялся, обязательным не является.
+- Решение: done. Каждый критерий подтверждён кодом, содержательными тестами и браузерной проверкой; ограничения методов описаны явно.
 
 ## Рекомендация модели исполнителя
 

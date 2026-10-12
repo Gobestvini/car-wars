@@ -1,0 +1,149 @@
+{
+  "errors": [],
+  "maps": [
+    {
+      "seed": 1,
+      "pickup": {
+        "id": 0,
+        "x": -85,
+        "z": -75,
+        "section": "0:0",
+        "status": "available"
+      },
+      "repaired": {
+        "position": {
+          "x": -85,
+          "y": 0.9383884838157344,
+          "z": -75
+        },
+        "speed": 1.4489895953733658,
+        "signedSpeed": 5.352519799901373e-16,
+        "heading": 9.945702181514873e-21,
+        "roll": -4.076697163845835e-18,
+        "steer": 0,
+        "grounded": 4,
+        "slip": 0,
+        "gear": "1",
+        "damage": 0,
+        "damageState": "healthy",
+        "traction": 1,
+        "lastImpactSpeed": 0
+      },
+      "moved": {
+        "position": {
+          "x": 8.901439372269722e-18,
+          "y": 0.8662380110637279,
+          "z": 8.798269811300704
+        },
+        "speed": 48.81896153481422,
+        "signedSpeed": 13.54054742263205,
+        "heading": 1.8160837605618365e-18,
+        "roll": -2.18764480746421e-18,
+        "steer": 0,
+        "grounded": 4,
+        "slip": 0,
+        "gear": "2",
+        "damage": 0,
+        "damageState": "healthy",
+        "traction": 1,
+        "lastImpactSpeed": 0
+      }
+    },
+    {
+      "seed": 2,
+      "pickup": {
+        "id": 0,
+        "x": -75,
+        "z": -150,
+        "section": "0:0",
+        "status": "available"
+      },
+      "repaired": {
+        "position": {
+          "x": -75,
+          "y": 0.9383884838157381,
+          "z": -150
+        },
+        "speed": 1.4489895953731025,
+        "signedSpeed": 5.246027532862854e-16,
+        "heading": 1.1124247274313174e-20,
+        "roll": -4.3677335831131925e-18,
+        "steer": 0,
+        "grounded": 4,
+        "slip": 0,
+        "gear": "1",
+        "damage": 0,
+        "damageState": "healthy",
+        "traction": 1,
+        "lastImpactSpeed": 0
+      },
+      "moved": {
+        "position": {
+          "x": 9.574113206233346e-18,
+          "y": 0.8662882525561483,
+          "z": 9.373606567106885
+        },
+        "speed": 50.30164153792287,
+        "signedSpeed": 13.951788821360982,
+        "heading": 1.9469233629384847e-18,
+        "roll": -2.4074010921218394e-18,
+        "steer": 0,
+        "grounded": 4,
+        "slip": 0,
+        "gear": "2",
+        "damage": 0,
+        "damageState": "healthy",
+        "traction": 1,
+        "lastImpactSpeed": 0
+      }
+    },
+    {
+      "seed": 3,
+      "pickup": {
+        "id": 0,
+        "x": -75,
+        "z": -100,
+        "section": "0:0",
+        "status": "available"
+      },
+      "repaired": {
+        "position": {
+          "x": -75,
+          "y": 0.9417426263976182,
+          "z": -100
+        },
+        "speed": 1.3755238007224975,
+        "signedSpeed": 4.969380228460938e-16,
+        "heading": 1.3602445435705348e-20,
+        "roll": -4.5486830118324985e-18,
+        "steer": 0,
+        "grounded": 4,
+        "slip": 0,
+        "gear": "1",
+        "damage": 0,
+        "damageState": "healthy",
+        "traction": 1,
+        "lastImpactSpeed": 0
+      },
+      "moved": {
+        "position": {
+          "x": 9.277067433095564e-18,
+          "y": 0.8662680501143688,
+          "z": 9.141413805563248
+        },
+        "speed": 49.709359038541784,
+        "signedSpeed": 13.787516047408356,
+        "heading": 1.894502727798126e-18,
+        "roll": -2.2851503264333837e-18,
+        "steer": 0,
+        "grounded": 4,
+        "slip": 0,
+        "gear": "2",
+        "damage": 0,
+        "damageState": "healthy",
+        "traction": 1,
+        "lastImpactSpeed": 0
+      }
+    }
+  ]
+}

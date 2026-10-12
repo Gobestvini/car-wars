@@ -30,7 +30,7 @@ test('tree crowns and trunks fit sidewalk pockets clear of asphalt, buildings, s
     const center = Math.floor(plan.roads.length / 2);
     const plazaSpan = Math.abs(plan.roads[center] - plan.roads[center - 1]);
     const plaza = { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan };
-    const roads = createRoadSurfaceRectangles(plan.roads, plan.bounds, plan.roadWidth, plaza);
+    const roads = createRoadSurfaceRectangles(plan, plan.bounds, plan.roadWidth, plaza);
     const signals = plan.roadNetwork.intersections.map(node => ({ x: node.x, z: node.z }));
     const placements = createTreePlacements(plan, { signals });
     for (const tree of placements) {

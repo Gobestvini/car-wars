@@ -3,7 +3,7 @@ import { BuildingOcclusion } from './building-occlusion.js';
 import { createRoadMarkings } from './road-markings.js';
 import { createRoadSurfacePositions, createRoadSurfaceRectangles,
   createRoundedSidewalkLayout, createSidewalkSupportBoxes, createSidewalkSupportPrisms,
-  ROAD_SURFACE_HEIGHTS } from './road-surface.js';
+  ROAD_SURFACE_HEIGHTS, unionRectangles } from './road-surface.js';
 import { createSidewalkVisuals } from './sidewalk-visuals.js';
 import { getSignalPosition, getStopLineLayout } from './signal-layout.js';
 import { createSignalBeam } from './signal-glow.js';
@@ -32,10 +32,15 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
     group.add(mesh);
   };
 
-  plane(plan.bounds * 2, plan.bounds * 2, pavementMaterial, 0, 0, -0.015);
+  if(plan.territory) {
+    const baseGeometry = new THREE.BufferGeometry();
+    baseGeometry.setAttribute('position', new THREE.BufferAttribute(createRoadSurfacePositions(unionRectangles(plan.territory),-.015),3));
+    baseGeometry.computeVertexNormals();
+    const base=new THREE.Mesh(baseGeometry,pavementMaterial);base.receiveShadow=true;group.add(base);
+  } else plane(plan.bounds * 2, plan.bounds * 2, pavementMaterial, 0, 0, -0.015);
   const centreIndex = Math.floor(plan.roads.length / 2);
   const plazaSpan = Math.abs(plan.roads[centreIndex] - plan.roads[centreIndex - 1]);
-  const roadRects = createRoadSurfaceRectangles(plan.roads, plan.bounds, plan.roadWidth,
+  const roadRects = createRoadSurfaceRectangles(plan, plan.bounds, plan.roadWidth,
     { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan });
   const roadGeometry = new THREE.BufferGeometry();
   roadGeometry.setAttribute('position', new THREE.BufferAttribute(createRoadSurfacePositions(roadRects), 3));
@@ -47,10 +52,10 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   roadSurface.name = 'Road surface';
   roadSurface.receiveShadow = true;
   group.add(roadSurface);
-  const sidewalkLayout = createRoundedSidewalkLayout(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth,
+  const sidewalkLayout = createRoundedSidewalkLayout(plan, plan.bounds, plan.roadWidth, plan.sidewalkWidth,
     { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan });
   group.add(...createSidewalkVisuals(THREE, sidewalkLayout, roadRects, sidewalkMaterial, curbMaterial, ART.asphalt));
-  const marks = createRoadMarkings(plan.roads, plan.bounds, plan.roadWidth);
+  const marks = createRoadMarkings(plan, plan.bounds, plan.roadWidth);
   // Paint is a surface layer, below sampled tire decals, rather than a raised block.
   const dashGeometry = new THREE.PlaneGeometry(0.16, 2.2).rotateX(-Math.PI / 2);
   // Slope bias keeps paint above asphalt at shallow angles and long camera ranges.
@@ -125,12 +130,13 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   group.add(poles, housings, bulbs, stopLines, signalBeam);
 
   const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+  const allBuildings=[...plan.buildings,...(plan.boundaryBuildings||[])];
   const buildingMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.88 });
-  const buildings = new THREE.InstancedMesh(boxGeometry, buildingMaterial, plan.buildings.length);
+  const buildings = new THREE.InstancedMesh(boxGeometry, buildingMaterial, allBuildings.length);
   const entries = [];
   const buildMatrix = new THREE.Matrix4();
-  for (let i = 0; i < plan.buildings.length; i++) {
-    const source = plan.buildings[i];
+  for (let i = 0; i < allBuildings.length; i++) {
+    const source = allBuildings[i];
     const style = buildingArt(source, plan.seed);
     const building = { ...source, color: new THREE.Color(style.color).multiplyScalar(style.tint).getHex() };
     buildMatrix.compose(new THREE.Vector3(building.x, building.height / 2, building.z), new THREE.Quaternion(),
@@ -165,7 +171,8 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const art = createCityArt(group, entries, plan.seed);
   const occlusion = new BuildingOcclusion(THREE, group, buildings, boxGeometry, entries);
 
-  const walls = [
+  const walls = plan.boundaryBuildings?.length ? [] : plan.contour ? plan.contour.map(({axis,value,min,max})=>axis==='x'
+    ? [(min+max)/2,value,max-min+3,3] : [value,(min+max)/2,3,max-min+3]) : [
     [0, -plan.bounds, plan.bounds * 2 + plan.roadWidth, 3],
     [0, plan.bounds, plan.bounds * 2 + plan.roadWidth, 3],
     [-plan.bounds, 0, 3, plan.bounds * 2 + plan.roadWidth],

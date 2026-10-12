@@ -20,8 +20,8 @@ const bounds = (x, z, width, depth, yaw = 0) => {
 /** Bounded, seeded setup-time placement. The radius encloses the entire model, including lamp arms. */
 export function createStreetPropPlacements(plan, { signals = [], trees = [], damageObstacles = [] } = {}) {
   const plaza = { centerX: 0, centerZ: 0, width: plan.blockPitch, depth: plan.blockPitch };
-  const layout = createRoundedSidewalkLayout(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plaza);
-  const roads = createRoadSurfaceRectangles(plan.roads, plan.bounds, plan.roadWidth, plaza);
+  const layout = createRoundedSidewalkLayout(plan, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plaza);
+  const roads = createRoadSurfaceRectangles(plan, plan.bounds, plan.roadWidth, plaza);
   const obstacles = [...plan.buildings.map(b => bounds(b.x, b.z, b.width, b.depth)),
     ...damageObstacles.map(([x, z, width, depth, , yaw]) => bounds(x, z, width, depth, yaw))];
   const nodes = new Map(plan.roadNetwork.intersections.map(node => [node.id, node]));

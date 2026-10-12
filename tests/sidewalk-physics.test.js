@@ -96,9 +96,11 @@ test('surface sampler follows the raised slab while road and ground levels remai
 
 test('the live city scene adds raycastable raised slabs and removes every support collider on dispose', () => {
   const scene = new THREE.Scene();
-  const simulation = new CarSimulation({ spawn: { x: 0, y: 0.96, z: 83.5, yaw: Math.PI / 2 } });
   const plan = createCityPlan();
-  const rounded = createRoundedSidewalkLayout(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plazaFor(plan.roads));
+  const rounded = createRoundedSidewalkLayout(plan, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plazaFor(plan.roads));
+  const slab=rounded.rectangles.find(r=>r.maxX-r.minX>10 && r.maxZ-r.minZ>=2);
+  assert.ok(slab,'generated city has a straight support slab');
+  const simulation = new CarSimulation({ spawn: { x:(slab.minX+slab.maxX)/2,y:.96,z:(slab.minZ+slab.maxZ)/2,yaw:Math.PI/2 } });
   const city = createCityScene(scene, simulation, plan);
   const supports = city.staticBodies.filter(body => body.wheelSupport);
   assert.equal(supports.length, rounded.rectangles.length + rounded.corners.length);

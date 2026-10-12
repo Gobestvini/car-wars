@@ -18,7 +18,7 @@ test('whole prop footprints fit sidewalks and avoid roads, buildings, signals, t
     const args={trees,signals,damageObstacles};
     const placements=createStreetPropPlacements(plan,args);
     assert.deepEqual(placements,createStreetPropPlacements(plan,args)); assert.equal(JSON.stringify(plan),original);
-    const roads=createRoadSurfaceRectangles(plan.roads,plan.bounds,roadWidth,{centerX:0,centerZ:0,width:50,depth:50});
+    const roads=createRoadSurfaceRectangles(plan,plan.bounds,roadWidth,{centerX:0,centerZ:0,width:50,depth:50});
     const sample=createSurfaceHeightSampler(plan,0);
     for(const type of ['lamp','bin']) {
       const selected=placements.filter(p=>p.type===type); assert.ok(selected.length>10 && selected.length<=STREET_PROPS[type].maxCount);

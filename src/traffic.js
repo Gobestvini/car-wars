@@ -11,6 +11,7 @@ import { junctionMovement, movementsConflict, pathProgress, pathTarget, turnStag
 import { findSafeSpawnPose } from './vehicle-spawn.js';
 import { createPolicePursuit } from './police-pursuit.js';
 import { createTrafficAssets, makeTrafficCar } from './vehicle-visuals.js';
+import { VehicleAppearance } from './vehicle-spawn-effects.js';
 
 const headingOf = q => Math.atan2(2 * (q.x * q.z + q.w * q.y), 1 - 2 * (q.x * q.x + q.y * q.y));
 const now = () => globalThis.performance?.now?.() ?? Date.now();
@@ -22,6 +23,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
   const states = [], cars = [], simulations = [];
   let requestedCount = 0, pendingCount = null, pendingReason = null, physics = null, serial = 0;
   let visualAssets = null;
+  let appearanceEffects = null;
   const vehiclePools = new Map();
   const actorStorage = new WeakMap();
   let disposed = false;
@@ -185,6 +187,10 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
         let mesh;
         try { mesh = makeTrafficCar(THREE, visualAssets, context.index, role); }
         catch (error) { simulation.disposeDamageListener(); physics.world.removeBody(simulation.body); throw error; }
+        if(appearanceEffects) {
+          const visual=new THREE.Group();visual.name='Vehicle appearance visual';
+          visual.add(...[...mesh.children]);mesh.add(visual);mesh.userData.appearanceVisual=visual;
+        }
         profile.vehicleCreated++;
         return { simulation, mesh };
       },
@@ -196,6 +202,10 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
         mesh.visible = true; scene.add(mesh);
       },
       release: ({ simulation, mesh }, context) => {
+        if(context.state?.appearance) context.state.appearance.cancel();
+        if(context.state) appearanceEffects?.release(context.state.id);
+        const visual=mesh.userData.appearanceVisual;
+        if(visual){visual.scale.setScalar(1);visual.position.y=0;}
         if (context.state) {
           context.state.active = false;
           context.state.simulation = null; context.state.mesh = null;
@@ -318,6 +328,11 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     simulation.body.addEventListener('collide', collide);
     state.occupancyItem.state = state;
     states.push(state); simulations.push(simulation); cars.push(mesh); syncState(state);
+    if(appearanceEffects) {
+      state.appearance=new VehicleAppearance();simulation.world.removeBody(simulation.body);simulation.disposeDamageListener();
+      appearanceEffects.acquire(state.id,state.appearance,state.spawnPose);
+      state.appearance.apply(mesh.userData.appearanceVisual);
+    }
     return state;
   };
 
@@ -437,6 +452,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
   };
 
   const setLogical = (state, logical) => {
+    if(state.appearance?.stage==='appearing') return;
     if (state.logical === logical) return;
     const body = state.simulation.body;
     state.logical = logical;
@@ -463,6 +479,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       if (b) touching.add(b);
     }
     for (const state of states) {
+      if(state.appearance?.stage==='appearing') continue;
       if (roleRegistry.get(state.role)?.physicalOnly) {
         if (state.logical) setLogical(state, false);
         continue;
@@ -489,6 +506,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
 
   const stepLogical = dt => {
     for (const state of states) {
+      if(state.appearance?.stage==='appearing') continue;
       if (state.role !== 'civilian') continue;
       if (!state.logical) continue;
       const body = state.simulation.body, control = state.ai.control;
@@ -538,7 +556,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     const plans = [], byId = new Map();
     // Route changes do not move bodies. Every hazard uses this tick's occupancy snapshot.
     for (const state of states) {
-      if (state.role !== 'civilian') continue;
+      if (state.role !== 'civilian' || state.appearance?.stage==='appearing') continue;
       const ai = state.ai, car = state.occupancyItem;
       if (!ai.targetNode) replanAtNearest(state);
       let edge = routeEdge(ai);
@@ -871,7 +889,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       ai.waitTime = reason ? (ai.waitTime || 0) + dt : 0;
     }
     for (const state of states) {
-      if (state.role === 'civilian') continue;
+      if (state.role === 'civilian' || state.appearance?.stage==='appearing') continue;
       const role = roleRegistry.get(state.role);
       if (!role?.update) continue;
       if (state.role === 'police' && state.simulation.damage >= 1) {
@@ -892,6 +910,14 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
   };
   return {
     states, cars, simulations, reservations,
+    setAppearanceEffects(effects) {
+      if(states.length||vehiclePools.size) throw new Error('Install appearance effects before vehicle warmup.');
+      appearanceEffects=effects;
+    },
+    canActivatePlayer() {
+      const player=updatePlayerOccupancy();
+      return isTrafficSpawnSafe(player,states.map(state=>state.occupancyItem),spawnObstacles,0);
+    },
     warmupVehicles(options) {
       requireOwner();
       if (warmup?.generation === poolGeneration) return warmup.promise;
@@ -1004,8 +1030,13 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       if (!Number.isInteger(value) || value < 0 || value > 300) throw new RangeError('Traffic count must be an integer from 0 to 300.');
       requestedCount = value; pendingCount = value; pendingReason = 'Запрос применяется';
     },
-    setRoadNetwork(network, width = roadWidth, obstacles = spawnObstacles) {
+    setRoadNetwork(network, width = roadWidth, obstacles = spawnObstacles, bounds = undefined) {
       requireOwner();
+      if(bounds !== undefined) {
+        while(states.length) removeAt(states.length-1);
+        spawnRequests.clear(); spawnResults.clear(); occupancy.clear();
+        spawnBounds=bounds; pendingCount=requestedCount; pendingReason='Поиск безопасных мест';
+      }
       spawnElapsed = 0;
       roadNetwork = network; roadWidth = width; graph = createRoadGraph(network, getLaneOffset(width));
       movementCache.clear();
@@ -1020,6 +1051,17 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     prepare(dt = STEP) {
       profile.aiStepMs = 0;
       if (pendingCount !== null) applyCount(pendingCount);
+      if(appearanceEffects) for(const state of states) {
+        if(!state.appearance||state.appearance.finished) continue;
+        const safe=state.appearance.stage!=='appearing'||findSafeSpawnPose({position:state.spawnPose,yaw:state.heading},
+          {bounds:spawnBounds,obstacles:spawnObstacles,occupants:[...states.filter(other=>other!==state).map(other=>other.occupancyItem),updatePlayerOccupancy()],
+            surfaceHeight:()=>state.spawnPose.y}).status==='created';
+        if(state.appearance.advance(dt,safe)) {
+          state.appearance.apply(state.mesh.userData.appearanceVisual);
+          state.simulation.attachDamageListener();physics.world.addBody(state.simulation.body);
+          state.ai.control={steer:0,throttle:0,brake:1};
+        }
+      }
       stepLogical(dt);
       lodElapsed += dt;
       if (lodElapsed >= TRAFFIC_PHYSICS_ZONE.interval) { lodElapsed = 0; updateLod(); }
@@ -1031,11 +1073,12 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
         profile.aiTicks++; profile.aiDecisions += states.length;
       }
       const prepareStarted = now();
-      for (const state of states) if (!state.logical) state.simulation.prepare(state.ai.control, dt);
+      for (const state of states) if (!state.logical && state.appearance?.stage!=='appearing') state.simulation.prepare(state.ai.control, dt);
       profile.npcPrepareMs = now() - prepareStarted;
     },
     postStep(dt = STEP) {
       for (const state of states) {
+        if(state.appearance?.stage==='appearing') continue;
         const body = state.simulation.body;
         if (!state.logical) state.simulation.postStep(dt);
         state.x = body.position.x; state.z = body.position.z;
@@ -1044,13 +1087,13 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     },
     stepWorld(input = {}, dt = STEP) {
       let started = now();
-      physics.prepare(input, dt); profile.playerPrepareMs = now() - started;
+      if(!physics.appearing) physics.prepare(input, dt); profile.playerPrepareMs = now() - started;
       started = now(); this.prepare(dt); profile.prepareMs = now() - started;
       started = now(); physics.world.step(dt); profile.worldStepMs = now() - started;
-      started = now(); physics.postStep(dt); this.postStep(dt); profile.postMs = now() - started;
+      started = now(); if(!physics.appearing) physics.postStep(dt); this.postStep(dt); profile.postMs = now() - started;
     },
-    render(alpha = 1, camera = null) {
-      visualAssets?.animate(thinkTime);
+    render(alpha = 1, camera = null, quality = 'high') {
+      visualAssets?.animate(aiTime + thinkTime, quality);
       let frustum = null;
       if (camera) {
         frustum = visibilityFrustum.setFromProjectionMatrix(
@@ -1058,13 +1101,21 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       }
       visibleCount = 0;
       for (const state of states) {
+        visibilitySphere.radius = state.role === 'police' ? 6 : 3.2;
         visibilitySphere.center.set(state.x, 1, state.z);
         const visible = !frustum || frustum.intersectsSphere(visibilitySphere);
         state.mesh.visible = visible;
         if (visible) { visibleCount++; syncState(state, alpha); }
+        if(state.appearance) state.appearance.apply(state.mesh.userData.appearanceVisual);
       }
     },
     reset() {
+      for(const state of states) if(state.appearance) {
+        const wasAppearing=state.appearance.stage==='appearing';
+        state.appearance.cancel();appearanceEffects?.release(state.id);
+        state.appearance.apply(state.mesh.userData.appearanceVisual);
+        if(wasAppearing){physics.world.addBody(state.simulation.body);state.simulation.attachDamageListener();}
+      }
       spawnElapsed = 0;
       if (pendingCount !== null) applyCount(pendingCount);
       reservations.clear(); thinkTime = 0; aiTime = 0; lodElapsed = 0;
@@ -1121,13 +1172,13 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       }
       disposed = true; return true;
     },
-    status() { return { count: roleStates('civilian').length, requestedCount, pending: pendingCount !== null,
+    status() { return { count: roleStates('civilian').length, appearing:states.filter(state=>state.appearance?.stage==='appearing').length, requestedCount, pending: pendingCount !== null,
       totalCount: states.length, roleCounts: Object.fromEntries([...roleRegistry.keys()].map(role => [role, roleStates(role).length])),
       pendingSpawns: spawnRequests.size, insertionReason: pendingReason,
-      bodies: states.filter(state => !state.logical).length, logical: states.filter(state => state.logical).length,
+      bodies: states.filter(state => !state.logical && state.appearance?.stage!=='appearing').length, logical: states.filter(state => state.logical).length,
       visible: visibleCount, reservations: reservations.size }; },
     poolStats() { return Object.fromEntries([...vehiclePools].map(([role, pool]) => [role, pool.snapshot()])); },
-    physicalActors() { return states.filter(state => !state.logical).map(state => ({
+    physicalActors() { return states.filter(state => !state.logical && state.appearance?.stage!=='appearing').map(state => ({
       id: state.id, role: state.role, body: state.simulation.body, logical: state.logical,
       mesh: state.mesh, damageableBody: state.mesh.userData.damageableBody || null,
       damage: state.simulation.damage, operational: state.simulation.damage < 1,
@@ -1135,7 +1186,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       x: state.x, z: state.z, heading: state.heading, vx: state.simulation.body.velocity.x,
       vz: state.simulation.body.velocity.z,
     })); },
-    physicalTireSources() { return states.filter(state => !state.logical).map(state => ({
+    physicalTireSources() { return states.filter(state => !state.logical && state.appearance?.stage!=='appearing').map(state => ({
       id: state.id, role: state.role, x: state.x, z: state.z, body: state.simulation.body, wheels: state.simulation.wheels,
     })); },
     accumulateTimings(target) {
@@ -1157,6 +1208,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       const blockerLimit = blocker ? followingLimit(state.occupancyItem, blocker.occupancyItem,
         Math.sin(state.heading), Math.cos(state.heading)) : null;
       return { id: state.id, role: state.role, targetId: state.ai.targetId || null,
+      appearance:state.appearance?.stage||'active', appearanceTime:state.appearance?.elapsed??null,
       goal: state.ai.goalId, route: [...state.ai.route], state: state.ai.state,
       segment: [state.ai.fromNode, state.ai.targetNode], seed: state.ai.seed, completedGoals: state.ai.completedGoals,
       goals: [...state.ai.goalHistory], reason: state.ai.waitReason,

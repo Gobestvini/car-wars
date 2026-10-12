@@ -1,4 +1,7 @@
 // Deterministic street grid and buildings, measured in metres.
+import { createCityLayout, cityLayoutSignature } from './city-layout.js';
+import { createRectangleUnionEdges } from './road-surface.js';
+import { createCityBoundary } from './city-boundary.js';
 const mulberry32 = seed => {
   let state = seed >>> 0;
   return () => {
@@ -37,6 +40,8 @@ export function createCityPlan(seed = DEFAULT_CITY_SEED, { roadWidth = ROAD_WIDT
   }
 
   const random = mulberry32(seed);
+  const layout = createCityLayout(seed, roadWidth, sidewalkWidth);
+  const active = new Set(layout.activeCells.map(([x,z])=>`${x}:${z}`));
   const sizeRandom = mulberry32(seed ^ 0x51D3A9B7);
   const buildings = [];
   const landmarks = [];
@@ -51,6 +56,7 @@ export function createCityPlan(seed = DEFAULT_CITY_SEED, { roadWidth = ROAD_WIDT
   for (let bx = 0; bx < ROAD_CENTRES.length - 1; bx++) for (let bz = 0; bz < ROAD_CENTRES.length - 1; bz++) {
     // Keep a generous open plaza at the player spawn.
     if (bx === 3 && bz === 3) continue;
+    if (!active.has(`${bx}:${bz}`)) continue;
     const cx = (ROAD_CENTRES[bx] + ROAD_CENTRES[bx + 1]) / 2;
     const cz = (ROAD_CENTRES[bz] + ROAD_CENTRES[bz + 1]) / 2;
     for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
@@ -76,17 +82,14 @@ export function createCityPlan(seed = DEFAULT_CITY_SEED, { roadWidth = ROAD_WIDT
     landmarks.push(landmark.id);
   }
 
-  const intersections = ROAD_CENTRES.flatMap(x => ROAD_CENTRES.map(z => ({ x, z, id: `${x}:${z}` })));
-  const edges = [];
-  for (let x = 0; x < ROAD_CENTRES.length; x++) for (let z = 0; z < ROAD_CENTRES.length; z++) {
-    const from = `${ROAD_CENTRES[x]}:${ROAD_CENTRES[z]}`;
-    if (x + 1 < ROAD_CENTRES.length) edges.push({ from, to: `${ROAD_CENTRES[x + 1]}:${ROAD_CENTRES[z]}`, length: BLOCK_PITCH });
-    if (z + 1 < ROAD_CENTRES.length) edges.push({ from, to: `${ROAD_CENTRES[x]}:${ROAD_CENTRES[z + 1]}`, length: BLOCK_PITCH });
-  }
-  const roadNetwork = { intersections, edges, horizontal: ROAD_CENTRES, vertical: ROAD_CENTRES };
-  return {
+  const roadNetwork = layout.roadNetwork;
+  const contour = createRectangleUnionEdges(layout.territory);
+  const plan = {
     seed, bounds: CITY_BOUNDS, roads: ROAD_CENTRES, roadWidth, blockPitch: BLOCK_PITCH,
     buildingSetback, sidewalkWidth, buildingFootprint: { min: minFootprint, max: maxFootprint }, buildingGap,
-    buildings, landmarks, roadNetwork,
+    buildings, landmarks, ...layout, roadNetwork, contour,
+    signature: cityLayoutSignature(layout),
   };
+  plan.boundaryBuildings=createCityBoundary(plan);
+  return plan;
 }

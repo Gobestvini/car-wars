@@ -12,6 +12,7 @@ import { FrameIntervals } from './frame-intervals.js';
 import { TireTracks, DEFAULT_SKID_THRESHOLD, DEFAULT_TRACK_INTENSITY } from './tire-tracks.js';
 import { smoothCameraScale, targetCameraScale } from './camera-distance.js';
 import { createCityPlan, ROAD_WIDTH } from './city-generator.js';
+import { containsCityPoint, nextRoundPlan } from './city-layout.js';
 import { createCityScene } from './city-scene.js';
 import { createSurfaceHeightSampler } from './road-surface.js';
 import { updateShadowCoverage } from './shadow-coverage.js';
@@ -35,6 +36,7 @@ import { PLAYER_MODEL_URL, preparePlayerModel, offsetPlayerWheel } from './playe
 import { createPlayerLights } from './player-lights.js';
 import { TRAFFIC_MODEL_URLS, createConceptTrafficAssets } from './traffic-models.js';
 import { TireSmoke } from './tire-smoke.js';
+import { VehicleAppearance, VehicleSpawnEffects } from './vehicle-spawn-effects.js';
 import { createStartScreen } from './start-screen.js';
 
 export async function startGame(loadingScreen) {
@@ -45,7 +47,7 @@ const startScreen = createStartScreen({
   // Explicit lab/test entry points keep their direct access to the simulation.
   bypass: bypassMenu,
   onPlay: () => {
-    setSettingsOpen(false); reset();
+    setSettingsOpen(false); newRound();
     traffic.render(1, camera);
     miniatureBlur.render(scene, camera, { mode: cameraMode, car });
   },
@@ -174,25 +176,45 @@ const damageTestObstacles = damageTestType === 'wheel' ? [[-1.72, 0.44, 0.3, 0.7
   : damageTestType === 'rear' ? [[4, -10, 8, 1.2]]
     : damageTestType === 'front' ? [[-8, 18, 10, 1.2]]
       : [[-8, 18, 10, 1.2], [-6, 10, 1.2, 14], [4, -10, 8, 1.2]];
-let cityPlan = createCityPlan(undefined, { roadWidth: savedDefaults.roadWidth });
+const seedParameter = new URLSearchParams(location.search).get('seed');
+const pinnedSeed = seedParameter !== null && Number.isSafeInteger(Number(seedParameter)) ? Number(seedParameter) : null;
+const randomSeed = () => crypto.getRandomValues(new Uint32Array(1))[0];
+let cityPlan = createCityPlan(pinnedSeed ?? (damageTest ? undefined : randomSeed()), { roadWidth: savedDefaults.roadWidth });
+const citySpawnBounds = plan => ({minX:-plan.bounds,maxX:plan.bounds,minZ:-plan.bounds,maxZ:plan.bounds,
+  contains:(x,z)=>containsCityPoint(plan,x,z)});
 let cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : []);
 let buildingEntries = cityState.entries;
 let buildingOcclusion = cityState.occlusion;
-const spawnObstaclesForPlan = plan => [...plan.buildings.map(building => ({ x: building.x, z: building.z,
+const spawnObstaclesForPlan = plan => [...[...plan.buildings,...(plan.boundaryBuildings||[])].map(building => ({ x: building.x, z: building.z,
   halfX: building.width / 2, halfZ: building.depth / 2, heading: 0 })),
 ...(damageTest ? damageTestObstacles.map(([x, z, width, depth, , heading = 0]) =>
   ({ x, z, halfX: width / 2, halfZ: depth / 2, heading })) : [])];
 let trafficSpawnObstacles = spawnObstaclesForPlan(cityPlan);
 
 const car = new THREE.Group(); scene.add(car);
+const playerAppearanceRoot=new THREE.Group();scene.add(playerAppearanceRoot);playerAppearanceRoot.add(car);
+const spawnEffects=new VehicleSpawnEffects(scene);
+let playerAppearance=null;
+function cancelPlayerAppearance() {
+  if(playerAppearance) playerAppearance.cancel();spawnEffects.release('player');
+  playerAppearanceRoot.scale.setScalar(1);playerAppearanceRoot.position.y=0;
+  if(sim.appearing){sim.appearing=false;sim.world.addBody(sim.body);sim.attachDamageListener();}
+}
+function beginPlayerAppearance() {
+  if(damageTest) return;
+  cancelPlayerAppearance();playerAppearance=new VehicleAppearance();sim.appearing=true;
+  sim.world.removeBody(sim.body);sim.disposeDamageListener();releasePointer();keys.clear();
+  spawnEffects.acquire('player',playerAppearance,{x:sim.body.position.x,y:sim.body.position.y-.96,z:sim.body.position.z},true);
+  playerAppearance.apply(playerAppearanceRoot);
+}
 const damageEffects = new CarDamageEffects(scene);
 const policeDamageVisuals = new Map();
 const policeEffectsPool = new ObjectPool({ capacity: 2, create: () => new CarDamageEffects(scene),
   acquire: effects => effects.reset(), release: effects => effects.reset(), destroy: effects => effects.dispose() });
 const damagePreview = debug ? Number(new URLSearchParams(location.search).get('damagePreview') || 0) : 0;
 const traffic = createVehicleRuntime(scene, THREE, savedDefaults.trafficCount, cityPlan.roadNetwork,
-  cityPlan.roadWidth, trafficSpawnObstacles, { minX: -cityPlan.bounds, maxX: cityPlan.bounds,
-    minZ: -cityPlan.bounds, maxZ: cityPlan.bounds });
+  cityPlan.roadWidth, trafficSpawnObstacles, citySpawnBounds(cityPlan));
+traffic.setAppearanceEffects(spawnEffects);
 traffic.registerRole('police', { maxCount: 2, physicalOnly: true,
   create: ({ targetId }) => createPolicePursuit({ targetId }),
   update: (controller, context) => wanted.snapshot().level > 0 && arrest.snapshot().state !== 'arrested'
@@ -268,7 +290,7 @@ async function loadCar() {
       node.removeFromParent();
       node.position.set(0, 0, 0);
       const pivot = new THREE.Group(); const spin = new THREE.Group();
-      spin.add(node); pivot.add(spin); scene.add(pivot);
+      spin.add(node); pivot.add(spin); playerAppearanceRoot.add(pivot);
       visualWheels.push({ pivot, spin });
     }
     // Compile while the loading indicator is visible, before accepting movement.
@@ -334,6 +356,7 @@ async function loadCar() {
     await loadingScreen.paint();
     if (disposed) return;
     modelReady = true;
+    if(bypassMenu) beginPlayerAppearance();
     startScreen.setReady(true);
     loadingScreen.finish();
   } catch (error) {
@@ -388,6 +411,7 @@ function updatePointer(event) {
 }
 canvas.addEventListener('pointerdown', event => {
   if (startScreen.isOpen || loadingScreen.isOpen) return;
+  if(sim.appearing) return;
   if (cameraMode === 'free') return;
   if (pointer.active || (event.pointerType === 'mouse' && event.button !== 0)) return;
   if (!modelReady) return;
@@ -424,13 +448,15 @@ window.addEventListener('keydown', event => {
   if (startScreen.isOpen || loadingScreen.isOpen) return;
   if (event.target.closest?.('#settings')) return;
   if (/INPUT|TEXTAREA/.test(document.activeElement?.tagName)) return;
+  if(sim.appearing && event.code!=='KeyR') return;
   if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.code)) event.preventDefault();
   keys.add(event.code);
-  if (event.code === 'KeyR' && !event.repeat && cameraMode !== 'free') reset();
+  if (event.code === 'KeyR' && !event.repeat && cameraMode !== 'free') newRound();
 });
 window.addEventListener('keyup', event => keys.delete(event.code));
 const has = (...codes) => codes.some(code => keys.has(code));
 function getInput() {
+  if(sim.appearing) return {steer:0,throttle:0,brake:1,handbrake:false};
   if (cameraMode === 'free') return { steer: 0, throttle: 0, brake: 1, handbrake: false };
   if (arrest.snapshot().state === 'arrested') return { steer: 0, throttle: 0, brake: 1, handbrake: false };
   const telemetry = sim.telemetry();
@@ -462,6 +488,7 @@ function getInput() {
 }
 
 function reset() {
+  cancelPlayerAppearance();
   frameIntervals.reset();
   releasePointer(); keys.clear(); sim.reset(); traffic.reset(); driveDirection = 1;
   violations.reset(); wanted.reset(); arrest.reset(); wantedRenderKey = ''; renderWantedHud();
@@ -502,7 +529,7 @@ function setSettingsOpen(open) {
     (startScreen.isOpen ? $('menu-settings') : settingsButton).focus({ preventScroll: true });
   }
 }
-arrestRestart.addEventListener('click', reset);
+arrestRestart.addEventListener('click', newRound);
 window.addEventListener('keydown', event => { if (event.code === 'Escape' && settingsButton.getAttribute('aria-expanded') === 'true') setSettingsOpen(false); });
 settingsButton.addEventListener('click', () => setSettingsOpen(settingsButton.getAttribute('aria-expanded') !== 'true'));
 function setCameraMode(mode) {
@@ -603,8 +630,15 @@ function applyDrawDistance(distance) {
 }
 applyDrawDistance(cameraMode === 'free' ? settings.values.drawDistanceFree : settings.values.drawDistanceFollow);
 
-function rebuildCity(roadWidth) {
-  const nextPlan = createCityPlan(cityPlan.seed, { roadWidth });
+function newRound() {
+  const nextPlan = pinnedSeed !== null || damageTest ? createCityPlan(pinnedSeed ?? cityPlan.seed,{roadWidth:cityPlan.roadWidth})
+    : nextRoundPlan(createCityPlan,cityPlan,randomSeed(),{roadWidth:cityPlan.roadWidth});
+  rebuildCity(cityPlan.roadWidth,nextPlan);
+  beginPlayerAppearance();
+}
+function rebuildCity(roadWidth, preparedPlan = null) {
+  const nextPlan = preparedPlan || createCityPlan(cityPlan.seed, { roadWidth });
+  const policeCount=traffic.roleCount('police');
   releasePointer(); keys.clear();
   repairPickupVisuals.dispose(); repairPickups = null;
   cityState.dispose();
@@ -615,12 +649,13 @@ function rebuildCity(roadWidth) {
   repairPickupVisuals = new RepairPickupVisuals(scene, repairPickups.placements, pickupSurfaceHeight);
   cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : []);
   trafficSpawnObstacles = spawnObstaclesForPlan(cityPlan);
-  traffic.setRoadNetwork(cityPlan.roadNetwork, cityPlan.roadWidth, trafficSpawnObstacles);
+  traffic.setRoadNetwork(cityPlan.roadNetwork, cityPlan.roadWidth, trafficSpawnObstacles, citySpawnBounds(cityPlan));
   trafficSignals = createTrafficSignals(cityPlan.roadNetwork);
   traffic.setSignalController(trafficSignals);
   buildingEntries = cityState.entries;
   buildingOcclusion = cityState.occlusion;
   reset();
+  traffic.setRoleCount('police',policeCount,policeSpawnSpecs());
 }
 
 const cameraGoal = new THREE.Vector3();
@@ -639,7 +674,7 @@ function updateCamera(dt) {
   camera.updateMatrixWorld();
   const shadowTarget = cameraMode === 'free' ? orbitControls.target : follow;
   sun.position.copy(shadowTarget).add(sunOffset); sun.target.position.copy(shadowTarget);
-  shadowBounds = updateShadowCoverage(sun, camera, { resolution: sun.shadow.mapSize.x, casterHeight: 24 });
+  shadowBounds = updateShadowCoverage(sun, camera, { resolution: sun.shadow.mapSize.x, casterHeight: 52 });
 }
 function segmentHitsRect(ax, az, bx, bz, minX, minZ, maxX, maxZ) {
   let enter = 0, leave = 1;
@@ -654,7 +689,7 @@ function segmentHitsRect(ax, az, bx, bz, minX, minZ, maxX, maxZ) {
   return true;
 }
 function arrestCorridorIsClear(playerPose, policeUnit) {
-  return !cityPlan.buildings.some(building => segmentHitsRect(playerPose.x, playerPose.z, policeUnit.x, policeUnit.z,
+  return ![...cityPlan.buildings,...(cityPlan.boundaryBuildings||[])].some(building => segmentHitsRect(playerPose.x, playerPose.z, policeUnit.x, policeUnit.z,
     building.x - building.width / 2 - 0.65, building.z - building.depth / 2 - 0.65,
     building.x + building.width / 2 + 0.65, building.z + building.depth / 2 + 0.65));
 }
@@ -744,8 +779,14 @@ function frame(now) {
   traffic.advanceSpawnFrame(elapsed);
   frameIntervals.push(now);
   const { alpha, steps } = stepper.advance(elapsed, () => {
+    if(playerAppearance && !playerAppearance.finished) {
+      if(playerAppearance.advance(STEP,traffic.canActivatePlayer())) {
+        sim.appearing=false;sim.world.addBody(sim.body);sim.attachDamageListener();releasePointer();keys.clear();
+      }
+      playerAppearance.apply(playerAppearanceRoot);
+    }
     input = getInput();
-    const enabled = cameraMode !== 'free';
+    const enabled = cameraMode !== 'free' && !sim.appearing;
     const playerBefore = { x: sim.body.position.x, z: sim.body.position.z };
     const actorsBefore = traffic.physicalActors();
     const velocitiesBefore = new Map([[sim.body, { ...sim.body.velocity }],
@@ -792,7 +833,7 @@ function frame(now) {
       else actor.simulation.drainImpactEvents();
     }
     const repaired = repairPickups.collectSegment(playerBefore, { x: sim.body.position.x, z: sim.body.position.z }, {
-      enabled: cameraMode !== 'free' && arrest.snapshot().state !== 'arrested',
+      enabled: cameraMode !== 'free' && !sim.appearing && arrest.snapshot().state !== 'arrested',
       damaged: sim.damage > 0 || sim.wheels.some(wheel => wheel.detached),
       detachedWheels: sim.wheels.some(wheel => wheel.detached), bodyY: sim.body.position.y,
       expectedBodyY: pickupSurfaceHeight(sim.body.position.x, sim.body.position.z) + 0.96,
@@ -805,7 +846,7 @@ function frame(now) {
     const policeForArrest = physicalActors.map(actor => ({ ...actor,
       speed: Math.hypot(actor.vx, actor.vz), clearPath: arrestCorridorIsClear(playerArrestPose, actor) }));
     const arrestResult = arrest.update(STEP, { wantedLevel: wanted.snapshot().level, player: playerArrestPose,
-      police: policeForArrest, enabled: cameraMode !== 'free', damage: sim.damage });
+      police: policeForArrest, enabled: cameraMode !== 'free' && !sim.appearing, damage: sim.damage });
     renderArrestHud(arrestResult);
     const trackSources = [{ id: 'player', role: 'player', wheels: sim.wheels },
       ...physicalActors.filter(actor => actor.role === 'police').map(actor => ({ id: actor.id, role: actor.role,
@@ -842,7 +883,7 @@ function frame(now) {
   let stageStart = stages ? performance.now() : 0;
   cityState.updateSignals(trafficSignals, traffic.simulationTime(), camera, quality);
   if (stages) { stages.signalMs = performance.now() - stageStart; stageStart = performance.now(); }
-  traffic.render(alpha, camera);
+  traffic.render(alpha, camera, quality);
   if (stages) { stages.trafficVisualMs = performance.now() - stageStart; stageStart = performance.now(); }
   buildingOcclusion.update(camera, car, dt);
   if (stages) { stages.occlusionMs = performance.now() - stageStart; stageStart = performance.now(); }
@@ -853,6 +894,7 @@ function frame(now) {
   }
   if (stages) { stages.damageVisualMs = performance.now() - stageStart; stageStart = performance.now(); }
   tireSmoke.update(dt, camera, { quality });
+  spawnEffects.update(camera,quality);
   if (stages) { stages.smokeVisualMs = performance.now() - stageStart; stageStart = performance.now(); }
   repairPickupVisuals.update(dt);
   if (stages) stages.pickupVisualMs = performance.now() - stageStart;
@@ -944,7 +986,7 @@ window.carLab = {
   damageEffects: () => damageEffects.snapshot(),
   buildingVisibility: () => buildingEntries.map(entry => ({ id: entry.id, bounds: entry.bounds, opacity: entry.opacity,
     proximity: Boolean(entry.nearCar), gap: entry.carGap, occluded: Boolean(entry.wasOccluded), proxy: Boolean(entry.proxy) })),
-  city: () => ({ seed: cityPlan.seed, buildings: cityPlan.buildings.length, trees: cityState.trees.count, landmarks: cityPlan.landmarks.length, bounds: cityPlan.bounds, roadWidth: cityPlan.roadWidth, roads: cityPlan.roads, roadNetwork: cityPlan.roadNetwork, hasBuildingWindows: false,
+  city: () => ({ seed: cityPlan.seed, signature:cityPlan.signature, districts:cityPlan.districts, contour:cityPlan.contour, territory:cityPlan.territory, activeCells:cityPlan.activeCells, buildings: cityPlan.buildings.length, trees: cityState.trees.count, landmarks: cityPlan.landmarks.length, bounds: cityPlan.bounds, roadWidth: cityPlan.roadWidth, roads: cityPlan.roads, roadNetwork: cityPlan.roadNetwork, hasBuildingWindows: false,
     fadedBuildings: buildingEntries.filter(entry => entry.opacity < 0.999).length }),
   roadMarkings: () => cityState.roadMarkings(),
   worldBodies: () => sim.world.bodies.length,
@@ -972,6 +1014,17 @@ window.carLab = {
   getSpawnRequest: requestId => traffic.spawnRequest(requestId),
   cancelVehicleSpawn: requestId => traffic.cancelSpawn(requestId),
   trafficClock: () => traffic.simulationTime(),
+  appearance: () => ({player:playerAppearance?.stage||'active',elapsed:playerAppearance?.elapsed??null,effects:spawnEffects.snapshot()}),
+  newRound: () => { if(debug) { newRound(); return cityPlan.seed; } return false; },
+  rebuildCity: width => { if(debug) rebuildCity(width); },
+  setDebugCitySeed: seed => { if(debug && Number.isSafeInteger(seed)) rebuildCity(cityPlan.roadWidth,createCityPlan(seed,{roadWidth:cityPlan.roadWidth})); },
+  setDebugTrafficCount: count => { if(debug) traffic.setCount(count); },
+  setDebugPoliceCount: count => { if(debug) traffic.setRoleCount('police',count,policeSpawnSpecs()); },
+  removeDebugVehicle: id => debug && traffic.remove(id),
+  setDebugPlayerPose: (x,z,yaw=0) => { if(debug) {sim.body.position.set(x,.96,z);sim.body.previousPosition.copy(sim.body.position);
+    sim.body.quaternion.setFromEuler(0,yaw,0);sim.body.previousQuaternion.copy(sim.body.quaternion);sim.body.velocity.setZero();
+    sim.body.angularVelocity.setZero();sim.body.aabbNeedsUpdate=true;sim.body.wakeUp();} },
+  setDebugCamera: (position,target=[0,0,0]) => { if(debug) {setCameraMode('free');camera.position.fromArray(position);orbitControls.target.fromArray(target);camera.lookAt(orbitControls.target);camera.updateMatrixWorld();} },
   trafficStatus: () => traffic.status(),
   trafficAI: () => traffic.debug().filter(state => state.role === 'civilian'),
   signals: () => ({ controlled: trafficSignals.controlled.size, approaches: cityState.signalApproaches.length,
@@ -1004,6 +1057,7 @@ window.addEventListener('pagehide', event => {
   gpuProfile?.dispose(); sceneProfile.stop(); miniatureBlur.dispose();
   policeEffectsPool.dispose(); policeDamageVisuals.clear(); damageEffects.dispose();
   tireSmoke.dispose(); tracks.dispose(); repairPickupVisuals.dispose();
+  cancelPlayerAppearance();spawnEffects.dispose();
   traffic.dispose(); cityState.dispose(); sim.disposeDamageListener();
   for (const body of [...sim.world.bodies]) sim.world.removeBody(body);
   sim.staticBodies.length = 0;

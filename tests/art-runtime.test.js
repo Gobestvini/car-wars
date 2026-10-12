@@ -43,7 +43,7 @@ test('batched decoration fades with its building and returns after fade; low hid
     assert.equal(Boolean(plant),e.artFamily===1);
     if(plant) {
       const bounds=new THREE.Box3(new THREE.Vector3(-.5,-.5,-.5),new THREE.Vector3(.5,.5,.5)).applyMatrix4(plant.matrix);
-      assert.ok(Math.abs(bounds.min.y-(e.height+.2))<1e-6);
+      assert.ok(Math.abs(bounds.min.y-(e.height+(e.boundary?e.crownHeight:.2)))<1e-6);
     }
   }
   assert.equal(entry.proxy.children.find(c=>c.userData.roofDetail).visible,false);
@@ -76,9 +76,10 @@ test('traffic art reuses geometry and stays inside its original collision footpr
   const assets=createTrafficAssets();
   const cars=[makeTrafficCar(THREE,assets,0),makeTrafficCar(THREE,assets,6),makeTrafficCar(THREE,assets,1),makeTrafficCar(THREE,assets,0,'police')];
   assert.equal(cars[0].children[0].geometry,cars[1].children[0].geometry);
-  assert.equal(cars[0].children.length,1);assert.equal(cars[3].children.length,3);
+  assert.equal(cars[0].children.length,1);assert.equal(cars[3].children.filter(node=>!node.name.includes('scattering')).length,3);
   for(const car of cars) {
-    const bounds=new THREE.Box3().setFromObject(car);
+    const bounds=new THREE.Box3();
+    for(const child of car.children.filter(node=>!node.name.includes('scattering'))) bounds.union(new THREE.Box3().setFromObject(child));
     assert.ok(bounds.max.x<=1.01 && bounds.min.x>=-1.01);
     assert.ok(bounds.max.z<=1.94 && bounds.min.z>=-1.94);
   }

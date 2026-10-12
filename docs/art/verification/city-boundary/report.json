@@ -1,0 +1,7521 @@
+{
+  "errors": [],
+  "maps": [
+    {
+      "seed": 1,
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "high",
+      "towers": 112,
+      "bodies": 678,
+      "resources": {
+        "geometries": 33,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 2,
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "high",
+      "towers": 116,
+      "bodies": 622,
+      "resources": {
+        "geometries": 33,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 3,
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "high",
+      "towers": 106,
+      "bodies": 648,
+      "resources": {
+        "geometries": 33,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 4,
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "high",
+      "towers": 104,
+      "bodies": 754,
+      "resources": {
+        "geometries": 33,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 5,
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "high",
+      "towers": 116,
+      "bodies": 634,
+      "resources": {
+        "geometries": 33,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 6,
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "high",
+      "towers": 120,
+      "bodies": 566,
+      "resources": {
+        "geometries": 33,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 1,
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "low",
+      "towers": 112,
+      "bodies": 678,
+      "resources": {
+        "geometries": 33,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 2,
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "low",
+      "towers": 116,
+      "bodies": 622,
+      "resources": {
+        "geometries": 33,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 3,
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "low",
+      "towers": 106,
+      "bodies": 648,
+      "resources": {
+        "geometries": 33,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 4,
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "low",
+      "towers": 104,
+      "bodies": 754,
+      "resources": {
+        "geometries": 33,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 5,
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "low",
+      "towers": 116,
+      "bodies": 634,
+      "resources": {
+        "geometries": 33,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 6,
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "low",
+      "towers": 120,
+      "bodies": 566,
+      "resources": {
+        "geometries": 33,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 1,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "high",
+      "towers": 112,
+      "bodies": 678,
+      "resources": {
+        "geometries": 31,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 2,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "high",
+      "towers": 116,
+      "bodies": 622,
+      "resources": {
+        "geometries": 31,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 3,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "high",
+      "towers": 106,
+      "bodies": 648,
+      "resources": {
+        "geometries": 32,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 4,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "high",
+      "towers": 104,
+      "bodies": 754,
+      "resources": {
+        "geometries": 31,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 5,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "high",
+      "towers": 116,
+      "bodies": 634,
+      "resources": {
+        "geometries": 32,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 6,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "high",
+      "towers": 120,
+      "bodies": 566,
+      "resources": {
+        "geometries": 32,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 1,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "low",
+      "towers": 112,
+      "bodies": 678,
+      "resources": {
+        "geometries": 31,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 2,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "low",
+      "towers": 116,
+      "bodies": 622,
+      "resources": {
+        "geometries": 31,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 3,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "low",
+      "towers": 106,
+      "bodies": 648,
+      "resources": {
+        "geometries": 32,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 4,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "low",
+      "towers": 104,
+      "bodies": 754,
+      "resources": {
+        "geometries": 31,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 5,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "low",
+      "towers": 116,
+      "bodies": 634,
+      "resources": {
+        "geometries": 32,
+        "textures": 0
+      }
+    },
+    {
+      "seed": 6,
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "low",
+      "towers": 120,
+      "bodies": 566,
+      "resources": {
+        "geometries": 32,
+        "textures": 0
+      }
+    }
+  ],
+  "impacts": [
+    {
+      "seed": 1,
+      "cases": [
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 87.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -131.5000305588827,
+            "y": 0.9336386688733758,
+            "z": -185.40384097426858
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 87.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -134.7412011670776,
+            "y": 0.8958343145049903,
+            "z": -185.29443718614834
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 87.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -25.000028882150282,
+            "y": 0.9336386219442281,
+            "z": -185.4038409508573
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 87.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -28.30000402801963,
+            "y": 0.9289142390959543,
+            "z": -185.2736040547372
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 87.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 81.49999173854616,
+            "y": 0.9336386122822089,
+            "z": -185.4038409460799
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 87.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 78.2041540006322,
+            "y": 0.9287144491210318,
+            "z": -185.27697420573014
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -181.50000899621216,
+            "y": 0.9336386166599104,
+            "z": -135.40384094826305
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -184.74120116636902,
+            "y": 0.8958343145212073,
+            "z": -135.29443718514855
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -162.501908652612,
+            "y": 0.9405679809239326,
+            "z": -133.8068547769636
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -165.79999636887862,
+            "y": 0.92891428389586,
+            "z": -135.27360262236704
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -143.50016432045524,
+            "y": 0.9405679219675107,
+            "z": -133.80717818670237
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -146.8795157164197,
+            "y": 0.923736444084049,
+            "z": -135.26747135479368
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 93.49984082056005,
+            "y": 0.9405679219291527,
+            "z": -133.8071778241609
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 90.12048428358017,
+            "y": 0.9237364440841208,
+            "z": -135.26747135480107
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 112.49811825564579,
+            "y": 0.9405679807496135,
+            "z": -133.80685378562362
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 109.20000363110584,
+            "y": 0.9289142838962827,
+            "z": -135.27360262238244
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 131.49999173888625,
+            "y": 0.9336386122803119,
+            "z": -135.40384094607896
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 128.20415400063175,
+            "y": 0.9287144491210205,
+            "z": -135.27697420573008
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 143.49983478492658,
+            "y": 0.9405679220078631,
+            "z": -83.80717857630654
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 140.12048428358048,
+            "y": 0.9237364440840637,
+            "z": -85.26747135479245
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 162.49999601884582,
+            "y": 0.93363860831725,
+            "z": -85.40384094411037
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 159.19999597199174,
+            "y": 0.9289142390960156,
+            "z": -85.27360405473516
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 181.49999173854616,
+            "y": 0.9336386122822219,
+            "z": -85.40384094607991
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 178.20445282348092,
+            "y": 0.9287198226976332,
+            "z": -85.27687399504427
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 143.50057738680292,
+            "y": 0.9405680293111046,
+            "z": 33.80741166428817
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 146.8782711958337,
+            "y": 0.9237436489446775,
+            "z": 35.26773872691557
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 162.50010518850195,
+            "y": 0.9336427199517144,
+            "z": 35.403842907698994
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 165.8015059244897,
+            "y": 0.9286090716972435,
+            "z": 35.27397318332087
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 181.50010931371455,
+            "y": 0.9336427242440415,
+            "z": 35.40384290985447
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 184.74066516858704,
+            "y": 0.8958269865057721,
+            "z": 35.29434383047608
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 93.500549587641,
+            "y": 0.9405680293793327,
+            "z": 83.807412274485
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 96.87827119583649,
+            "y": 0.923743648944907,
+            "z": 85.26773872695225
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 112.49733077682893,
+            "y": 0.9405679371145172,
+            "z": 83.80617170395536
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 115.79970262073802,
+            "y": 0.9289196598652757,
+            "z": 85.27350642926292
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 131.5001093580884,
+            "y": 0.9336427233768895,
+            "z": 85.40384290942524
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 134.74066516858286,
+            "y": 0.8958269865043055,
+            "z": 85.2943438304539
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -181.49987002818375,
+            "y": 0.9336427329180504,
+            "z": 135.40384291422055
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -178.20445306008494,
+            "y": 0.9287198239091445,
+            "z": 135.27687394450768
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -162.50266385997995,
+            "y": 0.9405679371810114,
+            "z": 133.80617242804536
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -159.20029737926532,
+            "y": 0.928919659865179,
+            "z": 135.27350642925953
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -143.49947488054022,
+            "y": 0.9405680292884813,
+            "z": 133.80741135963348
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -140.1217288041607,
+            "y": 0.9237436489451228,
+            "z": 135.2677387269846
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 43.500520166488364,
+            "y": 0.9405680292564119,
+            "z": 133.80741104281296
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 161,
+          "end": {
+            "x": 46.877528194082984,
+            "y": 0.9246932074099232,
+            "z": 135.26845089539898
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 62.497331406324356,
+            "y": 0.9405679371122,
+            "z": 133.80617169091084
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 65.79970262073758,
+            "y": 0.928919659865265,
+            "z": 135.2735064292625
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 81.50010935808854,
+            "y": 0.9336427233768942,
+            "z": 135.40384290942524
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 84.7406651685827,
+            "y": 0.8958269865043094,
+            "z": 135.29434383045395
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -131.4998700281838,
+            "y": 0.9336427329180209,
+            "z": 185.40384291422055
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -128.20445306008483,
+            "y": 0.9287198239091371,
+            "z": 185.27687394450768
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -49.999889908334566,
+            "y": 0.9336427278666926,
+            "z": 185.4038429116522
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -46.69849407550494,
+            "y": 0.928609071697197,
+            "z": 185.27397318332189
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 31.50010931371419,
+            "y": 0.9336427242440194,
+            "z": 185.40384290985443
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 34.74066516858657,
+            "y": 0.8958269865057535,
+            "z": 185.29434383047612
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -185.40384007453295,
+            "y": 0.9336347304570147,
+            "z": -131.49988455955892
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -185.27694241869366,
+            "y": 0.9287188438785356,
+            "z": -128.2043358758263
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -185.40384086176542,
+            "y": 0.9336365232911322,
+            "z": 0.00006964438291683402
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -185.27357303804902,
+            "y": 0.9289184360690691,
+            "z": 3.299830971341874
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -185.40384085953147,
+            "y": 0.9336365188847506,
+            "z": 131.5000689099397
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -185.2943998828963,
+            "y": 0.8958306224976046,
+            "z": 134.74077836647902
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -135.4038408652839,
+            "y": 0.9336365301810695,
+            "z": -181.4999104694549
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -135.27694239824174,
+            "y": 0.9287188443689149,
+            "z": -178.20433597143708
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -133.80702464271008,
+            "y": 0.9405679501144273,
+            "z": -162.502088444073
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -135.27357163700862,
+            "y": 0.9289184815853382,
+            "z": -159.20017663858513
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -133.80741429417984,
+            "y": 0.9405680295033864,
+            "z": -143.49946357361134
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -135.2677111000302,
+            "y": 0.92374076669604,
+            "z": -140.1215586842947
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -133.80741396636228,
+            "y": 0.9405680294686809,
+            "z": 143.50053144274943
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -135.26771110003693,
+            "y": 0.923740766696055,
+            "z": 146.87844131570535
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -133.80702389842494,
+            "y": 0.9405679500476867,
+            "z": 162.49790620683405
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -135.27357163701183,
+            "y": 0.9289184815853969,
+            "z": 165.799823361418
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -135.40384085953053,
+            "y": 0.9336365188828571,
+            "z": 181.50006890960842
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -135.2943998828962,
+            "y": 0.8958306224975879,
+            "z": 184.74077836647953
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 33.80741519765549,
+            "y": 0.9405680296013155,
+            "z": 143.50056123820966
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 35.26771110454021,
+            "y": 0.923740766726459,
+            "z": 140.12155868395917
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 33.805971031220004,
+            "y": 0.9405680074600726,
+            "z": 162.498613179422
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 35.273571614883004,
+            "y": 0.9289184809670831,
+            "z": 159.20017666068864
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 35.403840860257674,
+            "y": 0.9336365201607213,
+            "z": 181.50011350034785
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 35.27694239352247,
+            "y": 0.9287188445961961,
+            "z": 178.2043359980259
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 85.40384086246814,
+            "y": 0.9336365245262278,
+            "z": -181.49988723446688
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 85.29439989891935,
+            "y": 0.895830623462659,
+            "z": -184.74077836482232
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 83.80597223373745,
+            "y": 0.9405680076224262,
+            "z": -162.50141341430822
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 85.27357161486891,
+            "y": 0.9289184809667307,
+            "z": -165.79982333929698
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 83.80741419940135,
+            "y": 0.9405680294945298,
+            "z": -143.49941009013293
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 85.26771110457818,
+            "y": 0.9237407667267407,
+            "z": -146.8784413160438
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 83.80741385552022,
+            "y": 0.9405680294580875,
+            "z": 93.50059489302738
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 85.26771110458476,
+            "y": 0.9237407667267706,
+            "z": 90.12155868395587
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 85.40384085839321,
+            "y": 0.9336365164688728,
+            "z": 112.500117699847
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 85.27357303828992,
+            "y": 0.9289184360584203,
+            "z": 109.20016902714887
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 85.40384086025863,
+            "y": 0.9336365201625915,
+            "z": 131.50011350001037
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 85.27694239352245,
+            "y": 0.9287188445962005,
+            "z": 128.20433599802587
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 135.40384086246814,
+            "y": 0.9336365245262288,
+            "z": -131.49988723446697
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 135.29439989891938,
+            "y": 0.8958306234626503,
+            "z": -134.740778364822
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 135.40384086541874,
+            "y": 0.933636530404743,
+            "z": -112.49990712070054
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 135.27357303829206,
+            "y": 0.928918436058374,
+            "z": -115.79983097286294
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 133.80741419956954,
+            "y": 0.9405680294945409,
+            "z": -93.49941009053785
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 135.26771110457818,
+            "y": 0.9237407667267516,
+            "z": -96.87844131604355
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 133.8074138555175,
+            "y": 0.9405680294580933,
+            "z": 43.500594893027255
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 135.26771110458475,
+            "y": 0.9237407667267613,
+            "z": 40.1215586839557
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 133.8059710312175,
+            "y": 0.9405680074600842,
+            "z": 62.49861317942203
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 135.273571614883,
+            "y": 0.9289184809670926,
+            "z": 59.200176660688705
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 135.40384086025767,
+            "y": 0.9336365201607407,
+            "z": 81.50011350034787
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 135.27694239352246,
+            "y": 0.9287188445962048,
+            "z": 78.20433599802604
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -87.5,
+            "max": 37.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 185.40384086246814,
+            "y": 0.9336365245262207,
+            "z": -81.49988723446674
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -87.5,
+            "max": 37.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 185.29439989891938,
+            "y": 0.8958306234626475,
+            "z": -84.7407783648218
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -87.5,
+            "max": 37.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 185.40384086541874,
+            "y": 0.9336365304047203,
+            "z": -24.999907120700627
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -87.5,
+            "max": 37.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 185.27357303829206,
+            "y": 0.9289184360583627,
+            "z": -28.299830972862985
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -87.5,
+            "max": 37.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 185.4038408602586,
+            "y": 0.9336365201626505,
+            "z": 31.50011350001033
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -87.5,
+            "max": 37.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 185.27694239352246,
+            "y": 0.928718844596207,
+            "z": 28.204335998026142
+          }
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "cases": [
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -131.49991625144375,
+            "y": 0.9336371661030679,
+            "z": -185.40384022436353
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -134.74120114670393,
+            "y": 0.8958343149678506,
+            "z": -185.29443715769344
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -50.00002888215045,
+            "y": 0.9336386219441717,
+            "z": -185.4038409508573
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -53.30000402801957,
+            "y": 0.9289142390959524,
+            "z": -185.27360405473723
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 31.499991738546292,
+            "y": 0.9336386122822348,
+            "z": -185.4038409460799
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 28.20415400063202,
+            "y": 0.9287144491210286,
+            "z": -185.27697420573006
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -181.50000899621207,
+            "y": 0.9336386166599192,
+            "z": -135.40384094826305
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -184.741201166369,
+            "y": 0.8958343145212225,
+            "z": -135.29443718514852
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -162.50002888215016,
+            "y": 0.933638621944182,
+            "z": -135.40384095085733
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -165.80000402801974,
+            "y": 0.9289142390959447,
+            "z": -135.2736040547372
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -143.50016432086827,
+            "y": 0.9405679219675281,
+            "z": -133.80717818686864
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 161,
+          "end": {
+            "x": -146.87752819414442,
+            "y": 0.9246932074261439,
+            "z": -135.26845089717258
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 43.49984003023545,
+            "y": 0.940567921931132,
+            "z": -133.807177841915
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 40.12048428358025,
+            "y": 0.9237364440841027,
+            "z": -135.2674713547999
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 62.49999601884592,
+            "y": 0.9336386083172602,
+            "z": -135.40384094411036
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 59.199995971991996,
+            "y": 0.9289142390960202,
+            "z": -135.2736040547352
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 81.49999173854623,
+            "y": 0.9336386122822041,
+            "z": -135.4038409460799
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 78.20415400063214,
+            "y": 0.9287144491210237,
+            "z": -135.27697420573008
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 93.49983478492673,
+            "y": 0.940567922007863,
+            "z": -83.80717857630647
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 90.12048428358071,
+            "y": 0.9237364440840495,
+            "z": -85.26747135479245
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 112.49811825564572,
+            "y": 0.9405679807496077,
+            "z": -83.80685378562202
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 109.20000363110584,
+            "y": 0.9289142838962784,
+            "z": -85.27360262238246
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 131.49999173888622,
+            "y": 0.9336386122803346,
+            "z": -85.40384094607896
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 128.20415400063172,
+            "y": 0.928714449121021,
+            "z": -85.27697420573008
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 143.4998347849266,
+            "y": 0.9405679220078573,
+            "z": -33.80717857630594
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 140.1204842835804,
+            "y": 0.9237364440840483,
+            "z": -35.26747135479245
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 162.4981182556459,
+            "y": 0.9405679807496018,
+            "z": -33.80685378562096
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 159.2000036311059,
+            "y": 0.9289142838962748,
+            "z": -35.27360262238247
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 181.49999173888628,
+            "y": 0.9336386122802985,
+            "z": -35.403840946078965
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 178.20415400063172,
+            "y": 0.928714449121015,
+            "z": -35.27697420573011
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -181.49984658274246,
+            "y": 0.9336427252261842,
+            "z": 35.40384291027927
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -178.20445305966783,
+            "y": 0.9287198239072957,
+            "z": 35.27687394459992
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -162.50266385997998,
+            "y": 0.940567937181023,
+            "z": 33.8061724280454
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -159.2002973792654,
+            "y": 0.9289196598651909,
+            "z": 35.27350642925958
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -143.4994748805402,
+            "y": 0.9405680292884929,
+            "z": 33.80741135963546
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -140.1217288041609,
+            "y": 0.9237436489451362,
+            "z": 35.26773872698465
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -131.4998948114981,
+            "y": 0.9336427199516789,
+            "z": 85.403842907699
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -128.20445305923818,
+            "y": 0.9287198239045015,
+            "z": 85.27687394468528
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -112.50266385997995,
+            "y": 0.9405679371810172,
+            "z": 83.80617242804439
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -109.20029737926542,
+            "y": 0.9289196598651831,
+            "z": 85.27350642925951
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -93.49947488054002,
+            "y": 0.9405680292884872,
+            "z": 83.80741135963484
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -90.12172880416105,
+            "y": 0.9237436489451294,
+            "z": 85.26773872698465
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 143.5005201664884,
+            "y": 0.9405680292564179,
+            "z": 83.80741104281336
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 161,
+          "end": {
+            "x": 146.87752819408317,
+            "y": 0.9246932074099323,
+            "z": 85.26845089539894
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 162.4973314063243,
+            "y": 0.9405679371122059,
+            "z": 83.80617169090598
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 165.7997026207374,
+            "y": 0.9289196598652647,
+            "z": 85.27350642926251
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 181.5001093580884,
+            "y": 0.9336427233769163,
+            "z": 85.40384290942522
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 184.74066516858295,
+            "y": 0.8958269865043015,
+            "z": 85.29434383045388
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -81.49987002818386,
+            "y": 0.9336427329179942,
+            "z": 135.40384291422058
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -78.20445306008496,
+            "y": 0.9287198239091397,
+            "z": 135.27687394450768
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -62.50266385997989,
+            "y": 0.9405679371810114,
+            "z": 133.80617242804433
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -59.200297379265514,
+            "y": 0.928919659865183,
+            "z": 135.27350642925953
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -43.499474880540234,
+            "y": 0.9405680292884813,
+            "z": 133.80741135963254
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -40.12172880416086,
+            "y": 0.9237436489451116,
+            "z": 135.2677387269846
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 93.5005201664883,
+            "y": 0.9405680292564119,
+            "z": 133.80741104281333
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 96.87827119583933,
+            "y": 0.9237436489451666,
+            "z": 135.26773872699127
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 112.49733077682899,
+            "y": 0.9405679371145115,
+            "z": 133.80617170395388
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 115.79970262073822,
+            "y": 0.9289196598652661,
+            "z": 135.27350642926288
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 131.5001093580885,
+            "y": 0.9336427233768574,
+            "z": 135.4038429094252
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 134.7406651685827,
+            "y": 0.8958269865043168,
+            "z": 135.29434383045393
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -31.499870028183775,
+            "y": 0.9336427329179401,
+            "z": 185.40384291422058
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -28.204453060084848,
+            "y": 0.9287198239091293,
+            "z": 185.27687394450768
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 24.99733614002012,
+            "y": 0.9405679371810056,
+            "z": 183.80617242804502
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 28.299702620734614,
+            "y": 0.9289196598651694,
+            "z": 185.2735064292595
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 81.50010935808857,
+            "y": 0.9336427233768826,
+            "z": 185.40384290942524
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 84.74066516858281,
+            "y": 0.8958269865043031,
+            "z": 185.2943438304539
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -185.403840074533,
+            "y": 0.9336347304569326,
+            "z": -131.49988455955895
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -185.27694241869372,
+            "y": 0.9287188438785348,
+            "z": -128.2043358758264
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -185.40384086176542,
+            "y": 0.9336365232911552,
+            "z": -49.99993035561705
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -185.273573038049,
+            "y": 0.9289184360690711,
+            "z": -46.70016902865815
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -185.4038408595315,
+            "y": 0.9336365188847571,
+            "z": 31.50006890993975
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -137.5,
+            "max": 37.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -185.29439988289627,
+            "y": 0.8958306224976266,
+            "z": 34.74077836647914
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -135.4038408652839,
+            "y": 0.9336365301810722,
+            "z": -181.49991046945485
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -135.27694239824174,
+            "y": 0.9287188443689202,
+            "z": -178.20433597143713
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -135.40384086176542,
+            "y": 0.9336365232911283,
+            "z": -162.49993035562193
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -135.27357303804897,
+            "y": 0.9289184360690842,
+            "z": -159.20016902865788
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -133.80741429434545,
+            "y": 0.9405680295034032,
+            "z": -143.49946357321338
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -135.26771110003025,
+            "y": 0.9237407666960523,
+            "z": -140.12155868429517
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -133.80741396636154,
+            "y": 0.9405680294686931,
+            "z": 43.50053144274936
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 161,
+          "end": {
+            "x": -135.26843045631352,
+            "y": 0.924693517231901,
+            "z": 46.87771039253592
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -133.80702388782447,
+            "y": 0.9405679500453706,
+            "z": 62.49790683768742
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -135.27357163701143,
+            "y": 0.9289184815853989,
+            "z": 65.7998233614174
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -135.40384085953053,
+            "y": 0.933636518882892,
+            "z": 81.50006890960812
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -135.29439988289627,
+            "y": 0.8958306224976057,
+            "z": 84.74077836647922
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -83.80741520739645,
+            "y": 0.9405680296001804,
+            "z": 93.5005608780328
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -85.26771109999787,
+            "y": 0.9237407666957956,
+            "z": 96.87844131570255
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -83.80702389842806,
+            "y": 0.9405679500476926,
+            "z": 112.49790620683412
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -85.27357163701174,
+            "y": 0.9289184815853959,
+            "z": 115.79982336141808
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -85.40384085953055,
+            "y": 0.9336365188828557,
+            "z": 131.5000689096083
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -85.2943998828962,
+            "y": 0.8958306224976029,
+            "z": 134.7407783664793
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -33.80741520739684,
+            "y": 0.9405680296001745,
+            "z": 143.50056087803267
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -35.26771109999791,
+            "y": 0.9237407666957932,
+            "z": 146.8784413157022
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -33.80702389842885,
+            "y": 0.9405679500476866,
+            "z": 162.49790620683402
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -35.273571637011756,
+            "y": 0.9289184815853891,
+            "z": 165.79982336141794
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -35.403840859530554,
+            "y": 0.9336365188828571,
+            "z": 181.50006890960836
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -35.294399882896165,
+            "y": 0.8958306224975865,
+            "z": 184.74077836647953
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 35.40384086536832,
+            "y": 0.9336365303147736,
+            "z": -181.49991068542877
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 35.294399899107624,
+            "y": 0.895830623474286,
+            "z": -184.740778364841
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 35.40384086541876,
+            "y": 0.9336365304046677,
+            "z": -162.49990712070067
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 35.27357303829206,
+            "y": 0.9289184360583792,
+            "z": -165.79983097286308
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 33.80741419956954,
+            "y": 0.940568029494547,
+            "z": -143.49941009053754
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 35.267711104578176,
+            "y": 0.9237407667267467,
+            "z": -146.8784413160438
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 85.40384085839321,
+            "y": 0.9336365164689201,
+            "z": -131.49988230015322
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 85.2943998986995,
+            "y": 0.8958306234489702,
+            "z": -134.7407783647861
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 83.80597223373819,
+            "y": 0.9405680076224205,
+            "z": -112.50141341430785
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 85.27357161486891,
+            "y": 0.928918480966723,
+            "z": -115.79982333929703
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 83.80741419940135,
+            "y": 0.9405680294945238,
+            "z": -93.4994100901328
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 161,
+          "end": {
+            "x": 85.26843046095536,
+            "y": 0.9246935172743644,
+            "z": -96.87771039268421
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 83.80741384388675,
+            "y": 0.9405680294569954,
+            "z": 143.50059420754093
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 85.26771110458388,
+            "y": 0.9237407667267511,
+            "z": 140.1215586839558
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 83.80597103122045,
+            "y": 0.9405680074600725,
+            "z": 162.498613179422
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 85.27357161488301,
+            "y": 0.9289184809670845,
+            "z": 159.20017666068867
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 85.40384086025766,
+            "y": 0.9336365201607155,
+            "z": 181.50011350034788
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 85.27694239352248,
+            "y": 0.9287188445961945,
+            "z": 178.20433599802595
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 135.40384086246814,
+            "y": 0.9336365245262207,
+            "z": -81.49988723446674
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 135.29439989891938,
+            "y": 0.8958306234626475,
+            "z": -84.74077836482178
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 133.80597223373863,
+            "y": 0.9405680076224144,
+            "z": -62.50141341430789
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 135.27357161486887,
+            "y": 0.9289184809667151,
+            "z": -65.79982333929719
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 133.80741419940037,
+            "y": 0.940568029494518,
+            "z": -43.49941009013295
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 135.26771110457818,
+            "y": 0.9237407667267463,
+            "z": -46.8784413160436
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 133.8074138555175,
+            "y": 0.9405680294580873,
+            "z": 93.50059489302738
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 135.26771110458475,
+            "y": 0.9237407667267574,
+            "z": 90.12155868395578
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 135.4038408583932,
+            "y": 0.9336365164689129,
+            "z": 112.50011769984698
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 135.27357303828998,
+            "y": 0.9289184360584255,
+            "z": 109.20016902714912
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 135.4038408602586,
+            "y": 0.9336365201626367,
+            "z": 131.50011350001037
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 135.27694239352243,
+            "y": 0.9287188445962004,
+            "z": 128.20433599802604
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 185.40384086246814,
+            "y": 0.9336365245262132,
+            "z": -31.499887234466588
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 185.29439989891938,
+            "y": 0.8958306234626303,
+            "z": -34.74077836482188
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 185.40384086541872,
+            "y": 0.9336365304047132,
+            "z": 25.00009287929936
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 185.27357303829206,
+            "y": 0.9289184360583568,
+            "z": 21.700169027137015
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 185.4038408602586,
+            "y": 0.9336365201626412,
+            "z": 81.50011350001024
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 185.27694239352246,
+            "y": 0.9287188445962017,
+            "z": 78.20433599802622
+          }
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "cases": [
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -81.49991625144366,
+            "y": 0.9336371661030304,
+            "z": -185.40384022436353
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -84.741201146704,
+            "y": 0.8958343149678571,
+            "z": -185.29443715769347
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 24.99809134738797,
+            "y": 0.9405679809239386,
+            "z": -183.80685477696167
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 21.70000363112167,
+            "y": 0.9289142838958669,
+            "z": -185.2736026223671
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 131.49999173888625,
+            "y": 0.9336386122803272,
+            "z": -185.40384094607896
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -187.5,
+            "min": -87.5,
+            "max": 137.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 128.20415400063197,
+            "y": 0.9287144491210303,
+            "z": -185.2769742057301
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -131.50000899621216,
+            "y": 0.9336386166599048,
+            "z": -135.40384094826305
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -134.74120116636888,
+            "y": 0.8958343145212154,
+            "z": -135.29443718514855
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -112.50190865261186,
+            "y": 0.9405679809239326,
+            "z": -133.8068547769636
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -115.79999636887828,
+            "y": 0.9289142838958641,
+            "z": -135.2736026223671
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -93.50016432045523,
+            "y": 0.9405679219675107,
+            "z": -133.80717818670055
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 162,
+          "end": {
+            "x": -96.87794538748297,
+            "y": 0.9246956356532762,
+            "z": -135.26857767157253
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 143.49983998323552,
+            "y": 0.9405679219327358,
+            "z": -133.80717785737016
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 140.1204842835803,
+            "y": 0.9237364440841145,
+            "z": -135.26747135479982
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 162.498118255646,
+            "y": 0.9405679807496135,
+            "z": -133.80685378562322
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 159.20000363110572,
+            "y": 0.9289142838962875,
+            "z": -135.2736026223824
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 181.49999173888628,
+            "y": 0.9336386122803003,
+            "z": -135.40384094607896
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -137.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 178.20415400063177,
+            "y": 0.9287144491210223,
+            "z": -135.27697420573008
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -181.50000899621207,
+            "y": 0.9336386166599193,
+            "z": -85.40384094826307
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -184.74120116636885,
+            "y": 0.8958343145212028,
+            "z": -85.29443718514855
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -162.50002888215005,
+            "y": 0.9336386219441863,
+            "z": -85.40384095085732
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -165.80000402801957,
+            "y": 0.9289142390959421,
+            "z": -85.27360405473725
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -143.50016432086827,
+            "y": 0.9405679219675225,
+            "z": -83.80717818687081
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": -87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "south"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 161,
+          "end": {
+            "x": -146.87752819414422,
+            "y": 0.9246932074261386,
+            "z": -85.26845089717263
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -181.49984221409315,
+            "y": 0.9336427166307871,
+            "z": 35.403842905916434
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -178.20445305915237,
+            "y": 0.9287198239047044,
+            "z": 35.27687394471042
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -162.5026638599799,
+            "y": 0.9405679371810232,
+            "z": 33.806172428045535
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -159.2002973792654,
+            "y": 0.9289196598651924,
+            "z": 35.27350642925958
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -143.4994748805402,
+            "y": 0.9405680292884929,
+            "z": 33.80741135963546
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 37.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -140.12172880416085,
+            "y": 0.9237436489451367,
+            "z": 35.26773872698465
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -131.49989481149805,
+            "y": 0.9336427199517026,
+            "z": 85.403842907699
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -128.2044530592381,
+            "y": 0.9287198239045018,
+            "z": 85.27687394468526
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -112.49988990833451,
+            "y": 0.9336427278666685,
+            "z": 85.40384291165223
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -109.19849407550475,
+            "y": 0.9286090716972055,
+            "z": 85.27397318332184
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -93.49947493067427,
+            "y": 0.9405680292961417,
+            "z": 83.80741143331386
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -90.12172880416111,
+            "y": 0.9237436489451335,
+            "z": 85.26773872698475
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 143.5005201664884,
+            "y": 0.9405680292564179,
+            "z": 83.80741104281346
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 146.87827119583932,
+            "y": 0.9237436489451739,
+            "z": 85.26773872699121
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 162.49733077682882,
+            "y": 0.9405679371145172,
+            "z": 83.80617170395537
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 165.799702620738,
+            "y": 0.9289196598652774,
+            "z": 85.27350642926297
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 181.5001093580884,
+            "y": 0.9336427233768886,
+            "z": 85.40384290942522
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 184.7406651685829,
+            "y": 0.8958269865043069,
+            "z": 85.29434383045388
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -81.49987002818379,
+            "y": 0.9336427329179394,
+            "z": 135.40384291422058
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -78.20445306008494,
+            "y": 0.928719823909144,
+            "z": 135.27687394450766
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -62.49988990833454,
+            "y": 0.9336427278666976,
+            "z": 135.4038429116522
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -59.198494075504925,
+            "y": 0.9286090716972051,
+            "z": 135.27397318332189
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -43.499474930674225,
+            "y": 0.9405680292961359,
+            "z": 133.80741143331923
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": -87.5,
+            "max": -37.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -40.121728804160995,
+            "y": 0.9237436489451253,
+            "z": 135.26773872698467
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 93.5005201664883,
+            "y": 0.9405680292564119,
+            "z": 133.80741104281333
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 96.87827119583922,
+            "y": 0.9237436489451701,
+            "z": 135.26773872699124
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 112.49733077682899,
+            "y": 0.9405679371145115,
+            "z": 133.80617170395388
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 115.79970262073823,
+            "y": 0.9289196598652667,
+            "z": 135.27350642926285
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 131.50010935808857,
+            "y": 0.9336427233769119,
+            "z": 135.4038429094252
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 134.74066516858278,
+            "y": 0.8958269865043169,
+            "z": 135.2943438304539
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -31.499870028183775,
+            "y": 0.9336427329179401,
+            "z": 185.40384291422058
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -28.204453060084813,
+            "y": 0.9287198239091367,
+            "z": 185.27687394450766
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 25.00011009166547,
+            "y": 0.9336427278666969,
+            "z": 185.40384291165216
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 28.301505924495178,
+            "y": 0.9286090716971928,
+            "z": 185.27397318332186
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 81.5001093137141,
+            "y": 0.9336427242440016,
+            "z": 185.40384290985446
+          }
+        },
+        {
+          "edge": {
+            "axis": "x",
+            "value": 187.5,
+            "min": -37.5,
+            "max": 87.5,
+            "side": "north"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 84.74066516858653,
+            "y": 0.8958269865057729,
+            "z": 185.29434383047612
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -87.5,
+            "max": 37.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -185.40384007453295,
+            "y": 0.9336347304569932,
+            "z": -81.49988455955899
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -87.5,
+            "max": 37.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -185.27694241869366,
+            "y": 0.9287188438785318,
+            "z": -78.20433587582619
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -87.5,
+            "max": 37.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -185.40384086176542,
+            "y": 0.9336365232911409,
+            "z": -24.999930355617085
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -87.5,
+            "max": 37.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -185.273573038049,
+            "y": 0.9289184360690707,
+            "z": -21.70016902865806
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -87.5,
+            "max": 37.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -185.40384085953147,
+            "y": 0.9336365188847152,
+            "z": 31.500068909939785
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -187.5,
+            "min": -87.5,
+            "max": 37.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -185.2943998828963,
+            "y": 0.8958306224976249,
+            "z": 34.74077836647922
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -135.40384086528388,
+            "y": 0.9336365301811074,
+            "z": -131.49991046945482
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -135.2769423982418,
+            "y": 0.9287188443689104,
+            "z": -128.2043359714373
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -135.40384086176542,
+            "y": 0.9336365232910954,
+            "z": -112.49993035562167
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -135.27357303804897,
+            "y": 0.9289184360690789,
+            "z": -109.20016902865798
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -133.8074142943451,
+            "y": 0.9405680295033972,
+            "z": -93.49946357321328
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": -137.5,
+            "max": -87.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -135.26771110003023,
+            "y": 0.9237407666960121,
+            "z": -90.12155868429475
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -133.80741396636162,
+            "y": 0.940568029468693,
+            "z": 43.50053144274937
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -135.26771110003688,
+            "y": 0.9237407666960774,
+            "z": 46.87844131570543
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -135.40384085754434,
+            "y": 0.9336365149744723,
+            "z": 62.5000647101389
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -135.273573038048,
+            "y": 0.9289184360690984,
+            "z": 65.79983097133609
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -135.40384085953147,
+            "y": 0.9336365188847462,
+            "z": 81.50006890993964
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -137.5,
+            "min": 37.5,
+            "max": 87.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -135.2943998828963,
+            "y": 0.8958306224976175,
+            "z": 84.74077836647922
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -85.4038408652839,
+            "y": 0.9336365301810972,
+            "z": -181.49991046945476
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": -85.27694239824184,
+            "y": 0.9287188443689202,
+            "z": -178.20433597143756
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -83.80702464271035,
+            "y": 0.9405679501144272,
+            "z": -162.50208844407305
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -85.27357163700866,
+            "y": 0.9289184815853426,
+            "z": -159.20017663858522
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -83.80741429417989,
+            "y": 0.9405680295033862,
+            "z": -143.49946357361137
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -85.2677111000303,
+            "y": 0.9237407666960414,
+            "z": -140.12155868429525
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -83.80741396636283,
+            "y": 0.9405680294686871,
+            "z": 93.50053144274952
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -85.26771110003686,
+            "y": 0.9237407666960521,
+            "z": 96.8784413157055
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -83.80702389842783,
+            "y": 0.9405679500476924,
+            "z": 112.49790620683416
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -85.27357163701174,
+            "y": 0.9289184815853926,
+            "z": 115.79982336141808
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -85.40384085953056,
+            "y": 0.9336365188828655,
+            "z": 131.5000689096084
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -87.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -85.29439988289619,
+            "y": 0.8958306224976007,
+            "z": 134.74077836647953
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": -33.80741520739691,
+            "y": 0.9405680296001744,
+            "z": 143.50056087803267
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": -35.26771109999793,
+            "y": 0.923740766695789,
+            "z": 146.87844131570213
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -35.40384085754433,
+            "y": 0.933636514974488,
+            "z": 162.50006471013893
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": -35.273573038047935,
+            "y": 0.9289184360690835,
+            "z": 165.79983097133606
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": -35.403840859531506,
+            "y": 0.9336365188847061,
+            "z": 181.5000689099398
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": -37.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "east"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": -35.2943998828962,
+            "y": 0.8958306224975886,
+            "z": 184.74077836647962
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 83.80741519765648,
+            "y": 0.9405680296013156,
+            "z": 143.50056123820966
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 85.26771110454023,
+            "y": 0.9237407667264607,
+            "z": 140.12155868395925
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 85.40384085839321,
+            "y": 0.9336365164688629,
+            "z": 162.50011769984675
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 85.27357303828992,
+            "y": 0.9289184360584148,
+            "z": 159.20016902714912
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 85.40384086025863,
+            "y": 0.9336365201625747,
+            "z": 181.50011350001037
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 87.5,
+            "min": 137.5,
+            "max": 187.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 85.27694239352243,
+            "y": 0.9287188445961937,
+            "z": 178.20433599802587
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 135.40384086246814,
+            "y": 0.9336365245262391,
+            "z": -181.49988723446694
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 135.29439989891938,
+            "y": 0.8958306234626618,
+            "z": -184.740778364822
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 133.80597223373863,
+            "y": 0.9405680076224262,
+            "z": -162.50141341430822
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 135.27357161486887,
+            "y": 0.9289184809667269,
+            "z": -165.799823339297
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 133.80741419940037,
+            "y": 0.9405680294945299,
+            "z": -143.49941009013295
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": -187.5,
+            "max": -137.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 161,
+          "end": {
+            "x": 135.2684304609554,
+            "y": 0.9246935172743679,
+            "z": -146.87771039268426
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 133.80741384388855,
+            "y": 0.9405680294570011,
+            "z": 93.50059420754084
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 300,
+          "end": {
+            "x": 135.26771110458384,
+            "y": 0.9237407667267601,
+            "z": 90.12155868395587
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 40,
+          "end": {
+            "x": 133.8059710312175,
+            "y": 0.9405680074600783,
+            "z": 112.49861317942211
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 135.273571614883,
+            "y": 0.9289184809670944,
+            "z": 109.20017666068868
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 135.40384086025767,
+            "y": 0.9336365201607313,
+            "z": 131.5001135003478
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 137.5,
+            "min": 87.5,
+            "max": 137.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 135.27694239352246,
+            "y": 0.9287188445961956,
+            "z": 128.20433599802584
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -137.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 185.40384086246814,
+            "y": 0.9336365245262288,
+            "z": -131.49988723446697
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -137.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 0,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 89,
+          "end": {
+            "x": 185.29439989891938,
+            "y": 0.8958306234626503,
+            "z": -134.740778364822
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -137.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 185.40384086541874,
+            "y": 0.9336365304047203,
+            "z": -24.999907120700627
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -137.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 0.5,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 133,
+          "end": {
+            "x": 185.27357303829206,
+            "y": 0.9289184360583627,
+            "z": -28.299830972862985
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -137.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0,
+          "contained": true,
+          "contacts": 258,
+          "end": {
+            "x": 185.4038408602586,
+            "y": 0.9336365201626412,
+            "z": 81.50011350001024
+          }
+        },
+        {
+          "edge": {
+            "axis": "z",
+            "value": 187.5,
+            "min": -137.5,
+            "max": 87.5,
+            "side": "west"
+          },
+          "t": 1,
+          "angle": 0.35,
+          "contained": true,
+          "contacts": 134,
+          "end": {
+            "x": 185.27694239352246,
+            "y": 0.9287188445962017,
+            "z": 78.20433599802622
+          }
+        }
+      ]
+    }
+  ],
+  "cycles": [
+    {
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "cycles": [
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        }
+      ],
+      "faded": 1
+    },
+    {
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "cycles": [
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 51,
+            "textures": 6,
+            "programs": 27
+          }
+        }
+      ],
+      "faded": 1
+    },
+    {
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "cycles": [
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        }
+      ],
+      "faded": 1
+    },
+    {
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "cycles": [
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        },
+        {
+          "bodies": 678,
+          "resources": {
+            "geometries": 49,
+            "textures": 6,
+            "programs": 25
+          }
+        }
+      ],
+      "faded": 1
+    }
+  ],
+  "method": "Edge software WebGL; physical CarSimulation and createCityScene fixture plus main-game lifecycle/occlusion."
+}

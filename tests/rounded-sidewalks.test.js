@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as C from 'cannon-es';
 import * as THREE from 'three';
-import { CITY_CONFIG, createCityPlan } from '../src/city-generator.js';
+import { CITY_CONFIG } from '../src/city-generator.js';
+import { createCityPlan } from './grid-city-fixture.js';
 import { CarSimulation } from '../src/vehicle.js';
 import { createRoadSurfaceRectangles, createRoundedSidewalkLayout, createSidewalkSupportPrisms, createSurfaceHeightSampler,
   containsRoundedSidewalk, createRoundedSidewalkEdges, createRoadFacingSidewalkEdges,

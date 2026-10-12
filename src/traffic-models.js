@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { VEHICLE_ROUGHNESS_FRAGMENT } from './vehicle-surface.js';
+import { createPoliceBeaconAssets } from './police-beacons.js';
 
 export const TRAFFIC_MODEL_URLS = Object.freeze({
   grey: 'models/grey-sedan.glb', green: 'models/green-sedan.glb', police: 'models/police-sedan.glb',
@@ -46,6 +47,7 @@ function baked(node) {
 }
 
 export function createConceptTrafficAssets(scenes) {
+  const beaconEffects = createPoliceBeaconAssets();
   const geometries = new Set(), materials = new Set(), textures = new Set();
   const retain = geometry => { geometries.add(geometry); return geometry; };
   const merged = nodes => {
@@ -108,11 +110,10 @@ export function createConceptTrafficAssets(scenes) {
       if (!materials.has(node.material)) node.material.dispose();
     }
   });
-  return { concept:true, variants,
-    animate(time) { variants.police.beacons.forEach(({material},i) => {
-      material.emissiveIntensity=.25+1.55*(.5+.5*Math.sin(time*8+i*Math.PI));
-    }); },
-    dispose() { geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(t=>t?.dispose()); },
+  const lamps = variants.police.beacons.map(beacon => beacon.material);
+  return { concept:true, variants, beaconEffects,
+    animate(time, quality) { beaconEffects.animate(time, lamps, quality); },
+    dispose() { beaconEffects.dispose(); geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(t=>t?.dispose()); },
   };
 }
 
@@ -132,6 +133,10 @@ export function makeConceptTrafficCar(assets, index, role) {
     group.add(body,mesh(variant.fixed,variant.material,'Police fixed wheels and lightbar'));
     group.userData.damageableBody=body;
     variant.beacons.forEach(({geometry,material},i)=>group.add(mesh(geometry,material,i?'Blue right beacon':'Red left beacon')));
+    assets.beaconEffects.attach(group, variant.beacons.map(({geometry}) => {
+      geometry.computeBoundingBox();
+      return geometry.boundingBox.getCenter(new THREE.Vector3());
+    }));
   } else {
     const lod=new THREE.LOD();
     lod.addLevel(mesh(variant.full,variant.material,'Concept sedan near'),0);

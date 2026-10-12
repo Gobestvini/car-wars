@@ -1,0 +1,108 @@
+{
+  "wanted": {
+    "level": 2,
+    "stars": [
+      "filled",
+      "filled",
+      "empty",
+      "empty",
+      "empty",
+      "empty"
+    ],
+    "pendingStar": null,
+    "warningRemaining": 0,
+    "lastViolation": "red-light",
+    "lastAcceptedAt": 4.308333333333337
+  },
+  "spawn": {
+    "status": "created",
+    "id": "police-00",
+    "pose": {
+      "x": 0,
+      "y": 0,
+      "z": 10,
+      "yaw": 3.141592653589793
+    }
+  },
+  "chase": [
+    {
+      "id": "police-00",
+      "x": 0.005594022010457698,
+      "z": 5.827341541416311,
+      "heading": 3.1376356472070146,
+      "speed": 3.0446994527250224,
+      "targetId": "player",
+      "state": "follow",
+      "waitReason": null,
+      "damage": 0,
+      "operational": true,
+      "damageStage": "healthy",
+      "pursuit": {
+        "state": "follow",
+        "stateSince": 6.933333333333336,
+        "targetId": "player",
+        "lastContactAt": null,
+        "noProgressTime": 0,
+        "recoveryUntil": 0,
+        "targetStoppedTime": 1.1916666666666664,
+        "stalledTime": 0,
+        "escapePhase": null,
+        "wantedLevel": 2,
+        "profile": {
+          "level": 2,
+          "maxSpeed": 28,
+          "leadSeconds": 0.25,
+          "ramDistance": 0,
+          "canMaintainBlock": false
+        },
+        "desiredSpeedLimit": 0
+      }
+    }
+  ],
+  "arrest": {
+    "state": "arrested",
+    "progress": 0,
+    "remainingSeconds": 5,
+    "holdProgress": 0,
+    "nearbyPoliceIds": [
+      "police-00"
+    ],
+    "cancellationReason": null
+  },
+  "restart": {
+    "city": 3834322583,
+    "arrest": {
+      "state": "idle",
+      "progress": 0,
+      "remainingSeconds": 5,
+      "holdProgress": 0,
+      "nearbyPoliceIds": [],
+      "cancellationReason": null
+    },
+    "appearance": {
+      "player": "active",
+      "elapsed": 0.9,
+      "effects": {
+        "capacity": 32,
+        "active": 0,
+        "particles": 0,
+        "rejected": 0
+      }
+    },
+    "wanted": {
+      "level": 0,
+      "stars": [
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty",
+        "empty"
+      ],
+      "pendingStar": null,
+      "warningRemaining": 0,
+      "lastViolation": null,
+      "lastAcceptedAt": null
+    }
+  }
+}

@@ -46,8 +46,8 @@ export function createTreePlacements(plan, { damageObstacles = [], signals = [] 
   const { maxTrees, minSpacing, signalClearance, roadClearance, canopyRadius } = TREE_PLACEMENT;
   const plazaSpan = plan.blockPitch;
   const plaza = { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan };
-  const sidewalks = createRoundedSidewalkLayout(plan.roads, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plaza);
-  const roads = createRoadSurfaceRectangles(plan.roads, plan.bounds, plan.roadWidth, plaza);
+  const sidewalks = createRoundedSidewalkLayout(plan, plan.bounds, plan.roadWidth, plan.sidewalkWidth, plaza);
+  const roads = createRoadSurfaceRectangles(plan, plan.bounds, plan.roadWidth, plaza);
   const buildings = plan.buildings.map(({ x, z, width, depth }) => ({
     minX: x - width / 2, maxX: x + width / 2, minZ: z - depth / 2, maxZ: z + depth / 2,
   }));

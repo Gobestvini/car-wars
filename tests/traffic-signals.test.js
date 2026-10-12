@@ -10,7 +10,8 @@ edges: ['25:-25', '25:75', '-25:25', '75:25'].map(from => ({ from, to: '25:25', 
 test('traffic signals control internal intersections and leave boundary nodes on priority rules', () => {
   const plan = createCityPlan();
   const signals = createTrafficSignals(plan.roadNetwork);
-  assert.equal(signals.controlled.size, 36);
+  const controlled=plan.roadNetwork.intersections.filter(node=>plan.roadNetwork.edges.filter(e=>e.from===node.id||e.to===node.id).length===4);
+  assert.equal(signals.controlled.size, controlled.length);
   assert.equal(signals.phase('-175:-175', '-125:-175', 0).controlled, false);
   assert.equal(signals.phase('missing', '-25:-25', 0).canEnter, true);
 });

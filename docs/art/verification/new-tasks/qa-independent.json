@@ -1,0 +1,186 @@
+{
+  "date": "2026-10-12T20:21:15.066Z",
+  "checks": [
+    {
+      "scenario": "real menu->Play changes seed, appearance waits menu fade",
+      "early": {
+        "seed": 3513617446,
+        "appearance": {
+          "player": "appearing",
+          "elapsed": 0,
+          "effects": {
+            "capacity": 32,
+            "active": 1,
+            "particles": 8,
+            "rejected": 0
+          }
+        },
+        "screen": "launching"
+      }
+    },
+    {
+      "scenario": "keyboard R creates new map and safe player appearance"
+    },
+    {
+      "scenario": "20 immediate remove mid-appearance cycles no actors/cloud slots"
+    },
+    {
+      "scenario": "width rebuild mid-player-appearance cleanup",
+      "width": {
+        "appearance": {
+          "player": "cancelled",
+          "elapsed": 0.9,
+          "effects": {
+            "capacity": 32,
+            "active": 0,
+            "particles": 0,
+            "rejected": 0
+          }
+        },
+        "status": {
+          "count": 0,
+          "appearing": 0,
+          "requestedCount": 0,
+          "pending": false,
+          "totalCount": 0,
+          "roleCounts": {
+            "civilian": 0,
+            "police": 0
+          },
+          "pendingSpawns": 0,
+          "insertionReason": null,
+          "bodies": 0,
+          "logical": 0,
+          "visible": 0,
+          "reservations": 0
+        },
+        "width": 30
+      }
+    },
+    {
+      "scenario": "visibility handler and hidden frame branch (property simulation, not physical tab hide)",
+      "frozen": 0.08333333333333333
+    },
+    {
+      "scenario": "input held before landing is cleared",
+      "telemetry": {
+        "position": {
+          "x": 5.597264459684021e-17,
+          "y": 0.8541178429122244,
+          "z": 2.355418234256133e-16
+        },
+        "speed": 0.046143216149032426,
+        "signedSpeed": 2.802166396815432e-16,
+        "heading": -0.45,
+        "roll": -1.8521835983397814e-16,
+        "steer": 0,
+        "grounded": 4,
+        "slip": 0,
+        "gear": "N",
+        "damage": 0,
+        "damageState": "healthy",
+        "traction": 1,
+        "lastImpactSpeed": 0
+      }
+    }
+  ],
+  "errors": [],
+  "pickups": {
+    "pickups": [
+      {
+        "id": 0,
+        "x": -92.5,
+        "z": -175,
+        "section": "0:0",
+        "status": "available"
+      },
+      {
+        "id": 1,
+        "x": -150,
+        "z": 25,
+        "section": "0:1",
+        "status": "available"
+      },
+      {
+        "id": 2,
+        "x": -125,
+        "z": 115,
+        "section": "0:2",
+        "status": "available"
+      },
+      {
+        "id": 3,
+        "x": 25,
+        "z": -157.5,
+        "section": "1:0",
+        "status": "available"
+      },
+      {
+        "id": 4,
+        "x": 25,
+        "z": -42.5,
+        "section": "1:1",
+        "status": "available"
+      },
+      {
+        "id": 5,
+        "x": 7.5,
+        "z": 175,
+        "section": "1:2",
+        "status": "available"
+      },
+      {
+        "id": 6,
+        "x": 75,
+        "z": -115,
+        "section": "2:0",
+        "status": "available"
+      },
+      {
+        "id": 7,
+        "x": 75,
+        "z": -65,
+        "section": "2:1",
+        "status": "available"
+      },
+      {
+        "id": 8,
+        "x": 75,
+        "z": 100,
+        "section": "2:2",
+        "status": "available"
+      },
+      {
+        "id": 9,
+        "x": 25,
+        "z": 100,
+        "section": "1:2",
+        "status": "available"
+      },
+      {
+        "id": 10,
+        "x": 65,
+        "z": 125,
+        "section": "1:2",
+        "status": "available"
+      },
+      {
+        "id": 11,
+        "x": -42.5,
+        "z": 25,
+        "section": "1:1",
+        "status": "available"
+      }
+    ],
+    "repairs": 0,
+    "unavailableReason": null
+  },
+  "after": {
+    "resources": {
+      "geometries": 51,
+      "textures": 6,
+      "programs": 27
+    },
+    "bodies": 642
+  }
+}

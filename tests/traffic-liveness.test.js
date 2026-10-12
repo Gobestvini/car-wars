@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import { CarSimulation, STEP } from '../src/vehicle.js';
-import { createCityPlan } from '../src/city-generator.js';
+import { createCityPlan } from './grid-city-fixture.js';
 import { createTraffic } from '../src/traffic.js';
 import { footprintsOverlap } from '../src/traffic-spawn.js';
 import { followingLimit, planPassing, projectedExtent, sweptPathIsSafe, trackProgress } from '../src/traffic-planner.js';

@@ -1,7 +1,7 @@
 import { attachForTrafficTest, framePrepare, frameStep } from './traffic-frame-helpers.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createCityPlan } from '../src/city-generator.js';
+import { createCityPlan } from './grid-city-fixture.js';
 import { chooseRoadGoal, createRoadGraph, createSeededRandom, findRoadRoute, laneTarget, turnDirection } from '../src/traffic-ai.js';
 import * as THREE from 'three';
 import { CarSimulation, STEP } from '../src/vehicle.js';
