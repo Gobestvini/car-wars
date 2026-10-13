@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { VEHICLE_ROUGHNESS_FRAGMENT } from './vehicle-surface.js';
+import { VEHICLE_ROUGHNESS_FRAGMENT, VEHICLE_WINDOWS_FRAGMENT } from './vehicle-surface.js';
 
 // Tile IDs match the deterministic Blender atlas (4 x 4 cells, from bottom left).
 const HEAD = 8, TAIL = 10;
@@ -11,6 +11,7 @@ export function createPlayerLights(body) {
   material.onBeforeCompile = shader => {
     shader.uniforms.playerReverse = reverse;
     shader.fragmentShader = 'uniform float playerReverse;\n' + shader.fragmentShader;
+    shader.fragmentShader = shader.fragmentShader.replace('#include <map_fragment>', VEHICLE_WINDOWS_FRAGMENT);
     shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', VEHICLE_ROUGHNESS_FRAGMENT);
     shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', `
       #include <emissivemap_fragment>
@@ -40,7 +41,7 @@ export function createPlayerLights(body) {
       #endif
     `);
   };
-  material.customProgramCacheKey = () => 'car-stars-concept-surface-v5';
+  material.customProgramCacheKey = () => 'car-stars-concept-surface-v6';
   material.needsUpdate = true;
 
   // Four camera-facing soft halos in one draw call. Centres track deformed

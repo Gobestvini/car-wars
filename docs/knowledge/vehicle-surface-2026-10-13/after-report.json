@@ -1,0 +1,109 @@
+{
+  "geometry": {
+    "doorVertices": 95,
+    "maximumProjectionError": 1.7557957365799126e-7,
+    "lodTriangles": 1454,
+    "sharedGeometry": true
+  },
+  "game": [
+    {
+      "model": {
+        "url": "models/player-sedan.glb",
+        "meshes": 5,
+        "triangles": 4140,
+        "textures": 1,
+        "materials": 1,
+        "deformedVertices": 0,
+        "lights": {
+          "headlights": true,
+          "tailLights": true,
+          "reverse": false,
+          "lensVertices": [
+            128,
+            128,
+            96,
+            96
+          ]
+        },
+        "glowDrawCalls": 1
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 1,
+        "radiiCss": [
+          4,
+          8,
+          12
+        ],
+        "debugBypass": false,
+        "draws": 86,
+        "size": [
+          1000,
+          700
+        ],
+        "blurSize": [
+          250,
+          175
+        ],
+        "estimatedMiB": 26.04
+      }
+    },
+    {
+      "model": {
+        "url": "models/player-sedan.glb",
+        "meshes": 5,
+        "triangles": 4140,
+        "textures": 1,
+        "materials": 1,
+        "deformedVertices": 0,
+        "lights": {
+          "headlights": true,
+          "tailLights": true,
+          "reverse": false,
+          "lensVertices": [
+            128,
+            128,
+            96,
+            96
+          ]
+        },
+        "glowDrawCalls": 1
+      },
+      "blur": {
+        "enabled": true,
+        "failure": null,
+        "antialiasSamples": 2,
+        "antialiasing": "msaa",
+        "antialiasFailure": null,
+        "focusY": 0.5,
+        "focusSize": 0.58,
+        "quality": "low",
+        "strength": 1,
+        "radiiCss": [
+          4,
+          8,
+          12
+        ],
+        "debugBypass": false,
+        "draws": 86,
+        "size": [
+          1000,
+          700
+        ],
+        "blurSize": [
+          250,
+          175
+        ],
+        "estimatedMiB": 26.04
+      }
+    }
+  ],
+  "errors": []
+}

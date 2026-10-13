@@ -147,6 +147,18 @@ for name, paint, concept in VARIANTS:
     decimate.ratio=.35
     decimate.use_collapse_triangulate=True
     bpy.ops.object.modifier_apply(modifier=decimate.name)
+    # Collapse interpolates UVs independently of the moved vertices, bending
+    # the flat door's paint/trim line into triangular patches. Restore the
+    # original affine shell projection after simplification (Blender Y,Z).
+    uv=lod.data.uv_layers.active
+    for loop in lod.data.loops:
+        tex=uv.data[loop.index].uv
+        tile=int(tex.x*4)+4*int(tex.y*4)
+        if tile==TILES.index('doors'):
+            p=lod.data.vertices[loop.vertex_index].co
+            u,v=(p.y+2)/4,(p.z+.54)/.86
+            tex.x=(.03125+u*.9375)/4
+            tex.y=(3+.03125+v*.9375)/4
     for wheel in wheels:
         distant_wheel(wheel,material).select_set(True)
     lod.select_set(True)

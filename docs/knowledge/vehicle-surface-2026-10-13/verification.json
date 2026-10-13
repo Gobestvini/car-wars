@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-13",
+  "baselineCommit": "ed4e9a0",
+  "changes": {
+    "civilianSides": "Restore the affine door UV projection after Blender LOD decimation. Shared grey/green distant geometry retains 1454 triangles.",
+    "windows": "Evaluate the authored trapezoid and central pillar with screen derivative coverage in the shared vehicle material, avoiding raster atlas stair steps.",
+    "source": "Authored Blender sedan family, existing atlas and palette; no external art added."
+  },
+  "checks": {
+    "focusedTests": {"command": "node --no-maglev --test --test-isolation=none tests/player-model.test.js tests/police-beacons.test.js tests/miniature-blur.test.js", "passed": 11, "failed": 0},
+    "build": {"command": "npm run build", "passed": true},
+    "browser": {
+      "script": "tests/vehicle-surface-browser.cjs",
+      "preview": "All four cars at 15/35/60 metre camera distances, with/without received shadows and forced full/automatic LOD; before and after.",
+      "game": "Actual game with traffic, police, player and miniature blur at low/high quality; no shader or console errors.",
+      "maximumDoorUVErrorBefore": 0.01697651609893909,
+      "maximumDoorUVErrorAfter": 1.7557957365799126e-7,
+      "lodTrianglesBeforeAndAfter": 1454,
+      "sharedCivilianGeometry": true
+    }
+  }
+}
