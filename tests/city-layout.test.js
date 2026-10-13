@@ -14,7 +14,16 @@ test('100 seeds at all widths give deterministic connected cyclic cities and div
     assert.deepEqual(plan,createCityPlan(seed,{roadWidth}));
     signatures.add(plan.signature);
     assert.ok(new Set(plan.districts.map(d=>d.type)).size>=3);
+    assert.ok(plan.districts.some(d=>d.type==='I'),'each city has a straight row district');
+    assert.ok(plan.districts.some(d=>d.type.startsWith('H')),'each city has a shaped H district');
+    assert.ok(plan.districts.filter(d=>d.type==='O').length<=2,'only rare isolated square plots');
+    assert.ok(plan.districts.filter(d=>d.type!=='O'&&d.type!=='plaza').length>=6,'many shaped districts');
     assert.ok(plan.activeCells.length<49 && plan.activeCells.length>=25);
+    const cells=new Set(plan.activeCells.map(([x,z])=>`${x}:${z}`));
+    for(let x=0;x<7;x++)for(let z=0;z<7;z++)if(!cells.has(`${x}:${z}`)) {
+      assert.ok(!(cells.has(`${x-1}:${z}`)&&cells.has(`${x+1}:${z}`)),'no exterior notch between opposing rows');
+      assert.ok(!(cells.has(`${x}:${z-1}`)&&cells.has(`${x}:${z+1}`)),'no exterior notch between opposing rows');
+    }
     const adjacency=new Map(plan.roadNetwork.intersections.map(n=>[n.id,[]]));
     for(const e of plan.roadNetwork.edges) {adjacency.get(e.from).push(e.to);adjacency.get(e.to).push(e.from);}
     const visited=new Set(),pending=[plan.roadNetwork.intersections[0].id];

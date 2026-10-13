@@ -1,0 +1,1586 @@
+{
+  "date": "2026-10-13",
+  "matrix": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "seed": 1,
+      "width": 12,
+      "buildings": 146,
+      "cells": 39,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 6
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "U",
+          "size": 5
+        },
+        {
+          "type": "J-extended",
+          "size": 5
+        },
+        {
+          "type": "V-extended",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 670
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "seed": 20261005,
+      "width": 12,
+      "buildings": 131,
+      "cells": 35,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 7
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "W",
+          "size": 5
+        },
+        {
+          "type": "T",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 649
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "seed": 1,
+      "width": 15,
+      "buildings": 146,
+      "cells": 39,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 6
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "U",
+          "size": 5
+        },
+        {
+          "type": "J-extended",
+          "size": 5
+        },
+        {
+          "type": "V-extended",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 671
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "seed": 20261005,
+      "width": 15,
+      "buildings": 131,
+      "cells": 35,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 7
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "W",
+          "size": 5
+        },
+        {
+          "type": "T",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 649
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "seed": 1,
+      "width": 30,
+      "buildings": 67,
+      "cells": 39,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 6
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "U",
+          "size": 5
+        },
+        {
+          "type": "J-extended",
+          "size": 5
+        },
+        {
+          "type": "V-extended",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 597
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "seed": 20261005,
+      "width": 30,
+      "buildings": 61,
+      "cells": 35,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 7
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "W",
+          "size": 5
+        },
+        {
+          "type": "T",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 583
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "seed": 1,
+      "width": 12,
+      "buildings": 146,
+      "cells": 39,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 6
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "U",
+          "size": 5
+        },
+        {
+          "type": "J-extended",
+          "size": 5
+        },
+        {
+          "type": "V-extended",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 670
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "seed": 20261005,
+      "width": 12,
+      "buildings": 131,
+      "cells": 35,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 7
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "W",
+          "size": 5
+        },
+        {
+          "type": "T",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 649
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "seed": 1,
+      "width": 15,
+      "buildings": 146,
+      "cells": 39,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 6
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "U",
+          "size": 5
+        },
+        {
+          "type": "J-extended",
+          "size": 5
+        },
+        {
+          "type": "V-extended",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 671
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "seed": 20261005,
+      "width": 15,
+      "buildings": 131,
+      "cells": 35,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 7
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "W",
+          "size": 5
+        },
+        {
+          "type": "T",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 649
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "seed": 1,
+      "width": 30,
+      "buildings": 67,
+      "cells": 39,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 6
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "U",
+          "size": 5
+        },
+        {
+          "type": "J-extended",
+          "size": 5
+        },
+        {
+          "type": "V-extended",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 597
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "seed": 20261005,
+      "width": 30,
+      "buildings": 61,
+      "cells": 35,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 7
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "W",
+          "size": 5
+        },
+        {
+          "type": "T",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 583
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "seed": 1,
+      "width": 12,
+      "buildings": 146,
+      "cells": 39,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 6
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "U",
+          "size": 5
+        },
+        {
+          "type": "J-extended",
+          "size": 5
+        },
+        {
+          "type": "V-extended",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 670
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "seed": 20261005,
+      "width": 12,
+      "buildings": 131,
+      "cells": 35,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 7
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "W",
+          "size": 5
+        },
+        {
+          "type": "T",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 649
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "seed": 1,
+      "width": 15,
+      "buildings": 146,
+      "cells": 39,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 6
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "U",
+          "size": 5
+        },
+        {
+          "type": "J-extended",
+          "size": 5
+        },
+        {
+          "type": "V-extended",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 671
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "seed": 20261005,
+      "width": 15,
+      "buildings": 131,
+      "cells": 35,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 7
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "W",
+          "size": 5
+        },
+        {
+          "type": "T",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 649
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "seed": 1,
+      "width": 30,
+      "buildings": 67,
+      "cells": 39,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 6
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "U",
+          "size": 5
+        },
+        {
+          "type": "J-extended",
+          "size": 5
+        },
+        {
+          "type": "V-extended",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 597
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "seed": 20261005,
+      "width": 30,
+      "buildings": 61,
+      "cells": 35,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 7
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "W",
+          "size": 5
+        },
+        {
+          "type": "T",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 583
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "seed": 1,
+      "width": 12,
+      "buildings": 146,
+      "cells": 39,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 6
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "U",
+          "size": 5
+        },
+        {
+          "type": "J-extended",
+          "size": 5
+        },
+        {
+          "type": "V-extended",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 670
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "seed": 20261005,
+      "width": 12,
+      "buildings": 131,
+      "cells": 35,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 7
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "W",
+          "size": 5
+        },
+        {
+          "type": "T",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 649
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "seed": 1,
+      "width": 15,
+      "buildings": 146,
+      "cells": 39,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 6
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "U",
+          "size": 5
+        },
+        {
+          "type": "J-extended",
+          "size": 5
+        },
+        {
+          "type": "V-extended",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 671
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "seed": 20261005,
+      "width": 15,
+      "buildings": 131,
+      "cells": 35,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 7
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "W",
+          "size": 5
+        },
+        {
+          "type": "T",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 649
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "seed": 1,
+      "width": 30,
+      "buildings": 67,
+      "cells": 39,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 6
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "U",
+          "size": 5
+        },
+        {
+          "type": "J-extended",
+          "size": 5
+        },
+        {
+          "type": "V-extended",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 597
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "seed": 20261005,
+      "width": 30,
+      "buildings": 61,
+      "cells": 35,
+      "shapes": [
+        {
+          "type": "+-extended",
+          "size": 7
+        },
+        {
+          "type": "H-extended",
+          "size": 8
+        },
+        {
+          "type": "T-extended",
+          "size": 5
+        },
+        {
+          "type": "I",
+          "size": 3
+        },
+        {
+          "type": "plaza",
+          "size": 1
+        },
+        {
+          "type": "W",
+          "size": 5
+        },
+        {
+          "type": "T",
+          "size": 4
+        },
+        {
+          "type": "D",
+          "size": 2
+        }
+      ],
+      "parcels": 19,
+      "maxRow": 4,
+      "bodies": 583
+    }
+  ],
+  "beacons": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "time": 0,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 0,
+          "pulse": 1,
+          "samples": 8
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 3.141592653589793,
+          "pulse": 0.16,
+          "samples": 8
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "time": 0.45,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 1.5707963267948966,
+          "pulse": 0.37,
+          "samples": 8
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 4.71238898038469,
+          "pulse": 0.3699999999999999,
+          "samples": 8
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "time": 0.9,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 3.141592653589793,
+          "pulse": 0.16,
+          "samples": 8
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 0,
+          "pulse": 1,
+          "samples": 8
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "time": 1.35,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 4.71238898038469,
+          "pulse": 0.3699999999999999,
+          "samples": 8
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 1.5707963267948966,
+          "pulse": 0.37,
+          "samples": 8
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "time": 0,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 0,
+          "pulse": 1,
+          "samples": 16
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 3.141592653589793,
+          "pulse": 0.16,
+          "samples": 16
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "time": 0.45,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 1.5707963267948966,
+          "pulse": 0.37,
+          "samples": 16
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 4.71238898038469,
+          "pulse": 0.3699999999999999,
+          "samples": 16
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "time": 0.9,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 3.141592653589793,
+          "pulse": 0.16,
+          "samples": 16
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 0,
+          "pulse": 1,
+          "samples": 16
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "time": 1.35,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 4.71238898038469,
+          "pulse": 0.3699999999999999,
+          "samples": 16
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 1.5707963267948966,
+          "pulse": 0.37,
+          "samples": 16
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "time": 0,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 0,
+          "pulse": 1,
+          "samples": 8
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 3.141592653589793,
+          "pulse": 0.16,
+          "samples": 8
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "time": 0.45,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 1.5707963267948966,
+          "pulse": 0.37,
+          "samples": 8
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 4.71238898038469,
+          "pulse": 0.3699999999999999,
+          "samples": 8
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "time": 0.9,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 3.141592653589793,
+          "pulse": 0.16,
+          "samples": 8
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 0,
+          "pulse": 1,
+          "samples": 8
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "time": 1.35,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 4.71238898038469,
+          "pulse": 0.3699999999999999,
+          "samples": 8
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 1.5707963267948966,
+          "pulse": 0.37,
+          "samples": 8
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "time": 0,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 0,
+          "pulse": 1,
+          "samples": 16
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 3.141592653589793,
+          "pulse": 0.16,
+          "samples": 16
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "time": 0.45,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 1.5707963267948966,
+          "pulse": 0.37,
+          "samples": 16
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 4.71238898038469,
+          "pulse": 0.3699999999999999,
+          "samples": 16
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "time": 0.9,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 3.141592653589793,
+          "pulse": 0.16,
+          "samples": 16
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 0,
+          "pulse": 1,
+          "samples": 16
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "time": 1.35,
+      "state": [
+        {
+          "name": "Red beacon scattering",
+          "angle": 4.71238898038469,
+          "pulse": 0.3699999999999999,
+          "samples": 16
+        },
+        {
+          "name": "Blue beacon scattering",
+          "angle": 1.5707963267948966,
+          "pulse": 0.37,
+          "samples": 16
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    "1440-low-city.png",
+    "1440-low-H-district.png",
+    "1440-low-beacon-0.png",
+    "1440-low-beacon-0.45.png",
+    "1440-low-beacon-0.9.png",
+    "1440-low-beacon-1.35.png",
+    "1440-high-city.png",
+    "1440-high-H-district.png",
+    "1440-high-beacon-0.png",
+    "1440-high-beacon-0.45.png",
+    "1440-high-beacon-0.9.png",
+    "1440-high-beacon-1.35.png",
+    "390-low-city.png",
+    "390-low-H-district.png",
+    "390-low-beacon-0.png",
+    "390-low-beacon-0.45.png",
+    "390-low-beacon-0.9.png",
+    "390-low-beacon-1.35.png",
+    "390-high-city.png",
+    "390-high-H-district.png",
+    "390-high-beacon-0.png",
+    "390-high-beacon-0.45.png",
+    "390-high-beacon-0.9.png",
+    "390-high-beacon-1.35.png"
+  ],
+  "errors": []
+}

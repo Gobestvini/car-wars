@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-13",
+  "requirements": {
+    "maximumConsecutiveHousesInRow": 4,
+    "rowAxes": ["x", "z"],
+    "internalStreets": "Large districts are divided into housing parcels with connected through streets.",
+    "districtVariety": "Straight I rows and additional D, P, W, H and V shapes; residual square cells join adjacent districts.",
+    "buildingPlacement": "House footprints reserve actual street surfaces and setbacks; internal parcel seams contain houses.",
+    "policeBeacons": "Broad continuous rotating reflector beam, 1.8 second revolution."
+  },
+  "checks": {
+    "tests": {
+      "command": "node --no-maglev --test --test-isolation=none tests/*.test.js",
+      "passed": 325,
+      "failed": 0,
+      "skipped": 0,
+      "runtimeNote": "The bundled Node runtime previously crashed with native V8 worker errors in the default runner; this full run disables Maglev and worker isolation. No test assertions were weakened for those crashes."
+    },
+    "build": {"command": "npm run build", "passed": true},
+    "browser": {
+      "script": "tests/city-density-browser.cjs",
+      "browser": "Microsoft Edge, real WebGL",
+      "configurations": 24,
+      "beaconPhaseChecks": 16,
+      "screenshots": 24,
+      "consoleErrors": 0,
+      "maximumObservedRow": 4,
+      "details": "report.json"
+    }
+  }
+}

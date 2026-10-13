@@ -1,20 +1,22 @@
 import * as THREE from 'three';
 
-export const BEACON_PERIOD = .8;
+export const BEACON_PERIOD = 1.8;
 export const BEACON_RADIUS = 3.6;
-const smooth = x => { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); };
+export function beaconAngle(seconds, color = 0) {
+  if (!Number.isFinite(seconds)) return 0;
+  return (((seconds / BEACON_PERIOD + color / 2) % 1 + 1) % 1) * Math.PI * 2;
+}
 export function beaconPulse(seconds, color = 0) {
   if (!Number.isFinite(seconds)) return 0;
-  const t = ((seconds - color * .4) % BEACON_PERIOD + BEACON_PERIOD) % BEACON_PERIOD;
-  const pulse = start => smooth((t - start) / .012) * (1 - smooth((t - start - .065) / .015));
-  return Math.max(pulse(0), pulse(.14));
+  // A broad reflector sweep, not a modern double strobe. It never snaps off.
+  return .16 + .84 * ((1 + Math.cos(beaconAngle(seconds,color))) / 2) ** 2;
 }
 
 /** Shared volumes owned by the traffic assets, never by individual pool leases. */
 export function createPoliceBeaconAssets() {
   const geometry = new THREE.SphereGeometry(1, 20, 12);
   const materials = ['#ff252d', '#2478ff'].map(color => new THREE.ShaderMaterial({
-    uniforms: { color: { value: new THREE.Color(color) }, pulse: { value: 0 }, samples: { value: 16 } },
+    uniforms: { color: { value: new THREE.Color(color) }, pulse: { value: 0 }, angle: { value: 0 }, samples: { value: 16 } },
     transparent: true, depthWrite: false, depthTest: true, toneMapped: false,
     vertexShader: `varying vec3 vLocal; varying vec3 vRay; varying vec2 vSourceDepth;
       void main() {
@@ -28,7 +30,7 @@ export function createPoliceBeaconAssets() {
         vSourceDepth = source.zw;
         gl_Position = projectionMatrix * view;
       }`,
-    fragmentShader: `uniform vec3 color; uniform float pulse; uniform float samples;
+    fragmentShader: `uniform vec3 color; uniform float pulse; uniform float angle; uniform float samples;
       varying vec3 vLocal; varying vec3 vRay; varying vec2 vSourceDepth;
       void main() {
         vec3 ray = normalize(vRay);
@@ -40,8 +42,11 @@ export function createPoliceBeaconAssets() {
           vec3 p = vLocal + ray * (float(i)+.5)*stepSize;
           float r = length(p);
           float edge = 1. - smoothstep(.65, 1., r);
-          // A thin horizontal fan and compact bright core, visible from every side.
-          float fan = exp2(-abs(p.y)*22.) * exp2(-r*6.);
+          // A broad rotating reflector beam in the car's local horizontal plane.
+          vec2 direction = vec2(cos(angle),sin(angle));
+          float alignment = dot(p.xz,direction) / max(length(p.xz),.001);
+          float sweep = pow(max(0.,alignment),4.);
+          float fan = exp2(-abs(p.y)*22.) * exp2(-r*3.) * sweep;
           light += (fan + .65*exp2(-dot(p,p)*90.)) * edge * stepSize;
         }
         float alpha = (1.-exp(-light*4.5))*pulse;
@@ -67,6 +72,7 @@ export function createPoliceBeaconAssets() {
       materials.forEach((material, i) => {
         const pulse = beaconPulse(time, i);
         material.uniforms.pulse.value = pulse;
+        material.uniforms.angle.value = beaconAngle(time,i);
         material.uniforms.samples.value = quality === 'low' ? 8 : 16;
         lamps[i].emissiveIntensity = .12 + 5.5 * pulse;
       });
