@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-13",
+  "baselineCommit": "7e1ffd7",
+  "cause": "Inherited weighted custom normals blend wheel-well faces into flat civilian side panels, producing lighting patches in both full and distant meshes.",
+  "fix": "Clear inherited custom normals, make planar side faces flat, and restore their plane after decimation. Other body surfaces retain smooth shading. Preserve the corrected affine door UVs.",
+  "provenance": "Existing authored sedan family; Blender source and GLBs rebuilt with tools/build-traffic-sedans.py.",
+  "checks": {
+    "browser": {
+      "script": "tests/civilian-sides-browser.cjs",
+      "views": "Grey and green, both rear sides, full/distant geometry, received shadows enabled/disabled and unlit texture inspection: 24 before and 24 after views.",
+      "geometry": "Both sides have axial planar normals in full and distant meshes; affine door UVs and triangle budgets are checked.",
+      "maximumPlanarNormalTiltBefore": {"full": 0.3760149673258391, "lod": 0.4802860038424609},
+      "maximumPlanarNormalTiltAfter": {"full": 0, "lod": 0},
+      "triangles": {"full": 4140, "lod": 1454},
+      "game": "Actual application loaded at low and high quality with traffic, player, police and blur; no console or shader errors."
+    },
+    "focusedTests": {"command": "node --no-maglev --test --test-isolation=none tests/player-model.test.js tests/police-beacons.test.js", "passed": 6, "failed": 0},
+    "build": {"command": "npm run build", "passed": true}
+  }
+}

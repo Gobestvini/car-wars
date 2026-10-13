@@ -5,7 +5,7 @@
     "paint_srgb": "#a5a8b1",
     "triangles": 4140,
     "lod_triangles": 1454,
-    "glb_bytes": 232728,
+    "glb_bytes": 240600,
     "atlas_size": [
       512,
       512
@@ -19,7 +19,7 @@
     "paint_srgb": "#66a47e",
     "triangles": 4140,
     "lod_triangles": 1454,
-    "glb_bytes": 232844,
+    "glb_bytes": 240716,
     "atlas_size": [
       512,
       512

@@ -20,6 +20,24 @@ VARIANTS = [('grey', '#a5a8b1', '03-grey-traffic.png'),
             ('police', '#edf0f5', '02-police-patrol.png')]
 SIZE = 512
 
+def flatten_door_normals(obj):
+    # Weighted normals inherited from the shared body blend wheel-well faces
+    # into the flat side sheet. At a rear angle those tilted corner normals
+    # create dark triangular patches. Keep chamfers and arches smooth, but
+    # give the genuinely planar door/quarter-panel faces their axial normal.
+    data=obj.data
+    data.update()
+    bpy.context.view_layer.objects.active=obj
+    bpy.ops.mesh.customdata_custom_splitnormals_clear()
+    for poly in data.polygons:
+        points=[data.vertices[i].co for i in poly.vertices]
+        sign=1 if points[0].x>0 else -1
+        if all(abs(p.x-sign*.91)<.001 for p in points):
+            for p in points:
+                p.x=sign*.91
+            poly.use_smooth=False
+    data.update()
+
 def sample(tile, u, v, name, paint):
     color = shade(tile, u, v)
     r, g, b = color[:3]
@@ -110,6 +128,8 @@ for name, paint, concept in VARIANTS:
     bpy.ops.wm.open_mainfile(filepath=str(ROOT/'docs/art/models/player-sedan-v2/player-sedan.blend'))
     bpy.context.preferences.filepaths.save_version=0
     body=bpy.data.objects['body']
+    if name!='police':
+        flatten_door_normals(body)
     wheels=[bpy.data.objects[n] for n in ['wheel-front-left','wheel-front-right','wheel-rear-left','wheel-rear-right']]
     objects=[body]+wheels
     material=body.data.materials[0]
@@ -147,6 +167,8 @@ for name, paint, concept in VARIANTS:
     decimate.ratio=.35
     decimate.use_collapse_triangulate=True
     bpy.ops.object.modifier_apply(modifier=decimate.name)
+    if name!='police':
+        flatten_door_normals(lod)
     # Collapse interpolates UVs independently of the moved vertices, bending
     # the flat door's paint/trim line into triangular patches. Restore the
     # original affine shell projection after simplification (Blender Y,Z).
