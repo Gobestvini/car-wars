@@ -1,0 +1,1516 @@
+{
+  "date": "2026-10-13",
+  "errors": [],
+  "matrix": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "low",
+      "seed": 1,
+      "width": 12,
+      "boundary": 117,
+      "heightRange": [
+        5.407945889160038,
+        11.439419362694025
+      ],
+      "houses": 117,
+      "bodies": 265,
+      "expectedBodies": 265,
+      "corners": {
+        "convex": 122,
+        "concave": 21
+      }
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "low",
+      "seed": 1,
+      "width": 15,
+      "boundary": 118,
+      "heightRange": [
+        5.407945889160038,
+        11.439419362694025
+      ],
+      "houses": 118,
+      "bodies": 266,
+      "expectedBodies": 266,
+      "corners": {
+        "convex": 122,
+        "concave": 21
+      }
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "low",
+      "seed": 1,
+      "width": 30,
+      "boundary": 123,
+      "heightRange": [
+        5.407945889160038,
+        11.439419362694025
+      ],
+      "houses": 123,
+      "bodies": 271,
+      "expectedBodies": 271,
+      "corners": {
+        "convex": 122,
+        "concave": 21
+      }
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "high",
+      "seed": 1,
+      "width": 12,
+      "boundary": 117,
+      "heightRange": [
+        5.407945889160038,
+        11.439419362694025
+      ],
+      "houses": 117,
+      "bodies": 265,
+      "expectedBodies": 265,
+      "corners": {
+        "convex": 122,
+        "concave": 21
+      }
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "high",
+      "seed": 1,
+      "width": 15,
+      "boundary": 118,
+      "heightRange": [
+        5.407945889160038,
+        11.439419362694025
+      ],
+      "houses": 118,
+      "bodies": 266,
+      "expectedBodies": 266,
+      "corners": {
+        "convex": 122,
+        "concave": 21
+      }
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "high",
+      "seed": 1,
+      "width": 30,
+      "boundary": 123,
+      "heightRange": [
+        5.407945889160038,
+        11.439419362694025
+      ],
+      "houses": 123,
+      "bodies": 271,
+      "expectedBodies": 271,
+      "corners": {
+        "convex": 122,
+        "concave": 21
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "low",
+      "seed": 1,
+      "width": 12,
+      "boundary": 117,
+      "heightRange": [
+        5.407945889160038,
+        11.439419362694025
+      ],
+      "houses": 117,
+      "bodies": 265,
+      "expectedBodies": 265,
+      "corners": {
+        "convex": 122,
+        "concave": 21
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "low",
+      "seed": 1,
+      "width": 15,
+      "boundary": 118,
+      "heightRange": [
+        5.407945889160038,
+        11.439419362694025
+      ],
+      "houses": 118,
+      "bodies": 266,
+      "expectedBodies": 266,
+      "corners": {
+        "convex": 122,
+        "concave": 21
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "low",
+      "seed": 1,
+      "width": 30,
+      "boundary": 123,
+      "heightRange": [
+        5.407945889160038,
+        11.439419362694025
+      ],
+      "houses": 123,
+      "bodies": 271,
+      "expectedBodies": 271,
+      "corners": {
+        "convex": 122,
+        "concave": 21
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "high",
+      "seed": 1,
+      "width": 12,
+      "boundary": 117,
+      "heightRange": [
+        5.407945889160038,
+        11.439419362694025
+      ],
+      "houses": 117,
+      "bodies": 265,
+      "expectedBodies": 265,
+      "corners": {
+        "convex": 122,
+        "concave": 21
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "high",
+      "seed": 1,
+      "width": 15,
+      "boundary": 118,
+      "heightRange": [
+        5.407945889160038,
+        11.439419362694025
+      ],
+      "houses": 118,
+      "bodies": 266,
+      "expectedBodies": 266,
+      "corners": {
+        "convex": 122,
+        "concave": 21
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "high",
+      "seed": 1,
+      "width": 30,
+      "boundary": 123,
+      "heightRange": [
+        5.407945889160038,
+        11.439419362694025
+      ],
+      "houses": 123,
+      "bodies": 271,
+      "expectedBodies": 271,
+      "corners": {
+        "convex": 122,
+        "concave": 21
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "1440-low-L.png",
+      "seed": 1,
+      "width": 15,
+      "label": "L",
+      "x": -175,
+      "z": -125
+    },
+    {
+      "name": "1440-low-T.png",
+      "seed": 1,
+      "width": 15,
+      "label": "T",
+      "x": -175,
+      "z": -75
+    },
+    {
+      "name": "1440-low-X.png",
+      "seed": 1,
+      "width": 15,
+      "label": "X",
+      "x": -125,
+      "z": -75
+    },
+    {
+      "name": "1440-low-houses.png",
+      "seed": 1,
+      "width": 15,
+      "label": "houses",
+      "x": -131.57894736842104,
+      "z": -193
+    },
+    {
+      "name": "1440-low-boundary-convex.png",
+      "seed": 1,
+      "width": 15,
+      "label": "boundary-convex",
+      "x": -137.5,
+      "z": -187.5,
+      "nx": -1,
+      "nz": -1,
+      "type": "convex"
+    },
+    {
+      "name": "1440-low-boundary-concave.png",
+      "seed": 1,
+      "width": 15,
+      "label": "boundary-concave",
+      "x": -137.5,
+      "z": -137.5,
+      "nx": -1,
+      "nz": -1,
+      "type": "concave"
+    },
+    {
+      "name": "1440-low-crossing-convex.png",
+      "type": "convex",
+      "point": {
+        "x": -110,
+        "z": -160
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 0.9914187060821182,
+      "segments": 40,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "name": "1440-low-crossing-concave.png",
+      "type": "concave",
+      "point": {
+        "x": -140,
+        "z": -190
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 1.011953228495517,
+      "segments": 36,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "name": "1440-low-overview.png",
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "name": "1440-high-L.png",
+      "seed": 1,
+      "width": 15,
+      "label": "L",
+      "x": -175,
+      "z": -125
+    },
+    {
+      "name": "1440-high-T.png",
+      "seed": 1,
+      "width": 15,
+      "label": "T",
+      "x": -175,
+      "z": -75
+    },
+    {
+      "name": "1440-high-X.png",
+      "seed": 1,
+      "width": 15,
+      "label": "X",
+      "x": -125,
+      "z": -75
+    },
+    {
+      "name": "1440-high-houses.png",
+      "seed": 1,
+      "width": 15,
+      "label": "houses",
+      "x": -131.57894736842104,
+      "z": -193
+    },
+    {
+      "name": "1440-high-boundary-convex.png",
+      "seed": 1,
+      "width": 15,
+      "label": "boundary-convex",
+      "x": -137.5,
+      "z": -187.5,
+      "nx": -1,
+      "nz": -1,
+      "type": "convex"
+    },
+    {
+      "name": "1440-high-boundary-concave.png",
+      "seed": 1,
+      "width": 15,
+      "label": "boundary-concave",
+      "x": -137.5,
+      "z": -137.5,
+      "nx": -1,
+      "nz": -1,
+      "type": "concave"
+    },
+    {
+      "name": "1440-high-crossing-convex.png",
+      "type": "convex",
+      "point": {
+        "x": -110,
+        "z": -160
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 0.9914187060821182,
+      "segments": 40,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "name": "1440-high-crossing-concave.png",
+      "type": "concave",
+      "point": {
+        "x": -140,
+        "z": -190
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 1.011953228495517,
+      "segments": 36,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "name": "1440-high-overview.png",
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "name": "390-low-L.png",
+      "seed": 1,
+      "width": 15,
+      "label": "L",
+      "x": -175,
+      "z": -125
+    },
+    {
+      "name": "390-low-T.png",
+      "seed": 1,
+      "width": 15,
+      "label": "T",
+      "x": -175,
+      "z": -75
+    },
+    {
+      "name": "390-low-X.png",
+      "seed": 1,
+      "width": 15,
+      "label": "X",
+      "x": -125,
+      "z": -75
+    },
+    {
+      "name": "390-low-houses.png",
+      "seed": 1,
+      "width": 15,
+      "label": "houses",
+      "x": -131.57894736842104,
+      "z": -193
+    },
+    {
+      "name": "390-low-boundary-convex.png",
+      "seed": 1,
+      "width": 15,
+      "label": "boundary-convex",
+      "x": -137.5,
+      "z": -187.5,
+      "nx": -1,
+      "nz": -1,
+      "type": "convex"
+    },
+    {
+      "name": "390-low-boundary-concave.png",
+      "seed": 1,
+      "width": 15,
+      "label": "boundary-concave",
+      "x": -137.5,
+      "z": -137.5,
+      "nx": -1,
+      "nz": -1,
+      "type": "concave"
+    },
+    {
+      "name": "390-low-crossing-convex.png",
+      "type": "convex",
+      "point": {
+        "x": -110,
+        "z": -160
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 0.9914187060821182,
+      "segments": 40,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "name": "390-low-crossing-concave.png",
+      "type": "concave",
+      "point": {
+        "x": -140,
+        "z": -190
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 1.0119532284955182,
+      "segments": 36,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "name": "390-low-overview.png",
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "name": "390-high-L.png",
+      "seed": 1,
+      "width": 15,
+      "label": "L",
+      "x": -175,
+      "z": -125
+    },
+    {
+      "name": "390-high-T.png",
+      "seed": 1,
+      "width": 15,
+      "label": "T",
+      "x": -175,
+      "z": -75
+    },
+    {
+      "name": "390-high-X.png",
+      "seed": 1,
+      "width": 15,
+      "label": "X",
+      "x": -125,
+      "z": -75
+    },
+    {
+      "name": "390-high-houses.png",
+      "seed": 1,
+      "width": 15,
+      "label": "houses",
+      "x": -131.57894736842104,
+      "z": -193
+    },
+    {
+      "name": "390-high-boundary-convex.png",
+      "seed": 1,
+      "width": 15,
+      "label": "boundary-convex",
+      "x": -137.5,
+      "z": -187.5,
+      "nx": -1,
+      "nz": -1,
+      "type": "convex"
+    },
+    {
+      "name": "390-high-boundary-concave.png",
+      "seed": 1,
+      "width": 15,
+      "label": "boundary-concave",
+      "x": -137.5,
+      "z": -137.5,
+      "nx": -1,
+      "nz": -1,
+      "type": "concave"
+    },
+    {
+      "name": "390-high-crossing-convex.png",
+      "type": "convex",
+      "point": {
+        "x": -110,
+        "z": -160
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 0.9914187060821182,
+      "segments": 40,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "name": "390-high-crossing-concave.png",
+      "type": "concave",
+      "point": {
+        "x": -140,
+        "z": -190
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 1.0119532284955186,
+      "segments": 36,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "name": "390-high-overview.png",
+      "seed": 1,
+      "width": 30
+    }
+  ],
+  "attacks": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "width": 30,
+      "attacks": [
+        {
+          "target": {
+            "x": -145,
+            "z": -195,
+            "nx": -1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": -195,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -195,
+            "z": -145,
+            "nx": -1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -145,
+            "z": -145,
+            "nx": -1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": -145,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": -145,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": -95,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 195,
+            "z": -95,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": 45,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 195,
+            "z": 45,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": 95,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": 95,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -195,
+            "z": 145,
+            "nx": -1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -145,
+            "z": 145,
+            "nx": -1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 45,
+            "z": 145,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": 145,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -145,
+            "z": 195,
+            "nx": -1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 45,
+            "z": 195,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "width": 30,
+      "attacks": [
+        {
+          "target": {
+            "x": -145,
+            "z": -195,
+            "nx": -1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": -195,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -195,
+            "z": -145,
+            "nx": -1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -145,
+            "z": -145,
+            "nx": -1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": -145,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": -145,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": -95,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 195,
+            "z": -95,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": 45,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 195,
+            "z": 45,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": 95,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": 95,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -195,
+            "z": 145,
+            "nx": -1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -145,
+            "z": 145,
+            "nx": -1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 45,
+            "z": 145,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": 145,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -145,
+            "z": 195,
+            "nx": -1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 45,
+            "z": 195,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "width": 30,
+      "attacks": [
+        {
+          "target": {
+            "x": -145,
+            "z": -195,
+            "nx": -1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": -195,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -195,
+            "z": -145,
+            "nx": -1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -145,
+            "z": -145,
+            "nx": -1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": -145,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": -145,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": -95,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 195,
+            "z": -95,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": 45,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 195,
+            "z": 45,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": 95,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": 95,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -195,
+            "z": 145,
+            "nx": -1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -145,
+            "z": 145,
+            "nx": -1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 45,
+            "z": 145,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": 145,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -145,
+            "z": 195,
+            "nx": -1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 45,
+            "z": 195,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "width": 30,
+      "attacks": [
+        {
+          "target": {
+            "x": -145,
+            "z": -195,
+            "nx": -1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": -195,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -195,
+            "z": -145,
+            "nx": -1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -145,
+            "z": -145,
+            "nx": -1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": -145,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": -145,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": -95,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 195,
+            "z": -95,
+            "nx": 1,
+            "nz": -1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": 45,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 195,
+            "z": 45,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": 95,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 145,
+            "z": 95,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -195,
+            "z": 145,
+            "nx": -1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -145,
+            "z": 145,
+            "nx": -1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 45,
+            "z": 145,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 95,
+            "z": 145,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": -145,
+            "z": 195,
+            "nx": -1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        },
+        {
+          "target": {
+            "x": 45,
+            "z": 195,
+            "nx": 1,
+            "nz": 1
+          },
+          "contact": true,
+          "inside": true
+        }
+      ]
+    }
+  ],
+  "crossings": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "type": "convex",
+      "point": {
+        "x": -110,
+        "z": -160
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 0.9914187060821182,
+      "segments": 40,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "type": "concave",
+      "point": {
+        "x": -140,
+        "z": -190
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 1.011953228495517,
+      "segments": 36,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "type": "convex",
+      "point": {
+        "x": -110,
+        "z": -160
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 0.9914187060821182,
+      "segments": 40,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "type": "concave",
+      "point": {
+        "x": -140,
+        "z": -190
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 1.011953228495517,
+      "segments": 36,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "type": "convex",
+      "point": {
+        "x": -110,
+        "z": -160
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 0.9914187060821182,
+      "segments": 40,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "type": "concave",
+      "point": {
+        "x": -140,
+        "z": -190
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 1.0119532284955182,
+      "segments": 36,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "type": "convex",
+      "point": {
+        "x": -110,
+        "z": -160
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 0.9914187060821182,
+      "segments": 40,
+      "seed": 1,
+      "width": 30
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "type": "concave",
+      "point": {
+        "x": -140,
+        "z": -190
+      },
+      "raised": true,
+      "road": true,
+      "maxRise": 1.0119532284955186,
+      "segments": 36,
+      "seed": 1,
+      "width": 30
+    }
+  ]
+}

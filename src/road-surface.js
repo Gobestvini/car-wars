@@ -74,7 +74,7 @@ const containsSurface = (rectangles, x, z) => rectangles.some(rect => x >= rect.
 const ROUND_CORNER_SEGMENTS = 8;
 const ROUND_CORNER_RADIUS = 2;
 
-function subtractRectangles(rectangles, cut) {
+export function subtractSurfaceRectangle(rectangles, cut) {
   return rectangles.flatMap(tile => {
     const x0 = Math.max(tile.minX, cut.minX), x1 = Math.min(tile.maxX, cut.maxX);
     const z0 = Math.max(tile.minZ, cut.minZ), z1 = Math.min(tile.maxZ, cut.maxZ);
@@ -87,43 +87,109 @@ function subtractRectangles(rectangles, cut) {
   });
 }
 
-/** Shared rounded outside corners for actual road-grid intersections. */
+/** Fillet the actual sidewalk contour, including re-entrant roadside corners. */
 export function createRoundedSidewalkLayout(roadCenters, bounds, roadWidth, sidewalkWidth, plaza = null) {
   const source = createSidewalkRectangles(roadCenters, bounds, roadWidth, sidewalkWidth, plaza);
-  const radius = Math.min(ROUND_CORNER_RADIUS, sidewalkWidth, roadWidth / 2);
-  if (!(radius > 0)) return { rectangles: source, corners: [], patches: [] };
-  let rectangles = source;
-  const corners = [];
-  const halfRoad = roadWidth / 2;
-  const nodes = Array.isArray(roadCenters) ? roadCenters.flatMap(x=>roadCenters.map(z=>({x,z})))
-    : roadCenters.roadNetwork.intersections;
-  for (const {x:xCenter,z:zCenter} of nodes) {
-    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
-      const pointX = xCenter + sx * halfRoad, pointZ = zCenter + sz * halfRoad;
-      const centerX = pointX + sx * radius, centerZ = pointZ + sz * radius;
-      const boundsRect = { minX: Math.min(pointX, centerX), maxX: Math.max(pointX, centerX),
-        minZ: Math.min(pointZ, centerZ), maxZ: Math.max(pointZ, centerZ) };
-      // Only round a complete, real sidewalk corner; this excludes plaza notches and clipped map edges.
-      const samples = [0.1, 0.5, 0.9].every(a => [0.1, 0.5, 0.9].every(b =>
-        containsSurface(source, pointX + (centerX - pointX) * a, pointZ + (centerZ - pointZ) * b)));
-      if (!samples) continue;
-      rectangles = subtractRectangles(rectangles, boundsRect);
-      const arc = Array.from({ length: ROUND_CORNER_SEGMENTS + 1 }, (_, i) => {
-        const angle = i / ROUND_CORNER_SEGMENTS * Math.PI / 2;
-        return { x: centerX - sx * radius * Math.cos(angle), z: centerZ - sz * radius * Math.sin(angle) };
-      });
-      corners.push({ x: centerX, z: centerZ, sx, sz, radius, arc, bounds: boundsRect,
-        point: { x: pointX, z: pointZ } });
-    }
+  const maxRadius = Math.min(ROUND_CORNER_RADIUS, sidewalkWidth, roadWidth / 2);
+  if (!(maxRadius > 0)) return { rectangles: source, corners: [], patches: [], joins: [] };
+  const roads = createRoadSurfaceRectangles(roadCenters, bounds, roadWidth, plaza);
+  const edges = createRectangleUnionEdges(source);
+  const vertices = new Map();
+  for (const edge of edges) for (const along of [edge.min, edge.max]) {
+    const x = edge.axis === 'x' ? along : edge.value;
+    const z = edge.axis === 'x' ? edge.value : along;
+    const key = `${x}:${z}`;
+    if (!vertices.has(key)) vertices.set(key, { x, z, edges: [] });
+    vertices.get(key).edges.push(edge);
   }
-  return { rectangles, corners, patches: corners.map(corner => corner.bounds) };
+  let rectangles = source;
+  const corners = [], joins = [];
+  const epsilon = Math.min(1e-4, maxRadius / 100);
+  for (const { x: pointX, z: pointZ, edges: incident } of vertices.values()) {
+    const quadrants = [-1, 1].flatMap(sx => [-1, 1].map(sz => ({ sx, sz,
+      occupied: containsSurface(source, pointX + sx * epsilon, pointZ + sz * epsilon) })));
+    const occupied = quadrants.filter(q => q.occupied);
+    if (occupied.length === 2) {
+      if (occupied[0].sx === occupied[1].sx || occupied[0].sz === occupied[1].sz)
+        joins.push({ type: 'straight', point: { x: pointX, z: pointZ } });
+      continue;
+    }
+    if (occupied.length !== 1 && occupied.length !== 3) continue;
+    const type = occupied.length === 1 ? 'convex' : 'concave';
+    const { sx, sz } = type === 'convex' ? occupied[0] : quadrants.find(q => !q.occupied);
+    const roadFacing = type === 'convex'
+      ? containsSurface(roads, pointX - sx * epsilon, pointZ + sz * epsilon)
+        && containsSurface(roads, pointX + sx * epsilon, pointZ - sz * epsilon)
+      : containsSurface(roads, pointX + sx * epsilon, pointZ + sz * epsilon);
+    // Building-facing re-entrant corners and clipped array-grid boundaries stay
+    // square. Real segment end caps and outer bends may also round toward ground.
+    if (!roadFacing && (type === 'concave' || !roadCenters.roadSegments)) continue;
+    const radius = Math.min(maxRadius, ...incident.map(e => (e.max - e.min) / 2));
+    if (!(radius > 1e-7)) continue;
+    const centerX = pointX + sx * radius, centerZ = pointZ + sz * radius;
+    const boundsRect = { minX: Math.min(pointX, centerX), maxX: Math.max(pointX, centerX),
+      minZ: Math.min(pointZ, centerZ), maxZ: Math.max(pointZ, centerZ) };
+    if (type === 'concave' && plaza
+      && boundsRect.maxX > plaza.centerX - plaza.width / 2 && boundsRect.minX < plaza.centerX + plaza.width / 2
+      && boundsRect.maxZ > plaza.centerZ - plaza.depth / 2 && boundsRect.minZ < plaza.centerZ + plaza.depth / 2) continue;
+    // Convex fillets remove sidewalk; concave fillets fill a small roadside
+    // notch. In both cases require a complete square in the correct domain.
+    const domain = type === 'convex' ? source : roads;
+    const samples = [0.1, 0.5, 0.9].every(a => [0.1, 0.5, 0.9].every(b =>
+      containsSurface(domain, pointX + (centerX - pointX) * a, pointZ + (centerZ - pointZ) * b)));
+    if (!samples) continue;
+    if (type === 'convex') rectangles = subtractSurfaceRectangle(rectangles, boundsRect);
+    const arc = Array.from({ length: ROUND_CORNER_SEGMENTS + 1 }, (_, i) => {
+      const angle = i / ROUND_CORNER_SEGMENTS * Math.PI / 2;
+      return { x: centerX - sx * radius * Math.cos(angle), z: centerZ - sz * radius * Math.sin(angle) };
+    });
+    const corner = { type, roadFacing, x: centerX, z: centerZ, sx, sz, radius, arc, bounds: boundsRect,
+      point: { x: pointX, z: pointZ } };
+    corner.polygons = sidewalkCornerPolygons(corner);
+    corners.push(corner);
+  }
+  // Explicit terminal descriptors are useful to inspectors; their perimeter
+  // consists of the same convex/concave fillets above, not four fictitious arms.
+  if (roadCenters.roadSegments) {
+    const ends = new Map();
+    for (const segment of roadCenters.roadSegments) for (const point of [segment.from, segment.to]) {
+      const key = `${point.x}:${point.z}`;
+      if (!ends.has(key)) ends.set(key, { point: { x: point.x, z: point.z }, degree: 0 });
+      ends.get(key).degree++;
+    }
+    for (const end of ends.values()) if (end.degree === 1) joins.push({ type: 'terminal', point: end.point });
+  }
+  return { rectangles, corners, patches: corners.filter(c => c.roadFacing).map(c => c.bounds), joins };
+}
+
+/** Convex pieces shared by rendering, wheel support and containment. */
+export function sidewalkCornerPolygons(corner) {
+  if (corner.polygons) return corner.polygons;
+  const { x, z, arc, point, type } = corner;
+  if (type !== 'concave') return [[{ x, z }, ...arc]];
+  return arc.slice(1).map((b, i) => [point, arc[i], b]);
+}
+
+export function containsSidewalkPolygon(polygon, x, z) {
+  let positive = false, negative = false;
+  for (let i = 0; i < polygon.length; i++) {
+    const a = polygon[i], b = polygon[(i + 1) % polygon.length];
+    const cross = (b.x - a.x) * (z - a.z) - (b.z - a.z) * (x - a.x);
+    // Visual vertices are stored in float32; tolerate their sub-millimetre
+    // rounding at an otherwise shared polygon edge.
+    const tolerance = 1e-5 * Math.hypot(b.x - a.x, b.z - a.z);
+    positive ||= cross > tolerance; negative ||= cross < -tolerance;
+    if (positive && negative) return false;
+  }
+  return true;
 }
 
 export function containsRoundedSidewalk(layout, x, z) {
   if (containsSurface(layout.rectangles, x, z)) return true;
-  return layout.corners.some(({ x: cx, z: cz, sx, sz, radius }) => {
-    const dx = (x - cx) * sx, dz = (z - cz) * sz;
-    return dx <= 1e-7 && dz <= 1e-7 && dx * dx + dz * dz <= radius * radius + 1e-7;
+  return layout.corners.some(corner => {
+    const b = corner.bounds;
+    if (b && (x < b.minX - 1e-5 || x > b.maxX + 1e-5 || z < b.minZ - 1e-5 || z > b.maxZ + 1e-5)) return false;
+    return sidewalkCornerPolygons(corner).some(polygon => containsSidewalkPolygon(polygon, x, z));
   });
 }
 
@@ -173,8 +239,9 @@ export function createRoundedSidewalkEdges(rectangles, corners) {
     for (const edge of edges) {
       // The fan fills the removed square up to C. These two radii join the
       // rectangular slab and are internal edges, not exposed curb faces.
-      const replaced = (edge.axis === 'x' && Math.abs(edge.value - corner.z) < epsilon)
-        || (edge.axis === 'z' && Math.abs(edge.value - corner.x) < epsilon);
+      const join = corner.type === 'concave' ? corner.point : corner;
+      const replaced = (edge.axis === 'x' && Math.abs(edge.value - join.z) < epsilon)
+        || (edge.axis === 'z' && Math.abs(edge.value - join.x) < epsilon);
       if (!replaced) { next.push(edge); continue; }
       const cutMin = edge.axis === 'x' ? minX : minZ;
       const cutMax = edge.axis === 'x' ? maxX : maxZ;
@@ -245,13 +312,17 @@ export function createSidewalkSupportBoxes(rectangles, bottom = ROAD_SURFACE_HEI
 
 export function createSidewalkSupportPrisms(corners, bottom = ROAD_SURFACE_HEIGHTS.sidewalkBottom,
   top = ROAD_SURFACE_HEIGHTS.sidewalk) {
-  return corners.map(({ x, z, sx, sz, radius, arc }) => {
-    const vertices = [
-      { x: 0, z: 0 },
-      ...arc.map(point => ({ x: point.x - x, z: point.z - z })),
-    ];
+  return corners.flatMap(corner => sidewalkCornerPolygons(corner).map(polygon => {
+    // Cannon validates outward face normals relative to the local origin.
+    // Every decomposed triangle therefore owns an origin inside that triangle.
+    const x = polygon.reduce((sum, p) => sum + p.x, 0) / polygon.length;
+    const z = polygon.reduce((sum, p) => sum + p.z, 0) / polygon.length;
+    const vertices = polygon.map(point => ({ x: point.x - x, z: point.z - z }));
     const count = vertices.length;
-    const reflected = sx * sz < 0;
+    const area = vertices.reduce((sum, p, i) => {
+      const q = vertices[(i + 1) % count]; return sum + p.x * q.z - q.x * p.z;
+    }, 0);
+    const reflected = area < 0;
     const points = [
       ...vertices.map(point => [point.x, top, point.z]),
       ...vertices.map(point => [point.x, bottom, point.z]),
@@ -265,7 +336,7 @@ export function createSidewalkSupportPrisms(corners, bottom = ROAD_SURFACE_HEIGH
       faces.push(reflected ? [i, i + count, next + count, next] : [i, next, next + count, i + count]);
     }
     return { x, z, y: 0, vertices: points, faces, wheelSupport: true };
-  });
+  }));
 }
 
 /** The difference between expanded streets and asphalt forms disjoint sidewalk tiles. */

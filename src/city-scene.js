@@ -3,7 +3,7 @@ import { BuildingOcclusion } from './building-occlusion.js';
 import { createRoadMarkings } from './road-markings.js';
 import { createRoadSurfacePositions, createRoadSurfaceRectangles,
   createRoundedSidewalkLayout, createSidewalkSupportBoxes, createSidewalkSupportPrisms,
-  ROAD_SURFACE_HEIGHTS, unionRectangles } from './road-surface.js';
+  ROAD_SURFACE_HEIGHTS, unionRectangles, subtractSurfaceRectangle } from './road-surface.js';
 import { createSidewalkVisuals } from './sidewalk-visuals.js';
 import { getSignalPosition, getStopLineLayout } from './signal-layout.js';
 import { createSignalBeam } from './signal-glow.js';
@@ -40,8 +40,14 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   } else plane(plan.bounds * 2, plan.bounds * 2, pavementMaterial, 0, 0, -0.015);
   const centreIndex = Math.floor(plan.roads.length / 2);
   const plazaSpan = Math.abs(plan.roads[centreIndex] - plan.roads[centreIndex - 1]);
-  const roadRects = createRoadSurfaceRectangles(plan, plan.bounds, plan.roadWidth,
+  let roadRects = createRoadSurfaceRectangles(plan, plan.bounds, plan.roadWidth,
     { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan });
+  const sidewalkLayout = createRoundedSidewalkLayout(plan, plan.bounds, plan.roadWidth, plan.sidewalkWidth,
+    { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan });
+  // Re-entrant fillets replace a square of asphalt with complementary sidewalk
+  // and road polygons. The road patch is batched by createSidewalkVisuals.
+  for (const corner of sidewalkLayout.corners) if (corner.type === 'concave')
+    roadRects = subtractSurfaceRectangle(roadRects, corner.bounds);
   const roadGeometry = new THREE.BufferGeometry();
   roadGeometry.setAttribute('position', new THREE.BufferAttribute(createRoadSurfacePositions(roadRects), 3));
   roadGeometry.computeVertexNormals();
@@ -52,8 +58,6 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   roadSurface.name = 'Road surface';
   roadSurface.receiveShadow = true;
   group.add(roadSurface);
-  const sidewalkLayout = createRoundedSidewalkLayout(plan, plan.bounds, plan.roadWidth, plan.sidewalkWidth,
-    { centerX: 0, centerZ: 0, width: plazaSpan, depth: plazaSpan });
   group.add(...createSidewalkVisuals(THREE, sidewalkLayout, roadRects, sidewalkMaterial, curbMaterial, ART.asphalt));
   const marks = createRoadMarkings(plan, plan.bounds, plan.roadWidth);
   // Paint is a surface layer, below sampled tire decals, rather than a raised block.

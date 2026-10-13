@@ -43,7 +43,7 @@ test('batched decoration fades with its building and returns after fade; low hid
     assert.equal(Boolean(plant),e.artFamily===1);
     if(plant) {
       const bounds=new THREE.Box3(new THREE.Vector3(-.5,-.5,-.5),new THREE.Vector3(.5,.5,.5)).applyMatrix4(plant.matrix);
-      assert.ok(Math.abs(bounds.min.y-(e.height+(e.boundary?e.crownHeight:.2)))<1e-6);
+      assert.ok(Math.abs(bounds.min.y-(e.height+.2))<1e-6);
     }
   }
   assert.equal(entry.proxy.children.find(c=>c.userData.roofDetail).visible,false);

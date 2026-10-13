@@ -1,33 +1,35 @@
 import {
   createRoadFacingSidewalkEdges, createRoadSurfacePositions, createRoundedSidewalkEdges,
-  createSidewalkCapPositions, createSidewalkWallPositions, ROAD_SURFACE_HEIGHTS,
+  createSidewalkCapPositions, createSidewalkWallPositions, ROAD_SURFACE_HEIGHTS, sidewalkCornerPolygons,
 } from './road-surface.js';
 
 function roundedPositions(corners, bottom, top, capWidth = 0, part = 'all') {
   const positions = [];
   for (const corner of corners) {
     const { x, z, sx, sz, radius, arc } = corner;
+    if (part === 'all' || part === 'top') {
+      for (const polygon of sidewalkCornerPolygons(corner)) for (let i = 1; i < polygon.length - 1; i++) {
+        const a = polygon[0], b = polygon[i], c = polygon[i + 1];
+        const upward = (b.x - a.x) * (c.z - a.z) - (b.z - a.z) * (c.x - a.x) < 0;
+        for (const p of upward ? [a,b,c] : [a,c,b]) positions.push(p.x, top, p.z);
+      }
+    }
     for (let i = 0; i < arc.length - 1; i++) {
       const a = arc[i], b = arc[i + 1];
       const pushTri = (p, q, r) => positions.push(p.x, p.y, p.z, q.x, q.y, q.z, r.x, r.y, r.z);
-      const center = { x, y: top, z };
       const p = { ...a, y: top }, q = { ...b, y: top };
       const aBottom = { ...a, y: bottom }, bBottom = { ...b, y: bottom };
-      if (part === 'all' || part === 'top') {
-        if (sx * sz > 0) pushTri(center, q, p); else pushTri(center, p, q);
-      }
       if (part === 'all' || part === 'walls') {
         pushTri(aBottom, bBottom, { ...b, y: top });
         pushTri(aBottom, { ...b, y: top }, { ...a, y: top });
       }
-      if ((part === 'all' || part === 'cap') && capWidth > 0) {
+      if ((part === 'all' || part === 'cap') && capWidth > 0 && corner.roadFacing !== false) {
         const capY = top;
         const capP = { ...p, y: capY }, capQ = { ...q, y: capY };
-        const ai = { x: x + (a.x - x) * (1 - capWidth / radius), y: capY,
-          z: z + (a.z - z) * (1 - capWidth / radius) };
-        const bi = { x: x + (b.x - x) * (1 - capWidth / radius), y: capY,
-          z: z + (b.z - z) * (1 - capWidth / radius) };
-        if (sx * sz > 0) { pushTri(capP, bi, capQ); pushTri(capP, ai, bi); }
+        const factor = 1 + (corner.type === 'concave' ? 1 : -1) * Math.min(capWidth, radius) / radius;
+        const ai = { x: x + (a.x - x) * factor, y: capY, z: z + (a.z - z) * factor };
+        const bi = { x: x + (b.x - x) * factor, y: capY, z: z + (b.z - z) * factor };
+        if ((sx * sz > 0) !== (corner.type === 'concave')) { pushTri(capP, bi, capQ); pushTri(capP, ai, bi); }
         else { pushTri(capP, capQ, bi); pushTri(capP, bi, ai); }
       }
     }
@@ -37,9 +39,11 @@ function roundedPositions(corners, bottom, top, capWidth = 0, part = 'all') {
 
 function cutoutPositions(THREE, corners) {
   const positions = [];
-  for (const { arc, point } of corners) {
+  for (const corner of corners) {
+    if (corner.roadFacing === false) continue;
+    const { arc, point, x, z, type } = corner;
     const shape = new THREE.Shape();
-    shape.moveTo(point.x, point.z);
+    shape.moveTo(type === 'concave' ? x : point.x, type === 'concave' ? z : point.z);
     for (const vertex of arc) shape.lineTo(vertex.x, vertex.z);
     shape.closePath();
     const geometry = new THREE.ShapeGeometry(shape);
@@ -69,7 +73,7 @@ function cutoutPositions(THREE, corners) {
 export function createSidewalkVisuals(THREE, layout, roadRects, sidewalkMaterial, curbMaterial, asphaltColor = '#30343a') {
   const rectangles = Array.isArray(layout) ? layout : layout.rectangles;
   const corners = Array.isArray(layout) ? [] : layout.corners;
-  if (!rectangles.length) return [];
+  if (!rectangles.length && !corners.length) return [];
   const group = new THREE.Group();
   const surfaceGeometry = new THREE.BufferGeometry();
   surfaceGeometry.setAttribute('position', new THREE.BufferAttribute(

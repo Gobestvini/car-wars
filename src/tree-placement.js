@@ -1,4 +1,4 @@
-import { createRoadSurfaceRectangles, createRoundedSidewalkLayout } from './road-surface.js';
+import { createRoadSurfaceRectangles, createRoundedSidewalkLayout, sidewalkCornerPolygons } from './road-surface.js';
 
 export const TREE_PLACEMENT = Object.freeze({
   maxTrees: 320,
@@ -28,10 +28,16 @@ function rootInside(rectangles, x, z, radius) {
 
 function rootInsideRounded(layout, x, z, radius) {
   if (rootInside(layout.rectangles, x, z, radius)) return true;
-  return layout.corners.some(corner => {
-    const dx = (x - corner.x) * corner.sx, dz = (z - corner.z) * corner.sz;
-    return dx <= -radius && dz <= -radius && Math.hypot(dx, dz) <= corner.radius - radius;
-  });
+  return layout.corners.some(corner => sidewalkCornerPolygons(corner).some(polygon => {
+    // Require the complete root disk inside one convex support piece. This is
+    // conservative at triangle seams and never plants a tree over a cutout.
+    const area = polygon.reduce((sum,p,i) => { const q=polygon[(i+1)%polygon.length];return sum+p.x*q.z-q.x*p.z; },0);
+    return polygon.every((a,i) => {
+      const b=polygon[(i+1)%polygon.length],length=Math.hypot(b.x-a.x,b.z-a.z);
+      const distance=((b.x-a.x)*(z-a.z)-(b.z-a.z)*(x-a.x))*Math.sign(area)/length;
+      return distance >= radius-1e-7;
+    });
+  }));
 }
 
 function obstacleBounds([x, z, width, depth, , yaw = 0]) {
