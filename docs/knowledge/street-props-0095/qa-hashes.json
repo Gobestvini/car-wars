@@ -1,0 +1,58 @@
+[
+  {
+    "path": "src/street-prop-config.js",
+    "sha256": "BCC15A60180CEE9851F4B9A8E92F472637671B7DD625E8A9D58C6CD81D1568E3"
+  },
+  {
+    "path": "src/street-prop-physics.js",
+    "sha256": "656B203F9B5499DC476A4569394755B713CB682882419B008DC239FDDCB51EC2"
+  },
+  {
+    "path": "src/street-prop-placement.js",
+    "sha256": "8E5D2CE906298CA17F744A73997BDFCBDA01AE7FCB8093874E84E577312A6E89"
+  },
+  {
+    "path": "src/city-street-props.js",
+    "sha256": "A035C74906D5A5F28549924044AE30CBCD3855D5F5D47AFD610EC8EFA39EEF79"
+  },
+  {
+    "path": "src/city-scene.js",
+    "sha256": "5BE289D1C98689A4DB6F09FB833607F07A68B1720A40AF7678AF9EBE045605F1"
+  },
+  {
+    "path": "src/signal-glow.js",
+    "sha256": "F08D7BB4D70D80F56F546C1B63F5FCDCCF223CC3B24C91D808BA63E0396E7CEC"
+  },
+  {
+    "path": "src/main.js",
+    "sha256": "BCB6002503DDE507E919811C5DBA59B1A1527D7145F80F9B9AB2A60988D51F5D"
+  },
+  {
+    "path": "src/wanted-system.js",
+    "sha256": "1FC2691F70E143800D6169CBF46D0142D68224F9811679E85295BC12DF422872"
+  },
+  {
+    "path": "tests/street-prop-physics.test.js",
+    "sha256": "74041E2A8B345D382F704E288C641307FC00E71A29C84739A5041D04E9205AC8"
+  },
+  {
+    "path": "tests/street-prop-placement.test.js",
+    "sha256": "A852175BBCCCF22D35C9FD0833DF9F7EE29EE7BC557D3DE7F9391BCCB9923C76"
+  },
+  {
+    "path": "tests/wanted-system.test.js",
+    "sha256": "315053A24F718CC887641F9106B8C357DFA1F92C8BF9491A15DE8F22A96CD07B"
+  },
+  {
+    "path": "tests/street-prop-browser.cjs",
+    "sha256": "CD63F4E28608D359317E85BEF832C8ED3009D7CE1F79541F2D0AF9A1A7A7304E"
+  },
+  {
+    "path": "tests/street-prop-profile.cjs",
+    "sha256": "49065891B229F1E895797675470CD38B5F66F684B7143EF85EA8D887127ACF5D"
+  },
+  {
+    "path": "tests/city-boundary.test.js",
+    "sha256": "D0781587C74BA6CA7D5BAF8F4BC9C105877A685FB846EB4AD180900EBC28A21D"
+  }
+]

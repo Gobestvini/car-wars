@@ -1,0 +1,104 @@
+{
+  "errors": [],
+  "results": {
+    "widths": [
+      {
+        "cycle": 0,
+        "width": 12,
+        "bodies": 886,
+        "contacts": 4,
+        "restored": true
+      },
+      {
+        "cycle": 0,
+        "width": 30,
+        "bodies": 790,
+        "contacts": 4,
+        "restored": true
+      },
+      {
+        "cycle": 0,
+        "width": 15,
+        "bodies": 876,
+        "contacts": 4,
+        "restored": true
+      },
+      {
+        "cycle": 1,
+        "width": 12,
+        "bodies": 886,
+        "contacts": 4,
+        "restored": true
+      },
+      {
+        "cycle": 1,
+        "width": 30,
+        "bodies": 790,
+        "contacts": 4,
+        "restored": true
+      },
+      {
+        "cycle": 1,
+        "width": 15,
+        "bodies": 876,
+        "contacts": 4,
+        "restored": true
+      },
+      {
+        "cycle": 2,
+        "width": 12,
+        "bodies": 886,
+        "contacts": 4,
+        "restored": true
+      },
+      {
+        "cycle": 2,
+        "width": 30,
+        "bodies": 790,
+        "contacts": 4,
+        "restored": true
+      },
+      {
+        "cycle": 2,
+        "width": 15,
+        "bodies": 876,
+        "contacts": 4,
+        "restored": true
+      }
+    ],
+    "ground": [
+      {
+        "type": "bin",
+        "ground": true,
+        "finite": true,
+        "state": "detached"
+      },
+      {
+        "type": "bench",
+        "ground": true,
+        "finite": true,
+        "state": "detached"
+      },
+      {
+        "type": "lamp",
+        "ground": true,
+        "finite": true,
+        "state": "detached"
+      },
+      {
+        "type": "signal",
+        "ground": true,
+        "finite": true,
+        "state": "detached"
+      }
+    ],
+    "npc": {
+      "state": "detached",
+      "level": 0
+    },
+    "debris": {
+      "level": 0
+    },
+    "cap": 6
+  }
+}

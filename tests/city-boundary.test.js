@@ -57,6 +57,7 @@ test('100 seeds at every width have separated low houses, car-tight contour cove
 test('real house collision prevents straight, seam and corner exits without coordinate clamp',()=>{
   for(const seed of [1,2,3]) {
     const plan=createCityPlan(seed),sim=new CarSimulation(),city=createCityScene(new THREE.Scene(),sim,plan);
+    city.propPhysics?.dispose(); // Isolate perimeter collisions from breakable street furniture.
     const towerBodies=new Set(city.staticBodies.slice(plan.buildings.length,plan.buildings.length+plan.boundaryBuildings.length));
     // Test every straight section and both ends: convex/concave contour joins.
     for(const edge of plan.contour) for(const t of [.15,.5,.85]) {

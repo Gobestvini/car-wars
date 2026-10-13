@@ -1,0 +1,2146 @@
+TAP version 13
+# Subtest: memory stores verified outcome, hides stale facts and does not learn failures
+ok 1 - memory stores verified outcome, hides stale facts and does not learn failures
+  ---
+  duration_ms: 178.1882
+  type: 'test'
+  ...
+# warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+# warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+# Subtest: memory context remains bounded for long reports
+ok 2 - memory context remains bounded for long reports
+  ---
+  duration_ms: 1497.1565
+  type: 'test'
+  ...
+# warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+# Subtest: checks receipt avoids identical checks but invalidates code, test and dependency edits
+ok 3 - checks receipt avoids identical checks but invalidates code, test and dependency edits
+  ---
+  duration_ms: 937.9131
+  type: 'test'
+  ...
+# warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+# Subtest: failed or changing checks cannot produce a reusable success receipt
+ok 4 - failed or changing checks cannot produce a reusable success receipt
+  ---
+  duration_ms: 280.4336
+  type: 'test'
+  ...
+# Subtest: arrest requires wanted level, stopped player and assigned nearby physical police
+ok 5 - arrest requires wanted level, stopped player and assigned nearby physical police
+  ---
+  duration_ms: 0.6937
+  type: 'test'
+  ...
+# Subtest: continuous hold enters a five-second countdown, then completes once
+ok 6 - continuous hold enters a five-second countdown, then completes once
+  ---
+  duration_ms: 1.9173
+  type: 'test'
+  ...
+# Subtest: physical escape cancels immediately and a new attempt must complete a fresh hold
+ok 7 - physical escape cancels immediately and a new attempt must complete a fresh hold
+  ---
+  duration_ms: 0.4686
+  type: 'test'
+  ...
+# Subtest: two police do not shorten the timer, and losing all valid police cancels
+ok 8 - two police do not shorten the timer, and losing all valid police cancels
+  ---
+  duration_ms: 0.4339
+  type: 'test'
+  ...
+# Subtest: hidden, free camera, destroyed vehicle, reset, and invalid time do not complete an arrest
+ok 9 - hidden, free camera, destroyed vehicle, reset, and invalid time do not complete an arrest
+  ---
+  duration_ms: 0.5681
+  type: 'test'
+  ...
+# Subtest: destroyed police cannot hold or finish an arrest, while an operational partner can
+ok 10 - destroyed police cannot hold or finish an arrest, while an operational partner can
+  ---
+  duration_ms: 0.6216
+  type: 'test'
+  ...
+# Subtest: art variation never mutates the plan or physical city dimensions
+ok 11 - art variation never mutates the plan or physical city dimensions
+  ---
+  duration_ms: 207.3421
+  type: 'test'
+  ...
+# Subtest: batched decoration fades with its building and returns after fade; low hides optional proxies
+ok 12 - batched decoration fades with its building and returns after fade; low hides optional proxies
+  ---
+  duration_ms: 156.8444
+  type: 'test'
+  ...
+# Subtest: traffic art reuses geometry and stays inside its original collision footprint
+ok 13 - traffic art reuses geometry and stays inside its original collision footprint
+  ---
+  duration_ms: 12.6345
+  type: 'test'
+  ...
+# Subtest: varied street trees connect to their trunks, use four batches and dispose
+ok 14 - varied street trees connect to their trunks, use four batches and dispose
+  ---
+  duration_ms: 1194.0617
+  type: 'test'
+  ...
+# Subtest: decorative trees remain fixed and add no collisions while a physical car drives through
+ok 15 - decorative trees remain fixed and add no collisions while a physical car drives through
+  ---
+  duration_ms: 50.8978
+  type: 'test'
+  ...
+# Subtest: proxy cache evicts only idle entries and releases private resources exactly once
+ok 16 - proxy cache evicts only idle entries and releases private resources exactly once
+  ---
+  duration_ms: 9.6107
+  type: 'test'
+  ...
+# Subtest: camera segment detects a building only in front of its endpoint
+ok 17 - camera segment detects a building only in front of its endpoint
+  ---
+  duration_ms: 0.1895
+  type: 'test'
+  ...
+# Subtest: any visible vehicle sample detects the blocker; unrelated buildings remain opaque
+ok 18 - any visible vehicle sample detects the blocker; unrelated buildings remain opaque
+  ---
+  duration_ms: 0.1014
+  type: 'test'
+  ...
+# Subtest: a wall behind the near body surface does not fade at bumper contact
+ok 19 - a wall behind the near body surface does not fade at bumper contact
+  ---
+  duration_ms: 0.4534
+  type: 'test'
+  ...
+# Subtest: sight targets follow the tilted body and stop at its near surface
+ok 20 - sight targets follow the tilted body and stop at its near surface
+  ---
+  duration_ms: 0.2337
+  type: 'test'
+  ...
+# Subtest: fade smoothing has equal results at 30/60/120fps
+ok 21 - fade smoothing has equal results at 30/60/120fps
+  ---
+  duration_ms: 0.1565
+  type: 'test'
+  ...
+# Subtest: nearby clear buildings stay opaque; actual blockers fade and restore as a whole
+ok 22 - nearby clear buildings stay opaque; actual blockers fade and restore as a whole
+  ---
+  duration_ms: 4.6819
+  type: 'test'
+  ...
+# Subtest: camera target scale follows the bounded smooth speed range
+ok 23 - camera target scale follows the bounded smooth speed range
+  ---
+  duration_ms: 0.6362
+  type: 'test'
+  ...
+# Subtest: zooming out is monotone, bounded, and frame-rate independent
+ok 24 - zooming out is monotone, bounded, and frame-rate independent
+  ---
+  duration_ms: 1.563
+  type: 'test'
+  ...
+# Subtest: zooming in is monotone, bounded, and frame-rate independent
+ok 25 - zooming in is monotone, bounded, and frame-rate independent
+  ---
+  duration_ms: 0.3291
+  type: 'test'
+  ...
+# Subtest: zero, negative, and non-finite dt leave camera state unchanged
+ok 26 - zero, negative, and non-finite dt leave camera state unchanged
+  ---
+  duration_ms: 0.186
+  type: 'test'
+  ...
+# Subtest: visual damage boundaries distinguish every stage
+ok 27 - visual damage boundaries distinguish every stage
+  ---
+  duration_ms: 1.5314
+  type: 'test'
+  ...
+# Subtest: healthy idle produces no emission; darker damage increases smoke and fire
+ok 28 - healthy idle produces no emission; darker damage increases smoke and fire
+  ---
+  duration_ms: 0.8515
+  type: 'test'
+  ...
+# Subtest: direct terminal jump burns for 0.6s and bursts exactly once at all frame rates
+ok 29 - direct terminal jump burns for 0.6s and bursts exactly once at all frame rates
+  ---
+  duration_ms: 1.989
+  type: 'test'
+  ...
+# Subtest: reset before the flash cancels terminal time and repeats the full warning
+ok 30 - reset before the flash cancels terminal time and repeats the full warning
+  ---
+  duration_ms: 0.1891
+  type: 'test'
+  ...
+# Subtest: impact severity has a quiet threshold, grows monotonically, and saturates
+ok 31 - impact severity has a quiet threshold, grows monotonically, and saturates
+  ---
+  duration_ms: 0.5984
+  type: 'test'
+  ...
+# Subtest: damage is bounded and traction fades only after half damage
+ok 32 - damage is bounded and traction fades only after half damage
+  ---
+  duration_ms: 0.1095
+  type: 'test'
+  ...
+# Subtest: wheel detaches only after a severe direct hit near its mount
+ok 33 - wheel detaches only after a severe direct hit near its mount
+  ---
+  duration_ms: 0.068
+  type: 'test'
+  ...
+# Subtest: detached wheel becomes a dynamic body and reset restores it
+ok 34 - detached wheel becomes a dynamic body and reset restores it
+  ---
+  duration_ms: 8.5993
+  type: 'test'
+  ...
+# Subtest: a direct high-speed wheel-zone impact detaches only the struck wheel
+ok 35 - a direct high-speed wheel-zone impact detaches only the struck wheel
+  ---
+  duration_ms: 6.2177
+  type: 'test'
+  ...
+# Subtest: a real chassis impact against a static box creates one fixed-step impact event
+ok 36 - a real chassis impact against a static box creates one fixed-step impact event
+  ---
+  duration_ms: 2.0175
+  type: 'test'
+  ...
+# Subtest: front, rear, side, and rotated-front impacts keep their local contact direction
+ok 37 - front, rear, side, and rotated-front impacts keep their local contact direction
+  ---
+  duration_ms: 7.9197
+  type: 'test'
+  ...
+# Subtest: a 17 m/s frontal hit dents more than a 6 m/s frontal hit
+ok 38 - a 17 m/s frontal hit dents more than a 6 m/s frontal hit
+  ---
+  duration_ms: 4.8
+  type: 'test'
+  ...
+# Subtest: holding against a wall does not repeat damage; a later separated hit counts
+ok 39 - holding against a wall does not repeat damage; a later separated hit counts
+  ---
+  duration_ms: 26.1046
+  type: 'test'
+  ...
+# Subtest: repeated real frontal impacts accumulate to the destroyed state
+ok 40 - repeated real frontal impacts accumulate to the destroyed state
+  ---
+  duration_ms: 8.457
+  type: 'test'
+  ...
+# Subtest: reset clears impact and damage state
+ok 41 - reset clears impact and damage state
+  ---
+  duration_ms: 0.3711
+  type: 'test'
+  ...
+# Subtest: thirty seconds of simulation without contact causes no damage
+ok 42 - thirty seconds of simulation without contact causes no damage
+  ---
+  duration_ms: 92.6496
+  type: 'test'
+  ...
+# Subtest: destroyed engine loses throttle while chassis still steps and brakes
+ok 43 - destroyed engine loses throttle while chassis still steps and brakes
+  ---
+  duration_ms: 3.4799
+  type: 'test'
+  ...
+# Subtest: deformation is local in metres across rotated nonuniform transforms and restores exactly
+ok 44 - deformation is local in metres across rotated nonuniform transforms and restores exactly
+  ---
+  duration_ms: 2.747
+  type: 'test'
+  ...
+# Subtest: hard-edge mode does not weld normals across perpendicular body panels after damage
+ok 45 - hard-edge mode does not weld normals across perpendicular body panels after damage
+  ---
+  duration_ms: 1.0855
+  type: 'test'
+  ...
+# Subtest: L/T/U/plus contours have exterior houses, including an ordinary house on an isolated short edge
+ok 46 - L/T/U/plus contours have exterior houses, including an ordinary house on an isolated short edge
+  ---
+  duration_ms: 6.7412
+  type: 'test'
+  ...
+# Subtest: 100 seeds at every width have separated low houses, car-tight contour coverage and safe streets/spawn
+ok 47 - 100 seeds at every width have separated low houses, car-tight contour coverage and safe streets/spawn
+  ---
+  duration_ms: 5512.3224
+  type: 'test'
+  ...
+# Subtest: real house collision prevents straight, seam and corner exits without coordinate clamp
+ok 48 - real house collision prevents straight, seam and corner exits without coordinate clamp
+  ---
+  duration_ms: 17168.467
+  type: 'test'
+  ...
+# Subtest: diagonal convex/concave vertex attacks and gap attempts contact houses in forward and reverse
+ok 49 - diagonal convex/concave vertex attacks and gap attempts contact houses in forward and reverse
+  ---
+  duration_ms: 130943.7484
+  type: 'test'
+  ...
+# Subtest: indexed queries match Cannon for boxes, convex supports, planes and moving bodies on all axes
+ok 50 - indexed queries match Cannon for boxes, convex supports, planes and moving bodies on all axes
+  ---
+  duration_ms: 30.4091
+  type: 'test'
+  ...
+# Subtest: pair generation includes every eligible AABB overlap and preserves SAP pair order
+ok 51 - pair generation includes every eligible AABB overlap and preserves SAP pair order
+  ---
+  duration_ms: 4.6249
+  type: 'test'
+  ...
+# Subtest: static grid updates on removal, replacement, transform invalidation and wide queries
+ok 52 - static grid updates on removal, replacement, transform invalidation and wide queries
+  ---
+  duration_ms: 0.7971
+  type: 'test'
+  ...
+# Subtest: city broadphase retains chassis, suspension and curb motion of the original solver
+ok 53 - city broadphase retains chassis, suspension and curb motion of the original solver
+  ---
+  duration_ms: 145.7841
+  type: 'test'
+  ...
+# Subtest: city plans are deterministic for a seed and vary with seed/road width
+ok 54 - city plans are deterministic for a seed and vary with seed/road width
+  ---
+  duration_ms: 81.4961
+  type: 'test'
+  ...
+# Subtest: default district retains scale but uses a non-square connected street layout
+ok 55 - default district retains scale but uses a non-square connected street layout
+  ---
+  duration_ms: 11.993
+  type: 'test'
+  ...
+# Subtest: buildings fit their blocks, stay inside walls, and clear streets at all supported widths
+ok 56 - buildings fit their blocks, stay inside walls, and clear streets at all supported widths
+  ---
+  duration_ms: 43.4694
+  type: 'test'
+  ...
+# Subtest: merged district seams are built up instead of reserving fictitious grid streets
+ok 57 - merged district seams are built up instead of reserving fictitious grid streets
+  ---
+  duration_ms: 121.0488
+  type: 'test'
+  ...
+# Subtest: internal streets divide long housing rows into at most four homes on either axis
+ok 58 - internal streets divide long housing rows into at most four homes on either axis
+  ---
+  duration_ms: 1057.3597
+  type: 'test'
+  ...
+# Subtest: invalid width options fail before a city plan can be used
+ok 59 - invalid width options fail before a city plan can be used
+  ---
+  duration_ms: 0.8972
+  type: 'test'
+  ...
+# Subtest: city dimensions are configurable and wider footprints keep seeded heights stable
+ok 60 - city dimensions are configurable and wider footprints keep seeded heights stable
+  ---
+  duration_ms: 26.3871
+  type: 'test'
+  ...
+# Subtest: 100 seeds at all widths give deterministic connected cyclic cities and diverse topology
+ok 61 - 100 seeds at all widths give deterministic connected cyclic cities and diverse topology
+  ---
+  duration_ms: 4468.9638
+  type: 'test'
+  ...
+# Subtest: 20 next rounds differ while width rebuild preserves seed and topology
+ok 62 - 20 next rounds differ while width rebuild preserves seed and topology
+  ---
+  duration_ms: 224.6561
+  type: 'test'
+  ...
+# Subtest: coordinate spawn rejects the cut-out corners even inside the enclosing bounds
+ok 63 - coordinate spawn rejects the cut-out corners even inside the enclosing bounds
+  ---
+  duration_ms: 15.1242
+  type: 'test'
+  ...
+# Subtest: circular joystick motion activates only after a deliberate fast rotation
+ok 64 - circular joystick motion activates only after a deliberate fast rotation
+  ---
+  duration_ms: 0.9812
+  type: 'test'
+  ...
+# Subtest: angle wrapping, speed gate, weak input, and stale gestures are handled
+ok 65 - angle wrapping, speed gate, weak input, and stale gestures are handled
+  ---
+  duration_ms: 0.2702
+  type: 'test'
+  ...
+# Subtest: one-finger drift command completes two compact physical circles in either direction
+ok 66 - one-finger drift command completes two compact physical circles in either direction
+  ---
+  duration_ms: 89.5762
+  type: 'test'
+  ...
+# Subtest: opposite joystick direction brakes before reverse, then forward
+ok 67 - opposite joystick direction brakes before reverse, then forward
+  ---
+  duration_ms: 0.9349
+  type: 'test'
+  ...
+# Subtest: reverse steering is inverted and sideways direction keeps its current gear
+ok 68 - reverse steering is inverted and sideways direction keeps its current gear
+  ---
+  duration_ms: 0.1785
+  type: 'test'
+  ...
+# Subtest: reverse engages only within a 15%-of-half-turn sector around the car rear
+ok 69 - reverse engages only within a 15%-of-half-turn sector around the car rear
+  ---
+  duration_ms: 0.1459
+  type: 'test'
+  ...
+# Subtest: normal corner assist brakes at high turn demand while intentional drift keeps the chosen gear
+ok 70 - normal corner assist brakes at high turn demand while intentional drift keeps the chosen gear
+  ---
+  duration_ms: 0.1262
+  type: 'test'
+  ...
+# Subtest: corner assist reduces lateral speed without sacrificing turn progress at city speeds
+ok 71 - corner assist reduces lateral speed without sacrificing turn progress at city speeds
+  ---
+  duration_ms: 195.0286
+  type: 'test'
+  ...
+# Subtest: physical forward-reverse-forward transition and coasting
+ok 72 - physical forward-reverse-forward transition and coasting
+  ---
+  duration_ms: 68.6498
+  type: 'test'
+  ...
+# Subtest: first frame and paused time do not form intervals
+ok 73 - first frame and paused time do not form intervals
+  ---
+  duration_ms: 0.9984
+  type: 'test'
+  ...
+# Subtest: known percentile thresholds, duration and bounded eviction
+ok 74 - known percentile thresholds, duration and bounded eviction
+  ---
+  duration_ms: 1.5365
+  type: 'test'
+  ...
+# Subtest: render limiter caps high-refresh callbacks at 60 while preserving 30 FPS
+ok 75 - render limiter caps high-refresh callbacks at 60 while preserving 30 FPS
+  ---
+  duration_ms: 2.9439
+  type: 'test'
+  ...
+# Subtest: render limiter retains cadence under jitter and resets after a pause
+ok 76 - render limiter retains cadence under jitter and resets after a pause
+  ---
+  duration_ms: 0.3132
+  type: 'test'
+  ...
+# Subtest: render frequency does not change fixed simulation time
+ok 77 - render frequency does not change fixed simulation time
+  ---
+  duration_ms: 2.3467
+  type: 'test'
+  ...
+# Subtest: long stalls have bounded catch-up and pause discards remainder
+ok 78 - long stalls have bounded catch-up and pause discards remainder
+  ---
+  duration_ms: 0.2323
+  type: 'test'
+  ...
+# Subtest: 60Hz early callbacks and seeded jitter preserve cadence over a minute
+ok 79 - 60Hz early callbacks and seeded jitter preserve cadence over a minute
+  ---
+  duration_ms: 2.8975
+  type: 'test'
+  ...
+# Subtest: near60Hz and jittered discrete refresh rates keep the long-window cap
+ok 80 - near60Hz and jittered discrete refresh rates keep the long-window cap
+  ---
+  duration_ms: 4.1776
+  type: 'test'
+  ...
+# Subtest: invalid timestamp and a late stall cannot cause catch-up render bursts
+ok 81 - invalid timestamp and a late stall cannot cause catch-up render bursts
+  ---
+  duration_ms: 0.1581
+  type: 'test'
+  ...
+# Subtest: first touch is neutral regardless of its screen position
+ok 82 - first touch is neutral regardless of its screen position
+  ---
+  duration_ms: 0.9821
+  type: 'test'
+  ...
+# Subtest: same drag gives the same direction and throttle anywhere on screen
+ok 83 - same drag gives the same direction and throttle anywhere on screen
+  ---
+  duration_ms: 0.8187
+  type: 'test'
+  ...
+# Subtest: dead zone, analog throttle and knob radius are bounded
+ok 84 - dead zone, analog throttle and knob radius are bounded
+  ---
+  duration_ms: 0.1719
+  type: 'test'
+  ...
+# Subtest: loader keeps progress monotonic and only releases the menu after completion
+ok 85 - loader keeps progress monotonic and only releases the menu after completion
+  ---
+  duration_ms: 4.6957
+  type: 'test'
+  ...
+# Subtest: failure cancels dismissal and ignores late resource events until Retry
+ok 86 - failure cancels dismissal and ignores late resource events until Retry
+  ---
+  duration_ms: 1.035
+  type: 'test'
+  ...
+# Subtest: fatal WebGL failure offers no retry
+ok 87 - fatal WebGL failure offers no retry
+  ---
+  duration_ms: 0.6096
+  type: 'test'
+  ...
+# Subtest: completed boot cannot reopen a loading screen during gameplay
+ok 88 - completed boot cannot reopen a loading screen during gameplay
+  ---
+  duration_ms: 0.597
+  type: 'test'
+  ...
+# Subtest: blur targets follow CSS size, DPR and portrait or landscape aspect ratios
+ok 89 - blur targets follow CSS size, DPR and portrait or landscape aspect ratios
+  ---
+  duration_ms: 1.5338
+  type: 'test'
+  ...
+# Subtest: blur strength supports direct-render zero and bounded intensity without invalid uniforms
+ok 90 - blur strength supports direct-render zero and bounded intensity without invalid uniforms
+  ---
+  duration_ms: 0.3255
+  type: 'test'
+  ...
+# Subtest: vertical blur mask is independent of screen width and grows symmetrically above and below focus
+ok 91 - vertical blur mask is independent of screen width and grows symmetrically above and below focus
+  ---
+  duration_ms: 0.3967
+  type: 'test'
+  ...
+# Subtest: scene MSAA request respects quality and available maximum samples
+ok 92 - scene MSAA request respects quality and available maximum samples
+  ---
+  duration_ms: 0.2213
+  type: 'test'
+  ...
+# Subtest: focus band has a fixed screen center and user-sized screen-space coverage
+ok 93 - focus band has a fixed screen center and user-sized screen-space coverage
+  ---
+  duration_ms: 0.2281
+  type: 'test'
+  ...
+# Subtest: bounded reuse resets data, rejects stale releases, and destroys storage once
+ok 94 - bounded reuse resets data, rejects stale releases, and destroys storage once
+  ---
+  duration_ms: 2.4032
+  type: 'test'
+  ...
+# Subtest: variant exhaustion replaces idle storage without evicting a live owner
+ok 95 - variant exhaustion replaces idle storage without evicting a live owner
+  ---
+  duration_ms: 0.3929
+  type: 'test'
+  ...
+# Subtest: capacity changes retire only free storage and preserve current leases
+ok 96 - capacity changes retire only free storage and preserve current leases
+  ---
+  duration_ms: 1.4711
+  type: 'test'
+  ...
+# Subtest: preparation is idle, bounded, idempotent and retryable after a factory error
+ok 97 - preparation is idle, bounded, idempotent and retryable after a factory error
+  ---
+  duration_ms: 0.5753
+  type: 'test'
+  ...
+# Subtest: tire smoke draws only living particles, keeps slot order and stops empty uploads
+ok 98 - tire smoke draws only living particles, keeps slot order and stops empty uploads
+  ---
+  duration_ms: 12.8325
+  type: 'test'
+  ...
+# Subtest: damage particles preserve sparse slot order, expire and restart after reset
+ok 99 - damage particles preserve sparse slot order, expire and restart after reset
+  ---
+  duration_ms: 2.756
+  type: 'test'
+  ...
+# Subtest: textured GLB fits simulation mounts and shares one atlas across five meshes
+ok 100 - textured GLB fits simulation mounts and shares one atlas across five meshes
+  ---
+  duration_ms: 34.4492
+  type: 'test'
+  ...
+# Subtest: authored body has local impact geometry and restores exact positions and normals
+ok 101 - authored body has local impact geometry and restores exact positions and normals
+  ---
+  duration_ms: 31.8441
+  type: 'test'
+  ...
+# Subtest: reverse lamps track actual motion and reverse drive request; lens anchors survive dents
+ok 102 - reverse lamps track actual motion and reverse drive request; lens anchors survive dents
+  ---
+  duration_ms: 21.5675
+  type: 'test'
+  ...
+# Subtest: smaller visual tires retain ground contact and fit their arches at full steering/compression
+ok 103 - smaller visual tires retain ground contact and fit their arches at full steering/compression
+  ---
+  duration_ms: 6.7668
+  type: 'test'
+  ...
+# Subtest: rotor beacons sweep slowly with broad smooth peaks, no hard blackouts and stable time
+ok 104 - rotor beacons sweep slowly with broad smooth peaks, no hard blackouts and stable time
+  ---
+  duration_ms: 1.8541
+  type: 'test'
+  ...
+# Subtest: pooled cars share bounded volumes and dispose the asset owner once
+ok 105 - pooled cars share bounded volumes and dispose the asset owner once
+  ---
+  duration_ms: 24.3003
+  type: 'test'
+  ...
+# Subtest: police take twice the normalized damage from the same real impact and keep their wheels attached
+ok 106 - police take twice the normalized damage from the same real impact and keep their wheels attached
+  ---
+  duration_ms: 30.571
+  type: 'test'
+  ...
+# Subtest: police damage listener is explicitly removable without disabling another vehicle
+ok 107 - police damage listener is explicitly removable without disabling another vehicle
+  ---
+  duration_ms: 0.7895
+  type: 'test'
+  ...
+# Subtest: wanted level profiles normalize safely and monotonically scale distant chase speed
+ok 108 - wanted level profiles normalize safely and monotonically scale distant chase speed
+  ---
+  duration_ms: 2.457
+  type: 'test'
+  ...
+# Subtest: pending stars do not activate police; a confirmed wanted star applies without resetting pursuit
+ok 109 - pending stars do not activate police; a confirmed wanted star applies without resetting pursuit
+  ---
+  duration_ms: 0.5362
+  type: 'test'
+  ...
+# Subtest: recovery survives a wanted-level change and retains the active star profile
+ok 110 - recovery survives a wanted-level change and retains the active star profile
+  ---
+  duration_ms: 32.3936
+  type: 'test'
+  ...
+# Subtest: ram thresholds escalate by stars while low levels keep a six-metre follow distance
+ok 111 - ram thresholds escalate by stars while low levels keep a six-metre follow distance
+  ---
+  duration_ms: 0.3122
+  type: 'test'
+  ...
+# Subtest: stalled police reverse away from a building and another police car, even near the player
+ok 112 - stalled police reverse away from a building and another police car, even near the player
+  ---
+  duration_ms: 60.776
+  type: 'test'
+  ...
+# Subtest: rear traffic and walls prevent reversing into a second collision
+ok 113 - rear traffic and walls prevent reversing into a second collision
+  ---
+  duration_ms: 19.1573
+  type: 'test'
+  ...
+# Subtest: reverse speed is bounded and a newly occupied rear corridor cancels throttle
+ok 114 - reverse speed is bounded and a newly occupied rear corridor cancels throttle
+  ---
+  duration_ms: 9.2473
+  type: 'test'
+  ...
+# Subtest: an approaching target does not hide a police car stuck at the same position
+ok 115 - an approaching target does not hide a police car stuck at the same position
+  ---
+  duration_ms: 14.4093
+  type: 'test'
+  ...
+# Subtest: recovery completes, brakes reverse motion before pursuit and resets cleanly
+ok 116 - recovery completes, brakes reverse motion before pursuit and resets cleanly
+  ---
+  duration_ms: 8.6078
+  type: 'test'
+  ...
+# Subtest: moving police and police holding a stopped target do not trigger reverse recovery
+ok 117 - moving police and police holding a stopped target do not trigger reverse recovery
+  ---
+  duration_ms: 9.1528
+  type: 'test'
+  ...
+# Subtest: shared vehicle physics actually back a stalled police car away from a wall
+ok 118 - shared vehicle physics actually back a stalled police car away from a wall
+  ---
+  duration_ms: 152.6509
+  type: 'test'
+  ...
+# Subtest: exact spawn rejects bad geometry while explicit nearest-safe reports its moved pose
+ok 119 - exact spawn rejects bad geometry while explicit nearest-safe reports its moved pose
+  ---
+  duration_ms: 1.339
+  type: 'test'
+  ...
+# Subtest: spawn safety reports occupied exact poses as pending and blocks closing followers
+ok 120 - spawn safety reports occupied exact poses as pending and blocks closing followers
+  ---
+  duration_ms: 13.1967
+  type: 'test'
+  ...
+# Subtest: police plans a real corridor detour around a rotated building
+ok 121 - police plans a real corridor detour around a rotated building
+  ---
+  duration_ms: 15.627
+  type: 'test'
+  ...
+# Subtest: police role uses the shared world, pursues through collision, and disposes cleanly
+ok 122 - police role uses the shared world, pursues through collision, and disposes cleanly
+  ---
+  duration_ms: 465.4628
+  type: 'test'
+  ...
+# Subtest: police role retains at least 90% of player acceleration on a clear straight
+ok 123 - police role retains at least 90% of player acceleration on a clear straight
+  ---
+  duration_ms: 144.7853
+  type: 'test'
+  ...
+# Subtest: 12 deterministic road pickups cover all nine map sectors at each supported road width
+ok 124 - 12 deterministic road pickups cover all nine map sectors at each supported road width
+  ---
+  duration_ms: 69.7359
+  type: 'test'
+  ...
+# Subtest: swept pickup trigger catches high speed crossings, rejects healthy/high/flying/inactive cases, and consumes once
+ok 125 - swept pickup trigger catches high speed crossings, rejects healthy/high/flying/inactive cases, and consumes once
+  ---
+  duration_ms: 15.2178
+  type: 'test'
+  ...
+# Subtest: dashes align their long axis with both directions of the street grid
+ok 126 - dashes align their long axis with both directions of the street grid
+  ---
+  duration_ms: 1.6688
+  type: 'test'
+  ...
+# Subtest: mark spacing, bounds, and junction gaps derive from the current road plan
+ok 127 - mark spacing, bounds, and junction gaps derive from the current road plan
+  ---
+  duration_ms: 0.5493
+  type: 'test'
+  ...
+# Subtest: both paint batches receive shadows below continuous tire decals in either road direction
+ok 128 - both paint batches receive shadows below continuous tire decals in either road direction
+  ---
+  duration_ms: 308.1776
+  type: 'test'
+  ...
+# Subtest: sidewalk corners are disjoint and never cover the asphalt plaza
+ok 129 - sidewalk corners are disjoint and never cover the asphalt plaza
+  ---
+  duration_ms: 23.3575
+  type: 'test'
+  ...
+# Subtest: road grid and spawn plaza form a continuous, non-overlapping surface
+ok 130 - road grid and spawn plaza form a continuous, non-overlapping surface
+  ---
+  duration_ms: 64.0073
+  type: 'test'
+  ...
+# Subtest: rounded sidewalk cuts the acute intersection point and preserves the block-facing corner in all quadrants
+ok 131 - rounded sidewalk cuts the acute intersection point and preserves the block-facing corner in all quadrants
+  ---
+  duration_ms: 5.1724
+  type: 'test'
+  ...
+# Subtest: every real road-grid corner is rounded consistently for supported widths and zero width is unchanged
+ok 132 - every real road-grid corner is rounded consistently for supported widths and zero width is unchanged
+  ---
+  duration_ms: 6786.5408
+  type: 'test'
+  ...
+# Subtest: rounded top, asphalt patch, curved wall and curb are batched and have upward top normals
+ok 133 - rounded top, asphalt patch, curved wall and curb are batched and have upward top normals
+  ---
+  duration_ms: 52.6658
+  type: 'test'
+  ...
+# Subtest: straight curb trim stays on the sidewalk and shares both tangent endpoints with the curved trim
+ok 134 - straight curb trim stays on the sidewalk and shares both tangent endpoints with the curved trim
+  ---
+  duration_ms: 1.1968
+  type: 'test'
+  ...
+# Subtest: rounded convex support ends at its arc and leaves the cut corner clear for a raycast
+ok 135 - rounded convex support ends at its arc and leaves the cut corner clear for a raycast
+  ---
+  duration_ms: 4.9004
+  type: 'test'
+  ...
+# Subtest: stage samples are frame totals and diagnostic storage disappears on stop
+ok 136 - stage samples are frame totals and diagnostic storage disappears on stop
+  ---
+  duration_ms: 1.8172
+  type: 'test'
+  ...
+# Subtest: profile records actual accepted renders at 120/144 Hz, never external callbacks
+ok 137 - profile records actual accepted renders at 120/144 Hz, never external callbacks
+  ---
+  duration_ms: 6.3982
+  type: 'test'
+  ...
+# Subtest: bounded profile retains chronological rows; stopped profiling still counts renders
+ok 138 - bounded profile retains chronological rows; stopped profiling still counts renders
+  ---
+  duration_ms: 0.3354
+  type: 'test'
+  ...
+# Subtest: GPU absence is explicit, not CPU time reported as GPU
+ok 139 - GPU absence is explicit, not CPU time reported as GPU
+  ---
+  duration_ms: 0.3331
+  type: 'test'
+  ...
+# Subtest: disjoint query results are discarded and GPU queries are bounded
+ok 140 - disjoint query results are discarded and GPU queries are bounded
+  ---
+  duration_ms: 0.2819
+  type: 'test'
+  ...
+# Subtest: saved defaults persist only validated user settings and can be cleared
+ok 141 - saved defaults persist only validated user settings and can be cleared
+  ---
+  duration_ms: 2.1932
+  type: 'test'
+  ...
+# Subtest: draw distance is persisted independently per camera mode and invalid values fall back
+ok 142 - draw distance is persisted independently per camera mode and invalid values fall back
+  ---
+  duration_ms: 0.2669
+  type: 'test'
+  ...
+# Subtest: missing or invalid fields use their own factory fallback
+ok 143 - missing or invalid fields use their own factory fallback
+  ---
+  duration_ms: 0.1507
+  type: 'test'
+  ...
+# Subtest: unsupported versions, corrupt JSON, and unavailable storage safely fall back
+ok 144 - unsupported versions, corrupt JSON, and unavailable storage safely fall back
+  ---
+  duration_ms: 0.2207
+  type: 'test'
+  ...
+# Subtest: skid controls validate, persist, and default for profiles created before the controls existed
+ok 145 - skid controls validate, persist, and default for profiles created before the controls existed
+  ---
+  duration_ms: 0.2662
+  type: 'test'
+  ...
+# Subtest: blur control preserves disabled/strong values and migrates older profiles without changing other settings
+ok 146 - blur control preserves disabled/strong values and migrates older profiles without changing other settings
+  ---
+  duration_ms: 0.281
+  type: 'test'
+  ...
+# Subtest: blur focus size persists independently and old profiles keep the default
+ok 147 - blur focus size persists independently and old profiles keep the default
+  ---
+  duration_ms: 0.2876
+  type: 'test'
+  ...
+# Subtest: shadow coverage contains the visible ground footprint plus caster margin
+ok 148 - shadow coverage contains the visible ground footprint plus caster margin
+  ---
+  duration_ms: 3.7495
+  type: 'test'
+  ...
+# Subtest: shadow centre snaps to stable world-space texels as the camera moves
+ok 149 - shadow centre snaps to stable world-space texels as the camera moves
+  ---
+  duration_ms: 0.9576
+  type: 'test'
+  ...
+# Subtest: current art sun covers road receivers and high casters after camera and city translations
+ok 150 - current art sun covers road receivers and high casters after camera and city translations
+  ---
+  duration_ms: 3.5696
+  type: 'test'
+  ...
+# Subtest: sidewalk supports match the elevated footprint across road widths without reaching the road or plaza
+ok 151 - sidewalk supports match the elevated footprint across road widths without reaching the road or plaza
+  ---
+  duration_ms: 109.4859
+  type: 'test'
+  ...
+# Subtest: union walls remove internal seams, road-facing caps stay on top, and zero-width sidewalks are empty
+ok 152 - union walls remove internal seams, road-facing caps stay on top, and zero-width sidewalks are empty
+  ---
+  duration_ms: 32.9491
+  type: 'test'
+  ...
+# Subtest: sidewalk tops, union faces, and road-facing caps are rendered in at most three batches
+ok 153 - sidewalk tops, union faces, and road-facing caps are rendered in at most three batches
+  ---
+  duration_ms: 2.3891
+  type: 'test'
+  ...
+# Subtest: surface sampler follows the raised slab while road and ground levels remain unchanged
+ok 154 - surface sampler follows the raised slab while road and ground levels remain unchanged
+  ---
+  duration_ms: 22.0863
+  type: 'test'
+  ...
+# Subtest: the live city scene adds raycastable raised slabs and removes every support collider on dispose
+ok 155 - the live city scene adds raycastable raised slabs and removes every support collider on dispose
+  ---
+  duration_ms: 629.3044
+  type: 'test'
+  ...
+# Subtest: detached wheels use the raised support group and physically land on a sidewalk slab
+ok 156 - detached wheels use the raised support group and physically land on a sidewalk slab
+  ---
+  duration_ms: 51.6398
+  type: 'test'
+  ...
+# Subtest: ten city rebuilds across supported road widths release every sidewalk support body
+ok 157 - ten city rebuilds across supported road widths release every sidewalk support body
+  ---
+  duration_ms: 1185.7319
+  type: 'test'
+  ...
+# Subtest: a vehicle settles at the same suspension height above road and sidewalk tops
+ok 158 - a vehicle settles at the same suspension height above road and sidewalk tops
+  ---
+  duration_ms: 34.499
+  type: 'test'
+  ...
+# Subtest: a 14.4 km/h approach and retreat cross a 15 cm curb without launching or losing wheel contact
+ok 159 - a 14.4 km/h approach and retreat cross a 15 cm curb without launching or losing wheel contact
+  ---
+  duration_ms: 17.3066
+  type: 'test'
+  ...
+# Subtest: L inner/outer and T/X roadside corners follow geometry under rotations and reflections
+ok 160 - L inner/outer and T/X roadside corners follow geometry under rotations and reflections
+  ---
+  duration_ms: 75.0497
+  type: 'test'
+  ...
+# Subtest: straight continuations have no phantom bends; terminals close, short segments clamp radius, zero width is empty
+ok 161 - straight continuations have no phantom bends; terminals close, short segments clamp radius, zero width is empty
+  ---
+  duration_ms: 2.1014
+  type: 'test'
+  ...
+# Subtest: convex decompositions, rendered surface and sampler agree at both sides of each fillet
+ok 162 - convex decompositions, rendered surface and sampler agree at both sides of each fillet
+  ---
+  duration_ms: 37.6401
+  type: 'test'
+  ...
+# Subtest: real irregular maps expose both types and leave the spawn plaza clear
+ok 163 - real irregular maps expose both types and leave the spawn plaza clear
+  ---
+  duration_ms: 550.2206
+  type: 'test'
+  ...
+# Subtest: slow wheels cross both fillets and skid strips conform to their visible heights
+ok 164 - slow wheels cross both fillets and skid strips conform to their visible heights
+  ---
+  duration_ms: 169.8264
+  type: 'test'
+  ...
+# Subtest: signals and stop lines use independently expected right-hand world coordinates
+ok 165 - signals and stop lines use independently expected right-hand world coordinates
+  ---
+  duration_ms: 1.861
+  type: 'test'
+  ...
+# Subtest: signal assemblies sit fully inside approach sidewalks for every cardinal direction and road width
+ok 166 - signal assemblies sit fully inside approach sidewalks for every cardinal direction and road width
+  ---
+  duration_ms: 75.6569
+  type: 'test'
+  ...
+# Subtest: fog beams originate at the active bulb and point down the incoming approach
+ok 167 - fog beams originate at the active bulb and point down the incoming approach
+  ---
+  duration_ms: 0.5264
+  type: 'test'
+  ...
+# Subtest: four signal assemblies persist and fog beam colors follow the controller on the real city
+ok 168 - four signal assemblies persist and fog beam colors follow the controller on the real city
+  ---
+  duration_ms: 278.651
+  type: 'test'
+  ...
+# Subtest: stop lines span only the incoming half-road and share an approach plane
+ok 169 - stop lines span only the incoming half-road and share an approach plane
+  ---
+  duration_ms: 0.3343
+  type: 'test'
+  ...
+# Subtest: fog renders only active volumes in the camera frustum, and restores their latest phase on return
+ok 170 - fog renders only active volumes in the camera frustum, and restores their latest phase on return
+  ---
+  duration_ms: 1.6437
+  type: 'test'
+  ...
+# Subtest: a visible fog volume is retained when its source lamp is outside the frame
+ok 171 - a visible fog volume is retained when its source lamp is outside the frame
+  ---
+  duration_ms: 0.6173
+  type: 'test'
+  ...
+# Subtest: bin threshold 14 km/h uses pre-solver speed
+ok 172 - bin threshold 14 km/h uses pre-solver speed
+  ---
+  duration_ms: 25.8224
+  type: 'test'
+  ...
+# Subtest: bin threshold 15 km/h uses pre-solver speed
+ok 173 - bin threshold 15 km/h uses pre-solver speed
+  ---
+  duration_ms: 4.6656
+  type: 'test'
+  ...
+# Subtest: bin threshold 16 km/h uses pre-solver speed
+ok 174 - bin threshold 16 km/h uses pre-solver speed
+  ---
+  duration_ms: 3.4957
+  type: 'test'
+  ...
+# Subtest: bin swept 60 km/h hit preserves progress and removes invisible obstacle
+ok 175 - bin swept 60 km/h hit preserves progress and removes invisible obstacle
+  ---
+  duration_ms: 83.9504
+  type: 'test'
+  ...
+# Subtest: bin swept 120 km/h hit preserves progress and removes invisible obstacle
+ok 176 - bin swept 120 km/h hit preserves progress and removes invisible obstacle
+  ---
+  duration_ms: 20.7679
+  type: 'test'
+  ...
+# Subtest: bench threshold 24 km/h uses pre-solver speed
+ok 177 - bench threshold 24 km/h uses pre-solver speed
+  ---
+  duration_ms: 2.1389
+  type: 'test'
+  ...
+# Subtest: bench threshold 25 km/h uses pre-solver speed
+ok 178 - bench threshold 25 km/h uses pre-solver speed
+  ---
+  duration_ms: 2.8251
+  type: 'test'
+  ...
+# Subtest: bench threshold 26 km/h uses pre-solver speed
+ok 179 - bench threshold 26 km/h uses pre-solver speed
+  ---
+  duration_ms: 19.1196
+  type: 'test'
+  ...
+# Subtest: bench swept 60 km/h hit preserves progress and removes invisible obstacle
+ok 180 - bench swept 60 km/h hit preserves progress and removes invisible obstacle
+  ---
+  duration_ms: 23.7151
+  type: 'test'
+  ...
+# Subtest: bench swept 120 km/h hit preserves progress and removes invisible obstacle
+ok 181 - bench swept 120 km/h hit preserves progress and removes invisible obstacle
+  ---
+  duration_ms: 36.2519
+  type: 'test'
+  ...
+# Subtest: lamp threshold 34 km/h uses pre-solver speed
+ok 182 - lamp threshold 34 km/h uses pre-solver speed
+  ---
+  duration_ms: 2.3088
+  type: 'test'
+  ...
+# Subtest: lamp threshold 35 km/h uses pre-solver speed
+ok 183 - lamp threshold 35 km/h uses pre-solver speed
+  ---
+  duration_ms: 1.079
+  type: 'test'
+  ...
+# Subtest: lamp threshold 36 km/h uses pre-solver speed
+ok 184 - lamp threshold 36 km/h uses pre-solver speed
+  ---
+  duration_ms: 1.3497
+  type: 'test'
+  ...
+# Subtest: lamp swept 60 km/h hit preserves progress and removes invisible obstacle
+ok 185 - lamp swept 60 km/h hit preserves progress and removes invisible obstacle
+  ---
+  duration_ms: 15.5594
+  type: 'test'
+  ...
+# Subtest: lamp swept 120 km/h hit preserves progress and removes invisible obstacle
+ok 186 - lamp swept 120 km/h hit preserves progress and removes invisible obstacle
+  ---
+  duration_ms: 30.4766
+  type: 'test'
+  ...
+# Subtest: signal threshold 39 km/h uses pre-solver speed
+ok 187 - signal threshold 39 km/h uses pre-solver speed
+  ---
+  duration_ms: 3.5235
+  type: 'test'
+  ...
+# Subtest: signal threshold 40 km/h uses pre-solver speed
+ok 188 - signal threshold 40 km/h uses pre-solver speed
+  ---
+  duration_ms: 0.8878
+  type: 'test'
+  ...
+# Subtest: signal threshold 41 km/h uses pre-solver speed
+ok 189 - signal threshold 41 km/h uses pre-solver speed
+  ---
+  duration_ms: 2.0391
+  type: 'test'
+  ...
+# Subtest: signal swept 60 km/h hit preserves progress and removes invisible obstacle
+ok 190 - signal swept 60 km/h hit preserves progress and removes invisible obstacle
+  ---
+  duration_ms: 15.406
+  type: 'test'
+  ...
+# Subtest: signal swept 120 km/h hit preserves progress and removes invisible obstacle
+ok 191 - signal swept 120 km/h hit preserves progress and removes invisible obstacle
+  ---
+  duration_ms: 19.1607
+  type: 'test'
+  ...
+# Subtest: substantial contact 1.9/2 km/h, prolonged contact and separated re-entry
+ok 192 - substantial contact 1.9/2 km/h, prolonged contact and separated re-entry
+  ---
+  duration_ms: 82.5467
+  type: 'test'
+  ...
+# Subtest: NPC and debris do not blame player; disabled player and retreat never create offenses
+ok 193 - NPC and debris do not blame player; disabled player and retreat never create offenses
+  ---
+  duration_ms: 2.4052
+  type: 'test'
+  ...
+# Subtest: normal orientation works for either contact body order and duplicates form one episode
+ok 194 - normal orientation works for either contact body order and duplicates form one episode
+  ---
+  duration_ms: 0.685
+  type: 'test'
+  ...
+# Subtest: NPC shoving a stationary player into a prop on the following tick remains uncharged
+ok 195 - NPC shoving a stationary player into a prop on the following tick remains uncharged
+  ---
+  duration_ms: 0.532
+  type: 'test'
+  ...
+# Subtest: distant anchored colliders reactivate before an actor sweep; detached bodies remain physical
+ok 196 - distant anchored colliders reactivate before an actor sweep; detached bodies remain physical
+  ---
+  duration_ms: 0.8721
+  type: 'test'
+  ...
+# Subtest: reverse travel hits physically, grazing uses normal speed rather than speedometer
+ok 197 - reverse travel hits physically, grazing uses normal speed rather than speedometer
+  ---
+  duration_ms: 0.5922
+  type: 'test'
+  ...
+# Subtest: 5s simulated lifetime, fade, oldest eviction, reset and repeated dispose
+ok 198 - 5s simulated lifetime, fade, oldest eviction, reset and repeated dispose
+  ---
+  duration_ms: 3.9308
+  type: 'test'
+  ...
+# Subtest: seed42 scene has all types, destroyed signal stays dark across phases/quality, reset and resources
+ok 199 - seed42 scene has all types, destroyed signal stays dark across phases/quality, reset and resources
+  ---
+  duration_ms: 717.5144
+  type: 'test'
+  ...
+# Subtest: whole prop footprints fit sidewalks and avoid roads, buildings, signals, trees and rotated obstacles
+ok 200 - whole prop footprints fit sidewalks and avoid roads, buildings, signals, trees and rotated obstacles
+  ---
+  duration_ms: 1863.9806
+  type: 'test'
+  ...
+# Subtest: narrow and completely occupied sidewalks skip impossible placements
+ok 201 - narrow and completely occupied sidewalks skip impossible placements
+  ---
+  duration_ms: 60.0463
+  type: 'test'
+  ...
+# Subtest: shared models including benches fit envelopes, stand on the surface, and dispose once over ten rebuilds
+ok 202 - shared models including benches fit envelopes, stand on the surface, and dispose once over ten rebuilds
+  ---
+  duration_ms: 757.043
+  type: 'test'
+  ...
+# Subtest: tire smoke requires a stronger grounded slip than ordinary track skidding
+ok 203 - tire smoke requires a stronger grounded slip than ordinary track skidding
+  ---
+  duration_ms: 1.3345
+  type: 'test'
+  ...
+# Subtest: cloud particles fade in alpha while growing instead of shrinking into points
+ok 204 - cloud particles fade in alpha while growing instead of shrinking into points
+  ---
+  duration_ms: 8.7839
+  type: 'test'
+  ...
+# Subtest: emitters confirm slip, honor role/distance budgets, and retain particles when sources vanish
+ok 205 - emitters confirm slip, honor role/distance budgets, and retain particles when sources vanish
+  ---
+  duration_ms: 8.5492
+  type: 'test'
+  ...
+# Subtest: low quality and invalid/distant emitters stay within fixed particle budgets
+ok 206 - low quality and invalid/distant emitters stay within fixed particle budgets
+  ---
+  duration_ms: 11.1289
+  type: 'test'
+  ...
+# Subtest: segment cross sections share identical edges and remain finite on straight and curved paths
+ok 207 - segment cross sections share identical edges and remain finite on straight and curved paths
+  ---
+  duration_ms: 3.2694
+  type: 'test'
+  ...
+# Subtest: sections follow the visible road and sidewalk elevations, including transitions
+ok 208 - sections follow the visible road and sidewalk elevations, including transitions
+  ---
+  duration_ms: 52.9676
+  type: 'test'
+  ...
+# Subtest: threshold calibration rejects a measured gentle turn and accepts a sustained physical skid
+ok 209 - threshold calibration rejects a measured gentle turn and accepts a sustained physical skid
+  ---
+  duration_ms: 243.892
+  type: 'test'
+  ...
+# Subtest: zero movement and invalid positions create no non-finite geometry
+ok 210 - zero movement and invalid positions create no non-finite geometry
+  ---
+  duration_ms: 0.9578
+  type: 'test'
+  ...
+# Subtest: real discontinuities and disable/reset terminate strips
+ok 211 - real discontinuities and disable/reset terminate strips
+  ---
+  duration_ms: 1.5291
+  type: 'test'
+  ...
+# Subtest: position jump of at least 4m closes the old strip and starts a fresh one
+ok 212 - position jump of at least 4m closes the old strip and starts a fresh one
+  ---
+  duration_ms: 2.2196
+  type: 'test'
+  ...
+# Subtest: slip hysteresis keeps a strip connected across threshold fluctuations
+ok 213 - slip hysteresis keeps a strip connected across threshold fluctuations
+  ---
+  duration_ms: 3.1573
+  type: 'test'
+  ...
+# Subtest: straight acceleration and mild cornering do not leave tracks; sustained hard slides do
+ok 214 - straight acceleration and mild cornering do not leave tracks; sustained hard slides do
+  ---
+  duration_ms: 1.666
+  type: 'test'
+  ...
+# Subtest: reverse starts a new strip instead of connecting across the direction change
+ok 215 - reverse starts a new strip instead of connecting across the direction change
+  ---
+  duration_ms: 4.2887
+  type: 'test'
+  ...
+# Subtest: simulation time advances with stopped wheels and prepareRender publishes it
+ok 216 - simulation time advances with stopped wheels and prepareRender publishes it
+  ---
+  duration_ms: 0.6275
+  type: 'test'
+  ...
+# Subtest: multiple vehicle sources share one clock and retain independent wheel strips
+ok 217 - multiple vehicle sources share one clock and retain independent wheel strips
+  ---
+  duration_ms: 1.1063
+  type: 'test'
+  ...
+# Subtest: prepareRender publishes changed geometry attributes and the bounded draw range
+ok 218 - prepareRender publishes changed geometry attributes and the bounded draw range
+  ---
+  duration_ms: 1.0144
+  type: 'test'
+  ...
+# Subtest: actual end caps fade, internal joins do not, and age is interpolated per cross section
+ok 219 - actual end caps fade, internal joins do not, and age is interpolated per cross section
+  ---
+  duration_ms: 0.259
+  type: 'test'
+  ...
+# Subtest: terminal cap uses up to 0.5m and limits short-strip fade to strip length
+ok 220 - terminal cap uses up to 0.5m and limits short-strip fade to strip length
+  ---
+  duration_ms: 0.4022
+  type: 'test'
+  ...
+# Subtest: full live buffer embeds terminal fade without overwriting its visible segment
+ok 221 - full live buffer embeds terminal fade without overwriting its visible segment
+  ---
+  duration_ms: 0.4318
+  type: 'test'
+  ...
+# Subtest: four-wheel maximum-rate ring does not overwrite a visible segment before 45 seconds
+ok 222 - four-wheel maximum-rate ring does not overwrite a visible segment before 45 seconds
+  ---
+  duration_ms: 62.4355
+  type: 'test'
+  ...
+# Subtest: curb subdivision covers both flat surfaces without bridging, in either direction and obliquely
+ok 223 - curb subdivision covers both flat surfaces without bridging, in either direction and obliquely
+  ---
+  duration_ms: 12.7997
+  type: 'test'
+  ...
+# Subtest: surface-aware terminal caps cross the curb, and clipping cannot overwrite a live ring slot
+ok 224 - surface-aware terminal caps cross the curb, and clipping cannot overwrite a live ring slot
+  ---
+  duration_ms: 22.0094
+  type: 'test'
+  ...
+# Subtest: right lanes have independent world coordinates in all four directions
+ok 225 - right lanes have independent world coordinates in all four directions
+  ---
+  duration_ms: 10.1556
+  type: 'test'
+  ...
+# Subtest: city street graph is connected, directed into right-side lanes, and supports varied seeded destinations
+ok 226 - city street graph is connected, directed into right-side lanes, and supports varied seeded destinations
+  ---
+  duration_ms: 64.4394
+  type: 'test'
+  ...
+# Subtest: no-path and invalid destinations fail safely without non-finite route points
+ok 227 - no-path and invalid destinations fail safely without non-finite route points
+  ---
+  duration_ms: 0.2855
+  type: 'test'
+  ...
+# Subtest: detour search avoids returning through the blocked junction while retaining the destination
+ok 228 - detour search avoids returning through the blocked junction while retaining the destination
+  ---
+  duration_ms: 27.2008
+  type: 'test'
+  ...
+# Subtest: six hybrid AI cars follow varied road paths and replan for two simulated minutes
+ok 229 - six hybrid AI cars follow varied road paths and replan for two simulated minutes
+  ---
+  duration_ms: 813.313
+  type: 'test'
+  ...
+# Subtest: AI brakes for a stationary player sharing its lane
+ok 230 - AI brakes for a stationary player sharing its lane
+  ---
+  duration_ms: 108.2795
+  type: 'test'
+  ...
+# Subtest: AI detects a stationary leader independently of its commanded speed and passes when a corridor is clear
+ok 231 - AI detects a stationary leader independently of its commanded speed and passes when a corridor is clear
+  ---
+  duration_ms: 83.3558
+  type: 'test'
+  ...
+# Subtest: AI waits instead of entering occupied passing lanes when the route corridor is blocked
+ok 232 - AI waits instead of entering occupied passing lanes when the route corridor is blocked
+  ---
+  duration_ms: 201.1309
+  type: 'test'
+  ...
+# Subtest: conflicting paths reserve the same junction for one car with stable id priority
+ok 233 - conflicting paths reserve the same junction for one car with stable id priority
+  ---
+  duration_ms: 21.9238
+  type: 'test'
+  ...
+# Subtest: conflicting physical traffic crosses a reserved junction without chassis contact
+ok 234 - conflicting physical traffic crosses a reserved junction without chassis contact
+  ---
+  duration_ms: 78.7508
+  type: 'test'
+  ...
+# Subtest: escape destination prefers cover and avoids an immediate turn back into the player
+ok 235 - escape destination prefers cover and avoids an immediate turn back into the player
+  ---
+  duration_ms: 10.0843
+  type: 'test'
+  ...
+# Subtest: a real player impact triggers fast escape, survives logical LOD, then resumes normal driving
+ok 236 - a real player impact triggers fast escape, survives logical LOD, then resumes normal driving
+  ---
+  duration_ms: 229.0889
+  type: 'test'
+  ...
+# Subtest: touching without an impact does not trigger escape, reset cancels an active escape
+ok 237 - touching without an impact does not trigger escape, reset cancels an active escape
+  ---
+  duration_ms: 23.8697
+  type: 'test'
+  ...
+# Subtest: escape ignores a red light while normal driving resumes signal compliance
+ok 238 - escape ignores a red light while normal driving resumes signal compliance
+  ---
+  duration_ms: 90.6845
+  type: 'test'
+  ...
+# Subtest: front and side player impacts release contact before the NPC accelerates away
+ok 239 - front and side player impacts release contact before the NPC accelerates away
+  ---
+  duration_ms: 410.0215
+  type: 'test'
+  ...
+# Subtest: ignoring signs during escape does not disable braking for an occupied lane
+ok 240 - ignoring signs during escape does not disable braking for an occupied lane
+  ---
+  duration_ms: 33.7262
+  type: 'test'
+  ...
+# TRAFFIC_STOP_AUDIT {"count":592,"unexplained":0,"reasonCounts":{"intersection-reservation":143,"turn-staging":61,"oncoming-priority":70,"signal-red":260,"queue-wait":191,"blocked-by-leader":160,"signal-yellow":18,"blocked-junction-exit":7,"junction-priority":1},"controllerStall":[],"stagingOnly":[]}
+# TRAFFIC_FLOW_PROFILE {"samples":300,"aiMsP95":1.4086000000006607,"prepareMsP95":0.6856999999999971,"worldStepMsP95":0.36859999999978754,"physicalMax":6,"logicalMax":59,"physicalAndLogicalBothObserved":true}
+# Subtest: overhead city traffic stays alive for five minutes, including offscreen cars
+ok 241 - overhead city traffic stays alive for five minutes, including offscreen cars
+  ---
+  duration_ms: 20280.1571
+  type: 'test'
+  ...
+# Subtest: cause-aware traffic waits hold across city seeds and road widths
+ok 242 - cause-aware traffic waits hold across city seeds and road widths
+  ---
+  duration_ms: 4865.7712
+  type: 'test'
+  ...
+# Subtest: traffic resumes after reducing a full 300-car congestion load
+ok 243 - traffic resumes after reducing a full 300-car congestion load
+  ---
+  duration_ms: 3097.0315
+  type: 'test'
+  ...
+# Subtest: opposing straight traffic and four right turns can share a junction, crossing traffic cannot
+ok 244 - opposing straight traffic and four right turns can share a junction, crossing traffic cannot
+  ---
+  duration_ms: 9.6787
+  type: 'test'
+  ...
+# Subtest: left turns yield to opposing straight traffic independently of request age
+ok 245 - left turns yield to opposing straight traffic independently of request age
+  ---
+  duration_ms: 0.7045
+  type: 'test'
+  ...
+# Subtest: smooth turn paths join the correct lanes and lookahead advances monotonically
+ok 246 - smooth turn paths join the correct lanes and lookahead advances monotonically
+  ---
+  duration_ms: 3.351
+  type: 'test'
+  ...
+# Subtest: turn staging preserves a safe pass-by gap on the curb side at all road widths
+ok 247 - turn staging preserves a safe pass-by gap on the curb side at all road widths
+  ---
+  duration_ms: 0.4161
+  type: 'test'
+  ...
+# Subtest: opposing straight cars start together and occupy the junction concurrently in both LOD modes
+ok 248 - opposing straight cars start together and occupy the junction concurrently in both LOD modes
+  ---
+  duration_ms: 368.7448
+  type: 'test'
+  ...
+# Subtest: an older left-turn request yields to opposing straight traffic then resumes safely
+ok 249 - an older left-turn request yields to opposing straight traffic then resumes safely
+  ---
+  duration_ms: 300.3554
+  type: 'test'
+  ...
+# Subtest: a same-lane platoon starts its follower before the leader has left the junction
+ok 250 - a same-lane platoon starts its follower before the leader has left the junction
+  ---
+  duration_ms: 55.4905
+  type: 'test'
+  ...
+# Subtest: followers enter behind left and right turns without waiting for the whole maneuver
+ok 251 - followers enter behind left and right turns without waiting for the whole maneuver
+  ---
+  duration_ms: 393.9884
+  type: 'test'
+  ...
+# Subtest: four simultaneous right turns clear onto their own lanes without contact
+ok 252 - four simultaneous right turns clear onto their own lanes without contact
+  ---
+  duration_ms: 158.67
+  type: 'test'
+  ...
+# Subtest: a left turn gives up an unentered permit when oncoming straight traffic approaches
+ok 253 - a left turn gives up an unentered permit when oncoming straight traffic approaches
+  ---
+  duration_ms: 163.0969
+  type: 'test'
+  ...
+# Subtest: a following straight car passes the staged left-turn vehicle on its curb side
+ok 254 - a following straight car passes the staged left-turn vehicle on its curb side
+  ---
+  duration_ms: 61.3543
+  type: 'test'
+  ...
+# Subtest: a stationary upstream oncoming queue does not deadlock an otherwise clear left turn
+ok 255 - a stationary upstream oncoming queue does not deadlock an otherwise clear left turn
+  ---
+  duration_ms: 22.0298
+  type: 'test'
+  ...
+# Subtest: a cruising left turn brakes in its lane when the staging point is too close or behind
+ok 256 - a cruising left turn brakes in its lane when the staging point is too close or behind
+  ---
+  duration_ms: 346.1907
+  type: 'test'
+  ...
+# Subtest: a right turn has priority over an older unentered conflicting straight permit
+ok 257 - a right turn has priority over an older unentered conflicting straight permit
+  ---
+  duration_ms: 101.3669
+  type: 'test'
+  ...
+# Subtest: right priority does not drive into an already entered conflicting vehicle
+ok 258 - right priority does not drive into an already entered conflicting vehicle
+  ---
+  duration_ms: 11.3747
+  type: 'test'
+  ...
+# Subtest: left and right turns retain the straight cruise target and clear at cruising speed
+ok 259 - left and right turns retain the straight cruise target and clear at cruising speed
+  ---
+  duration_ms: 122.9124
+  type: 'test'
+  ...
+# Subtest: U-turns have straight lead-ins and one semicircle with monotone heading, entirely within the junction
+ok 260 - U-turns have straight lead-ins and one semicircle with monotone heading, entirely within the junction
+  ---
+  duration_ms: 2.8058
+  type: 'test'
+  ...
+# Subtest: physical and logical U-turns exit aligned in the opposite lane without reversing or extra loops
+ok 261 - physical and logical U-turns exit aligned in the opposite lane without reversing or extra loops
+  ---
+  duration_ms: 202.6869
+  type: 'test'
+  ...
+# Subtest: an escaping left turn ignores oncoming priority but retains collision exclusion
+ok 262 - an escaping left turn ignores oncoming priority but retains collision exclusion
+  ---
+  duration_ms: 29.2457
+  type: 'test'
+  ...
+# Subtest: following uses bumper orientation, headway, and reaction closing speed
+ok 263 - following uses bumper orientation, headway, and reaction closing speed
+  ---
+  duration_ms: 1.2865
+  type: 'test'
+  ...
+# Subtest: traffic diagnostics tie a long stationary wait to the measured leader footprint
+ok 264 - traffic diagnostics tie a long stationary wait to the measured leader footprint
+  ---
+  duration_ms: 126.9029
+  type: 'test'
+  ...
+# Subtest: sideways displacement is not route progress, lawful waits reset the stall clock
+ok 265 - sideways displacement is not route progress, lawful waits reset the stall clock
+  ---
+  duration_ms: 0.2328
+  type: 'test'
+  ...
+# Subtest: swept passing checks rear traffic, oncoming traffic, and occupied return corridor
+ok 266 - swept passing checks rear traffic, oncoming traffic, and occupied return corridor
+  ---
+  duration_ms: 1.2755
+  type: 'test'
+  ...
+# Subtest: passing keeps the entire rotated chassis inside narrow road boundaries
+ok 267 - passing keeps the entire rotated chassis inside narrow road boundaries
+  ---
+  duration_ms: 0.9226
+  type: 'test'
+  ...
+# Subtest: passing cannot return with its front bumper beyond the junction stop plane
+ok 268 - passing cannot return with its front bumper beyond the junction stop plane
+  ---
+  duration_ms: 0.2075
+  type: 'test'
+  ...
+# Subtest: red queues never pass and resume within three seconds of green in both LOD modes
+ok 269 - red queues never pass and resume within three seconds of green in both LOD modes
+  ---
+  duration_ms: 251.4393
+  type: 'test'
+  ...
+# Subtest: recovery sees oncoming cars beyond the immediate following cells
+ok 270 - recovery sees oncoming cars beyond the immediate following cells
+  ---
+  duration_ms: 27.174
+  type: 'test'
+  ...
+# Subtest: two touching physical cars separate and regain route progress within fifteen seconds
+ok 271 - two touching physical cars separate and regain route progress within fifteen seconds
+  ---
+  duration_ms: 216.9635
+  type: 'test'
+  ...
+# Subtest: stalled vehicle without a leader reevaluates its directed route after three seconds
+ok 272 - stalled vehicle without a leader reevaluates its directed route after three seconds
+  ---
+  duration_ms: 19.7483
+  type: 'test'
+  ...
+# Subtest: a physically displaced NPC returns to its directed lane without resetting its identity
+ok 273 - a physically displaced NPC returns to its directed lane without resetting its identity
+  ---
+  duration_ms: 81.11
+  type: 'test'
+  ...
+# Subtest: a clear passing maneuver moves past its blocker and returns to the right lane
+ok 274 - a clear passing maneuver moves past its blocker and returns to the right lane
+  ---
+  duration_ms: 141.826
+  type: 'test'
+  ...
+# Subtest: a fully occupied retreat corridor keeps a contact jam waiting and is retried
+ok 275 - a fully occupied retreat corridor keeps a contact jam waiting and is retried
+  ---
+  duration_ms: 14.2127
+  type: 'test'
+  ...
+# Subtest: physical and logical followers move within three seconds of their leader clearing
+ok 276 - physical and logical followers move within three seconds of their leader clearing
+  ---
+  duration_ms: 83.7764
+  type: 'test'
+  ...
+# Subtest: blocked dead-end exit waits when no alternative exists and resumes when cleared
+ok 277 - blocked dead-end exit waits when no alternative exists and resumes when cleared
+  ---
+  duration_ms: 36.8855
+  type: 'test'
+  ...
+# Subtest: blocked junction exit selects a clear detour to the same goal in physical and logical traffic
+ok 278 - blocked junction exit selects a clear detour to the same goal in physical and logical traffic
+  ---
+  duration_ms: 95.123
+  type: 'test'
+  ...
+# Subtest: all four occupied exits wait and a newly cleared side street is retried
+ok 279 - all four occupied exits wait and a newly cleared side street is retried
+  ---
+  duration_ms: 31.2997
+  type: 'test'
+  ...
+# Subtest: blocked exit never changes a red-light decision or an already entered junction path
+ok 280 - blocked exit never changes a red-light decision or an already entered junction path
+  ---
+  duration_ms: 35.0155
+  type: 'test'
+  ...
+# Subtest: entered reservation survives timeouts and route advancement until rear bumper clears
+ok 281 - entered reservation survives timeouts and route advancement until rear bumper clears
+  ---
+  duration_ms: 18.8989
+  type: 'test'
+  ...
+# Subtest: reservation decisions are independent of state iteration order and honor request age
+ok 282 - reservation decisions are independent of state iteration order and honor request age
+  ---
+  duration_ms: 27.944
+  type: 'test'
+  ...
+# Subtest: a junction owner finishes turning instead of following the opposing waiting lane
+ok 283 - a junction owner finishes turning instead of following the opposing waiting lane
+  ---
+  duration_ms: 60.8178
+  type: 'test'
+  ...
+# Subtest: followers close a large gap to a lawful queue instead of stopping with the leader
+ok 284 - followers close a large gap to a lawful queue instead of stopping with the leader
+  ---
+  duration_ms: 50.158
+  type: 'test'
+  ...
+# Subtest: physical zone has hysteresis and switches without replacing civilian geometry
+ok 285 - physical zone has hysteresis and switches without replacing civilian geometry
+  ---
+  duration_ms: 60.8384
+  type: 'test'
+  ...
+# Subtest: fast approaching player activates collision physics before reaching the ordinary zone
+ok 286 - fast approaching player activates collision physics before reaching the ordinary zone
+  ---
+  duration_ms: 25.627
+  type: 'test'
+  ...
+# Subtest: a remote collision and passing maneuver cannot retain full physics indefinitely
+ok 287 - a remote collision and passing maneuver cannot retain full physics indefinitely
+  ---
+  duration_ms: 9.4246
+  type: 'test'
+  ...
+# Subtest: real-city NPC spawn and reset retain the independently expected right side at every width
+ok 288 - real-city NPC spawn and reset retain the independently expected right side at every width
+  ---
+  duration_ms: 612.7567
+  type: 'test'
+  ...
+# Subtest: split single-car stepping matches the standalone solver and uses one world integration
+ok 289 - split single-car stepping matches the standalone solver and uses one world integration
+  ---
+  duration_ms: 70.6877
+  type: 'test'
+  ...
+# Subtest: two shared-world cars exchange momentum in a real chassis contact
+ok 290 - two shared-world cars exchange momentum in a real chassis contact
+  ---
+  duration_ms: 13.2542
+  type: 'test'
+  ...
+# Subtest: front, rear, and side contacts transfer momentum through the same chassis solver
+ok 291 - front, rear, and side contacts transfer momentum through the same chassis solver
+  ---
+  duration_ms: 17.3193
+  type: 'test'
+  ...
+# Subtest: traffic count changes are fixed-step queued and repeated resizing cleans up bodies
+ok 292 - traffic count changes are fixed-step queued and repeated resizing cleans up bodies
+  ---
+  duration_ms: 196.5739
+  type: 'test'
+  ...
+# Subtest: traffic count configuration supports the tenfold 60 default and 300 maximum
+ok 293 - traffic count configuration supports the tenfold 60 default and 300 maximum
+  ---
+  duration_ms: 4709.9979
+  type: 'test'
+  ...
+# Subtest: blocked insertion retains pending count, retries after clearance, and cancels on reduction
+ok 294 - blocked insertion retains pending count, retries after clearance, and cancels on reduction
+  ---
+  duration_ms: 5.6726
+  type: 'test'
+  ...
+# Subtest: repeated resets preserve NPC identities and place every oriented footprint safely
+ok 295 - repeated resets preserve NPC identities and place every oriented footprint safely
+  ---
+  duration_ms: 9.2945
+  type: 'test'
+  ...
+# Subtest: distant traffic swaps to logical route motion and becomes physical near the player
+ok 296 - distant traffic swaps to logical route motion and becomes physical near the player
+  ---
+  duration_ms: 6.686
+  type: 'test'
+  ...
+# Subtest: physical LOD does not cascade across remote neighbors or retain a ground-only contact
+ok 297 - physical LOD does not cascade across remote neighbors or retain a ground-only contact
+  ---
+  duration_ms: 5.153
+  type: 'test'
+  ...
+# Subtest: twenty traffic cycles reuse bounded storage and invalidate old actors/listeners
+ok 298 - twenty traffic cycles reuse bounded storage and invalidate old actors/listeners
+  ---
+  duration_ms: 34918.168
+  type: 'test'
+  ...
+# Subtest: new world and visual generations retire both active and idle vehicle storage
+ok 299 - new world and visual generations retire both active and idle vehicle storage
+  ---
+  duration_ms: 16.0431
+  type: 'test'
+  ...
+# Subtest: a reused police body has fresh contact episodes, damage and one listener
+ok 300 - a reused police body has fresh contact episodes, damage and one listener
+  ---
+  duration_ms: 21.6583
+  type: 'test'
+  ...
+# Subtest: traffic signals control internal intersections and leave boundary nodes on priority rules
+ok 301 - traffic signals control internal intersections and leave boundary nodes on priority rules
+  ---
+  duration_ms: 43.7874
+  type: 'test'
+  ...
+# Subtest: signal phases are deterministic and conflicting axes never have green together
+ok 302 - signal phases are deterministic and conflicting axes never have green together
+  ---
+  duration_ms: 5.6635
+  type: 'test'
+  ...
+# Subtest: each green lasts sixteen seconds and budgets a full city block with start and turn allowance
+ok 303 - each green lasts sixteen seconds and budgets a full city block with start and turn allowance
+  ---
+  duration_ms: 31.2594
+  type: 'test'
+  ...
+# Subtest: spawn slots stay clear of intersections and are spread across directed lanes deterministically
+ok 304 - spawn slots stay clear of intersections and are spread across directed lanes deterministically
+  ---
+  duration_ms: 2.0854
+  type: 'test'
+  ...
+# Subtest: oriented spawn footprint rejects collision and preserves a two-metre same-lane gap
+ok 305 - oriented spawn footprint rejects collision and preserves a two-metre same-lane gap
+  ---
+  duration_ms: 0.5114
+  type: 'test'
+  ...
+# Subtest: a fast follower needs braking space and static obstacle footprints block insertion
+ok 306 - a fast follower needs braking space and static obstacle footprints block insertion
+  ---
+  duration_ms: 0.2235
+  type: 'test'
+  ...
+# Subtest: deterministic spawn allocation fits 6, 60 and 300 cars without footprint conflicts at widths 12, 15 and 30
+ok 307 - deterministic spawn allocation fits 6, 60 and 300 cars without footprint conflicts at widths 12, 15 and 30
+  ---
+  duration_ms: 5470.3422
+  type: 'test'
+  ...
+# Subtest: city-wide spawn slots use every available sector and are deterministic
+ok 308 - city-wide spawn slots use every available sector and are deterministic
+  ---
+  duration_ms: 6.9039
+  type: 'test'
+  ...
+# Subtest: speeding requires one continuous second and resets before activation in the hysteresis band
+ok 309 - speeding requires one continuous second and resets before activation in the hysteresis band
+  ---
+  duration_ms: 2.7928
+  type: 'test'
+  ...
+# Subtest: speeding repeats after five seconds and clears below the reset threshold
+ok 310 - speeding repeats after five seconds and clears below the reset threshold
+  ---
+  duration_ms: 19.0099
+  type: 'test'
+  ...
+# Subtest: red light offense is detected only while crossing its stop plane in the lane
+ok 311 - red light offense is detected only while crossing its stop plane in the lane
+  ---
+  duration_ms: 0.3696
+  type: 'test'
+  ...
+# Subtest: red light crossing works in all four cardinal directions and ignores wrong lanes and green
+ok 312 - red light crossing works in all four cardinal directions and ignores wrong lanes and green
+  ---
+  duration_ms: 1.439
+  type: 'test'
+  ...
+# Subtest: collision event requires the player to contribute sufficient closing speed and is one per contact episode
+ok 313 - collision event requires the player to contribute sufficient closing speed and is one per contact episode
+  ---
+  duration_ms: 0.4234
+  type: 'test'
+  ...
+# Subtest: collision normal is oriented correctly when the player is the second body
+ok 314 - collision normal is oriented correctly when the player is the second body
+  ---
+  duration_ms: 0.1863
+  type: 'test'
+  ...
+# Subtest: a moving police car that hits a stationary player does not blame the player
+ok 315 - a moving police car that hits a stationary player does not blame the player
+  ---
+  duration_ms: 0.1973
+  type: 'test'
+  ...
+# Subtest: detector reset removes speed and collision state
+ok 316 - detector reset removes speed and collision state
+  ---
+  duration_ms: 0.1969
+  type: 'test'
+  ...
+# Subtest: traffic initializes repeatable AI routes on actual city streets
+ok 317 - traffic initializes repeatable AI routes on actual city streets
+  ---
+  duration_ms: 99.1374
+  type: 'test'
+  ...
+# Subtest: traffic waits at a controlled red signal before reserving the intersection
+ok 318 - traffic waits at a controlled red signal before reserving the intersection
+  ---
+  duration_ms: 43.7536
+  type: 'test'
+  ...
+# Subtest: red signal stops the NPC front bumper before its stop plane and green releases it
+ok 319 - red signal stops the NPC front bumper before its stop plane and green releases it
+  ---
+  duration_ms: 153.451
+  type: 'test'
+  ...
+# Subtest: red signal does not stop an NPC whose front bumper has entered the junction
+ok 320 - red signal does not stop an NPC whose front bumper has entered the junction
+  ---
+  duration_ms: 27.5651
+  type: 'test'
+  ...
+# Subtest: tree placements are deterministic, spread across town and do not mutate the city plan
+ok 321 - tree placements are deterministic, spread across town and do not mutate the city plan
+  ---
+  duration_ms: 253.5552
+  type: 'test'
+  ...
+# Subtest: tree crowns and trunks fit sidewalk pockets clear of asphalt, buildings, spawn and signals
+ok 322 - tree crowns and trunks fit sidewalk pockets clear of asphalt, buildings, spawn and signals
+  ---
+  duration_ms: 141.1463
+  type: 'test'
+  ...
+# Subtest: rotated damage obstacles exclude nearby tree crowns
+ok 323 - rotated damage obstacles exclude nearby tree crowns
+  ---
+  duration_ms: 65.5331
+  type: 'test'
+  ...
+# Subtest: repair restores damage and detached wheels without resetting chassis, motion, time, or tuning
+ok 324 - repair restores damage and detached wheels without resetting chassis, motion, time, or tuning
+  ---
+  duration_ms: 8.5843
+  type: 'test'
+  ...
+# Subtest: appearance reserves the landing stage until safe, pauses without dt and restores transforms
+ok 325 - appearance reserves the landing stage until safe, pauses without dt and restores transforms
+  ---
+  duration_ms: 1.7521
+  type: 'test'
+  ...
+# Subtest: cloud pool has bounded slots and a player reservation; reset and dispose release resources
+ok 326 - cloud pool has bounded slots and a player reservation; reset and dispose release resources
+  ---
+  duration_ms: 2.9664
+  type: 'test'
+  ...
+# Subtest: coordinate actor is created once, reserves occupancy, has no collision until safe landing and reuses clean storage
+ok 327 - coordinate actor is created once, reserves occupancy, has no collision until safe landing and reuses clean storage
+  ---
+  duration_ms: 156.2831
+  type: 'test'
+  ...
+# Subtest: reset cancels appearing actors and logical/physical culling never starts a new effect
+ok 328 - reset cancels appearing actors and logical/physical culling never starts a new effect
+  ---
+  duration_ms: 63.0617
+  type: 'test'
+  ...
+# Subtest: warm-up yields between factories, keeps storage idle, and is idempotent
+ok 329 - warm-up yields between factories, keeps storage idle, and is idempotent
+  ---
+  duration_ms: 181.6792
+  type: 'test'
+  ...
+# Subtest: frame cadence bounds activation and never catches up hidden or long frames
+ok 330 - frame cadence bounds activation and never catches up hidden or long frames
+  ---
+  duration_ms: 13662.8795
+  type: 'test'
+  ...
+# Subtest: full prepared capacity and repeated arbitrary removal never evict variants
+ok 331 - full prepared capacity and repeated arbitrary removal never evict variants
+  ---
+  duration_ms: 322.4813
+  type: 'test'
+  ...
+# Subtest: jittered frames respect the minimum interval without accumulating spawn debt
+ok 332 - jittered frames respect the minimum interval without accumulating spawn debt
+  ---
+  duration_ms: 14.6905
+  type: 'test'
+  ...
+# Subtest: count cancellation and blocked searches stay bounded and retry safely
+ok 333 - count cancellation and blocked searches stay bounded and retry safely
+  ---
+  duration_ms: 11.6986
+  type: 'test'
+  ...
+# Subtest: warm-up cancellation, errors, retry and new world generations are safe
+ok 334 - warm-up cancellation, errors, retry and new world generations are safe
+  ---
+  duration_ms: 36.6024
+  type: 'test'
+  ...
+# Subtest: visual preparation uploads shared civilian variants and each unique police body once
+ok 335 - visual preparation uploads shared civilian variants and each unique police body once
+  ---
+  duration_ms: 13.6868
+  type: 'test'
+  ...
+# Subtest: four springs hold the chassis above the ground without idle drift
+ok 336 - four springs hold the chassis above the ground without idle drift
+  ---
+  duration_ms: 188.6796
+  type: 'test'
+  ...
+# Subtest: accelerates, physically turns with body roll, brakes to a stop
+ok 337 - accelerates, physically turns with body roll, brakes to a stop
+  ---
+  duration_ms: 114.1511
+  type: 'test'
+  ...
+# Subtest: medium-speed steering responds quickly and holds a stable arcade turn
+ok 338 - medium-speed steering responds quickly and holds a stable arcade turn
+  ---
+  duration_ms: 29.0895
+  type: 'test'
+  ...
+# Subtest: 50 km/h steering meets response, heading, and lateral-slip targets
+ok 339 - 50 km/h steering meets response, heading, and lateral-slip targets
+  ---
+  duration_ms: 19.6285
+  type: 'test'
+  ...
+# Subtest: coasting from 50 km/h retains 60–90% speed over one second
+ok 340 - coasting from 50 km/h retains 60–90% speed over one second
+  ---
+  duration_ms: 12.147
+  type: 'test'
+  ...
+# Subtest: partial damage still reduces throttle response
+ok 341 - partial damage still reduces throttle response
+  ---
+  duration_ms: 38.1731
+  type: 'test'
+  ...
+# Subtest: handbrake keeps a controllable, grounded rear slide
+ok 342 - handbrake keeps a controllable, grounded rear slide
+  ---
+  duration_ms: 33.545
+  type: 'test'
+  ...
+# Subtest: three-wheel handling keeps stepping without support or drive from the detached wheel
+ok 343 - three-wheel handling keeps stepping without support or drive from the detached wheel
+  ---
+  duration_ms: 45.1535
+  type: 'test'
+  ...
+# Subtest: steering and tire forces do not add yaw while the car is airborne
+ok 344 - steering and tire forces do not add yaw while the car is airborne
+  ---
+  duration_ms: 2.0146
+  type: 'test'
+  ...
+# Subtest: full-lock arcade turn at top speed keeps all tires close to the ground
+ok 345 - full-lock arcade turn at top speed keeps all tires close to the ground
+  ---
+  duration_ms: 52.8354
+  type: 'test'
+  ...
+# Subtest: reverse and reset remain functional after a hard maneuver
+ok 346 - reverse and reset remain functional after a hard maneuver
+  ---
+  duration_ms: 35.0949
+  type: 'test'
+  ...
+# Subtest: fixed step has similar acceleration at 60 Hz and 120 Hz
+ok 347 - fixed step has similar acceleration at 60 Hz and 120 Hz
+  ---
+  duration_ms: 39.6673
+  type: 'test'
+  ...
+# Subtest: tuning extremes stay finite through prolonged steering and braking
+ok 348 - tuning extremes stay finite through prolonged steering and braking
+  ---
+  duration_ms: 300.972
+  type: 'test'
+  ...
+# Subtest: first offense blinks as a warning, then a repeat confirms one star
+ok 349 - first offense blinks as a warning, then a repeat confirms one star
+  ---
+  duration_ms: 1.7556
+  type: 'test'
+  ...
+# Subtest: warning expires and the next offense starts a fresh warning
+ok 350 - warning expires and the next offense starts a fresh warning
+  ---
+  duration_ms: 0.3644
+  type: 'test'
+  ...
+# Subtest: only one event is accepted per cooldown and collision severity wins ties
+ok 351 - only one event is accepted per cooldown and collision severity wins ties
+  ---
+  duration_ms: 1.6783
+  type: 'test'
+  ...
+# Subtest: wanted system caps at six stars and reset clears its state
+ok 352 - wanted system caps at six stars and reset clears its state
+  ---
+  duration_ms: 1.1519
+  type: 'test'
+  ...
+# Subtest: warning at its exact deadline expires before a new offense, and snapshots are isolated
+ok 353 - warning at its exact deadline expires before a new offense, and snapshots are isolated
+  ---
+  duration_ms: 0.2289
+  type: 'test'
+  ...
+# Subtest: property crime immediately fills one star, clears warnings and keeps cooldown and cap
+ok 354 - property crime immediately fills one star, clears warnings and keeps cooldown and cap
+  ---
+  duration_ms: 0.2232
+  type: 'test'
+  ...
+# Subtest: property collision priority is independent of input order and below police
+ok 355 - property collision priority is independent of input order and below police
+  ---
+  duration_ms: 0.2568
+  type: 'test'
+  ...
+1..355
+# tests 355
+# suites 0
+# pass 355
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 153829.2793

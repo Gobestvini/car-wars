@@ -11,7 +11,7 @@ const distance = (p, r) => Math.hypot(Math.max(r.minX-p.x,0,p.x-r.maxX),Math.max
 const simulation = () => ({ addStaticBox: s=>s, addStaticConvex: s=>s, removeStaticBox() {} });
 
 test('whole prop footprints fit sidewalks and avoid roads, buildings, signals, trees and rotated obstacles', () => {
-  for (const seed of [1,20261005,928172]) for (const roadWidth of [12,15,30]) {
+  for (const seed of [42,7,123,1,20261005,928172]) for (const roadWidth of [12,15,30]) {
     const plan = createCityPlan(seed,{roadWidth}), original=JSON.stringify(plan);
     const trees = createTreePlacements(plan), signals = trees.slice(0,10).map(p=>({x:p.x+4,z:p.z}));
     const damageObstacles = [[-66,-5,4,8,2,Math.PI/4]];
@@ -20,7 +20,7 @@ test('whole prop footprints fit sidewalks and avoid roads, buildings, signals, t
     assert.deepEqual(placements,createStreetPropPlacements(plan,args)); assert.equal(JSON.stringify(plan),original);
     const roads=createRoadSurfaceRectangles(plan,plan.bounds,roadWidth,{centerX:0,centerZ:0,width:50,depth:50});
     const sample=createSurfaceHeightSampler(plan,0);
-    for(const type of ['lamp','bin']) {
+    for(const type of ['lamp','bin','bench']) {
       const selected=placements.filter(p=>p.type===type); assert.ok(selected.length>10 && selected.length<=STREET_PROPS[type].maxCount);
       assert.ok(selected.some(p=>p.x<0) && selected.some(p=>p.x>0) && selected.some(p=>p.z<0) && selected.some(p=>p.z>0));
     }
@@ -46,16 +46,16 @@ test('narrow and completely occupied sidewalks skip impossible placements',()=>{
   assert.deepEqual(createStreetPropPlacements(createCityPlan(),{damageObstacles:[[0,0,1000,1000]]}),[]);
 });
 
-test('eight shared model batches fit declared envelopes, stand on the surface, and dispose once over ten rebuilds',()=>{
+test('shared models including benches fit envelopes, stand on the surface, and dispose once over ten rebuilds',()=>{
   const scene=new THREE.Scene(),plan=createCityPlan(),sample=createSurfaceHeightSampler(plan,0);
   let expected;
   for(let cycle=0;cycle<10;cycle++) {
     const city=createCityScene(scene,simulation(),plan),props=city.streetProps;
     expected ||= props.counts; assert.deepEqual(props.counts,expected);
-    assert.equal(props.batches.length,8); assert.ok(props.counts.lamp>0 && props.counts.bin>0);
+    assert.equal(props.batches.length,18); assert.ok(props.counts.lamp>0 && props.counts.bin>0 && props.counts.bench>0);
     assert.ok(props.batches.every(b=>b.isInstancedMesh && b.material.depthTest));
     assert.equal(props.batches.filter(b=>b.name.includes('lamp')).length,5);
-    for(const type of ['lamp','bin']) {
+    for(const type of ['lamp','bin','bench']) {
       const poses=props.placements.filter(p=>p.type===type),batches=props.batches.filter(b=>b.name.includes(type));
       const vertex=new THREE.Vector3(),matrix=new THREE.Matrix4();
       for(const [index,p] of poses.entries()) {

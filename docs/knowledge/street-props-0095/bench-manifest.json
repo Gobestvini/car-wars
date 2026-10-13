@@ -1,0 +1,19 @@
+{
+  "id": "sidewalk-bench",
+  "source": "Original procedural Three.js geometry in src/city-street-props.js",
+  "date": "2026-10-13",
+  "provenance": "Authored in the project for TASK-0095; no external models, textures or generated raster assets",
+  "engine": "Three.js 0.180.0 / cannon-es 0.20.0",
+  "units": "metres",
+  "dimensions": [1.8, 0.95, 0.64],
+  "origin": "centre of footprint at sidewalk height; +Z faces the road",
+  "materials": {"wood": "#bd8b53, roughness 0.9", "supports": "shared street metal #364960"},
+  "textures": 0,
+  "trianglesPerBench": 120,
+  "maxInstances": 60,
+  "batches": 10,
+  "physics": "4 compound box shapes, mass 70 kg after detachment",
+  "states": ["anchored", "dynamic debris", "0.5 second scale fade", "removed", "reset to anchored"],
+  "visualChecks": ["1440-high-bench.png", "1440-low-bench.png", "390-high-bench.png", "390-low-bench.png"],
+  "validation": "Whole geometry tested against placement radius and sidewalk height; reviewed in real WebGL at desktop and mobile viewport resolutions"
+}

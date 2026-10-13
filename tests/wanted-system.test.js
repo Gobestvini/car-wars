@@ -41,3 +41,25 @@ test('warning at its exact deadline expires before a new offense, and snapshots 
   assert.equal(deadline.pendingStar, 1);
   assert.equal(deadline.stars[0], 'pending');
 });
+
+test('property crime immediately fills one star, clears warnings and keeps cooldown and cap', () => {
+  const wanted = createWantedSystem();
+  wanted.update(.1,[{type:'speeding'}]);
+  const state = wanted.update(.5,[{type:'property-collision'}]);
+  assert.equal(state.level,1); assert.equal(state.pendingStar,null);
+  assert.equal(wanted.update(.1,[{type:'property-collision'}]).level,1);
+  for (let i=0;i<12;i++) wanted.update(.5,[{type:'property-collision'}]);
+  assert.equal(wanted.snapshot().level,6);
+});
+
+test('property collision priority is independent of input order and below police', () => {
+  for (const reverse of [false,true]) {
+    const wanted = createWantedSystem();
+    const events = [{type:'speeding'},{type:'civilian-collision'},{type:'property-collision'}];
+    if (reverse) events.reverse();
+    assert.equal(wanted.update(1,events).level,1);
+    assert.equal(wanted.snapshot().lastViolation,'property-collision');
+    assert.equal(wanted.update(.5,[...events,{type:'police-collision'}]).lastViolation,'police-collision');
+    assert.equal(wanted.snapshot().pendingStar,2);
+  }
+});

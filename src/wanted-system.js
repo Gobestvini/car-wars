@@ -3,6 +3,7 @@ const WARNING_SECONDS = 10;
 const OFFENSE_COOLDOWN = 0.5;
 const PRIORITY = Object.freeze({
   'police-collision': 4,
+  'property-collision': 3.5,
   'civilian-collision': 3,
   'red-light': 2,
   speeding: 1,
@@ -60,7 +61,10 @@ export function createWantedSystem(config = {}) {
 
       lastAcceptedAt = clock;
       lastViolation = event.type;
-      if (warningDeadline === null) {
+      if (event.type === 'property-collision') {
+        level = Math.min(MAX_LEVEL, level + 1);
+        warningDeadline = null;
+      } else if (warningDeadline === null) {
         warningDeadline = clock + warningSeconds;
       } else {
         level++;

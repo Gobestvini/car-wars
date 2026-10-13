@@ -3,6 +3,7 @@ import { createRoundedSidewalkLayout, createRoadSurfaceRectangles } from './road
 export const STREET_PROPS = Object.freeze({
   lamp: Object.freeze({ maxCount: 160, spacing: 12, radius: .96, height: 3.9 }),
   bin: Object.freeze({ maxCount: 80, spacing: 8, radius: .4, height: .9 }),
+  bench: Object.freeze({ maxCount: 60, spacing: 14, radius: .96, height: .96 }),
 });
 const hash = (seed, token) => {
   let value = (seed ^ Math.imul(token + 1, 0x9e3779b1)) >>> 0;
@@ -30,7 +31,7 @@ export function createStreetPropPlacements(plan, { signals = [], trees = [], dam
     const from = nodes.get(edge.from), to = nodes.get(edge.to);
     if (!from || !to) continue;
     const horizontal = Math.abs(to.x - from.x) > Math.abs(to.z - from.z);
-    for (const [typeIndex, type] of ['lamp', 'bin'].entries()) for (let slot = 0; slot < 3; slot++) for (const side of [-1,1]) {
+    for (const [typeIndex, type] of ['lamp', 'bin', 'bench'].entries()) for (let slot = 0; slot < 3; slot++) for (const side of [-1,1]) {
       const spec = STREET_PROPS[type];
       if (plan.sidewalkWidth < spec.radius * 2 + .04) continue;
       const token = hash(plan.seed, edgeIndex * 24 + typeIndex * 6 + slot * 2 + (side + 1) / 2);
@@ -49,7 +50,7 @@ export function createStreetPropPlacements(plan, { signals = [], trees = [], dam
     }
   }
   candidates.sort((a, b) => a.token - b.token || a.x - b.x || a.z - b.z);
-  const counts = { lamp: 0, bin: 0 }, accepted = [];
+  const counts = { lamp: 0, bin: 0, bench: 0 }, accepted = [];
   for (const candidate of candidates) {
     const spec = STREET_PROPS[candidate.type];
     if (counts[candidate.type] >= spec.maxCount) continue;

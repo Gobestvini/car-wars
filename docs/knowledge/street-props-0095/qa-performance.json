@@ -1,0 +1,223 @@
+{
+  "date": "2026-10-13",
+  "durationSeconds": 30,
+  "traffic": 0,
+  "seed": 42,
+  "baselineRef": "90b9e65",
+  "browserFlags": [
+    "--enable-webgl",
+    "--js-flags=--no-opt"
+  ],
+  "baselineDefinition": "Pre-implementation broadphase and no prop colliders; identical geometry, seed, viewport and quality",
+  "profiles": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "mode": "baseline",
+      "frames": 1763,
+      "fps": 58.766666666666666,
+      "p95FrameMs": 17.099999999998545,
+      "p95CpuMs": 3.300000000745058,
+      "p95PhysicsMs": 1.5,
+      "p95PhysicsPerStepMs": 0.7000000011175871,
+      "bodies": 619,
+      "detached": 0
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "mode": "intact",
+      "frames": 1765,
+      "fps": 58.833333333333336,
+      "p95FrameMs": 21.100000000002183,
+      "p95CpuMs": 3.5,
+      "p95PhysicsMs": 1.699999999254942,
+      "p95PhysicsPerStepMs": 0.75,
+      "bodies": 619,
+      "detached": 0,
+      "physicsRatio": 1.0714285697179788,
+      "physicsBudgetPassed": true
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "mode": "debris",
+      "frames": 1787,
+      "fps": 59.56666666666667,
+      "p95FrameMs": 18.899999999997817,
+      "p95CpuMs": 6.800000000745058,
+      "p95PhysicsMs": 4.900000000372529,
+      "p95PhysicsPerStepMs": 2.2000000001862645,
+      "bodies": 643,
+      "detached": 24,
+      "fpsBudgetPassed": true,
+      "slowBaseline": false
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "mode": "baseline",
+      "frames": 1784,
+      "fps": 59.46666666666667,
+      "p95FrameMs": 17.5,
+      "p95CpuMs": 3.099999999627471,
+      "p95PhysicsMs": 1.400000000372529,
+      "p95PhysicsPerStepMs": 0.650000000372529,
+      "bodies": 619,
+      "detached": 0
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "mode": "intact",
+      "frames": 1776,
+      "fps": 59.2,
+      "p95FrameMs": 17.599999999998545,
+      "p95CpuMs": 3.599999999627471,
+      "p95PhysicsMs": 1.599999999627471,
+      "p95PhysicsPerStepMs": 0.75,
+      "bodies": 619,
+      "detached": 0,
+      "physicsRatio": 1.1538461531848596,
+      "physicsBudgetPassed": true
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "mode": "debris",
+      "frames": 1774,
+      "fps": 59.13333333333333,
+      "p95FrameMs": 19.900000000000546,
+      "p95CpuMs": 7,
+      "p95PhysicsMs": 4.800000000745058,
+      "p95PhysicsPerStepMs": 2.2000000001862645,
+      "bodies": 643,
+      "detached": 24,
+      "fpsBudgetPassed": true,
+      "slowBaseline": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "mode": "baseline",
+      "frames": 1771,
+      "fps": 59.03333333333333,
+      "p95FrameMs": 18.899999999999636,
+      "p95CpuMs": 3.5,
+      "p95PhysicsMs": 1.599999999627471,
+      "p95PhysicsPerStepMs": 0.75,
+      "bodies": 619,
+      "detached": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "mode": "intact",
+      "frames": 1778,
+      "fps": 59.266666666666666,
+      "p95FrameMs": 20.599999999998545,
+      "p95CpuMs": 3.900000000372529,
+      "p95PhysicsMs": 1.700000001117587,
+      "p95PhysicsPerStepMs": 0.8000000007450581,
+      "bodies": 619,
+      "detached": 0,
+      "physicsRatio": 1.0666666676600773,
+      "physicsBudgetPassed": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "mode": "debris",
+      "frames": 1785,
+      "fps": 59.5,
+      "p95FrameMs": 18.200000000000728,
+      "p95CpuMs": 7.799999998882413,
+      "p95PhysicsMs": 5.300000000745058,
+      "p95PhysicsPerStepMs": 2.5499999998137355,
+      "bodies": 643,
+      "detached": 24,
+      "fpsBudgetPassed": true,
+      "slowBaseline": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "mode": "baseline",
+      "frames": 1778,
+      "fps": 59.266666666666666,
+      "p95FrameMs": 19.799999999999272,
+      "p95CpuMs": 3.900000000372529,
+      "p95PhysicsMs": 1.700000001117587,
+      "p95PhysicsPerStepMs": 0.849999999627471,
+      "bodies": 619,
+      "detached": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "mode": "intact",
+      "frames": 1783,
+      "fps": 59.43333333333333,
+      "p95FrameMs": 17.400000000001455,
+      "p95CpuMs": 3.900000000372529,
+      "p95PhysicsMs": 1.799999998882413,
+      "p95PhysicsPerStepMs": 0.849999999627471,
+      "bodies": 619,
+      "detached": 0,
+      "physicsRatio": 1,
+      "physicsBudgetPassed": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "mode": "debris",
+      "frames": 1785,
+      "fps": 59.5,
+      "p95FrameMs": 17.399999999999636,
+      "p95CpuMs": 7.299999998882413,
+      "p95PhysicsMs": 4.800000000745058,
+      "p95PhysicsPerStepMs": 2.2999999998137355,
+      "bodies": 643,
+      "detached": 24,
+      "fpsBudgetPassed": true,
+      "slowBaseline": false
+    }
+  ],
+  "errors": []
+}

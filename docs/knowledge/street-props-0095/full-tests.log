@@ -1,0 +1,687 @@
+npm notice run carwars-driving-lab@1.1.0 test
+npm notice run node --test tests/*.test.js
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ memory stores verified outcome, hides stale facts and does not learn failures (182.5472ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ memory context remains bounded for long reports (1349.7317ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ checks receipt avoids identical checks but invalidates code, test and dependency edits (1143.3334ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ failed or changing checks cannot produce a reusable success receipt (290.3297ms)
+✔ arrest requires wanted level, stopped player and assigned nearby physical police (0.8264ms)
+✔ continuous hold enters a five-second countdown, then completes once (2.3903ms)
+✔ physical escape cancels immediately and a new attempt must complete a fresh hold (0.6733ms)
+✔ two police do not shorten the timer, and losing all valid police cancels (0.3764ms)
+✔ hidden, free camera, destroyed vehicle, reset, and invalid time do not complete an arrest (0.7406ms)
+✔ destroyed police cannot hold or finish an arrest, while an operational partner can (0.6183ms)
+✔ art variation never mutates the plan or physical city dimensions (271.4871ms)
+✔ batched decoration fades with its building and returns after fade; low hides optional proxies (177.5526ms)
+✔ traffic art reuses geometry and stays inside its original collision footprint (42.1745ms)
+✔ varied street trees connect to their trunks, use four batches and dispose (1158.8948ms)
+✔ decorative trees remain fixed and add no collisions while a physical car drives through (62.8613ms)
+✔ proxy cache evicts only idle entries and releases private resources exactly once (25.925ms)
+✔ camera segment detects a building only in front of its endpoint (0.3262ms)
+✔ any visible vehicle sample detects the blocker; unrelated buildings remain opaque (0.1573ms)
+✔ a wall behind the near body surface does not fade at bumper contact (0.7281ms)
+✔ sight targets follow the tilted body and stop at its near surface (0.4407ms)
+✔ fade smoothing has equal results at 30/60/120fps (0.2234ms)
+✔ nearby clear buildings stay opaque; actual blockers fade and restore as a whole (7.2197ms)
+✔ camera target scale follows the bounded smooth speed range (0.6126ms)
+✔ zooming out is monotone, bounded, and frame-rate independent (1.1708ms)
+✔ zooming in is monotone, bounded, and frame-rate independent (0.3968ms)
+✔ zero, negative, and non-finite dt leave camera state unchanged (0.1915ms)
+✔ visual damage boundaries distinguish every stage (1.6556ms)
+✔ healthy idle produces no emission; darker damage increases smoke and fire (0.8947ms)
+✔ direct terminal jump burns for 0.6s and bursts exactly once at all frame rates (2.5018ms)
+✔ reset before the flash cancels terminal time and repeats the full warning (0.1666ms)
+✔ impact severity has a quiet threshold, grows monotonically, and saturates (0.9761ms)
+✔ damage is bounded and traction fades only after half damage (0.188ms)
+✔ wheel detaches only after a severe direct hit near its mount (0.1104ms)
+✔ detached wheel becomes a dynamic body and reset restores it (7.5228ms)
+✔ a direct high-speed wheel-zone impact detaches only the struck wheel (7.5058ms)
+✔ a real chassis impact against a static box creates one fixed-step impact event (4.5522ms)
+✔ front, rear, side, and rotated-front impacts keep their local contact direction (8.549ms)
+✔ a 17 m/s frontal hit dents more than a 6 m/s frontal hit (5.2822ms)
+✔ holding against a wall does not repeat damage; a later separated hit counts (34.0833ms)
+✔ repeated real frontal impacts accumulate to the destroyed state (9.0899ms)
+✔ reset clears impact and damage state (0.4085ms)
+✔ thirty seconds of simulation without contact causes no damage (85.0508ms)
+✔ destroyed engine loses throttle while chassis still steps and brakes (4.4691ms)
+✔ deformation is local in metres across rotated nonuniform transforms and restores exactly (5.1573ms)
+✔ hard-edge mode does not weld normals across perpendicular body panels after damage (1.4373ms)
+Stacktrace:
+    ptr0=000002AF4185C869
+    ptr1=0000000000000000
+    ptr2=0000000000000000
+    ptr3=0000000000000000
+    ptr4=0000000000000000
+    ptr5=0000000000000000
+    failure_message_object=00000087E91F5910
+
+==== JS stack trace =========================================
+
+    0: ExitFrame [pc: 000001B23BDB75FA]
+    1: StubFrame [pc: 000001B23BEB57CD]
+    2: dot [000003F21ABC7171] [C:\Users\gobes\OneDrive\?????????\CarWars\node_modules\.pnpm\cannon-es@0.20.0\node_modules\cannon-es\dist\cannon-es.cjs.js:849] [bytecode=00000201A3DA54A9 offset=5](this=0x01fb41440ff9 <Vec3 map = 0000025535D24519>,0x02af4185c869 <BlockContext[3]>)
+    3: _intersectPlane [000003F21ABC8361] [C:\Users\gobes\OneDrive\?????????\CarWars\node_modules\.pnpm\cannon-es@0.20.0\node_modules\cannon-es\dist\cannon-es.cjs.js:4882] [bytecode=00000201A3DA9511 offset=75](this=0x03f21abcb401 <Ray map = 000001AE2211BF99>,0x0048ac3d5019 <Shape map = 0000025535D25171>,0x03f21abc8d29 <Quaternion map = 0000025535D25F51>,0x03f21abc8cf9 <Vec3 map = 0000025535D24519>,0x010677f7e3d1 <EventTarget map = 00000012D3F64B21>,0x0048ac3d5019 <Shape map = 0000025535D25171>)
+    4: intersectShape [000003F21ABC82F1] [C:\Users\gobes\OneDrive\?????????\CarWars\node_modules\.pnpm\cannon-es@0.20.0\node_modules\cannon-es\dist\cannon-es.cjs.js:~4853] [pc=000001B21C0A7542](this=0x03f21abcb401 <Ray map = 000001AE2211BF99>,0x0048ac3d5019 <Shape map = 0000025535D25171>,0x03f21abc8d29 <Quaternion map = 0000025535D25F51>,0x03f21abc8cf9 <Vec3 map = 0000025535D24519>,0x010677f7e3d1 <EventTarget map = 00000012D3F64B21>)
+    5: intersectBody [000003F21ABC8249] [C:\Users\gobes\OneDrive\?????????\CarWars\node_modules\.pnpm\cannon-es@0.20.0\node_modules\cannon-es\dist\cannon-es.cjs.js:~4789] [pc=000001B21C078663](this=0x03f21abcb401 <Ray map = 000001AE2211BF99>,0x010677f7e3d1 <EventTarget map = 00000012D3F64B21>,0x01045c940011 <undefined>)
+    6: intersectWorld [000003F21ABC8211] [C:\Users\gobes\OneDrive\?????????\CarWars\node_modules\.pnpm\cannon-es@0.20.0\node_modules\cannon-es\dist\cannon-es.cjs.js:~4756] [pc=000001B21C0152F3](this=0x03f21abcb401 <Ray map = 000001AE2211BF99>,0x01181f5fa949 <EventTarget map = 00000283B00F11F1>,0x01181f5faa69 <Object map = 0000025535D2CF61>)
+    7: prepare [000002AF4186E3D1] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/src/vehicle.js:~228] [pc=000001B21C0CE9F9](this=0x01181f5ff631 <CarSimulation map = 0000005FFF7AFD49>,0x000517b3ff41 <Object map = 0000038574CB9F89>,0x036187829be9 <HeapNumber 0.00833333>)
+    8: step [000002AF4186E441] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/src/vehicle.js:~344] [pc=000001B21C0A3CE6](this=0x01181f5ff631 <CarSimulation map = 0000005FFF7AFD49>,0x000517b3ff41 <Object map = 0000038574CB9F89>,0x036187829be9 <HeapNumber 0.00833333>)
+    9: /* anonymous */ [000002637CA43F59] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tests/city-boundary.test.js:~82] [pc=000001B21C2CAC88](this=0x03c56f2a2f39 <TestContext map = 0000014AC8E8B999>)
+   10: runInAsyncScope [00000122C0070C69] [node:async_hooks:227] [bytecode=0000000F5C846B99 offset=98](this=0x02af41864ce1 <AsyncResource map = 000001AE22137AC9>,0x02637ca43f59 <JSFunction (sfi = 0000031464553291)>,0x03c56f2a2f39 <TestContext map = 0000014AC8E8B999>)
+   11: run [000000AF123ECDA1] [node:internal/test_runner/test:1382] [bytecode=0000038DB9AFD4C1 offset=934](this=0x02af41864ce1 <AsyncResource map = 000001AE22137AC9>)
+   12: processPendingSubtests [000000AF123ECEF1] [node:internal/test_runner/test:960] [bytecode=0000026201C122C1 offset=125](this=0x02af418483e9 <AsyncResource map = 000001AE22134051>)
+   13: postRun [000000AF123ECEB9] [node:internal/test_runner/test:1522] [bytecode=0000026201C10891 offset=526](this=0x02af418649a1 <AsyncResource map = 000001AE22137AC9>,0x01045c940011 <undefined>)
+   14: run [000000AF123ECDA1] [node:internal/test_runner/test:1447] [bytecode=0000038DB9AFD4C1 offset=1775](this=0x02af418649a1 <AsyncResource map = 000001AE22137AC9>)
+   15: /* anonymous */ [000003C56F2A3249](this=0x01a162600059 <JSGlobalProxy>,0x01045c940011 <undefined>)
+   16: StubFrame [pc: 000001B23BE3B5F5]
+   17: StubFrame [pc: 000001B23BD3EEC7]
+   18: EntryFrame [pc: 000001B23BD0B67B]
+
+==== Details ================================================
+
+[0]: ExitFrame [pc: 000001B23BDB75FA]
+[1]: StubFrame [pc: 000001B23BEB57CD]
+[2]: dot [000003F21ABC7171] [C:\Users\gobes\OneDrive\?????????\CarWars\node_modules\.pnpm\cannon-es@0.20.0\node_modules\cannon-es\dist\cannon-es.cjs.js:849] [bytecode=00000201A3DA54A9 offset=5](this=0x01fb41440ff9 <Vec3 map = 0000025535D24519>,0x02af4185c869 <BlockContext[3]>) {
+  // expression stack (top to bottom)
+  [01] : 0x01045c948ee1 <optimized_out>
+  [00] : 0x01fb41441059 <HeapNumber 52.7417>
+--------- s o u r c e   c o d e ---------
+function dot(vector) {\x0a    return this.x * vector.x + this.y * vector.y + this.z * vector.z;\x0a  }
+-----------------------------------------
+}
+
+[3]: _intersectPlane [000003F21ABC8361] [C:\Users\gobes\OneDrive\?????????\CarWars\node_modules\.pnpm\cannon-es@0.20.0\node_modules\cannon-es\dist\cannon-es.cjs.js:4882] [bytecode=00000201A3DA9511 offset=75](this=0x03f21abcb401 <Ray map = 000001AE2211BF99>,0x0048ac3d5019 <Shape map = 0000025535D25171>,0x03f21abc8d29 <Quaternion map = 0000025535D25F51>,0x03f21abc8cf9 <Vec3 map = 0000025535D24519>,0x010677f7e3d1 <EventTarget map = 00000012D3F64B21>,0x0048ac3d5019 <Shape map = 0000025535D25171>) {
+  // expression stack (top to bottom)
+  [20] : 0x01fb41440ff9 <Vec3 map = 0000025535D24519>
+  [19] : 0x02af4185c869 <BlockContext[3]>
+  [18] : 0x01045c948ee1 <optimized_out>
+  [17] : 0x01045c948ee1 <optimized_out>
+  [16] : 0x01045c948ee1 <optimized_out>
+  [15] : 0x01045c948ee1 <optimized_out>
+  [14] : 0x01045c948ee1 <optimized_out>
+  [13] : 0x01045c948ee1 <optimized_out>
+  [12] : 0x01045c948ee1 <optimized_out>
+  [11] : 0x01045c948ee1 <optimized_out>
+  [10] : 0x01045c948ee1 <optimized_out>
+  [09] : 0x01045c948ee1 <optimized_out>
+  [08] : 0x01045c948ee1 <optimized_out>
+  [07] : 0x01045c948ee1 <optimized_out>
+  [06] : 0x01045c948ee1 <optimized_out>
+  [05] : 0x01045c948ee1 <optimized_out>
+  [04] : 0x01fb41440ff9 <Vec3 map = 0000025535D24519>
+  [03] : 0x02af4185c869 <BlockContext[3]>
+  [02] : 0x03f21abcb761 <Vec3 map = 0000025535D24519>
+  [01] : 0x03f21abcb731 <Vec3 map = 0000025535D24519>
+  [00] : 0x03f21abcb701 <Vec3 map = 0000025535D24519>
+--------- s o u r c e   c o d e ---------
+function _intersectPlane(shape, quat, position, body, reportedShape) {\x0a    const from = this.from;\x0a    const to = this.to;\x0a    const direction = this.direction; // Get plane normal\x0a\x0a    const worldNormal = new Vec3(0, 0, 1);\x0a    quat.vmult(worldNormal, worldNormal);\x0a    const len = new Vec3();\x0a    from.vsub(position, len);...
+
+-----------------------------------------
+}
+
+[4]: intersectShape [000003F21ABC82F1] [C:\Users\gobes\OneDrive\?????????\CarWars\node_modules\.pnpm\cannon-es@0.20.0\node_modules\cannon-es\dist\cannon-es.cjs.js:~4853] [pc=000001B21C0A7542](this=0x03f21abcb401 <Ray map = 000001AE2211BF99>,0x0048ac3d5019 <Shape map = 0000025535D25171>,0x03f21abc8d29 <Quaternion map = 0000025535D25F51>,0x03f21abc8cf9 <Vec3 map = 0000025535D24519>,0x010677f7e3d1 <EventTarget map = 00000012D3F64B21>) {
+// optimized frame
+--------- s o u r c e   c o d e ---------
+function intersectShape(shape, quat, position, body) {\x0a    const from = this.from; // Checking boundingSphere\x0a\x0a    const distance = distanceFromIntersection(from, this.direction, position);\x0a\x0a    if (distance > shape.boundingSphereRadius) {\x0a      return;\x0a    }\x0a\x0a    const intersectMethod = this[shape.type];\x0a\x0a    if (interse...
+
+-----------------------------------------
+}
+[5]: intersectBody [000003F21ABC8249] [C:\Users\gobes\OneDrive\?????????\CarWars\node_modules\.pnpm\cannon-es@0.20.0\node_modules\cannon-es\dist\cannon-es.cjs.js:~4789] [pc=000001B21C078663](this=0x03f21abcb401 <Ray map = 000001AE2211BF99>,0x010677f7e3d1 <EventTarget map = 00000012D3F64B21>,0x01045c940011 <undefined>) {
+// optimized frame
+--------- s o u r c e   c o d e ---------
+function intersectBody(body, result) {\x0a    if (result) {\x0a      this.result = result;\x0a      this.updateDirection();\x0a    }\x0a\x0a    const checkCollisionResponse = this.checkCollisionResponse;\x0a\x0a    if (checkCollisionResponse && !body.collisionResponse) {\x0a      return;\x0a    }\x0a\x0a    if ((this.collisionFilterGroup & body.collisionFi...
+
+-----------------------------------------
+}
+[6]: intersectWorld [000003F21ABC8211] [C:\Users\gobes\OneDrive\?????????\CarWars\node_modules\.pnpm\cannon-es@0.20.0\node_modules\cannon-es\dist\cannon-es.cjs.js:~4756] [pc=000001B21C0152F3](this=0x03f21abcb401 <Ray map = 000001AE2211BF99>,0x01181f5fa949 <EventTarget map = 00000283B00F11F1>,0x01181f5faa69 <Object map = 0000025535D2CF61>) {
+// optimized frame
+--------- s o u r c e   c o d e ---------
+function intersectWorld(world, options) {\x0a    this.mode = options.mode || Ray.ANY;\x0a    this.result = options.result || new RaycastResult();\x0a    this.skipBackfaces = !!options.skipBackfaces;\x0a    this.collisionFilterMask = typeof options.collisionFilterMask !== 'undefined' ? options.collisionFilterMask : -1;\x0a    this.collis...
+
+-----------------------------------------
+}
+[7]: prepare [000002AF4186E3D1] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/src/vehicle.js:~228] [pc=000001B21C0CE9F9](this=0x01181f5ff631 <CarSimulation map = 0000005FFF7AFD49>,0x000517b3ff41 <Object map = 0000038574CB9F89>,0x036187829be9 <HeapNumber 0.00833333>) {
+// optimized frame
+--------- s o u r c e   c o d e ---------
+function prepare(input = {}, dt = STEP) {\x0a    const body = this.body;\x0a    this.previousSteering = this.steering;\x0a    for (const wheel of this.wheels) {\x0a      wheel.previousPosition.copy(wheel.position);\x0a      wheel.previousRotation = wheel.rotation;\x0a    }\x0a    const speed = this.signedSpeed;\x0a    const absSpeed = Mat...
+
+-----------------------------------------
+}
+[8]: step [000002AF4186E441] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/src/vehicle.js:~344] [pc=000001B21C0A3CE6](this=0x01181f5ff631 <CarSimulation map = 0000005FFF7AFD49>,0x000517b3ff41 <Object map = 0000038574CB9F89>,0x036187829be9 <HeapNumber 0.00833333>) {
+// optimized frame
+--------- s o u r c e   c o d e ---------
+function step(input = {}, dt = STEP) {\x0a    this.prepare(input, dt);\x0a    this.world.step(dt);\x0a    this.postStep(dt);\x0a  }
+-----------------------------------------
+}
+[9]: /* anonymous */ [000002637CA43F59] [file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tests/city-boundary.test.js:~82] [pc=000001B21C2CAC88](this=0x03c56f2a2f39 <TestContext map = 0000014AC8E8B999>) {
+// optimized frame
+--------- s o u r c e   c o d e ---------
+function ()=>{\x0d\x0a  for(const seed of [1,2,3]) for(const roadWidth of [12,15,30]) {\x0d\x0a    const plan=createCityPlan(seed,{roadWidth}), sim=new CarSimulation({damage:false});\x0d\x0a    // Isolate the perimeter: a tree or ordinary inner building cannot mask a hole.\x0d\x0a    const bodies=new Set(plan.boundaryBuildings.map(...
+
+-----------------------------------------
+}
+[10]: runInAsyncScope [00000122C0070C69] [node:async_hooks:227] [bytecode=0000000F5C846B99 offset=98](this=0x02af41864ce1 <AsyncResource map = 000001AE22137AC9>,0x02637ca43f59 <JSFunction (sfi = 0000031464553291)>,0x03c56f2a2f39 <TestContext map = 0000014AC8E8B999>) {
+  // expression stack (top to bottom)
+  [16] : 0x03c56f2a2f39 <TestContext map = 0000014AC8E8B999>
+  [15] : 0x03c56f2a2f39 <TestContext map = 0000014AC8E8B999>
+  [14] : 0x03c56f2a2fa9 <JSArray[1]>
+  [13] : 0x03c56f2a2f39 <TestContext map = 0000014AC8E8B999>
+  [12] : 0x02637ca43f59 <JSFunction (sfi = 0000031464553291)>
+  [11] : 0x014af3b02f31 <JSFunction apply (sfi = 000001045C95C691)>
+  [10] : 0x0122c0070e11 <BlockContext[3]>
+  [09] : 0x01045c940d31 <the_hole_value>
+  [08] : 0x01a1626062e1 <JSFunction AsyncContextFrame (sfi = 000000487D0EF729)>
+  [07] : 0x0122c0070a69 <JSFunction exchange (sfi = 000000487D0EF519)>
+  [06] : 0x01045c940011 <undefined>
+  [05] : 0x01045c940011 <undefined>
+  [04] : 0x03c56f2a2fc9 <HeapNumber 26.0>
+  [03] : 0x03c56f2a2fa9 <JSArray[1]>
+  [02] : 0x03c56f2a2fa9 <JSArray[1]>
+  [01] : 0x03c56f2a2f39 <TestContext map = 0000014AC8E8B999>
+  [00] : 0x02637ca43f59 <JSFunction (sfi = 0000031464553291)>
+--------- s o u r c e   c o d e ---------
+function runInAsyncScope(fn, thisArg, ...args) {\x0d\x0a    const asyncId = this[async_id_symbol];\x0d\x0a    emitBefore(asyncId, this[trigger_async_id_symbol], this);\x0d\x0a\x0d\x0a    const contextFrame = this[contextFrameSymbol];\x0d\x0a    const prior = AsyncContextFrame.exchange(contextFrame);\x0d\x0a    try {\x0d\x0a      return ReflectApply(fn, thisArg, ar...
+
+-----------------------------------------
+}
+
+[11]: run [000000AF123ECDA1] [node:internal/test_runner/test:1382] [bytecode=0000038DB9AFD4C1 offset=934](this=0x02af41864ce1 <AsyncResource map = 000001AE22137AC9>) {
+  // heap-allocated locals
+  var this = 0x02af41864ce1 <AsyncResource map = 000001AE22137AC9>
+  var channelContext = 0x00b62eedd489 <Object map = 000001A1626033B9>
+  var hookArgs = 0x00b62eedd4a1 <Object map = 000001A1626033B9>
+  var wasSkippedBeforeRun = 0x01045c940081 <false>
+  var publishEnd = 0x00b62eedd4b9 <JSFunction publishEnd (sfi = 0000014AC8E8B269)>
+  var publishError = 0x00b62eedd4f1 <JSFunction publishError (sfi = 0000014AC8E8B2B1)>
+  // expression stack (top to bottom)
+  [36] : 0x02af41864ce1 <AsyncResource map = 000001AE22137AC9>
+  [35] : 0x02637ca43f59 <JSFunction (sfi = 0000031464553291)>
+  [34] : 0x03c56f2a2f39 <TestContext map = 0000014AC8E8B999>
+  [33] : 0x03c56f2a2f39 <TestContext map = 0000014AC8E8B999>
+  [32] : 0x01045c940011 <undefined>
+  [31] : 0x01045c940011 <undefined>
+  [30] : 0x03c56f2a2fd9 <JSArray[3]>
+  [29] : 0x02af41864ce1 <AsyncResource map = 000001AE22137AC9>
+  [28] : 0x0122c0070c69 <JSFunction runInAsyncScope (sfi = 000001E430ECEF89)>
+  [27] : 0x014af3b02f31 <JSFunction apply (sfi = 000001045C95C691)>
+  [26] : 0x03c56f2a2ff9 <FunctionContext[8]>
+  [25] : 0x03c56f2a2ff9 <FunctionContext[8]>
+  [24] : 0x01045c940d31 <the_hole_value>
+  [23] : 0x03c56f2a3049 <JSFunction (sfi = 0000014AC8E8B221)>
+  [22] : 0x0122c0048ac9 <JSFunction once (sfi = 000000487D0E0321)>
+  [21] : 0x03c56f2a2ff9 <FunctionContext[8]>
+  [20] : 0x00af123eb7c9 <BlockContext[9]>
+  [19] : 0x01045c940011 <undefined>
+  [18] : 0x01045c940011 <undefined>
+  [17] : 0x01045c940011 <undefined>
+  [16] : 0x01045c940011 <undefined>
+  [15] : 0x01045c940011 <undefined>
+  [14] : 0x03c56f2a3081 <JSArray[0]>
+  [13] : 0x02637ca43f59 <JSFunction (sfi = 0000031464553291)>
+  [12] : 0x03c56f2a2fd9 <JSArray[3]>
+  [11] : 0x01045c940011 <undefined>
+  [10] : 0x01045c940011 <undefined>
+  [09] : 0x01045c940011 <undefined>
+  [08] : 0x01045c940011 <undefined>
+  [07] : 0x01045c940011 <undefined>
+  [06] : 0x01045c940011 <undefined>
+  [05] : 0x03c56f2a30a1 <Promise map = 0000014AC8E8C761>
+  [04] : 0x03c56f2a30d1 <JSFunction (sfi = 000000487D0E0441)>
+  [03] : 0x03c56f2a3111 <JSFunction after (sfi = 0000014AC8E8B1D9)>
+  [02] : 0x03c56f2a2f39 <TestContext map = 0000014AC8E8B999>
+  [01] : 0x03c56f2a3149 <JSArray[1]>
+  [00] : 0x03c56f2a3169 <JSAsyncFunctionObject>
+--------- s o u r c e   c o d e ---------
+function run() {\x0d\x0a    if (this.parent !== null) {\x0d\x0a      this.parent.activeSubtests++;\x0d\x0a      this.computeInheritedHooks();\x0d\x0a    }\x0d\x0a    this.startTime ??= hrtime();\x0d\x0a\x0d\x0a    // Channel context object shared across all lifecycle events for this test run.\x0d\x0a    // Only tests emit events; hooks do not. This way, the ...
+
+-----------------------------------------
+}
+
+[12]: processPendingSubtests [000000AF123ECEF1] [node:internal/test_runner/test:960] [bytecode=0000026201C122C1 offset=125](this=0x02af418483e9 <AsyncResource map = 000001AE22134051>) {
+  // expression stack (top to bottom)
+  [13] : 0x02af41864ce1 <AsyncResource map = 000001AE22137AC9>
+  [12] : 0x00af123e6ac9 <JSArray[0]>
+  [11] : 0
+  [10] : 4
+  [09] : 0x01045c94e7c1 <String[4]: #test>
+  [08] : 0x031464552671 <String[93]: #diagonal convex/concave vertex attacks and gap attempts contact houses in forward and reverse>
+  [07] : 0x02637ca44029 <Object map = 000001A1626033B9>
+  [06] : 0
+  [05] : 0x02af41848301 <Readable map = 000001AE22135139>
+  [04] : 0x00af123ecda1 <JSFunction run (sfi = 000003146455B891)>
+  [03] : 0x00af123eb7c9 <BlockContext[9]>
+  [02] : 0x02af41864ce1 <AsyncResource map = 000001AE22137AC9>
+  [01] : 0x0366dd482191 <Object map = 0000014AC8E93C09>
+  [00] : 0x03c56f2a31c1 <JSAsyncFunctionObject>
+--------- s o u r c e   c o d e ---------
+function processPendingSubtests() {\x0d\x0a    while (this.pendingSubtests.length > 0 && this.hasConcurrency()) {\x0d\x0a      const deferred = this.dequeuePendingSubtest();\x0d\x0a      const test = deferred.test;\x0d\x0a      this.assignReportOrder(test);\x0d\x0a      test.reporter.dequeue(test.nesting, test.loc, test.name, this.reportedType, test.testId, t...
+
+-----------------------------------------
+}
+
+[13]: postRun [000000AF123ECEB9] [node:internal/test_runner/test:1522] [bytecode=0000026201C10891 offset=526](this=0x02af418649a1 <AsyncResource map = 000001AE22137AC9>,0x01045c940011 <undefined>) {
+  // expression stack (top to bottom)
+  [30] : 0x02af418483e9 <AsyncResource map = 000001AE22134051>
+  [29] : 0x00af123e6ac9 <JSArray[0]>
+  [28] : 0
+  [27] : 3
+  [26] : 0x01045c940011 <undefined>
+  [25] : 0x03c56f2a3219 <Object map = 000001A1626033B9>
+  [24] : 0x031464552389 <String[86]: #real house collision prevents straight, seam and corner exits without coordinate clamp>
+  [23] : 3
+  [22] : 0x02637ca44219 <Object map = 000001A1626033B9>
+  [21] : 0x01045c940081 <false>
+  [20] : 0x02af418483e9 <AsyncResource map = 000001AE22134051>
+  [19] : 0x00af123ecef1 <JSFunction processPendingSubtests (sfi = 000003146455B1F1)>
+  [18] : 0x01045c940011 <undefined>
+  [17] : 0
+  [16] : 0x01045c940011 <undefined>
+  [15] : 0x01045c940011 <undefined>
+  [14] : 0x03c56f2a3231 <Object map = 000001A1626033B9>
+  [13] : 0x01045c940011 <undefined>
+  [12] : 0x01045c940011 <undefined>
+  [11] : 0x01045c940011 <undefined>
+  [10] : 0x01045c940011 <undefined>
+  [09] : 0x01045c940011 <undefined>
+  [08] : 0x01045c940011 <undefined>
+  [07] : 0x01045c940011 <undefined>
+  [06] : 0x01045c940011 <undefined>
+  [05] : 0x01045c940011 <undefined>
+  [04] : 0x01045c940011 <undefined>
+  [03] : 0x01045c940011 <undefined>
+  [02] : 0x01045c940011 <undefined>
+  [01] : 0x01045c940011 <undefined>
+  [00] : 0
+--------- s o u r c e   c o d e ---------
+function postRun(pendingSubtestsError) {\x0d\x0a    // If the test was cancelled before it started, then the start and end\x0d\x0a    // times need to be corrected.\x0d\x0a    this.endTime ??= hrtime();\x0d\x0a    this.startTime ??= this.endTime;\x0d\x0a\x0d\x0a    // The test has run, so recursively cancel any outstanding subtests and\x0d\x0a    // mark t...
+
+-----------------------------------------
+}
+
+[14]: run [000000AF123ECDA1] [node:internal/test_runner/test:1447] [bytecode=0000038DB9AFD4C1 offset=1775](this=0x02af418649a1 <AsyncResource map = 000001AE22137AC9>) {
+  // heap-allocated locals
+  var this = 0x02af418649a1 <AsyncResource map = 000001AE22137AC9>
+  var channelContext = 0x01a781b403d9 <Object map = 000001A1626033B9>
+  var hookArgs = 0x01a781b403f1 <Object map = 000001A1626033B9>
+  var wasSkippedBeforeRun = 0x01045c940081 <false>
+  var publishEnd = 0x01a781b40409 <JSFunction publishEnd (sfi = 0000014AC8E8B269)>
+  var publishError = 0x01a781b40441 <JSFunction publishError (sfi = 0000014AC8E8B2B1)>
+  // expression stack (top to bottom)
+  [34] : 0x02af418649a1 <AsyncResource map = 000001AE22137AC9>
+  [33] : 0x01045c940011 <undefined>
+  [32] : 0x01045c940011 <undefined>
+  [31] : 0x01045c940011 <undefined>
+  [30] : 0x01045c940011 <undefined>
+  [29] : 0x01045c940011 <undefined>
+  [28] : 0
+  [27] : 0x02637ca44061 <AbortController map = 000002AA4E11B539>
+  [26] : 0x00af123cad19 <Channel map = 000001A162617FD9>
+  [25] : 0x0281a8e70cb1 <FunctionContext[8]>
+  [24] : 0x01045c940d31 <the_hole_value>
+  [23] : 0x02af418649a1 <AsyncResource map = 000001AE22137AC9>
+  [22] : 0x00af123eceb9 <JSFunction postRun (sfi = 000003146455B8F1)>
+  [21] : 0x0281a8e70cb1 <FunctionContext[8]>
+  [20] : 0x00af123eb7c9 <BlockContext[9]>
+  [19] : 0x01045c940011 <undefined>
+  [18] : 0x01045c940011 <undefined>
+  [17] : 0x01045c940011 <undefined>
+  [16] : 0x01045c940011 <undefined>
+  [15] : 0x01045c940011 <undefined>
+  [14] : 0x0281a8e70d39 <JSArray[2]>
+  [13] : 0x02637ca44149 <JSFunction (sfi = 0000031464553249)>
+  [12] : 0x0281a8e70c91 <JSArray[3]>
+  [11] : 0x01045c940011 <undefined>
+  [10] : 0x01045c940011 <undefined>
+  [09] : 0x01045c940011 <undefined>
+  [08] : 0x01045c940011 <undefined>
+  [07] : 0x01045c940011 <undefined>
+  [06] : 0x01045c940011 <undefined>
+  [05] : 0x0281a8e70d59 <Promise map = 0000014AC8E8C761>
+  [04] : 0x0281a8e70d89 <JSFunction (sfi = 000000487D0E0441)>
+  [03] : 0x0281a8e70dc9 <JSFunction after (sfi = 0000014AC8E8B1D9)>
+  [02] : 0x0281a8e70bf1 <TestContext map = 0000014AC8E8B999>
+  [01] : 0x0281a8e70e01 <JSArray[1]>
+  [00] : 0x0281a8e70e21 <JSAsyncFunctionObject>
+--------- s o u r c e   c o d e ---------
+function run() {\x0d\x0a    if (this.parent !== null) {\x0d\x0a      this.parent.activeSubtests++;\x0d\x0a      this.computeInheritedHooks();\x0d\x0a    }\x0d\x0a    this.startTime ??= hrtime();\x0d\x0a\x0d\x0a    // Channel context object shared across all lifecycle events for this test run.\x0d\x0a    // Only tests emit events; hooks do not. This way, the ...
+
+-----------------------------------------
+}
+
+[15]: /* anonymous */ [000003C56F2A3249](this=0x01a162600059 <JSGlobalProxy>,0x01045c940011 <undefined>) {
+// optimized frame
+--------- s o u r c e   c o d e ---------
+<No Source>
+-----------------------------------------
+}
+[16]: StubFrame [pc: 000001B23BE3B5F5]
+[17]: StubFrame [pc: 000001B23BD3EEC7]
+[18]: EntryFrame [pc: 000001B23BD0B67B]
+=====================
+
+✖ tests\city-boundary.test.js (85978.7073ms)
+✔ indexed queries match Cannon for boxes, convex supports, planes and moving bodies on all axes (33.9434ms)
+✔ pair generation includes every eligible AABB overlap and preserves SAP pair order (5.6047ms)
+✔ static grid updates on removal, replacement, transform invalidation and wide queries (1.1688ms)
+✔ city broadphase retains chassis, suspension and curb motion of the original solver (138.7047ms)
+✔ city plans are deterministic for a seed and vary with seed/road width (88.3045ms)
+✔ default district retains scale but uses a non-square connected street layout (9.6328ms)
+✔ buildings fit their blocks, stay inside walls, and clear streets at all supported widths (34.5425ms)
+✔ merged district seams are built up instead of reserving fictitious grid streets (109.4528ms)
+✔ internal streets divide long housing rows into at most four homes on either axis (922.7956ms)
+✔ invalid width options fail before a city plan can be used (5.3136ms)
+✔ city dimensions are configurable and wider footprints keep seeded heights stable (17.973ms)
+✔ 100 seeds at all widths give deterministic connected cyclic cities and diverse topology (4798.2628ms)
+✔ 20 next rounds differ while width rebuild preserves seed and topology (316.3694ms)
+✔ coordinate spawn rejects the cut-out corners even inside the enclosing bounds (23.9495ms)
+✔ circular joystick motion activates only after a deliberate fast rotation (0.9076ms)
+✔ angle wrapping, speed gate, weak input, and stale gestures are handled (0.2546ms)
+✔ one-finger drift command completes two compact physical circles in either direction (86.8178ms)
+✔ opposite joystick direction brakes before reverse, then forward (1.6309ms)
+✔ reverse steering is inverted and sideways direction keeps its current gear (0.1788ms)
+✔ reverse engages only within a 15%-of-half-turn sector around the car rear (0.1438ms)
+✔ normal corner assist brakes at high turn demand while intentional drift keeps the chosen gear (0.1164ms)
+✔ corner assist reduces lateral speed without sacrificing turn progress at city speeds (211.0355ms)
+✔ physical forward-reverse-forward transition and coasting (46.0466ms)
+✔ first frame and paused time do not form intervals (1.1282ms)
+✔ known percentile thresholds, duration and bounded eviction (1.8141ms)
+✔ render limiter caps high-refresh callbacks at 60 while preserving 30 FPS (3.1261ms)
+✔ render limiter retains cadence under jitter and resets after a pause (0.3371ms)
+✔ render frequency does not change fixed simulation time (2.6931ms)
+✔ long stalls have bounded catch-up and pause discards remainder (0.2639ms)
+✔ 60Hz early callbacks and seeded jitter preserve cadence over a minute (3.5213ms)
+✔ near60Hz and jittered discrete refresh rates keep the long-window cap (4.3358ms)
+✔ invalid timestamp and a late stall cannot cause catch-up render bursts (0.1459ms)
+✔ first touch is neutral regardless of its screen position (0.7579ms)
+✔ same drag gives the same direction and throttle anywhere on screen (0.7347ms)
+✔ dead zone, analog throttle and knob radius are bounded (0.1597ms)
+✔ loader keeps progress monotonic and only releases the menu after completion (3.7604ms)
+✔ failure cancels dismissal and ignores late resource events until Retry (1.127ms)
+✔ fatal WebGL failure offers no retry (0.5834ms)
+✔ completed boot cannot reopen a loading screen during gameplay (0.4706ms)
+✔ blur targets follow CSS size, DPR and portrait or landscape aspect ratios (1.4937ms)
+✔ blur strength supports direct-render zero and bounded intensity without invalid uniforms (0.3277ms)
+✔ vertical blur mask is independent of screen width and grows symmetrically above and below focus (0.3777ms)
+✔ scene MSAA request respects quality and available maximum samples (0.2204ms)
+✔ focus band has a fixed screen center and user-sized screen-space coverage (2.4384ms)
+✔ bounded reuse resets data, rejects stale releases, and destroys storage once (2.014ms)
+✔ variant exhaustion replaces idle storage without evicting a live owner (0.4405ms)
+✔ capacity changes retire only free storage and preserve current leases (2.5894ms)
+✔ preparation is idle, bounded, idempotent and retryable after a factory error (0.6939ms)
+✔ tire smoke draws only living particles, keeps slot order and stops empty uploads (7.2087ms)
+✔ damage particles preserve sparse slot order, expire and restart after reset (3.1816ms)
+✔ textured GLB fits simulation mounts and shares one atlas across five meshes (29.7536ms)
+✔ authored body has local impact geometry and restores exact positions and normals (36.6324ms)
+✔ reverse lamps track actual motion and reverse drive request; lens anchors survive dents (24.596ms)
+✔ smaller visual tires retain ground contact and fit their arches at full steering/compression (6.8024ms)
+✔ rotor beacons sweep slowly with broad smooth peaks, no hard blackouts and stable time (1.828ms)
+✔ pooled cars share bounded volumes and dispose the asset owner once (20.1467ms)
+✔ police take twice the normalized damage from the same real impact and keep their wheels attached (28.1995ms)
+✔ police damage listener is explicitly removable without disabling another vehicle (0.8905ms)
+✔ wanted level profiles normalize safely and monotonically scale distant chase speed (2.7919ms)
+✔ pending stars do not activate police; a confirmed wanted star applies without resetting pursuit (0.6194ms)
+✔ recovery survives a wanted-level change and retains the active star profile (48.6239ms)
+✔ ram thresholds escalate by stars while low levels keep a six-metre follow distance (0.4015ms)
+✔ stalled police reverse away from a building and another police car, even near the player (171.9398ms)
+✔ rear traffic and walls prevent reversing into a second collision (23.5995ms)
+✔ reverse speed is bounded and a newly occupied rear corridor cancels throttle (13.1594ms)
+✔ an approaching target does not hide a police car stuck at the same position (11.2043ms)
+✔ recovery completes, brakes reverse motion before pursuit and resets cleanly (14.9963ms)
+✔ moving police and police holding a stopped target do not trigger reverse recovery (11.4344ms)
+✔ shared vehicle physics actually back a stalled police car away from a wall (165.0738ms)
+✔ exact spawn rejects bad geometry while explicit nearest-safe reports its moved pose (1.7507ms)
+✔ spawn safety reports occupied exact poses as pending and blocks closing followers (1.1755ms)
+✔ police plans a real corridor detour around a rotated building (13.3718ms)
+✔ police role uses the shared world, pursues through collision, and disposes cleanly (440.2332ms)
+✔ police role retains at least 90% of player acceleration on a clear straight (99.8026ms)
+✔ 12 deterministic road pickups cover all nine map sectors at each supported road width (67.095ms)
+✔ swept pickup trigger catches high speed crossings, rejects healthy/high/flying/inactive cases, and consumes once (11.0641ms)
+✔ dashes align their long axis with both directions of the street grid (1.6683ms)
+✔ mark spacing, bounds, and junction gaps derive from the current road plan (0.5573ms)
+✔ both paint batches receive shadows below continuous tire decals in either road direction (281.8193ms)
+✔ sidewalk corners are disjoint and never cover the asphalt plaza (18.9517ms)
+✔ road grid and spawn plaza form a continuous, non-overlapping surface (68.5404ms)
+✔ rounded sidewalk cuts the acute intersection point and preserves the block-facing corner in all quadrants (5.7174ms)
+✔ every real road-grid corner is rounded consistently for supported widths and zero width is unchanged (7309.7907ms)
+✔ rounded top, asphalt patch, curved wall and curb are batched and have upward top normals (53.9203ms)
+✔ straight curb trim stays on the sidewalk and shares both tangent endpoints with the curved trim (1.319ms)
+✔ rounded convex support ends at its arc and leaves the cut corner clear for a raycast (4.2189ms)
+✔ stage samples are frame totals and diagnostic storage disappears on stop (1.7025ms)
+✔ profile records actual accepted renders at 120/144 Hz, never external callbacks (19.321ms)
+✔ bounded profile retains chronological rows; stopped profiling still counts renders (0.2951ms)
+✔ GPU absence is explicit, not CPU time reported as GPU (0.3662ms)
+✔ disjoint query results are discarded and GPU queries are bounded (0.3157ms)
+✔ saved defaults persist only validated user settings and can be cleared (2.0412ms)
+✔ draw distance is persisted independently per camera mode and invalid values fall back (0.3026ms)
+✔ missing or invalid fields use their own factory fallback (0.1916ms)
+✔ unsupported versions, corrupt JSON, and unavailable storage safely fall back (0.2802ms)
+✔ skid controls validate, persist, and default for profiles created before the controls existed (0.3446ms)
+✔ blur control preserves disabled/strong values and migrates older profiles without changing other settings (0.3873ms)
+✔ blur focus size persists independently and old profiles keep the default (0.3898ms)
+✔ shadow coverage contains the visible ground footprint plus caster margin (2.8832ms)
+✔ shadow centre snaps to stable world-space texels as the camera moves (0.8332ms)
+✔ current art sun covers road receivers and high casters after camera and city translations (3.2957ms)
+✔ sidewalk supports match the elevated footprint across road widths without reaching the road or plaza (94.5967ms)
+✔ union walls remove internal seams, road-facing caps stay on top, and zero-width sidewalks are empty (40.6765ms)
+✔ sidewalk tops, union faces, and road-facing caps are rendered in at most three batches (3.6242ms)
+✔ surface sampler follows the raised slab while road and ground levels remain unchanged (24.8825ms)
+✔ the live city scene adds raycastable raised slabs and removes every support collider on dispose (661.4003ms)
+✔ detached wheels use the raised support group and physically land on a sidewalk slab (47.4846ms)
+✔ ten city rebuilds across supported road widths release every sidewalk support body (1321.5736ms)
+✔ a vehicle settles at the same suspension height above road and sidewalk tops (24.307ms)
+✔ a 14.4 km/h approach and retreat cross a 15 cm curb without launching or losing wheel contact (22.1801ms)
+✔ L inner/outer and T/X roadside corners follow geometry under rotations and reflections (54.7959ms)
+✔ straight continuations have no phantom bends; terminals close, short segments clamp radius, zero width is empty (1.7386ms)
+✔ convex decompositions, rendered surface and sampler agree at both sides of each fillet (43.9283ms)
+✔ real irregular maps expose both types and leave the spawn plaza clear (476.0461ms)
+✔ slow wheels cross both fillets and skid strips conform to their visible heights (107.2185ms)
+✔ signals and stop lines use independently expected right-hand world coordinates (1.8846ms)
+✔ signal assemblies sit fully inside approach sidewalks for every cardinal direction and road width (70.6842ms)
+✔ fog beams originate at the active bulb and point down the incoming approach (3.2235ms)
+✔ four signal assemblies persist and fog beam colors follow the controller on the real city (219.8296ms)
+✔ stop lines span only the incoming half-road and share an approach plane (0.3561ms)
+✔ fog renders only active volumes in the camera frustum, and restores their latest phase on return (1.6538ms)
+✔ a visible fog volume is retained when its source lamp is outside the frame (0.777ms)
+✔ bin threshold 14 km/h uses pre-solver speed (19.7091ms)
+✔ bin threshold 15 km/h uses pre-solver speed (5.8141ms)
+✔ bin threshold 16 km/h uses pre-solver speed (5.1795ms)
+✔ bin swept 60 km/h hit preserves progress and removes invisible obstacle (57.3492ms)
+✔ bin swept 120 km/h hit preserves progress and removes invisible obstacle (20.5786ms)
+✔ bench threshold 24 km/h uses pre-solver speed (3.0779ms)
+✔ bench threshold 25 km/h uses pre-solver speed (2.6974ms)
+✔ bench threshold 26 km/h uses pre-solver speed (2.5551ms)
+✔ bench swept 60 km/h hit preserves progress and removes invisible obstacle (25.0783ms)
+✔ bench swept 120 km/h hit preserves progress and removes invisible obstacle (20.5116ms)
+✔ lamp threshold 34 km/h uses pre-solver speed (2.078ms)
+✔ lamp threshold 35 km/h uses pre-solver speed (1.1857ms)
+✔ lamp threshold 36 km/h uses pre-solver speed (1.0428ms)
+✔ lamp swept 60 km/h hit preserves progress and removes invisible obstacle (13.5136ms)
+✔ lamp swept 120 km/h hit preserves progress and removes invisible obstacle (22.4636ms)
+✔ signal threshold 39 km/h uses pre-solver speed (3.9947ms)
+✔ signal threshold 40 km/h uses pre-solver speed (1.0051ms)
+✔ signal threshold 41 km/h uses pre-solver speed (0.9287ms)
+✔ signal swept 60 km/h hit preserves progress and removes invisible obstacle (17.7918ms)
+✔ signal swept 120 km/h hit preserves progress and removes invisible obstacle (16.0521ms)
+✔ substantial contact 1.9/2 km/h, prolonged contact and separated re-entry (85.8097ms)
+✔ NPC and debris do not blame player; disabled player and retreat never create offenses (2.1252ms)
+✔ normal orientation works for either contact body order and duplicates form one episode (6.7031ms)
+✔ NPC shoving a stationary player into a prop on the following tick remains uncharged (0.6245ms)
+✔ distant anchored colliders reactivate before an actor sweep; detached bodies remain physical (1.0506ms)
+✔ reverse travel hits physically, grazing uses normal speed rather than speedometer (0.6314ms)
+✔ 5s simulated lifetime, fade, oldest eviction, reset and repeated dispose (3.1939ms)
+✔ seed42 scene has all types, destroyed signal stays dark across phases/quality, reset and resources (624.7765ms)
+✔ whole prop footprints fit sidewalks and avoid roads, buildings, signals, trees and rotated obstacles (1789.9839ms)
+✔ narrow and completely occupied sidewalks skip impossible placements (69.2139ms)
+✔ shared models including benches fit envelopes, stand on the surface, and dispose once over ten rebuilds (799.6389ms)
+✔ tire smoke requires a stronger grounded slip than ordinary track skidding (1.0533ms)
+✔ cloud particles fade in alpha while growing instead of shrinking into points (6.3386ms)
+✔ emitters confirm slip, honor role/distance budgets, and retain particles when sources vanish (7.2991ms)
+✔ low quality and invalid/distant emitters stay within fixed particle budgets (11.6646ms)
+✔ segment cross sections share identical edges and remain finite on straight and curved paths (3.8608ms)
+✔ sections follow the visible road and sidewalk elevations, including transitions (48.3933ms)
+✔ threshold calibration rejects a measured gentle turn and accepts a sustained physical skid (199.0962ms)
+✔ zero movement and invalid positions create no non-finite geometry (1.3985ms)
+✔ real discontinuities and disable/reset terminate strips (4.2222ms)
+✔ position jump of at least 4m closes the old strip and starts a fresh one (1.6259ms)
+✔ slip hysteresis keeps a strip connected across threshold fluctuations (3.9247ms)
+✔ straight acceleration and mild cornering do not leave tracks; sustained hard slides do (1.0642ms)
+✔ reverse starts a new strip instead of connecting across the direction change (0.8592ms)
+✔ simulation time advances with stopped wheels and prepareRender publishes it (0.7089ms)
+✔ multiple vehicle sources share one clock and retain independent wheel strips (1.3174ms)
+✔ prepareRender publishes changed geometry attributes and the bounded draw range (0.6355ms)
+✔ actual end caps fade, internal joins do not, and age is interpolated per cross section (0.3437ms)
+✔ terminal cap uses up to 0.5m and limits short-strip fade to strip length (0.6722ms)
+✔ full live buffer embeds terminal fade without overwriting its visible segment (0.3465ms)
+✔ four-wheel maximum-rate ring does not overwrite a visible segment before 45 seconds (59.7772ms)
+✔ curb subdivision covers both flat surfaces without bridging, in either direction and obliquely (12.5787ms)
+✔ surface-aware terminal caps cross the curb, and clipping cannot overwrite a live ring slot (4.2449ms)
+✔ right lanes have independent world coordinates in all four directions (14.0295ms)
+✔ city street graph is connected, directed into right-side lanes, and supports varied seeded destinations (47.112ms)
+✔ no-path and invalid destinations fail safely without non-finite route points (0.2778ms)
+✔ detour search avoids returning through the blocked junction while retaining the destination (12.9083ms)
+✔ six hybrid AI cars follow varied road paths and replan for two simulated minutes (782.3131ms)
+✔ AI brakes for a stationary player sharing its lane (114.9468ms)
+✔ AI detects a stationary leader independently of its commanded speed and passes when a corridor is clear (92.342ms)
+✔ AI waits instead of entering occupied passing lanes when the route corridor is blocked (220.2865ms)
+✔ conflicting paths reserve the same junction for one car with stable id priority (21.5886ms)
+✔ conflicting physical traffic crosses a reserved junction without chassis contact (94.1339ms)
+✔ escape destination prefers cover and avoids an immediate turn back into the player (12.4778ms)
+✔ a real player impact triggers fast escape, survives logical LOD, then resumes normal driving (274.4409ms)
+✔ touching without an impact does not trigger escape, reset cancels an active escape (27.1736ms)
+✔ escape ignores a red light while normal driving resumes signal compliance (62.7289ms)
+✔ front and side player impacts release contact before the NPC accelerates away (362.5614ms)
+✔ ignoring signs during escape does not disable braking for an occupied lane (39.7586ms)
+TRAFFIC_STOP_AUDIT {"count":592,"unexplained":0,"reasonCounts":{"intersection-reservation":143,"turn-staging":61,"oncoming-priority":70,"signal-red":260,"queue-wait":191,"blocked-by-leader":160,"signal-yellow":18,"blocked-junction-exit":7,"junction-priority":1},"controllerStall":[],"stagingOnly":[]}
+TRAFFIC_FLOW_PROFILE {"samples":300,"aiMsP95":1.7047999999995227,"prepareMsP95":0.5917000000008557,"worldStepMsP95":0.46159999999963475,"physicalMax":6,"logicalMax":59,"physicalAndLogicalBothObserved":true}
+✔ overhead city traffic stays alive for five minutes, including offscreen cars (18407.8632ms)
+✔ cause-aware traffic waits hold across city seeds and road widths (4450.5115ms)
+✔ traffic resumes after reducing a full 300-car congestion load (2700.0031ms)
+✔ opposing straight traffic and four right turns can share a junction, crossing traffic cannot (36.6135ms)
+✔ left turns yield to opposing straight traffic independently of request age (0.9048ms)
+✔ smooth turn paths join the correct lanes and lookahead advances monotonically (4.4888ms)
+✔ turn staging preserves a safe pass-by gap on the curb side at all road widths (0.6196ms)
+✔ opposing straight cars start together and occupy the junction concurrently in both LOD modes (327.2944ms)
+✔ an older left-turn request yields to opposing straight traffic then resumes safely (285.9547ms)
+✔ a same-lane platoon starts its follower before the leader has left the junction (65.9992ms)
+✔ followers enter behind left and right turns without waiting for the whole maneuver (435.4936ms)
+✔ four simultaneous right turns clear onto their own lanes without contact (177.9232ms)
+✔ a left turn gives up an unentered permit when oncoming straight traffic approaches (142.1973ms)
+✔ a following straight car passes the staged left-turn vehicle on its curb side (76.5977ms)
+✔ a stationary upstream oncoming queue does not deadlock an otherwise clear left turn (27.6119ms)
+✔ a cruising left turn brakes in its lane when the staging point is too close or behind (360.3322ms)
+✔ a right turn has priority over an older unentered conflicting straight permit (80.6116ms)
+✔ right priority does not drive into an already entered conflicting vehicle (11.6222ms)
+✔ left and right turns retain the straight cruise target and clear at cruising speed (124.919ms)
+✔ U-turns have straight lead-ins and one semicircle with monotone heading, entirely within the junction (2.0124ms)
+✔ physical and logical U-turns exit aligned in the opposite lane without reversing or extra loops (151.6723ms)
+✔ an escaping left turn ignores oncoming priority but retains collision exclusion (22.9976ms)
+✔ following uses bumper orientation, headway, and reaction closing speed (1.4165ms)
+✔ traffic diagnostics tie a long stationary wait to the measured leader footprint (96.3589ms)
+✔ sideways displacement is not route progress, lawful waits reset the stall clock (0.3402ms)
+✔ swept passing checks rear traffic, oncoming traffic, and occupied return corridor (0.9671ms)
+✔ passing keeps the entire rotated chassis inside narrow road boundaries (0.8699ms)
+✔ passing cannot return with its front bumper beyond the junction stop plane (0.1867ms)
+✔ red queues never pass and resume within three seconds of green in both LOD modes (250.2368ms)
+✔ recovery sees oncoming cars beyond the immediate following cells (17.3881ms)
+✔ two touching physical cars separate and regain route progress within fifteen seconds (223.266ms)
+✔ stalled vehicle without a leader reevaluates its directed route after three seconds (9.6871ms)
+✔ a physically displaced NPC returns to its directed lane without resetting its identity (79.7675ms)
+✔ a clear passing maneuver moves past its blocker and returns to the right lane (136.6674ms)
+✔ a fully occupied retreat corridor keeps a contact jam waiting and is retried (16.282ms)
+✔ physical and logical followers move within three seconds of their leader clearing (83.4548ms)
+✔ blocked dead-end exit waits when no alternative exists and resumes when cleared (28.7287ms)
+✔ blocked junction exit selects a clear detour to the same goal in physical and logical traffic (117.0563ms)
+✔ all four occupied exits wait and a newly cleared side street is retried (32.9001ms)
+✔ blocked exit never changes a red-light decision or an already entered junction path (30.2685ms)
+✔ entered reservation survives timeouts and route advancement until rear bumper clears (18.067ms)
+✔ reservation decisions are independent of state iteration order and honor request age (28.9384ms)
+✔ a junction owner finishes turning instead of following the opposing waiting lane (62.4042ms)
+✔ followers close a large gap to a lawful queue instead of stopping with the leader (39.3435ms)
+✔ physical zone has hysteresis and switches without replacing civilian geometry (65.9038ms)
+✔ fast approaching player activates collision physics before reaching the ordinary zone (26.8102ms)
+✔ a remote collision and passing maneuver cannot retain full physics indefinitely (9.4873ms)
+✔ real-city NPC spawn and reset retain the independently expected right side at every width (594.4719ms)
+✔ split single-car stepping matches the standalone solver and uses one world integration (47.2428ms)
+✔ two shared-world cars exchange momentum in a real chassis contact (13.8575ms)
+✔ front, rear, and side contacts transfer momentum through the same chassis solver (13.7059ms)
+✔ traffic count changes are fixed-step queued and repeated resizing cleans up bodies (211.9583ms)
+✔ traffic count configuration supports the tenfold 60 default and 300 maximum (5272.4297ms)
+✔ blocked insertion retains pending count, retries after clearance, and cancels on reduction (5.6247ms)
+✔ repeated resets preserve NPC identities and place every oriented footprint safely (5.0666ms)
+✔ distant traffic swaps to logical route motion and becomes physical near the player (7.8467ms)
+✔ physical LOD does not cascade across remote neighbors or retain a ground-only contact (5.3985ms)
+✔ twenty traffic cycles reuse bounded storage and invalidate old actors/listeners (33420.6594ms)
+✔ new world and visual generations retire both active and idle vehicle storage (13.3623ms)
+✔ a reused police body has fresh contact episodes, damage and one listener (20.1478ms)
+✔ traffic signals control internal intersections and leave boundary nodes on priority rules (34.4981ms)
+✔ signal phases are deterministic and conflicting axes never have green together (4.7655ms)
+✔ each green lasts sixteen seconds and budgets a full city block with start and turn allowance (14.9103ms)
+✔ spawn slots stay clear of intersections and are spread across directed lanes deterministically (1.9322ms)
+✔ oriented spawn footprint rejects collision and preserves a two-metre same-lane gap (0.422ms)
+✔ a fast follower needs braking space and static obstacle footprints block insertion (0.1582ms)
+✔ deterministic spawn allocation fits 6, 60 and 300 cars without footprint conflicts at widths 12, 15 and 30 (6341.7952ms)
+✔ city-wide spawn slots use every available sector and are deterministic (6.1374ms)
+✔ speeding requires one continuous second and resets before activation in the hysteresis band (4.29ms)
+✔ speeding repeats after five seconds and clears below the reset threshold (1.569ms)
+✔ red light offense is detected only while crossing its stop plane in the lane (0.3615ms)
+✔ red light crossing works in all four cardinal directions and ignores wrong lanes and green (0.5833ms)
+✔ collision event requires the player to contribute sufficient closing speed and is one per contact episode (0.3582ms)
+✔ collision normal is oriented correctly when the player is the second body (0.1726ms)
+✔ a moving police car that hits a stationary player does not blame the player (0.172ms)
+✔ detector reset removes speed and collision state (0.2164ms)
+✔ traffic initializes repeatable AI routes on actual city streets (137.4306ms)
+✔ traffic waits at a controlled red signal before reserving the intersection (32.3506ms)
+✔ red signal stops the NPC front bumper before its stop plane and green releases it (123.3365ms)
+✔ red signal does not stop an NPC whose front bumper has entered the junction (33.4417ms)
+✔ tree placements are deterministic, spread across town and do not mutate the city plan (243.6977ms)
+✔ tree crowns and trunks fit sidewalk pockets clear of asphalt, buildings, spawn and signals (131.3621ms)
+✔ rotated damage obstacles exclude nearby tree crowns (65.8932ms)
+✔ repair restores damage and detached wheels without resetting chassis, motion, time, or tuning (6.8094ms)
+✔ appearance reserves the landing stage until safe, pauses without dt and restores transforms (2.0242ms)
+✔ cloud pool has bounded slots and a player reservation; reset and dispose release resources (2.2998ms)
+✔ coordinate actor is created once, reserves occupancy, has no collision until safe landing and reuses clean storage (108.1302ms)
+✔ reset cancels appearing actors and logical/physical culling never starts a new effect (50.2408ms)
+✔ warm-up yields between factories, keeps storage idle, and is idempotent (170.7512ms)
+✔ frame cadence bounds activation and never catches up hidden or long frames (13506.6155ms)
+✔ full prepared capacity and repeated arbitrary removal never evict variants (255.9467ms)
+✔ jittered frames respect the minimum interval without accumulating spawn debt (12.6878ms)
+✔ count cancellation and blocked searches stay bounded and retry safely (10.5924ms)
+✔ warm-up cancellation, errors, retry and new world generations are safe (28.0555ms)
+✔ visual preparation uploads shared civilian variants and each unique police body once (15.5378ms)
+✔ four springs hold the chassis above the ground without idle drift (170.0828ms)
+✔ accelerates, physically turns with body roll, brakes to a stop (85.6643ms)
+✔ medium-speed steering responds quickly and holds a stable arcade turn (40.6079ms)
+✔ 50 km/h steering meets response, heading, and lateral-slip targets (13.8343ms)
+✔ coasting from 50 km/h retains 60–90% speed over one second (18.5243ms)
+✔ partial damage still reduces throttle response (37.582ms)
+✔ handbrake keeps a controllable, grounded rear slide (29.1243ms)
+✔ three-wheel handling keeps stepping without support or drive from the detached wheel (42.5467ms)
+✔ steering and tire forces do not add yaw while the car is airborne (2.7819ms)
+✔ full-lock arcade turn at top speed keeps all tires close to the ground (54.4438ms)
+✔ reverse and reset remain functional after a hard maneuver (41.4273ms)
+✔ fixed step has similar acceleration at 60 Hz and 120 Hz (69.096ms)
+✔ tuning extremes stay finite through prolonged steering and braking (363.1219ms)
+✔ first offense blinks as a warning, then a repeat confirms one star (1.6574ms)
+✔ warning expires and the next offense starts a fresh warning (0.2741ms)
+✔ only one event is accepted per cooldown and collision severity wins ties (1.332ms)
+✔ wanted system caps at six stars and reset clears its state (1.2384ms)
+✔ warning at its exact deadline expires before a new offense, and snapshots are isolated (0.2536ms)
+✔ property crime immediately fills one star, clears warnings and keeps cooldown and cap (0.1947ms)
+✔ property collision priority is independent of input order and below police (0.198ms)
+ℹ tests 352
+ℹ suites 0
+ℹ pass 351
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 86032.2933
+
+✖ failing tests:
+
+test at tests\city-boundary.test.js:1:1
+✖ tests\city-boundary.test.js (85978.7073ms)
+  'test failed'

@@ -10,7 +10,9 @@ import { createSignalBeam } from './signal-glow.js';
 import { ART, buildingArt } from './art-direction.js';
 import { createCityArt } from './city-art.js';
 import { createCityTrees } from './city-trees.js';
-import { createCityStreetProps } from './city-street-props.js';
+import { createCityStreetProps, createPropInstanceVisual } from './city-street-props.js';
+import { StreetPropPhysics } from './street-prop-physics.js';
+import { createSurfaceHeightSampler } from './road-surface.js';
 
 export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const group = new THREE.Group();
@@ -205,13 +207,46 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const streetProps = createCityStreetProps(group, plan, { damageObstacles, trees: trees.placements,
     signals: approaches.map(({ signalX: x, signalZ: z }) => ({ x, z })) });
 
+  // Lightweight scene-only fixtures have no world. Production always owns sim.world.
+  const propPhysics = simulation.world ? new StreetPropPhysics(simulation.world) : null;
+  const surface = createSurfaceHeightSampler(plan,0);
+  if (propPhysics) {
+    const indices = { lamp: 0, bin: 0, bench: 0 };
+    for (const placement of streetProps.placements) {
+      const source = { ...placement, id: `${placement.type}:${placement.id}`, y: surface(placement.x,placement.z) };
+      const index = indices[placement.type]++;
+      const visual = createPropInstanceVisual(streetProps.batches.filter(batch => batch.userData.propType === placement.type)
+        .map(batch => ({batch,index})),source);
+      propPhysics.register({ ...source,...visual });
+    }
+    approaches.forEach((approach,index) => {
+      const source = { id: `signal:${approach.nodeId}:${approach.fromId}`, type: 'signal',
+        x: approach.signalX,y: ROAD_SURFACE_HEIGHTS.sidewalk,z: approach.signalZ,yaw: approach.signalYaw };
+      const visual = createPropInstanceVisual([{batch:poles,index},{batch:housings,index},
+        ...[0,1,2].map(lamp => ({batch:bulbs,index:index*3+lamp}))],source);
+      propPhysics.register({ ...source,...visual,
+        onDetach() {
+          approach.destroyed = true; approach.signalVisible = false;
+          signalBeam.userData.updateBeam(index,approach,'off');
+          for (let lamp=0;lamp<3;lamp++) bulbs.setColorAt(index*3+lamp,lightColors.off);
+          bulbs.instanceColor.needsUpdate = true;
+        },
+        restore() {
+          visual.restore(); approach.destroyed = false; approach.signalVisible = true;
+          approach.color = null; // force all lamps and beam to refresh on next render
+        },
+      });
+    });
+  }
+
   return {
-    group, entries, buildings, marks, dashes, stopLines, signalBeam, occlusion, trees, streetProps, staticBodies, signalApproaches: approaches,
+    group, entries, buildings, marks, dashes, stopLines, signalBeam, occlusion, trees, streetProps, propPhysics, staticBodies, signalApproaches: approaches,
     updateSignals(controller, time, camera = null, quality = 'high') {
       art.setQuality(quality);
       let changed = false;
       for (let i = 0; i < approaches.length; i++) {
         const approach = approaches[i];
+        if (approach.destroyed) continue;
         const { color } = controller.phase(approach.nodeId, approach.fromId, time);
         if (approach.color === color) continue;
         approach.color = color;
@@ -225,6 +260,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
       signalBeam.userData.prepare(camera, quality);
     },
     dispose() {
+      propPhysics?.dispose();
       occlusion.dispose();
       for (const body of staticBodies) simulation.removeStaticBox(body);
       scene.remove(group);

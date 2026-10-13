@@ -9,7 +9,7 @@ const SIGNAL_COLORS = Object.freeze({
 
 /** Short, widening light volume, tilted inward from the sidewalk. */
 export function signalBeamLayout(approach, color) {
-  if (!SIGNAL_COLORS[color]) return { visible: false };
+  if (approach.destroyed || !SIGNAL_COLORS[color]) return { visible: false };
   const length = 12, width = 10.8, verticalRadius = 1.35;
   const sourceY = ROAD_SURFACE_HEIGHTS.sidewalk + (color === 'red' ? 3.5 : color === 'yellow' ? 3.05 : 2.6);
   const dirX = -approach.forwardX - approach.rightX * 0.38;

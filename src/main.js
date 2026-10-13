@@ -492,6 +492,7 @@ function reset() {
   frameIntervals.reset();
   releasePointer(); keys.clear(); sim.reset(); traffic.reset(); driveDirection = 1;
   violations.reset(); wanted.reset(); arrest.reset(); wantedRenderKey = ''; renderWantedHud();
+  cityState.propPhysics?.reset();
   lastArrestHudState = ''; renderArrestHud();
   damageEffects.reset();
   tireSmoke.reset();
@@ -791,7 +792,11 @@ function frame(now) {
     const actorsBefore = traffic.physicalActors();
     const velocitiesBefore = new Map([[sim.body, { ...sim.body.velocity }],
       ...actorsBefore.map(actor => [actor.body, { ...actor.body.velocity }])]);
+    cityState.propPhysics?.beforeStep(STEP, [
+      { body: sim.body, player: true }, ...actorsBefore.map(actor => ({ body: actor.body, player: false })),
+    ], enabled);
     traffic.stepWorld(input, STEP);
+    const propertyEvents = cityState.propPhysics?.afterStep(STEP) || [];
     if (sceneProfile.stages) traffic.accumulateTimings(sceneProfile.stages);
     const physicalActors = traffic.physicalActors();
     const observed = violations.update({ dt: STEP, enabled, player: { x: sim.body.position.x, z: sim.body.position.z,
@@ -800,7 +805,7 @@ function frame(now) {
       vz: sim.body.velocity.z, body: sim.body }, actors: physicalActors, contacts: sim.world.contacts,
       velocitiesBefore, approaches: cityState.signalApproaches,
       phaseAt: approach => trafficSignals.phase(approach.nodeId, approach.fromId, traffic.simulationTime()) });
-    if (enabled) wanted.update(STEP, observed);
+    if (enabled) wanted.update(STEP, [...observed,...propertyEvents]);
     renderWantedHud();
     const trafficStatus = traffic.status();
     const pendingReason = trafficStatus.insertionReason || '—';
@@ -881,6 +886,7 @@ function frame(now) {
   if (cameraMode === 'free') moveFreeCamera(dt);
   updateCamera(dt);
   let stageStart = stages ? performance.now() : 0;
+  cityState.propPhysics?.syncVisuals();
   cityState.updateSignals(trafficSignals, traffic.simulationTime(), camera, quality);
   if (stages) { stages.signalMs = performance.now() - stageStart; stageStart = performance.now(); }
   traffic.render(alpha, camera, quality);
@@ -990,6 +996,7 @@ window.carLab = {
     fadedBuildings: buildingEntries.filter(entry => entry.opacity < 0.999).length }),
   roadMarkings: () => cityState.roadMarkings(),
   worldBodies: () => sim.world.bodies.length,
+  streetProps: () => cityState.propPhysics?.snapshot(),
   damageTest,
   joystick: () => ({ active: pointer.active, startX: pointer.startX, startY: pointer.startY, direction: driveDirection, ...joystickVector(pointer.startX, pointer.startY, pointer.x, pointer.y) }),
   donut: () => donutGesture.snapshot(),
