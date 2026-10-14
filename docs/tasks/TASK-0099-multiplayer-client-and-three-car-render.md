@@ -33,6 +33,8 @@
 
 При зависимостях таблица описывает baseline до серии; после done зависимости обязательно проверить фактические новые пути/API и обновить задание. Прочитать принятый docs/knowledge/multiplayer-server-adr.md, когда он появится; отсутствующий ADR блокирует этапы после0096.
 
+Контекст TASK-0096 (2026-10-14): изолированный spike создан в tools/multiplayer-spike; решения и ограничения описаны в docs/knowledge/multiplayer-server-adr.md. Проверены core0.18.18/ws-transport0.18.4/SDK0.18.5/Schema5.0.39. Production core/полный gameplay ещё не перенесены. Loss1% и optimized-runtime soak не подтверждены, nominal patch20Hz не выдержан в длинном профиле; зависимость не считается done. Сохранять draft до независимой QA и закрытия blockers, перед исполнением сверить актуальный ADR и код.
+
 ## 3. Область изменений
 
 src/network/room-client.js, src/network/actor-presenter.js, src/main.js, src/start-screen.js, src/start-screen.css, src/style.css, index.html, src/vehicle-visuals.js и существующие effects adapters, tests/multiplayer-client.test.js и browser harness. Не менять серверные правила под предпочтения клиента; оптимизацию latency выполнитьTASK-0100.

@@ -33,6 +33,8 @@
 
 При зависимостях таблица описывает baseline до серии; после done зависимости обязательно проверить фактические новые пути/API и обновить задание. Прочитать принятый docs/knowledge/multiplayer-server-adr.md, когда он появится; отсутствующий ADR блокирует этапы после0096.
 
+Контекст TASK-0096 (2026-10-14): изолированный spike создан в tools/multiplayer-spike; решения и ограничения описаны в docs/knowledge/multiplayer-server-adr.md. Проверены core0.18.18/ws-transport0.18.4/SDK0.18.5/Schema5.0.39. Production core/полный gameplay ещё не перенесены. Loss1% и optimized-runtime soak не подтверждены, nominal patch20Hz не выдержан в длинном профиле; зависимость не считается done. Сохранять draft до независимой QA и закрытия blockers, перед исполнением сверить актуальный ADR и код.
+
 ## 3. Область изменений
 
 src/simulation/**, src/vehicle.js, src/traffic*.js, src/police-*.js, src/city-scene.js, src/city-generator.js, src/road-surface.js, src/street-prop-physics.js, src/vehicle-spawn*.js, src/repair-pickups.js, src/wanted-system.js, src/arrest-system.js, src/main.js, релевантные tests/**. Выделить visual adapter из traffic.js, общий data-only collider builder из city-scene.js. Рендер, материалы, модели и управление сохранить; сетевой room/UI сюда не входят.

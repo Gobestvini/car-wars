@@ -1,0 +1,21 @@
+{
+  "name": "carwars-multiplayer-spike",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "start": "node --no-opt --no-concurrent-recompilation server.js",
+    "benchmark": "node --expose-gc --no-opt --no-concurrent-recompilation benchmark.js",
+    "network": "node --no-opt --no-concurrent-recompilation network-benchmark.js"
+  },
+  "dependencies": {
+    "@colyseus/core": "0.18.18",
+    "@colyseus/ws-transport": "0.18.4",
+    "@colyseus/sdk": "0.18.5",
+    "@colyseus/schema": "5.0.39",
+    "express": "5.1.0",
+    "esbuild": "0.25.12"
+  }
+}

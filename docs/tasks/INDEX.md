@@ -4,7 +4,7 @@
 
 | ID / файл | Название | Статус | Приоритет | Зависимости | Рекомендуемый исполнитель |
 | --- | --- | --- | --- | --- | --- |
-| [TASK-0096](TASK-0096-multiplayer-architecture-spike.md) | Проверить серверную архитектуру мультиплеера на трёх игроков | ready | high | нет | gpt-6.1-sol, high |
+| [TASK-0096](TASK-0096-multiplayer-architecture-spike.md) | Проверить серверную архитектуру мультиплеера на трёх игроков | blocked | high | нет | gpt-6.1-sol, high |
 | [TASK-0097](TASK-0097-headless-multiplayer-game-world.md) | Выделить общий серверный мир физики и AI для трёх игроков | draft | high | TASK-0096 — требуется done | gpt-6.1-sol, high |
 | [TASK-0098](TASK-0098-authoritative-three-player-rooms.md) | Создать authoritative серверные комнаты на трёх игроков | draft | high | TASK-0096 — требуется done; TASK-0097 — требуется done | gpt-6.1-sol, high |
 | [TASK-0099](TASK-0099-multiplayer-client-and-three-car-render.md) | Подключить онлайн-режим и отображение трёх игроков | draft | high | TASK-0097 — требуется done; TASK-0098 — требуется done | gpt-6.1-sol, high |

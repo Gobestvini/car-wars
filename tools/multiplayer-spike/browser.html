@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CarWars — серверный прототип TASK-0096</title>
+<style>body{margin:24px;background:#111b23;color:#eee;font:16px system-ui}button{padding:10px 16px;margin:4px;background:#ffe29c;color:#18212b;border:0;border-radius:5px;cursor:pointer}canvas{background:#26343c;border:1px solid #71838e;width:min(95vw,900px);height:550px}pre{white-space:pre-wrap;font-size:13px}h1{font-size:22px}</style>
+<h1>CarWars: физика и AI на сервере · до 3 игроков</h1>
+<p>Исследовательский стенд. Управление: стрелки/WASD — первая машина. Серверный рендер состояния в Canvas; полный gameplay игры сюда ещё не перенесён.</p>
+<button id="connect">Подключить 3 SDK-сессии</button><button id="fourth">Проверить четвёртого</button>
+<button id="latency">Измерить видимый отклик</button><button id="disconnect">Отключить третьего</button>
+<button id="reconnect">Вернуть третьего</button><button id="collision">Столкновение (новая fixture-комната)</button>
+<p id="status">Не подключено</p><canvas width="1000" height="600" id="scene"></canvas><pre id="metrics"></pre>
+<details><summary>Сырые измерения браузера</summary><pre id="raw"></pre></details>
+<script type="module" src="/client.js"></script></html>

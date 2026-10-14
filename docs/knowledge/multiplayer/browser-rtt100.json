@@ -1,0 +1,497 @@
+{
+  "endpoint": "http://127.0.0.1:2580",
+  "sessions": 3,
+  "fourth": "room \"LblRpr0jO\" is locked",
+  "mapSignatures": [
+    "7ee310664502559afb995feee1d07155086e49d596ac70044db038c269d38e3a",
+    "7ee310664502559afb995feee1d07155086e49d596ac70044db038c269d38e3a",
+    "7ee310664502559afb995feee1d07155086e49d596ac70044db038c269d38e3a"
+  ],
+  "samples": [
+    {
+      "seq": 1897,
+      "ms": 178.40000000037253,
+      "tick": 7624,
+      "appliedTick": 7618,
+      "moved": false,
+      "steerChanged": true
+    },
+    {
+      "seq": 1901,
+      "ms": 187.20000000018626,
+      "tick": 7658,
+      "appliedTick": 7653,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1905,
+      "ms": 116.19999999925494,
+      "tick": 7686,
+      "appliedTick": 7685,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1910,
+      "ms": 149.3999999994412,
+      "tick": 7714,
+      "appliedTick": 7713,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1914,
+      "ms": 149.70000000018626,
+      "tick": 7745,
+      "appliedTick": 7743,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1918,
+      "ms": 141.1000000005588,
+      "tick": 7775,
+      "appliedTick": 7773,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1922,
+      "ms": 116.09999999962747,
+      "tick": 7801,
+      "appliedTick": 7800,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1927,
+      "ms": 215.79999999981374,
+      "tick": 7837,
+      "appliedTick": 7829,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1931,
+      "ms": 157.79999999981374,
+      "tick": 7870,
+      "appliedTick": 7864,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1935,
+      "ms": 174.69999999925494,
+      "tick": 7902,
+      "appliedTick": 7897,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1939,
+      "ms": 170.20000000018626,
+      "tick": 7935,
+      "appliedTick": 7933,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1944,
+      "ms": 157.79999999981374,
+      "tick": 7963,
+      "appliedTick": 7962,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1948,
+      "ms": 182.79999999981374,
+      "tick": 7998,
+      "appliedTick": 7994,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1952,
+      "ms": 137.20000000018626,
+      "tick": 8028,
+      "appliedTick": 8025,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1956,
+      "ms": 195.5,
+      "tick": 8063,
+      "appliedTick": 8057,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1960,
+      "ms": 153.70000000018626,
+      "tick": 8095,
+      "appliedTick": 8091,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1964,
+      "ms": 195.09999999962747,
+      "tick": 8128,
+      "appliedTick": 8124,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1968,
+      "ms": 203.79999999981374,
+      "tick": 8164,
+      "appliedTick": 8159,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1972,
+      "ms": 195.29999999981374,
+      "tick": 8201,
+      "appliedTick": 8195,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1976,
+      "ms": 195.30000000074506,
+      "tick": 8236,
+      "appliedTick": 8230,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1980,
+      "ms": 191.6000000005588,
+      "tick": 8270,
+      "appliedTick": 8265,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1984,
+      "ms": 128.59999999962747,
+      "tick": 8301,
+      "appliedTick": 8299,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1988,
+      "ms": 137.29999999981374,
+      "tick": 8329,
+      "appliedTick": 8326,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1992,
+      "ms": 149.5,
+      "tick": 8357,
+      "appliedTick": 8354,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1996,
+      "ms": 149.70000000018626,
+      "tick": 8389,
+      "appliedTick": 8384,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 2000,
+      "ms": 145.3999999994412,
+      "tick": 8417,
+      "appliedTick": 8414,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 2005,
+      "ms": 191,
+      "tick": 8452,
+      "appliedTick": 8444,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 2009,
+      "ms": 195.59999999962747,
+      "tick": 8487,
+      "appliedTick": 8479,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 2013,
+      "ms": 170.20000000018626,
+      "tick": 8521,
+      "appliedTick": 8514,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 2018,
+      "ms": 153.90000000037253,
+      "tick": 8551,
+      "appliedTick": 8548,
+      "moved": true,
+      "steerChanged": true
+    }
+  ],
+  "movementSamples": [
+    {
+      "seq": 1901,
+      "ms": 187.20000000018626,
+      "tick": 7658,
+      "appliedTick": 7653,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1905,
+      "ms": 116.19999999925494,
+      "tick": 7686,
+      "appliedTick": 7685,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1910,
+      "ms": 149.3999999994412,
+      "tick": 7714,
+      "appliedTick": 7713,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1914,
+      "ms": 149.70000000018626,
+      "tick": 7745,
+      "appliedTick": 7743,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1918,
+      "ms": 141.1000000005588,
+      "tick": 7775,
+      "appliedTick": 7773,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1922,
+      "ms": 116.09999999962747,
+      "tick": 7801,
+      "appliedTick": 7800,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1927,
+      "ms": 215.79999999981374,
+      "tick": 7837,
+      "appliedTick": 7829,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1931,
+      "ms": 157.79999999981374,
+      "tick": 7870,
+      "appliedTick": 7864,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1935,
+      "ms": 174.69999999925494,
+      "tick": 7902,
+      "appliedTick": 7897,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1939,
+      "ms": 170.20000000018626,
+      "tick": 7935,
+      "appliedTick": 7933,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1944,
+      "ms": 157.79999999981374,
+      "tick": 7963,
+      "appliedTick": 7962,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1948,
+      "ms": 182.79999999981374,
+      "tick": 7998,
+      "appliedTick": 7994,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1952,
+      "ms": 137.20000000018626,
+      "tick": 8028,
+      "appliedTick": 8025,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1956,
+      "ms": 195.5,
+      "tick": 8063,
+      "appliedTick": 8057,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1960,
+      "ms": 153.70000000018626,
+      "tick": 8095,
+      "appliedTick": 8091,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1964,
+      "ms": 195.09999999962747,
+      "tick": 8128,
+      "appliedTick": 8124,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1968,
+      "ms": 203.79999999981374,
+      "tick": 8164,
+      "appliedTick": 8159,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1972,
+      "ms": 195.29999999981374,
+      "tick": 8201,
+      "appliedTick": 8195,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1976,
+      "ms": 195.30000000074506,
+      "tick": 8236,
+      "appliedTick": 8230,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1980,
+      "ms": 191.6000000005588,
+      "tick": 8270,
+      "appliedTick": 8265,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1984,
+      "ms": 128.59999999962747,
+      "tick": 8301,
+      "appliedTick": 8299,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1988,
+      "ms": 137.29999999981374,
+      "tick": 8329,
+      "appliedTick": 8326,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1992,
+      "ms": 149.5,
+      "tick": 8357,
+      "appliedTick": 8354,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 1996,
+      "ms": 149.70000000018626,
+      "tick": 8389,
+      "appliedTick": 8384,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 2000,
+      "ms": 145.3999999994412,
+      "tick": 8417,
+      "appliedTick": 8414,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 2005,
+      "ms": 191,
+      "tick": 8452,
+      "appliedTick": 8444,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 2009,
+      "ms": 195.59999999962747,
+      "tick": 8487,
+      "appliedTick": 8479,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 2013,
+      "ms": 170.20000000018626,
+      "tick": 8521,
+      "appliedTick": 8514,
+      "moved": true,
+      "steerChanged": true
+    },
+    {
+      "seq": 2018,
+      "ms": 153.90000000037253,
+      "tick": 8551,
+      "appliedTick": 8548,
+      "moved": true,
+      "steerChanged": true
+    }
+  ],
+  "collision": null,
+  "error": null,
+  "latency": {
+    "metric": "input -> Canvas frame containing changed position OR visible steering, after applied seq ack",
+    "count": 30,
+    "movementCount": 29,
+    "p50": 157.79999999981374,
+    "p95": 203.79999999981374,
+    "p99": 215.79999999981374
+  },
+  "capturedAt": "2026-10-14T12:45:06.356Z"
+}
