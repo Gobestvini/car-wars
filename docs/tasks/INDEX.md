@@ -4,6 +4,12 @@
 
 | ID / файл | Название | Статус | Приоритет | Зависимости | Рекомендуемый исполнитель |
 | --- | --- | --- | --- | --- | --- |
+| [TASK-0096](TASK-0096-multiplayer-architecture-spike.md) | Проверить серверную архитектуру мультиплеера на трёх игроков | ready | high | нет | gpt-6.1-sol, high |
+| [TASK-0097](TASK-0097-headless-multiplayer-game-world.md) | Выделить общий серверный мир физики и AI для трёх игроков | draft | high | TASK-0096 — требуется done | gpt-6.1-sol, high |
+| [TASK-0098](TASK-0098-authoritative-three-player-rooms.md) | Создать authoritative серверные комнаты на трёх игроков | draft | high | TASK-0096 — требуется done; TASK-0097 — требуется done | gpt-6.1-sol, high |
+| [TASK-0099](TASK-0099-multiplayer-client-and-three-car-render.md) | Подключить онлайн-режим и отображение трёх игроков | draft | high | TASK-0097 — требуется done; TASK-0098 — требуется done | gpt-6.1-sol, high |
+| [TASK-0100](TASK-0100-multiplayer-smoothing-and-network-resilience.md) | Обеспечить плавность езды и устойчивость к задержкам сети | draft | high | TASK-0099 — требуется done | gpt-6.1-sol, high |
+| [TASK-0101](TASK-0101-multiplayer-self-host-and-release-validation.md) | Подготовить запуск игрового сервера и итоговую проверку мультиплеера | draft | high | TASK-0100 — требуется done | gpt-6.1-sol, high |
 | [TASK-0095](TASK-0095-breakable-sidewalk-props.md) | Физические объекты тротуара, скамейки и розыск за наезд | done | high | нет; TASK-0075 — done; существующий wanted API; последовательно при общих файлах | gpt-6.1-sol, high |
 | [TASK-0093](TASK-0093-normal-house-city-boundary.md) | Обычные дома с узкими зазорами по непроходимой границе карты | done | high | нет; TASK-0090/0091 — done; последовательно с0094 при общих файлах | gpt-6.1-sol, high |
 | [TASK-0094](TASK-0094-topology-aware-sidewalk-corners.md) | Разные формы углов тротуара по реальному контуру дорог | done | normal | нет; последовательно с0093 при общих файлах | gpt-6.1-sol, high |
