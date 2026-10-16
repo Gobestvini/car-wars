@@ -3,7 +3,7 @@
 - Статус: draft
 - Приоритет: high
 - Создана: 2026-10-14
-- Обновлена: 2026-10-14
+- Обновлена: 2026-10-16
 - Проект: CarWars; C:\Users\gobes\OneDrive\Документы\CarWars; github.com/Gobestvini/car-wars
 - Рекомендуемый исполнитель: gpt-6.1-sol, high; Интеграция крупного main.js, модели и lifecycle: gpt-6.1-sol, high.
 - Зависимости: TASK-0097 — требуется done; TASK-0098 — требуется done
@@ -33,7 +33,7 @@
 
 При зависимостях таблица описывает baseline до серии; после done зависимости обязательно проверить фактические новые пути/API и обновить задание. Прочитать принятый docs/knowledge/multiplayer-server-adr.md, когда он появится; отсутствующий ADR блокирует этапы после0096.
 
-Контекст TASK-0096 (2026-10-14): изолированный spike создан в tools/multiplayer-spike; решения и ограничения описаны в docs/knowledge/multiplayer-server-adr.md. Проверены core0.18.18/ws-transport0.18.4/SDK0.18.5/Schema5.0.39. Production core/полный gameplay ещё не перенесены. Loss1% и optimized-runtime soak не подтверждены, nominal patch20Hz не выдержан в длинном профиле; зависимость не считается done. Сохранять draft до независимой QA и закрытия blockers, перед исполнением сверить актуальный ADR и код.
+Контекст TASK-0096 (2026-10-16): изолированный tools/multiplayer-spike и ADR сохранены, core0.18.18/ws-transport0.18.4/SDK0.18.5/Schema5.0.39. Реальная kernel netem loss1% матрица и optimized Node22.23.3 soak теперь выполнены, основной исследовательский результат прошёл независимую QA; см. актуальный статус/отчёт TASK-0096 и docs/knowledge/multiplayer/2026-10-16. Production core/полный gameplay ещё не перенесены. ADR сохраняет no-go: browser p95 при RTT100/loss1 выше200мс, measured cadence ниже nominal; короткие patch30/60 пробы тоже не прошли latency. Сохранять draft до закрытия архитектурного gate, а не только смены статуса0096. Следующий вариант в ADR — unreliable authoritative transport; online client solver без отдельного решения не вводить.
 
 ## 3. Область изменений
 

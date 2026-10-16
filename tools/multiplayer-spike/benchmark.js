@@ -1,6 +1,9 @@
 import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { cpus, totalmem, platform, release } from 'node:os';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { performance } from 'node:perf_hooks';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { Client } from '@colyseus/sdk';
@@ -9,17 +12,20 @@ import { SpikeWorld, STEP } from './world.js';
 import { startServer } from './server.js';
 import { summary } from './protocol.js';
 
-export const outputDir = new URL('../../docs/knowledge/multiplayer/', import.meta.url);
+export const outputDir = process.env.BENCH_OUTPUT_DIR
+  ? pathToFileURL(resolve(process.env.BENCH_OUTPUT_DIR) + '/')
+  : new URL('../../docs/knowledge/multiplayer/', import.meta.url);
 export async function metadata() {
   const sources = {};
   for(const name of ['src/vehicle.js','src/traffic-ai.js','src/traffic-planner.js','src/city-generator.js',
-    'src/city-boundary.js','src/road-surface.js','src/traffic-signals.js','src/city-broadphase.js']) {
+    'src/city-boundary.js','src/road-surface.js','src/traffic-signals.js','src/city-broadphase.js',
+    'tools/multiplayer-spike/server.js','tools/multiplayer-spike/world.js','tools/multiplayer-spike/state.js']) {
     sources[name] = createHash('sha256').update(await readFile(new URL(`../../${name}`,import.meta.url))).digest('hex');
   }
   return { date: new Date().toISOString(), node:process.version, os:`${platform()} ${release()}`,
     cpu:cpus()[0].model, logicalCpus:cpus().length, memoryBytes:totalmem(), sourceHashes:sources,execArgv:process.execArgv,
     packages:JSON.parse(await readFile(new URL('package.json',import.meta.url),'utf8')).dependencies,
-    gitBaseline:'dc9eb0603b82bd3db4d1accbc7dda214efa9bb0c plus pre-existing working changes',
+    gitBaseline:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()+' plus recorded working source hashes',
     seed:20261005, physicsHz:120,schedulerHz:60,AIHz:10,patchHz:20,
     limitations:['reduced AI harness, not full production junction/reservation/evasion/police/gameplay',
       'server-only physics; physics LOD is harness union-of-players approximation',

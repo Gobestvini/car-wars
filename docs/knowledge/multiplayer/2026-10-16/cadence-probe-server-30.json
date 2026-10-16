@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-16",
+  "node": "v22.23.3",
+  "schedulerHz": 120,
+  "patchHz": 30,
+  "samples": [
+    {
+      "seconds": 55.0722825,
+      "tick": 3956,
+      "schedulerCount": 2265,
+      "patchCount": 846,
+      "stepMs": {
+        "count": 3956,
+        "p50": 1.9403999999994994,
+        "p95": 2.7076000000015483,
+        "p99": 3.05279999999766,
+        "max": 11.250400000000809
+      },
+      "encodingMs": {
+        "count": 846,
+        "p50": 1.0351000000009662,
+        "p95": 1.3179000000018277,
+        "p99": 1.6231000000007043,
+        "max": 2.3809000000001106
+      },
+      "wireBytes": 5313626
+    },
+    {
+      "seconds": 60.081297000000006,
+      "tick": 4556,
+      "schedulerCount": 2621,
+      "patchCount": 974,
+      "stepMs": {
+        "count": 4556,
+        "p50": 2.0023000000001048,
+        "p95": 2.786500000001979,
+        "p99": 3.125,
+        "max": 11.250400000000809
+      },
+      "encodingMs": {
+        "count": 974,
+        "p50": 1.0314999999973224,
+        "p95": 1.310300000004645,
+        "p99": 1.6231000000007043,
+        "max": 2.3809000000001106
+      },
+      "wireBytes": 6085760
+    },
+    {
+      "seconds": 65.0989074,
+      "tick": 5159,
+      "schedulerCount": 2976,
+      "patchCount": 1106,
+      "stepMs": {
+        "count": 5159,
+        "p50": 2.0496000000057393,
+        "p95": 2.814299999998184,
+        "p99": 3.132900000004156,
+        "max": 11.250400000000809
+      },
+      "encodingMs": {
+        "count": 1106,
+        "p50": 1.0267999999996391,
+        "p95": 1.3014000000002852,
+        "p99": 1.6067999999941094,
+        "max": 2.4967000000033295
+      },
+      "wireBytes": 6755264
+    },
+    {
+      "seconds": 70.1039784,
+      "tick": 5759,
+      "schedulerCount": 3336,
+      "patchCount": 1234,
+      "stepMs": {
+        "count": 5759,
+        "p50": 2.105999999999767,
+        "p95": 2.886500000000524,
+        "p99": 3.271199999999226,
+        "max": 11.250400000000809
+      },
+      "encodingMs": {
+        "count": 1234,
+        "p50": 1.019399999997404,
+        "p95": 1.2913000000007742,
+        "p99": 1.6067999999941094,
+        "max": 2.4967000000033295
+      },
+      "wireBytes": 7388264
+    },
+    {
+      "seconds": 75.11485680000001,
+      "tick": 6361,
+      "schedulerCount": 3700,
+      "patchCount": 1363,
+      "stepMs": {
+        "count": 6361,
+        "p50": 2.1592000000018743,
+        "p95": 2.930399999997462,
+        "p99": 3.3372999999992317,
+        "max": 11.250400000000809
+      },
+      "encodingMs": {
+        "count": 1363,
+        "p50": 1.0151999999943655,
+        "p95": 1.280800000000454,
+        "p99": 1.6067999999941094,
+        "max": 2.4967000000033295
+      },
+      "wireBytes": 7889405
+    }
+  ],
+  "note": "Partial captured stdout tail from process-local cadence probe. Windows launcher cancellation did not deliver Node SIGINT; graceful report was not written. These rows alone support interval cadence estimates, not a long soak. Browser raw is separate."
+}

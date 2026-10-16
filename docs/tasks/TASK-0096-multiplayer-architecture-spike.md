@@ -1,9 +1,9 @@
 # TASK-0096: Проверить серверную архитектуру мультиплеера на трёх игроков
 
-- Статус: blocked
+- Статус: done
 - Приоритет: high
 - Создана: 2026-10-14
-- Обновлена: 2026-10-14
+- Обновлена: 2026-10-16
 - Проект: CarWars; C:\Users\gobes\OneDrive\Документы\CarWars; github.com/Gobestvini/car-wars
 - Рекомендуемый исполнитель: gpt-6.1-sol, high; Архитектурный риск, реальная серверная физика, сравнение стеков и интерпретация измерений требуют gpt-6.1-sol с high.
 - Зависимости: нет
@@ -63,8 +63,8 @@ ADR фиксирует решение go/no-go, server capacity, число по
 - [x] Node-прототип запускается без browser globals; три машины и map collisions работают, четвёртая сессия отказана.
 - [x] Измерены реальные simulation/serialization/wire costs и input-to-response; непокрытые production пути названы.
 - [x] Определены DTO, global police cap, timing, recovery, latency strategy и воспроизводимый способ следующих проверок.
-- [ ] Обязательные проверки ниже выполнены и записаны фактически; ограничения и невыполненные пункты перечислены.
-- [ ] Отчёт заполнен; после разработки статус ready-for-qa и INDEX синхронизированы. done разрешён только независимому QA.
+- [x] Обязательные проверки ниже выполнены и записаны фактически; ограничения и невыполненные пункты перечислены.
+- [x] Отчёт заполнен; после разработки статус ready-for-qa и INDEX синхронизированы. done разрешён только независимому QA.
 
 ## 7. Проверки
 
@@ -109,6 +109,21 @@ QA повторяет обязательные сценарии независи
 - Отклонения: разрешённый reduced headless AI glue вместо renderer-bound createVehicleRuntime; все отсутствующие production пути перечислены в README/ADR. Offline baseline — headless1-player harness, не полный browser offline performance. Default102 workload без3 police, productionCoverage=false. Временная копия collider descriptor builder подлежит замене единым core в0097.
 - Итоговый статус: ready-for-qa,2026-10-14; независимый QA должен проверить критерии и записать собственное решение. Незавершённые обязательные проверки выше не объявлены pass. Downstream0097–0101 оставлены draft с новым контекстом.
 
+### Повторная разработка и проверки 2026-10-16
+
+Baseline HEAD4efe5698982662858eb48ec7e1a3c911009307af плюс исходные чужие working changes. Production src и root dependencies не менялись. Предыдущие отчёты сохранены как история.
+
+- Устранён внешний blocker предыдущего QA: добавлены netem-bootstrap.py/netem-vm.py/netem-network.js. Официальные QEMU11.1.0/Alpine3.22.6 и Node22.23.3 извлечены в user-local cache; QEMU/ISO/Node checksums проверены, Windows adapters/drivers не менялись. RAM-only Linux guest запускает настоящий kernel netem и TCP/socat. Все host listeners127.0.0.1. Пошаговый запуск и ограничения двух TCP-плеч SLIRP записаны в tools/multiplayer-spike/README.md.
+- Actual loss1%/RTT0/50/100/150/jitter20,40 samples/профиль: p95 applied-ack всех3SDK271.9/331.7/380.4/539.2мс. Настройки проверены по actual tc JSON, наблюдались drops и прирост TCP RetransSegs29/27/27/64; не подмена потерь выкидыванием JS messages. Сырьё docs/knowledge/multiplayer/2026-10-16/netem-network.json.
+- Новый полный optimized Node22.23.3 soak: --expose-gc без --no-opt,15с warmup+300.082с measured,36009 ticks. p95/p99 step2.919/4.173мс,14.255KiB/s/client, heap tail+0.938%, droppedSeconds0. Scheduler41.86Hz/patch16.83Hz не достигают nominal60/20. Full production workload всё ещё не проверен: reduced AI без3/6 police и gameplay. Node24 failures не диагностированы.
+- Прямой Node22 --test tools/multiplayer-spike/tests/spike.test.js:5/5, exit0,6.579с. Старые артефакты сохранены. Новый benchmark runner принимает BENCH_OUTPUT_DIR, записывает актуальный git baseline и SHA256 spike/production modules.
+- Browser на http://127.0.0.1:2577/?endpoint=http://127.0.0.1:2581: три SDK102NPC, одинаковые signatures, fourth room locked;30 input→Canvas responses после applied seq,29 movement responses, p50/p95/p99=195.4/253.6/287.2мс. RTT100/loss1 actual qdisc и counters, raw30 и PNG сохранены. Снято после завершения benchmark/network runner. Токены не записывались, browser closed перед QA.
+- Отрицательный результат latency200мс сохранён как no-go в ADR. Исполнитель не заявляет, что выбранный транспорт пригоден к выпуску. Физика/AI остаются серверными, client solver не добавлен. Обязательное внешнее измерение теперь выполнено; исследовательская задача передаётся на повторную независимую приёмку с отрицательным архитектурным выводом, как допускает раздел4. TASK-0097–0105 остаются draft: существующий gate на непрошедшие budgets не снимается. Следующий конкретный вариант — cadence/30Hz patch A/B, затем при необходимости server-authoritative H3/WebTransport spike с browser/certificate проверкой; это ещё не доказанное улучшение.
+
+### Дополнительное исследование частот после baseline QA
+
+2026-10-16: process-local cadence-probe.js, без изменения default server/world/state. Временный launcher с тем же кодом запускался на Node22, nominal scheduler120Hz/patch30 либо60, тот же netem RTT100/loss1. Две последовательные browser серии по30 проб/29movement: p50/p95/p99=195.3/245.4/278.8 и174.5/341.1/409.2мс. Нет контролируемого seed потерь между сериями, пятиминутный soak этих вариантов не заявлен. No-go сохраняется; простая смена частот не подтвердила200мс. Source hashes default server/world/state совпадают с baseline. Все raw browser samples и server summaries сохранены отдельно в dated artifacts; у30 только stdout tail из-за отмены Windows launcher без SIGINT, у60 штатный120с report. Этот helper и дополнения отчёта передаются на дополнительную QA-проверку; предыдущая baseline QA остаётся сохранённой.
+
 ## 11. Отчёт QA
 
 Дата: 2026-10-14. Независимый QA-подагент, отдельный контекст; проверен HEAD dc9eb0603b82bd3db4d1accbc7dda214efa9bb0c и текущий незакоммиченный spike/ADR/artifacts. Исходные чужие staged/unstaged изменения сохранены. Реализация и критерии не изменялись.
@@ -140,6 +155,44 @@ RTT100/jitter20 browser capture завершён2026-10-14T12:50:40.214Z:30 пр
 Дополнительные ограничения: scripts benchmark/start/network используют `--no-opt --no-concurrent-recompilation`; этот QA не подтверждает stable optimized runtime и не диагностирует два ранее заявленных exit1. Не доказаны полный production workload с3 активными police, gameplay и качество traffic liveness. Для снятия blocked требуется обязательная packet-loss матрица и новая независимая приёмка; budget/authority решения не ослаблять без явного согласования.
 
 Примечание ведущего после завершения QA: повторное сырьё сохранено в репозитории без изменения байтов: [qa-repeat-benchmark.json](../knowledge/multiplayer/qa-repeat-benchmark.json), [qa-repeat-network.json](../knowledge/multiplayer/qa-repeat-network.json). Исходные артефакты исполнителя сохранены отдельно.
+
+### Повторная независимая приёмка 2026-10-16
+
+Проверен HEAD `4efe5698982662858eb48ec7e1a3c911009307af` и текущий working diff: benchmark metadata/output-dir, netem bootstrap/VM/network runner, README, дополнение ADR и dated artifacts. Прочитаны AGENTS.md, qa-tasks, соглашения/роль QA, план, задание целиком и релевантные исходники world/server/state/protocol/browser/tests. Все 11 SHA256 из `2026-10-16/benchmark.json` совпали с текущими файлами. Чужие изменения сохранены; QA меняет только эту задачу и её статус в INDEX, без commit/push.
+
+**Решение: done — принят исследовательский результат с отрицательным production go/no-go.** Раздел 4 прямо допускает недостигнутые budgets при воспроизводимом blocker/вариантах и draft зависимых задач. Недоступная ранее обязательная packet-loss проверка теперь выполнена независимо. Это не подтверждение готовности production multiplayer и не снятие gate TASK-0097–0105: они остаются draft. Latency200мс, nominal cadence и полный gameplay workload не объявлены пройденными.
+
+| Критерий раздела 6 | Доказательство повторной QA |
+| --- | --- |
+| Четыре варианта, версии/лицензии, go/no-go | Сравнение Colyseus/Nakama/geckos.io/raw WS и первичные ссылки в ADR проверены. `npm --prefix tools/multiplayer-spike ls --depth=0` подтвердил core0.18.18/transport0.18.4/SDK0.18.5/Schema5.0.39. Nakama release и benchmarks альтернатив явно не заявлены проверенными. Официальные Colyseus reconnect и Heroic Labs runtime просмотрены повторно. Дополнение ADR2026-10-16 задаёт актуальный no-go и конкретные cadence/transport эксперименты; прежние формулировки выше сохранены как история. |
+| Headless Node, машины/город/capacity | Spike tests5/5; реальные CarSimulation, городской collider builder и один world.step на substep изучены. Дополнительная независимая fixture:120 steps,10 контактов именно между кузовами P1/P2, одинаковый signature. Browser через netem создал3 SDK/102NPC, четвёртому room locked; collision fixture-комната повторена, contactCount растёт. |
+| Costs/response и границы coverage | Полный повтор optimized Node22 soak и actual packet-loss matrix ниже; браузерный capture повторён. Reduced AI, отсутствие police/props/wanted/полного production gameplay, временный collider builder и headless offline baseline явно ограничивают выводы. |
+| DTO/cap/timing/recovery/latency | Изучены wire Schema, welcome/full, applied ack, whitelist/seq/rate/silence и15с reconnect. SDK тесты подтвердили late join, reconnect identity/expiry, cleanup; browser disconnect false→reconnect true повторён. ADR содержит cap6/default до3, полный будущий DTO, capacity MAX_ROOMS1, latency/recovery и запрет online solver. |
+| Обязательные проверки | Root regression/build, spike test, полноценный benchmark, real SDK matrix, browser RTT100 и collision/signature/capacity сценарии выполнены независимо. Packet loss подтверждён actual tc drops/TCP retransmissions, не удалением application messages. Оговорка RTT0 ниже. |
+| Отчёт и статусы | История QA2026-10-14 и отчёт исполнителя сохранены. Переходы qa-in-progress→done выполнены queue CLI с синхронизацией INDEX. |
+
+Команды и факты QA:
+
+- `node tools/verify.js --full` → exit0:355/355 тестов,165.988с; Vite build1.80с, обычное предупреждение large chunk. Исторический `tools/telegram/verify.js` отсутствует, использован актуальный root verifier. Он запускает тот же node:test/Vite, что npm aliases. `.checks.json`:ok=true, tests/build0,2026-10-16T15:35:27.576Z; `.check-logs/tests.log` и build.log. `npm --prefix tools/multiplayer-spike test` → exit0,5/5,3.355с; expired token diagnostic ожидаем assertion.
+- `%LOCALAPPDATA%/carwars-netem/node22/node.exe --expose-gc tools/multiplayer-spike/benchmark.js`, `BENCH_OUTPUT_DIR=%TEMP%/carwars-qa0096-20261016` → exit0, оптимизированный Node22.23.3, только --expose-gc. i9-13900KF/32logical/Windows22631, seed20261005. Accelerated1+102/3+102/3+300 p95=2.228/2.448/3.683мс; all-physical3+102 p95/p99=7.356/10.752мс превышает6/8.33мс. Real-time3SDK+102NPC после15с warmup:300.932с,36112 ticks,p95/p99=2.567/3.332мс; snapshot1.085мс, encode/send1.259мс p95;12.300KiB/s/client, heap tail120с+0.991%, droppedSeconds0,maxDebt56.513мс. Scheduler42.159Hz/patch16.891Hz ниже60/20. Все reduced-harness budgets true, productionCoverage=false. В начале были concurrent root/network QA runners; отдельный VPS sizing не заявляется. Raw JSON сохранён вне репозитория в указанной TEMP-папке; исходные benchmark artifacts не перезаписывались.
+- `%LOCALAPPDATA%/carwars-netem/node22/node.exe tools/multiplayer-spike/netem-network.js` → exit0;40 applied-ack проб каждого RTT0/50/100/150; p95=224.732/219.853/398.938/505.063мс. Actual loss0.01 во всех qdisc; drops delta17/15/21/27, TCP RetransSegs delta29/29/33/40. Для50/100/150 actual delay25/50/75мс и jitter10мс на guest egress. **RTT0 фактически loss-only baseline:** Linux не сохраняет options.delay/jitter при команде delay0ms10ms; ему нельзя приписывать actual jitter20. Это нулевая точка матрицы, а jitter подтверждён в ненулевых профилях. Два TCP-плеча QEMU SLIRP/socat и emulator overhead не являются прямым WAN. Исходный dated network JSON восстановлен byte-for-byte в finally; повторный raw сохранён `%TEMP%/carwars-qa0096-netem-20261016.json`.
+
+Браузер: Codex in-app browser на `http://127.0.0.1:2577/?endpoint=http://127.0.0.1:2581`, actual profile RTT100/jitter20/loss1; kernel stats delay50ms/jitter10ms/loss0.01, drops476/RetransSegs478 наблюдались во время сценария. Три реальные SDK одной вкладки,102NPC, одинаковые три welcome signatures и стабильный state signature `7ee310664502559afb995feee1d07155086e49d596ac70044db038c269d38e3a`; full-room/reconnect/collision fixture повторены. Canvas показывает серверные poses, solver/AI в browser отсутствуют, Three.js gameplay не интегрирован. Скриншот диагностической карты просмотрен; ошибок/warnings консоли нет. QA-вкладка закрыта; серверы/VM ведущего не останавливались.
+
+Capture2026-10-16T15:33:27.809Z:30 input→Canvas responses после applied ack,29 movement; p50/p95/p99=178.7/228.6/493.1мс. Raw мс:493.1,149.9,149.5,149.3,182.8,183.0,228.6,220.0,161.9,199.5,165.9,187.0,158.0,137.1,142.0,178.7,187.0,174.0,228.2,162.1,166.1,182.8,211.9,157.7,187.3,203.3,124.7,199.4,199.6,132.9. Первая проба steering-only; root verifier работал параллельно, benchmark/network matrix начались позже. Целевой200мс не достигнут, что независимо подтверждает blocker ADR. Полная управляемость на RTT150 и настоящий production renderer/gameplay остаются downstream проверками, не результатом этого Canvas spike. Optimized Node22 завершился; причины прежних Node24 exit1 не установлены.
+
+### Дополнительная независимая QA cadence-probe, 2026-10-16
+
+**Решение: done, исследовательское дополнение принято; production no-go и draft gate TASK-0097–0105 сохраняются.** Проверен новый `tools/multiplayer-spike/cadence-probe.js` (SHA256 `b38eced37c2a5a5d082c257369e73016672c206eab1c972ed4edfe4229b5ae0f`), README/ADR/отчёт и четыре cadence JSON. Default server/world/state не изменены: их hashes совпадают с принятым baseline, git status этих трёх файлов пуст. Повтор пятиминутного soak неизменного кода не нужен; предыдущая независимая baseline-приёмка и её ограничения действуют.
+
+- Helper изучен: process-local onCreate вызывает исходный onCreate, затем заменяет единственный simulation interval и patchRate; physics STEP/authority/input/state не меняются. Доступны только patch30/60, порт2577 loopback, срок120с, сохранение samples и graceful shutdown/quit. `node --check tools/multiplayer-spike/cadence-probe.js` → exit0.
+- QA самостоятельно запустил optimized Node22 helper30 и helper60, по три настоящих SDK через `http://127.0.0.1:2581`; по30 последовательных applied seq всем трём сессиям, одинаковые signatures, exit0 клиентов. Actual qdisc: delay50ms/jitter10ms/loss0.01, то есть используемый RTT100/jitter20/loss1 path. Helper30 завершился штатным120с таймером exit0; helper60 завершился stdin `quit` exit0 после smoke. Исходные dated server reports сохранены байтами и восстановлены в finally; новые QA reports находятся `%TEMP%/carwars-qa0096-cadence30.json` и `carwars-qa0096-cadence60.json`.
+- По разности первой/последней из4 активных строк каждого QA report:30Hz вариант дал scheduler64.347Hz/patch25.112Hz/physics120.034Hz,60Hz вариант64.819/47.915/119.988Hz. Это короткие интервальные оценки при concurrent root verifier, не target runtime capacity, не обещанные120/30/60Hz. Отсутствие клиентов прекращает сбор строк;120с жизнь процесса не означает120с активного workload.
+- Raw browser JSON независимо проверены assertions:30 samples/29movement, три одинаковых signatures, sessions3, error=null, appliedTick≤tick; заново отсортированы ms и сверены p50/p95/p99:195.3/245.4/278.8 и174.5/341.1/409.2мс. Server30 явно partial stdout5rows, server60 содержит7 active rows и штатное завершение; эти различия честно записаны. Random loss не контролировался одинаковым seed, causal A/B и улучшение latency не заявлены. Из двух превышений p95 нельзя выводить, что увеличение частоты само вызывает ухудшение.
+- Браузерный повтор новых exploratory серий в этом followup not-run: поддержанные `cua.createBrowserTab('iab',...)` и прежний browser id вернули Browser is not available, inventory apps[]/browsers[]. Это не новый обязательный gameplay сценарий: browser-client и baseline server/world/state неизменны, обязательная независимая browser RTT100 проверка выполнена выше; дополнительные числа оценены как executor exploratory evidence, не приписаны независимому browser capture QA. SDK smoke и raw consistency достаточны для принятия именно этого ограниченного дополнения.
+- Прежняя root квитанция перестала соответствовать fingerprint после добавления helper, поэтому QA повторил `node tools/verify.js --full` → exit0:355/355,162.215с; build1.49с, только прежнее предупреждение large chunk. `.checks.json` ok=true/tests0/build0, at2026-10-16T15:48:39.151Z, fingerprint `89b2005c6d60147054bece1f653571bc241086cbacb12defd254d6dc40251d17`. Изменён только изолированный helper и документация, поэтому повтор неизменного spike suite/пятиминутной baseline без новой причины не выполнялся.
+
+Новых дефектов, требующих возврата задачи, не выявлено. Уточнение RTT0 loss-only внесено в актуальные документы. История предыдущих QA сохранена; статус и INDEX возвращены в done через queue CLI. QA не менял реализацию, не создавал подагентов и не делал commit/push. Его процессы helper завершены, SDK-сессии освобождены; QEMU/netem больше для QA не нужен.
 
 ## Рекомендация модели исполнителя
 
