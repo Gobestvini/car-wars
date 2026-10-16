@@ -4,6 +4,10 @@
 
 | ID / файл | Название | Статус | Приоритет | Зависимости | Рекомендуемый исполнитель |
 | --- | --- | --- | --- | --- | --- |
+| [TASK-0102](TASK-0102-city-hunt-server-round-and-roles.md) | Режим города: серверные роли 3+1 и раунд на две минуты | draft | high | TASK-0101 — требуется done | gpt-6.1-sol, high |
+| [TASK-0103](TASK-0103-city-hunt-cards-and-road-blockades.md) | Карты города: полиция, перекрытия и серверные способности | draft | high | TASK-0102 — требуется done | gpt-6.1-sol, high |
+| [TASK-0104](TASK-0104-city-director-camera-and-card-ui.md) | Играть за город: общий обзор и перетаскивание карточек | draft | high | TASK-0103 — требуется done | gpt-6.1-sol, high |
+| [TASK-0105](TASK-0105-city-hunt-balance-and-load-validation.md) | Проверить баланс и нагрузку режима города в матчах 3+1 | draft | high | TASK-0104 — требуется done | gpt-6.1-sol, high |
 | [TASK-0096](TASK-0096-multiplayer-architecture-spike.md) | Проверить серверную архитектуру мультиплеера на трёх игроков | blocked | high | нет | gpt-6.1-sol, high |
 | [TASK-0097](TASK-0097-headless-multiplayer-game-world.md) | Выделить общий серверный мир физики и AI для трёх игроков | draft | high | TASK-0096 — требуется done | gpt-6.1-sol, high |
 | [TASK-0098](TASK-0098-authoritative-three-player-rooms.md) | Создать authoritative серверные комнаты на трёх игроков | draft | high | TASK-0096 — требуется done; TASK-0097 — требуется done | gpt-6.1-sol, high |
