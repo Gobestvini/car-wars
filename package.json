@@ -14,7 +14,8 @@
   "dependencies": {
     "cannon-es": "0.20.0",
     "three": "0.180.0",
-    "tweakpane": "4.0.5"
+    "tweakpane": "4.0.5",
+    "@colyseus/sdk": "0.18.5"
   },
   "devDependencies": {
     "vite": "7.1.9"

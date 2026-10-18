@@ -34,6 +34,17 @@ try {
   }
   await until(() => clients.slice(0, 3).every(r => r.state.actors.get(a.sessionId)?.ack === 20));
   assert.notDeepEqual(a.state.actors.get(a.sessionId).pose.slice(0, 3), before);
+  const generation = a.state.actors.get(a.sessionId).generation;
+  let welcome;
+  a.onMessage('welcome', data => { welcome = data; }); a.send('hello');
+  await until(() => welcome);
+  assert.equal(welcome.map.plan.seed, a.state.seed);
+  assert.ok(welcome.map.plan.buildings.length > 100);
+  a.onMessage('respawned', () => {}); a.send('respawn');
+  await until(() => b.state.actors.get(a.sessionId).generation === generation + 1);
+  assert.equal(b.state.actors.get(b.sessionId).generation, 1);
+  a.send('respawn'); await sleep(150);
+  assert.equal(a.state.actors.get(a.sessionId).generation, generation + 1);
   const identity = c.sessionId, token = c.reconnectionToken;
   c.reconnection.enabled = false; c.connection.close(4001);
   await until(() => a.state.actors.get(identity)?.connected === false);
@@ -45,7 +56,8 @@ try {
   await assert.rejects(sdk.create('driving', { protocolVersion: 1 }), /занят|две комнаты/);
   assert.notEqual(second.roomId, a.roomId);
   console.log(JSON.stringify({ ok: true, endpoint, checks: ['3 independent clients', '102 NPC', 'same map', '4th rejected',
-    'shared movement and applied input', 'reconnect preserves identity', '2-room cap', 'proxy-safe error JSON'], signature: a.state.signature }));
+    'shared movement and applied input', 'reconnect preserves identity', '2-room cap', 'proxy-safe error JSON',
+    'authoritative 3D map', 'individual rate-limited respawn'], signature: a.state.signature }));
 } finally {
   await Promise.allSettled(clients.filter(r => r.connection?.isOpen).map(r => r.leave()));
 }

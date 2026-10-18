@@ -1,0 +1,17 @@
+.multiplayer-entry { display:block;width:100%;min-height:42px;margin:8px 0 0;border:2px solid #fff3d6;border-radius:12px;background:#143759ed;color:#fff9ec;font:700 16px 'Car Roboto',sans-serif;cursor:pointer; }
+body[data-online="true"] #start-screen,body[data-online="true"] #menu-button,body[data-online="true"] #settings-button,body[data-online="true"] #wanted {display:none!important}
+#multiplayer-lobby {position:fixed;z-index:15;inset:0;display:grid;place-items:center;padding:16px;background:#071c3e99;font-family:'Car Roboto',system-ui;color:#fff9ec;overflow:auto}
+#multiplayer-lobby[hidden]{display:none}
+.multiplayer-card{width:min(100%,420px);box-sizing:border-box;padding:24px;border:2px solid #fff3d6;border-radius:24px;background:#143759f5;box-shadow:0 14px 50px #071c3e88;text-align:center}
+.multiplayer-card h1{margin:4px 0 10px;font:36px 'Lilita One',system-ui}.multiplayer-card p{line-height:1.5}
+.multiplayer-card button,.multiplayer-card input{box-sizing:border-box;width:100%;font:700 16px 'Car Roboto',system-ui;border-radius:10px;padding:12px;margin:5px 0;min-height:46px}
+.multiplayer-card input{border:1px solid #94c6ed;background:#fff9ec;color:#071c3e}
+.multiplayer-card button{border:0;background:#ffe29c;color:#071c3e;cursor:pointer}.multiplayer-card button:disabled{opacity:.55;cursor:wait}
+.multiplayer-card a{color:#d2eeff}.multiplayer-card label{display:block;text-align:left;font-size:13px;margin-top:12px}
+#online-toolbar{position:fixed;z-index:6;top:calc(12px + env(safe-area-inset-top));right:12px;display:flex;gap:6px}
+#online-toolbar button{background:#fff9ec;color:#071c3e;border:2px solid #143759;border-radius:10px;padding:10px;font:700 14px system-ui;min-height:44px;cursor:pointer}
+#online-toolbar[hidden]{display:none}
+#online-status{position:fixed;z-index:6;bottom:calc(12px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);padding:8px 14px;border-radius:12px;background:#143759e8;color:#fff9ec;font:600 13px system-ui;text-align:center;max-width:min(90vw,650px);pointer-events:none}
+#online-status:empty{display:none}
+#multiplayer-lobby :focus-visible,#online-toolbar :focus-visible,.multiplayer-entry:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(max-width:600px){#online-toolbar{top:auto;bottom:calc(56px + env(safe-area-inset-bottom));right:8px;flex-direction:column}#online-toolbar button{padding:8px;font-size:12px}.multiplayer-card{padding:18px}#online-status{font-size:11px;width:80vw}}

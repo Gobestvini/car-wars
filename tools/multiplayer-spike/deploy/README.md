@@ -1,10 +1,27 @@
-# Hosted multiplayer preview
+# Hosted 3D multiplayer
 
 Live: **https://api.plusvibegames.com/carwars/** (2026-10-18).
-Create a room and send its invitation link to the other two players. Each browser
-controls its own car with WASD/arrows or the on-screen buttons. This is the existing
-authoritative physics/traffic prototype, with a Canvas map, not the production
-Three.js game. Rooms disappear when all players leave; there is no saved progress.
+The deployed root opens the main game's Three.js city, car models, lighting,
+camera and damage effects in online mode. Create a room and send its invitation
+link to the other two players. Each controls their own car using WASD/arrows,
+Space for handbrake, or the same directional touch gesture as the offline game.
+R / «Вернуть машину» safely resets only that player's car. «Пригласить» opens the
+selectable invitation link and pauses only local input; other players continue.
+Rooms disappear when all players leave; there is no saved progress.
+
+The main menu also has «Играть с друзьями» on the normal static/GitHub Pages build.
+`?online=1&room=ROOM_ID` joins an invitation; `?offline=1` opens the existing offline
+game, including on this VPS. Optional `VITE_GAME_SERVER_URL` overrides the public
+endpoint at build time. The server supplies the actual city plan and all actor,
+wheel, damage and signal-clock state; online does not construct cannon or run AI.
+Snapshots interpolate remote cars and bound local extrapolation to 80 ms. After
+500 ms without new state, extrapolation stops and the client brakes/shows a warning.
+
+Online supports shared free driving with 102 civilians, three physical players,
+collisions/damage and individual respawn. Police/wanted/arrest, repair pickups and
+destructible street props are still offline-only. Rendered street props/trees are
+decorative in online mode. The deployed server remains the bounded research world;
+this integration does not accept the full production multiplayer backlog.
 
 The White Tower VPS runs this as an independent Docker Compose project on the
 existing `tower-edge` network. No host game port is published. Caddy strips
@@ -16,7 +33,7 @@ existing `tower-edge` network. No host game port is published. Caddy strips
 Use a source export of a committed revision, not the shared working directory:
 
 ```sh
-git archive --format=tar --output=carwars.tar HEAD package.json src tools/multiplayer-spike
+git archive --format=tar --output=carwars.tar HEAD package.json pnpm-lock.yaml pnpm-workspace.yaml index.html vite.config.js src public tools/multiplayer-spike
 # Upload, extract to /srv/carwars/releases/RELEASE, then run there:
 docker build -f tools/multiplayer-spike/deploy/Dockerfile -t carwars-preview:RELEASE .
 CARWARS_RELEASE=RELEASE docker compose -f tools/multiplayer-spike/deploy/compose.yaml config --quiet
@@ -44,11 +61,13 @@ research room are bounded for this long-lived service. No extra rented resources
 docker run --rm --entrypoint node carwars-preview:RELEASE --test tools/multiplayer-spike/tests/spike.test.js
 node tools/multiplayer-spike/deploy/smoke.js https://api.plusvibegames.com/carwars
 docker stats --no-stream carwars-preview-multiplayer-1
+node --test tests/multiplayer-snapshot.test.js
 ```
 
 The smoke uses real Colyseus SDK sessions over public HTTPS/WSS. It checks a shared
 map/105 actors, the fourth-player rejection, shared input acknowledgement/movement,
 identity-preserving reconnection, a two-room ceiling and proxy-safe error JSON.
+It also checks the authoritative city plan, per-player respawn and its rate limit.
 It temporarily occupies both rooms; run when the preview is empty. Also verify the
 White Tower web/Telegram build-info and `/health`, `/test/health` on its API origin.
 
@@ -79,3 +98,23 @@ all three existing containers retained their uptime across Caddy hot reloads.
 This validates deployment and basic shared-world behavior, not production gameplay,
 packet-loss/latency budgets, physical-phone behavior or TASK-0097–0101 acceptance.
 Those tasks and the existing TASK-0096 QA restrictions are unchanged.
+
+### Main 3D integration, 2026-10-18
+
+The same live origin now serves a built main-game client rather than the diagnostic
+Canvas page. Five presentation/protocol regression tests plus five existing spike
+tests passed locally. Forty relevant physics/input/map/model/network tests passed
+in the actual ARM64 Node 22 image. Vite production build passed (existing Three.js
+chunk-size warning). Public SDK smoke passed all ten scenarios, including respawn.
+Three local and three public browser tabs joined one room and rendered the city;
+keyboard driving changed only the controlled player's speed. Renderer console had
+no errors in those checks. Physical-phone and portrait/touch acceptance remain
+unverified: the in-app browser's viewport override did not change its actual size.
+
+The broad root suite was attempted separately: Windows finished 357 other tests
+but its existing exhaustive city-boundary test was stopped; the isolated Linux
+full run also exceeded a 120-second budget in that unrelated perimeter scenario.
+These are not full-suite passes. The targeted 40-test Linux run above passed.
+Foreign in-progress city-boundary/traffic changes were excluded from deployment.
+Native `msgpackr-extract` is explicitly unapproved in pnpm config; its JavaScript
+fallback works in the browser, and image installation disables lifecycle scripts.
