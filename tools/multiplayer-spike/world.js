@@ -68,7 +68,7 @@ export class SpikeWorld {
     if (this.players.size >= 3 || this.players.has(id)) throw new Error('Room full or duplicate player');
     const slot = this.spawnSlot(), actor = { id, role: 'player', generation: 1, sim: this.makeSim(slot),
       control: neutral(), pending: null, lastSeq: -1, receivedSeq: -1, lastInputTick: this.tick,
-      lastAppliedTick: 0, connected: true };
+      lastAppliedTick: 0, connected: true, commands:new Map(), timed:false };
     this.players.set(id, actor); return actor;
   }
   removePlayer(id) {
@@ -101,12 +101,26 @@ export class SpikeWorld {
   }
   input(id, input) {
     const actor = this.players.get(id);
-    if (!actor || input.seq <= actor.receivedSeq) return false;
+    if (!actor || actor.timed || input.seq <= actor.receivedSeq) return false;
     actor.receivedSeq = input.seq; actor.pending = input; return true;
   }
   disconnect(id) {
     const actor = this.players.get(id);
-    if (actor) { actor.connected = false; actor.pending = null; actor.control = neutral(); }
+    if (actor) { actor.connected = false; this.halt(id); }
+  }
+  timedInput(id,packet) {
+    const actor=this.players.get(id);
+    if(!actor || !actor.connected || packet.generation!==actor.generation)return false;
+    actor.timed=true;actor.pending=null;
+    for(const [tick,steer,throttle,brake,handbrake]of packet.commands){
+      if(tick<=this.tick || tick>this.tick+120)continue;
+      if(!actor.commands.has(tick))actor.commands.set(tick,{steer,throttle,brake,handbrake:Boolean(handbrake)});
+    }
+    return true;
+  }
+  halt(id) {
+    const actor=this.players.get(id);if(!actor)return;
+    actor.commands.clear();actor.pending=null;actor.control=neutral();actor.lastInputTick=this.tick;
   }
   think() {
     const occupants = this.occupants();
@@ -155,6 +169,11 @@ export class SpikeWorld {
   step() {
     const start = performance.now();
     for (const actor of this.players.values()) {
+      if(actor.timed){
+        const command=actor.commands.get(this.tick+1);
+        if(command && actor.connected){actor.control=command;actor.lastAppliedTick=this.tick+1;actor.lastSeq=this.tick+1;actor.lastInputTick=this.tick;}
+        for(const tick of actor.commands.keys())if(tick<=this.tick+1)actor.commands.delete(tick);
+      }
       if (actor.pending && actor.connected) {
         const { seq, ...control } = actor.pending;
         actor.control = control; actor.lastSeq = seq; actor.lastAppliedTick = this.tick + 1;
@@ -193,10 +212,11 @@ export class SpikeWorld {
       const s = a.sim, b = s.body;
       return { id: a.id, generation: a.generation, role: a.role, physical: a.physical ?? true,
         p: vector(b.position), q: quaternion(b.quaternion), v: vector(b.velocity), av: vector(b.angularVelocity),
-        steering: s.steering, damage: s.damage, lastProcessedInputSeq: a.lastSeq ?? -1,
+        steering: s.steering, throttle:s.throttle,control:{...a.control}, damage: s.damage, lastProcessedInputSeq: a.lastSeq ?? -1,
         lastAppliedTick: a.lastAppliedTick ?? 0, connected: a.connected ?? true,
         wheels: s.wheels.map(w => ({ p: vector(w.detachedBody?.position ?? w.position),
-          rotation: w.rotation, slip: w.slip, grounded: w.grounded, detached: w.detached })) };
+          rotation: w.rotation, slip: w.slip, grounded: w.grounded, detached: w.detached,
+          body:w.detachedBody?{q:quaternion(w.detachedBody.quaternion),v:vector(w.detachedBody.velocity),av:vector(w.detachedBody.angularVelocity)}:null })) };
     };
     return { protocolVersion: 1, buildId: 'spike-1', roundId: 'round-1', tick: this.tick,
       serverTime: this.tick * STEP, stepSeconds: STEP, seed: this.plan.seed, roadWidth: this.plan.roadWidth,

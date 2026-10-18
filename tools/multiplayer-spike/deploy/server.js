@@ -8,6 +8,7 @@ import { Server } from '@colyseus/core';
 import { WebSocketTransport } from '@colyseus/ws-transport';
 import { DrivingSpikeRoom } from '../server.js';
 import { encodeFrame } from '../../../src/multiplayer/frame-codec.js';
+import { validateCommands } from '../protocol.js';
 
 // A small, bounded public preview; the production game is a separate service.
 let activeRooms = 0;
@@ -23,12 +24,28 @@ class HostedDrivingRoom extends DrivingSpikeRoom {
       if(!Number.isSafeInteger(seed)||seed<0||seed>=4294967296)throw Error('Invalid configured map seed');
       super.onCreate({ npcCount: 102, reconnectSeconds: 15, seed, collisionFixture: false });
       this.lastRespawn = new Map();
+      this.onMessage('commands',(client,payload)=>{
+        const now=performance.now();let bucket=this.buckets.get(client.sessionId);
+        if(!bucket || now-bucket.start>=1000){bucket={start:now,count:0};this.buckets.set(client.sessionId,bucket);}
+        if(++bucket.count>60){this.metrics.rateLimited++;return;}
+        const packet=validateCommands(payload);
+        if(!packet || JSON.stringify(payload).length>1024){this.metrics.invalidInputs++;return;}
+        this.sim.timedInput(client.sessionId,packet);
+      });
+      this.onMessage('ping',(client,stamp)=>{
+        if(!Number.isFinite(stamp))return;
+        const now=performance.now();if(now-(client.lastClockPing??-Infinity)<400)return;
+        client.lastClockPing=now;client.send('pong',{stamp,tick:this.sim.tick});
+      });
+      this.onMessage('halt',(client,generation)=>{
+        if(this.sim.players.get(client.sessionId)?.generation===generation)this.sim.halt(client.sessionId);
+      });
       this.onMessage('respawn', client => {
         const actor = this.sim.players.get(client.sessionId), now = performance.now();
         if (!actor || now - (this.lastRespawn.get(client.sessionId) ?? -Infinity) < 3000) return;
         const slot = this.sim.spawnSlot();
         actor.sim.spawn = { x: slot.x, y: .96, z: slot.z, yaw: slot.heading };
-        actor.sim.reset(); actor.generation++; actor.pending = null;
+        actor.sim.reset(); actor.generation++; this.sim.halt(client.sessionId);actor.lastSeq=-1;actor.lastAppliedTick=0;
         actor.control = { steer: 0, throttle: 0, brake: 1 };
         this.lastRespawn.set(client.sessionId, now);
         client.send('respawned');
@@ -38,14 +55,14 @@ class HostedDrivingRoom extends DrivingSpikeRoom {
   }
   onAuth(client,options){
     super.onAuth(client,options);
-    if(options.presentationVersion!==2)throw Error('Game version outdated; reload the page');
+    if(options.presentationVersion!==3)throw Error('Game version outdated; reload the page');
     return true;
   }
   welcome(client) {
     const data = super.welcome(client);
     data.map.plan = this.sim.plan;
     Object.assign(data.map,this.sim.map);
-    data.presentationVersion = 2;
+    data.presentationVersion = 3;
     return data;
   }
   onLeave(client) { this.lastRespawn?.delete(client.sessionId); super.onLeave(client); }
@@ -91,7 +108,7 @@ export async function startHostedServer({ port = 2577, host = '0.0.0.0' } = {}) 
   const bundle = await build({ entryPoints: [fileURLToPath(new URL('client.js', import.meta.url))],
     bundle: true, write: false, format: 'esm', platform: 'browser', minify: true });
   app.use((req, res, next) => { res.set('Cache-Control', 'no-store'); next(); });
-  app.get('/health', (_, res) => res.json({ ok: true, prototype: true, transport: 'ws', mapVersion:2,motionVersion:2,activeRooms,maxRooms }));
+  app.get('/health', (_, res) => res.json({ ok: true, prototype: true, transport: 'ws', mapVersion:2,motionVersion:3,activeRooms,maxRooms }));
   app.get('/client.js', (_, res) => res.type('text/javascript').send(bundle.outputFiles[0].text));
   if (process.env.GAME_STATIC_DIR) {
     app.use(express.static(process.env.GAME_STATIC_DIR, { index: false }));

@@ -17,29 +17,31 @@ export function quaternionSlerp(a, b, t) {
 
 // Copies decoded Schema values: Colyseus mutates the source objects in place.
 export class SnapshotBuffer {
-  constructor() { this.frames = [];this.rendered=new Map();this.delay=90;this.gaps=[]; }
-  clear() { this.frames.length = 0;this.rendered.clear();this.gaps=[];this.delay=90; }
+  constructor() { this.frames = [];this.rendered=new Map();this.delay=90;this.gaps=[];this.clockOffset=null; }
+  clear() { this.frames.length = 0;this.rendered.clear();this.gaps=[];this.delay=90;this.clockOffset=null; }
   setMap(plan) { this.obstacles=new CityObstacleIndex(plan); }
   push(state, receivedAt) {
     if (!state?.actors?.size) return;
     const last = this.frames.at(-1);
     if (last && state.tick <= last.tick) return;
     if(last){
-      this.gaps.push(receivedAt-last.time);if(this.gaps.length>40)this.gaps.shift();
+      this.gaps.push(receivedAt-last.receivedAt);if(this.gaps.length>40)this.gaps.shift();
       const sorted=[...this.gaps].sort((a,b)=>a-b),gap=sorted[Math.ceil(sorted.length*.95)-1];
       const desired=Math.max(90,Math.min(180,gap+30));this.delay+=(desired-this.delay)*.1;
     }
-    this.frames.push({ tick: state.tick, time: receivedAt,
+    const time=state.tick*1000/120,offset=receivedAt-time;
+    this.clockOffset=this.clockOffset===null?offset:Math.min(this.clockOffset+.1,offset);
+    this.frames.push({ tick: state.tick, time, receivedAt,
       actors: new Map([...state.actors.values()].map(actor => [actor.id, copy(actor)])) });
     if (this.frames.length > 12) this.frames.shift();
   }
-  get age() { return this.frames.at(-1)?.time ?? null; }
+  get age() { return this.frames.at(-1)?.receivedAt ?? null; }
   sample(now, localId) {
     const latest = this.frames.at(-1);
     if (!latest) return [];
     for(const id of this.rendered.keys())if(!latest.actors.has(id))this.rendered.delete(id);
     return [...latest.actors.values()].map(actor => {
-      const target = now - (actor.id === localId ? Math.max(60,this.delay*.65) : this.delay);
+      const target = now - this.clockOffset - (actor.id === localId ? Math.max(60,this.delay*.65) : this.delay);
       const end = this.frames.find(frame => frame.time >= target) || latest;
       const index = this.frames.indexOf(end), start = this.frames[Math.max(0,index-1)];
       const b = end.actors.get(actor.id) || actor, a = start.actors.get(actor.id) || b;

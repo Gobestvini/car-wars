@@ -18,8 +18,8 @@ import '../style.css';
 import '../start-screen.css';
 import './style.css';
 
-// Online owns presentation only. No cannon world, traffic controller or local
-// gameplay solver is constructed: every car/wheel pose comes from the room.
+// Server-owned map/results, with a local fixed-step prediction world for input
+// response and moving-body collisions. AI and damage decisions stay on server.
 export async function startGame(loadingScreen) {
   const $ = id => document.getElementById(id);
   document.body.dataset.online = 'true'; document.body.dataset.screen = 'playing';
@@ -80,6 +80,7 @@ export async function startGame(loadingScreen) {
       catch(error){if(epoch!==welcomeEpoch || data.roomId!==network.room?.roomId)return;ready=false;await network.leave();lobby.hidden=false;toolbar.hidden=true;setButtons();message(error.message);return;}
       if(epoch!==welcomeEpoch || data.roomId!==network.room?.roomId)return;
       network.buffer.setMap(plan);
+      network.startPrediction(data.map.colliders);
       if(expectedSignature!==data.snapshot.mapSignature){
         city?.dispose();clearModels();city=createCityScene(scene,readOnlyCity,plan);
         signals=createTrafficSignals(plan.roadNetwork);expectedSignature=data.snapshot.mapSignature;
@@ -189,11 +190,27 @@ export async function startGame(loadingScreen) {
   const keyup=e=>keys.delete(e.code);
   window.addEventListener('keydown',keydown);window.addEventListener('keyup',keyup);window.addEventListener('blur',stop);
   document.addEventListener('visibilitychange',stop);
-  const limiter=new FrameRateLimiter();
+  const limiter=new FrameRateLimiter();let lastRenderedActors=[];
+  const frameIntervals=[],debug=new URL(location.href).searchParams.has('netdebug')?document.createElement('output'):null;
+  if(debug){debug.id='online-diagnostics';debug.hidden=true;document.body.append(debug);}
+  let debugAt=0,lastKeyAt=null;
+  window.addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD'].includes(e.code)&&!e.repeat)lastKeyAt=performance.now();});
   function frame(now){
     if(disposed)return;request=requestAnimationFrame(frame);if(!limiter.shouldRender(now))return;
-    const dt=Math.min(.1,(now-lastTime)/1000);lastTime=now;
-    const room=network.room,actors=ready?network.buffer.sample(now,room?.sessionId):[],own=actors.find(a=>a.id===room?.sessionId);
+    const frameMs=now-lastTime,dt=Math.min(.1,frameMs/1000);lastTime=now;
+    frameIntervals.push(frameMs);if(frameIntervals.length>240)frameIntervals.shift();
+    const room=network.room,stale=network.buffer.age!==null&&now-network.buffer.age>500;
+    const local=network.prediction?.world.sample().find(a=>a.id===room?.sessionId);
+    network.input=stale?neutralInput():inputFor(local);
+    const stepsBefore=network.prediction?.metrics.steps;
+    if(ready)network.prediction?.advance(now,network.input);
+    if(lastKeyAt!==null&&network.prediction?.metrics.steps>stepsBefore){
+      network.prediction.metrics.keyToSimulationMs=performance.now()-lastKeyAt;lastKeyAt=null;
+    }
+    const combined=new Map((ready?network.buffer.sample(now):[]).map(a=>[a.id,a]));
+    if(ready)for(const actor of network.prediction?.sample(now)??[])combined.set(actor.id,actor);
+    const actors=[...combined.values()],own=combined.get(room?.sessionId);
+    lastRenderedActors=actors;
     const activeIds=new Set(actors.map(a=>a.id));
     for(const [id,visual]of models)if(!activeIds.has(id)){disposeVisual(visual);models.delete(id);}
     for(const actor of actors){
@@ -204,13 +221,11 @@ export async function startGame(loadingScreen) {
         visual.effects.update({damage:actor.damage,car:visual.group,camera,dt,quality});
       }
     }
-    const stale=network.buffer.age!==null&&now-network.buffer.age>500;
-    network.input=stale?neutralInput():inputFor(own);
     const focus=own?models.get(own.id).group:null;
     if(focus){
       const speed=Math.hypot(own.pose[7],own.pose[9]),scale=1+Math.min(.3,speed/100);
-      follow.lerp(focus.position,1-Math.exp(-10*dt));cameraGoal.set(12,20,-17).multiplyScalar(scale).add(follow);
-      if(camera.position.lengthSq()<1)camera.position.copy(cameraGoal);else camera.position.lerp(cameraGoal,1-Math.exp(-8*dt));
+      follow.copy(focus.position);cameraGoal.set(12,20,-17).multiplyScalar(scale).add(follow);
+      camera.position.copy(cameraGoal);
       camera.lookAt(follow.x,follow.y+.6,follow.z);$('speed').textContent=String(Math.round(speed*3.6));
       city?.occlusion.update(camera,focus,dt);
     }else{camera.position.set(12,22,-20);camera.lookAt(0,0,0);$('speed').textContent='0';}
@@ -220,6 +235,13 @@ export async function startGame(loadingScreen) {
     blur.render(scene,camera,{mode:'follow',car:focus});
     const count=actors.filter(a=>a.role==='player'&&a.connected).length;
     status.textContent=room?(stale?'Соединение нестабильно. Ожидаем сервер…':`Комната ${room.roomId} · ${count}/3 · WASD / стрелки · R — вернуть машину${own?.damage>.7?' · Машина повреждена':''}`):'';
+    if(debug&&now-debugAt>500){
+      debugAt=now;const sorted=[...frameIntervals].sort((a,b)=>a-b);
+      debug.textContent=JSON.stringify({roomId:room?.roomId,playerId:room?.sessionId,ready,rtt:network.rtt,
+        tick:room?.state?.tick,predictedTick:network.prediction?.world.tick,physics:network.prediction?.metrics,
+        frameP95:sorted[Math.floor(sorted.length*.95)],frameP99:sorted[Math.floor(sorted.length*.99)],
+        physical:network.prediction?.world.actors.size,players:actors.filter(a=>a.role==='player').map(a=>({id:a.id,generation:a.generation,pose:a.pose}))});
+    }
   }
   async function load(){
     loadingScreen.update(15,'Загружаем машины…');
@@ -235,8 +257,9 @@ export async function startGame(loadingScreen) {
   await load();
   // Small read-only diagnostics for acceptance; no client authority setters.
   window.__multiplayer={snapshot:()=>({roomId:network.room?.roomId,playerId:network.room?.sessionId,ready,
-    tick:network.room?.state?.tick,signature:expectedSignature,actors:network.buffer.sample(performance.now(),network.room?.sessionId),
-    meshes:models.size,localPhysicsSteps:0,citySeed:network.room?.state?.seed}),renderer:()=>renderer.info.render};
+    tick:network.room?.state?.tick,signature:expectedSignature,actors:lastRenderedActors,
+    meshes:models.size,localPhysicsSteps:network.prediction?.metrics.steps??0,prediction:network.prediction?.metrics,
+    predictedTick:network.prediction?.world.tick,rtt:network.rtt,citySeed:network.room?.state?.seed}),renderer:()=>renderer.info.render};
   window.addEventListener('pagehide',()=>{disposed=true;cancelAnimationFrame(request);void network.leave();clearModels();city?.dispose();trafficAssets?.dispose();blur.dispose();renderer.dispose();},{once:true});
   window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
   return{retry:()=>location.reload()};

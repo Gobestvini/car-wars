@@ -1,4 +1,17 @@
 export const PROTOCOL_VERSION = 1;
+export function validateCommands(payload) {
+  if(!payload || Object.keys(payload).some(k=>!['generation','commands'].includes(k)) ||
+    !Number.isSafeInteger(payload.generation) || payload.generation<1 || !Array.isArray(payload.commands) ||
+    !payload.commands.length || payload.commands.length>24)return null;
+  let previous=-1;
+  for(const c of payload.commands){
+    if(!Array.isArray(c)||c.length!==5||!Number.isSafeInteger(c[0])||c[0]<=previous||c[0]>2147483647)return null;
+    if(!Number.isFinite(c[1])||Math.abs(c[1])>1||!Number.isFinite(c[2])||Math.abs(c[2])>1||
+      !Number.isFinite(c[3])||c[3]<0||c[3]>1||![0,1].includes(c[4]))return null;
+    previous=c[0];
+  }
+  return payload;
+}
 export function validateInput(payload, roundId = 'round-1') {
   if (!payload || typeof payload !== 'object' || Array.isArray(payload)) return null;
   const allowed = ['roundId', 'seq', 'steer', 'throttle', 'brake', 'handbrake'];
