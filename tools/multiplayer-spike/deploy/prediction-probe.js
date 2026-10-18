@@ -36,6 +36,10 @@ if(role==='server'){
   const errors=[],intervals=[],corrections=[],states=[];let last,first,previousCorrections=0;
   client=new RoomClient({endpoint,onStatus:text=>errors.push(text),onWelcome:data=>client.startPrediction(data.map.colliders)});
   try{
+    for(let i=0;i<300;i++){
+      try{if((await fetch(`${endpoint}/health`)).ok)break;}catch{}
+      if(i===299)throw Error('server readiness timeout');await sleep(100);
+    }
     const room=await client.connect(role==='leader'?undefined:await roomId());
     if(role==='leader')await writeFile(`${share}/room.json`,JSON.stringify({roomId:room.roomId}));
     first=last=performance.now();
