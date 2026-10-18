@@ -126,9 +126,14 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
       bulbs.setMatrixAt(index * 3 + lamp, visualMatrix);
       bulbs.setColorAt(index * 3 + lamp, lightColors.off);
     }
-    visualPosition.set(approach.stopX, ROAD_SURFACE_HEIGHTS.marking, approach.stopZ);
+    // Cover the divider's full 0.16 m width and tuck the other end beneath
+    // the raised curb. Exact edge contact can leave a visible antialiased seam.
+    const dividerOverlap = 0.08, curbOverlap = 0.3;
+    const paintOffset = (curbOverlap - dividerOverlap) / 2;
+    visualPosition.set(approach.stopX + approach.rightX * paintOffset, ROAD_SURFACE_HEIGHTS.marking,
+      approach.stopZ + approach.rightZ * paintOffset);
     visualMatrix.compose(visualPosition, visualRotation.setFromAxisAngle(up, approach.yaw),
-      visualScale.set(approach.stopLineLength, 1, approach.stopLineThickness));
+      visualScale.set(approach.stopLineLength + dividerOverlap + curbOverlap, 1, approach.stopLineThickness));
     stopLines.setMatrixAt(index, visualMatrix);
     visualScale.set(1, 1, 1);
   });

@@ -25,6 +25,17 @@ const baseUrl = process.env.CARWARS_BASE_URL || 'http://localhost:5173/';
       await route.fulfill({ response, body: source.replace(marker, `window.markingProbe={
         pause:()=>cancelAnimationFrame(frameRequest),
         rebuild:width=>rebuildCity(width),
+        paint:()=>{
+          const matrix=new THREE.Matrix4(),vertex=new THREE.Vector3();
+          return cityState.signalApproaches.map((a,i)=>{
+            cityState.stopLines.getMatrixAt(i,matrix);const lateral=[];
+            for(let v=0;v<cityState.stopLines.geometry.attributes.position.count;v++){
+              vertex.fromBufferAttribute(cityState.stopLines.geometry.attributes.position,v).applyMatrix4(matrix);
+              lateral.push((vertex.x-a.stopX)*a.rightX+(vertex.z-a.stopZ)*a.rightZ+cityPlan.roadWidth/4);
+            }
+            return {min:Math.min(...lateral),max:Math.max(...lateral)};
+          });
+        },
         view:(level,shallow=false)=>{
           settings.values.quality=level;applyQuality();
           const node=cityPlan.roadNetwork.intersections.filter(n=>cityState.signalApproaches.some(a=>a.nodeId===n.id))
@@ -49,6 +60,8 @@ const baseUrl = process.env.CARWARS_BASE_URL || 'http://localhost:5173/';
       assert.equal(stopLines.length, controlled.length * 4);
       assert.ok(stopLines.length > 0);
       assert.ok(stopLines.every(line => Math.abs(line.length - roadWidth / 2) < 1e-8 && line.thickness === .6 && line.distance === roadWidth / 2 + 1.5));
+      const paint = await page.evaluate(() => markingProbe.paint());
+      assert.ok(paint.every(p => Math.abs(p.min + .08) < 1e-5 && Math.abs(p.max - roadWidth / 2 - .3) < 1e-5));
       for (const axis of ['x', 'z']) for (const kind of ['dash', 'solid']) {
         const items = marks.filter(m => m.axis === axis && m.kind === kind);
         assert.ok(items.length > 0, `${axis} ${kind}`);

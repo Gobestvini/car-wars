@@ -73,6 +73,19 @@ test('four signal assemblies persist and fog beam colors follow the controller o
   for (const approach of city.signalApproaches) counts.set(approach.nodeId, (counts.get(approach.nodeId) || 0) + 1);
   assert.equal(counts.size, controller.controlled.size);
   assert.ok([...counts.values()].every(count => count === 4));
+  const paintMatrix = new THREE.Matrix4(), paintVertex = new THREE.Vector3();
+  city.signalApproaches.forEach((approach, index) => {
+    city.stopLines.getMatrixAt(index, paintMatrix);
+    const lateral = [];
+    for (let v = 0; v < city.stopLines.geometry.attributes.position.count; v++) {
+      paintVertex.fromBufferAttribute(city.stopLines.geometry.attributes.position, v).applyMatrix4(paintMatrix);
+      lateral.push((paintVertex.x - approach.stopX) * approach.rightX
+        + (paintVertex.z - approach.stopZ) * approach.rightZ + plan.roadWidth / 4);
+    }
+    assert.ok(Math.abs(Math.min(...lateral) + .08) < 1e-5, 'paint covers the full central divider');
+    assert.ok(Math.abs(Math.max(...lateral) - (plan.roadWidth / 2 + .3)) < 1e-5, 'paint extends beneath the curb');
+    assert.equal(approach.stopLineLength, plan.roadWidth / 2, 'logical offense span stays unchanged');
+  });
   const color = new THREE.Color();
   const expected = { red: '#f34f45', green: '#51d28b', yellow: '#ffc34a' };
   for (const time of [0, 16, 18, 19, 35, 37, 38]) {
