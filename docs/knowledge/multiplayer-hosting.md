@@ -96,3 +96,14 @@ ms, 0 dropped seconds, 0 observed NPC centres inside houses, 95.01 KiB/s per cli
 Durations differ; these are server/socket observations, not a WAN-to-screen latency
 or physical-phone performance measurement. The original world/traffic remained a
 research implementation; this does not silently accept unrelated backlog tasks.
+
+## Follow-up: driving responsiveness remains unaccepted
+
+2026-10-18: the player reported that driving still feels jerky and highly delayed.
+The server cadence/collision soak above did not establish responsive driving.
+[Source research and code audit](multiplayer-client-prediction.md) confirm that the
+online client still waits for authoritative poses and buffers its own car; it has
+no local physics prediction or input replay. The recommended next architecture is
+client prediction/reconciliation with server-owned results and map, plus consistent
+timing for nearby collisions. This is a researched proposal, not a deployed fix or
+a measured diagnosis of every source of stutter on the player's device.
