@@ -132,3 +132,17 @@ p95 was 16.8ms, measured key-event-to-local-step 1.4–14.6ms. This is not measu
 input-to-display latency or acceptance on a physical phone. Rare larger corrections
 in the collision/loss harness remain documented rather than hidden by averages.
 White Tower services and Caddy retained their uptimes; both health checks passed.
+
+
+## Street destruction, body dents and joystick parity (2026-10-18)
+
+Live game revision a9fc8ae: presentation v4, signed map v3, binary frame v3.
+Server-owned persistent dent histories and street-object lifecycles are included
+in complete frames; local prediction uses the shared prop physics. Knob animation
+and pointer ownership now match the existing directional gesture. ARM64 image:
+76 targeted tests passed sequentially; public SDK smoke and three actual public
+3D clients confirmed matching dents/removed objects and native joystick drag.
+A rejected candidate's ARM replay cost led to earlier wheel-ray mask filtering;
+contact/raycast parity and TCP stress were verified before activation.
+Evidence, measured limits and omitted gameplay remain documented in
+[multiplayer-destruction.md](multiplayer-destruction.md).

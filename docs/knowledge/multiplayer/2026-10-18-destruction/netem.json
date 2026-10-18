@@ -1,0 +1,262 @@
+{
+  "date": "2026-10-18",
+  "runtime": "Node 22.23.3 Linux ARM64",
+  "method": "Separate containers: server 1.5 CPU/768MiB; three SDK prediction clients 1 CPU/768MiB each; 102 NPC. 40 seconds each, egress75ms+10ms jitter+1% loss each direction. Sequential isolated runs. Headless timer intervals, not browser or phone FPS. Candidate runs are comparison evidence, not deployed revisions.",
+  "profiles": [
+    {
+      "name": "baseline",
+      "revision": "dc4f4b0",
+      "results": [
+        {
+          "role": "server",
+          "elapsed": 37.022662839000006,
+          "physicsHz": 119.3593237530442,
+          "droppedSeconds": 0.19097194900000095,
+          "contacts": 1217,
+          "npc": 102,
+          "players": 3,
+          "schedulerP95": 27.021719999997003
+        },
+        {
+          "role": "leader",
+          "elapsed": 40.001610829,
+          "rtt": 148.71579600000405,
+          "frameP95": 52.373868999999104,
+          "frameP99": 92.47310499999912,
+          "correctionP95": 0.22786325674121427,
+          "prediction": {
+            "steps": 4760,
+            "replaySteps": 18895,
+            "corrections": 6,
+            "maxCorrection": 0.22786325674121427,
+            "maxReplay": 60,
+            "lateFrames": 0,
+            "replayMs": 14765.442552000019,
+            "lastCorrection": 0.02429779708922369,
+            "confirmedPositionError": 0.00021171944678151784,
+            "skippedReconciliations": 130
+          },
+          "physical": 10,
+          "players": 3,
+          "errors": []
+        },
+        {
+          "role": "friend1",
+          "elapsed": 40.002977356,
+          "rtt": 146.0054999999993,
+          "frameP95": 43.163494000000355,
+          "frameP99": 68.3657230000008,
+          "correctionP95": 1.065909479374294,
+          "prediction": {
+            "steps": 4646,
+            "replaySteps": 14643,
+            "corrections": 10,
+            "maxCorrection": 1.065909479374294,
+            "maxReplay": 60,
+            "lateFrames": 0,
+            "replayMs": 11320.482223000035,
+            "lastCorrection": 0.053334391093144806,
+            "confirmedPositionError": 0.00015258868410700493,
+            "skippedReconciliations": 220
+          },
+          "physical": 11,
+          "players": 3,
+          "errors": []
+        },
+        {
+          "role": "friend2",
+          "elapsed": 40.00152906699999,
+          "rtt": 171.86297199999535,
+          "frameP95": 50.99770000000353,
+          "frameP99": 80.79535600000054,
+          "correctionP95": 2.4447583508423922,
+          "prediction": {
+            "steps": 4722,
+            "replaySteps": 17261,
+            "corrections": 5,
+            "maxCorrection": 2.4447583508423922,
+            "maxReplay": 60,
+            "lateFrames": 0,
+            "replayMs": 13091.246007000014,
+            "lastCorrection": 0.021028776915349105,
+            "confirmedPositionError": 9.934352333517913e-05,
+            "skippedReconciliations": 250
+          },
+          "physical": 10,
+          "players": 3,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "name": "rejected",
+      "revision": "6e3b445",
+      "results": [
+        {
+          "role": "server",
+          "elapsed": 37.242494671,
+          "physicsHz": 115.75486653306527,
+          "droppedSeconds": 1.3177679713333357,
+          "contacts": 410,
+          "npc": 102,
+          "players": 3,
+          "schedulerP95": 75.63552599999821
+        },
+        {
+          "role": "leader",
+          "elapsed": 40.003150324,
+          "rtt": 160.41910400000052,
+          "frameP95": 97.429414000002,
+          "frameP99": 140.37766700000066,
+          "correctionP95": 0.43001633092701347,
+          "prediction": {
+            "steps": 4317,
+            "replaySteps": 12396,
+            "corrections": 36,
+            "maxCorrection": 0.6101793938208059,
+            "maxReplay": 60,
+            "lateFrames": 0,
+            "replayMs": 17038.094870000004,
+            "lastCorrection": 0.020154143032678488,
+            "confirmedPositionError": 4.9974359737015004e-05,
+            "skippedReconciliations": 105
+          },
+          "physical": 11,
+          "players": 3,
+          "errors": []
+        },
+        {
+          "role": "friend1",
+          "elapsed": 40.053578540000004,
+          "rtt": 161.71139199999743,
+          "frameP95": 108.30667799999901,
+          "frameP99": 160.26110300000073,
+          "correctionP95": 0.3442410398454768,
+          "prediction": {
+            "steps": 4543,
+            "replaySteps": 13973,
+            "corrections": 41,
+            "maxCorrection": 1.9664063775396223,
+            "maxReplay": 60,
+            "lateFrames": 0,
+            "replayMs": 19922.15170199998,
+            "lastCorrection": 0.048000216476073734,
+            "confirmedPositionError": 0.0002504754991669735,
+            "skippedReconciliations": 105
+          },
+          "physical": 10,
+          "players": 3,
+          "errors": []
+        },
+        {
+          "role": "friend2",
+          "elapsed": 40.019190258,
+          "rtt": 134.19210999999632,
+          "frameP95": 77.87389799999983,
+          "frameP99": 140.62622799999917,
+          "correctionP95": 1.0019989487179781,
+          "prediction": {
+            "steps": 4592,
+            "replaySteps": 16792,
+            "corrections": 18,
+            "maxCorrection": 1.0019989487179781,
+            "maxReplay": 60,
+            "lateFrames": 0,
+            "replayMs": 18177.307851999998,
+            "lastCorrection": 0.07354630940509131,
+            "confirmedPositionError": 1.4628804499954623e-05,
+            "skippedReconciliations": 93
+          },
+          "physical": 6,
+          "players": 3,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "name": "final",
+      "revision": "a9fc8ae",
+      "results": [
+        {
+          "role": "server",
+          "elapsed": 37.028585740000004,
+          "physicsHz": 119.88035490118072,
+          "droppedSeconds": 0.039068173666666664,
+          "contacts": 1243,
+          "npc": 102,
+          "players": 3,
+          "schedulerP95": 21.480787999999848
+        },
+        {
+          "role": "leader",
+          "elapsed": 40.000376941,
+          "rtt": 152.72774900000513,
+          "frameP95": 49.23774599999888,
+          "frameP99": 89.52505700000074,
+          "correctionP95": 0.29604901692278063,
+          "prediction": {
+            "steps": 4674,
+            "replaySteps": 13955,
+            "corrections": 22,
+            "maxCorrection": 0.30935561890155344,
+            "maxReplay": 60,
+            "lateFrames": 0,
+            "replayMs": 13675.480864000017,
+            "confirmedPositionError": 0.00030976910819042363,
+            "lastCorrection": 0.02622470850508828,
+            "skippedReconciliations": 239
+          },
+          "physical": 12,
+          "players": 3,
+          "errors": []
+        },
+        {
+          "role": "friend1",
+          "elapsed": 40.00335568599999,
+          "rtt": 196.0598890000001,
+          "frameP95": 53.48301899999933,
+          "frameP99": 103.60184799999843,
+          "correctionP95": 0.06571801061256846,
+          "prediction": {
+            "steps": 4456,
+            "replaySteps": 14370,
+            "corrections": 21,
+            "maxCorrection": 0.7595896075902401,
+            "maxReplay": 60,
+            "lateFrames": 0,
+            "replayMs": 14308.599399000012,
+            "lastCorrection": 0.04150326596171911,
+            "confirmedPositionError": 0.0008037796696597742,
+            "skippedReconciliations": 157
+          },
+          "physical": 12,
+          "players": 3,
+          "errors": []
+        },
+        {
+          "role": "friend2",
+          "elapsed": 40.000942991,
+          "rtt": 152.44374999999854,
+          "frameP95": 48.492575999996916,
+          "frameP99": 101.25848199999928,
+          "correctionP95": 1.9658280765675047,
+          "prediction": {
+            "steps": 4693,
+            "replaySteps": 12852,
+            "corrections": 15,
+            "maxCorrection": 1.9658280765675047,
+            "maxReplay": 60,
+            "lateFrames": 0,
+            "replayMs": 13245.59596699999,
+            "lastCorrection": 0.025671680346339116,
+            "confirmedPositionError": 0.00012747521702245168,
+            "skippedReconciliations": 205
+          },
+          "physical": 11,
+          "players": 3,
+          "errors": []
+        }
+      ]
+    }
+  ]
+}
