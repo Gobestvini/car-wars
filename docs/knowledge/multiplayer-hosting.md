@@ -107,3 +107,28 @@ no local physics prediction or input replay. The recommended next architecture i
 client prediction/reconciliation with server-owned results and map, plus consistent
 timing for nearby collisions. This is a researched proposal, not a deployed fix or
 a measured diagnosis of every source of stutter on the player's device.
+
+## Local vehicle physics and prediction deployed
+
+2026-10-18, release `dc4f4b0`: server-ticked input batches, local cannon physics,
+state-history comparison, bounded restore/replay and visual-only correction now
+replace the server-only presentation for the controlled car. Other players and
+near physical NPC share the client's prediction world; the server owns the map,
+AI and final collisions/damage. Full binary motion includes angular velocity,
+engine throttle, controls and detached-wheel state. Hosted Schema carries room
+scalars only. Presentation version 3 rejects stale builds.
+
+Replay initially overloaded the CPU. Built-in sparse Cannon contact matrices,
+indexed contact pairs, reachable static collider activation and selective replay
+reduced the measured cost. Exact sparse/dense impact parity and bounded streamed
+collider parity are regression-tested. Dropped TCP snapshot bursts are coalesced
+before reconciliation. See [implementation, measured limits and evidence](multiplayer-client-prediction.md).
+
+Verified: ARM64 Node 22.23.3 build and 29 tests; four separate three-client real
+TCP netem profiles (0/50/100/150ms, last with 10ms jitter and 1% loss per direction),
+102 NPC; public SDK smoke; three simultaneous public 3D browser clients driving,
+turning, hitting a house/NPC and independently respawning. Public desktop render
+p95 was 16.8ms, measured key-event-to-local-step 1.4–14.6ms. This is not measured
+input-to-display latency or acceptance on a physical phone. Rare larger corrections
+in the collision/loss harness remain documented rather than hidden by averages.
+White Tower services and Caddy retained their uptimes; both health checks passed.

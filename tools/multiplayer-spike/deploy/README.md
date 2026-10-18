@@ -13,10 +13,12 @@ The main menu also has «Играть с друзьями» on the normal static
 `?online=1&room=ROOM_ID` joins an invitation; `?offline=1` opens the existing offline
 game, including on this VPS. Optional `VITE_GAME_SERVER_URL` overrides the public
 endpoint at build time. The server supplies the actual city plan and all actor,
-wheel, damage and signal-clock state; online does not construct cannon or run AI.
-Compact binary full frames interpolate cars and bound extrapolation to 80 ms,
-checking houses against the authoritative map. After 500 ms without new state,
-the capped pose is held and the client brakes/shows a warning.
+wheel, damage and signal-clock state. The browser now runs non-authoritative cannon
+prediction for its car, other players and nearby physical NPC; AI and all final
+results remain on the server. Server-ticked input history supports reconciliation
+and replay; its own car has no network interpolation delay. Distant NPC use a
+server-tick interpolation timeline. After 500 ms without new state prediction
+stops and the server's input-silence brake protects the car.
 
 Online supports shared free driving with 102 civilians, three physical players,
 collisions/damage and individual respawn. Police/wanted/arrest, repair pickups and
@@ -64,9 +66,40 @@ node tools/multiplayer-spike/deploy/smoke.js https://api.plusvibegames.com/carwa
 docker stats --no-stream carwars-preview-multiplayer-1
 node --test tests/multiplayer-snapshot.test.js
 node --test tests/multiplayer-world-safety.test.js
+node --test tests/multiplayer-prediction.test.js tools/multiplayer-spike/tests/hosted-prediction.test.js
 # Isolated 5-minute probe, without publishing ports or occupying public rooms:
 docker run --rm --no-healthcheck --cpus=1.5 --memory=768m -e PROBE_SECONDS=300 --entrypoint node carwars-preview:RELEASE tools/multiplayer-spike/deploy/runtime-probe.js
 ```
+
+The prediction transport uses presentation version 3 and binary frame version 2;
+stale clients must reload. Frame fields include angular velocity, smoothed engine
+throttle, server controls, applied tick and detached-wheel dynamics. Hosted Schema
+contains room scalars only; complete binary frames carry actor lifecycle as well
+as motion. Clients queue the latest frame and reconcile at most once per render,
+so retransmission bursts do not cause repeated replay of obsolete snapshots.
+
+The optional `&netdebug=1` URL adds a hidden `#online-diagnostics` JSON output for
+read-only acceptance. It includes actual render intervals, local step count,
+correction/replay counters and key-event-to-local-step time. This is not a
+photodiode/input-to-display measurement and should not appear in normal UI.
+
+For real TCP delay/loss tests, build the separate `Dockerfile.netem` from the game
+image and run `prediction-netem.sh RELEASE ONE_WAY_MS LOSS_PERCENT JITTER_MS` on
+the VPS. It creates a private bridge and four temporary containers (server plus
+three independent SDK prediction clients), with no published ports. Only these
+test containers receive NET_ADMIN; the live Compose service keeps its capabilities
+removed. The test activates a collision fixture through its own in-process room,
+never through a public client position command. Results stay in
+`/srv/carwars/probes/carwars-predict-*`; the script removes its own containers and
+network. Headless event-loop timing is separate from browser/GPU acceptance.
+
+Release `dc4f4b0` was built and verified on ARM64 Node 22.23.3: 29 profile tests,
+four 40-second real TCP netem profiles with three independent prediction clients
+and 102 NPC (including 150ms / jitter / 1% loss per direction), public SDK smoke
+and three public Three.js clients. Desktop browser p95 frame interval was 16.8ms;
+recorded key-event-to-local-step times were 1.4–14.6ms. These are distinct from
+input-to-display and from the weaker ARM headless client budgets. Full results and
+rare collision correction limits: [prediction evidence](../../../docs/knowledge/multiplayer-client-prediction.md).
 
 The smoke uses real Colyseus SDK sessions over public HTTPS/WSS. It checks a shared
 map/105 actors, the fourth-player rejection, shared input acknowledgement/movement,
