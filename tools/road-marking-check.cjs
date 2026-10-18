@@ -48,7 +48,7 @@ const baseUrl = process.env.CARWARS_BASE_URL || 'http://localhost:5173/';
       const controlled = network.intersections.filter(n => network.edges.filter(e => e.from === n.id || e.to === n.id).length === 4);
       assert.equal(stopLines.length, controlled.length * 4);
       assert.ok(stopLines.length > 0);
-      assert.ok(stopLines.every(line => Math.abs(line.length - (roadWidth / 2 - .3)) < 1e-8 && line.thickness === .6 && line.distance === roadWidth / 2 + 1.5));
+      assert.ok(stopLines.every(line => Math.abs(line.length - roadWidth / 2) < 1e-8 && line.thickness === .6 && line.distance === roadWidth / 2 + 1.5));
       for (const axis of ['x', 'z']) for (const kind of ['dash', 'solid']) {
         const items = marks.filter(m => m.axis === axis && m.kind === kind);
         assert.ok(items.length > 0, `${axis} ${kind}`);

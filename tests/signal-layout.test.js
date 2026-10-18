@@ -101,10 +101,10 @@ test('stop lines span only the incoming half-road and share an approach plane', 
     assert.equal(along, roadWidth / 2 + 1.5);
     assert.equal(line.distanceFromNode, along);
     assert.equal(lateral, roadWidth / 4);
-    assert.equal(line.length, roadWidth / 2 - 0.3);
+    assert.equal(line.length, roadWidth / 2);
     assert.equal(line.thickness, 0.6);
-    assert.ok(lateral - line.length / 2 >= 0);
-    assert.ok(lateral + line.length / 2 <= roadWidth / 2);
+    assert.equal(lateral - line.length / 2, 0, 'inner end meets the central divider');
+    assert.equal(lateral + line.length / 2, roadWidth / 2, 'outer end meets the curb');
   }
 });
 

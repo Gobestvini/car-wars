@@ -16,7 +16,8 @@ export function getStopLineLayout(node, approach, roadWidth) {
     x: node.x - approach.forwardX * distanceFromNode + approach.rightX * lateralOffset,
     z: node.z - approach.forwardZ * distanceFromNode + approach.rightZ * lateralOffset,
     distanceFromNode,
-    length: halfRoad - 0.3,
+    // Span from the centre divider to the asphalt/curb boundary, without end gaps.
+    length: halfRoad,
     thickness: 0.6,
     lateralOffset,
     setback,
