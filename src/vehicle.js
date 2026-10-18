@@ -258,7 +258,7 @@ export class CarSimulation {
       up.scale(-(rest + wheel.radius + 0.18), rayDelta);
       origin.vadd(rayDelta, rayEnd);
       wheel.result.reset();
-      this.world.raycastClosest(origin, rayEnd, this.wheelRaycastOptions, wheel.result);
+      this.castWheelRay(origin, rayEnd, wheel.result);
       wheel.grounded = wheel.result.hasHit && up.y > 0.15;
       wheel.load = 0; wheel.slip = 0;
       if (!wheel.grounded) {
@@ -358,10 +358,16 @@ export class CarSimulation {
       up.scale(-(0.68 + wheel.radius), rayDelta);
       origin.vadd(rayDelta, rayEnd);
       wheel.result.reset();
-      this.world.raycastClosest(origin, rayEnd, this.wheelRaycastOptions, wheel.result);
+      this.castWheelRay(origin, rayEnd, wheel.result);
       const length = wheel.result.hasHit && up.y > 0.15 ? clamp(wheel.result.distance - wheel.radius, 0.1, 0.68) : 0.68;
       wheel.position.copy(origin.vadd(up.scale(-length)));
     }
+  }
+
+  castWheelRay(from,to,result) {
+    const broadphase=this.world.broadphase;
+    if(broadphase.raycastClosest)return broadphase.raycastClosest(this.world,from,to,this.wheelRaycastOptions,result);
+    return this.world.raycastClosest(from,to,this.wheelRaycastOptions,result);
   }
 
   telemetry() {

@@ -31,7 +31,8 @@ test('indexed queries match Cannon for boxes, convex supports, planes and moving
       assert.deepEqual(sim.world.broadphase.aabbQuery(sim.world, aabb), reference.aabbQuery(sim.world, aabb));
       from.set(x, 3, z); to.set(x + .6, -6, z + .4);
       const indexed = new C.RaycastResult(), native = new C.RaycastResult();
-      sim.world.raycastClosest(from, to, { collisionFilterMask: 1, skipBackfaces: true }, indexed);
+      sim.world.broadphase.raycastClosest(sim.world,from, to, { collisionFilterMask: 1, skipBackfaces: true }, indexed);
+      assert.equal(sim.world.broadphase.queryMask,-1);
       sim.world.broadphase = reference;
       sim.world.raycastClosest(from, to, { collisionFilterMask: 1, skipBackfaces: true }, native);
       sim.world.broadphase = indexedBroadphase;
@@ -41,6 +42,17 @@ test('indexed queries match Cannon for boxes, convex supports, planes and moving
       assert.ok(indexed.hitNormalWorld.distanceTo(native.hitNormalWorld) < 1e-10);
     }
   }
+});
+
+test('masked ray failures restore general query/contact masks',()=>{
+  const sim=new CarSimulation(),broadphase=sim.world.broadphase;
+  const original=sim.world.raycastClosest;
+  sim.world.raycastClosest=()=>{throw Error('fixture');};
+  assert.throws(()=>broadphase.raycastClosest(sim.world,new C.Vec3(),new C.Vec3(0,-2,0),{collisionFilterMask:1,collisionFilterGroup:2},new C.RaycastResult()),/fixture/);
+  assert.equal(broadphase.queryMask,-1);assert.equal(broadphase.queryGroup,-1);
+  sim.world.raycastClosest=original;
+  const result=broadphase.aabbQuery(sim.world,new C.AABB({lowerBound:new C.Vec3(-3,-3,-3),upperBound:new C.Vec3(3,3,3)}));
+  assert.ok(result.includes(sim.body));
 });
 
 test('pair generation includes every eligible AABB overlap and preserves SAP pair order', () => {

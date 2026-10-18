@@ -4,8 +4,10 @@ export class StreetVisuals {
   constructor(){this.entries=new Map();this.previousChanged=new Set();}
   register(source){this.entries.set(source.id,{...source,state:'intact'});}
   sync(physics){
-    const changed=new Set([...physics.changedEntries,...this.previousChanged]);
-    for(const e of changed){
+    const current=new Set([...physics.changedEntries].map(e=>e.index));
+    const changed=new Set([...current,...this.previousChanged]);
+    for(const index of changed){
+      const e=physics.entries[index];if(!e)continue;
       const v=this.entries.get(e.id);if(!v)continue;
       if(v.state!==e.state){
         if(e.state==='intact')v.restore?.();
@@ -15,7 +17,7 @@ export class StreetVisuals {
       }
       if(e.state==='detached')v.sync?.(e.body,Math.max(0,Math.min(1,(PROP_LIFETIME-physics.clock+e.destroyedAt)/PROP_FADE_SECONDS)));
     }
-    this.previousChanged=new Set(physics.changedEntries);
+    this.previousChanged=current;
   }
   dispose(){this.entries.clear();this.previousChanged.clear();}
 }

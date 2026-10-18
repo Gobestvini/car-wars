@@ -17,6 +17,7 @@ export class CityBroadphase extends SAPBroadphase {
     this.queryBodies = [];
     this.querySeen = new Set();
     this.cellSize = 12;
+    this.queryMask = -1; this.queryGroup = -1;
     // Cannon's SAP handlers update the list but do not dirty its ordering on add/remove.
     const add = this._addBodyHandler, remove = this._removeBodyHandler;
     world.removeEventListener('addBody', add); world.removeEventListener('removeBody', remove);
@@ -125,6 +126,7 @@ export class CityBroadphase extends SAPBroadphase {
     candidates.length = 0; seen.clear();
     const collect = bodies => {
       for (const body of bodies) {
+        if ((body.collisionFilterGroup & this.queryMask) === 0 || (body.collisionFilterMask & this.queryGroup) === 0) continue;
         if (seen.has(body)) continue;
         seen.add(body);
         if (body.aabbNeedsUpdate) body.updateAABB();
@@ -140,5 +142,15 @@ export class CityBroadphase extends SAPBroadphase {
     candidates.sort((a, b) => this.bodyOrder.get(a) - this.bodyOrder.get(b));
     for (const body of candidates) result.push(body);
     return result;
+  }
+
+  // Cannon applies ray masks after its broadphase query. Wheel rays can reject
+  // cars/props before collecting and sorting those candidates; general AABB and
+  // physical contact queries retain their ordinary masks and ordering.
+  raycastClosest(world, from, to, options, result) {
+    const mask=this.queryMask,group=this.queryGroup;
+    this.queryMask=options.collisionFilterMask??-1;this.queryGroup=options.collisionFilterGroup??-1;
+    try{return world.raycastClosest(from,to,options,result);}
+    finally{this.queryMask=mask;this.queryGroup=group;}
   }
 }
