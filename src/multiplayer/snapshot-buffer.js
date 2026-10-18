@@ -17,12 +17,18 @@ export function quaternionSlerp(a, b, t) {
 
 // Copies decoded Schema values: Colyseus mutates the source objects in place.
 export class SnapshotBuffer {
-  constructor() { this.frames = []; }
-  clear() { this.frames.length = 0; }
+  constructor() { this.frames = [];this.rendered=new Map();this.delay=90;this.gaps=[]; }
+  clear() { this.frames.length = 0;this.rendered.clear();this.gaps=[];this.delay=90; }
+  setMap(plan) { this.obstacles=new CityObstacleIndex(plan); }
   push(state, receivedAt) {
     if (!state?.actors?.size) return;
     const last = this.frames.at(-1);
     if (last && state.tick <= last.tick) return;
+    if(last){
+      this.gaps.push(receivedAt-last.time);if(this.gaps.length>40)this.gaps.shift();
+      const sorted=[...this.gaps].sort((a,b)=>a-b),gap=sorted[Math.ceil(sorted.length*.95)-1];
+      const desired=Math.max(90,Math.min(180,gap+30));this.delay+=(desired-this.delay)*.1;
+    }
     this.frames.push({ tick: state.tick, time: receivedAt,
       actors: new Map([...state.actors.values()].map(actor => [actor.id, copy(actor)])) });
     if (this.frames.length > 12) this.frames.shift();
@@ -31,8 +37,9 @@ export class SnapshotBuffer {
   sample(now, localId) {
     const latest = this.frames.at(-1);
     if (!latest) return [];
+    for(const id of this.rendered.keys())if(!latest.actors.has(id))this.rendered.delete(id);
     return [...latest.actors.values()].map(actor => {
-      const target = now - (actor.id === localId ? 25 : 90);
+      const target = now - (actor.id === localId ? Math.max(60,this.delay*.65) : this.delay);
       const end = this.frames.find(frame => frame.time >= target) || latest;
       const index = this.frames.indexOf(end), start = this.frames[Math.max(0,index-1)];
       const b = end.actors.get(actor.id) || actor, a = start.actors.get(actor.id) || b;
@@ -45,12 +52,26 @@ export class SnapshotBuffer {
         result.pose.splice(3,4,...quaternionSlerp(a.pose.slice(3,7),b.pose.slice(3,7),t));
         result.wheels = b.wheels.map((v,i) => i%7 < 4 ? mix(a.wheels[i] ?? v,v,t) : v);
         result.steering = mix(a.steering,b.steering,t);
-      } else if (target > latest.time && now-latest.time < 500) {
+      } else if (target > latest.time) {
         const seconds = Math.min(80,target-latest.time)/1000;
         for (let i=0;i<3;i++) result.pose[i] += (result.pose[7+i] || 0)*seconds;
-        for (let w=0;w<4;w++) for (let i=0;i<3;i++) result.wheels[w*7+i] += (result.pose[7+i] || 0)*seconds;
+        for (let w=0;w<result.wheels.length/7;w++) for (let i=0;i<3;i++) result.wheels[w*7+i] += (result.pose[7+i] || 0)*seconds;
+        const q=result.pose.slice(3,7),heading=Math.atan2(2*(q[0]*q[2]+q[3]*q[1]),1-2*(q[0]**2+q[1]**2));
+        if(this.obstacles?.overlaps({x:result.pose[0],z:result.pose[2],heading})){
+          result.pose=[...b.pose];result.wheels=[...b.wheels];
+        }
       }
+      const previous=this.rendered.get(actor.id),distance=previous?Math.hypot(...result.pose.slice(0,3).map((v,i)=>v-previous.pose[i])):0;
+      if(previous && previous.generation===actor.generation && !teleported && distance>.35 && distance<12){
+        const blend=1-Math.exp(-Math.min(.1,Math.max(0,(now-previous.time)/1000))/.035);
+        for(let i=0;i<3;i++){
+          const correction=mix(previous.pose[i],result.pose[i],blend)-result.pose[i];result.pose[i]+=correction;
+          for(let w=0;w<result.wheels.length/7;w++)result.wheels[w*7+i]+=correction;
+        }
+      }
+      this.rendered.set(actor.id,{pose:[...result.pose],time:now,generation:actor.generation});
       return result;
     });
   }
 }
+import { CityObstacleIndex } from './map-contract.js';

@@ -7,16 +7,16 @@ const actor=(x=0,generation=1)=>({id:'player',role:'player',generation,pose:[x,1
 const state=(tick,a)=>({tick,actors:new Map([[a.id,a]])});
 test('online snapshots copy Schema values and interpolate positions and wheels',()=>{
   const buffer=new SnapshotBuffer(),a=actor();buffer.push(state(1,a),100);
-  a.pose[0]=10;a.wheels[0]=10;buffer.push(state(2,a),200);
+  a.pose[0]=10;a.wheels[0]=10;buffer.push(state(2,a),150);
   assert.equal(buffer.frames[0].actors.get('player').pose[0],0);
-  const sample=buffer.sample(240,'different-player')[0]; // target 150
+  const sample=buffer.sample(215,'different-player')[0]; // target 125
   assert.equal(sample.pose[0],5);assert.equal(sample.wheels[0],5);
 });
 test('presentation bounds extrapolation, freezes stale state and rejects older ticks',()=>{
   const buffer=new SnapshotBuffer();buffer.push(state(10,actor()),100);buffer.push(state(9,actor(99)),110);
   assert.equal(buffer.frames.length,1);
   assert.equal(buffer.sample(400,'player')[0].pose[0],.8);
-  assert.equal(buffer.sample(700,'player')[0].pose[0],0);
+  assert.equal(buffer.sample(700,'player')[0].pose[0],.8); // hold the capped pose; never snap backwards on timeout
   for(let i=11;i<100;i++)buffer.push(state(i,actor()),i*100);
   assert.equal(buffer.frames.length,12);
 });

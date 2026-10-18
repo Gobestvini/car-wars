@@ -20,4 +20,4 @@ ENV GAME_STATIC_DIR=/app/dist
 USER node
 EXPOSE 2577
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s CMD node -e "fetch('http://127.0.0.1:2577/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"
-CMD ["node", "--no-opt", "--no-concurrent-recompilation", "tools/multiplayer-spike/deploy/server.js"]
+CMD ["node", "tools/multiplayer-spike/deploy/server.js"]

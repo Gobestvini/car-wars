@@ -14,8 +14,9 @@ The main menu also has «Играть с друзьями» on the normal static
 game, including on this VPS. Optional `VITE_GAME_SERVER_URL` overrides the public
 endpoint at build time. The server supplies the actual city plan and all actor,
 wheel, damage and signal-clock state; online does not construct cannon or run AI.
-Snapshots interpolate remote cars and bound local extrapolation to 80 ms. After
-500 ms without new state, extrapolation stops and the client brakes/shows a warning.
+Compact binary full frames interpolate cars and bound extrapolation to 80 ms,
+checking houses against the authoritative map. After 500 ms without new state,
+the capped pose is held and the client brakes/shows a warning.
 
 Online supports shared free driving with 102 civilians, three physical players,
 collisions/damage and individual respawn. Police/wanted/arrest, repair pickups and
@@ -49,7 +50,7 @@ deployment does not modify White Tower source or recreate its API/payment servic
 Keep the previous image/release to roll back by running Compose with its release tag.
 An active room is lost whenever this preview container is recreated/restarted.
 
-Runtime: Node 22.23.3 on ARM64, 102 NPC per room, maximum two rooms / three players
+Runtime: optimized Node 22.23.3 on ARM64, 102 NPC per room, maximum two rooms / three players
 per room, reconnect grace 15 seconds. Container limits: 1.5 CPU, 768 MiB RAM, 128
 processes, bounded logs, read-only filesystem, non-root process and no capabilities.
 Docker restarts the service after a process/host restart. Metrics retained by the
@@ -62,6 +63,9 @@ docker run --rm --entrypoint node carwars-preview:RELEASE --test tools/multiplay
 node tools/multiplayer-spike/deploy/smoke.js https://api.plusvibegames.com/carwars
 docker stats --no-stream carwars-preview-multiplayer-1
 node --test tests/multiplayer-snapshot.test.js
+node --test tests/multiplayer-world-safety.test.js
+# Isolated 5-minute probe, without publishing ports or occupying public rooms:
+docker run --rm --no-healthcheck --cpus=1.5 --memory=768m -e PROBE_SECONDS=300 --entrypoint node carwars-preview:RELEASE tools/multiplayer-spike/deploy/runtime-probe.js
 ```
 
 The smoke uses real Colyseus SDK sessions over public HTTPS/WSS. It checks a shared
@@ -82,8 +86,9 @@ White Tower web/Telegram build-info and `/health`, `/test/health` on its API ori
   matchmaking HTTP statuses to 400 and retains the original SDK code/message in
   JSON. Confirmed through the Cloudflare origin before the move to the API origin.
 - The existing research scripts use `--no-opt --no-concurrent-recompilation` after
-  unexplained optimized Node 24 process exits. The hosted process retains those
-  flags; this is not a diagnosis or production performance approval.
+  unexplained optimized Node 24 exits. The hosted Node 22 process now uses ordinary
+  optimization, verified by the later ARM64 five-minute probe below. Do not apply
+  the Node 24 research workaround to this runtime without measuring it.
 
 ## Acceptance, 2026-10-18
 
@@ -118,3 +123,29 @@ These are not full-suite passes. The targeted 40-test Linux run above passed.
 Foreign in-progress city-boundary/traffic changes were excluded from deployment.
 Native `msgpackr-extract` is explicitly unapproved in pnpm config; its JavaScript
 fallback works in the browser, and image installation disables lifecycle scripts.
+
+### Player-reported collision/cadence correction, 2026-10-18
+
+Connection checks alone had missed two defects: numeric landmark IDs became NaN
+static boxes, and far NPC moved without colliders on incorrect corner trajectories.
+The authoritative map contract now validates finite descriptors and transfers its
+versioned plan/colliders with SHA-256 verification before rendering. Every new room
+gets a server-generated seed; `CARWARS_FIXED_SEED` is only an operator diagnostic
+override. Three clients in one room receive the same plan/hash. Late join/reconnect
+reuse that room's map. Old presentation clients must reload for version 2.
+
+Full movement frames replace high-frequency Schema pose/wheel array mutations in
+the hosted service; actor lifecycle remains Schema. Far NPC follow sampled road
+and junction paths with full-footprint building guards, and near-player collision
+continues in the common cannon world. Client interpolation adapts to packet gaps
+and no longer snaps back to an older position when a network stall crosses 500 ms.
+
+The raw before/after artifacts and precise restrictions live in
+`docs/knowledge/multiplayer/2026-10-18-smoothing/`. The fixed five-minute ARM64 run
+with three players and 102 NPC kept 120 Hz physics / 19.11 Hz patches, p95 gap 64.42
+ms, zero dropped simulation time and zero NPC centres observed inside houses.
+Output was 95.01 KiB/s per client. This is a socket/server probe, not a phone test
+or WAN input-to-visible-response acceptance. Geometry corruption, rendered collider
+parity, real three-player building collisions, logical NPC turns, frame codec and
+stalled extrapolation have regression checks. Broad root-suite limitations above
+still apply; unrelated dirty city/traffic files remain excluded from releases.

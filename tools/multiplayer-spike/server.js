@@ -40,7 +40,7 @@ export class DrivingSpikeRoom extends Room {
   }
   welcome(client) {
     return { playerId: client.sessionId, roomId: this.roomId, protocolVersion: 1, roundId: 'round-1',
-      snapshot: this.sim.snapshot(), map: { buildings: [...this.sim.plan.buildings, ...this.sim.plan.landmarks,
+      snapshot: this.sim.snapshot(), map: { buildings: [...this.sim.plan.buildings,
         ...this.sim.plan.boundaryBuildings].map(b => [b.x,b.z,b.width,b.depth]),
       roads: this.sim.graph.directed.map(e => [e.start.x,e.start.z,e.end.x,e.end.z]) } };
   }

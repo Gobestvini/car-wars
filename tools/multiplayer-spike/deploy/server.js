@@ -1,11 +1,13 @@
 import http from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+import { randomInt } from 'node:crypto';
 import express from 'express';
 import { build } from 'esbuild';
 import { Server } from '@colyseus/core';
 import { WebSocketTransport } from '@colyseus/ws-transport';
 import { DrivingSpikeRoom } from '../server.js';
+import { encodeFrame } from '../../../src/multiplayer/frame-codec.js';
 
 // A small, bounded public preview; the production game is a separate service.
 let activeRooms = 0;
@@ -16,7 +18,10 @@ class HostedDrivingRoom extends DrivingSpikeRoom {
     activeRooms++;
     this.hostedSlot = true;
     try {
-      super.onCreate({ npcCount: 102, reconnectSeconds: 15, seed: 20261005, collisionFixture: false });
+      const fixed=process.env.CARWARS_FIXED_SEED;
+      const seed=fixed===undefined?randomInt(0,4294967296):Number(fixed);
+      if(!Number.isSafeInteger(seed)||seed<0||seed>=4294967296)throw Error('Invalid configured map seed');
+      super.onCreate({ npcCount: 102, reconnectSeconds: 15, seed, collisionFixture: false });
       this.lastRespawn = new Map();
       this.onMessage('respawn', client => {
         const actor = this.sim.players.get(client.sessionId), now = performance.now();
@@ -31,10 +36,16 @@ class HostedDrivingRoom extends DrivingSpikeRoom {
     }
     catch (error) { this.releaseSlot(); throw error; }
   }
+  onAuth(client,options){
+    super.onAuth(client,options);
+    if(options.presentationVersion!==2)throw Error('Game version outdated; reload the page');
+    return true;
+  }
   welcome(client) {
     const data = super.welcome(client);
     data.map.plan = this.sim.plan;
-    data.presentationVersion = 1;
+    Object.assign(data.map,this.sim.map);
+    data.presentationVersion = 2;
     return data;
   }
   onLeave(client) { this.lastRespawn?.delete(client.sessionId); super.onLeave(client); }
@@ -51,8 +62,17 @@ class HostedDrivingRoom extends DrivingSpikeRoom {
     }
   }
   onBeforePatch() {
-    super.onBeforePatch();
-    if (this.metrics.snapshotMs.length > 1000) this.metrics.snapshotMs.splice(0, 500);
+    const begin=performance.now();
+    this.state.tick=this.sim.tick;this.state.contactCount=this.sim.contacts;
+    for(const [id,state]of this.state.actors){
+      if(state.role!=='player')continue;
+      const actor=this.sim.players.get(id);
+      if(!actor){this.state.actors.delete(id);continue;}
+      state.connected=actor.connected;state.generation=actor.generation;
+    }
+    if(this.clients.length)this.broadcastBytes('frame',encodeFrame(this.sim.snapshot()),{});
+    this.metrics.snapshotMs.push(performance.now()-begin);
+    if(this.metrics.snapshotMs.length>1000)this.metrics.snapshotMs.splice(0,500);
   }
   broadcastPatch() {
     const result = super.broadcastPatch();
@@ -71,7 +91,7 @@ export async function startHostedServer({ port = 2577, host = '0.0.0.0' } = {}) 
   const bundle = await build({ entryPoints: [fileURLToPath(new URL('client.js', import.meta.url))],
     bundle: true, write: false, format: 'esm', platform: 'browser', minify: true });
   app.use((req, res, next) => { res.set('Cache-Control', 'no-store'); next(); });
-  app.get('/health', (_, res) => res.json({ ok: true, prototype: true, transport: 'ws', activeRooms, maxRooms }));
+  app.get('/health', (_, res) => res.json({ ok: true, prototype: true, transport: 'ws', mapVersion:2,motionVersion:2,activeRooms,maxRooms }));
   app.get('/client.js', (_, res) => res.type('text/javascript').send(bundle.outputFiles[0].text));
   if (process.env.GAME_STATIC_DIR) {
     app.use(express.static(process.env.GAME_STATIC_DIR, { index: false }));

@@ -1,0 +1,20 @@
+{
+  "node": "v22.23.3",
+  "execArgv": [],
+  "seconds": 300.00120215,
+  "seed": 20261005,
+  "signature": "95bd532edb574755dac8a48e61720f4840050576197a568c0329f36b3e1d348f",
+  "players": 3,
+  "npcCount": 102,
+  "physicsHz": 119.99618582195072,
+  "patchHz": 19.109923423351855,
+  "patchGapP95": 64.41990400000941,
+  "patchGapP99": 79.73111500000232,
+  "patchGapMax": 128.72448599999188,
+  "ackP95": 60.279879000008805,
+  "droppedSeconds": 0,
+  "outboundKiBPerClient": 95.00632502298792,
+  "npcCentersInsideBuildings": [],
+  "physicalNPC": 16,
+  "cpuLimit": 1.5
+}

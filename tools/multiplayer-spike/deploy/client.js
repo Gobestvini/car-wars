@@ -1,4 +1,5 @@
 import { Client } from '@colyseus/sdk';
+import { decodeFrame } from '../../../src/multiplayer/frame-codec.js';
 const $ = id => document.getElementById(id);
 const sdk = new Client(new URL('.', location.href).href.replace(/\/$/, ''));
 const canvas = $('scene'), ctx = canvas.getContext('2d'), keys = new Set();
@@ -9,10 +10,11 @@ async function connect(id) {
   if (busy || room) return;
   busy = true; buttons(); status('Подключение…');
   try {
-    const r = id ? await sdk.joinById(id, { protocolVersion: 1 }) : await sdk.create('driving', { protocolVersion: 1 });
+    const r = id ? await sdk.joinById(id, { protocolVersion: 1,presentationVersion:2 }) : await sdk.create('driving', { protocolVersion: 1,presentationVersion:2 });
     room = r; seq = 0;
     r.onMessage('welcome', data => { map = data.map; });
     r.onMessage('full', () => {});
+    r.onMessage('frame',bytes=>{r.motionFrame=decodeFrame(bytes);});
     r.onError((code, message) => status(`Ошибка ${code}: ${message}`));
     r.onLeave(() => { if (room === r) { room = null; map = null; keys.clear(); buttons(); status('Соединение закрыто. Можно войти снова.'); } });
     r.send('hello');
@@ -53,7 +55,7 @@ function draw() {
     ctx.fillStyle = '#64756e';
     for (const [x,z,w,d] of map.buildings) ctx.fillRect(...project(x-w/2,z-d/2),w*1.25,d*1.25);
   }
-  const state = room?.state;
+  const state = room?.motionFrame || room?.state;
   if (state?.actors) {
     const players = [...state.actors.values()].filter(a => a.role === 'player');
     for (const a of state.actors.values()) {

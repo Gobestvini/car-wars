@@ -13,6 +13,7 @@ import { directionalInput } from '../driving-input.js';
 import { FrameRateLimiter } from '../game-loop.js';
 import { CarDamageEffects } from '../car-damage-effects.js';
 import { RoomClient, roomError, neutralInput } from './room-client.js';
+import { verifyMap } from './map-contract.js';
 import '../style.css';
 import '../start-screen.css';
 import './style.css';
@@ -59,7 +60,7 @@ export async function startGame(loadingScreen) {
     sun.shadow.mapSize.setScalar(quality==='low'?512:1024);sun.shadow.map?.dispose();sun.shadow.map=null;
   };
   resize();window.addEventListener('resize',resize);
-  const models=new Map(),keys=new Set();let playerTemplate,trafficAssets,driveDirection=1,expectedSignature=null;
+  const models=new Map(),keys=new Set();let playerTemplate,trafficAssets,driveDirection=1,expectedSignature=null,welcomeEpoch=0;
   const pointer={active:false,id:null,startX:0,startY:0,x:0,y:0};
   const stop=()=>{keys.clear();pointer.active=false;$('touch-marker').style.display='none';network.stop();};
   const message=text=>{$('online-message').textContent=text;};
@@ -68,11 +69,17 @@ export async function startGame(loadingScreen) {
   const network=new RoomClient({
     endpoint:import.meta.env.VITE_GAME_SERVER_URL || undefined,
     onStatus:message,
-    onWelcome(data){
-      const plan=data.map?.plan;
+    async onWelcome(data){
+      const epoch=++welcomeEpoch;
+      ready=false;network.stop();
+      let plan=data.map?.plan;
       if(!plan?.roadNetwork || data.snapshot?.protocolVersion!==1 || !Number.isSafeInteger(plan.seed)) {
         message('Обновите игру: сервер ещё не поддерживает 3D-карту.');ready=false;void network.leave();return;
       }
+      try { plan=await verifyMap(data.map,data.snapshot.mapSignature); }
+      catch(error){ready=false;await network.leave();lobby.hidden=false;toolbar.hidden=true;setButtons();message(error.message);return;}
+      if(epoch!==welcomeEpoch || !network.room)return;
+      network.buffer.setMap(plan);
       if(expectedSignature!==data.snapshot.mapSignature){
         city?.dispose();clearModels();city=createCityScene(scene,readOnlyCity,plan);
         signals=createTrafficSignals(plan.roadNetwork);expectedSignature=data.snapshot.mapSignature;
@@ -186,7 +193,7 @@ export async function startGame(loadingScreen) {
   function frame(now){
     if(disposed)return;request=requestAnimationFrame(frame);if(!limiter.shouldRender(now))return;
     const dt=Math.min(.1,(now-lastTime)/1000);lastTime=now;
-    const room=network.room,actors=network.buffer.sample(now,room?.sessionId),own=actors.find(a=>a.id===room?.sessionId);
+    const room=network.room,actors=ready?network.buffer.sample(now,room?.sessionId):[],own=actors.find(a=>a.id===room?.sessionId);
     const activeIds=new Set(actors.map(a=>a.id));
     for(const [id,visual]of models)if(!activeIds.has(id)){disposeVisual(visual);models.delete(id);}
     for(const actor of actors){

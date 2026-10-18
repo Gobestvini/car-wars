@@ -50,3 +50,45 @@ limitations and the draft downstream tasks were not accepted or reopened here.
   did not finish the pre-existing exhaustive perimeter test within the test budget;
   it is not a full-suite pass. Hardware phone, packet-loss budgets and the offline
   police/pickup/prop gameplay have not been accepted for online mode.
+
+## Correction after player report: jitter and NPC driving through houses
+
+Verified 2026-10-18; raw results: [before](multiplayer/2026-10-18-smoothing/before-60s.json),
+[after](multiplayer/2026-10-18-smoothing/after-300s.json). Earlier connection/render
+acceptance missed long-lived NPC motion and effective snapshot cadence.
+
+- Cause: `plan.landmarks` contains IDs of buildings already present in `buildings`.
+  The spike treated those IDs as building objects, creating three non-finite static
+  boxes. `map-contract.js` now owns finite collider descriptors, excludes duplicate
+  landmark IDs and hashes the complete server plan/colliders. Browser verifies the
+  SHA-256 and checks collider parity before accepting input/rendering that world.
+  A test records every actual house/curb collider from `createCityScene` and compares
+  it with the server contract; another rejects a tampered network map.
+- Cause: far NPC were removed from cannon and advanced by a gradual yaw change plus
+  straight motion; their turn radius cut through blocks. Logical NPC now advance
+  along the existing junction path geometry, wait for signals/occupied junctions,
+  and test their complete footprint against a shared spatial building index. Cars
+  near the union of player positions remain physical. One-minute simulation checks
+  confirm real movement, no house overlap and no path-boundary teleport; three
+  physical players also hit an ordinary/landmark/perimeter house in one solver.
+- Cause: high-frequency Schema array mutations/encoding and the research `--no-opt`
+  runtime flags cost server time. Hosted motion now uses independent compact binary
+  full frames (positions, normalized quaternions, velocity, damage, player wheels,
+  generation and input ack); Schema retains lifecycle. Node 22.23.3 uses normal
+  optimization after actual ARM64 soak. This does not diagnose the old Node 24 bug.
+- Cause: extrapolation was cancelled at 500 ms by returning the old unprojected
+  snapshot, visibly pulling cars backwards. The client now holds its bounded pose,
+  adapts its interpolation delay, smooths small packet corrections and rejects
+  extrapolation into server-map houses. It still runs no local physics or AI.
+- New rooms generate a random seed on the server and send the complete plan once;
+  no online `createCityPlan` call is used. Existing offline behavior is unchanged.
+  Motion presentation version 2 rejects stale clients with a reload message.
+
+Same VPS / 1.5 CPU quota / Node 22 optimized / seed 20261005 / 3 SDK players +102
+NPC: old 60-second profile had 95.30 physics Hz, 5.64 patch Hz, p95 patch gap 254 ms,
+12.27 dropped simulation seconds and 49 NPC IDs observed inside houses. Fixed
+300-second profile: 119.996 physics Hz, 19.11 patch Hz, p95/p99 patch gap 64.42/79.73
+ms, 0 dropped seconds, 0 observed NPC centres inside houses, 95.01 KiB/s per client.
+Durations differ; these are server/socket observations, not a WAN-to-screen latency
+or physical-phone performance measurement. The original world/traffic remained a
+research implementation; this does not silently accept unrelated backlog tasks.

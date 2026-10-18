@@ -1,5 +1,6 @@
 import { Client } from '@colyseus/sdk';
 import { SnapshotBuffer } from './snapshot-buffer.js';
+import { decodeFrame } from './frame-codec.js';
 export const DEFAULT_GAME_ENDPOINT = 'https://api.plusvibegames.com/carwars';
 export const neutralInput = () => ({ steer: 0, throttle: 0, brake: 1, handbrake: false });
 export function roomError(error) {
@@ -16,9 +17,13 @@ export class RoomClient {
   }
   async connect(roomId) {
     await this.leave();
-    const room = roomId ? await this.sdk.joinById(roomId,{ protocolVersion: 1 }) : await this.sdk.create('driving',{ protocolVersion: 1 });
+    const options={protocolVersion:1,presentationVersion:2};
+    const room = roomId ? await this.sdk.joinById(roomId,options) : await this.sdk.create('driving',options);
     this.room = room; this.seq = 0; this.buffer.clear(); this.input = neutralInput();
-    room.onStateChange(state => this.buffer.push(state,performance.now()));
+    room.onMessage('frame',bytes=>{
+      try { this.buffer.push(decodeFrame(bytes),performance.now()); }
+      catch { this.stop();this.onStatus('Получено неверное состояние мира. Перезагрузите игру.'); }
+    });
     room.onMessage('full',()=>{});
     room.onMessage('welcome',data => this.onWelcome(data));
     room.onMessage('respawned',()=>this.buffer.clear());
