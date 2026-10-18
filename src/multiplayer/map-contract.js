@@ -1,7 +1,8 @@
 import { createRoundedSidewalkLayout, createSidewalkSupportBoxes, createSidewalkSupportPrisms } from '../road-surface.js';
 import { footprintsOverlap } from '../traffic-spawn.js';
+import { streetManifest } from './street-world.js';
 
-export const MAP_VERSION = 2;
+export const MAP_VERSION = 3;
 export function cityColliders(plan) {
   const middle = Math.floor(plan.roads.length / 2), span = Math.abs(plan.roads[middle]-plan.roads[middle-1]);
   const sidewalks = createRoundedSidewalkLayout(plan,plan.bounds,plan.roadWidth,plan.sidewalkWidth,
@@ -13,7 +14,7 @@ export function cityColliders(plan) {
   if(boxes.some(b=>!['x','y','z','halfX','halfY','halfZ'].every(k=>Number.isFinite(b[k])) ||
     ['halfX','halfY','halfZ'].some(k=>b[k]<=0)))throw Error('Invalid server city collider');
   if(prisms.some(p=>![p.x,p.y,p.z,...p.vertices.flat()].every(Number.isFinite)))throw Error('Invalid server sidewalk collider');
-  return {boxes,prisms};
+  return {boxes,prisms,props:streetManifest(plan)};
 }
 export const mapContract = (plan,colliders=cityColliders(plan))=>({version:MAP_VERSION,plan,colliders});
 export const mapBytes = data=>JSON.stringify({version:data.version,plan:data.plan,colliders:data.colliders});

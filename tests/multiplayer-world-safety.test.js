@@ -15,7 +15,7 @@ test('server map roundtrip matches every rendered house/curb collider and has no
   const scene=createCityScene(new THREE.Scene(),{
     addStaticBox:b=>{recorded.boxes.push(b);return b;},addStaticConvex:p=>{recorded.prisms.push(p);return p;},removeStaticBox:()=>{},
   },plan);
-  try{assert.deepEqual(recorded,colliders);}finally{scene.dispose();}
+  try{assert.deepEqual(recorded,{boxes:colliders.boxes,prisms:colliders.prisms});}finally{scene.dispose();}
   const data=mapContract(plan,colliders),signature=createHash('sha256').update(mapBytes(data)).digest('hex');
   const wire=JSON.parse(JSON.stringify(data));assert.equal((await verifyMap(wire,signature)).seed,plan.seed);
   wire.plan.buildings[0].x+=1;await assert.rejects(verifyMap(wire,signature),/совпадают|повреждённая/);

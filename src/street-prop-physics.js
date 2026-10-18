@@ -43,7 +43,7 @@ export function sweepPropBox(actor, prop, velocity, dt, margin = 0) {
 }
 
 export class StreetPropPhysics {
-  constructor(world) {
+  constructor(world, { materials: extraMaterials = [] } = {}) {
     this.world = world;
     this.entries = [];
     this.byBody = new Map();
@@ -55,7 +55,7 @@ export class StreetPropPhysics {
     this.playerPushedUntil = -Infinity;
     this.disposed = false;
     this.material = new C.Material({ friction: .45, restitution: .1 });
-    const materials = new Set(world.bodies.map(body => body.material).filter(Boolean));
+    const materials = new Set([...world.bodies.map(body => body.material),...extraMaterials].filter(Boolean));
     materials.add(this.material);
     this.contactMaterials = [...materials].map(material => {
       const contact = new C.ContactMaterial(material,this.material,{friction:.45,restitution:.1});

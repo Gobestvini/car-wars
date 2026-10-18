@@ -10,7 +10,7 @@ async function connect(id) {
   if (busy || room) return;
   busy = true; buttons(); status('Подключение…');
   try {
-    const r = id ? await sdk.joinById(id, { protocolVersion: 1,presentationVersion:3 }) : await sdk.create('driving', { protocolVersion: 1,presentationVersion:3 });
+    const r = id ? await sdk.joinById(id, { protocolVersion: 1,presentationVersion:4 }) : await sdk.create('driving', { protocolVersion: 1,presentationVersion:4 });
     room = r; seq = 0;
     r.onMessage('welcome', data => { map = data.map; });
     r.onMessage('full', () => {});

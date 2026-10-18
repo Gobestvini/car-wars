@@ -77,6 +77,6 @@ export function createCityTrees(group, plan, { damageObstacles = [], signals = [
   }
   group.add(trunks, ...crownBatches);
 
-  // Decorative trees stay fixed even when a vehicle passes through their trunks/canopies.
+  // The online scene may register trunks/crowns with its shared destructible registry.
   return { count: trees.length, placements: trees, trunks, crownBatches };
 }

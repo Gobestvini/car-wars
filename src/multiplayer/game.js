@@ -12,6 +12,8 @@ import { joystickVector } from '../joystick.js';
 import { directionalInput } from '../driving-input.js';
 import { FrameRateLimiter } from '../game-loop.js';
 import { CarDamageEffects } from '../car-damage-effects.js';
+import { CarDeformation } from '../car-deformation.js';
+import { StreetVisuals } from './street-visuals.js';
 import { RoomClient, roomError, neutralInput } from './room-client.js';
 import { verifyMap } from './map-contract.js';
 import '../style.css';
@@ -62,9 +64,10 @@ export async function startGame(loadingScreen) {
   resize();window.addEventListener('resize',resize);
   const models=new Map(),keys=new Set();let playerTemplate,trafficAssets,driveDirection=1,expectedSignature=null,welcomeEpoch=0;
   const pointer={active:false,id:null,startX:0,startY:0,x:0,y:0};
-  const stop=()=>{keys.clear();pointer.active=false;$('touch-marker').style.display='none';network.stop();};
+  const stop=()=>{keys.clear();pointer.active=false;pointer.id=null;$('touch-marker').style.display='none';network.stop();};
   const message=text=>{$('online-message').textContent=text;};
   const readOnlyCity={ addStaticBox:()=>null,addStaticConvex:()=>null,removeStaticBox:()=>{} };
+  let streetVisuals=null;
   function clearModels(){for(const visual of models.values())disposeVisual(visual);models.clear();}
   const network=new RoomClient({
     endpoint:import.meta.env.VITE_GAME_SERVER_URL || undefined,
@@ -82,7 +85,8 @@ export async function startGame(loadingScreen) {
       network.buffer.setMap(plan);
       network.startPrediction(data.map.colliders);
       if(expectedSignature!==data.snapshot.mapSignature){
-        city?.dispose();clearModels();city=createCityScene(scene,readOnlyCity,plan);
+        city?.dispose();clearModels();streetVisuals=new StreetVisuals();
+        city=createCityScene(scene,readOnlyCity,plan,[],{propRegistry:streetVisuals,destructibleTrees:true});
         signals=createTrafficSignals(plan.roadNetwork);expectedSignature=data.snapshot.mapSignature;
       }
       ready=true;message('Комната готова. Отправьте ссылку друзьям.');
@@ -121,7 +125,9 @@ export async function startGame(loadingScreen) {
       return{group,player:false};
     }
     const group=new THREE.Group(),model=playerTemplate.model.clone(true);group.add(model);scene.add(group);
-    const body=model.getObjectByName('body');body.material=body.material.clone();
+    const body=model.getObjectByName('body');body.material=body.material.clone();body.geometry=body.geometry.clone();
+    body.updateWorldMatrix(true,false);
+    const deformation=new CarDeformation(body.geometry,body.matrixWorld.clone(),{preserveHardEdges:true});
     const lights=createPlayerLights(body);group.add(lights.glow);
     const wheels=playerTemplate.wheels.map(source=>{
       const node=model.getObjectByName(source.name);node.removeFromParent();node.position.set(0,0,0);
@@ -133,11 +139,11 @@ export async function startGame(loadingScreen) {
     labelCtx.fillText(actor.id===network.room?.sessionId?'Вы':`Друг ${[...models.values()].filter(v=>v.player).length+1}`,128,43);
     const texture=new THREE.CanvasTexture(labelCanvas),material=new THREE.SpriteMaterial({map:texture,depthTest:false});
     const label=new THREE.Sprite(material);label.position.y=3;label.scale.set(4.8,1.2,1);group.add(label);
-    return{group,wheels,lights,body,label,texture,effects:new CarDamageEffects(scene),generation:actor.generation,player:true};
+    return{group,wheels,lights,body,label,texture,deformation,dentCount:0,effects:new CarDamageEffects(scene),generation:actor.generation,player:true};
   }
   function disposeVisual(visual){
     scene.remove(visual.group);
-    if(visual.player){for(const {pivot}of visual.wheels)scene.remove(pivot);visual.effects.dispose();visual.lights.glow.geometry.dispose();visual.lights.glow.material.dispose();visual.body.material.dispose();visual.label.material.dispose();visual.texture.dispose();}
+    if(visual.player){for(const {pivot}of visual.wheels)scene.remove(pivot);visual.effects.dispose();visual.lights.glow.geometry.dispose();visual.lights.glow.material.dispose();visual.body.geometry.dispose();visual.body.material.dispose();visual.label.material.dispose();visual.texture.dispose();}
   }
   function applyActor(visual,actor){
     const p=actor.pose;visual.group.position.fromArray(p);visual.group.quaternion.fromArray(p,3);
@@ -174,13 +180,19 @@ export async function startGame(loadingScreen) {
     return{steer:0,throttle:0,brake:.18};
   }
   const down=e=>{
-    if(!ready || !lobby.hidden)return;e.preventDefault();pointer.active=true;pointer.id=e.pointerId;
+    if(!ready || !lobby.hidden || pointer.active || (e.pointerType==='mouse' && e.button!==0))return;e.preventDefault();pointer.active=true;pointer.id=e.pointerId;
     pointer.startX=pointer.x=e.clientX;pointer.startY=pointer.y=e.clientY;canvas.setPointerCapture(e.pointerId);
     const marker=$('touch-marker');marker.style.display='block';marker.style.left=`${e.clientX}px`;marker.style.top=`${e.clientY}px`;
+    marker.firstElementChild.style.transform='translate(0px, 0px)';
   };
-  const move=e=>{if(pointer.active&&pointer.id===e.pointerId){pointer.x=e.clientX;pointer.y=e.clientY;}};
+  const move=e=>{if(pointer.active&&pointer.id===e.pointerId){
+    pointer.x=e.clientX;pointer.y=e.clientY;
+    const stick=joystickVector(pointer.startX,pointer.startY,pointer.x,pointer.y);
+    $('touch-marker').firstElementChild.style.transform=`translate(${stick.knobX}px, ${stick.knobY}px)`;
+  }};
+  const release=e=>{if(pointer.active && pointer.id===e.pointerId)stop();};
   canvas.addEventListener('pointerdown',down);canvas.addEventListener('pointermove',move);
-  canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);canvas.addEventListener('lostpointercapture',stop);
+  canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);
   const keydown=e=>{
     if(['INPUT','TEXTAREA','BUTTON'].includes(e.target.tagName)||!lobby.hidden)return;
     if(e.code.startsWith('Arrow')||e.code==='Space')e.preventDefault();
@@ -217,7 +229,9 @@ export async function startGame(loadingScreen) {
       if(!models.has(actor.id))models.set(actor.id,makeVisual(actor));
       const visual=models.get(actor.id);applyActor(visual,actor);
       if(visual.player){
-        if(visual.generation!==actor.generation){visual.effects.reset();visual.generation=actor.generation;}
+        if(visual.generation!==actor.generation){visual.effects.reset();visual.deformation.restore();visual.dentCount=0;visual.generation=actor.generation;}
+        const dents=actor.dents??[];
+        if(dents.length>visual.dentCount){visual.deformation.apply(dents.slice(visual.dentCount));visual.dentCount=dents.length;}
         visual.effects.update({damage:actor.damage,car:visual.group,camera,dt,quality});
       }
     }
@@ -231,6 +245,7 @@ export async function startGame(loadingScreen) {
     }else{camera.position.set(12,22,-20);camera.lookAt(0,0,0);$('speed').textContent='0';}
     sun.position.copy(follow).add(sunOffset);sun.target.position.copy(follow);camera.updateMatrixWorld();updateShadowCoverage(sun,camera);
     if(city&&signals)city.updateSignals(signals,(room?.state?.tick||0)/120,camera,quality);
+    if(ready&&network.prediction)streetVisuals?.sync(network.prediction.world.props);
     trafficAssets?.animate(now/1000,quality);
     blur.render(scene,camera,{mode:'follow',car:focus});
     const count=actors.filter(a=>a.role==='player'&&a.connected).length;
@@ -240,7 +255,13 @@ export async function startGame(loadingScreen) {
       debug.textContent=JSON.stringify({roomId:room?.roomId,playerId:room?.sessionId,ready,rtt:network.rtt,
         tick:room?.state?.tick,predictedTick:network.prediction?.world.tick,physics:network.prediction?.metrics,
         frameP95:sorted[Math.floor(sorted.length*.95)],frameP99:sorted[Math.floor(sorted.length*.99)],
-        physical:network.prediction?.world.actors.size,players:actors.filter(a=>a.role==='player').map(a=>({id:a.id,generation:a.generation,pose:a.pose}))});
+        physical:network.prediction?.world.actors.size,
+        props:network.prediction?{total:network.prediction.world.props.entries.length,detached:network.prediction.world.props.debris.length,removed:network.prediction.world.props.entries.filter(e=>e.state==='removed').length}:null,
+        players:actors.filter(a=>a.role==='player').map(a=>{
+          const visual=models.get(a.id),positions=visual?.body.geometry.attributes.position.array,original=visual?.deformation.originalPositions;
+          let deformedVertices=0;if(positions)for(let i=0;i<positions.length;i+=3)if(Math.hypot(positions[i]-original[i],positions[i+1]-original[i+1],positions[i+2]-original[i+2])>1e-5)deformedVertices++;
+          return{id:a.id,generation:a.generation,pose:a.pose,damage:a.damage,dents:visual?.dentCount??0,deformedVertices};
+        })});
     }
   }
   async function load(){

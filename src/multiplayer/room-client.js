@@ -18,7 +18,7 @@ export class RoomClient {
   }
   async connect(roomId) {
     await this.leave();
-    const options={protocolVersion:1,presentationVersion:3};
+    const options={protocolVersion:1,presentationVersion:4};
     const room = roomId ? await this.sdk.joinById(roomId,options) : await this.sdk.create('driving',options);
     this.room = room; this.seq = 0; this.buffer.clear(); this.input = neutralInput();
     room.onMessage('frame',bytes=>{

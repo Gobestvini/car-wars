@@ -1,6 +1,7 @@
 import { STEP } from '../vehicle.js';
 import { PredictionWorld, idleControl } from './prediction-world.js';
 import { quaternionSlerp } from './snapshot-buffer.js';
+import { streetMatches } from './street-world.js';
 
 const MS=STEP*1000;
 const multiplyQ=(a,b)=>[
@@ -28,7 +29,7 @@ export class ClientPrediction {
     const generation=frame.actors.get(this.localId).generation;
     const changed=this.latest?.actors.get(this.localId)?.generation!==generation;
     const past=this.history.get(frame.tick),selected=this.world.selected(frame);
-    const matches=!changed&&past&&past.size===selected.size&&[...selected].every(([id,a])=>{
+    const matches=!changed&&past&&streetMatches(past.props,frame.props)&&past.size===selected.size&&[...selected].every(([id,a])=>{
       const recorded=past.get(id);if(!recorded||recorded.generation!==a.generation)return false;
       const local=id===this.localId,p=recorded.pose;
       const position=Math.hypot(...a.pose.slice(0,3).map((v,i)=>v-p[i]));

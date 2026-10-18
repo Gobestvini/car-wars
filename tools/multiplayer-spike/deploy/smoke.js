@@ -6,7 +6,7 @@ import { verifyMap } from '../../../src/multiplayer/map-contract.js';
 
 const endpoint = process.argv[2] || 'http://127.0.0.1:2577';
 const clients = [];
-const joinOptions={protocolVersion:1,presentationVersion:3};
+const joinOptions={protocolVersion:1,presentationVersion:4};
 async function until(predicate, timeout = 10000) {
   const deadline = Date.now() + timeout;
   while (!predicate()) { if (Date.now() > deadline) throw Error('Timed out waiting for shared state'); await sleep(25); }

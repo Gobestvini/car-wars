@@ -13,7 +13,7 @@ const sdk=new Client(`http://127.0.0.1:${port}`),clients=[],gaps=[],ackMs=[];
 const sent=new Map(),inside=new Set();let timer,lastPatch,seq=0,measuring=false;
 const percentile=(values,p)=>{const sorted=[...values].sort((a,b)=>a-b);return sorted[Math.min(sorted.length-1,Math.ceil(sorted.length*p)-1)]??null;};
 const join=async id=>{
-  const room=id?await sdk.joinById(id,{protocolVersion:1,presentationVersion:3}):await sdk.create('driving',{protocolVersion:1,presentationVersion:3});
+  const room=id?await sdk.joinById(id,{protocolVersion:1,presentationVersion:4}):await sdk.create('driving',{protocolVersion:1,presentationVersion:4});
   room.onMessage('welcome',()=>{});room.onMessage('full',()=>{});room.onMessage('frame',()=>{});clients.push(room);return room;
 };
 try{

@@ -1,6 +1,8 @@
 import * as C from 'cannon-es';
 import { CarSimulation, STEP } from '../vehicle.js';
 import { useSparseContacts } from './contact-cache.js';
+import { StreetPropPhysics } from '../street-prop-physics.js';
+import { captureStreet, restoreStreet } from './street-world.js';
 
 const vec = v => [v.x,v.y,v.z];
 const quat = q => [q.x,q.y,q.z,q.w];
@@ -63,6 +65,8 @@ export class PredictionWorld {
       this.world.removeBody(body);return{body,minX:lo.x,maxX:hi.x,minZ:lo.z,maxZ:hi.z,active:false};
     });
     this.actors=new Map();this.tick=0;this.steps=0;this.localId=localId;
+    this.props=new StreetPropPhysics(this.world,{materials:[this.owner.materials.chassis]});
+    for(const p of colliders.props??[])this.props.register(p);
   }
   remove(id) {
     const actor=this.actors.get(id);if(!actor)return;
@@ -84,10 +88,11 @@ export class PredictionWorld {
     return new Map([...frame.actors].filter(([id,a])=>a.role==='player'||(a.physical&&selected.has(id))));
   }
   checkpoint() {
-    return new Map([...this.actors].map(([id,{sim,source}])=>[id,{generation:source.generation,
+    const checkpoint=new Map([...this.actors].map(([id,{sim,source}])=>[id,{generation:source.generation,
       pose:[...vec(sim.body.position),...quat(sim.body.quaternion),...vec(sim.body.velocity),...vec(sim.body.angularVelocity)],
       steering:sim.steering,throttle:sim.throttle,damage:sim.damage,detached:sim.wheels.map(w=>w.detached),
       wheelBodies:sim.wheels.map(w=>w.detachedBody?{p:vec(w.detachedBody.position),v:vec(w.detachedBody.velocity)}:null)}]));
+    checkpoint.props=captureStreet(this.props);return checkpoint;
   }
   syncStatics() {
     const zones=[...this.actors.values()].map(({sim})=>({x:sim.body.position.x,z:sim.body.position.z,
@@ -114,6 +119,7 @@ export class PredictionWorld {
       if(actor.role!=='player')entry.sim.syncWheelPositions();
     }
     for(const id of this.actors.keys())if(!active.has(id))this.remove(id);
+    restoreStreet(this.props,frame.props??[],frame.tick*STEP);
     this.syncStatics();
     // Clear future contacts and spatial caches after rewind. Damage listeners are
     // absent here, so replay cannot repeat authoritative effects or damage.
@@ -127,7 +133,9 @@ export class PredictionWorld {
   step(localId,input) {
     if(this.tick%12===0)this.syncStatics();
     for(const [id,a]of this.actors)a.sim.prepare(id===localId?input:a.control,STEP);
+    this.props.beforeStep(STEP,[...this.actors.values()].map(a=>({body:a.sim.body,player:a.source.role==='player'})));
     this.world.step(STEP);
+    this.props.afterStep(STEP);
     for(const a of this.actors.values())a.sim.postStep(STEP);
     this.tick++;this.steps++;
   }
@@ -138,5 +146,5 @@ export class PredictionWorld {
         wheels:s.wheels.flatMap(w=>[...w.p,w.rotation,w.slip,Number(w.grounded),Number(w.detached)])};
     });
   }
-  dispose(){for(const id of this.actors.keys())this.remove(id);for(const b of [...this.world.bodies])this.world.removeBody(b);}
+  dispose(){this.props.dispose();for(const id of this.actors.keys())this.remove(id);for(const b of [...this.world.bodies])this.world.removeBody(b);}
 }

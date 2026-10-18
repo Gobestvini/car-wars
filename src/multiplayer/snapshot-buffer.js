@@ -1,7 +1,7 @@
 const mix = (a, b, t) => a + (b - a) * t;
 const copy = actor => ({ id: actor.id, role: actor.role, generation: actor.generation,
   pose: Array.from(actor.pose), wheels: Array.from(actor.wheels), steering: actor.steering,
-  damage: actor.damage, ack: actor.ack, connected: actor.connected });
+  damage: actor.damage, ack: actor.ack, connected: actor.connected, dents:actor.dents });
 
 export function quaternionSlerp(a, b, t) {
   let dot = a.reduce((sum, value, i) => sum + value * b[i], 0);

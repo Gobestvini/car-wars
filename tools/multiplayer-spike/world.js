@@ -3,6 +3,8 @@ import { createHash } from 'node:crypto';
 import { performance } from 'node:perf_hooks';
 import { CarSimulation, STEP } from '../../src/vehicle.js';
 import { useSparseContacts } from '../../src/multiplayer/contact-cache.js';
+import { StreetPropPhysics } from '../../src/street-prop-physics.js';
+import { captureStreet } from '../../src/multiplayer/street-world.js';
 import { createCityPlan } from '../../src/city-generator.js';
 import { cityColliders, mapContract, mapBytes } from '../../src/multiplayer/map-contract.js';
 import { createRoadGraph, createSeededRandom, chooseRoadGoal, findRoadRoute } from '../../src/traffic-ai.js';
@@ -35,6 +37,8 @@ export class SpikeWorld {
     this.map = mapContract(this.plan,colliders);
     this.signature = createHash('sha256').update(mapBytes(this.map)).digest('hex');
     this.colliders = colliders;
+    this.props=new StreetPropPhysics(this.world,{materials:[this.owner.materials.chassis]});
+    for(const p of colliders.props)this.props.register(p);
     this.graph = createRoadGraph(this.plan.roadNetwork, Math.min(5.2, this.plan.roadWidth * .25));
     this.slots = createTrafficSpawnSlots(this.graph.directed);
     this.signals = createTrafficSignals(this.plan.roadNetwork);
@@ -68,7 +72,7 @@ export class SpikeWorld {
   }
   addPlayer(id) {
     if (this.players.size >= 3 || this.players.has(id)) throw new Error('Room full or duplicate player');
-    const slot = this.spawnSlot(), actor = { id, role: 'player', generation: 1, sim: this.makeSim(slot),
+    const slot = this.spawnSlot(), actor = { id, role: 'player', generation: 1, dents:[], dentGeneration:1, sim: this.makeSim(slot),
       control: neutral(), pending: null, lastSeq: -1, receivedSeq: -1, lastInputTick: this.tick,
       lastAppliedTick: 0, connected: true, commands:new Map(), timed:false };
     this.players.set(id, actor); return actor;
@@ -203,8 +207,16 @@ export class SpikeWorld {
         }else b.velocity.setZero();
       }
     }
+    const physical=[...this.players.values(),...this.npcs.filter(a=>a.physical)];
+    this.props.beforeStep(STEP,physical.map(a=>({body:a.sim.body,player:a.role==='player'})));
     this.world.step(STEP); this.steps++; this.contacts += this.world.contacts.length;
+    this.props.afterStep(STEP);
     for (const actor of [...this.players.values(), ...this.npcs]) if (actor.role === 'player' || actor.physical) actor.sim.postStep(STEP);
+    for(const actor of this.players.values()){
+      if(actor.dentGeneration!==actor.generation){actor.dents=[];actor.dentGeneration=actor.generation;}
+      const impacts=actor.sim.drainImpactEvents();
+      actor.dents.push(...impacts.filter(e=>e.impact.depth>0).slice(0,32-actor.dents.length));
+    }
     this.tick++;
     this.metrics.stepMs.push(performance.now() - start);
     if (this.tick % 120 === 0) this.metrics.physicalCounts.push(this.npcs.filter(a => a.physical).length);
@@ -214,7 +226,8 @@ export class SpikeWorld {
       const s = a.sim, b = s.body;
       return { id: a.id, generation: a.generation, role: a.role, physical: a.physical ?? true,
         p: vector(b.position), q: quaternion(b.quaternion), v: vector(b.velocity), av: vector(b.angularVelocity),
-        steering: s.steering, throttle:s.throttle,control:{...a.control}, damage: s.damage, lastProcessedInputSeq: a.lastSeq ?? -1,
+        steering: s.steering, throttle:s.throttle,control:{...a.control}, damage: s.damage,
+        dents:a.dentGeneration===a.generation?a.dents??[]:[], lastProcessedInputSeq: a.lastSeq ?? -1,
         lastAppliedTick: a.lastAppliedTick ?? 0, connected: a.connected ?? true,
         wheels: s.wheels.map(w => ({ p: vector(w.detachedBody?.position ?? w.position),
           rotation: w.rotation, slip: w.slip, grounded: w.grounded, detached: w.detached,
@@ -224,10 +237,11 @@ export class SpikeWorld {
       serverTime: this.tick * STEP, stepSeconds: STEP, seed: this.plan.seed, roadWidth: this.plan.roadWidth,
       generatorVersion: 'baseline-dc9eb06-working-tree', mapSignature: this.signature,
       players: [...this.players.values()].map(actor), actors: this.npcs.map(actor),
-      signalTime: this.tick * STEP,
-      coverage: 'spike: damage and wheels only; no wanted/arrest/pickups/props/police gameplay' };
+      signalTime: this.tick * STEP,props:captureStreet(this.props),
+      coverage: 'preview: driving, deformation, wheels and street destruction; no wanted/arrest/pickups/police gameplay' };
   }
   dispose() {
+    this.props.dispose();
     for (const a of [...this.players.values(), ...this.npcs]) this.removeSim(a.sim);
     this.players.clear(); this.npcs.length = 0;
     for (const b of [...this.world.bodies]) this.world.removeBody(b);

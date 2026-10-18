@@ -21,9 +21,11 @@ server-tick interpolation timeline. After 500 ms without new state prediction
 stops and the server's input-silence brake protects the car.
 
 Online supports shared free driving with 102 civilians, three physical players,
-collisions/damage and individual respawn. Police/wanted/arrest, repair pickups and
-destructible street props are still offline-only. Rendered street props/trees are
-decorative in online mode. The deployed server remains the bounded research world;
+collisions, body deformation, individual respawn, and destructible lamps, bins,
+benches, signals and trees. Server-owned object lifecycles survive late joins and
+reconnects within the room; nearby contacts are predicted locally. Debris fades
+after five simulation seconds, as in offline street-prop physics. Police/wanted/
+arrest and repair pickups remain offline-only. The server remains the bounded research world;
 this integration does not accept the full production multiplayer backlog.
 
 The White Tower VPS runs this as an independent Docker Compose project on the
@@ -182,3 +184,10 @@ or WAN input-to-visible-response acceptance. Geometry corruption, rendered colli
 parity, real three-player building collisions, logical NPC turns, frame codec and
 stalled extrapolation have regression checks. Broad root-suite limitations above
 still apply; unrelated dirty city/traffic files remain excluded from releases.
+
+## Online gameplay parity fixes (2026-10-18)
+
+Presentation version 4, motion frame 3, signed map version 3. See
+[destruction and joystick verification](../../../docs/knowledge/multiplayer-destruction.md).
+Old online pages must reload. The directional joystick now updates its knob on
+pointer movement, resets to centre on a new gesture and ignores unrelated pointers.

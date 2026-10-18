@@ -1,6 +1,7 @@
 // Authored in metres, kilograms and km/h. Local origin is the sidewalk surface.
 const box = (x, y, z, px, py, pz = 0) => ({ half: [x, y, z], center: [px, py, pz] });
 export const PROP_PHYSICS = Object.freeze({
+  tree: { threshold: 40, mass: 140, height: 3, boxes: [box(.18,1.5,.18,0,1.5)] },
   bin: { threshold: 15, mass: 25, height: .84, boxes: [box(.26,.36,.26,0,.36),box(.3,.06,.3,0,.78)] },
   bench: { threshold: 25, mass: 70, height: .95, boxes: [
     box(.9,.04,.325,0,.45), box(.9,.23,.04,0,.72,-.285),

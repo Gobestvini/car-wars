@@ -14,7 +14,7 @@ import { createCityStreetProps, createPropInstanceVisual } from './city-street-p
 import { StreetPropPhysics } from './street-prop-physics.js';
 import { createSurfaceHeightSampler } from './road-surface.js';
 
-export function createCityScene(scene, simulation, plan, damageObstacles = []) {
+export function createCityScene(scene, simulation, plan, damageObstacles = [], { propRegistry = null, destructibleTrees = false } = {}) {
   const group = new THREE.Group();
   group.name = 'Procedural City';
   scene.add(group);
@@ -213,7 +213,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
     signals: approaches.map(({ signalX: x, signalZ: z }) => ({ x, z })) });
 
   // Lightweight scene-only fixtures have no world. Production always owns sim.world.
-  const propPhysics = simulation.world ? new StreetPropPhysics(simulation.world) : null;
+  const propPhysics = simulation.world ? new StreetPropPhysics(simulation.world) : propRegistry;
   const surface = createSurfaceHeightSampler(plan,0);
   if (propPhysics) {
     const indices = { lamp: 0, bin: 0, bench: 0 };
@@ -241,6 +241,11 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
           approach.color = null; // force all lamps and beam to refresh on next render
         },
       });
+    });
+    if(destructibleTrees)trees.placements.forEach((tree,index)=>{
+      const source={id:`tree:${index}`,type:'tree',x:tree.x,y:surface(tree.x,tree.z),z:tree.z,yaw:0};
+      propPhysics.register({...source,...createPropInstanceVisual([{batch:trees.trunks,index},
+        {batch:trees.crownBatches[tree.crownType],index:tree.crownIndex}],source)});
     });
   }
 
