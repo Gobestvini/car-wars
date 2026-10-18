@@ -77,8 +77,8 @@ export async function startGame(loadingScreen) {
         message('Обновите игру: сервер ещё не поддерживает 3D-карту.');ready=false;void network.leave();return;
       }
       try { plan=await verifyMap(data.map,data.snapshot.mapSignature); }
-      catch(error){ready=false;await network.leave();lobby.hidden=false;toolbar.hidden=true;setButtons();message(error.message);return;}
-      if(epoch!==welcomeEpoch || !network.room)return;
+      catch(error){if(epoch!==welcomeEpoch || data.roomId!==network.room?.roomId)return;ready=false;await network.leave();lobby.hidden=false;toolbar.hidden=true;setButtons();message(error.message);return;}
+      if(epoch!==welcomeEpoch || data.roomId!==network.room?.roomId)return;
       network.buffer.setMap(plan);
       if(expectedSignature!==data.snapshot.mapSignature){
         city?.dispose();clearModels();city=createCityScene(scene,readOnlyCity,plan);

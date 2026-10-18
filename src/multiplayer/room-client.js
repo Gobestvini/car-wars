@@ -21,15 +21,16 @@ export class RoomClient {
     const room = roomId ? await this.sdk.joinById(roomId,options) : await this.sdk.create('driving',options);
     this.room = room; this.seq = 0; this.buffer.clear(); this.input = neutralInput();
     room.onMessage('frame',bytes=>{
+      if(this.room!==room)return;
       try { this.buffer.push(decodeFrame(bytes),performance.now()); }
       catch { this.stop();this.onStatus('Получено неверное состояние мира. Перезагрузите игру.'); }
     });
     room.onMessage('full',()=>{});
-    room.onMessage('welcome',data => this.onWelcome(data));
-    room.onMessage('respawned',()=>this.buffer.clear());
-    room.onError((code,message)=>this.onStatus(roomError({message:message || `Ошибка ${code}`})));
-    room.onDrop(()=>{ this.input = neutralInput(); this.onStatus('Переподключение… Машина сохранена на 15 секунд.'); });
-    room.onReconnect(()=>{ this.input=neutralInput(); this.buffer.clear(); room.send('hello'); this.onStatus('Соединение восстановлено'); });
+    room.onMessage('welcome',data => {if(this.room===room)this.onWelcome(data);});
+    room.onMessage('respawned',()=>{if(this.room===room)this.buffer.clear();});
+    room.onError((code,message)=>{if(this.room===room)this.onStatus(roomError({message:message || `Ошибка ${code}`}));});
+    room.onDrop(()=>{ if(this.room!==room)return;this.input = neutralInput(); this.onStatus('Переподключение… Машина сохранена на 15 секунд.'); });
+    room.onReconnect(()=>{ if(this.room!==room)return;this.input=neutralInput(); this.buffer.clear(); room.send('hello'); this.onStatus('Соединение восстановлено'); });
     room.onLeave(()=>{ if(this.room===room) { this.room=null; clearInterval(this.timer); this.input=neutralInput(); this.onLeave(); } });
     room.send('hello');
     this.timer = setInterval(()=>this.sendInput(),1000/30);

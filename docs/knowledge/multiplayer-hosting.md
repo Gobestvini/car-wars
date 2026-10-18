@@ -83,6 +83,10 @@ acceptance missed long-lived NPC motion and effective snapshot cadence.
 - New rooms generate a random seed on the server and send the complete plan once;
   no online `createCityPlan` call is used. Existing offline behavior is unchanged.
   Motion presentation version 2 rejects stale clients with a reload message.
+  Room callbacks and asynchronous map validation are scoped to the current room;
+  packets from a departed room cannot enter the new map's presentation buffer.
+  A real SDK test switches through three hosted rooms and verifies map hashes and
+  replacement of player identities in every retained motion frame.
 
 Same VPS / 1.5 CPU quota / Node 22 optimized / seed 20261005 / 3 SDK players +102
 NPC: old 60-second profile had 95.30 physics Hz, 5.64 patch Hz, p95 patch gap 254 ms,
