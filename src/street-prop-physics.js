@@ -46,6 +46,7 @@ export class StreetPropPhysics {
   constructor(world, { materials: extraMaterials = [] } = {}) {
     this.world = world;
     this.entries = [];
+    this.changedEntries = new Set(); this.episodes = new Set();
     this.byBody = new Map();
     this.cells = new Map();
     this.activeIntact = new Set();
@@ -76,7 +77,7 @@ export class StreetPropPhysics {
     return body;
   }
   register(source) {
-    const entry = { ...source, state: 'intact', lastTouch: -Infinity, episode: false, destroyedAt: null };
+    const entry = { ...source, index:this.entries.length, state: 'intact', lastTouch: -Infinity, episode: false, destroyedAt: null };
     entry.body = this.makeBody(entry);
     entry.active = true;
     this.activeIntact.add(entry);
@@ -101,6 +102,7 @@ export class StreetPropPhysics {
     entry.lastTouch = this.clock;
     if (entry.episode) return;
     entry.episode = true;
+    this.episodes.add(entry);
     if (speed + 1e-6 < PROP_CRIME_KMH || this.clock < this.playerPushedUntil) return;
     this.events.push({ type: 'property-collision', propId: entry.id, propType: entry.type,
       impactSpeedKmh: speed, time: this.clock });
@@ -113,6 +115,7 @@ export class StreetPropPhysics {
     entry.body = this.makeBody(entry,true);
     entry.active = true;
     entry.state = 'detached'; entry.destroyedAt = this.clock;
+    this.changedEntries.add(entry);
     // Apply at bumper height, below the centre of tall poles, to topple them.
     const mass = PROP_PHYSICS[entry.type].mass;
     const impulse = Math.min(speed/3.6 * mass * .65, mass * 16);
@@ -141,9 +144,9 @@ export class StreetPropPhysics {
     }
     const player = actors.find(actor => actor.player)?.body;
     const playerBoxes = player ? boxesOf(player) : [];
-    for (const entry of this.entries) if (entry.episode && this.clock-entry.lastTouch >= .5) {
+    for (const entry of this.episodes) if (this.clock-entry.lastTouch >= .5) {
       const nearby = playerBoxes.some(box => entry.boxes.some(prop => sweepPropBox(box,prop,new C.Vec3(),0,.5)));
-      if (!nearby) entry.episode = false;
+      if (!nearby) {entry.episode = false;this.episodes.delete(entry);}
     }
     for (const actor of actors) {
       if (actor.player && !enabled) continue;
@@ -219,6 +222,7 @@ export class StreetPropPhysics {
     this.world.removeBody(entry.body); this.byBody.delete(entry.body);
     this.activeIntact.delete(entry); entry.active = false;
     entry.state = 'removed'; entry.hide?.();
+    this.changedEntries.add(entry);
     this.debris = this.debris.filter(item => item !== entry);
   }
   reset() {
@@ -234,6 +238,7 @@ export class StreetPropPhysics {
       entry.restore?.();
     }
     this.debris = []; this.events = []; this.clock = 0;
+    this.changedEntries.clear(); this.episodes.clear();
     this.playerPushedUntil = -Infinity;
     this.actors?.clear(); this.velocities?.clear();
   }
@@ -248,6 +253,7 @@ export class StreetPropPhysics {
     for (const entry of this.entries) { this.world.removeBody(entry.body); entry.hide?.(); }
     this.entries = []; this.byBody.clear(); this.cells.clear(); this.debris = []; this.events = [];
     this.activeIntact.clear();
+    this.changedEntries.clear(); this.episodes.clear();
     this.actors?.clear(); this.velocities?.clear(); this.disposed = true;
     for (const contact of this.contactMaterials) this.world.removeContactMaterial(contact);
     this.contactMaterials = [];

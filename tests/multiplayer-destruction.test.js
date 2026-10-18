@@ -24,6 +24,8 @@ test('signed server manifest matches every rendered destructible instance, inclu
     world.props.remove(tree);registry.sync(world.props);assert.equal(registry.entries.get(tree.id).state,'removed');
     const signal=world.props.entries.find(e=>e.type==='signal');world.props.remove(signal);registry.sync(world.props);
     const approach=scene.signalApproaches.find(a=>`signal:${a.nodeId}:${a.fromId}`===signal.id);assert.equal(approach.destroyed,true);
+    world.props.reset();registry.sync(world.props);assert.equal(approach.destroyed,false);
+    assert.equal(registry.entries.get(tree.id).state,'intact');assert.equal(world.props.changedEntries.size,0);
   }finally{scene.dispose();world.dispose();}
 });
 

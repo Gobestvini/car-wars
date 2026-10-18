@@ -25,8 +25,8 @@ export function streetManifest(plan) {
 // remain present for late joins. No client collision reports are accepted.
 export function captureStreet(physics) {
   const states=[];
-  for(let i=0;i<physics.entries.length;i++){
-    const e=physics.entries[i];if(e.state==='intact')continue;
+  for(const e of [...physics.changedEntries].sort((a,b)=>a.index-b.index)){
+    const i=e.index;
     if(e.state==='removed'){states.push([i,-1]);continue;}
     const {position:p,quaternion:q,velocity:v,angularVelocity:a}=e.body;
     states.push([i,physics.clock-e.destroyedAt,p.x,p.y,p.z,q.x,q.y,q.z,q.w,v.x,v.y,v.z,a.x,a.y,a.z]);
@@ -36,8 +36,12 @@ export function captureStreet(physics) {
 
 export function restoreStreet(physics,states,time) {
   const byIndex=new Map(states.map(s=>[s[0],s]));physics.clock=time;physics.debris=[];
-  for(let i=0;i<physics.entries.length;i++){
-    const e=physics.entries[i],s=byIndex.get(i),state=!s?'intact':s[1]<0?'removed':'detached';
+  const changed=new Set([...physics.changedEntries,...states.map(s=>physics.entries[s[0]])]);
+  for(const e of physics.episodes){e.episode=false;e.lastTouch=-Infinity;}
+  physics.changedEntries.clear();physics.episodes.clear();
+  for(const e of changed){
+    if(!e)throw Error('Unknown street object');
+    const s=byIndex.get(e.index),state=!s?'intact':s[1]<0?'removed':'detached';
     if(e.state!==state){
       physics.world.removeBody(e.body);physics.byBody.delete(e.body);physics.activeIntact.delete(e);
       e.active=false;
@@ -47,6 +51,8 @@ export function restoreStreet(physics,states,time) {
       }
       e.state=state;
     }
+    e.episode=false;e.lastTouch=-Infinity;
+    if(state!=='intact')physics.changedEntries.add(e);
     if(state!=='detached')continue;
     e.destroyedAt=time-s[1];const b=e.body;
     b.position.set(...s.slice(2,5));b.quaternion.set(...s.slice(5,9));b.velocity.set(...s.slice(9,12));b.angularVelocity.set(...s.slice(12,15));
