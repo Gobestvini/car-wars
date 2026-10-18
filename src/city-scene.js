@@ -63,7 +63,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   group.add(...createSidewalkVisuals(THREE, sidewalkLayout, roadRects, sidewalkMaterial, curbMaterial, ART.asphalt));
   const marks = createRoadMarkings(plan, plan.bounds, plan.roadWidth);
   // Paint is a surface layer, below sampled tire decals, rather than a raised block.
-  const dashGeometry = new THREE.PlaneGeometry(0.16, 2.2).rotateX(-Math.PI / 2);
+  const dashGeometry = new THREE.PlaneGeometry(0.16, 1).rotateX(-Math.PI / 2);
   // Slope bias keeps paint above asphalt at shallow angles and long camera ranges.
   const dashMaterial = new THREE.MeshStandardMaterial({ color: ART.marking, roughness: 1,
     polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -2 });
@@ -73,12 +73,12 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
   const position = new THREE.Vector3();
   const rotation = new THREE.Quaternion();
   const up = new THREE.Vector3(0, 1, 0);
-  const unitScale = new THREE.Vector3(1, 1, 1);
+  const markScale = new THREE.Vector3(1, 1, 1);
   for (let i = 0; i < marks.length; i++) {
     const mark = marks[i];
     position.set(mark.x, ROAD_SURFACE_HEIGHTS.marking, mark.z);
     rotation.setFromAxisAngle(up, mark.yaw);
-    matrix.compose(position, rotation, unitScale);
+    matrix.compose(position, rotation, markScale.set(1, 1, mark.length ?? 2.2));
     dashes.setMatrixAt(i, matrix);
   }
   dashes.instanceMatrix.needsUpdate = true;
@@ -279,7 +279,8 @@ export function createCityScene(scene, simulation, plan, damageObstacles = []) {
       return marks.map((mark, index) => {
         dashes.getMatrixAt(index, transform);
         const elements = transform.elements;
-        return { axis: mark.axis, x: elements[12], z: elements[14], longAxisX: elements[8], longAxisZ: elements[10] };
+        return { axis: mark.axis, kind: mark.kind ?? 'dash', length: mark.length ?? 2.2,
+          x: elements[12], z: elements[14], longAxisX: elements[8], longAxisZ: elements[10] };
       });
     },
   };

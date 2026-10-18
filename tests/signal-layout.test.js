@@ -102,7 +102,7 @@ test('stop lines span only the incoming half-road and share an approach plane', 
     assert.equal(line.distanceFromNode, along);
     assert.equal(lateral, roadWidth / 4);
     assert.equal(line.length, roadWidth / 2 - 0.3);
-    assert.equal(line.thickness, 0.4);
+    assert.equal(line.thickness, 0.6);
     assert.ok(lateral - line.length / 2 >= 0);
     assert.ok(lateral + line.length / 2 <= roadWidth / 2);
   }

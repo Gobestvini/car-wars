@@ -34,6 +34,64 @@ test('mark spacing, bounds, and junction gaps derive from the current road plan'
   assert.notEqual(marks.length, createRoadMarkings(roads, 80, 20).length);
 });
 
+test('real-city solids reach controlled stop planes on both axes without overlapping dashes or junctions', () => {
+  for (const roadWidth of [12, 15, 30]) {
+    const plan = createCityPlan(5, { roadWidth });
+    const before = JSON.stringify(plan);
+    const marks = createRoadMarkings(plan, plan.bounds, roadWidth);
+    const degree = id => plan.roadNetwork.edges.filter(e => e.from === id || e.to === id).length;
+    assert.ok(marks.some(m => m.kind === 'dash'));
+    for (const axis of ['x', 'z']) assert.ok(marks.some(m => m.kind === 'solid' && m.axis === axis));
+    for (const { from, to } of plan.roadSegments) {
+      const dx = to.x - from.x, dz = to.z - from.z, length = Math.hypot(dx, dz);
+      const intervals = marks.filter(m => dx ? Math.abs(m.z - from.z) < 1e-8 && m.axis === 'x'
+        : Math.abs(m.x - from.x) < 1e-8 && m.axis === 'z').map(m => {
+        const along = ((m.x - from.x) * dx + (m.z - from.z) * dz) / length;
+        return { min: along - m.length / 2, max: along + m.length / 2, kind: m.kind };
+      }).filter(m => m.min > 0 && m.max < length).sort((a, b) => a.min - b.min);
+      for (let i = 0; i < intervals.length; i++) {
+        assert.ok(intervals[i].min >= roadWidth / 2 + 1.5 - 1e-8);
+        assert.ok(intervals[i].max <= length - roadWidth / 2 - 1.5 + 1e-8);
+        if (i) assert.ok(intervals[i].min >= intervals[i - 1].max - 1e-8, 'no overlapping paint');
+      }
+      const solids = intervals.filter(m => m.kind === 'solid');
+      if (degree(from.id) >= 4 && degree(to.id) >= 4 && length - roadWidth - 3 <= 24) {
+        assert.equal(solids.length, 1);
+        assert.ok(Math.abs(solids[0].min - (roadWidth / 2 + 1.5)) < 1e-8);
+        assert.ok(Math.abs(solids[0].max - (length - roadWidth / 2 - 1.5)) < 1e-8);
+        continue;
+      }
+      assert.equal(solids.length, Number(degree(from.id) >= 4) + Number(degree(to.id) >= 4));
+      if (degree(from.id) >= 4) {
+        assert.ok(Math.abs(solids[0].min - (roadWidth / 2 + 1.5)) < 1e-8);
+        assert.ok(Math.abs(solids[0].max - solids[0].min - 12) < 1e-8);
+      }
+      if (degree(to.id) >= 4) {
+        const last = solids.at(-1);
+        assert.ok(Math.abs(last.max - (length - roadWidth / 2 - 1.5)) < 1e-8);
+        assert.ok(Math.abs(last.max - last.min - 12) < 1e-8);
+      }
+    }
+    assert.equal(JSON.stringify(plan), before, 'paint does not mutate routing or city layout');
+  }
+});
+
+test('short controlled segments merge solid intervals; uncontrolled and degenerate segments stay safe', () => {
+  const fixture = (length, controlled = true) => ({
+    roadSegments: [{ from: { id: 'a', x: 0, z: 0 }, to: { id: 'b', x: 0, z: length } }],
+    roadNetwork: { edges: [{ from: 'a', to: 'b' }, ...(controlled ? ['a', 'b'].flatMap(from =>
+      [1, 2, 3].map(i => ({ from, to: `${from}${i}` }))) : [])] },
+  });
+  const merged = createRoadMarkings(fixture(35), 100, 15);
+  assert.equal(merged.length, 1);
+  assert.equal(merged[0].kind, 'solid');
+  assert.equal(merged[0].z, 17.5);
+  assert.equal(merged[0].length, 17);
+  assert.deepEqual(createRoadMarkings(fixture(18), 100, 15), []);
+  assert.deepEqual(createRoadMarkings(fixture(0), 100, 15), []);
+  assert.ok(createRoadMarkings(fixture(50, false), 100, 15).every(m => m.kind === 'dash' && Math.abs(m.length - 2.2) < 1e-8));
+});
+
 test('both paint batches receive shadows below continuous tire decals in either road direction', () => {
   const plan = createCityPlan(), sample = createSurfaceHeightSampler(plan);
   const city = createCityScene(new THREE.Scene(), { addStaticBox: s => s, removeStaticBox() {} }, plan);

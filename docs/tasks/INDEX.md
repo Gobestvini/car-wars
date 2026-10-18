@@ -4,6 +4,7 @@
 
 | ID / файл | Название | Статус | Приоритет | Зависимости | Рекомендуемый исполнитель |
 | --- | --- | --- | --- | --- | --- |
+| [TASK-0106](TASK-0106-stop-line-approach-markings.md) | Толстые стоп-линии и сплошная разметка перед ними | done | normal | нет | gpt-6-luna, medium |
 | [TASK-0102](TASK-0102-city-hunt-server-round-and-roles.md) | Режим города: серверные роли 3+1 и раунд на две минуты | draft | high | TASK-0101 — требуется done | gpt-6.1-sol, high |
 | [TASK-0103](TASK-0103-city-hunt-cards-and-road-blockades.md) | Карты города: полиция, перекрытия и серверные способности | draft | high | TASK-0102 — требуется done | gpt-6.1-sol, high |
 | [TASK-0104](TASK-0104-city-director-camera-and-card-ui.md) | Играть за город: общий обзор и перетаскивание карточек | draft | high | TASK-0103 — требуется done | gpt-6.1-sol, high |

@@ -17,7 +17,7 @@ export function getStopLineLayout(node, approach, roadWidth) {
     z: node.z - approach.forwardZ * distanceFromNode + approach.rightZ * lateralOffset,
     distanceFromNode,
     length: halfRoad - 0.3,
-    thickness: 0.4,
+    thickness: 0.6,
     lateralOffset,
     setback,
     yaw: Math.atan2(approach.forwardX, approach.forwardZ),
