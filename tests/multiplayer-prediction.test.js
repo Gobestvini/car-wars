@@ -19,6 +19,7 @@ function fixture(world){
 test('sparse contact cache preserves dense Cannon collision motion and damage',()=>{
   const sparse=new SpikeWorld({npcCount:0,playerCount:3}),dense=new SpikeWorld({npcCount:0,playerCount:3});
   dense.world.collisionMatrix=new ArrayCollisionMatrix();dense.world.collisionMatrixPrevious=new ArrayCollisionMatrix();
+  dense.world.broadphase.indexedPairs=false;
   dense.world.collisionMatrix.setNumObjects(dense.world.bodies.length);dense.world.collisionMatrixPrevious.setNumObjects(dense.world.bodies.length);
   fixture(sparse);fixture(dense);
   try{
@@ -47,6 +48,28 @@ test('car restore/replay preserves suspension force inputs and motion, including
     assert.ok(Math.hypot(...expected.p.map((v,i)=>v-actual.p[i]))<1e-7);
     assert.ok(Math.hypot(...expected.v.map((v,i)=>v-actual.v[i]))<1e-7);
     const state=captureCar(first);first.throttle=-1;restoreCar(first,state);assert.equal(first.throttle,state.throttle);
+  }finally{predicted.dispose();server.dispose();}
+});
+
+test('streamed prediction colliders retain full-city contacts within reconciliation tolerance between regions',()=>{
+  const server=new SpikeWorld({npcCount:0,playerCount:3});fixture(server);
+  for(const a of server.players.values()){a.sim.hasDamage=false;a.sim.disposeDamageListener();}
+  const predicted=new PredictionWorld(server.colliders),ids=[...server.players.keys()];
+  predicted.restore(frame(server,0));let contacts=0,minBodies=Infinity;
+  try{
+    for(let tick=0;tick<2400;tick++){
+      const input={steer:tick<240?0:Math.sin(tick/190)*.4,throttle:.7,brake:0};
+      for(const id of ids){server.input(id,{seq:tick,...input});predicted.actors.get(id).control=input;}
+      server.step();predicted.step(ids[0],input);
+      for(const id of ids){
+        const a=server.players.get(id).sim.body,b=predicted.actors.get(id).sim.body;
+        assert.ok(a.position.distanceTo(b.position)<.01,`streaming changed ${id} at ${tick}: ${a.position.distanceTo(b.position)}`);
+      }
+      if(predicted.world.contacts.length)contacts++;
+      minBodies=Math.min(minBodies,predicted.world.bodies.length);
+      if(tick%6===5)predicted.restore(frame(server,(tick+1)*MS));
+    }
+    assert.ok(contacts>0);assert.ok(minBodies<server.world.bodies.length/2,'distant city bodies must not consume every replay step');
   }finally{predicted.dispose();server.dispose();}
 });
 

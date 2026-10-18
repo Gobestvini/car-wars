@@ -55,8 +55,13 @@ export class PredictionWorld {
     this.owner=new CarSimulation({damage:false});this.world=this.owner.world;
     useSparseContacts(this.world);
     this.owner.disposeDamageListener();this.world.removeBody(this.owner.body);
-    for(const box of colliders.boxes)this.owner.addStaticBox(box);
-    for(const prism of colliders.prisms)this.owner.addStaticConvex(prism);
+    this.statics=[];
+    for(const box of colliders.boxes)this.statics.push(this.owner.addStaticBox(box));
+    for(const prism of colliders.prisms)this.statics.push(this.owner.addStaticConvex(prism));
+    this.staticPool=this.statics.map(body=>{
+      body.updateAABB();const lo=body.aabb.lowerBound,hi=body.aabb.upperBound;
+      this.world.removeBody(body);return{body,minX:lo.x,maxX:hi.x,minZ:lo.z,maxZ:hi.z,active:false};
+    });
     this.actors=new Map();this.tick=0;this.steps=0;this.localId=localId;
   }
   remove(id) {
@@ -84,6 +89,18 @@ export class PredictionWorld {
       steering:sim.steering,throttle:sim.throttle,damage:sim.damage,detached:sim.wheels.map(w=>w.detached),
       wheelBodies:sim.wheels.map(w=>w.detachedBody?{p:vec(w.detachedBody.position),v:vec(w.detachedBody.velocity)}:null)}]));
   }
+  syncStatics() {
+    const zones=[...this.actors.values()].map(({sim})=>({x:sim.body.position.x,z:sim.body.position.z,
+      // A one-second travel envelope exceeds the half-second replay cap, plus
+      // chassis/suspension/acceleration margin. Recheck every 100ms and rewind.
+      radius:8+Math.hypot(sim.body.velocity.x,sim.body.velocity.z)}));
+    for(const entry of this.staticPool){
+      const active=zones.some(z=>entry.maxX>=z.x-z.radius&&entry.minX<=z.x+z.radius&&entry.maxZ>=z.z-z.radius&&entry.minZ<=z.z+z.radius);
+      if(active===entry.active)continue;
+      if(active)this.world.addBody(entry.body);else this.world.removeBody(entry.body);
+      entry.active=active;
+    }
+  }
   restore(frame) {
     const selected=this.selected(frame),active=new Set();
     for(const actor of selected.values()){
@@ -97,6 +114,7 @@ export class PredictionWorld {
       if(actor.role!=='player')entry.sim.syncWheelPositions();
     }
     for(const id of this.actors.keys())if(!active.has(id))this.remove(id);
+    this.syncStatics();
     // Clear future contacts and spatial caches after rewind. Damage listeners are
     // absent here, so replay cannot repeat authoritative effects or damage.
     this.world.contacts.length=0;this.world.frictionEquations.length=0;
@@ -107,6 +125,7 @@ export class PredictionWorld {
     this.world.stepnumber=frame.tick;
   }
   step(localId,input) {
+    if(this.tick%12===0)this.syncStatics();
     for(const [id,a]of this.actors)a.sim.prepare(id===localId?input:a.control,STEP);
     this.world.step(STEP);
     for(const a of this.actors.values())a.sim.postStep(STEP);

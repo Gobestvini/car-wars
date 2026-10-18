@@ -64,6 +64,7 @@ export class CityBroadphase extends SAPBroadphase {
   }
 
   collisionPairs(world, pairs1, pairs2) {
+    if(this.indexedPairs)return this.indexedCollisionPairs(world,pairs1,pairs2);
     if (this.dirty) { this.sortList(); this.dirty = false; }
     const bodies = this.axisList, active = this.activeIndices, axis = axisName(this.axisIndex);
     active.length = 0;
@@ -89,6 +90,28 @@ export class CityBroadphase extends SAPBroadphase {
         }
       }
     }
+  }
+
+  indexedCollisionPairs(world,pairs1,pairs2) {
+    if(this.dirty){this.sortList();this.dirty=false;}
+    const candidates=[],pairs=[];
+    for(const body of this.movingBodies){
+      if(body.sleepState===Body.SLEEPING)continue;
+      if(body.aabbNeedsUpdate)body.updateAABB();
+      candidates.length=0;this.aabbQuery(world,body.aabb,candidates);
+      const i=this.bodyOrder.get(body);
+      for(const other of candidates){
+        if(body===other)continue;
+        const j=this.bodyOrder.get(other),active=other.type!==Body.STATIC&&other.sleepState!==Body.SLEEPING;
+        if(active&&j<i)continue;
+        if(!this.needBroadphaseCollision(body,other))continue;
+        pairs.push(i<j?{i,j,a:body,b:other}:{i:j,j:i,a:other,b:body});
+      }
+    }
+    // Keep Cannon's exact SAP contact/solver ordering while eliminating the
+    // scan over every static house for every moving car during replay.
+    pairs.sort((a,b)=>a.i-b.i||a.j-b.j);
+    for(const pair of pairs)this.intersectionTest(pair.a,pair.b,pairs1,pairs2);
   }
 
   aabbQuery(world, aabb, result = []) {

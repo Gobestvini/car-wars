@@ -4,6 +4,7 @@ import { ObjectCollisionMatrix } from 'cannon-es';
 // including every static house/curb pair. Replay magnifies that quadratic cost.
 // Its built-in sparse implementation tracks the actual touching body IDs only.
 export function useSparseContacts(world) {
+  world.broadphase.indexedPairs=true;
   world.collisionMatrix=new ObjectCollisionMatrix();
   world.collisionMatrixPrevious=new ObjectCollisionMatrix();
 }

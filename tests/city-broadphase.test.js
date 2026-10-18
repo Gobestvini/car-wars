@@ -52,8 +52,9 @@ test('pair generation includes every eligible AABB overlap and preserves SAP pai
     if (i % 14 === 0) body.sleep();
     world.addBody(body);
   }
-  for (const axis of [0, 1, 2]) {
+  for (const indexed of [false,true]) for (const axis of [0, 1, 2]) {
     const broadphase = world.broadphase;
+    broadphase.indexedPairs=indexed;
     broadphase.axisIndex = axis; broadphase.dirty = true;
     const first = [], second = []; broadphase.collisionPairs(world, first, second);
     const expected = [];
