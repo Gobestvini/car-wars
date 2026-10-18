@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CarWars — мультиплеер</title>
+<style>
+body{margin:20px auto;padding:0 16px;max-width:1050px;background:#111b23;color:#eee;font:16px system-ui}h1{font-size:26px}button,input{font:inherit;border:0;border-radius:6px;padding:12px;margin:4px 0}button{background:#ffe29c;color:#18212b;cursor:pointer}button:disabled{opacity:.5}input{box-sizing:border-box;max-width:100%}#invite{width:100%;background:#26343c;color:#fff}canvas{display:block;width:100%;height:auto;background:#26343c;border-radius:8px}#controls{display:flex;gap:8px;justify-content:center;margin:12px}#controls button{touch-action:none;user-select:none;min-width:65px;min-height:55px}p{line-height:1.5}.muted{color:#bac9d4}
+</style>
+<h1>CarWars · до трёх игроков</h1>
+<p class="muted">Серверный прототип с общей физикой и трафиком. Здесь пока диагностическая карта; основная 3D-игра ещё не подключена.</p>
+<button id="create">Создать комнату</button>
+<input id="room" aria-label="Код комнаты" placeholder="Код комнаты" maxlength="128">
+<button id="join">Войти</button><button id="leave" disabled>Выйти</button>
+<p id="status" role="status">Создайте комнату или откройте приглашение друга.</p>
+<input id="invite" aria-label="Ссылка-приглашение" readonly placeholder="Здесь появится ссылка для друзей">
+<p class="muted">Вы — жёлтая машина. Стрелки / WASD или кнопки под картой. Отпустите газ для торможения.</p>
+<canvas id="scene" width="1000" height="600" aria-label="Общая карта комнаты"></canvas>
+<div id="controls"><button data-key="a" aria-label="Влево">←</button><button data-key="w" aria-label="Газ">↑ Газ</button><button data-key="s" aria-label="Назад">↓</button><button data-key="d" aria-label="Вправо">→</button></div>
+<p id="metrics" class="muted"></p>
+<script type="module" src="./client.js"></script></html>
