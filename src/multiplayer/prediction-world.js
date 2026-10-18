@@ -1,5 +1,6 @@
 import * as C from 'cannon-es';
 import { CarSimulation, STEP } from '../vehicle.js';
+import { useSparseContacts } from './contact-cache.js';
 
 const vec = v => [v.x,v.y,v.z];
 const quat = q => [q.x,q.y,q.z,q.w];
@@ -52,6 +53,7 @@ export function stateFromActor(actor) {
 export class PredictionWorld {
   constructor(colliders,localId=null) {
     this.owner=new CarSimulation({damage:false});this.world=this.owner.world;
+    useSparseContacts(this.world);
     this.owner.disposeDamageListener();this.world.removeBody(this.owner.body);
     for(const box of colliders.boxes)this.owner.addStaticBox(box);
     for(const prism of colliders.prisms)this.owner.addStaticConvex(prism);

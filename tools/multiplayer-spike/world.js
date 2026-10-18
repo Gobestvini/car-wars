@@ -2,6 +2,7 @@
 import { createHash } from 'node:crypto';
 import { performance } from 'node:perf_hooks';
 import { CarSimulation, STEP } from '../../src/vehicle.js';
+import { useSparseContacts } from '../../src/multiplayer/contact-cache.js';
 import { createCityPlan } from '../../src/city-generator.js';
 import { cityColliders, mapContract, mapBytes } from '../../src/multiplayer/map-contract.js';
 import { createRoadGraph, createSeededRandom, chooseRoadGoal, findRoadRoute } from '../../src/traffic-ai.js';
@@ -25,6 +26,7 @@ export class SpikeWorld {
     this.plan = createCityPlan(seed);
     this.owner = new CarSimulation({ damage: false });
     this.world = this.owner.world;
+    useSparseContacts(this.world);
     this.world.removeBody(this.owner.body);
     this.owner.disposeDamageListener();
     const colliders = colliderDescriptors(this.plan);

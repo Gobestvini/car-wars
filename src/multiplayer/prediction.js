@@ -40,7 +40,8 @@ export class ClientPrediction {
     if(!changed){
       const before=new Map(previous.map(a=>[a.id,a]));
       for(const a of this.world.sample()){
-        const old=before.get(a.id);if(!old || old.generation!==a.generation)continue;
+        const old=before.get(a.id);
+        if(!old || old.generation!==a.generation){this.errors.delete(a.id);this.rendered.delete(a.id);continue;}
         const error=old.pose.slice(0,3).map((v,i)=>v-a.pose[i]);
         const distance=Math.hypot(...error);
         if(a.id===this.localId && distance>.02){this.metrics.corrections++;this.metrics.lastCorrection=distance;this.metrics.maxCorrection=Math.max(this.metrics.maxCorrection,distance);}

@@ -5,6 +5,7 @@ import { captureCar, restoreCar, PredictionWorld } from '../src/multiplayer/pred
 import { ClientPrediction } from '../src/multiplayer/prediction.js';
 import { encodeFrame, decodeFrame } from '../src/multiplayer/frame-codec.js';
 import { validateCommands } from '../tools/multiplayer-spike/protocol.js';
+import { ArrayCollisionMatrix } from 'cannon-es';
 
 const MS=STEP*1000;
 const control={steer:0,throttle:1,brake:0,handbrake:false};
@@ -14,6 +15,23 @@ function fixture(world){
   players.forEach((a,i)=>{a.sim.body.position.set(i===2?8:0,1,i===0?-12:i===1?12:0);
     a.sim.body.quaternion.setFromEuler(0,i===1?Math.PI:0,0);a.sim.body.velocity.set(0,0,i===0?9:i===1?-9:0);});
 }
+
+test('sparse contact cache preserves dense Cannon collision motion and damage',()=>{
+  const sparse=new SpikeWorld({npcCount:0,playerCount:3}),dense=new SpikeWorld({npcCount:0,playerCount:3});
+  dense.world.collisionMatrix=new ArrayCollisionMatrix();dense.world.collisionMatrixPrevious=new ArrayCollisionMatrix();
+  dense.world.collisionMatrix.setNumObjects(dense.world.bodies.length);dense.world.collisionMatrixPrevious.setNumObjects(dense.world.bodies.length);
+  fixture(sparse);fixture(dense);
+  try{
+    for(let tick=0;tick<240;tick++){
+      for(const w of [sparse,dense]){for(const id of w.players.keys())w.input(id,{seq:tick,...control});w.step();}
+      const a=[...sparse.players.values()],b=[...dense.players.values()];
+      a.forEach((actor,i)=>{
+        assert.ok(actor.sim.body.position.distanceTo(b[i].sim.body.position)<1e-9);
+        assert.equal(actor.sim.damage,b[i].sim.damage);
+      });
+    }
+  }finally{sparse.dispose();dense.dispose();}
+});
 
 test('car restore/replay preserves suspension force inputs and motion, including contact-cache rewind',()=>{
   const server=new SpikeWorld({npcCount:0,playerCount:3});fixture(server);
