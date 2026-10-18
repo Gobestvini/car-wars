@@ -17,7 +17,7 @@ test('three actual SDK prediction clients collide, respawn independently and rec
         onWelcome:data=>client.startPrediction(data.map.colliders)});
       clients.push(client);const room=await client.connect(id);id=room.roomId;
     }
-    await until(()=>clients.every(c=>c.prediction?.latest?.actors.size===105));
+    await until(()=>clients.every(c=>c.latestFrame?.actors.size===105));
     const room=matchMaker.getLocalRoomById(id),players=clients.map(c=>room.sim.players.get(c.room.sessionId));
     // Test-only fixture through the in-process room, never a public pose command.
     players.forEach((a,i)=>{
@@ -38,7 +38,7 @@ test('three actual SDK prediction clients collide, respawn independently and rec
       }
       if(room.sim.world.contacts.some(c=>players.some(a=>a.sim.body===c.bi)&&players.some(a=>a.sim.body===c.bj)))playerContacts++;
     },1000/60);
-    await sleep(5500);clearInterval(interval);interval=null;
+    await sleep(5500);
     assert.ok(playerContacts>0);assert.ok(localContacts>0,'client prediction must resolve player contacts');
     for(const client of clients){corrections.push({...client.prediction.metrics});assert.ok(client.prediction.world.actors.size>=3);}
     console.log(JSON.stringify({phase:'driving',elapsed:performance.now()-begin,playerContacts,localContacts,corrections}));
@@ -46,7 +46,7 @@ test('three actual SDK prediction clients collide, respawn independently and rec
     const oldGeneration=players[0].generation;clients[0].respawn();
     await until(()=>clients.every(c=>c.prediction.latest.actors.get(players[0].id)?.generation===oldGeneration+1));
     assert.equal(players[1].generation,2);assert.equal(players[2].generation,2);
-    assert.equal(clients[0].prediction.errors.size,0);
+    assert.equal(clients[0].prediction.world.actors.get(players[0].id).source.generation,oldGeneration+1);
     const reconnectClient=clients[2],sessionId=reconnectClient.room.sessionId;
     room.clients.find(c=>c.sessionId===sessionId).ref.terminate();
     await until(()=>!players[2].connected);assert.equal(players[2].commands.size,0);

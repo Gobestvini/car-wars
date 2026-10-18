@@ -43,7 +43,7 @@ export class ClientPrediction {
         const old=before.get(a.id);if(!old || old.generation!==a.generation)continue;
         const error=old.pose.slice(0,3).map((v,i)=>v-a.pose[i]);
         const distance=Math.hypot(...error);
-        if(a.id===this.localId && distance>.02){this.metrics.corrections++;this.metrics.maxCorrection=Math.max(this.metrics.maxCorrection,distance);}
+        if(a.id===this.localId && distance>.02){this.metrics.corrections++;this.metrics.lastCorrection=distance;this.metrics.maxCorrection=Math.max(this.metrics.maxCorrection,distance);}
         const existing=this.errors.get(a.id);
         const q=a.pose.slice(3,7),delta=multiplyQ(old.pose.slice(3,7),[-q[0],-q[1],-q[2],q[3]]);
         this.errors.set(a.id,{p:error.map((v,i)=>v+(existing?.p[i]??0)),q:multiplyQ(existing?.q??[0,0,0,1],delta)});
@@ -51,6 +51,9 @@ export class ClientPrediction {
     }
   }
   advance(now,input) {
+    // TCP can deliver a burst after retransmission. Reconcile once from its
+    // newest complete state rather than replaying every obsolete packet.
+    if(this.pendingFrame){const frame=this.pendingFrame;this.pendingFrame=null;this.receive(frame,frame.receivedAt);}
     if(!this.latest)return;
     const elapsed=this.lastNow===null?0:Math.max(0,now-this.lastNow);this.lastNow=now;
     if(now-this.latest.receivedAt>500){this.accumulator=0;return;}

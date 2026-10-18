@@ -24,7 +24,11 @@ export class RoomClient {
     room.onMessage('frame',bytes=>{
       if(this.room!==room)return;
       try { const now=performance.now(),frame=decodeFrame(bytes);frame.receivedAt=now;this.latestFrame=frame;
-        this.buffer.push(frame,now);this.prediction?.receive(frame,now); }
+        this.buffer.push(frame,now);
+        if(this.prediction){
+          if(!this.prediction.latest)this.prediction.receive(frame,now);
+          else this.prediction.pendingFrame=frame;
+        } }
       catch { this.stop();this.onStatus('Получено неверное состояние мира. Перезагрузите игру.'); }
     });
     room.onMessage('full',()=>{});
