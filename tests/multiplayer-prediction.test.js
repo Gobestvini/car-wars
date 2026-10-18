@@ -91,6 +91,7 @@ for(const rtt of [0,50,100,150])test(`three predicted players at simulated RTT $
     assert.ok(maxQueue<=120);assert.ok(late<10,`${late} late physics commands`);
     for(const client of clients){
       corrections.push({...client.metrics});assert.ok(client.metrics.maxReplay<=50);
+      assert.ok(client.metrics.replaySteps<1200,'steady driving should not replay more history than normal simulation');
       assert.ok(client.metrics.maxCorrection<2,`large correction ${client.metrics.maxCorrection}`);
       assert.ok(client.metrics.steps>1100);
     }

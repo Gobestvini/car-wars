@@ -11,7 +11,7 @@ const multiplyQ=(a,b)=>[
 export class ClientPrediction {
   constructor({colliders,localId,send=()=>{}}) {
     this.world=new PredictionWorld(colliders,localId);this.localId=localId;this.send=send;
-    this.commands=new Map();this.errors=new Map();this.rendered=new Map();this.latest=null;
+    this.commands=new Map();this.errors=new Map();this.rendered=new Map();this.history=new Map();this.latest=null;
     this.rtt=80;this.clock=null;this.lastNow=null;this.accumulator=0;this.lastSent=0;
     this.metrics={steps:0,replaySteps:0,corrections:0,maxCorrection:0,maxReplay:0,lateFrames:0,replayMs:0};
   }
@@ -27,13 +27,36 @@ export class ClientPrediction {
     this.observeClock(frame.tick,now);
     const generation=frame.actors.get(this.localId).generation;
     const changed=this.latest?.actors.get(this.localId)?.generation!==generation;
+    const past=this.history.get(frame.tick),selected=this.world.selected(frame);
+    const matches=!changed&&past&&past.size===selected.size&&[...selected].every(([id,a])=>{
+      const recorded=past.get(id);if(!recorded||recorded.generation!==a.generation)return false;
+      const local=id===this.localId,p=recorded.pose;
+      const position=Math.hypot(...a.pose.slice(0,3).map((v,i)=>v-p[i]));
+      if(local)this.metrics.confirmedPositionError=position;
+      return position<(local ? .015 : .06)&&
+        Math.hypot(...a.pose.slice(7,10).map((v,i)=>v-p[7+i]))<(local ? .06 : .2)&&
+        Math.abs(a.pose.slice(3,7).reduce((sum,v,i)=>sum+v*p[i+3],0))>.99998&&
+        Math.hypot(...a.pose.slice(10,13).map((v,i)=>v-p[10+i]))<.06&&
+        Math.abs(a.steering-recorded.steering)<.025&&Math.abs(a.throttle-recorded.throttle)<.02&&
+        Math.abs(a.damage-recorded.damage)<.0001&&recorded.detached.every((v,i)=>v===Boolean(a.wheels[i*7+6])&&(!v||
+          (Math.hypot(...recorded.wheelBodies[i].p.map((x,j)=>x-a.wheels[i*7+j]))<.1&&
+           Math.hypot(...recorded.wheelBodies[i].v.map((x,j)=>x-a.detached[i].v[j]))<.2)));
+    });
+    if(matches){
+      this.latest=frame;this.metrics.skippedReconciliations=(this.metrics.skippedReconciliations??0)+1;
+      for(const [id,a]of selected){const entry=this.world.actors.get(id);entry.source=a;entry.control=a.control;}
+      for(const tick of this.commands.keys())if(tick<=frame.tick)this.commands.delete(tick);
+      for(const tick of this.history.keys())if(tick<frame.tick)this.history.delete(tick);
+      return;
+    }
     const previous=this.world.sample(),target=changed?frame.tick:this.world.tick;
-    if(changed){this.commands.clear();this.errors.clear();this.rendered.clear();this.lastSent=frame.tick;this.lastNow=now;}
+    if(changed){this.commands.clear();this.history.clear();this.errors.clear();this.rendered.clear();this.lastSent=frame.tick;this.lastNow=now;}
     this.latest=frame;
     const begin=performance.now();this.world.restore(frame);
+    this.history.set(frame.tick,this.world.checkpoint());
     for(const id of this.errors.keys())if(!this.world.actors.has(id)){this.errors.delete(id);this.rendered.delete(id);}
     const end=Math.min(target,frame.tick+60);
-    for(let tick=frame.tick+1;tick<=end;tick++)this.world.step(this.localId,this.commands.get(tick) ?? idleControl());
+    for(let tick=frame.tick+1;tick<=end;tick++)this.step(this.commands.get(tick) ?? idleControl());
     const replay=Math.max(0,end-frame.tick);this.metrics.replaySteps+=replay;
     this.metrics.maxReplay=Math.max(this.metrics.maxReplay,replay);this.metrics.replayMs+=performance.now()-begin;
     for(const tick of this.commands.keys())if(tick<=frame.tick)this.commands.delete(tick);
@@ -50,6 +73,10 @@ export class ClientPrediction {
         this.errors.set(a.id,{p:error.map((v,i)=>v+(existing?.p[i]??0)),q:multiplyQ(existing?.q??[0,0,0,1],delta)});
       }
     }
+  }
+  step(input) {
+    this.world.step(this.localId,input);this.history.set(this.world.tick,this.world.checkpoint());
+    for(const tick of this.history.keys())if(tick<this.world.tick-180)this.history.delete(tick);
   }
   advance(now,input) {
     // TCP can deliver a burst after retransmission. Reconcile once from its
@@ -70,13 +97,13 @@ export class ClientPrediction {
     if(this.world.tick===this.latest.tick && !this.commands.size){
       // Do not send already elapsed startup frames as fresh input. Warm up the
       // provisional world neutrally and place the first command in the future.
-      while(this.world.tick<target-1)this.world.step(this.localId,idleControl());
+      while(this.world.tick<target-1)this.step(idleControl());
       this.lastSent=this.world.tick;this.accumulator=Math.max(this.accumulator,MS);
     }
     let budget=32;
     while(this.accumulator+1e-7>=MS && budget--){
       const tick=this.world.tick+1,control={...input};this.commands.set(tick,control);
-      this.world.step(this.localId,control);this.metrics.steps++;this.accumulator-=MS;
+      this.step(control);this.metrics.steps++;this.accumulator-=MS;
     }
     this.accumulator=Math.min(this.accumulator,MS*2);
     if(now-(this.sentAt??-Infinity)>=1000/30)this.flush(now);
@@ -125,5 +152,5 @@ export class ClientPrediction {
     }
     return result;
   }
-  dispose(){this.world.dispose();this.commands.clear();this.errors.clear();this.rendered.clear();}
+  dispose(){this.world.dispose();this.commands.clear();this.history.clear();this.errors.clear();this.rendered.clear();}
 }

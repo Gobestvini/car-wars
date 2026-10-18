@@ -65,10 +65,9 @@ export class PredictionWorld {
     for(const w of actor.sim.wheels)if(w.detachedBody)this.world.removeBody(w.detachedBody);
     this.actors.delete(id);
   }
-  restore(frame) {
+  selected(frame) {
     // Predict the nearby interaction island, including chains across its edge.
     // Other players are always present; distant NPC remain on snapshots.
-    const active=new Set();
     const local=frame.actors.get(this.localId),physical=[...frame.actors.values()].filter(a=>a.physical||a.role==='player');
     const selected=new Set(physical.filter(a=>!local || Math.hypot(a.pose[0]-local.pose[0],a.pose[2]-local.pose[2])<42).map(a=>a.id));
     let changed=true;
@@ -77,8 +76,17 @@ export class PredictionWorld {
         selected.add(a.id);changed=true;
       }
     }}
-    for(const actor of frame.actors.values()){
-      if(actor.role!=='player'&&(!actor.physical||!selected.has(actor.id)))continue;
+    return new Map([...frame.actors].filter(([id,a])=>a.role==='player'||(a.physical&&selected.has(id))));
+  }
+  checkpoint() {
+    return new Map([...this.actors].map(([id,{sim,source}])=>[id,{generation:source.generation,
+      pose:[...vec(sim.body.position),...quat(sim.body.quaternion),...vec(sim.body.velocity),...vec(sim.body.angularVelocity)],
+      steering:sim.steering,throttle:sim.throttle,damage:sim.damage,detached:sim.wheels.map(w=>w.detached),
+      wheelBodies:sim.wheels.map(w=>w.detachedBody?{p:vec(w.detachedBody.position),v:vec(w.detachedBody.velocity)}:null)}]));
+  }
+  restore(frame) {
+    const selected=this.selected(frame),active=new Set();
+    for(const actor of selected.values()){
       active.add(actor.id);let entry=this.actors.get(actor.id);
       if(!entry){
         const sim=new CarSimulation({world:this.world,materials:this.owner.materials,damage:false,allowWheelDetachment:false});

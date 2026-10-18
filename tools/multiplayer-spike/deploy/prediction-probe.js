@@ -57,5 +57,7 @@ if(role==='server'){
       players:client.latestFrame?[...client.latestFrame.actors.values()].filter(a=>a.role==='player').length:0,errors};
     await writeFile(`${share}/${role}.json`,JSON.stringify(result));console.log(JSON.stringify(result));
     if(result.players!==3||!result.prediction?.steps)process.exitCode=1;
+    // All three collect while everyone is still connected, regardless of join order.
+    await sleep(5000);
   }finally{clearInterval(timer);await client.leave();}
 }

@@ -23,6 +23,10 @@ class HostedDrivingRoom extends DrivingSpikeRoom {
       const seed=fixed===undefined?randomInt(0,4294967296):Number(fixed);
       if(!Number.isSafeInteger(seed)||seed<0||seed>=4294967296)throw Error('Invalid configured map seed');
       super.onCreate({ npcCount: 102, reconnectSeconds: 15, seed, collisionFixture: false });
+      // Hosted clients consume complete binary actor frames. Keep Schema only
+      // for room scalars: rewriting its 105 nested pose arrays on every join
+      // duplicated motion and caused needless lifecycle patch bursts.
+      this.state.actors.clear();
       this.lastRespawn = new Map();
       this.onMessage('commands',(client,payload)=>{
         const now=performance.now();let bucket=this.buckets.get(client.sessionId);
@@ -65,6 +69,7 @@ class HostedDrivingRoom extends DrivingSpikeRoom {
     data.presentationVersion = 3;
     return data;
   }
+  onJoin(client){this.meter(client);this.sim.addPlayer(client.sessionId);}
   onLeave(client) { this.lastRespawn?.delete(client.sessionId); super.onLeave(client); }
   async onDrop(client) {
     await super.onDrop(client);
