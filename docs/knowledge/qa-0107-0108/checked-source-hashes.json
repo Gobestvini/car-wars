@@ -1,0 +1,16 @@
+{
+  "head": "8c7a77462f4a694313baa5a4fefa54ac993f6aa1",
+  "files": {
+    "src/camera-follow.js": "dfa9415630f6a53c0e9a487610e344e70287ada4a41b5daf17a75af98a6300a0",
+    "src/main.js": "cc857b095925820c5005a4e819d97d5881f279385f5ca119570b45873c681ad3",
+    "src/multiplayer/game.js": "bd3e4e3d484a86c77039d68a42dd693f090199afcbfffa271704b1ebac85d57c",
+    "src/street-prop-config.js": "a941187d190a1d8be52ea342fb3e06faad0e56ee7a0d198dd77100b05f502eb5",
+    "src/street-prop-physics.js": "440101e5c935655b443421fdf4cdb34c9ebf959e70b7669c49536869de2bfda7",
+    "src/street-prop-fade.js": "b50042f2c6eea42681ea8ae0c845f584a0ab1ff4a08bef02040a89c949e616e9",
+    "src/city-street-props.js": "c7d9e38253ab3b4914d2b6c2de94ba4edc7931c09f7e773702ca29d705962e36",
+    "src/city-scene.js": "4aacdafe5bb619b7f20fe955e40918694172b540c8e92bdce35617c65eccff0e",
+    "src/multiplayer/street-world.js": "86b8bd66211e218bda619f9e8c4698669638a3e0299d904ff223894db1e9ea74",
+    "src/multiplayer/street-visuals.js": "9695fccb097892f68c2f86d1b6d0a6e3715cd9cd9d5c185ac7ff27a8efa5f02b",
+    "src/multiplayer/room-client.js": "bf0aa7b48eff0de62a60d40d0e4791bdaa136a57cc0e45b4d527f022fc4fc7d3"
+  }
+}

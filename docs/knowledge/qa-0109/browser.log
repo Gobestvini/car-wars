@@ -1,0 +1,2 @@
+@colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+NPC browser: three online clients, controls, LOD and four offline profiles passed

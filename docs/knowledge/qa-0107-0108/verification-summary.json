@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-19T15:27:33.530Z",
+  "revision": "8c7a77462f4a694313baa5a4fefa54ac993f6aa1 plus worktree diff",
+  "receipt": {
+    "version": 1,
+    "node": "v24.19.0",
+    "ok": true,
+    "fingerprint": "4758c9dc1c1332cd9ac40300ce7133edc8e56d686b8da1d6fdb1ec40b50496c4",
+    "tests": 0,
+    "build": 0,
+    "at": "2026-10-19T15:27:33.530Z"
+  },
+  "tests": {
+    "total": 394,
+    "passed": 394,
+    "failed": 0,
+    "skipped": 0
+  },
+  "targetedPassed": 63,
+  "hostedPassed": 4,
+  "build": "success, Vite 7.1.9, 1.69s",
+  "decisions": {
+    "TASK-0107": "changes-requested: FOV38 online vs50 offline changes projected length by35.4256%",
+    "TASK-0108": "passed"
+  }
+}

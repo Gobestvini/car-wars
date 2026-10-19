@@ -1,0 +1,1071 @@
+{
+  "date": "2026-10-19",
+  "mode": "three real WebGL clients; operator-controlled screenshot ages",
+  "types": [
+    {
+      "type": "bin",
+      "id": "bin:0",
+      "early": [
+        {
+          "id": "bin:0",
+          "state": "detached",
+          "age": 0.25833333507180134,
+          "physical": false,
+          "alpha": [
+            0.29499999895691925,
+            0.29499999895691925,
+            0.29499999895691925
+          ],
+          "sizes": [
+            0.9999999315429189,
+            0.9999999315429189,
+            0.9999999315429189
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 0,
+            "created": 1,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "bin:0",
+          "state": "detached",
+          "age": 0.1416666684051351,
+          "physical": false,
+          "alpha": [
+            0.3649999989569189,
+            0.3649999989569189,
+            0.3649999989569189
+          ],
+          "sizes": [
+            0.9999999315429189,
+            0.9999999315429189,
+            0.9999999315429189
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 0,
+            "created": 1,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "bin:0",
+          "state": "detached",
+          "age": 0.37500000149011514,
+          "physical": false,
+          "alpha": [
+            0.22499999910593094,
+            0.22499999910593094,
+            0.22499999910593094
+          ],
+          "sizes": [
+            0.9999999315429189,
+            0.9999999315429189,
+            0.9999999315429189
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 0,
+            "created": 1,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        }
+      ],
+      "middle": [
+        {
+          "id": "bin:0",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            0.9999999315429189,
+            0.9999999315429189,
+            0.9999999315429189
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 0,
+            "created": 1,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "bin:0",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            0.9999999315429189,
+            0.9999999315429189,
+            0.9999999315429189
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 0,
+            "created": 1,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "bin:0",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            0.9999999315429189,
+            0.9999999315429189,
+            0.9999999315429189
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 0,
+            "created": 1,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        }
+      ],
+      "removed": [
+        {
+          "id": "bin:0",
+          "state": "removed",
+          "age": 0.8749999960263564,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 1,
+            "created": 1,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        },
+        {
+          "id": "bin:0",
+          "state": "removed",
+          "age": 1.249999998013175,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 1,
+            "created": 1,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        },
+        {
+          "id": "bin:0",
+          "state": "removed",
+          "age": 0.9916666626930226,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 1,
+            "created": 1,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        }
+      ]
+    },
+    {
+      "type": "bench",
+      "id": "bench:2",
+      "early": [
+        {
+          "id": "bench:2",
+          "state": "detached",
+          "age": 0.4999999999999982,
+          "physical": false,
+          "alpha": [
+            0.15000000000000108,
+            0.15000000000000108,
+            0.15000000000000108,
+            0.15000000000000108,
+            0.15000000000000108,
+            0.15000000000000108,
+            0.15000000000000108,
+            0.15000000000000108,
+            0.15000000000000108,
+            0.15000000000000108
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 1,
+            "created": 2,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "bench:2",
+          "state": "detached",
+          "age": 0.5166666666666648,
+          "physical": false,
+          "alpha": [
+            0.1400000000000011,
+            0.1400000000000011,
+            0.1400000000000011,
+            0.1400000000000011,
+            0.1400000000000011,
+            0.1400000000000011,
+            0.1400000000000011,
+            0.1400000000000011,
+            0.1400000000000011,
+            0.1400000000000011
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 1,
+            "created": 2,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "bench:2",
+          "state": "detached",
+          "age": 0.2583333333333324,
+          "physical": false,
+          "alpha": [
+            0.29500000000000054,
+            0.29500000000000054,
+            0.29500000000000054,
+            0.29500000000000054,
+            0.29500000000000054,
+            0.29500000000000054,
+            0.29500000000000054,
+            0.29500000000000054,
+            0.29500000000000054,
+            0.29500000000000054
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 1,
+            "created": 2,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        }
+      ],
+      "middle": [
+        {
+          "id": "bench:2",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 1,
+            "created": 2,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "bench:2",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 1,
+            "created": 2,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "bench:2",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 1,
+            "created": 2,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        }
+      ],
+      "removed": [
+        {
+          "id": "bench:2",
+          "state": "removed",
+          "age": 1.1750000278155266,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 2,
+            "created": 2,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        },
+        {
+          "id": "bench:2",
+          "state": "removed",
+          "age": 1.1916666706403367,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 2,
+            "created": 2,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        },
+        {
+          "id": "bench:2",
+          "state": "removed",
+          "age": 0.9333333611488479,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 2,
+            "created": 2,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        }
+      ]
+    },
+    {
+      "type": "lamp",
+      "id": "lamp:5",
+      "early": [
+        {
+          "id": "lamp:5",
+          "state": "detached",
+          "age": 0.533333335071827,
+          "physical": false,
+          "alpha": [
+            0.12999999895690378,
+            0.12999999895690378,
+            0.12999999895690378,
+            0.12999999895690378,
+            0.12999999895690378
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 2,
+            "created": 3,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "lamp:5",
+          "state": "detached",
+          "age": 0.500000001738492,
+          "physical": false,
+          "alpha": [
+            0.1499999989569048,
+            0.1499999989569048,
+            0.1499999989569048,
+            0.1499999989569048,
+            0.1499999989569048
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 2,
+            "created": 3,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "lamp:5",
+          "state": "detached",
+          "age": 0.24166666840514583,
+          "physical": false,
+          "alpha": [
+            0.3049999989569125,
+            0.3049999989569125,
+            0.3049999989569125,
+            0.3049999989569125,
+            0.3049999989569125
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 2,
+            "created": 3,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        }
+      ],
+      "middle": [
+        {
+          "id": "lamp:5",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 2,
+            "created": 3,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "lamp:5",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 2,
+            "created": 3,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "lamp:5",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 2,
+            "created": 3,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        }
+      ],
+      "removed": [
+        {
+          "id": "lamp:5",
+          "state": "removed",
+          "age": 1.2000000238418815,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 3,
+            "created": 3,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        },
+        {
+          "id": "lamp:5",
+          "state": "removed",
+          "age": 1.1666666467984808,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 3,
+            "created": 3,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        },
+        {
+          "id": "lamp:5",
+          "state": "removed",
+          "age": 0.9166666905085341,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 3,
+            "created": 3,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        }
+      ]
+    },
+    {
+      "type": "signal",
+      "id": "signal:-75:-75:-125:-75",
+      "early": [
+        {
+          "id": "signal:-75:-75:-125:-75",
+          "state": "detached",
+          "age": 0.4916666666666911,
+          "physical": false,
+          "alpha": [
+            0.15499999999998532,
+            0.15499999999998532,
+            0.15499999999998532,
+            0.15499999999998532,
+            0.15499999999998532
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 3,
+            "created": 4,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "signal:-75:-75:-125:-75",
+          "state": "detached",
+          "age": 0.42500000000002114,
+          "physical": false,
+          "alpha": [
+            0.19499999999998732,
+            0.19499999999998732,
+            0.19499999999998732,
+            0.19499999999998732,
+            0.19499999999998732
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 3,
+            "created": 4,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "signal:-75:-75:-125:-75",
+          "state": "detached",
+          "age": 0.16666666666667496,
+          "physical": false,
+          "alpha": [
+            0.34999999999999504,
+            0.34999999999999504,
+            0.34999999999999504,
+            0.34999999999999504,
+            0.34999999999999504
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 3,
+            "created": 4,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        }
+      ],
+      "middle": [
+        {
+          "id": "signal:-75:-75:-125:-75",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 3,
+            "created": 4,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "signal:-75:-75:-125:-75",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 3,
+            "created": 4,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "signal:-75:-75:-125:-75",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225,
+            0.225,
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 3,
+            "created": 4,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        }
+      ],
+      "removed": [
+        {
+          "id": "signal:-75:-75:-125:-75",
+          "state": "removed",
+          "age": 1.1916666428248357,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 4,
+            "created": 4,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        },
+        {
+          "id": "signal:-75:-75:-125:-75",
+          "state": "removed",
+          "age": 1.1333333452542913,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 4,
+            "created": 4,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        },
+        {
+          "id": "signal:-75:-75:-125:-75",
+          "state": "removed",
+          "age": 0.8749999880790797,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 4,
+            "created": 4,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        }
+      ]
+    },
+    {
+      "type": "tree",
+      "id": "tree:0",
+      "early": [
+        {
+          "id": "tree:0",
+          "state": "detached",
+          "age": 0.5333333337058876,
+          "physical": false,
+          "alpha": [
+            0.1299999997764674,
+            0.1299999997764674
+          ],
+          "sizes": [
+            2.5256543803813827,
+            1.5718890566055723
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 4,
+            "created": 5,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "tree:0",
+          "state": "detached",
+          "age": 0.4333333337058827,
+          "physical": false,
+          "alpha": [
+            0.1899999997764704,
+            0.1899999997764704
+          ],
+          "sizes": [
+            2.5256543803813827,
+            1.5718890566055723
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 4,
+            "created": 5,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "tree:0",
+          "state": "detached",
+          "age": 0.1750000003725365,
+          "physical": false,
+          "alpha": [
+            0.3449999997764781,
+            0.3449999997764781
+          ],
+          "sizes": [
+            2.5256543803813827,
+            1.5718890566055723
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 4,
+            "created": 5,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        }
+      ],
+      "middle": [
+        {
+          "id": "tree:0",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            2.5256543803813827,
+            1.5718890566055723
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 4,
+            "created": 5,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "tree:0",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            2.5256543803813827,
+            1.5718890566055723
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 4,
+            "created": 5,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        },
+        {
+          "id": "tree:0",
+          "state": "detached",
+          "age": 0.375,
+          "physical": false,
+          "alpha": [
+            0.225,
+            0.225
+          ],
+          "sizes": [
+            2.5256543803813827,
+            1.5718890566055723
+          ],
+          "pool": {
+            "active": 1,
+            "idle": 4,
+            "created": 5,
+            "destroyed": 0
+          },
+          "registry": "detached"
+        }
+      ],
+      "removed": [
+        {
+          "id": "tree:0",
+          "state": "removed",
+          "age": 1.2166666706403486,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 5,
+            "created": 5,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        },
+        {
+          "id": "tree:0",
+          "state": "removed",
+          "age": 1.133333327372914,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 5,
+            "created": 5,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        },
+        {
+          "id": "tree:0",
+          "state": "removed",
+          "age": 1.1666666527589502,
+          "physical": false,
+          "pool": {
+            "active": 0,
+            "idle": 5,
+            "created": 5,
+            "destroyed": 0
+          },
+          "registry": "removed"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "lateJoinDetached": true,
+  "followingCar": {
+    "progress": 3.1261063801018167,
+    "seconds": 0.16666666666666666,
+    "ghostState": "detached",
+    "physical": false
+  },
+  "lateJoinRemoved": true,
+  "reconnectRemoved": true
+}

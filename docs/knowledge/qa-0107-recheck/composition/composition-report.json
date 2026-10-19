@@ -1,0 +1,1314 @@
+{
+  "date": "2026-10-19",
+  "environment": "Windows Edge headless WebGL; viewport/touch emulation; DPR 1",
+  "pairs": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "speedKmh": 0,
+      "position": [
+        40,
+        0.8677570066439445,
+        78.75
+      ],
+      "offline": {
+        "camera": {
+          "position": [
+            56.8,
+            28.5,
+            54.95
+          ],
+          "target": [
+            40,
+            0.5,
+            78.75
+          ],
+          "fov": 50,
+          "mode": "follow",
+          "scale": 1,
+          "far": 200,
+          "fogNear": 100,
+          "fogFar": 190,
+          "orientation": [
+            -2.275290391037114,
+            0.42879517690859675,
+            2.6866646933665073,
+            "XYZ"
+          ]
+        },
+        "screen": {
+          "x": 0.4999999999999998,
+          "y": 0.4929192858585708,
+          "length": 85.26192285633597
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 92,
+          "size": [
+            1440,
+            900
+          ],
+          "blurSize": [
+            720,
+            450
+          ],
+          "estimatedMiB": 88.99
+        },
+        "shadow": {
+          "left": -117.07879199512746,
+          "right": 88.92120800487254,
+          "bottom": -62.55013985558533,
+          "top": 97.44986014441467,
+          "near": 0.1,
+          "far": 159,
+          "width": 206,
+          "height": 160,
+          "margin": 44.75084033127852,
+          "resolution": 1024,
+          "centreX": -100.18359375,
+          "centreY": 32.65625,
+          "frustumCorners": 4,
+          "mapSize": [
+            1024,
+            1024
+          ],
+          "enabled": true
+        },
+        "occlusion": [],
+        "pose": [
+          40,
+          0.8677570066439445,
+          78.75
+        ]
+      },
+      "online": {
+        "camera": {
+          "position": [
+            56.8,
+            28.5,
+            54.95
+          ],
+          "target": [
+            40,
+            0.5,
+            78.75
+          ],
+          "scale": 1,
+          "subject": "SQYsd-uTe:1",
+          "fov": 50
+        },
+        "screen": {
+          "x": 0.4999999999999998,
+          "y": 0.4929192858585708,
+          "length": 85.26192285633597
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 111,
+          "size": [
+            1440,
+            900
+          ],
+          "blurSize": [
+            720,
+            450
+          ],
+          "estimatedMiB": 88.99
+        },
+        "shadow": {
+          "enabled": true,
+          "mapSize": [
+            1024,
+            1024
+          ]
+        },
+        "occlusion": [],
+        "pose": [
+          40,
+          0.8677570066439445,
+          78.75
+        ]
+      },
+      "loadingOverlay": false
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "speedKmh": 110,
+      "position": [
+        40,
+        0.8677570066439445,
+        78.75
+      ],
+      "offline": {
+        "camera": {
+          "position": [
+            68.56,
+            48.099999999999994,
+            38.29
+          ],
+          "target": [
+            40,
+            0.5,
+            78.75
+          ],
+          "fov": 50,
+          "mode": "follow",
+          "scale": 1.7,
+          "far": 200,
+          "fogNear": 100,
+          "fogFar": 190,
+          "orientation": [
+            -2.2752903910371147,
+            0.42879517690859686,
+            2.6866646933665077,
+            "XYZ"
+          ]
+        },
+        "screen": {
+          "x": 0.5000000000000001,
+          "y": 0.49584573102310264,
+          "length": 50.058861704009686
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 93,
+          "size": [
+            1440,
+            900
+          ],
+          "blurSize": [
+            720,
+            450
+          ],
+          "estimatedMiB": 88.99
+        },
+        "shadow": {
+          "left": -165.44597949512746,
+          "right": 118.55402050487254,
+          "bottom": -74.92513985558533,
+          "top": 133.07486014441469,
+          "near": 0.1,
+          "far": 199,
+          "width": 284,
+          "height": 208,
+          "margin": 44.75084033127852,
+          "resolution": 1024,
+          "centreX": -109.55078125,
+          "centreY": 44.28125,
+          "frustumCorners": 4,
+          "mapSize": [
+            1024,
+            1024
+          ],
+          "enabled": true
+        },
+        "occlusion": [],
+        "pose": [
+          40,
+          0.8677570066439445,
+          78.75
+        ]
+      },
+      "online": {
+        "camera": {
+          "position": [
+            68.56,
+            48.099999999999994,
+            38.29
+          ],
+          "target": [
+            40,
+            0.5,
+            78.75
+          ],
+          "scale": 1.7,
+          "subject": "SQYsd-uTe:1",
+          "fov": 50
+        },
+        "screen": {
+          "x": 0.5000000000000001,
+          "y": 0.49584573102310264,
+          "length": 50.058861704009686
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 131,
+          "size": [
+            1440,
+            900
+          ],
+          "blurSize": [
+            720,
+            450
+          ],
+          "estimatedMiB": 88.99
+        },
+        "shadow": {
+          "enabled": true,
+          "mapSize": [
+            1024,
+            1024
+          ]
+        },
+        "occlusion": [],
+        "pose": [
+          40,
+          0.8677570066439445,
+          78.75
+        ]
+      },
+      "loadingOverlay": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "speedKmh": 0,
+      "position": [
+        40,
+        0.8677570069587771,
+        78.75
+      ],
+      "offline": {
+        "camera": {
+          "position": [
+            57.64,
+            29.9,
+            53.760000000000005
+          ],
+          "target": [
+            40,
+            0.5,
+            78.75
+          ],
+          "fov": 50,
+          "mode": "follow",
+          "scale": 1,
+          "far": 200,
+          "fogNear": 100,
+          "fogFar": 190,
+          "orientation": [
+            -2.275290391037114,
+            0.42879517690859703,
+            2.6866646933665073,
+            "XYZ"
+          ]
+        },
+        "screen": {
+          "x": 0.4999999999999992,
+          "y": 0.49325850024133594,
+          "length": 76.13113745817931
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 92,
+          "size": [
+            390,
+            844
+          ],
+          "blurSize": [
+            195,
+            422
+          ],
+          "estimatedMiB": 22.6
+        },
+        "shadow": {
+          "left": -77.60027637012746,
+          "right": 56.39972362987254,
+          "bottom": -60.62826485558533,
+          "top": 91.37173514441467,
+          "near": 0.1,
+          "far": 152,
+          "width": 134,
+          "height": 152,
+          "margin": 44.75084033127852,
+          "resolution": 1024,
+          "centreX": -96.705078125,
+          "centreY": 30.578125,
+          "frustumCorners": 4,
+          "mapSize": [
+            1024,
+            1024
+          ],
+          "enabled": true
+        },
+        "occlusion": [],
+        "pose": [
+          40,
+          0.8677570069587771,
+          78.75
+        ]
+      },
+      "online": {
+        "camera": {
+          "position": [
+            57.64,
+            29.9,
+            53.760000000000005
+          ],
+          "target": [
+            40,
+            0.5,
+            78.75
+          ],
+          "scale": 1,
+          "subject": "MKv_bw3o8:1",
+          "fov": 50
+        },
+        "screen": {
+          "x": 0.4999999999999992,
+          "y": 0.49325850024133594,
+          "length": 76.13113745817931
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 95,
+          "size": [
+            390,
+            844
+          ],
+          "blurSize": [
+            195,
+            422
+          ],
+          "estimatedMiB": 22.6
+        },
+        "shadow": {
+          "enabled": true,
+          "mapSize": [
+            1024,
+            1024
+          ]
+        },
+        "occlusion": [],
+        "pose": [
+          40,
+          0.8677570069587771,
+          78.75
+        ]
+      },
+      "loadingOverlay": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "speedKmh": 110,
+      "position": [
+        40,
+        0.8677570069587771,
+        78.75
+      ],
+      "offline": {
+        "camera": {
+          "position": [
+            69.988,
+            50.480000000000004,
+            36.266999999999996
+          ],
+          "target": [
+            40,
+            0.5,
+            78.75
+          ],
+          "fov": 50,
+          "mode": "follow",
+          "scale": 1.7,
+          "far": 200,
+          "fogNear": 100,
+          "fogFar": 190,
+          "orientation": [
+            -2.2752903910371143,
+            0.4287951769085968,
+            2.6866646933665077,
+            "XYZ"
+          ]
+        },
+        "screen": {
+          "x": 0.5,
+          "y": 0.49604425479466796,
+          "length": 44.703458803471214
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 92,
+          "size": [
+            390,
+            844
+          ],
+          "blurSize": [
+            195,
+            422
+          ],
+          "estimatedMiB": 22.6
+        },
+        "shadow": {
+          "left": -99.83660449512746,
+          "right": 64.16339550487254,
+          "bottom": -71.47396798058533,
+          "top": 122.52603201941467,
+          "near": 0.1,
+          "far": 187,
+          "width": 164,
+          "height": 194,
+          "margin": 44.75084033127852,
+          "resolution": 1024,
+          "centreX": -103.94140625,
+          "centreY": 40.732421875,
+          "frustumCorners": 4,
+          "mapSize": [
+            1024,
+            1024
+          ],
+          "enabled": true
+        },
+        "occlusion": [],
+        "pose": [
+          40,
+          0.8677570069587771,
+          78.75
+        ]
+      },
+      "online": {
+        "camera": {
+          "position": [
+            69.988,
+            50.480000000000004,
+            36.266999999999996
+          ],
+          "target": [
+            40,
+            0.5,
+            78.75
+          ],
+          "scale": 1.7,
+          "subject": "MKv_bw3o8:1",
+          "fov": 50
+        },
+        "screen": {
+          "x": 0.5,
+          "y": 0.49604425479466796,
+          "length": 44.703458803471214
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 105,
+          "size": [
+            390,
+            844
+          ],
+          "blurSize": [
+            195,
+            422
+          ],
+          "estimatedMiB": 22.6
+        },
+        "shadow": {
+          "enabled": true,
+          "mapSize": [
+            1024,
+            1024
+          ]
+        },
+        "occlusion": [],
+        "pose": [
+          40,
+          0.8677570069587771,
+          78.75
+        ]
+      },
+      "loadingOverlay": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "speedKmh": 0,
+      "position": [
+        40,
+        0.8677570070767625,
+        78.75
+      ],
+      "offline": {
+        "camera": {
+          "position": [
+            53.775999999999996,
+            23.459999999999997,
+            59.234
+          ],
+          "target": [
+            40,
+            0.5,
+            78.75
+          ],
+          "fov": 50,
+          "mode": "follow",
+          "scale": 1,
+          "far": 200,
+          "fogNear": 100,
+          "fogFar": 190,
+          "orientation": [
+            -2.2752903910371143,
+            0.4287951769085968,
+            2.6866646933665077,
+            "XYZ"
+          ]
+        },
+        "screen": {
+          "x": 0.5,
+          "y": 0.4913529353529573,
+          "length": 45.10945084919721
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 92,
+          "size": [
+            844,
+            390
+          ],
+          "blurSize": [
+            422,
+            195
+          ],
+          "estimatedMiB": 22.6
+        },
+        "shadow": {
+          "left": -120.61199512012746,
+          "right": 97.38800487987254,
+          "bottom": -60.47982735558533,
+          "top": 91.52017264441467,
+          "near": 0.1,
+          "far": 153,
+          "width": 218,
+          "height": 152,
+          "margin": 44.75084033127852,
+          "resolution": 1024,
+          "centreX": -97.716796875,
+          "centreY": 30.7265625,
+          "frustumCorners": 4,
+          "mapSize": [
+            1024,
+            1024
+          ],
+          "enabled": true
+        },
+        "occlusion": [],
+        "pose": [
+          40,
+          0.8677570070767625,
+          78.75
+        ]
+      },
+      "online": {
+        "camera": {
+          "position": [
+            53.775999999999996,
+            23.459999999999997,
+            59.234
+          ],
+          "target": [
+            40,
+            0.5,
+            78.75
+          ],
+          "scale": 1,
+          "subject": "O7wGc-f7z:1",
+          "fov": 50
+        },
+        "screen": {
+          "x": 0.5,
+          "y": 0.4913529353529573,
+          "length": 45.10945084919721
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 108,
+          "size": [
+            844,
+            390
+          ],
+          "blurSize": [
+            422,
+            195
+          ],
+          "estimatedMiB": 22.6
+        },
+        "shadow": {
+          "enabled": true,
+          "mapSize": [
+            1024,
+            1024
+          ]
+        },
+        "occlusion": [],
+        "pose": [
+          40,
+          0.8677570070767625,
+          78.75
+        ]
+      },
+      "loadingOverlay": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "speedKmh": 110,
+      "position": [
+        40,
+        0.8677570070767625,
+        78.75
+      ],
+      "offline": {
+        "camera": {
+          "position": [
+            63.4192,
+            39.532,
+            45.5728
+          ],
+          "target": [
+            40,
+            0.5,
+            78.75
+          ],
+          "fov": 50,
+          "mode": "follow",
+          "scale": 1.7,
+          "far": 200,
+          "fogNear": 100,
+          "fogFar": 190,
+          "orientation": [
+            -2.2752903910371143,
+            0.4287951769085968,
+            2.6866646933665073,
+            "XYZ"
+          ]
+        },
+        "screen": {
+          "x": 0.5,
+          "y": 0.49492967376127117,
+          "length": 26.468614084571804
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 93,
+          "size": [
+            844,
+            390
+          ],
+          "blurSize": [
+            422,
+            195
+          ],
+          "estimatedMiB": 22.6
+        },
+        "shadow": {
+          "left": -172.38152637012746,
+          "right": 133.61847362987254,
+          "bottom": -72.05404610558533,
+          "top": 123.94595389441467,
+          "near": 0.1,
+          "far": 188,
+          "width": 306,
+          "height": 196,
+          "margin": 44.75084033127852,
+          "resolution": 1024,
+          "centreX": -105.486328125,
+          "centreY": 41.15234375,
+          "frustumCorners": 4,
+          "mapSize": [
+            1024,
+            1024
+          ],
+          "enabled": true
+        },
+        "occlusion": [],
+        "pose": [
+          40,
+          0.8677570070767625,
+          78.75
+        ]
+      },
+      "online": {
+        "camera": {
+          "position": [
+            63.4192,
+            39.532,
+            45.5728
+          ],
+          "target": [
+            40,
+            0.5,
+            78.75
+          ],
+          "scale": 1.7,
+          "subject": "O7wGc-f7z:1",
+          "fov": 50
+        },
+        "screen": {
+          "x": 0.5,
+          "y": 0.49492967376127117,
+          "length": 26.468614084571804
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 133,
+          "size": [
+            844,
+            390
+          ],
+          "blurSize": [
+            422,
+            195
+          ],
+          "estimatedMiB": 22.6
+        },
+        "shadow": {
+          "enabled": true,
+          "mapSize": [
+            1024,
+            1024
+          ]
+        },
+        "occlusion": [],
+        "pose": [
+          40,
+          0.8677570070767625,
+          78.75
+        ]
+      },
+      "loadingOverlay": false
+    }
+  ],
+  "compositionMismatches": [],
+  "effects": [
+    {
+      "quality": "high",
+      "offline": {
+        "camera": {
+          "position": [
+            -122.64411655515433,
+            28.5,
+            -23.114772505778816
+          ],
+          "target": [
+            -139.44411655515432,
+            0.5,
+            0.6852274942211807
+          ],
+          "fov": 50,
+          "mode": "follow",
+          "scale": 1,
+          "far": 200,
+          "fogNear": 100,
+          "fogFar": 190,
+          "orientation": [
+            -2.275290391037114,
+            0.42879517690859675,
+            2.6866646933665073,
+            "XYZ"
+          ]
+        },
+        "screen": {
+          "x": 0.5000000000000002,
+          "y": 0.49112913689391924,
+          "length": 85.32540359589997
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 99,
+          "size": [
+            1440,
+            900
+          ],
+          "blurSize": [
+            720,
+            450
+          ],
+          "estimatedMiB": 88.99
+        },
+        "shadow": {
+          "left": -117.10877607617932,
+          "right": 88.89122392382068,
+          "bottom": -62.619046933441425,
+          "top": 97.38095306655858,
+          "near": 0.1,
+          "far": 159,
+          "width": 206,
+          "height": 160,
+          "margin": 44.75084033127852,
+          "resolution": 1024,
+          "centreX": 74.634765625,
+          "centreY": 100.46875,
+          "frustumCorners": 4,
+          "mapSize": [
+            1024,
+            1024
+          ],
+          "enabled": true
+        },
+        "occlusion": [
+          {
+            "id": 2,
+            "opacity": 0.24106530244472008
+          }
+        ],
+        "pose": [
+          -139.44411655515432,
+          0.96,
+          0.6852274942211807
+        ]
+      },
+      "online": {
+        "camera": {
+          "position": [
+            -122.64411655515433,
+            28.5,
+            -23.114772505778816
+          ],
+          "target": [
+            -139.44411655515432,
+            0.5,
+            0.6852274942211807
+          ],
+          "scale": 1,
+          "subject": "SQYsd-uTe:1",
+          "fov": 50
+        },
+        "screen": {
+          "x": 0.5000000000000002,
+          "y": 0.49112913689391924,
+          "length": 85.32540359589997
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 4,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "high",
+          "strength": 1,
+          "radiiCss": [
+            6,
+            12,
+            18
+          ],
+          "debugBypass": false,
+          "draws": 118,
+          "size": [
+            1440,
+            900
+          ],
+          "blurSize": [
+            720,
+            450
+          ],
+          "estimatedMiB": 88.99
+        },
+        "shadow": {
+          "enabled": true,
+          "mapSize": [
+            1024,
+            1024
+          ]
+        },
+        "occlusion": [
+          {
+            "id": 2,
+            "opacity": 0.24107700864194304
+          }
+        ],
+        "pose": [
+          -139.44411655515432,
+          0.96,
+          0.6852274942211807
+        ]
+      }
+    },
+    {
+      "quality": "low",
+      "offline": {
+        "camera": {
+          "position": [
+            -122.64411655515433,
+            28.5,
+            -23.114772505778816
+          ],
+          "target": [
+            -139.44411655515432,
+            0.5,
+            0.6852274942211807
+          ],
+          "fov": 50,
+          "mode": "follow",
+          "scale": 1,
+          "far": 200,
+          "fogNear": 100,
+          "fogFar": 190,
+          "orientation": [
+            -2.275290391037114,
+            0.42879517690859675,
+            2.6866646933665073,
+            "XYZ"
+          ]
+        },
+        "screen": {
+          "x": 0.5000000000000002,
+          "y": 0.49112913689391924,
+          "length": 85.32540359589997
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 2,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "low",
+          "strength": 1,
+          "radiiCss": [
+            4,
+            8,
+            12
+          ],
+          "debugBypass": false,
+          "draws": 95,
+          "size": [
+            1440,
+            900
+          ],
+          "blurSize": [
+            360,
+            225
+          ],
+          "estimatedMiB": 48.2
+        },
+        "shadow": {
+          "left": -116.90760420117932,
+          "right": 89.09239579882068,
+          "bottom": -62.775296933441425,
+          "top": 97.22470306655858,
+          "near": 0.1,
+          "far": 159,
+          "width": 206,
+          "height": 160,
+          "margin": 44.75084033127852,
+          "resolution": 512,
+          "centreX": 74.8359375,
+          "centreY": 100.3125,
+          "frustumCorners": 4,
+          "mapSize": [
+            512,
+            512
+          ],
+          "enabled": true
+        },
+        "occlusion": [
+          {
+            "id": 2,
+            "opacity": 0.2239765119111452
+          }
+        ],
+        "pose": [
+          -139.44411655515432,
+          0.96,
+          0.6852274942211807
+        ]
+      },
+      "online": {
+        "camera": {
+          "position": [
+            -122.64411655515433,
+            28.5,
+            -23.114772505778816
+          ],
+          "target": [
+            -139.44411655515432,
+            0.5,
+            0.6852274942211807
+          ],
+          "scale": 1,
+          "subject": "SQYsd-uTe:1",
+          "fov": 50
+        },
+        "screen": {
+          "x": 0.5000000000000002,
+          "y": 0.49112913689391924,
+          "length": 85.32540359589997
+        },
+        "blur": {
+          "enabled": true,
+          "failure": null,
+          "antialiasSamples": 2,
+          "antialiasing": "msaa",
+          "antialiasFailure": null,
+          "focusY": 0.5,
+          "focusSize": 0.58,
+          "quality": "low",
+          "strength": 1,
+          "radiiCss": [
+            4,
+            8,
+            12
+          ],
+          "debugBypass": false,
+          "draws": 114,
+          "size": [
+            1440,
+            900
+          ],
+          "blurSize": [
+            360,
+            225
+          ],
+          "estimatedMiB": 48.2
+        },
+        "shadow": {
+          "enabled": true,
+          "mapSize": [
+            512,
+            512
+          ]
+        },
+        "occlusion": [
+          {
+            "id": 2,
+            "opacity": 0.22398093271325947
+          }
+        ],
+        "pose": [
+          -139.44411655515432,
+          0.96,
+          0.6852274942211807
+        ]
+      }
+    }
+  ],
+  "gestures": [
+    {
+      "direction": "up",
+      "offline": {
+        "steer": -1,
+        "throttle": 1,
+        "brake": 0,
+        "handbrake": false,
+        "direction": 1
+      },
+      "online": {
+        "steer": -1,
+        "throttle": 1,
+        "brake": 0
+      }
+    },
+    {
+      "direction": "right",
+      "offline": {
+        "steer": -1,
+        "throttle": 1,
+        "brake": 0,
+        "handbrake": false,
+        "direction": 1
+      },
+      "online": {
+        "steer": -1,
+        "throttle": 1,
+        "brake": 0
+      }
+    }
+  ],
+  "errors": []
+}

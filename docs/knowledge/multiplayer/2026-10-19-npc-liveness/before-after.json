@@ -1,0 +1,2196 @@
+{
+  "date": "2026-10-19",
+  "note": "Before TASK-0109, with current TASK-0108 prop physics; no original source copied into report.",
+  "head": "8c7a77462f4a694313baa5a4fefa54ac993f6aa1",
+  "cases": [
+    {
+      "name": "before",
+      "mode": "online",
+      "prop": "bin:74",
+      "state": "intact",
+      "initial": {
+        "x": 96.38,
+        "y": 1.115,
+        "z": -66.80508
+      },
+      "trace": [
+        {
+          "time": 1,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            96.5996166358265,
+            0.943356167413647,
+            -67.75250356020037
+          ],
+          "q": [
+            -0.04283513043738449,
+            0.5758178543542612,
+            -0.027117805408982638,
+            0.8160046414310814
+          ],
+          "v": [
+            0.009032127483804858,
+            -0.00013864145043585496,
+            -0.02632762757802597
+          ],
+          "speed": 0.027833851705628826,
+          "heading": 1.230838424662755,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 9,
+          "control": {
+            "steer": 1,
+            "throttle": 0.76,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": null,
+          "blocker": null
+        },
+        {
+          "time": 2,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            96.60491137039843,
+            0.9407194165300283,
+            -67.76705047852923
+          ],
+          "q": [
+            -0.04356620832533715,
+            0.5754108131045803,
+            -0.028521329101781727,
+            0.8162051919957057
+          ],
+          "v": [
+            0.004827868945340152,
+            -0.000711009272544239,
+            -0.013036411086592509
+          ],
+          "speed": 0.013901666539376202,
+          "heading": 1.2299827916957582,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 9,
+          "control": {
+            "steer": 1,
+            "throttle": 0.76,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": null,
+          "blocker": null
+        },
+        {
+          "time": 3,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            96.60983197210109,
+            0.9400467059876895,
+            -67.78039157198627
+          ],
+          "q": [
+            -0.04319530946010946,
+            0.5751921025030221,
+            -0.029026076750776005,
+            0.8163612541805596
+          ],
+          "v": [
+            0.005018240029540891,
+            -0.0006279036116574532,
+            -0.013648912324481647
+          ],
+          "speed": 0.014542198617660042,
+          "heading": 1.2293955543525394,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 9,
+          "control": {
+            "steer": 1,
+            "throttle": 0.76,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": null,
+          "blocker": null
+        },
+        {
+          "time": 4,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            96.61495613253511,
+            0.939459264645793,
+            -67.7943501357778
+          ],
+          "q": [
+            -0.042862881954317734,
+            0.5748037795095204,
+            -0.02948112437931744,
+            0.8166359358474694
+          ],
+          "v": [
+            0.005231421213129084,
+            -0.000549363356769259,
+            -0.014261022252682092
+          ],
+          "speed": 0.015190277272014188,
+          "heading": 1.2283994445482544,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 9,
+          "control": {
+            "steer": 1,
+            "throttle": 0.76,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": null,
+          "blocker": null
+        },
+        {
+          "time": 5,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            96.62030276284307,
+            0.938945333086359,
+            -67.80891433845714
+          ],
+          "q": [
+            -0.04256411197258343,
+            0.5742480763948411,
+            -0.02989427519135582,
+            0.8170274018902878
+          ],
+          "v": [
+            0.00546289701376261,
+            -0.0004805986876777491,
+            -0.014860169392215418
+          ],
+          "speed": 0.01583249437543915,
+          "heading": 1.2269996761521242,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 9,
+          "control": {
+            "steer": 1,
+            "throttle": 0.76,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": null,
+          "blocker": null
+        },
+        {
+          "time": 6,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            96.62588979489549,
+            0.9384957452622348,
+            -67.8240708612709
+          ],
+          "q": [
+            -0.04229426207632058,
+            0.5735273590257679,
+            -0.030272060906968972,
+            0.8175335871832988
+          ],
+          "v": [
+            0.005711974509156614,
+            -0.0004204163879360825,
+            -0.015445672352217929
+          ],
+          "speed": 0.016468012849318654,
+          "heading": 1.2252019456054861,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 9,
+          "control": {
+            "steer": 1,
+            "throttle": 0.76,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": null,
+          "blocker": null
+        },
+        {
+          "time": 7,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            96.63174478960582,
+            0.9380852073649242,
+            -67.83983061242749
+          ],
+          "q": [
+            -0.04205667413962568,
+            0.5726374821037696,
+            -0.030623075661676893,
+            0.8181563282693519
+          ],
+          "v": [
+            0.005998576391087286,
+            -0.00039185884464290686,
+            -0.016068470447105222
+          ],
+          "speed": 0.017151637275467427,
+          "heading": 1.2229975355412757,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 9,
+          "control": {
+            "steer": 1,
+            "throttle": 0.76,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": null,
+          "blocker": null
+        },
+        {
+          "time": 8,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            96.63789418114858,
+            0.9377181639132184,
+            -67.85620462931412
+          ],
+          "q": [
+            -0.04184374497818047,
+            0.5715734913694406,
+            -0.030950176883136882,
+            0.8188986088160436
+          ],
+          "v": [
+            0.006300713889786626,
+            -0.0003437896797952278,
+            -0.016672038631809372
+          ],
+          "speed": 0.017822902896596115,
+          "heading": 1.2203741270855484,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 9,
+          "control": {
+            "steer": 1,
+            "throttle": 0.76,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": null,
+          "blocker": null
+        },
+        {
+          "time": 9,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            96.64435478479048,
+            0.9373960035776976,
+            -67.87317451086155
+          ],
+          "q": [
+            -0.041648906444385576,
+            0.5703381752863982,
+            -0.03125629753739602,
+            0.8197577558445069
+          ],
+          "v": [
+            0.006620790038705221,
+            -0.0003018188832812387,
+            -0.017260214481037657
+          ],
+          "speed": 0.018486477887040578,
+          "heading": 1.2173386499861716,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 9,
+          "control": {
+            "steer": 1,
+            "throttle": 0.76,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": null,
+          "blocker": null
+        },
+        {
+          "time": 10,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            96.65114438791086,
+            0.937113097817104,
+            -67.89072460360038
+          ],
+          "q": [
+            -0.04146915944260859,
+            0.5689335867891516,
+            -0.031545182524245735,
+            0.8207312496169903
+          ],
+          "v": [
+            0.006958524347693687,
+            -0.00026511953737288693,
+            -0.017832522162569895
+          ],
+          "speed": 0.019142097789322684,
+          "heading": 1.213896971319932,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 9,
+          "control": {
+            "steer": 1,
+            "throttle": 0.76,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": null,
+          "blocker": null
+        }
+      ]
+    },
+    {
+      "name": "before",
+      "mode": "offline",
+      "prop": "bin:74",
+      "state": "intact",
+      "initial": {
+        "x": 96.38,
+        "y": 1.115,
+        "z": -66.80508
+      },
+      "trace": [
+        {
+          "time": 1,
+          "p": [
+            96.60016178702824,
+            0.9413984038960099,
+            -67.7581117437201
+          ],
+          "v": [
+            0.008294793349790275,
+            -0.0032288832958311023,
+            -0.023239744994351615
+          ],
+          "q": [
+            -0.04038869013426208,
+            0.5646355626702161,
+            -0.028345986350089215,
+            0.8238640301258259
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "following",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": null,
+            "waitReason": null,
+            "noProgressTime": 0,
+            "waitTime": 0,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 21.599887201326766,
+            "reevaluations": 0,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 2,
+          "p": [
+            96.60508346255641,
+            0.938888467872471,
+            -67.77061484614406
+          ],
+          "v": [
+            0.004314328130834946,
+            -0.0004974713370351666,
+            -0.01060890151988343
+          ],
+          "q": [
+            -0.04160651223313629,
+            0.5647571262352485,
+            -0.029841565117879186,
+            0.8236672674676424
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "stuck-recovery",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": "controller-stall",
+            "waitReason": "controller-stall",
+            "noProgressTime": 1.083333333333333,
+            "waitTime": 0.9749999999999998,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 21.604832090355316,
+            "reevaluations": 0,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 3,
+          "p": [
+            96.60947859997741,
+            0.9384204460274077,
+            -67.781539434731
+          ],
+          "v": [
+            0.004479607818410142,
+            -0.0004351034653132281,
+            -0.011241945072477375
+          ],
+          "q": [
+            -0.04143201229378258,
+            0.5651431686647639,
+            -0.030168358942261317,
+            0.8233993304512514
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "stuck-recovery",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": "controller-stall",
+            "waitReason": "controller-stall",
+            "noProgressTime": 2.166666666666666,
+            "waitTime": 1.9500000000000002,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 21.609105854786748,
+            "reevaluations": 0,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 4,
+          "p": [
+            96.61404554030403,
+            0.9380229401214923,
+            -67.79309178597221
+          ],
+          "v": [
+            0.004653995037304945,
+            -0.00036297456977164107,
+            -0.011850444102437595
+          ],
+          "q": [
+            -0.04127201169406843,
+            0.5653600302073988,
+            -0.030461320115069038,
+            0.8232476937541102
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "125:-175",
+            "route": [
+              "125:-75",
+              "125:-125",
+              "125:-175"
+            ],
+            "state": "following",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25",
+              "125:-175"
+            ],
+            "reason": null,
+            "waitReason": null,
+            "noProgressTime": 0,
+            "waitTime": 0,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 21.6135423464399,
+            "reevaluations": 2,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 5,
+          "p": [
+            96.61879436905235,
+            0.9376828349474855,
+            -67.80524501015977
+          ],
+          "v": [
+            0.004844521421198955,
+            -0.00031865862161171234,
+            -0.012449273059279183
+          ],
+          "q": [
+            -0.041126064362031846,
+            0.5654143895151639,
+            -0.030728100839147916,
+            0.8232077494643159
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "125:-175",
+            "route": [
+              "125:-75",
+              "125:-125",
+              "125:-175"
+            ],
+            "state": "stuck-recovery",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25",
+              "125:-175"
+            ],
+            "reason": "controller-stall",
+            "waitReason": "controller-stall",
+            "noProgressTime": 1.083333333333333,
+            "waitTime": 0.7583333333333332,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 21.618673297214357,
+            "reevaluations": 2,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 6,
+          "p": [
+            96.6237410964274,
+            0.9373841732137932,
+            -67.81799172716855
+          ],
+          "v": [
+            0.005049645213182977,
+            -0.0002798257450757544,
+            -0.01303744867950794
+          ],
+          "q": [
+            -0.04099526188025946,
+            0.5653074366974031,
+            -0.030974393634238522,
+            0.8232784932554547
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "125:-175",
+            "route": [
+              "125:-75",
+              "125:-125",
+              "125:-175"
+            ],
+            "state": "stuck-recovery",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25",
+              "125:-175"
+            ],
+            "reason": "controller-stall",
+            "waitReason": "controller-stall",
+            "noProgressTime": 2.166666666666666,
+            "waitTime": 1.7333333333333334,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 21.62348883516421,
+            "reevaluations": 2,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 7,
+          "p": [
+            96.62890273878888,
+            0.9371264677859139,
+            -67.83132914166401
+          ],
+          "v": [
+            0.005280023499327047,
+            -0.0002305487734979107,
+            -0.013645899123218083
+          ],
+          "q": [
+            -0.040877419359911446,
+            0.5650390311784793,
+            -0.03120671973479615,
+            0.8234598171585263
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "125:75",
+            "route": [
+              "125:-75",
+              "175:-75",
+              "175:-25",
+              "175:25",
+              "125:25",
+              "125:75"
+            ],
+            "state": "following",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25",
+              "125:-175",
+              "125:75"
+            ],
+            "reason": null,
+            "waitReason": null,
+            "noProgressTime": 0,
+            "waitTime": 0,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 21.628507348319857,
+            "reevaluations": 4,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 8,
+          "p": [
+            96.63430838765821,
+            0.9369104142242609,
+            -67.84528332187382
+          ],
+          "v": [
+            0.005531748334897391,
+            -0.00020238911568658876,
+            -0.014255281303812211
+          ],
+          "q": [
+            -0.04076928442175047,
+            0.5646010660024987,
+            -0.03143183759932516,
+            0.8237569673767319
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "125:75",
+            "route": [
+              "125:-75",
+              "175:-75",
+              "175:-25",
+              "175:25",
+              "125:25",
+              "125:75"
+            ],
+            "state": "stuck-recovery",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25",
+              "125:-175",
+              "125:75"
+            ],
+            "reason": "controller-stall",
+            "waitReason": "controller-stall",
+            "noProgressTime": 1.083333333333333,
+            "waitTime": 0.4333333333333333,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 21.633756398409517,
+            "reevaluations": 4,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 9,
+          "p": [
+            96.63997355200958,
+            0.9367202269088274,
+            -67.85984010313778
+          ],
+          "v": [
+            0.005802417758818221,
+            -0.00018663426416778886,
+            -0.014857871551793637
+          ],
+          "q": [
+            -0.04066832108234985,
+            0.5639952556559985,
+            -0.03164682489840767,
+            0.82416862214702
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "125:75",
+            "route": [
+              "125:-75",
+              "175:-75",
+              "175:-25",
+              "175:25",
+              "125:25",
+              "125:75"
+            ],
+            "state": "stuck-recovery",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25",
+              "125:-175",
+              "125:75"
+            ],
+            "reason": "controller-stall",
+            "waitReason": "controller-stall",
+            "noProgressTime": 2.166666666666666,
+            "waitTime": 1.5166666666666666,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 21.63987686600983,
+            "reevaluations": 4,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 10,
+          "p": [
+            96.64592664310643,
+            0.9365331012997822,
+            -67.875018330836
+          ],
+          "v": [
+            0.006101853369313584,
+            -0.0001767091118812902,
+            -0.015484713916868363
+          ],
+          "q": [
+            -0.040581749975334966,
+            0.5632150177529225,
+            -0.03185748720064216,
+            0.8246981665165598
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "-75:75",
+            "route": [
+              "125:-75",
+              "75:-75",
+              "25:-75",
+              "-25:-75",
+              "-75:-75",
+              "-75:-25",
+              "-75:25",
+              "-75:75"
+            ],
+            "state": "following",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25",
+              "125:-175",
+              "125:75",
+              "-75:75"
+            ],
+            "reason": null,
+            "waitReason": null,
+            "noProgressTime": 0,
+            "waitTime": 0,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 21.645672610865773,
+            "reevaluations": 6,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "after",
+      "mode": "online",
+      "prop": "bin:74",
+      "state": "intact",
+      "initial": {
+        "x": 96.38,
+        "y": 1.115,
+        "z": -66.80508
+      },
+      "trace": [
+        {
+          "time": 1,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            96.59942798066407,
+            0.9453054846570788,
+            -67.75405712271714
+          ],
+          "q": [
+            -0.044883880426721964,
+            0.5752405328894299,
+            -0.03082539151968816,
+            0.816170056934572
+          ],
+          "v": [
+            0.007428034456749985,
+            0.03550998291922808,
+            -0.02425922513607799
+          ],
+          "speed": 0.02537096174948012,
+          "heading": 1.2298208727396052,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 0,
+          "control": {
+            "steer": 0,
+            "throttle": 0,
+            "brake": 1
+          },
+          "owner": null,
+          "reason": "prop-contact",
+          "blocker": "bin:74"
+        },
+        {
+          "time": 2,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            96.42276034663456,
+            0.9337608150642847,
+            -67.82468075403769
+          ],
+          "q": [
+            -0.023396248457744122,
+            0.5750322113763436,
+            -0.052127548967343916,
+            0.8161331325686959
+          ],
+          "v": [
+            -1.4329664848897563,
+            -0.053738193286273876,
+            -0.5335033130461292
+          ],
+          "speed": 1.5290581191859582,
+          "heading": 1.2263653789296582,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": -2.2,
+          "control": {
+            "steer": -0.0032258812710842296,
+            "throttle": -0.5635290098535976,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": "prop-recovery",
+          "blocker": "bin:74"
+        },
+        {
+          "time": 3,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            94.14303458271684,
+            0.9033507517990166,
+            -68.58757568344245
+          ],
+          "q": [
+            -0.030739981904927393,
+            0.5696473451245507,
+            -0.01278859874122018,
+            0.8212145928119349
+          ],
+          "v": [
+            -2.2565305073907718,
+            0.0017236584966839367,
+            -0.8142372406831048
+          ],
+          "speed": 2.398939810603945,
+          "heading": 1.213930410254501,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": -2.2,
+          "control": {
+            "steer": 0.02661986229760209,
+            "throttle": 0,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": "prop-recovery",
+          "blocker": "bin:74"
+        },
+        {
+          "time": 4,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            93.52588931660037,
+            0.8664561439478653,
+            -68.92642231586117
+          ],
+          "q": [
+            -0.0003514780096087645,
+            0.6182110263107533,
+            0.019669571824909672,
+            0.7857659392944175
+          ],
+          "v": [
+            2.2035266798513944,
+            0.002810796246197086,
+            -0.4042257337621725
+          ],
+          "speed": 2.240296469812082,
+          "heading": 1.33285451868965,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 4.4,
+          "control": {
+            "steer": 0.9770841025222088,
+            "throttle": 0.76,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": "prop-recovery",
+          "blocker": "bin:74"
+        },
+        {
+          "time": 5,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            97.79399212747842,
+            0.8670281226426548,
+            -69.86301194367445
+          ],
+          "q": [
+            0.0005557152808812055,
+            0.7745260296121764,
+            -0.0016793862356432492,
+            0.6325395642136512
+          ],
+          "v": [
+            4.5407249539797245,
+            0.006265043536150398,
+            -0.9091911205734008
+          ],
+          "speed": 4.630854305786751,
+          "heading": 1.77193262430465,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 4.4,
+          "control": {
+            "steer": 0.00007580886260922793,
+            "throttle": 0,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": "prop-recovery",
+          "blocker": "bin:74"
+        },
+        {
+          "time": 6,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            102.09982165533805,
+            0.8676043742234356,
+            -70.7397378408077
+          ],
+          "q": [
+            -0.0006002176493953399,
+            0.7745689387841934,
+            0.0007167962212554016,
+            0.6324888022824428
+          ],
+          "v": [
+            4.186948072646747,
+            -0.0004037699707528473,
+            -0.8539637722957087
+          ],
+          "speed": 4.273147351476875,
+          "heading": 1.7720676505216497,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 4.4,
+          "control": {
+            "steer": -0.0000622027158600602,
+            "throttle": 0.056047572387424416,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": "prop-recovery",
+          "blocker": "bin:74"
+        },
+        {
+          "time": 7,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            106.93527848189372,
+            0.8643768696067723,
+            -71.23808216086074
+          ],
+          "q": [
+            -0.018456737913969207,
+            0.7074343687165615,
+            0.010193362305186353,
+            0.7064644776272124
+          ],
+          "v": [
+            7.262146564794872,
+            0.0039931164704568554,
+            0.23198362244185225
+          ],
+          "speed": 7.265850888205951,
+          "heading": 1.5724057223894572,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 9,
+          "control": {
+            "steer": -0.06649276656336757,
+            "throttle": 0.76,
+            "brake": 0
+          },
+          "owner": null,
+          "reason": null,
+          "blocker": null
+        },
+        {
+          "time": 8,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            112.74314790185915,
+            0.8664343650714899,
+            -71.24472538941728
+          ],
+          "q": [
+            -0.0010979325821932557,
+            0.7094227255431145,
+            -0.000003836529777698626,
+            0.7047823713830423
+          ],
+          "v": [
+            4.6800399792971,
+            0.005747085493156571,
+            -0.003731609554539205
+          ],
+          "speed": 4.680041466988201,
+          "heading": 1.5773599996749268,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 4.5,
+          "control": {
+            "steer": -0.012671154039936081,
+            "throttle": 0,
+            "brake": 0
+          },
+          "owner": "npc-0",
+          "reason": null,
+          "blocker": null
+        },
+        {
+          "time": 9,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            117.20193678329039,
+            0.867576742188646,
+            -71.24907508692306
+          ],
+          "q": [
+            -0.0009279641508594292,
+            0.7073922002451835,
+            0.0008721215125091755,
+            0.7068200996851182
+          ],
+          "v": [
+            4.382041227743971,
+            0.0001466050903755384,
+            -0.0016159241889300235
+          ],
+          "speed": 4.382041525688554,
+          "heading": 1.5716055016754835,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 4.5,
+          "control": {
+            "steer": -0.0010489497641033463,
+            "throttle": 0.05404568726133991,
+            "brake": 0
+          },
+          "owner": "npc-0",
+          "reason": null,
+          "blocker": null
+        },
+        {
+          "time": 10,
+          "id": "npc-0",
+          "physical": true,
+          "p": [
+            121.59913749996414,
+            0.8677495377716063,
+            -71.24986679358068
+          ],
+          "q": [
+            -0.0007633929562908598,
+            0.707145582616719,
+            0.0007583995440647965,
+            0.7070671587953913
+          ],
+          "v": [
+            4.394525686740305,
+            -0.000004777333561658102,
+            -0.0002533169927161875
+          ],
+          "speed": 4.394525694041378,
+          "heading": 1.5709072426182782,
+          "edge": [
+            "75:-75",
+            "125:-75"
+          ],
+          "progress": 21.379999999999995,
+          "targetSpeed": 4.5,
+          "control": {
+            "steer": -0.00013455829515083285,
+            "throttle": 0.04427522639278736,
+            "brake": 0
+          },
+          "owner": "npc-0",
+          "reason": null,
+          "blocker": null
+        }
+      ]
+    },
+    {
+      "name": "after",
+      "mode": "offline",
+      "prop": "bin:74",
+      "state": "intact",
+      "initial": {
+        "x": 96.38,
+        "y": 1.115,
+        "z": -66.80508
+      },
+      "trace": [
+        {
+          "time": 1,
+          "p": [
+            96.60012201865075,
+            0.9438255769975601,
+            -67.76018020886418
+          ],
+          "v": [
+            0.006979027678561758,
+            0.0270806184592287,
+            -0.024545887374459126
+          ],
+          "q": [
+            -0.042218213523503155,
+            0.5639407445247013,
+            -0.03192749603905507,
+            0.8241171604259225
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "yielding",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": "prop-contact",
+            "waitReason": "prop-contact",
+            "noProgressTime": 0,
+            "waitTime": 0.32499999999999996,
+            "leaderLimit": null,
+            "blocker": "bin:74",
+            "blockerEvidence": null,
+            "progressAlong": 21.59988727922007,
+            "reevaluations": 0,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 0,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 2,
+          "p": [
+            96.45940388165282,
+            0.9352687550042644,
+            -67.8228909023529
+          ],
+          "v": [
+            -1.2694306888806897,
+            -0.05963714602970695,
+            -0.5171640592143218
+          ],
+          "q": [
+            -0.024292711332284393,
+            0.5636100433770797,
+            -0.05112092765791917,
+            0.8240996504889482
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "yielding",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": "prop-recovery",
+            "waitReason": "prop-recovery",
+            "noProgressTime": 1.083333333333333,
+            "waitTime": 1.2999999999999998,
+            "leaderLimit": null,
+            "blocker": "bin:74",
+            "blockerEvidence": null,
+            "progressAlong": 21.5243192427084,
+            "reevaluations": 0,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": -2.2,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 3,
+          "p": [
+            94.23727962965708,
+            0.9034104818752868,
+            -68.63330850247455
+          ],
+          "v": [
+            -2.2408581747490275,
+            0.0006638299483415575,
+            -0.8799510624234784
+          ],
+          "q": [
+            -0.030562612937762402,
+            0.5579585010568566,
+            -0.013257656329772726,
+            0.8291998989010092
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "yielding",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": "prop-recovery",
+            "waitReason": "prop-recovery",
+            "noProgressTime": 2.166666666666666,
+            "waitTime": 2.2750000000000004,
+            "leaderLimit": null,
+            "blocker": "bin:74",
+            "blockerEvidence": null,
+            "progressAlong": 19.42492605698125,
+            "reevaluations": 0,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": -2.2,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 4,
+          "p": [
+            93.36035124695948,
+            0.8661829917042486,
+            -69.00860371949109
+          ],
+          "v": [
+            1.8431855331189009,
+            0.0038501237885734656,
+            -0.18673030371650626
+          ],
+          "q": [
+            -0.0027028844710807083,
+            0.5818667431066727,
+            0.019474227106000375,
+            0.8130464575659827
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "yielding",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": "prop-recovery",
+            "waitReason": "prop-recovery",
+            "noProgressTime": 3.249999999999999,
+            "waitTime": 3.250000000000001,
+            "leaderLimit": null,
+            "blocker": "bin:74",
+            "blockerEvidence": null,
+            "progressAlong": 18.18985787328576,
+            "reevaluations": 0,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 4.4,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 5,
+          "p": [
+            97.44754259559991,
+            0.8663330847323234,
+            -69.87573384719737
+          ],
+          "v": [
+            4.593119584225808,
+            0.008549084158149053,
+            -0.8633237114170794
+          ],
+          "q": [
+            0.00018375200136190446,
+            0.771572216540623,
+            -0.0030157235477232666,
+            0.6361345661959233
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "yielding",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": "prop-recovery",
+            "waitReason": "prop-recovery",
+            "noProgressTime": 0,
+            "waitTime": 4.333333333333335,
+            "leaderLimit": null,
+            "blocker": "bin:74",
+            "blockerEvidence": null,
+            "progressAlong": 22.332624206179602,
+            "reevaluations": 0,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 4.4,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 6,
+          "p": [
+            101.79522726616233,
+            0.8676493587734752,
+            -70.70922739713573
+          ],
+          "v": [
+            4.187703617564416,
+            -0.0006245343454828295,
+            -0.8067029229022076
+          ],
+          "q": [
+            -0.00040433631035860973,
+            0.7711212653707316,
+            0.0004431693211262108,
+            0.6366880195245884
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "yielding",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": "prop-recovery",
+            "waitReason": "prop-recovery",
+            "noProgressTime": 0,
+            "waitTime": 5.308333333333335,
+            "leaderLimit": null,
+            "blocker": "bin:74",
+            "blockerEvidence": null,
+            "progressAlong": 26.585874235161683,
+            "reevaluations": 0,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 4.4,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 7,
+          "p": [
+            106.36639199943507,
+            0.8642548633192816,
+            -71.26676968977628
+          ],
+          "v": [
+            6.4525746230646845,
+            -0.001835761004640197,
+            0.19211705654162575
+          ],
+          "q": [
+            -0.018733395532379876,
+            0.7154714486037128,
+            0.004925988412539196,
+            0.6983733963739538
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "following",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": null,
+            "waitReason": null,
+            "noProgressTime": 0,
+            "waitTime": 0,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 30.902351876429577,
+            "reevaluations": 0,
+            "reservationNode": null,
+            "reservationAge": null,
+            "junctionTurn": null,
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 8,
+          "p": [
+            114.37441393090255,
+            0.8674831890178647,
+            -71.2481752290757
+          ],
+          "v": [
+            7.978011019748525,
+            0.0020985087921283627,
+            -0.05011868796991132
+          ],
+          "q": [
+            -0.0006112458656111111,
+            0.7105458688646259,
+            -0.0012607075596791724,
+            0.7036494903248027
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "following",
+            "segment": [
+              "75:-75",
+              "125:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": null,
+            "waitReason": null,
+            "noProgressTime": 0,
+            "waitTime": 0,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": -0.9274081027779602,
+            "reevaluations": 0,
+            "reservationNode": "125:-75",
+            "reservationAge": 0.43333333333333357,
+            "junctionTurn": "straight",
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 9,
+          "p": [
+            122.19512632764467,
+            0.8676758862837731,
+            -71.25099148767417
+          ],
+          "v": [
+            7.838254164939658,
+            0.0002479034753959099,
+            -0.0009957500938360254
+          ],
+          "q": [
+            -0.0018152723481404114,
+            0.7073227653812878,
+            0.0014287916947878746,
+            0.7068869562482838
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "following",
+            "segment": [
+              "125:-75",
+              "175:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": null,
+            "waitReason": null,
+            "noProgressTime": 0,
+            "waitTime": 0,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 7.564489219218842,
+            "reevaluations": 0,
+            "reservationNode": "125:-75",
+            "reservationAge": 1.5166666666666586,
+            "junctionTurn": "straight",
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        },
+        {
+          "time": 10,
+          "p": [
+            130.02262328869648,
+            0.8677386864177883,
+            -71.25020192526493
+          ],
+          "v": [
+            7.8258231374126,
+            0.000054382977202930264,
+            0.0006997171148151504
+          ],
+          "q": [
+            -0.0014577726797602457,
+            0.7070953634992463,
+            0.0013798298926612181,
+            0.7071153497741017
+          ],
+          "ai": {
+            "id": "npc-00",
+            "role": "civilian",
+            "targetId": null,
+            "appearance": "active",
+            "appearanceTime": null,
+            "goal": "25:-25",
+            "route": [
+              "125:-75",
+              "175:-75"
+            ],
+            "state": "following",
+            "segment": [
+              "125:-75",
+              "175:-75"
+            ],
+            "seed": 2654486104,
+            "completedGoals": 0,
+            "goals": [
+              "25:-25"
+            ],
+            "reason": null,
+            "waitReason": null,
+            "noProgressTime": 0,
+            "waitTime": 0,
+            "leaderLimit": null,
+            "blocker": null,
+            "blockerEvidence": null,
+            "progressAlong": 15.19655161668365,
+            "reevaluations": 0,
+            "reservationNode": "125:-75",
+            "reservationAge": 2.491666666666651,
+            "junctionTurn": "straight",
+            "signal": {
+              "color": "green",
+              "canEnter": true,
+              "controlled": true
+            },
+            "maneuver": null,
+            "logical": false,
+            "evasion": null,
+            "pursuit": null,
+            "targetSpeed": 8,
+            "exitReplans": 0,
+            "spawn": {
+              "x": -128.75,
+              "z": -60
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "baselineSourceHashes": {
+    "tools/multiplayer-spike/world.js": "3df87eaed23b4f5e4cbe016b1105837f6e8fd782af0479a939e090f8e5faa246",
+    "src/traffic.js": "2e3dd011f88eec45b7249db4806b5d328edea158e0fcd1834e40025bff9f399b"
+  }
+}

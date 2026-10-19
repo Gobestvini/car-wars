@@ -2,12 +2,14 @@
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const fs = require('node:fs');
 const assert = require('node:assert/strict');
-const out = 'docs/knowledge/street-props-0095';
+const out = process.env.ARTIFACT_DIR || 'docs/knowledge/street-props-0108';
 const url = process.env.CARWARS_BASE_URL || 'http://localhost:5173';
 fs.mkdirSync(out,{recursive:true});
-const report = { date:'2026-10-13',errors:[],matrix:[],screenshots:[],profiles:[] };
+const report = { date:'2026-10-19',errors:[],matrix:[],screenshots:[],profiles:[] };
 const hook = `window.propCheck={sim,scene,camera,settings,wanted,reset,traffic,render:()=>renderFrame(),
-  city:()=>cityState,signals:()=>trafficSignals,setCameraMode};\n`;
+  city:()=>cityState,signals:()=>trafficSignals,setCameraMode,paused:false};
+const advancePropsTest=stepper.advance.bind(stepper);
+stepper.advance=(...args)=>propCheck.paused?{alpha:1,steps:0}:advancePropsTest(...args);\n`;
 
 (async()=>{
   const browser=await chromium.launch({headless:true,channel:'msedge',args:['--enable-webgl']});
@@ -66,12 +68,16 @@ const hook = `window.propCheck={sim,scene,camera,settings,wanted,reset,traffic,r
           sim.body.velocity.set(sx*speed/3.6,0,sz*speed/3.6);sim.body.angularVelocity.setZero();
           sim.body.aabbNeedsUpdate=true;sim.body.wakeUp();
         }
-        for(const type of ['bin','bench','lamp','signal']) for(const speed of [10,60]) {
+        for(const type of ['bin','bench','lamp','signal','tree']) for(const speed of [10,60]) {
           const entry=m.entries.find(e=>e.type===type); launch(entry,speed);
           let events=[]; const initial=speed;
           events.push(...tick()); const after=Math.hypot(sim.body.velocity.x,sim.body.velocity.z)*3.6;
+          const firstGhost=[...city.propFade.active.values()][0]?.meshes[0];
+          const firstAlpha=firstGhost?.material.opacity,firstSize=firstGhost?.matrix.determinant();
           for(let i=0;i<30;i++)events.push(...tick());
           results.push({type,speed,initial,after,state:entry.state,stars:wanted.snapshot().level,events:events.length,
+            physical:sim.world.bodies.includes(entry.body),firstAlpha,lateAlpha:firstGhost?.material.opacity,
+            firstSize,lateSize:firstGhost?.matrix.determinant(),
             angular:entry.body.angularVelocity.length(),position:{...entry.body.position},source:{x:entry.x,z:entry.z}});
           if(speed===60) {
             for(let i=0;i<600;i++)tick();
@@ -110,7 +116,8 @@ const hook = `window.propCheck={sim,scene,camera,settings,wanted,reset,traffic,r
       for(const result of checks.results) {
         assert.equal(result.state,result.speed===10?'intact':'detached',JSON.stringify(result));
         assert.equal(result.stars,1);assert.equal(result.events,1);
-        if(result.speed===60){assert.ok(result.after>=30);assert.equal(result.expired,'removed');assert.ok(result.angular>0);}
+        if(result.speed===60){assert.ok(result.after>=30);assert.equal(result.expired,'removed');assert.equal(result.physical,false);assert.equal(result.angular,0);
+          assert.ok(result.firstAlpha>0&&result.firstAlpha<=.45);assert.ok(result.lateAlpha<result.firstAlpha);assert.ok(Math.abs(result.lateSize-result.firstSize)<1e-8);}
       }
       assert.equal(checks.held,1);assert.equal(checks.repeated,2);assert.deepEqual(checks.reverse,{state:'detached',stars:1});
       assert.deepEqual(checks.signal,{destroyed:true,beam:false});
@@ -134,7 +141,7 @@ const hook = `window.propCheck={sim,scene,camera,settings,wanted,reset,traffic,r
       assert.equal(policeAfter.wanted.lastViolation,'property-collision');assert.equal(policeAfter.police.pursuit.wantedLevel,1);
       report.matrix[report.matrix.length-1].policeReaction={before:policeBefore,after:policeAfter};
       await page.evaluate(()=>{carLab.setDebugPoliceCount(0);propCheck.reset();});
-      for(const type of ['bench','lamp','bin','signal']) {
+      for(const type of ['bench','lamp','bin','signal','tree']) {
         await page.evaluate(type=>{
           const e=propCheck.city().propPhysics.entries.find(e=>e.type===type);
           carLab.setDebugCamera([e.x+6,e.y+7,e.z+8],[e.x,e.y+1,e.z]);
@@ -142,6 +149,18 @@ const hook = `window.propCheck={sim,scene,camera,settings,wanted,reset,traffic,r
         await page.waitForTimeout(200);
         const name=`${viewport.width}-${quality==='Лёгкая'?'low':'high'}-${type}.png`;
         await page.screenshot({path:`${out}/${name}`});report.screenshots.push(name);
+        if(viewport.width===1440&&quality==='Высокая'){
+          await page.evaluate(type=>{
+            propCheck.paused=true;const city=propCheck.city(),m=city.propPhysics,e=m.entries.find(e=>e.type===type);
+            m.detach(e,{body:propCheck.sim.body},{x:0,z:1},60);m.syncVisuals();
+          },type);
+          for(const [stage,seconds]of [['early',0],['middle',.375],['gone',.375]]){
+            if(seconds)await page.evaluate(dt=>{const m=propCheck.city().propPhysics;m.afterStep(dt,[]);m.syncVisuals();},seconds);
+            await page.waitForTimeout(40);const ghostName=`fade-${type}-${stage}.png`;
+            await page.screenshot({path:`${out}/${ghostName}`});report.screenshots.push(ghostName);
+          }
+          await page.evaluate(()=>{propCheck.reset();propCheck.paused=false;});
+        }
       }
       await page.close();
       fs.writeFileSync(`${out}/report.json`,JSON.stringify(report,null,2));

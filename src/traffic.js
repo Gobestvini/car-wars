@@ -12,6 +12,7 @@ import { findSafeSpawnPose } from './vehicle-spawn.js';
 import { createPolicePursuit } from './police-pursuit.js';
 import { createTrafficAssets, makeTrafficCar } from './vehicle-visuals.js';
 import { VehicleAppearance } from './vehicle-spawn-effects.js';
+import { recoverPropContact } from './traffic-prop-recovery.js';
 
 const headingOf = q => Math.atan2(2 * (q.x * q.z + q.w * q.y), 1 - 2 * (q.x * q.x + q.y * q.y));
 const now = () => globalThis.performance?.now?.() ?? Date.now();
@@ -33,6 +34,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
   const getLaneOffset = width => Math.min(5.2, width * 0.25);
   let graph = createRoadGraph(roadNetwork, getLaneOffset(roadWidth));
   let spawnObstacles = obstacles, spawnSlots = [], spawnSearchCursor = 0;
+  let streetProps = null;
   let thinkTime = 0, aiTime = 0, signalController = createTrafficSignals(roadNetwork);
   let lodElapsed = 0;
   const profile = { aiMs: 0, aiStepMs: 0, playerPrepareMs: 0, npcPrepareMs: 0, prepareMs: 0,
@@ -145,6 +147,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
     if (ai.goalHistory.length > 16) ai.goalHistory.shift();
     ai.routeIndex = 0; ai.fromNode = edge.from; ai.targetNode = edge.to;
     ai.state = 'following'; ai.reservationNode = null; ai.maneuver = null; ai.noProgressTime = 0; ai.waitReason = null;
+    ai.propBlocker = null; ai.propManeuver = null; ai.propStall = 0;
     ai.progressEdge = null; ai.progressElapsed = 0; ai.requestNode = null; ai.requestedAt = null;
     ai.cooldownUntil = 0; ai.nextCorridorCheck = 0; ai.reevaluations = 0;
     ai.continuation = null;
@@ -498,7 +501,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
         && Math.hypot(other.x - player.x, other.z - player.z) < TRAFFIC_PHYSICS_ZONE.leave
         && Math.hypot(other.x - candidate.x, other.z - candidate.z) < 10);
       const retainingContact = touching.has(state) && distance < TRAFFIC_PHYSICS_ZONE.retainContact;
-      if (!state.logical && distance > TRAFFIC_PHYSICS_ZONE.leave && !approaching && !nearPhysical && !retainingContact) setLogical(state, true);
+      if (!state.logical && !state.ai.propManeuver && !state.ai.propBlocker && distance > TRAFFIC_PHYSICS_ZONE.leave && !approaching && !nearPhysical && !retainingContact) setLogical(state, true);
       else if (state.logical && (approaching || nearPhysical)
         && isTrafficSpawnSafe(candidate, neighbors, spawnObstacles, 0)) setLogical(state, false);
     }
@@ -799,7 +802,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
         }
         ai.nextCorridorCheck = aiTime + 0.5;
       }
-      if (!ai.maneuver && ai.noProgressTime >= 3 && !legalWait && canRetry) {
+      if (!ai.maneuver && !ai.propBlocker && ai.noProgressTime >= 3 && !legalWait && canRetry) {
         ai.reevaluations = (ai.reevaluations || 0) + 1;
         ai.nextCorridorCheck = aiTime + 0.5;
         const held = reservationFor(ai);
@@ -880,6 +883,16 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
         const curvature = 2 * Math.sin(error) / Math.max(2, Math.hypot(dx, dz));
         const lock = 0.95 / (1 + Math.abs(speed) * 0.016);
         ai.control.steer = clamp(Math.atan(2.3 * curvature) / lock, -1, 1);
+      }
+      if(streetProps && !state.logical && state.role==='civilian') {
+        const body=state.simulation.body;
+        const contact=physics.world.contacts.map(c=>c.bi===body?streetProps.byBody.get(c.bj):c.bj===body?streetProps.byBody.get(c.bi):null).find(Boolean);
+        const returnTarget=junction?pathTarget(car,junction,8):laneTarget(graph,edge.from,edge.to,(edgeProgress(car,edge)+8)/edge.length);
+        const recovery=recoverPropContact(ai,car,returnTarget,{props:streetProps,contact,occupants:[...states.map(s=>s.occupancyItem),playerOccupancy],
+          obstacles:spawnObstacles,dt,waitReason:plan.waitReason||(leaderWait?'queue-wait':null),
+          canRecover:!legalWait&&Math.abs(body.quaternion.x)<.15&&Math.abs(body.quaternion.z)<.15});
+        if(recovery){ai.control=recovery.control;targetSpeed=recovery.targetSpeed;reason=recovery.reason;ai.blocker=recovery.blocker;
+          if(!reservationFor(ai)?.entered && !occupiesJunction(car,node,roadWidth))releaseReservation(ai);}
       }
       ai.targetSpeed = targetSpeed;
       ai.waitReason = reason;
@@ -1048,6 +1061,7 @@ export function createVehicleRuntime(scene, THREE, count = 6, roadNetwork = crea
       }
     },
     setSpawnObstacles(obstacles = []) { spawnObstacles = obstacles; },
+    setStreetProps(props = null) { streetProps = props; },
     prepare(dt = STEP) {
       profile.aiStepMs = 0;
       if (pendingCount !== null) applyCount(pendingCount);

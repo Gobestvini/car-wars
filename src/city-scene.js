@@ -12,6 +12,7 @@ import { createCityArt } from './city-art.js';
 import { createCityTrees } from './city-trees.js';
 import { createCityStreetProps, createPropInstanceVisual } from './city-street-props.js';
 import { StreetPropPhysics } from './street-prop-physics.js';
+import { StreetPropFadePool } from './street-prop-fade.js';
 import { createSurfaceHeightSampler } from './road-surface.js';
 
 export function createCityScene(scene, simulation, plan, damageObstacles = [], { propRegistry = null, destructibleTrees = false } = {}) {
@@ -214,6 +215,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = [], {
 
   // Lightweight scene-only fixtures have no world. Production always owns sim.world.
   const propPhysics = simulation.world ? new StreetPropPhysics(simulation.world) : propRegistry;
+  const propFade = new StreetPropFadePool(group);
   const surface = createSurfaceHeightSampler(plan,0);
   if (propPhysics) {
     const indices = { lamp: 0, bin: 0, bench: 0 };
@@ -221,14 +223,14 @@ export function createCityScene(scene, simulation, plan, damageObstacles = [], {
       const source = { ...placement, id: `${placement.type}:${placement.id}`, y: surface(placement.x,placement.z) };
       const index = indices[placement.type]++;
       const visual = createPropInstanceVisual(streetProps.batches.filter(batch => batch.userData.propType === placement.type)
-        .map(batch => ({batch,index})),source);
+        .map(batch => ({batch,index})),source,propFade);
       propPhysics.register({ ...source,...visual });
     }
     approaches.forEach((approach,index) => {
       const source = { id: `signal:${approach.nodeId}:${approach.fromId}`, type: 'signal',
         x: approach.signalX,y: ROAD_SURFACE_HEIGHTS.sidewalk,z: approach.signalZ,yaw: approach.signalYaw };
       const visual = createPropInstanceVisual([{batch:poles,index},{batch:housings,index},
-        ...[0,1,2].map(lamp => ({batch:bulbs,index:index*3+lamp}))],source);
+        ...[0,1,2].map(lamp => ({batch:bulbs,index:index*3+lamp}))],source,propFade);
       propPhysics.register({ ...source,...visual,
         onDetach() {
           approach.destroyed = true; approach.signalVisible = false;
@@ -245,12 +247,12 @@ export function createCityScene(scene, simulation, plan, damageObstacles = [], {
     if(destructibleTrees)trees.placements.forEach((tree,index)=>{
       const source={id:`tree:${index}`,type:'tree',x:tree.x,y:surface(tree.x,tree.z),z:tree.z,yaw:0};
       propPhysics.register({...source,...createPropInstanceVisual([{batch:trees.trunks,index},
-        {batch:trees.crownBatches[tree.crownType],index:tree.crownIndex}],source)});
+        {batch:trees.crownBatches[tree.crownType],index:tree.crownIndex}],source,propFade)});
     });
   }
 
   return {
-    group, entries, buildings, marks, dashes, stopLines, signalBeam, occlusion, trees, streetProps, propPhysics, staticBodies, signalApproaches: approaches,
+    group, entries, buildings, marks, dashes, stopLines, signalBeam, occlusion, trees, streetProps, propPhysics, propFade, staticBodies, signalApproaches: approaches,
     updateSignals(controller, time, camera = null, quality = 'high') {
       art.setQuality(quality);
       let changed = false;
@@ -271,6 +273,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = [], {
     },
     dispose() {
       propPhysics?.dispose();
+      propFade.dispose();
       occlusion.dispose();
       for (const body of staticBodies) simulation.removeStaticBox(body);
       scene.remove(group);

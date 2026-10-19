@@ -1,0 +1,10 @@
+{
+  "tests/camera-distance.test.js": "310f95bc0f116d778a4667df28ab4f950bf9dc60e9efffb4e621c8051d969f5d",
+  "tests/multiplayer-camera-browser.cjs": "09f719ec1faf7d457cd9f2d2676dd75b33fa31e53fa325b8a1260c136676ef34",
+  "tests/camera-follow.test.js": "323716a6bdd1e6094f03323f489d4f35a25c3b9b9e728b87534aa76f2c110d77",
+  "src/camera-follow.js": "37b39bcaeec0002a37f7fb36fb7f52f93ebca977e917e9d401a527b4d86838fb",
+  "src/main.js": "701cb9465bf42988bb970f1ba86809f46a110a65a1017b341444a132bb71d5c8",
+  "src/multiplayer/game.js": "aa82db729dce4ea434c131507dedb33e7f209d6b6c759a1fd779746ac0ffdf0b",
+  "src/camera-distance.js": "43e39f1015402796635d0c3eba7e61d12b2a22888f06581fc66700837c77b0de",
+  "tests/camera-composition-browser.cjs": "fe8a32a1bf767d0832a7ad7dcef6fcf7b20c6b57b57739d414a4e523adb45902"
+}

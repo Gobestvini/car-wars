@@ -4,7 +4,7 @@ import * as C from 'cannon-es';
 import * as THREE from 'three';
 import { CarSimulation, STEP } from '../src/vehicle.js';
 import { StreetPropPhysics } from '../src/street-prop-physics.js';
-import { PROP_PHYSICS } from '../src/street-prop-config.js';
+import { PROP_PHYSICS, PROP_LIFETIME, PROP_GHOST_ALPHA } from '../src/street-prop-config.js';
 import { createCityScene } from '../src/city-scene.js';
 import { createCityPlan } from '../src/city-generator.js';
 import { createTrafficSignals } from '../src/traffic-signals.js';
@@ -36,9 +36,10 @@ for (const [type,spec] of Object.entries(PROP_PHYSICS)) {
       assert.equal(f.entry.body,original); assert.equal(original.type,C.Body.STATIC);
       assert.ok(f.sim.body.velocity.z < (spec.threshold-1)/3.6*.5);
     } else {
-      assert.equal(f.entry.body.type,C.Body.DYNAMIC);
+      assert.equal(f.entry.body,original,'the old body is only a detached pose carrier');
       assert.ok(!f.sim.world.bodies.includes(original));
-      assert.ok(f.entry.body.position.z>0); assert.ok(f.entry.body.angularVelocity.length()>0);
+      assert.equal(f.entry.active,false);assert.equal(f.manager.byBody.has(original),false);
+      assert.equal(f.entry.body.angularVelocity.length(),0);
     }
   });
   for(const kmh of [60,120]) test(`${type} swept ${kmh} km/h hit preserves progress and removes invisible obstacle`,()=>{
@@ -111,16 +112,16 @@ test('NPC shoving a stationary player into a prop on the following tick remains 
   assert.equal(f.entry.episode,true);
 });
 
-test('distant anchored colliders reactivate before an actor sweep; detached bodies remain physical',()=>{
+test('distant anchored colliders reactivate before an actor sweep; ghosts never reactivate',()=>{
   const f=fixture('bin',0);
   const far=f.manager.register({id:'far',type:'lamp',x:120,y:.155,z:0,yaw:0});
   const anchored=far.body;
   f.tick();assert.equal(far.active,false);assert.ok(!f.sim.world.bodies.includes(anchored));
   f.sim.body.position.set(120,.7,-2.181);f.sim.body.velocity.set(0,0,60/3.6);
   const events=f.tick();assert.equal(events.length,1);assert.equal(far.state,'detached');
-  assert.ok(f.sim.world.bodies.includes(far.body));
+  assert.ok(!f.sim.world.bodies.includes(far.body));
   f.sim.body.position.set(-120,.7,0);f.sim.body.velocity.setZero();
-  f.tick();assert.ok(f.sim.world.bodies.includes(far.body));
+  f.tick();assert.ok(!f.sim.world.bodies.includes(far.body));
   f.manager.reset();f.sim.body.position.set(120,.7,-2.181);f.sim.body.velocity.set(0,0,10/3.6);
   assert.equal(f.tick().length,1);assert.equal(far.state,'intact');assert.equal(far.active,true);
 });
@@ -136,14 +137,29 @@ test('reverse travel hits physically, grazing uses normal speed rather than spee
   assert.equal(events.length,1); assert.ok(events[0].impactSpeedKmh<5);
 });
 
-test('5s simulated lifetime, fade, oldest eviction, reset and repeated dispose',()=>{
-  const f=fixture('bin',60); let scale;
-  f.entry.sync=(_,amount)=>{scale=amount;}; f.tick();
+test('a following physical car passes the fresh ghost without another impact or offense',()=>{
+  const f=fixture('bin',60);assert.equal(f.tick().length,1);
+  f.sim.body.position.set(20,1,0);f.sim.body.velocity.setZero();
+  const follower=new CarSimulation({world:f.sim.world,materials:f.sim.materials,spawn:{x:0,y:.96,z:-2.5,yaw:0}});
+  follower.body.velocity.set(0,0,20);let events=[];
+  for(let i=0;i<60;i++){
+    follower.prepare({throttle:0,brake:0},STEP);
+    f.manager.beforeStep(STEP,[{body:follower.body,player:true}]);f.sim.world.step(STEP);
+    events.push(...f.manager.afterStep(STEP));follower.postStep(STEP);
+    assert.equal(f.sim.world.contacts.some(c=>c.bi===f.entry.body||c.bj===f.entry.body),false);
+  }
+  assert.equal(f.entry.state,'detached','the follower passes while the visual ghost still exists');
+  assert.ok(follower.body.position.z>1);assert.equal(follower.damage,0);assert.deepEqual(events,[]);
+  follower.disposeDamageListener();
+});
+
+test('immediate alpha, 0.75s simulated lifetime, oldest eviction, reset and repeated dispose',()=>{
+  const f=fixture('bin',60); let alpha;
+  f.entry.sync=(_,amount)=>{alpha=amount;}; f.tick();
   const age=f.manager.clock-f.entry.destroyedAt;
-  f.manager.afterStep(4.49-age,[]); f.manager.syncVisuals(); assert.equal(scale,1);
-  f.manager.afterStep(.01,[]); f.manager.syncVisuals(); assert.ok(Math.abs(scale-1)<1e-8);
-  f.manager.afterStep(.25,[]); f.manager.syncVisuals(); assert.ok(Math.abs(scale-.5)<1e-8);
-  f.manager.afterStep(.25,[]); assert.equal(f.entry.state,'removed');
+  assert.ok(alpha>0&&alpha<=PROP_GHOST_ALPHA);assert.ok(!f.sim.world.bodies.includes(f.entry.body));
+  f.manager.afterStep(PROP_LIFETIME/2-age,[]);f.manager.syncVisuals();assert.ok(Math.abs(alpha-PROP_GHOST_ALPHA/2)<1e-8);
+  f.manager.afterStep(PROP_LIFETIME/2,[]); assert.equal(f.entry.state,'removed');
   f.manager.reset(); f.manager.reset(); assert.equal(f.entry.state,'intact');
   assert.equal(f.manager.snapshot().detached,0);
   for(let i=1;i<=25;i++) {
@@ -152,7 +168,8 @@ test('5s simulated lifetime, fade, oldest eviction, reset and repeated dispose',
   }
   assert.equal(f.manager.debris.length,24); assert.equal(f.manager.entries[1].state,'removed');
   const count=f.sim.world.bodies.length;
-  f.manager.reset(); assert.equal(f.sim.world.bodies.length,count+1);
+  f.manager.reset(); assert.equal(f.sim.world.bodies.length,count+25);
+  assert.ok(f.manager.entries.every(e=>e.state==='intact'&&f.sim.world.bodies.includes(e.body)));
   f.manager.dispose(); f.manager.dispose(); assert.equal(f.sim.world.bodies.length,2);
 });
 
@@ -160,8 +177,8 @@ test('seed42 scene has all types, destroyed signal stays dark across phases/qual
   const sim=new CarSimulation({damage:false}),scene=new THREE.Scene(),plan=createCityPlan(42);
   const baseline=sim.world.bodies.length;
   for(let cycle=0;cycle<3;cycle++) {
-    const city=createCityScene(scene,sim,plan),signals=createTrafficSignals(plan.roadNetwork);
-    for(const type of ['lamp','bin','bench','signal']) assert.ok(city.propPhysics.entries.some(e=>e.type===type));
+    const city=createCityScene(scene,sim,plan,[],{destructibleTrees:true}),signals=createTrafficSignals(plan.roadNetwork);
+    for(const type of ['lamp','bin','bench','signal','tree']) assert.ok(city.propPhysics.entries.some(e=>e.type===type));
     const entry=city.propPhysics.entries.find(e=>e.type==='signal');
     city.propPhysics.detach(entry,{body:sim.body},new C.Vec3(0,0,1),60);
     city.propPhysics.syncVisuals();

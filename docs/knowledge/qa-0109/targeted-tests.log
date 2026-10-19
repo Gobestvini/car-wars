@@ -1,0 +1,109 @@
+✔ real bin and lamp breaking impacts leave the NPC and its queue moving, with continuous LOD (1153.5945ms)
+✔ weak real contact keeps the prop intact and takes a safe retreat, never a power increase (368.4745ms)
+✔ a rear blocker prevents retreat; removal enables recovery without destroying the weak-hit prop (295.3458ms)
+✔ a physically blocked sidewalk waits truthfully and resumes when the prop is actually cleared (243.6734ms)
+✔ red signal and occupied exit remain lawful stops after the breaking contact, then resume on clearance (698.3735ms)
+✔ offline uses the same measured contact recovery, including a tall lamp and intact weak-hit prop (613.8717ms)
+✔ an unentered reservation behind the queue cannot keep its own leader waiting forever (63.0898ms)
+✔ the weak-contact fallback itself cannot bypass a red signal (278.4127ms)
+{"rtt":0,"inputToSimulationMs":0,"playerContacts":749,"late":0,"total":609,"maxQueue":11,"corrections":[{"steps":1200,"replaySteps":88,"corrections":0,"maxCorrection":0,"maxReplay":11,"lateFrames":0,"replayMs":5.599800000000187,"confirmedPositionError":0.000008792727455411228,"skippedReconciliations":191},{"steps":1200,"replaySteps":88,"corrections":0,"maxCorrection":0,"maxReplay":11,"lateFrames":0,"replayMs":6.779300000000148,"confirmedPositionError":0.000008217512891126,"skippedReconciliations":191},{"steps":1200,"replaySteps":88,"corrections":0,"maxCorrection":0,"maxReplay":11,"lateFrames":0,"replayMs":6.895800000000463,"confirmedPositionError":0.000010901505400173688,"skippedReconciliations":191}]}
+{"rtt":50,"inputToSimulationMs":0,"playerContacts":881,"late":0,"total":609,"maxQueue":15,"corrections":[{"steps":1200,"replaySteps":143,"corrections":0,"maxCorrection":0,"maxReplay":21,"lateFrames":0,"replayMs":8.783799999999701,"confirmedPositionError":0.000004884645198857973,"skippedReconciliations":192},{"steps":1200,"replaySteps":143,"corrections":0,"maxCorrection":0,"maxReplay":21,"lateFrames":0,"replayMs":7.00630000000001,"confirmedPositionError":0.000004575143956702138,"skippedReconciliations":192},{"steps":1200,"replaySteps":143,"corrections":0,"maxCorrection":0,"maxReplay":21,"lateFrames":0,"replayMs":6.912299999999959,"confirmedPositionError":0.000010362247798125172,"skippedReconciliations":192}]}
+{"rtt":100,"inputToSimulationMs":0,"playerContacts":734,"late":0,"total":609,"maxQueue":18,"corrections":[{"steps":1200,"replaySteps":220,"corrections":1,"maxCorrection":0.05831775685926501,"maxReplay":29,"lateFrames":0,"replayMs":17.069400000000314,"confirmedPositionError":0.000047754909019679906,"skippedReconciliations":190,"lastCorrection":0.05831775685926501},{"steps":1200,"replaySteps":220,"corrections":1,"maxCorrection":0.06215623664627553,"maxReplay":29,"lateFrames":0,"replayMs":10.805300000000443,"confirmedPositionError":0.000034512664082475104,"skippedReconciliations":190,"lastCorrection":0.06215623664627553},{"steps":1200,"replaySteps":220,"corrections":1,"maxCorrection":0.0402337654435566,"maxReplay":29,"lateFrames":0,"replayMs":9.774800000000141,"confirmedPositionError":0.000009119772534653475,"skippedReconciliations":190,"lastCorrection":0.0402337654435566}]}
+{"rtt":150,"inputToSimulationMs":0,"playerContacts":892,"late":0,"total":609,"maxQueue":21,"corrections":[{"steps":1200,"replaySteps":269,"corrections":1,"maxCorrection":0.07345634553399055,"maxReplay":39,"lateFrames":0,"replayMs":12.990399999998772,"confirmedPositionError":0.000012666920793194104,"skippedReconciliations":191,"lastCorrection":0.07345634553399055},{"steps":1200,"replaySteps":269,"corrections":2,"maxCorrection":0.09028713391856295,"maxReplay":39,"lateFrames":0,"replayMs":11.239800000000741,"confirmedPositionError":0.00001278416815949221,"skippedReconciliations":191,"lastCorrection":0.07348899915589927},{"steps":1200,"replaySteps":269,"corrections":1,"maxCorrection":0.06166060655399954,"maxReplay":39,"lateFrames":0,"replayMs":13.089399999999387,"confirmedPositionError":0.000011763493079159785,"skippedReconciliations":191,"lastCorrection":0.06166060655399954}]}
+✔ sparse contact cache preserves dense Cannon collision motion and damage (605.2865ms)
+✔ car restore/replay preserves suspension force inputs and motion, including contact-cache rewind (147.8161ms)
+✔ streamed prediction colliders retain full-city contacts within reconciliation tolerance between regions (957.6147ms)
+✔ three predicted players at simulated RTT 0ms steer immediately and share physical impacts (629.0479ms)
+✔ three predicted players at simulated RTT 50ms steer immediately and share physical impacts (551.3978ms)
+✔ three predicted players at simulated RTT 100ms steer immediately and share physical impacts (547.7765ms)
+✔ three predicted players at simulated RTT 150ms steer immediately and share physical impacts (492.0334ms)
+✔ prediction commands cannot choose dt, poses, invalid generations, unbounded queues or old respawn state (48.1976ms)
+✔ server map roundtrip matches every rendered house/curb collider and has no NaN landmark bodies (302.2302ms)
+✔ 102 far NPC follow turns for one simulated minute without entering houses or teleporting between edges (4792.3046ms)
+✔ three physical players cannot drive through an ordinary house, a landmark, or a perimeter house (167.5087ms)
+✔ motion frame roundtrip includes all players/wheels and stays below the default bandwidth budget (78.6542ms)
+✔ client extrapolation stops at server-map houses and holds its capped pose on a network stall (0.6197ms)
+✔ tree threshold 39 km/h uses pre-solver speed (12.1636ms)
+✔ tree threshold 40 km/h uses pre-solver speed (1.5755ms)
+✔ tree threshold 41 km/h uses pre-solver speed (0.9992ms)
+✔ tree swept 60 km/h hit preserves progress and removes invisible obstacle (19.2452ms)
+✔ tree swept 120 km/h hit preserves progress and removes invisible obstacle (9.1233ms)
+✔ bin threshold 14 km/h uses pre-solver speed (1.7001ms)
+✔ bin threshold 15 km/h uses pre-solver speed (0.4709ms)
+✔ bin threshold 16 km/h uses pre-solver speed (0.5326ms)
+✔ bin swept 60 km/h hit preserves progress and removes invisible obstacle (8.3872ms)
+✔ bin swept 120 km/h hit preserves progress and removes invisible obstacle (7.3457ms)
+✔ bench threshold 24 km/h uses pre-solver speed (1.4754ms)
+✔ bench threshold 25 km/h uses pre-solver speed (0.4239ms)
+✔ bench threshold 26 km/h uses pre-solver speed (0.4148ms)
+✔ bench swept 60 km/h hit preserves progress and removes invisible obstacle (7.9766ms)
+✔ bench swept 120 km/h hit preserves progress and removes invisible obstacle (6.3321ms)
+✔ lamp threshold 34 km/h uses pre-solver speed (1.5219ms)
+✔ lamp threshold 35 km/h uses pre-solver speed (0.2808ms)
+✔ lamp threshold 36 km/h uses pre-solver speed (0.2597ms)
+✔ lamp swept 60 km/h hit preserves progress and removes invisible obstacle (7.3189ms)
+✔ lamp swept 120 km/h hit preserves progress and removes invisible obstacle (6.7477ms)
+✔ signal threshold 39 km/h uses pre-solver speed (2.3918ms)
+✔ signal threshold 40 km/h uses pre-solver speed (0.7811ms)
+✔ signal threshold 41 km/h uses pre-solver speed (0.2982ms)
+✔ signal swept 60 km/h hit preserves progress and removes invisible obstacle (9.4417ms)
+✔ signal swept 120 km/h hit preserves progress and removes invisible obstacle (10.489ms)
+✔ substantial contact 1.9/2 km/h, prolonged contact and separated re-entry (45.5541ms)
+✔ NPC and debris do not blame player; disabled player and retreat never create offenses (2.0415ms)
+✔ normal orientation works for either contact body order and duplicates form one episode (0.6855ms)
+✔ NPC shoving a stationary player into a prop on the following tick remains uncharged (0.3154ms)
+✔ distant anchored colliders reactivate before an actor sweep; ghosts never reactivate (0.8362ms)
+✔ reverse travel hits physically, grazing uses normal speed rather than speedometer (0.7707ms)
+✔ a following physical car passes the fresh ghost without another impact or offense (7.8419ms)
+✔ immediate alpha, 0.75s simulated lifetime, oldest eviction, reset and repeated dispose (1.1969ms)
+✔ seed42 scene has all types, destroyed signal stays dark across phases/quality, reset and resources (491.2581ms)
+TRAFFIC_STOP_AUDIT {"count":592,"unexplained":0,"reasonCounts":{"intersection-reservation":143,"turn-staging":61,"oncoming-priority":70,"signal-red":260,"queue-wait":191,"blocked-by-leader":160,"signal-yellow":18,"blocked-junction-exit":7,"junction-priority":1},"controllerStall":[],"stagingOnly":[]}
+TRAFFIC_FLOW_PROFILE {"samples":300,"aiMsP95":1.160200000000259,"prepareMsP95":0.5288000000000466,"worldStepMsP95":0.30960000000004584,"physicalMax":6,"logicalMax":59,"physicalAndLogicalBothObserved":true}
+✔ overhead city traffic stays alive for five minutes, including offscreen cars (15186.8597ms)
+✔ cause-aware traffic waits hold across city seeds and road widths (4364.4318ms)
+✔ traffic resumes after reducing a full 300-car congestion load (2399.7223ms)
+✔ following uses bumper orientation, headway, and reaction closing speed (0.7477ms)
+✔ traffic diagnostics tie a long stationary wait to the measured leader footprint (43.657ms)
+✔ sideways displacement is not route progress, lawful waits reset the stall clock (0.1529ms)
+✔ swept passing checks rear traffic, oncoming traffic, and occupied return corridor (0.5045ms)
+✔ passing keeps the entire rotated chassis inside narrow road boundaries (0.509ms)
+✔ passing cannot return with its front bumper beyond the junction stop plane (0.1065ms)
+✔ red queues never pass and resume within three seconds of green in both LOD modes (107.3377ms)
+✔ recovery sees oncoming cars beyond the immediate following cells (12.097ms)
+✔ two touching physical cars separate and regain route progress within fifteen seconds (83.7519ms)
+✔ stalled vehicle without a leader reevaluates its directed route after three seconds (5.9838ms)
+✔ a physically displaced NPC returns to its directed lane without resetting its identity (37.9649ms)
+✔ a clear passing maneuver moves past its blocker and returns to the right lane (81.4681ms)
+✔ a fully occupied retreat corridor keeps a contact jam waiting and is retried (11.693ms)
+✔ physical and logical followers move within three seconds of their leader clearing (46.3478ms)
+✔ blocked dead-end exit waits when no alternative exists and resumes when cleared (35.7921ms)
+✔ blocked junction exit selects a clear detour to the same goal in physical and logical traffic (89.072ms)
+✔ all four occupied exits wait and a newly cleared side street is retried (17.7188ms)
+✔ blocked exit never changes a red-light decision or an already entered junction path (24.938ms)
+✔ entered reservation survives timeouts and route advancement until rear bumper clears (11.6428ms)
+✔ reservation decisions are independent of state iteration order and honor request age (19.8928ms)
+✔ a junction owner finishes turning instead of following the opposing waiting lane (41.4849ms)
+✔ followers close a large gap to a lawful queue instead of stopping with the leader (21.4647ms)
+@colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+{"phase":"driving","elapsed":5503.5649,"playerContacts":276,"localContacts":842,"corrections":[{"steps":669,"replaySteps":605,"corrections":4,"maxCorrection":0.06097656297412275,"maxReplay":19,"lateFrames":0,"replayMs":106.61869999999988,"lastCorrection":0.06097656297412275,"confirmedPositionError":0.0006747243886508819,"skippedReconciliations":73},{"steps":658,"replaySteps":411,"corrections":2,"maxCorrection":0.04034784798699731,"maxReplay":13,"lateFrames":0,"replayMs":67.72199999999862,"confirmedPositionError":0.0001213981696408347,"skippedReconciliations":71,"lastCorrection":0.04034784798699731},{"steps":659,"replaySteps":394,"corrections":0,"maxCorrection":0,"maxReplay":12,"lateFrames":0,"replayMs":69.6605000000011,"confirmedPositionError":0.0006870584277009432,"skippedReconciliations":71}]}
+[Colyseus reconnection]: ⏳ will retry in 0.2 seconds...
+[Colyseus reconnection]: 🔄 Re-establishing sessionId 'FTbgyQNIN' with roomId '4HVSCw5d8'... (attempt 1 of 15)
+[Colyseus reconnection]: ✅ reconnection successful!
+{"playerContacts":292,"localContacts":890,"frameP95":18.047599999999875,"corrections":[{"steps":669,"replaySteps":605,"corrections":4,"maxCorrection":0.06097656297412275,"maxReplay":19,"lateFrames":0,"replayMs":106.61869999999988,"lastCorrection":0.06097656297412275,"confirmedPositionError":0.0006747243886508819,"skippedReconciliations":73},{"steps":658,"replaySteps":411,"corrections":2,"maxCorrection":0.04034784798699731,"maxReplay":13,"lateFrames":0,"replayMs":67.72199999999862,"confirmedPositionError":0.0001213981696408347,"skippedReconciliations":71,"lastCorrection":0.04034784798699731},{"steps":659,"replaySteps":394,"corrections":0,"maxCorrection":0,"maxReplay":12,"lateFrames":0,"replayMs":69.6605000000011,"confirmedPositionError":0.0006870584277009432,"skippedReconciliations":71}],"reconnect":true,"independentRespawn":true,"statusMessages":["Не удалось подключиться: Ошибка undefined","Переподключение… Машина сохранена на 15 секунд.","Соединение восстановлено"]}
+✔ three actual SDK prediction clients collide, respawn independently and recover after reconnect (6420.3406ms)
+@colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+✔ headless city colliders are deterministic and a building blocks a real CarSimulation (370.1249ms)
+✔ three cars share one solver and collide; queued input is consumed only by a tick (114.1655ms)
+✔ real AI helpers create all requested actors, union-zone physics, finite snapshots (527.6554ms)
+✔ input whitelist rejects forged authority, NaN, stale epochs and invalid ranges (0.259ms)
+❌ reconnection token invalid or expired. Did you miss .allowReconnection()?
+👉 https://docs.colyseus.io/room#allow-reconnection
+✔ actual Colyseus SDK: capacity, schema, input ack, late join, reserved reconnect, expiry and cleanup (800.3235ms)
+ℹ tests 86
+ℹ suites 0
+ℹ pass 86
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 22117.4938

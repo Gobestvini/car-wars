@@ -8,10 +8,12 @@ import { captureStreet } from '../../src/multiplayer/street-world.js';
 import { createCityPlan } from '../../src/city-generator.js';
 import { cityColliders, mapContract, mapBytes } from '../../src/multiplayer/map-contract.js';
 import { createRoadGraph, createSeededRandom, chooseRoadGoal, findRoadRoute } from '../../src/traffic-ai.js';
-import { driveControl, followingLimit, edgeProgress } from '../../src/traffic-planner.js';
+import { driveControl, followingLimit, edgeProgress, occupiesJunction } from '../../src/traffic-planner.js';
 import { createTrafficSpawnSlots, isTrafficSpawnSafe } from '../../src/traffic-spawn.js';
 import { createTrafficSignals } from '../../src/traffic-signals.js';
 import { drivingPath, pointOnPath, pathProgress, pathTarget, BuildingIndex } from './road-motion.js';
+import { recoverPropContact } from '../../src/traffic-prop-recovery.js';
+import { footprintsOverlap } from '../../src/traffic-spawn.js';
 
 export { STEP };
 export const heading = q => Math.atan2(2 * (q.x * q.z + q.w * q.y), 1 - 2 * (q.x * q.x + q.y * q.y));
@@ -43,6 +45,8 @@ export class SpikeWorld {
     this.slots = createTrafficSpawnSlots(this.graph.directed);
     this.signals = createTrafficSignals(this.plan.roadNetwork);
     this.buildingIndex=new BuildingIndex(this.plan);this.pathCache=new Map();this.junctionOwners=new Map();
+    this.recoveryObstacles=[...this.plan.buildings,...this.plan.boundaryBuildings]
+      .map(b=>({x:b.x,z:b.z,halfX:b.width/2,halfZ:b.depth/2}));
     this.players = new Map(); this.npcs = []; this.tick = 0; this.steps = 0; this.contacts = 0;
     this.allPhysical = allPhysical; this.slotCursor = 0;
     this.metrics = { stepMs: [], aiMs: [], physicalCounts: [], transitions: 0 };
@@ -132,9 +136,17 @@ export class SpikeWorld {
     const occupants = this.occupants();
     for(const [node,id]of this.junctionOwners){
       const owner=this.npcs.find(a=>a.id===id);
-      if(!owner || owner.edge.to!==node)this.junctionOwners.delete(node);
+      if(!owner || owner.edge.to!==node){this.junctionOwners.delete(node);continue;}
+      const entered=occupiesJunction(this.occupancy(owner),this.graph.nodes.get(node),this.plan.roadWidth);
+      const hasLeader=this.npcs.some(a=>a!==owner&&a.edge.from===owner.edge.from&&a.edge.to===node
+        && edgeProgress(a.sim.body.position,a.edge)>edgeProgress(owner.sim.body.position,owner.edge)+.5);
+      if(!entered && (owner.propBlocker||hasLeader))this.junctionOwners.delete(node);
     }
-    for (const actor of this.npcs) {
+    // An unentered reservation must belong to the front of its lane. Otherwise
+    // the owner waits behind a leader that is itself waiting for that owner.
+    const ordered=[...this.npcs].sort((a,b)=>(a.edge.length-edgeProgress(a.sim.body.position,a.edge))
+      -(b.edge.length-edgeProgress(b.sim.body.position,b.edge)));
+    for (const actor of ordered) {
       const b = actor.sim.body;
       if(!actor.path)this.setPath(actor);
       if(actor.path && pathProgress(b.position,actor.path)>=actor.path.length-.5){
@@ -148,19 +160,47 @@ export class SpikeWorld {
       const current = this.occupancy(actor), fx = Math.sin(current.heading), fz = Math.cos(current.heading);
       const approaching=progress>actor.edge.length-this.plan.roadWidth/2-10;
       let speed = approaching ? 4.5 : 9;
-      for (const other of occupants) if (other.id !== actor.id) speed = Math.min(speed, followingLimit(current, other, fx, fz));
+      actor.waitReason=null;actor.blocker=null;
+      for (const other of occupants) if (other.id !== actor.id) {
+        const limit=followingLimit(current,other,fx,fz);
+        if(limit<speed){speed=limit;actor.blocker=other.id;}
+      }
       const phase = this.signals.phase(actor.edge.to, actor.edge.from, this.tick * STEP);
       const owner=this.junctionOwners.get(actor.edge.to),stopAt=actor.edge.length-this.plan.roadWidth/2-3;
-      if(approaching && !owner && phase.canEnter)this.junctionOwners.set(actor.edge.to,actor.id);
+      const exit=actor.outgoing && {x:actor.outgoing.start.x+Math.sin(actor.outgoing.heading)*(this.plan.roadWidth/2+5),
+        z:actor.outgoing.start.z+Math.cos(actor.outgoing.heading)*(this.plan.roadWidth/2+5),heading:actor.outgoing.heading};
+      const exitBlocker=exit && occupants.find(o=>o.id!==actor.id&&footprintsOverlap(exit,o,1));
+      const laneLeader=this.npcs.find(a=>a!==actor&&a.edge.from===actor.edge.from&&a.edge.to===actor.edge.to
+        && edgeProgress(a.sim.body.position,a.edge)>progress+.5);
+      if(approaching && !owner && phase.canEnter && !exitBlocker && !actor.propBlocker && !laneLeader)this.junctionOwners.set(actor.edge.to,actor.id);
       if(this.junctionOwners.get(actor.edge.to)!==actor.id && approaching)
         speed=Math.min(speed,Math.sqrt(2*5.5*Math.max(0,stopAt-progress)));
+      if(speed<.3)actor.waitReason=approaching&&this.junctionOwners.get(actor.edge.to)!==actor.id
+        ? !phase.canEnter?`signal-${phase.color}`:exitBlocker?'blocked-junction-exit':this.junctionOwners.has(actor.edge.to)?'intersection-reservation'
+          :laneLeader?'blocked-by-leader':null
+        :actor.blocker?'blocked-by-leader':null;
+      if(actor.waitReason==='blocked-junction-exit')actor.blocker=exitBlocker.id;
+      if(actor.waitReason==='intersection-reservation')actor.blocker=this.junctionOwners.get(actor.edge.to)??null;
+      if(actor.waitReason==='blocked-by-leader'&&laneLeader)actor.blocker=laneLeader.id;
       actor.targetSpeed=speed;
       actor.control = driveControl(target.x - b.position.x, target.z - b.position.z, current.heading,
         Math.hypot(b.velocity.x, b.velocity.z), speed);
+      const propContact=this.world.contacts.map(c=>c.bi===b?this.props.byBody.get(c.bj):c.bj===b?this.props.byBody.get(c.bi):null).find(Boolean);
+      const recoveryLook=this.junctionOwners.get(actor.edge.to)===actor.id?8:Math.max(0,Math.min(8,stopAt-progress-.5));
+      const recovery=actor.physical && recoverPropContact(actor,current,actor.path?pathTarget(b.position,actor.path,recoveryLook):target,{
+        props:this.props,contact:propContact,occupants,obstacles:this.recoveryObstacles,dt:12*STEP,
+        waitReason:actor.waitReason??(!phase.canEnter?`signal-${phase.color}`:null),
+        canRecover:Math.abs(b.quaternion.x)<.15&&Math.abs(b.quaternion.z)<.15&&!actor.waitReason?.startsWith('signal-')
+          && actor.waitReason!=='blocked-junction-exit' && actor.waitReason!=='intersection-reservation'
+          && (phase.canEnter || this.junctionOwners.get(actor.edge.to)===actor.id
+            && occupiesJunction(current,this.graph.nodes.get(actor.edge.to),this.plan.roadWidth)),
+      });
+      if(recovery){actor.control=recovery.control;actor.targetSpeed=recovery.targetSpeed;actor.waitReason=recovery.reason;actor.blocker=recovery.blocker;}
       const distance = Math.min(...[...this.players.values()].map(p => p.sim.body.position.distanceTo(b.position)));
       const touching = this.world.contacts.some(c => (c.bi === b && c.bj.mass > 0) || (c.bj === b && c.bi.mass > 0));
       const roadPose=actor.path?pointOnPath(actor.path,pathProgress(b.position,actor.path)):null;
       const aligned=roadPose && Math.hypot(b.position.x-roadPose.x,b.position.z-roadPose.z)<.25 &&
+        Math.cos(current.heading-roadPose.heading)>.995 && !actor.propManeuver &&
         Math.abs(b.quaternion.x)<.1 && Math.abs(b.quaternion.z)<.1 && b.position.y<1.8;
       const physical = this.allPhysical || distance < (actor.physical ? 42 : 32) || touching || (actor.physical && !aligned);
       if (physical !== actor.physical) {
@@ -239,6 +279,20 @@ export class SpikeWorld {
       players: [...this.players.values()].map(actor), actors: this.npcs.map(actor),
       signalTime: this.tick * STEP,props:captureStreet(this.props),
       coverage: 'preview: driving, deformation, wheels and street destruction; no wanted/arrest/pickups/police gameplay' };
+  }
+  npcDiagnostics() {
+    return this.npcs.map(a=>{
+      const b=a.sim.body,progress=a.path?pathProgress(b.position,a.path):edgeProgress(b.position,a.edge);
+      const contacts=this.world.contacts.filter(c=>(c.bi===b||c.bj===b)&&c.bi!==this.owner.ground&&c.bj!==this.owner.ground
+        &&!c.bi.wheelSupport&&!c.bj.wheelSupport).map(c=>{
+          const other=c.bi===b?c.bj:c.bi,prop=this.props.byBody.get(other);
+          return prop?.id??[...this.players.values(),...this.npcs].find(o=>o.sim.body===other)?.id??`static:${other.id}`;
+        });
+      return {id:a.id,physical:a.physical,p:vector(b.position),q:quaternion(b.quaternion),v:vector(b.velocity),
+        edge:[a.edge.from,a.edge.to],progress,targetSpeed:a.targetSpeed,control:{...a.control},
+        reason:a.waitReason,blocker:a.blocker,contacts,owner:this.junctionOwners.get(a.edge.to)??null,
+        phase:this.signals.phase(a.edge.to,a.edge.from,this.tick*STEP),propRecovery:Boolean(a.propManeuver)};
+    });
   }
   dispose() {
     this.props.dispose();

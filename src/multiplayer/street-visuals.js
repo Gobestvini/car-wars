@@ -1,4 +1,4 @@
-import { PROP_LIFETIME, PROP_FADE_SECONDS } from '../street-prop-config.js';
+import { propOpacity } from '../street-prop-config.js';
 
 export class StreetVisuals {
   constructor(){this.entries=new Map();this.previousChanged=new Set();}
@@ -15,7 +15,7 @@ export class StreetVisuals {
         if(e.state==='removed')v.hide?.();
         v.state=e.state;
       }
-      if(e.state==='detached')v.sync?.(e.body,Math.max(0,Math.min(1,(PROP_LIFETIME-physics.clock+e.destroyedAt)/PROP_FADE_SECONDS)));
+      if(e.state==='detached')v.sync?.(e.body,propOpacity(physics.clock-e.destroyedAt));
     }
     this.previousChanged=current;
   }

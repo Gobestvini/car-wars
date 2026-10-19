@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-19T16:09:18.821Z",
+  "head": "8c7a77462f4a694313baa5a4fefa54ac993f6aa1",
+  "files": {
+    "src/traffic-prop-recovery.js": "2cc567adc11b9486cba4afdd7d85b0f6ccd8d3c401b3406f993944305686c9b5",
+    "src/traffic.js": "8e3a1322a0384cf84090b672902ce28b7fb391ed2e60633222b5c6b79c445a9b",
+    "src/main.js": "8151ceca932adf3e3dc9ba0fd3f59452cb74f2f846c328a9238ec9b06891a6b9",
+    "tools/multiplayer-spike/world.js": "724a18dd5a4af12868604454ec4b4a0131f68f33a65873f57062eb22d4256cef",
+    "src/traffic-planner.js": "01affb524ad86753b7b724b5392fc84a10e3b79c54f71b3e390e211f550f3272",
+    "src/street-prop-physics.js": "440101e5c935655b443421fdf4cdb34c9ebf959e70b7669c49536869de2bfda7",
+    "tests/multiplayer-npc-liveness.test.js": "91c0c3532a8ec750a758be827703b4ced55b79afa504013281beeabdfad41807",
+    "tests/npc-sidewalk-fixture.js": "2eb815a1c2dd291a0fdfc2ddd8d452908d7e51d519349bba7e6c8d89c08107c4",
+    "tests/offline-npc-fixture.js": "affbc55239114e93ba1e6b9bb7847556a8d1b4e4b716bab0e424e7a0381c6977",
+    "tests/multiplayer-npc-browser.cjs": "6662982486d43311dd313dcef47b731ec2e2cc9736013b8395df8e595cfdcbb5",
+    "tests/multiplayer-npc-soak.mjs": "d20f07a79cae04da2372bab9e27c0b49240056321c84032f54fce40c37abfc2a"
+  },
+  "receipt": {
+    "version": 1,
+    "node": "v24.19.0",
+    "ok": true,
+    "fingerprint": "6e628113099df3a9a40459114347b222087e5befc116e315cc2254b65d8e02e8",
+    "tests": 0,
+    "build": 0,
+    "at": "2026-10-19T16:01:39.792Z"
+  },
+  "testsSummary": "1..402\n# tests 402\n# suites 0\n# pass 402\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 159800.9417\n",
+  "buildSummary": "dist/assets/three-Cm_UfyD4.js          752.45 kB │ gzip: 195.16 kB\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n✓ built in 1.64s\n"
+}

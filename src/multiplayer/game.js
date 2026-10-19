@@ -11,6 +11,7 @@ import { updateShadowCoverage } from '../shadow-coverage.js';
 import { joystickVector } from '../joystick.js';
 import { directionalInput } from '../driving-input.js';
 import { FrameRateLimiter } from '../game-loop.js';
+import { FOLLOW_CAMERA_FOV, FollowCamera } from '../camera-follow.js';
 import { CarDamageEffects } from '../car-damage-effects.js';
 import { CarDeformation } from '../car-deformation.js';
 import { StreetVisuals } from './street-visuals.js';
@@ -49,8 +50,8 @@ export async function startGame(loadingScreen) {
   renderer.toneMappingExposure=ART_LIGHT.exposure; renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   let quality='high',disposed=false,city=null,signals=null,ready=false,busy=false,lastTime=performance.now(),request=null;
   const scene=new THREE.Scene();scene.background=new THREE.Color(ART.fog);scene.fog=new THREE.Fog(ART.fog,100,260);
-  const camera=new THREE.PerspectiveCamera(38,innerWidth/innerHeight,.1,220);
-  const follow=new THREE.Vector3(),cameraGoal=new THREE.Vector3(),sunOffset=new THREE.Vector3().fromArray(ART_LIGHT.offset);
+  const camera=new THREE.PerspectiveCamera(FOLLOW_CAMERA_FOV,innerWidth/innerHeight,.1,220);
+  const follow=new THREE.Vector3(),followCamera=new FollowCamera(),sunOffset=new THREE.Vector3().fromArray(ART_LIGHT.offset);
   scene.add(new THREE.HemisphereLight(ART_LIGHT.sky,ART_LIGHT.ground,ART_LIGHT.ambient));
   const sun=new THREE.DirectionalLight(ART_LIGHT.sun,ART_LIGHT.intensity);sun.castShadow=true;
   sun.shadow.camera.near=.1;sun.shadow.camera.far=150;sun.shadow.bias=-.0008;sun.shadow.normalBias=.03;sun.shadow.radius=3;
@@ -68,13 +69,13 @@ export async function startGame(loadingScreen) {
   const message=text=>{$('online-message').textContent=text;};
   const readOnlyCity={ addStaticBox:()=>null,addStaticConvex:()=>null,removeStaticBox:()=>{} };
   let streetVisuals=null;
-  function clearModels(){for(const visual of models.values())disposeVisual(visual);models.clear();}
+  function clearModels(){for(const visual of models.values())disposeVisual(visual);models.clear();followCamera.reset();}
   const network=new RoomClient({
     endpoint:import.meta.env.VITE_GAME_SERVER_URL || undefined,
     onStatus:message,
     async onWelcome(data){
       const epoch=++welcomeEpoch;
-      ready=false;network.stop();
+      ready=false;network.stop();followCamera.reset();
       let plan=data.map?.plan;
       if(!plan?.roadNetwork || data.snapshot?.protocolVersion!==1 || !Number.isSafeInteger(plan.seed)) {
         message('Обновите игру: сервер ещё не поддерживает 3D-карту.');ready=false;void network.leave();return;
@@ -237,12 +238,12 @@ export async function startGame(loadingScreen) {
     }
     const focus=own?models.get(own.id).group:null;
     if(focus){
-      const speed=Math.hypot(own.pose[7],own.pose[9]),scale=1+Math.min(.3,speed/100);
-      follow.copy(focus.position);cameraGoal.set(12,20,-17).multiplyScalar(scale).add(follow);
-      camera.position.copy(cameraGoal);
-      camera.lookAt(follow.x,follow.y+.6,follow.z);$('speed').textContent=String(Math.round(speed*3.6));
+      const speed=Math.hypot(own.pose[7],own.pose[9])*3.6;
+      followCamera.update(focus.position,speed,dt,innerWidth,innerHeight,`${own.id}:${own.generation}`);
+      follow.set(focus.position.x,0,focus.position.z);camera.position.copy(followCamera.position);
+      camera.lookAt(followCamera.target.x,followCamera.target.y,followCamera.target.z);$('speed').textContent=String(Math.round(speed));
       city?.occlusion.update(camera,focus,dt);
-    }else{camera.position.set(12,22,-20);camera.lookAt(0,0,0);$('speed').textContent='0';}
+    }else{followCamera.reset();follow.set(0,0,0);camera.position.set(12,22,-20);camera.lookAt(0,0,0);$('speed').textContent='0';}
     sun.position.copy(follow).add(sunOffset);sun.target.position.copy(follow);camera.updateMatrixWorld();updateShadowCoverage(sun,camera);
     if(city&&signals)city.updateSignals(signals,(room?.state?.tick||0)/120,camera,quality);
     if(ready&&network.prediction)streetVisuals?.sync(network.prediction.world.props);
@@ -280,7 +281,9 @@ export async function startGame(loadingScreen) {
   window.__multiplayer={snapshot:()=>({roomId:network.room?.roomId,playerId:network.room?.sessionId,ready,
     tick:network.room?.state?.tick,signature:expectedSignature,actors:lastRenderedActors,
     meshes:models.size,localPhysicsSteps:network.prediction?.metrics.steps??0,prediction:network.prediction?.metrics,
-    predictedTick:network.prediction?.world.tick,rtt:network.rtt,citySeed:network.room?.state?.seed}),renderer:()=>renderer.info.render};
+    predictedTick:network.prediction?.world.tick,rtt:network.rtt,citySeed:network.room?.state?.seed}),
+    camera:()=>({position:camera.position.toArray(),target:[followCamera.target.x,followCamera.target.y,followCamera.target.z],scale:followCamera.scale,subject:followCamera.subject,fov:camera.fov}),
+    renderer:()=>renderer.info.render};
   window.addEventListener('pagehide',()=>{disposed=true;cancelAnimationFrame(request);void network.leave();clearModels();city?.dispose();trafficAssets?.dispose();blur.dispose();renderer.dispose();},{once:true});
   window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
   return{retry:()=>location.reload()};

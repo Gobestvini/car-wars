@@ -1,0 +1,1394 @@
+{
+  "date": "2026-10-19",
+  "errors": [],
+  "matrix": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Лёгкая",
+      "keyboard": 54.715389923817526,
+      "touch": null,
+      "results": [
+        {
+          "type": "bin",
+          "speed": 10,
+          "initial": 10,
+          "after": 2.929039837118434,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": 116.97444,
+            "y": 0.575,
+            "z": -0.9550000000000018
+          },
+          "source": {
+            "x": 116.97444,
+            "z": -0.9550000000000018
+          }
+        },
+        {
+          "type": "bin",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94200468143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": 116.97444,
+            "y": 0.575,
+            "z": -0.9550000000000018
+          },
+          "source": {
+            "x": 116.97444,
+            "z": -0.9550000000000018
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "bench",
+          "speed": 10,
+          "initial": 10,
+          "after": 9.985976877460963,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": 66.48788,
+            "y": 0.63,
+            "z": -100.755
+          },
+          "source": {
+            "x": 66.48788,
+            "z": -100.755
+          }
+        },
+        {
+          "type": "bench",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94200468143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": 66.48788,
+            "y": 0.63,
+            "z": -100.755
+          },
+          "source": {
+            "x": 66.48788,
+            "z": -100.755
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "lamp",
+          "speed": 10,
+          "initial": 10,
+          "after": 9.985976877460963,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": -51.535,
+            "y": 2.105,
+            "z": 16.50356
+          },
+          "source": {
+            "x": -51.535,
+            "z": 16.50356
+          }
+        },
+        {
+          "type": "lamp",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94200468143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": -51.535,
+            "y": 2.105,
+            "z": 16.50356
+          },
+          "source": {
+            "x": -51.535,
+            "z": 16.50356
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "signal",
+          "speed": 10,
+          "initial": 10,
+          "after": 9.983761977460963,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": -85.5,
+            "y": 2.05,
+            "z": -66.5
+          },
+          "source": {
+            "x": -85.5,
+            "z": -66.5
+          }
+        },
+        {
+          "type": "signal",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.93978978143245,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": -85.5,
+            "y": 2.05,
+            "z": -66.5
+          },
+          "source": {
+            "x": -85.5,
+            "z": -66.5
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "tree",
+          "speed": 10,
+          "initial": 10,
+          "after": 7.525626415072834,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": -156.76959400065243,
+            "y": 1.655,
+            "z": -34.24642310441665
+          },
+          "source": {
+            "x": -156.76959400065243,
+            "z": -34.24642310441665
+          }
+        },
+        {
+          "type": "tree",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94089723143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 2.5256543803813827,
+          "lateSize": 2.5256543803813827,
+          "angular": 0,
+          "position": {
+            "x": -156.76959400065243,
+            "y": 1.655,
+            "z": -34.24642310441665
+          },
+          "source": {
+            "x": -156.76959400065243,
+            "z": -34.24642310441665
+          },
+          "expired": "removed"
+        }
+      ],
+      "held": 1,
+      "repeated": 2,
+      "reverse": {
+        "state": "detached",
+        "stars": 1
+      },
+      "signal": {
+        "destroyed": true,
+        "beam": false
+      },
+      "counts": [
+        {
+          "bodies": 1196,
+          "oldest": "removed",
+          "detached": 24,
+          "resetState": true
+        },
+        {
+          "bodies": 1196,
+          "oldest": "removed",
+          "detached": 24,
+          "resetState": true
+        },
+        {
+          "bodies": 1196,
+          "oldest": "removed",
+          "detached": 24,
+          "resetState": true
+        }
+      ],
+      "rounds": [
+        {
+          "seed": 42,
+          "bodies": 1195
+        },
+        {
+          "seed": 42,
+          "bodies": 1195
+        },
+        {
+          "seed": 42,
+          "bodies": 1195
+        }
+      ],
+      "policeReaction": {
+        "before": {
+          "level": 0,
+          "state": "idle"
+        },
+        "after": {
+          "wanted": {
+            "level": 1,
+            "stars": [
+              "filled",
+              "empty",
+              "empty",
+              "empty",
+              "empty",
+              "empty"
+            ],
+            "pendingStar": null,
+            "warningRemaining": 0,
+            "lastViolation": "property-collision",
+            "lastAcceptedAt": 0.8833333333333326
+          },
+          "police": {
+            "id": "police-00",
+            "x": -8.000012686725025,
+            "z": -8.999954023894537,
+            "heading": -0.2500006227956307,
+            "speed": 0.005723327338338756,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 0.9749999999999998,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 22
+            }
+          }
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "quality": "Высокая",
+      "keyboard": 55.882048321826495,
+      "touch": null,
+      "results": [
+        {
+          "type": "bin",
+          "speed": 10,
+          "initial": 10,
+          "after": 2.929040580094893,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": 116.97444,
+            "y": 0.575,
+            "z": -0.9550000000000018
+          },
+          "source": {
+            "x": 116.97444,
+            "z": -0.9550000000000018
+          }
+        },
+        {
+          "type": "bin",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94200468143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": 116.97444,
+            "y": 0.575,
+            "z": -0.9550000000000018
+          },
+          "source": {
+            "x": 116.97444,
+            "z": -0.9550000000000018
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "bench",
+          "speed": 10,
+          "initial": 10,
+          "after": 9.985976877460963,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": 66.48788,
+            "y": 0.63,
+            "z": -100.755
+          },
+          "source": {
+            "x": 66.48788,
+            "z": -100.755
+          }
+        },
+        {
+          "type": "bench",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94200468143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": 66.48788,
+            "y": 0.63,
+            "z": -100.755
+          },
+          "source": {
+            "x": 66.48788,
+            "z": -100.755
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "lamp",
+          "speed": 10,
+          "initial": 10,
+          "after": 9.985976877460963,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": -51.535,
+            "y": 2.105,
+            "z": 16.50356
+          },
+          "source": {
+            "x": -51.535,
+            "z": 16.50356
+          }
+        },
+        {
+          "type": "lamp",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94200468143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": -51.535,
+            "y": 2.105,
+            "z": 16.50356
+          },
+          "source": {
+            "x": -51.535,
+            "z": 16.50356
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "signal",
+          "speed": 10,
+          "initial": 10,
+          "after": 9.983761977460963,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": -85.5,
+            "y": 2.05,
+            "z": -66.5
+          },
+          "source": {
+            "x": -85.5,
+            "z": -66.5
+          }
+        },
+        {
+          "type": "signal",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.93978978143245,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": -85.5,
+            "y": 2.05,
+            "z": -66.5
+          },
+          "source": {
+            "x": -85.5,
+            "z": -66.5
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "tree",
+          "speed": 10,
+          "initial": 10,
+          "after": 7.525626415072834,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": -156.76959400065243,
+            "y": 1.655,
+            "z": -34.24642310441665
+          },
+          "source": {
+            "x": -156.76959400065243,
+            "z": -34.24642310441665
+          }
+        },
+        {
+          "type": "tree",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94089723143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 2.5256543803813827,
+          "lateSize": 2.5256543803813827,
+          "angular": 0,
+          "position": {
+            "x": -156.76959400065243,
+            "y": 1.655,
+            "z": -34.24642310441665
+          },
+          "source": {
+            "x": -156.76959400065243,
+            "z": -34.24642310441665
+          },
+          "expired": "removed"
+        }
+      ],
+      "held": 1,
+      "repeated": 2,
+      "reverse": {
+        "state": "detached",
+        "stars": 1
+      },
+      "signal": {
+        "destroyed": true,
+        "beam": false
+      },
+      "counts": [
+        {
+          "bodies": 1196,
+          "oldest": "removed",
+          "detached": 24,
+          "resetState": true
+        },
+        {
+          "bodies": 1196,
+          "oldest": "removed",
+          "detached": 24,
+          "resetState": true
+        },
+        {
+          "bodies": 1196,
+          "oldest": "removed",
+          "detached": 24,
+          "resetState": true
+        }
+      ],
+      "rounds": [
+        {
+          "seed": 42,
+          "bodies": 1195
+        },
+        {
+          "seed": 42,
+          "bodies": 1195
+        },
+        {
+          "seed": 42,
+          "bodies": 1195
+        }
+      ],
+      "policeReaction": {
+        "before": {
+          "level": 0,
+          "state": "idle"
+        },
+        "after": {
+          "wanted": {
+            "level": 1,
+            "stars": [
+              "filled",
+              "empty",
+              "empty",
+              "empty",
+              "empty",
+              "empty"
+            ],
+            "pendingStar": null,
+            "warningRemaining": 0,
+            "lastViolation": "property-collision",
+            "lastAcceptedAt": 0.8833333333333326
+          },
+          "police": {
+            "id": "police-00",
+            "x": -8.000012686725025,
+            "z": -8.999954023894537,
+            "heading": -0.2500006227956307,
+            "speed": 0.005723327338338756,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 0.9749999999999998,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 22
+            }
+          }
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Лёгкая",
+      "keyboard": 55.882048321826495,
+      "touch": {
+        "speed": 53.63518533313106,
+        "marker": "block"
+      },
+      "results": [
+        {
+          "type": "bin",
+          "speed": 10,
+          "initial": 10,
+          "after": 2.9329276801813844,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": 116.97444,
+            "y": 0.575,
+            "z": -0.9550000000000018
+          },
+          "source": {
+            "x": 116.97444,
+            "z": -0.9550000000000018
+          }
+        },
+        {
+          "type": "bin",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94200468143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": 116.97444,
+            "y": 0.575,
+            "z": -0.9550000000000018
+          },
+          "source": {
+            "x": 116.97444,
+            "z": -0.9550000000000018
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "bench",
+          "speed": 10,
+          "initial": 10,
+          "after": 9.985976877460963,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": 66.48788,
+            "y": 0.63,
+            "z": -100.755
+          },
+          "source": {
+            "x": 66.48788,
+            "z": -100.755
+          }
+        },
+        {
+          "type": "bench",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94200468143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": 66.48788,
+            "y": 0.63,
+            "z": -100.755
+          },
+          "source": {
+            "x": 66.48788,
+            "z": -100.755
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "lamp",
+          "speed": 10,
+          "initial": 10,
+          "after": 9.985976877460963,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": -51.535,
+            "y": 2.105,
+            "z": 16.50356
+          },
+          "source": {
+            "x": -51.535,
+            "z": 16.50356
+          }
+        },
+        {
+          "type": "lamp",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94200468143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": -51.535,
+            "y": 2.105,
+            "z": 16.50356
+          },
+          "source": {
+            "x": -51.535,
+            "z": 16.50356
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "signal",
+          "speed": 10,
+          "initial": 10,
+          "after": 9.983761977460963,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": -85.5,
+            "y": 2.05,
+            "z": -66.5
+          },
+          "source": {
+            "x": -85.5,
+            "z": -66.5
+          }
+        },
+        {
+          "type": "signal",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.93978978143245,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": -85.5,
+            "y": 2.05,
+            "z": -66.5
+          },
+          "source": {
+            "x": -85.5,
+            "z": -66.5
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "tree",
+          "speed": 10,
+          "initial": 10,
+          "after": 7.525626415072834,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": -156.76959400065243,
+            "y": 1.655,
+            "z": -34.24642310441665
+          },
+          "source": {
+            "x": -156.76959400065243,
+            "z": -34.24642310441665
+          }
+        },
+        {
+          "type": "tree",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94089723143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 2.5256543803813827,
+          "lateSize": 2.5256543803813827,
+          "angular": 0,
+          "position": {
+            "x": -156.76959400065243,
+            "y": 1.655,
+            "z": -34.24642310441665
+          },
+          "source": {
+            "x": -156.76959400065243,
+            "z": -34.24642310441665
+          },
+          "expired": "removed"
+        }
+      ],
+      "held": 1,
+      "repeated": 2,
+      "reverse": {
+        "state": "detached",
+        "stars": 1
+      },
+      "signal": {
+        "destroyed": true,
+        "beam": false
+      },
+      "counts": [
+        {
+          "bodies": 1196,
+          "oldest": "removed",
+          "detached": 24,
+          "resetState": true
+        },
+        {
+          "bodies": 1196,
+          "oldest": "removed",
+          "detached": 24,
+          "resetState": true
+        },
+        {
+          "bodies": 1196,
+          "oldest": "removed",
+          "detached": 24,
+          "resetState": true
+        }
+      ],
+      "rounds": [
+        {
+          "seed": 42,
+          "bodies": 1195
+        },
+        {
+          "seed": 42,
+          "bodies": 1195
+        },
+        {
+          "seed": 42,
+          "bodies": 1195
+        }
+      ],
+      "policeReaction": {
+        "before": {
+          "level": 0,
+          "state": "idle"
+        },
+        "after": {
+          "wanted": {
+            "level": 1,
+            "stars": [
+              "filled",
+              "empty",
+              "empty",
+              "empty",
+              "empty",
+              "empty"
+            ],
+            "pendingStar": null,
+            "warningRemaining": 0,
+            "lastViolation": "property-collision",
+            "lastAcceptedAt": 0.7749999999999997
+          },
+          "police": {
+            "id": "police-00",
+            "x": -8.000012686725025,
+            "z": -8.999954023894537,
+            "heading": -0.2500006227952216,
+            "speed": 0.005723327338338738,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 0.8666666666666665,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 22
+            }
+          }
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "quality": "Высокая",
+      "keyboard": 55.59077180881763,
+      "touch": {
+        "speed": 53.63518533313105,
+        "marker": "block"
+      },
+      "results": [
+        {
+          "type": "bin",
+          "speed": 10,
+          "initial": 10,
+          "after": 2.9329276801813844,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": 116.97444,
+            "y": 0.575,
+            "z": -0.9550000000000018
+          },
+          "source": {
+            "x": 116.97444,
+            "z": -0.9550000000000018
+          }
+        },
+        {
+          "type": "bin",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94200468143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": 116.97444,
+            "y": 0.575,
+            "z": -0.9550000000000018
+          },
+          "source": {
+            "x": 116.97444,
+            "z": -0.9550000000000018
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "bench",
+          "speed": 10,
+          "initial": 10,
+          "after": 9.985976877460963,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": 66.48788,
+            "y": 0.63,
+            "z": -100.755
+          },
+          "source": {
+            "x": 66.48788,
+            "z": -100.755
+          }
+        },
+        {
+          "type": "bench",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94200468143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": 66.48788,
+            "y": 0.63,
+            "z": -100.755
+          },
+          "source": {
+            "x": 66.48788,
+            "z": -100.755
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "lamp",
+          "speed": 10,
+          "initial": 10,
+          "after": 9.985976877460963,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": -51.535,
+            "y": 2.105,
+            "z": 16.50356
+          },
+          "source": {
+            "x": -51.535,
+            "z": 16.50356
+          }
+        },
+        {
+          "type": "lamp",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94200468143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": -51.535,
+            "y": 2.105,
+            "z": 16.50356
+          },
+          "source": {
+            "x": -51.535,
+            "z": 16.50356
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "signal",
+          "speed": 10,
+          "initial": 10,
+          "after": 9.983761977460963,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": -85.5,
+            "y": 2.05,
+            "z": -66.5
+          },
+          "source": {
+            "x": -85.5,
+            "z": -66.5
+          }
+        },
+        {
+          "type": "signal",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.93978978143245,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 1,
+          "lateSize": 1,
+          "angular": 0,
+          "position": {
+            "x": -85.5,
+            "y": 2.05,
+            "z": -66.5
+          },
+          "source": {
+            "x": -85.5,
+            "z": -66.5
+          },
+          "expired": "removed"
+        },
+        {
+          "type": "tree",
+          "speed": 10,
+          "initial": 10,
+          "after": 7.525626415072834,
+          "state": "intact",
+          "stars": 1,
+          "events": 1,
+          "physical": true,
+          "angular": 0,
+          "position": {
+            "x": -156.76959400065243,
+            "y": 1.655,
+            "z": -34.24642310441665
+          },
+          "source": {
+            "x": -156.76959400065243,
+            "z": -34.24642310441665
+          }
+        },
+        {
+          "type": "tree",
+          "speed": 60,
+          "initial": 60,
+          "after": 59.94089723143246,
+          "state": "detached",
+          "stars": 1,
+          "events": 1,
+          "physical": false,
+          "firstAlpha": 0.445,
+          "lateAlpha": 0.29500000000000004,
+          "firstSize": 2.5256543803813827,
+          "lateSize": 2.5256543803813827,
+          "angular": 0,
+          "position": {
+            "x": -156.76959400065243,
+            "y": 1.655,
+            "z": -34.24642310441665
+          },
+          "source": {
+            "x": -156.76959400065243,
+            "z": -34.24642310441665
+          },
+          "expired": "removed"
+        }
+      ],
+      "held": 1,
+      "repeated": 2,
+      "reverse": {
+        "state": "detached",
+        "stars": 1
+      },
+      "signal": {
+        "destroyed": true,
+        "beam": false
+      },
+      "counts": [
+        {
+          "bodies": 1196,
+          "oldest": "removed",
+          "detached": 24,
+          "resetState": true
+        },
+        {
+          "bodies": 1196,
+          "oldest": "removed",
+          "detached": 24,
+          "resetState": true
+        },
+        {
+          "bodies": 1196,
+          "oldest": "removed",
+          "detached": 24,
+          "resetState": true
+        }
+      ],
+      "rounds": [
+        {
+          "seed": 42,
+          "bodies": 1195
+        },
+        {
+          "seed": 42,
+          "bodies": 1195
+        },
+        {
+          "seed": 42,
+          "bodies": 1195
+        }
+      ],
+      "policeReaction": {
+        "before": {
+          "level": 0,
+          "state": "idle"
+        },
+        "after": {
+          "wanted": {
+            "level": 1,
+            "stars": [
+              "filled",
+              "empty",
+              "empty",
+              "empty",
+              "empty",
+              "empty"
+            ],
+            "pendingStar": null,
+            "warningRemaining": 0,
+            "lastViolation": "property-collision",
+            "lastAcceptedAt": 0.7749999999999997
+          },
+          "police": {
+            "id": "police-00",
+            "x": -8.000012686725025,
+            "z": -8.999954023894537,
+            "heading": -0.2500006227953079,
+            "speed": 0.005723327338338761,
+            "targetId": "player",
+            "state": "follow",
+            "waitReason": null,
+            "damage": 0,
+            "operational": true,
+            "damageStage": "healthy",
+            "pursuit": {
+              "state": "follow",
+              "stateSince": 0.8666666666666665,
+              "targetId": "player",
+              "lastContactAt": null,
+              "noProgressTime": 0,
+              "recoveryUntil": 0,
+              "targetStoppedTime": 0,
+              "stalledTime": 0,
+              "escapePhase": null,
+              "wantedLevel": 1,
+              "profile": {
+                "level": 1,
+                "maxSpeed": 22,
+                "leadSeconds": 0.15,
+                "ramDistance": 0,
+                "canMaintainBlock": false
+              },
+              "desiredSpeedLimit": 22
+            }
+          }
+        }
+      }
+    }
+  ],
+  "screenshots": [
+    "1440-low-bench.png",
+    "1440-low-lamp.png",
+    "1440-low-bin.png",
+    "1440-low-signal.png",
+    "1440-low-tree.png",
+    "1440-high-bench.png",
+    "fade-bench-early.png",
+    "fade-bench-middle.png",
+    "fade-bench-gone.png",
+    "1440-high-lamp.png",
+    "fade-lamp-early.png",
+    "fade-lamp-middle.png",
+    "fade-lamp-gone.png",
+    "1440-high-bin.png",
+    "fade-bin-early.png",
+    "fade-bin-middle.png",
+    "fade-bin-gone.png",
+    "1440-high-signal.png",
+    "fade-signal-early.png",
+    "fade-signal-middle.png",
+    "fade-signal-gone.png",
+    "1440-high-tree.png",
+    "fade-tree-early.png",
+    "fade-tree-middle.png",
+    "fade-tree-gone.png",
+    "390-low-bench.png",
+    "390-low-lamp.png",
+    "390-low-bin.png",
+    "390-low-signal.png",
+    "390-low-tree.png",
+    "390-high-bench.png",
+    "390-high-lamp.png",
+    "390-high-bin.png",
+    "390-high-signal.png",
+    "390-high-tree.png"
+  ],
+  "profiles": []
+}

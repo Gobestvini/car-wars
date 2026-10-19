@@ -59,14 +59,14 @@ class HostedDrivingRoom extends DrivingSpikeRoom {
   }
   onAuth(client,options){
     super.onAuth(client,options);
-    if(options.presentationVersion!==4)throw Error('Game version outdated; reload the page');
+    if(options.presentationVersion!==5)throw Error('Game version outdated; reload the page');
     return true;
   }
   welcome(client) {
     const data = super.welcome(client);
     data.map.plan = this.sim.plan;
     Object.assign(data.map,this.sim.map);
-    data.presentationVersion = 4;
+    data.presentationVersion = 5;
     return data;
   }
   onJoin(client){this.meter(client);this.sim.addPlayer(client.sessionId);}
@@ -113,7 +113,7 @@ export async function startHostedServer({ port = 2577, host = '0.0.0.0' } = {}) 
   const bundle = await build({ entryPoints: [fileURLToPath(new URL('client.js', import.meta.url))],
     bundle: true, write: false, format: 'esm', platform: 'browser', minify: true });
   app.use((req, res, next) => { res.set('Cache-Control', 'no-store'); next(); });
-  app.get('/health', (_, res) => res.json({ ok: true, prototype: true, transport: 'ws', mapVersion:3,motionVersion:4,activeRooms,maxRooms }));
+  app.get('/health', (_, res) => res.json({ ok: true, prototype: true, transport: 'ws', mapVersion:3,motionVersion:5,activeRooms,maxRooms }));
   app.get('/client.js', (_, res) => res.type('text/javascript').send(bundle.outputFiles[0].text));
   if (process.env.GAME_STATIC_DIR) {
     app.use(express.static(process.env.GAME_STATIC_DIR, { index: false }));

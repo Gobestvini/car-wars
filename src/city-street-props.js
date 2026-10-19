@@ -3,8 +3,9 @@ import { createStreetPropPlacements } from './street-prop-placement.js';
 import { createSurfaceHeightSampler } from './road-surface.js';
 import { PROP_PHYSICS } from './street-prop-config.js';
 
-/** Move the original instance slots, sharing GPU assets even while detached. */
-export function createPropInstanceVisual(parts, source) {
+/** Hide only the broken slots; fade independent proxies at their original size. */
+export function createPropInstanceVisual(parts, source, fadePool) {
+  const owner = { id: source.id };
   const original = parts.map(({batch,index}) => {
     const matrix = new THREE.Matrix4(); batch.getMatrixAt(index,matrix);
     return { batch,index,matrix };
@@ -23,12 +24,14 @@ export function createPropInstanceVisual(parts, source) {
     }
   };
   return {
-    sync(body, amount) {
-      position.copy(body.position); rotation.copy(body.quaternion); scale.setScalar(amount);
-      delta.compose(position,rotation,scale).multiply(inverse); write(delta);
+    sync(body, alpha) {
+      write(delta.makeScale(0,0,0));
+      position.copy(body.position); rotation.copy(body.quaternion); scale.setScalar(1);
+      delta.compose(position,rotation,scale).multiply(inverse);
+      fadePool.sync(owner,original,delta,alpha);
     },
-    hide() { write(delta.makeScale(0,0,0)); },
-    restore() { write(delta.identity()); },
+    hide() { fadePool.release(owner);write(delta.makeScale(0,0,0)); },
+    restore() { fadePool.release(owner);write(delta.identity()); },
   };
 }
 

@@ -43,13 +43,19 @@ for(const type of ['bin','bench','lamp','signal','tree'])test(`${type}: server i
     }
     const index=server.props.entries.indexOf(prop),local=predicted.props.entries[index];
     assert.equal(prop.state,'detached');assert.equal(local.state,'detached');
+    assert.equal(server.world.bodies.includes(prop.body),false);
+    assert.equal(predicted.world.bodies.includes(local.body),false);
     const first=captureStreet(predicted.props);predicted.restore(initial);
     for(let t=0;t<12;t++)predicted.step(p.id,idle);
     const repeated=captureStreet(predicted.props);
     assert.equal(repeated.length,first.length);
     for(let i=0;i<first.length;i++)first[i].forEach((n,j)=>assert.ok(Math.abs(n-repeated[i][j])<(j<2?1e-7:j<9?.025:.2), `index ${i}:${j} ${n} != ${repeated[i][j]}`));
     const late=new PredictionWorld(server.colliders,p.id);late.restore(frame(server));
-    assert.equal(late.props.entries[index].state,'detached');late.dispose();
+    assert.equal(late.props.entries[index].state,'detached');
+    assert.equal(late.world.bodies.includes(late.props.entries[index].body),false);
+    const remaining=late.props.entries[index].destroyedAt;
+    late.restore(frame(server));assert.equal(late.props.entries[index].destroyedAt,remaining);
+    assert.equal(late.world.bodies.includes(late.props.entries[index].body),false);late.dispose();
     for(let t=0;t<610;t++){server.input(p.id,{seq:12+t,...idle});server.step();}
     assert.equal(prop.state,'removed');
     predicted.restore(frame(server));assert.equal(predicted.props.entries[index].state,'removed');

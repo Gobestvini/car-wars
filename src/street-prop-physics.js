@@ -1,5 +1,5 @@
 import * as C from 'cannon-es';
-import { PROP_PHYSICS, PROP_LIFETIME, PROP_FADE_SECONDS, PROP_DEBRIS_LIMIT, PROP_CRIME_KMH } from './street-prop-config.js';
+import { PROP_PHYSICS, PROP_LIFETIME, propOpacity, PROP_DEBRIS_LIMIT, PROP_CRIME_KMH } from './street-prop-config.js';
 
 const vec = values => new C.Vec3(...values);
 const unitAxes = [vec([1,0,0]),vec([0,1,0]),vec([0,0,1])];
@@ -63,9 +63,9 @@ export class StreetPropPhysics {
       world.addContactMaterial(contact); return contact;
     });
   }
-  makeBody(entry, dynamic = false) {
+  makeBody(entry) {
     const spec = PROP_PHYSICS[entry.type];
-    const body = new C.Body({ mass: dynamic ? spec.mass : 0, material: this.material,
+    const body = new C.Body({ mass: 0, material: this.material,
       linearDamping: .15, angularDamping: .25, allowSleep: true });
     body.collisionFilterGroup = 4; // props are obstacles, never wheel-ray supports
     body.position.set(entry.x,entry.y + spec.height/2,entry.z);
@@ -112,15 +112,13 @@ export class StreetPropPhysics {
     while (this.debris.length >= PROP_DEBRIS_LIMIT) this.remove(this.debris[0]);
     this.byBody.delete(entry.body); this.world.removeBody(entry.body);
     this.activeIntact.delete(entry);
-    entry.body = this.makeBody(entry,true);
-    entry.active = true;
+    // Keep only a pose carrier for snapshots/visuals. No replacement body may
+    // enter World: the first breaking hit must be the last physical contact.
+    entry.active = false;
+    entry.body.velocity.setZero(); entry.body.angularVelocity.setZero();
+    entry.body.force.setZero(); entry.body.torque.setZero();
     entry.state = 'detached'; entry.destroyedAt = this.clock;
     this.changedEntries.add(entry);
-    // Apply at bumper height, below the centre of tall poles, to topple them.
-    const mass = PROP_PHYSICS[entry.type].mass;
-    const impulse = Math.min(speed/3.6 * mass * .65, mass * 16);
-    const point = new C.Vec3(-normal.x*.08, Math.min(actor.body.position.y-entry.body.position.y,0), -normal.z*.08);
-    entry.body.applyImpulse(new C.Vec3(normal.x*impulse,0,normal.z*impulse),point);
     entry.onDetach?.();
     this.debris.push(entry);
   }
@@ -131,7 +129,7 @@ export class StreetPropPhysics {
     this.velocities = new Map(actors.map(actor => [actor.body,actor.body.velocity.clone()]));
     // Anchored bodies are needed only along physical actors' swept footprints.
     // Their stable shapes/poses remain allocated, and are reinserted BEFORE the
-    // world step. Detached debris never participates in this activation cull.
+    // world step. Detached pose carriers never return to collision physics.
     const nearby = new Map(actors.map(actor => [actor,this.candidates(actor.body,dt)]));
     const needed = new Set([...nearby.values()].flat());
     for (const entry of this.activeIntact) if (!needed.has(entry)) {
@@ -213,8 +211,7 @@ export class StreetPropPhysics {
   }
   syncVisuals() {
     for (const entry of this.debris) {
-      const scale = Math.min(1,Math.max(0,(PROP_LIFETIME-(this.clock-entry.destroyedAt))/PROP_FADE_SECONDS));
-      entry.sync?.(entry.body,scale);
+      entry.sync?.(entry.body,propOpacity(this.clock-entry.destroyedAt));
     }
   }
   remove(entry) {

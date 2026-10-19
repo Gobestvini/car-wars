@@ -16,7 +16,9 @@ export const PROP_PHYSICS = Object.freeze({
     ...[3.5,3.05,2.6].map(y => box(.15,.15,.15,0,y,.22)),
   ] },
 });
-export const PROP_LIFETIME = 5;
-export const PROP_FADE_SECONDS = .5;
+export const PROP_LIFETIME = .75;
+export const PROP_FADE_SECONDS = PROP_LIFETIME;
+export const PROP_GHOST_ALPHA = .45;
+export const propOpacity = age => PROP_GHOST_ALPHA * Math.max(0, Math.min(1, 1 - age / PROP_FADE_SECONDS));
 export const PROP_DEBRIS_LIMIT = 24;
 export const PROP_CRIME_KMH = 2;

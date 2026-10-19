@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-19",
+  "errors": [],
+  "observations": [
+    {
+      "id": "bin:0",
+      "state": "detached",
+      "physical": false,
+      "alpha": [
+        0.334999998956918,
+        0.334999998956918,
+        0.334999998956918
+      ],
+      "npcPresent": true
+    },
+    {
+      "id": "bin:0",
+      "state": "detached",
+      "physical": false,
+      "alpha": [
+        0.334999998956918,
+        0.334999998956918,
+        0.334999998956918
+      ],
+      "npcPresent": true
+    },
+    {
+      "id": "bin:0",
+      "state": "detached",
+      "physical": false,
+      "alpha": [
+        0.2499999989569138,
+        0.2499999989569138,
+        0.2499999989569138
+      ],
+      "npcPresent": true
+    }
+  ],
+  "actor": {
+    "id": "npc-0",
+    "role": "civilian",
+    "physical": true
+  },
+  "newRoom": {
+    "room": "hMCUDGUA0",
+    "state": "intact",
+    "registry": "intact",
+    "ghosts": 0
+  }
+}

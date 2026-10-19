@@ -45,15 +45,16 @@ export function restoreStreet(physics,states,time) {
     if(e.state!==state){
       physics.world.removeBody(e.body);physics.byBody.delete(e.body);physics.activeIntact.delete(e);
       e.active=false;
-      if(state!=='removed'){
-        e.body=physics.makeBody(e,state==='detached');e.active=true;
-        if(state==='intact')physics.activeIntact.add(e);
+      if(state==='intact'){
+        e.body=physics.makeBody(e);e.active=true;
+        physics.activeIntact.add(e);
       }
       e.state=state;
     }
     e.episode=false;e.lastTouch=-Infinity;
     if(state!=='intact')physics.changedEntries.add(e);
     if(state!=='detached')continue;
+    physics.world.removeBody(e.body);physics.byBody.delete(e.body);physics.activeIntact.delete(e);e.active=false;
     e.destroyedAt=time-s[1];const b=e.body;
     b.position.set(...s.slice(2,5));b.quaternion.set(...s.slice(5,9));b.velocity.set(...s.slice(9,12));b.angularVelocity.set(...s.slice(12,15));
     b.previousPosition.copy(b.position);b.previousQuaternion.copy(b.quaternion);b.force.setZero();b.torque.setZero();

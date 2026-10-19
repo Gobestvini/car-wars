@@ -11,6 +11,7 @@ import { ObjectPool } from './object-pool.js';
 import { FrameIntervals } from './frame-intervals.js';
 import { TireTracks, DEFAULT_SKID_THRESHOLD, DEFAULT_TRACK_INTENSITY } from './tire-tracks.js';
 import { smoothCameraScale, targetCameraScale } from './camera-distance.js';
+import { FOLLOW_CAMERA_FOV, followCameraPose } from './camera-follow.js';
 import { createCityPlan, ROAD_WIDTH } from './city-generator.js';
 import { containsCityPoint, nextRoundPlan } from './city-layout.js';
 import { createCityScene } from './city-scene.js';
@@ -138,7 +139,7 @@ renderer.toneMappingExposure = ART_LIGHT.exposure;
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(ART.fog);
 scene.fog = new THREE.Fog(ART.fog, 100, 260);
-const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.1, 200);
+const camera = new THREE.PerspectiveCamera(FOLLOW_CAMERA_FOV, innerWidth / innerHeight, 0.1, 200);
 const miniatureBlur = createMiniatureBlur(renderer);
 miniatureBlur.setStrength(savedDefaults.blurStrength);
 miniatureBlur.setFocusSize(savedDefaults.blurFocusSize / 100);
@@ -152,7 +153,6 @@ if (orbitControls) {
   orbitControls.maxPolarAngle = Math.PI / 2 - 0.01;
 }
 const follow = new THREE.Vector3();
-const cameraOffset = new THREE.Vector3(12, 20, -17);
 const cameraLookAt = new THREE.Vector3();
 let cameraDistanceScale = 1;
 let shadowBounds = null;
@@ -182,7 +182,7 @@ const randomSeed = () => crypto.getRandomValues(new Uint32Array(1))[0];
 let cityPlan = createCityPlan(pinnedSeed ?? (damageTest ? undefined : randomSeed()), { roadWidth: savedDefaults.roadWidth });
 const citySpawnBounds = plan => ({minX:-plan.bounds,maxX:plan.bounds,minZ:-plan.bounds,maxZ:plan.bounds,
   contains:(x,z)=>containsCityPoint(plan,x,z)});
-let cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : []);
+let cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : [], { destructibleTrees: true });
 let buildingEntries = cityState.entries;
 let buildingOcclusion = cityState.occlusion;
 const spawnObstaclesForPlan = plan => [...[...plan.buildings,...(plan.boundaryBuildings||[])].map(building => ({ x: building.x, z: building.z,
@@ -214,6 +214,7 @@ const policeEffectsPool = new ObjectPool({ capacity: 2, create: () => new CarDam
 const damagePreview = debug ? Number(new URLSearchParams(location.search).get('damagePreview') || 0) : 0;
 const traffic = createVehicleRuntime(scene, THREE, savedDefaults.trafficCount, cityPlan.roadNetwork,
   cityPlan.roadWidth, trafficSpawnObstacles, citySpawnBounds(cityPlan));
+traffic.setStreetProps(cityState.propPhysics);
 traffic.setAppearanceEffects(spawnEffects);
 traffic.registerRole('police', { maxCount: 2, physicalOnly: true,
   create: ({ targetId }) => createPolicePursuit({ targetId }),
@@ -648,9 +649,10 @@ function rebuildCity(roadWidth, preparedPlan = null) {
   tracks.setSurfaceHeightSampler(pickupSurfaceHeight);
   repairPickups = new RepairPickupManager(cityPlan, damageTest ? damageTestObstacles : [], { disabled: damageTest });
   repairPickupVisuals = new RepairPickupVisuals(scene, repairPickups.placements, pickupSurfaceHeight);
-  cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : []);
+  cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : [], { destructibleTrees: true });
   trafficSpawnObstacles = spawnObstaclesForPlan(cityPlan);
   traffic.setRoadNetwork(cityPlan.roadNetwork, cityPlan.roadWidth, trafficSpawnObstacles, citySpawnBounds(cityPlan));
+  traffic.setStreetProps(cityState.propPhysics);
   trafficSignals = createTrafficSignals(cityPlan.roadNetwork);
   traffic.setSignalController(trafficSignals);
   buildingEntries = cityState.entries;
@@ -668,8 +670,7 @@ function updateCamera(dt) {
   cameraLookAt.copy(follow); cameraLookAt.y = 0.5;
   if (cameraMode === 'follow') {
     // Scale the fixed offset around the fixed aim point so speed changes distance, never camera angle.
-    const viewportScale = innerWidth < 700 ? 1.05 : innerHeight < 500 ? 0.82 : 1;
-    camera.position.copy(cameraLookAt).addScaledVector(cameraOffset, cameraDistanceScale * 1.4 * viewportScale);
+    followCameraPose(car.position, cameraDistanceScale, innerWidth, innerHeight, camera.position, cameraLookAt);
     camera.lookAt(cameraLookAt);
   } else orbitControls?.update();
   camera.updateMatrixWorld();
@@ -718,7 +719,7 @@ function resize() {
   renderer.setSize(innerWidth, innerHeight);
   miniatureBlur.resize(innerWidth, innerHeight, renderer.getPixelRatio());
   camera.aspect = innerWidth / innerHeight;
-  camera.fov = 50;
+  camera.fov = FOLLOW_CAMERA_FOV;
   camera.updateProjectionMatrix();
 }
 window.addEventListener('resize', resize); resize(); updateCamera(1);
@@ -955,7 +956,7 @@ window.carLab = {
   setMiniatureBlurFocusY: value => miniatureBlur.setDebugFocusY(value, debug),
   shadow: () => ({ ...shadowBounds, mapSize: sun.shadow.mapSize.toArray(), enabled: renderer.shadowMap.enabled }),
   trails: () => ({ visible: tracks.mesh.visible }),
-  camera: () => ({ position: camera.position.toArray(), target: cameraMode === 'free' ? orbitControls.target.toArray() : cameraLookAt.toArray(), mode: cameraMode, scale: cameraDistanceScale, far: camera.far, fogNear: scene.fog.near, fogFar: scene.fog.far, orientation: camera.rotation.toArray(),
+  camera: () => ({ position: camera.position.toArray(), target: cameraMode === 'free' ? orbitControls.target.toArray() : cameraLookAt.toArray(), fov:camera.fov, mode: cameraMode, scale: cameraDistanceScale, far: camera.far, fogNear: scene.fog.near, fogFar: scene.fog.far, orientation: camera.rotation.toArray(),
     projectCar: () => {
       const point = car.position.clone(); point.y += 0.8;
       const screen = point.project(camera);
