@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-24",
+  "screen_count": 20,
+  "technical_passed": true,
+  "source_pngs_unchanged": true,
+  "total_png_bytes": 39834869,
+  "dimensions": [
+    [
+      853,
+      1844
+    ]
+  ],
+  "manual_review": {
+    "reviewed": true,
+    "scope": "Composition, English copy, primary actions, family palette, six-star counts, 3+1 lobby, matching five-card energy prices.",
+    "refinement": "Card placement regenerated from city gameplay to remove star currency and helicopter and align prices 2/3/2/2/3.",
+    "limitations": [
+      "Raster concepts, not editable UI or runtime screens; no game code was changed.",
+      "Safe-area insets, hit targets, font sizes and contrast are design intentions, not measured DOM constraints.",
+      "Camera framing, roadblock geometry and map are illustrative; actual endpoint safety requires game road data.",
+      "Landscape, tablet layouts, physical-device testing and game behavior were not validated.",
+      "Some fine text, icons and hero proportions vary between generated screens; normalize in implementation."
+    ]
+  }
+}

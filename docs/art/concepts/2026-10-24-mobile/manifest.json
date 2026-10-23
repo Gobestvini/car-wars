@@ -1,0 +1,644 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "art_direction_brief": "README.md",
+  "purpose": "Raster concept mockups for existing and planned Car Stars mobile flows",
+  "logical_viewport": [
+    390,
+    844
+  ],
+  "platform": "mobile portrait",
+  "language": "English",
+  "production_imported": false,
+  "visual_locks": [
+    "sunny miniature city",
+    "blue roofs",
+    "navy/cream tactile UI",
+    "gold racer",
+    "cyan city",
+    "five energy cards",
+    "three racers plus one city"
+  ],
+  "assets": [
+    {
+      "id": "01-loading",
+      "title": "Loading",
+      "path": "01-loading.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 2041102,
+        "sha256": "3fa433d24f5899a8f4f7bc46b1b9120b8cddbc98a23844deef5e7ddd3d3a532e"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "02-menu-racer",
+      "title": "Menu — Racer",
+      "path": "02-menu-racer.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 2189057,
+        "sha256": "92296d96cea2f088227daaf166be7c63d57832ca66806d2a2c5f375d672372c6"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "03-menu-city",
+      "title": "Menu — City",
+      "path": "03-menu-city.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 2239728,
+        "sha256": "6b2738353b03f7f1dc48ddc337575649b118d0a2c397390c54d18a9b23135331"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "04-play-with-friends",
+      "title": "Play with friends",
+      "path": "04-play-with-friends.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 1954222,
+        "sha256": "798882ef6d34ad6cc10eff7b8cec6ba0594fcbc0d8c1e8a11ee2a19e2424d9ee"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "05-room-lobby",
+      "title": "Room lobby",
+      "path": "05-room-lobby.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 2018329,
+        "sha256": "558ab5bb03828cb3e7b0b87c8281d8bf81af20234d34611a259dbe21ffba0c5a"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "06-gameplay-racer",
+      "title": "Gameplay — Racer",
+      "path": "06-gameplay-racer.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 1948457,
+        "sha256": "b9c114182adfcacd249553f1e5b78c1b8bdf6b77eb316ed5022e14be918d1e44"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "07-gameplay-city",
+      "title": "Gameplay — City",
+      "path": "07-gameplay-city.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 2386668,
+        "sha256": "2ed74d3bde2d04f9de17785fc25c31648790a1311723134bef9231b7aa7b90c9"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "08-city-card-placement",
+      "title": "City card placement",
+      "path": "08-city-card-placement.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 2366478,
+        "sha256": "c1bdacd988374387240d6865571cd9acb2249b5cb9516dd561e9700e77855139"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "09-pause",
+      "title": "Pause",
+      "path": "09-pause.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 1803575,
+        "sha256": "dc0f11f19f93d05341960bc162a807df83390dc00345ecbf1fdbfb0ad84b6f32"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "10-settings",
+      "title": "Settings",
+      "path": "10-settings.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 1647526,
+        "sha256": "4e1372b421c619b8134c0c0923c669725ae2fae6d241251cf3129d362f224380"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "11-racer-victory",
+      "title": "Racer victory",
+      "path": "11-racer-victory.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 1914377,
+        "sha256": "9515cfef554360eed1e67d3c2e9e03368592cdcf0d37ce3653faf6f87dabc5dd"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "12-racer-busted",
+      "title": "Racer busted",
+      "path": "12-racer-busted.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 1985348,
+        "sha256": "018549005f2ce852a6a6843f55c13f602f1abb7cf3665597cc2728580cd1e5ad"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "13-city-victory",
+      "title": "City victory",
+      "path": "13-city-victory.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 1967614,
+        "sha256": "ad1e109975a8f6052608f4dc66eeecdb61f137ca9632b9b869573b1324ca2ae9"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "14-city-defeat",
+      "title": "City defeat",
+      "path": "14-city-defeat.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 1883597,
+        "sha256": "2580756f97c0b40bb3ecb99f13075e5b7fa87187d12f52386e73154367575df8"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "15-spectating",
+      "title": "Captured — Spectating",
+      "path": "15-spectating.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 1934342,
+        "sha256": "41ad66b397fbf535c7a2a3fe813e2f3cc73323b5a83c3eae2611a2b54ffd45c1"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "16-reconnecting",
+      "title": "Reconnecting",
+      "path": "16-reconnecting.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 1922262,
+        "sha256": "96c9af75883709d98f254969a995518a9c376404daf0c0af81133c5754a3a2b3"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "17-connection-error",
+      "title": "Connection error",
+      "path": "17-connection-error.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 1919518,
+        "sha256": "d70f8485a1a8de2f27b7d8e6324aa6ab6fabddbe67cedef1363b25202cf96769"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "18-loading-error",
+      "title": "Loading error",
+      "path": "18-loading-error.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 2018008,
+        "sha256": "6bf024e889620025e019f25f9cb7e4ac3f1712ebcbcf2f82bc6db97aec472dd2"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "19-settings-car",
+      "title": "Settings — Car",
+      "path": "19-settings-car.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 1638942,
+        "sha256": "afa231d14078e6d7f7f0488eadcb59f324eaafd0095be5be977e380443e63578"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    },
+    {
+      "id": "20-match-countdown",
+      "title": "Match countdown",
+      "path": "20-match-countdown.png",
+      "status": "concept-visual-reviewed",
+      "technical": {
+        "dimensions": [
+          853,
+          1844
+        ],
+        "mode": "RGB",
+        "alpha_extrema": null,
+        "bytes": 2055719,
+        "sha256": "9fde64a7290f679a4c641550816546dde79686c96ecf2a67e649cc009586881b"
+      },
+      "source": {
+        "kind": "generated",
+        "tool": "built-in image_gen.imagegen",
+        "created_at": "2026-10-24",
+        "prompt": "prompts.json",
+        "terms": "AI-generated; no third-party asset license assigned; model version not disclosed."
+      },
+      "verification": {
+        "decodes": true,
+        "portrait_ratio": true,
+        "source_bytes_preserved": true,
+        "visual_inspection": "Generated full-size outputs and 390px-wide sheets reviewed.",
+        "in_engine_reviewed": false,
+        "physical_device_tested": false
+      }
+    }
+  ]
+}
