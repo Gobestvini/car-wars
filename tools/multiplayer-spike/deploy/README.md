@@ -1,5 +1,16 @@
 # Hosted 3D multiplayer
 
+Source update TASK-0098, 2026-10-23: `npm run server:start` runs this hosted
+entrypoint on port2577; `npm run server:dev` watches/restarts it during local
+development. Install root dependencies and `npm ci --prefix tools/multiplayer-spike`
+first; use Node22.23.3, as pinned in Docker. A restart loses ephemeral rooms.
+Protocol1 now requires presentation6/build `carwars-ws-6`/map3/generator `city-1`.
+Update browser and server together. A loading seat has no player body until
+verified `map-ready`; reconnect repeats verification. Loading20s, reconnect15s,
+input1KiB/60Hz, transport4KiB/120Hz, output256KiB per socket; full snapshots use
+bounded32KiB chunks. [Contract and limits](../../../docs/knowledge/multiplayer-rooms.md).
+These source changes were tested locally and were not deployed to the live URL below.
+
 Source update, 2026-10-23 (TASK-0097; deployment below was not repeated): the
 hosted adapter now creates the same `src/simulation/game-world.js` as offline.
 It includes 102 civilians, up to three players, three baseline/six expanded

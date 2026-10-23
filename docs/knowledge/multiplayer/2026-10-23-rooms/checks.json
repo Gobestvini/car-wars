@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "node": "v22.23.3",
+  "ok": true,
+  "fingerprint": "ec02b607cda1e71ee8d6c1831fa4082610d11472b649d4feb237185d7d6408b9",
+  "tests": 0,
+  "build": 0,
+  "at": "2026-10-23T21:40:48.680Z",
+  "testCount": 427,
+  "scope": "working tree verification; unrelated local automation edits preserved and excluded from own-only commit"
+}

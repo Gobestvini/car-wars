@@ -1,3 +1,5 @@
+import {JOIN_OPTIONS} from '../../../src/multiplayer/protocol.js';
+import {prepareRoom} from '../../../src/multiplayer/sdk-handshake.js';
 import { Client } from '@colyseus/sdk';
 import { decodeFrame } from '../../../src/multiplayer/frame-codec.js';
 const $ = id => document.getElementById(id);
@@ -10,14 +12,16 @@ async function connect(id) {
   if (busy || room) return;
   busy = true; buttons(); status('Подключение…');
   try {
-    const r = id ? await sdk.joinById(id, { protocolVersion: 1,presentationVersion:5 }) : await sdk.create('driving', { protocolVersion: 1,presentationVersion:5 });
+    const r = id ? await sdk.joinById(id, JOIN_OPTIONS) : await sdk.create('driving', JOIN_OPTIONS);
     room = r; seq = 0;
-    r.onMessage('welcome', data => { map = data.map; });
+    await prepareRoom(r);const plan=r.welcome.map.plan;map={
+      roads:plan.roadSegments.map(({from,to})=>[from.x,from.z,to.x,to.z]),
+      buildings:[...plan.buildings,...plan.boundaryBuildings].map(b=>[b.x,b.z,b.width,b.depth])};
     r.onMessage('full', () => {});
     r.onMessage('frame',bytes=>{r.motionFrame=decodeFrame(bytes);});
     r.onError((code, message) => status(`Ошибка ${code}: ${message}`));
     r.onLeave(() => { if (room === r) { room = null; map = null; keys.clear(); buttons(); status('Соединение закрыто. Можно войти снова.'); } });
-    r.send('hello');
+
     $('room').value = r.roomId;
     const invite = new URL(location.href); invite.search = ''; invite.searchParams.set('room', r.roomId);
     $('invite').value = invite.href;
@@ -44,7 +48,7 @@ setInterval(() => {
   if (!room?.connection?.isOpen) return;
   const throttle = Number(keys.has('w') || keys.has('arrowup')) - Number(keys.has('s') || keys.has('arrowdown'));
   const steer = Number(keys.has('a') || keys.has('arrowleft')) - Number(keys.has('d') || keys.has('arrowright'));
-  room.send('input', { roundId: 'round-1', seq: ++seq, throttle, steer, brake: throttle === 0 ? 1 : 0 });
+  room.send('input', { roundId:room.serverRoundId,generation:room.motionFrame?.actors.get(room.sessionId)?.generation??1, seq: ++seq, throttle, steer, brake: throttle === 0 ? 1 : 0 });
 }, 1000 / 30);
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);

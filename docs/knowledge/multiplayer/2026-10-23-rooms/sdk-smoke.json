@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "endpoint": "http://127.0.0.1:55516",
+  "checks": [
+    "3 independent clients",
+    "102 civilians + 3 police",
+    "same map",
+    "4th rejected",
+    "shared movement and applied input",
+    "reconnect preserves identity",
+    "2-room cap",
+    "proxy-safe error JSON",
+    "authoritative 3D map",
+    "individual rate-limited respawn"
+  ],
+  "signature": "bf1558fbca969f9d3b8d1460a0e44f035640e6c3fea2a13e9ba56a55a9247286",
+  "node": "v22.23.3",
+  "date": "2026-10-23"
+}

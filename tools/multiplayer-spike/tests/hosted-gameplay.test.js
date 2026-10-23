@@ -28,6 +28,7 @@ test('hosted production core replicates personal wanted/arrest, role-safe police
     await clients[2].connect(first.roomId);
     await until(()=>clients[2].gameplay?.players.find(p=>p.id===a.id)?.arrest.state==='arrested');
     assert.equal(b.arrest.snapshot().state,'idle');
+    assert.ok(!clients[2].events.some(e=>e.type==='arrested'&&e.playerId===a.id),'late join seeds event history without replay');
     const generations=[a.generation,b.generation],signature=world.signature;
     clients[0].respawn();await until(()=>a.generation===generations[0]+1);
     await until(()=>clients.every(c=>c.gameplay?.players.find(p=>p.id===a.id).wanted.level===0));

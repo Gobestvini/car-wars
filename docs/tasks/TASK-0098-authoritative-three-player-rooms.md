@@ -1,6 +1,6 @@
 # TASK-0098: Создать authoritative серверные комнаты на трёх игроков
 
-- Статус: ready
+- Статус: done
 - Приоритет: high
 - Создана: 2026-10-14
 - Обновлена: 2026-10-23
@@ -12,15 +12,15 @@
 
 Эта сверка имеет приоритет над историческим baseline и будущими путями ниже. Общий core реализован поверх `25bac72` и принят независимым QA TASK-0097 2026-10-23; чужие локальные изменения не входят в её результат. Общая карта выпуска: [что осталось до сетевого релиза](../knowledge/multiplayer-release-readiness.md).
 
-**Уже реализовано:** DrivingSpikeRoom и HostedDrivingRoom уже обеспечивают реальные SDK-сессии, лимит 3, 15 с reconnect, input validation/ack, binary frames, map/version checks и индивидуальный respawn.
+**Реализовано:** Hosted room использует GameWorld0097, map-ready с nonce/signature/build/round, loading timeout без player body, атомарные3 места с reservations, bounded input/output/full transfers, события и durable DTO, независимые deadline scheduler60Hz/patch20Hz, безопасный reconnect/leave/dispose и изоляцию ошибок. Публичные config/tuning не меняют серверные102 civilian.
 
-**Остаётся:** Общий GameWorld, police/wanted/arrest/repair и gameplay DTO реализованы и приняты в TASK-0097; повторять их перенос не нужно. Нужны map-ready/timeout перед активацией машины, backpressure/slow-reader, adversarial/capacity-race и независимая приёмка полного lifecycle.
+**Границы:** правила GameWorld не переносились повторно. Остаток этого этапа — независимый QA и его замечания, если обнаружатся. Online HUD/cancel/устройства —0099; окончательная WAN/bandwidth/stall матрица —0100; эксплуатационная выкладка и sizing —0101. Публичный сервер не обновлён. [Контракт и пределы](../knowledge/multiplayer-rooms.md).
 
-**Статус `ready`:** зависимости 0096/0097 приняты, можно выполнять перечисленные остатки на существующих core/room adapters. Реализация остатка 0098 и её независимая приёмка предстоят.
+Статус в шапке и INDEX отражает текущую разработку/передачу/решение независимого QA. Исполнитель не выставляет done.
 
 Архитектурное уточнение: запрет online solver ниже относится к первоначальному server-only варианту. С 2026-10-18 выбран и реализован non-authoritative client prediction/reconciliation, см. [план](../knowledge/multiplayer-server-plan.md) и [проверки prediction](../knowledge/multiplayer-client-prediction.md). Authority, AI, damage и игровые транзакции остаются серверными. Первоначальный no-go TASK-0096 нельзя автоматически применять к текущему клиенту; его отрицательные измерения сохранены как история, а итоговые budgets всё ещё требуют проверки. Не менять стек и не удалять prediction ради выполнения устаревшего текста.
 
-Фактические пути после реализации 0097: `src/simulation/{game-world,vehicle-runtime}.js`, `tools/multiplayer-spike/{server,deploy/server}.js`, `src/multiplayer/{game,room-client,frame-codec,snapshot-buffer,prediction,prediction-world,map-contract,street-world}.js`. Hosted adapter создаёт GameWorld; `tools/multiplayer-spike/world.js` остаётся research harness. Не создавать второй `server/` ради старых имён. Автопроверки: `node tools/verify.js --full` и соответствующие `tools/multiplayer-spike/tests/*`; не восстанавливать удалённый Telegram verifier. [Контракт общего core](../knowledge/multiplayer-shared-core.md), [свежие проверки](../knowledge/multiplayer/2026-10-23-core/README.md).
+Фактические пути0098: `tools/multiplayer-spike/{hosted-room,room-clock}.js`, `src/multiplayer/{protocol,transfers,sdk-handshake}.js`; после реализации0097: `src/simulation/{game-world,vehicle-runtime}.js`, `tools/multiplayer-spike/{server,deploy/server}.js`, `src/multiplayer/{game,room-client,frame-codec,snapshot-buffer,prediction,prediction-world,map-contract,street-world}.js`. Hosted adapter создаёт GameWorld; `tools/multiplayer-spike/world.js` остаётся research harness. Не создавать второй `server/` ради старых имён. Автопроверки: `node tools/verify.js --full` и соответствующие `tools/multiplayer-spike/tests/*`; не восстанавливать удалённый Telegram verifier. [Контракт общего core](../knowledge/multiplayer-shared-core.md), [свежие проверки](../knowledge/multiplayer/2026-10-23-core/README.md).
 
 Прежние пустые отметки критериев означают отсутствие полной приёмки, а не отсутствие всей реализации. Исторические артефакты 18–19 октября перечислены в общей карте; чтение этих отчётов не считается новым запуском тестов или новой QA-приёмкой.
 
@@ -77,12 +77,12 @@ Scheduler на monotonic time с fixed STEP120, bounded catch-up, независ
 
 ## 6. Критерии готовности
 
-- [ ] Три настоящие SDK-сессии управляют независимыми машинами, четвёртая получает full error; гонка последнего места не создаёт четвёртое тело.
-- [ ] Server snapshots всех клиентов описывают один мир, late join содержит pickups/props/damage и актуальную карту.
-- [ ] Неверные/повторные/чужие команды не меняют authority, stale input тормозит; spam не ломает комнату.
-- [ ] Reconnect сохраняет playerId до grace, после timeout/leave слот освобождён, две комнаты не делят bodies/state.
-- [ ] Обязательные проверки ниже выполнены и записаны фактически; ограничения и невыполненные пункты перечислены.
-- [ ] Отчёт заполнен; после разработки статус ready-for-qa и INDEX синхронизированы. done разрешён только независимому QA.
+- [x] Три настоящие SDK-сессии управляют независимыми машинами, четвёртая получает full error; гонка последнего места не создаёт четвёртое тело.
+- [x] Server snapshots всех клиентов описывают один мир, late join содержит pickups/props/damage и актуальную карту.
+- [x] Неверные/повторные/чужие команды не меняют authority, stale input тормозит; spam не ломает комнату.
+- [x] Reconnect сохраняет playerId до grace, после timeout/leave слот освобождён, две комнаты не делят bodies/state.
+- [x] Обязательные проверки ниже выполнены и записаны фактически; ограничения и невыполненные пункты перечислены.
+- [x] Отчёт заполнен; после разработки статус ready-for-qa и INDEX синхронизированы. done разрешён только независимому QA.
 
 ## 7. Проверки
 
@@ -123,9 +123,36 @@ QA повторяет обязательные сценарии независи
 - Исторические проверки: см. ссылки общей карты; не объявлены повторёнными сегодня.
 - Итоговый статус: `blocked`, 2026-10-23. `done` только после выполнения остатка и независимого QA.
 
+### Реализация lifecycle и сетевых пределов, 2026-10-23
+
+- База `7f3dc5e`; чужие локальные правки сохранены. Старый аудит выше описывает состояние до этого этапа. Текущие точки работы — existing hosted adapters, без параллельного сервера или изменения игрового UI.
+- Реализовано: map-ready handshake с server nonce/roundId/build/map signature; loading20с без машины,3 места вместе с reservations. Shared protocol constants: protocol1/presentation6/build carwars-ws-6/map3/generator city-1. Browser/server обновляются вместе; текущая публичная версия не проверена и не обновлялась.
+- Input1КиБ/60пакетов в секунду, transport4КиБ/120room frames в секунду, bounded future commands и actual ack,250мс silence brake с очисткой future queue, round/generation/seq/requestId validation, повторный respawn/cooldown защищены и после reconnect. Ordinary input epoch меняется до signed-int32 exhaustion без reset gameplay/pose.
+- Исходящий socket cap256КиБ, медленный reader отключается с возможностью штатной resync. Welcome/full больше cap, поэтому одна bounded transfer/socket, максимум2МиБ и32КиБ chunks, deadline10с. Hello/full/ping/respawn rate-limited, unknown/malformed/oversize изолированы от solver.
+- Server-only config/102 civilian, durable full DTO и bounded events/dedup; individual respawn сохраняет мир. Framework обеспечивает atomic seats/reservations. Reconnect15с сохраняет actor/id, новый socket повторяет map-ready; expiry/leave очищают body/targets, последний клиент/reservation — комнату. Graceful shutdown сообщает об исчезновении ephemeral room. Ошибка одной комнаты не останавливает другую.
+- Hosted state использует Schema5 schema()/t builders; research state сохранён. Независимые monotonic deadlines60Hz scheduler и20Hz patch, максимум10 fixed physics steps/callback, AI10Hz. Histories/queues/meters ограничены; dispose останавливает таймеры и обнуляет resource counts. Номинальные и измеренные частоты различаются в отчёте.
+- Команды запуска добавлены в root package: `npm run server:start` — hosted entrypoint на2577, `npm run server:dev` — watch/restart. Зависимости root и tools/multiplayer-spike уже установлены; новых библиотек не добавлялось. README уточняет Node22.23.3 и потерю комнат при restart.
+- Targeted acceptance: `node --test tests/multiplayer-room.test.js tests/multiplayer-protocol.test.js`,8/8 на Node22.23.3; настоящие SDK/transport, гонка последнего места, map-ready/deadline, mismatched build, same-frame authority, late join/durable state, invalid/stale/foreign/oversize/truncated/spam, silence/future queue, epoch/respawn, token другой комнаты, expiry/leave/isolation/fault, настоящий paused TCP socket и shutdown.
+- Реальные5с/16с и20 lifecycle циклов: `node tests/multiplayer-room-lifecycle.mjs`, passed=true. После5с сохраняется actor/id и neutral применяется сразу; после16с token отвергается, новый join получает другую identity/full snapshot. Все20 dispose оставляют0 bodies/pending/transfers/meters. Измерено120.071Hz physics,59.899Hz scheduler,20.008Hz patch, droppedSeconds0/maxDebt47.56мс; это локальный loopback, не WAN/VPS SLA.
+- Hosted regression11/11: spike, hosted room/gameplay/prediction/destruction/repair/version на Node22.23.3. Browser Edge/WebGL3 клиента: high/low, damage/wheels/repair, late join/reconnect/new room; passed=true/errors=[]. Физического телефона нет, performance устройства не заявляется.
+- Финальный `node tools/verify.js --full` на официальном Node22.23.3: **427/427 + Vite build1.84с**, `.checks.json` ok=true, tests/build0, fingerprint `ec02b607cda1e71ee8d6c1831fa4082610d11472b649d4feb237185d7d6408b9`; отдельный matchingReceipt подтвердил неизменность входов. Только штатное предупреждение размера bundle. [Артефакты и команды](../knowledge/multiplayer/2026-10-23-rooms/README.md).
+- Неудачные попытки: inherited onMessage добавлял callback вместо замены — отключена базовая регистрация hosted. Welcome278КиБ несовместим с cap256 — введён chunk transfer. Старый interval дал40/16.46Hz — заменён deadline scheduler, старое измерение сохранено отдельно. Первоначальные malformed bytes были допустимым unknown message — fixture заменён реальным truncated MessagePack. Искусственная grace300мс не выдержала негативный cross-room token HTTP round trip — fixture использует3с, а отдельный ручной harness проверяет настоящие15с. Начальная передача теперь засеивает dedup из верхнего snapshot.events, чтобы late join не воспроизводил старый арест; добавлена SDK регрессия. Квитанция во время source edits не считается итоговой.
+- Передача и независимое решение записываются в шапке/разделе11; исполнитель не выставляет done.
+
 ## 11. Отчёт QA
 
-Не проводилась.
+### Независимая приёмка, 2026-10-23
+
+- Решение: **принято (`done`)**. Отдельный QA-контекст; реализация не исправлялась. Проверена база `7f3dc5efb0309314f8404d13d20d5b816474c019` с рабочим diff0098. Зависимости0096/0097 — `done`. Соседние automation/H3 и чужие локальные изменения не принимаются этим отчётом.
+- Критерий1: SDK suite8/8 подтвердил3 места, отказ лишним join и гонку6 клиентов за последнюю позицию без четвёртого actor. Дополнительный независимый SDK fixture подтвердил три разных control, applied ack15 и физическое перемещение каждой машины.
+- Критерий2: same-tick actor frames совпадают; late join/full содержат актуальные map signature/round, damage/wheels, pickups и tombstones props. Собственный fixture отдельно подтвердил signalTime, отсутствие historical event replay и ровно одно новое событие. Hosted gameplay regression проверила поздний вход после ареста.
+- Критерий3:8/8 покрывает forbidden actorId/wanted/dt/transform, неверные round/generation/seq, silence250мс, bounded future queue, malformed MessagePack, input/transport overflow и spam. Здоровые peers/другая комната продолжают получать state. Реальный paused TCP reader достигает backpressure/drop с socket cap256КиБ; graceful shutdown предупреждает клиента.
+- Критерий4: самостоятельно повторены реальные5с/16с при default grace15с: прежние identity/actor и neutral при первом возврате, rejection старого token и новый identity/full после expiry. Token другой комнаты отвергнут. Явный leave, expiry, fault isolation и20 полных lifecycle циклов оставили0 bodies/pending/transfers/meters; scheduler/patch timers очищены.
+- Критерии5/6: собственные `node --test tests/multiplayer-room.test.js tests/multiplayer-protocol.test.js` —8/8; семь hosted/spike suites —11/11; `node tests/multiplayer-room-lifecycle.mjs` и собственный `qa/independent-sdk.mjs` —exit0. Node22.23.3. `server:start/server:dev` и назначение сверены с `deploy/README.md`, hosted entrypoint реально запущен SDK/browser fixtures.
+- Browser Edge/WebGL: самостоятельно повторён `tests/multiplayer-repair-browser.cjs` с `ARTIFACT_DIR=.../qa/browser`:3 клиента, desktop/high и portrait/low, damage/repair/wheels, late join, reconnect, leave/new room; passed=true, errors=[]. Снимки desktop/portrait до/после ремонта просмотрены QA.
+- Финальные tests/build ведущего переиспользованы по правилам навыка только после независимого вызова `matchingReceipt(process.cwd())` в том же Node22.23.3. Fingerprint `ec02b607cda1e71ee8d6c1831fa4082610d11472b649d4feb237185d7d6408b9`, tests/build exit0; журналы прочитаны QA:427/427 и Vite build1.84с. Новые файлы QA только в docs и не меняют fingerprint.
+- Короткий реальный участок21.947с: physics120.018Hz, scheduler59.899Hz, patch20.017Hz, droppedSeconds0, maxDebt51.38мс. Code review/unit подтвердили monotonic independent deadlines и bounded10 physics steps/callback. Публичный сервер/WAN budgets/VPS sizing/физический телефон не проверялись; это не обязательные сценарии0098 и не заявленный результат.
+- Блокирующих замечаний нет. Первоначальное неверное ожидание собственной fixture о непустом DTO intact props исправлено по контракту implicit manifest; повторный прогон прошёл без правок реализации. Полная матрица, команды, JSON и PNG: [независимые артефакты QA](../knowledge/multiplayer/2026-10-23-rooms/qa/README.md).
 
 ## Рекомендация модели исполнителя
 

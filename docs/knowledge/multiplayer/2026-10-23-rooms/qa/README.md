@@ -1,0 +1,22 @@
+# Независимый QA TASK-0098, 2026-10-23
+
+Решение: **принято**. Проверена база `7f3dc5efb0309314f8404d13d20d5b816474c019` с рабочими изменениями0098. Исходники QA не менял. Соседние automation/H3 и чужие staged/unstaged файлы не входят в решение.
+
+Среда: Windows, официальный оптимизированный Node22.23.3, настоящий Colyseus SDK/WebSocket на ephemeral loopback ports, серверные102 civilian. Browser: Edge headless WebGL, desktop1440×900/high и portrait390×844/low с touch emulation, третий viewport844×390. Это локальная функциональная приёмка; публичная выкладка, физический телефон, WAN budgets и VPS sizing не проверялись и относятся к следующим этапам.
+
+| Проверка | Фактический результат |
+| --- | --- |
+| `node --test tests/multiplayer-room.test.js tests/multiplayer-protocol.test.js` | 8/8, exit0. Реальные SDK capacity/race, loading/map-ready, actual ack, forged/stale/oversize/truncated/spam, future queue/silence, epochs/respawn, token scope/expiry, две комнаты/fault isolation, настоящий paused TCP reader, cap256КиБ, shutdown warning/cleanup. |
+| `ARTIFACT_DIR=.../qa node tests/multiplayer-room-lifecycle.mjs` | Exit0, [lifecycle.json](lifecycle.json). Реальные5/16с; сначала прежние actor/id и немедленный neutral, затем старый token отвергнут и новый full join. Все20 create/leave/dispose циклов: bodies/pending/transfers/meters0. |
+| `node docs/knowledge/multiplayer/2026-10-23-rooms/qa/independent-sdk.mjs` | Exit0, [fixture](independent-sdk.mjs), [результат](independent-sdk.json). Три разных управления применены на tick309 с ack15, перемещения0.525/1.440/0.883м. Late join не воспроизводит историческое событие, новое событие приходит один раз; full содержит карту, три машины,4колеса/машину, signalTime и tombstone удалённого prop. |
+| `PLAYWRIGHT_MODULE=<installed Playwright> ARTIFACT_DIR=.../qa/browser node tests/multiplayer-repair-browser.cjs` | Exit0, [browser-report](browser/browser-report.json): passed=true/errors=[]. Три 3D клиента, high/low, authoritative repair/wheels/damage, late join, reconnect, leave/new room. Снимки ниже просмотрены QA. |
+| `node --test tools/multiplayer-spike/tests/{spike,hosted-room,hosted-repair,hosted-prop-version,hosted-prediction,hosted-gameplay,hosted-destruction}.test.js` | 11/11, exit0. В команде фактически перечислены7 отдельных путей; braces здесь сокращают запись. Включён поздний вход после ареста без повторного эффекта. |
+| `node tools/verify.js --full`, финальный прогон ведущего | Переиспользован только после независимого `matchingReceipt(process.cwd())` в Node22.23.3: [квитанция](checks-matched.json), fingerprint `ec02b607cda1e71ee8d6c1831fa4082610d11472b649d4feb237185d7d6408b9`. QA прочитал `.check-logs/tests.log`:427/427; build: Vite1.84с, tests/build exit0. Квитанция включает сохранённое чужое рабочее дерево и не подтверждает авторство соседних изменений. |
+
+Измерение в реальном участке21.947с: physics120.018Hz, scheduler59.899Hz, patch20.017Hz, droppedSeconds0, maxDebt51.38мс; p95 интервалов30.42/62.83мс. Это короткое наблюдение cadence под Windows, не performance SLA. Code review и unit подтверждают independent deadlines и bounded10 physics steps/callback; AI остаётся10Hz общего core.
+
+Контракт запуска сверён: root `server:start` вызывает hosted entrypoint, `server:dev` — тот же entrypoint с `--watch`; точное назначение и потеря ephemeral rooms при restart записаны в `tools/multiplayer-spike/deploy/README.md`. Сам entrypoint/factory многократно запущен реальными SDK/browser fixtures. Отдельный watch/restart процесс не измерялся.
+
+Снимки: [desktop damage](browser/desktop-damaged.png), [desktop repair](browser/desktop-repaired.png), [portrait before](browser/portrait-before.png), [portrait repair](browser/portrait-repaired.png). После ремонта model geometry возвращается к исходной, wheel detach flags0, pickup исчезает; desktop и portrait сохраняют рабочую сцену и органы управления.
+
+Блокирующих замечаний нет. Первоначальная собственная QA fixture ошибочно ожидала непустой props DTO при нетронутом городе; `captureStreet` корректно кодирует intact props неявно через подписанный manifest. Fixture исправлена: оператор удаляет prop, после чего full обязан содержать его tombstone. Это исправление проверки, без изменения реализации. Ожидаемые library logs о несовместимой версии, переполненном payload и истёкшем токене относятся к негативным сценариям. Локальные `.log` игнорируются Git; устойчивые доказательства сохранены в JSON/fixture/PNG и этой матрице.

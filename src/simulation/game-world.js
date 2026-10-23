@@ -117,18 +117,22 @@ export class GameWorld {
   timedInput(id,packet){const a=this.players.get(id);
     if(!a||!a.connected||a.generation!==packet?.generation||a.arrest.snapshot().state==='arrested'||!Array.isArray(packet.commands)||packet.commands.length>120)return false;
     if(packet.commands.some(c=>!Array.isArray(c)||c.length!==5||!Number.isSafeInteger(c[0])||!controlsValid({steer:c[1],throttle:c[2],brake:c[3]})))return false;
-    a.timed=true;a.pending=null;
-    for(const [tick,steer,throttle,brake,handbrake]of packet.commands)if(tick>this.tick&&tick<=this.tick+120&&!a.commands.has(tick))
-      a.commands.set(tick,{steer,throttle,brake,handbrake:Boolean(handbrake)});
-    return true;
+    a.timed=true;a.pending=null;let added=0;
+    for(const [tick,steer,throttle,brake,handbrake]of packet.commands)if(tick>this.tick&&tick<=this.tick+120&&!a.commands.has(tick)){
+      a.commands.set(tick,{steer,throttle,brake,handbrake:Boolean(handbrake)});added++;
+    }
+    if(added)a.packetTick=this.tick;
+    return added>0;
   }
+  rotateInputEpoch(id){const a=this.players.get(id);if(!a)return;this.halt(id);a.generation++;a.lastSeq=a.receivedSeq=-1;a.lastAppliedTick=0;
+    a.dentGeneration=a.generation;this.gameplayRevision++;}
   halt(id){const a=this.players.get(id);if(!a)return;a.commands.clear();a.pending=null;a.control=neutral();a.lastInputTick=this.tick;}
   disconnect(id){const a=this.players.get(id);if(a){a.connected=false;this.halt(id);}}
   respawn(id){const a=this.players.get(id);if(!a)return false;const p=this.spawnSlot();
     a.sim.spawn={x:p.x,y:.96+this.surfaceHeight(p.x,p.z),z:p.z,yaw:p.heading};a.sim.reset();a.generation++;
     a.wanted.reset();a.arrest.reset();a.violations.reset();a.dents=[];a.dentGeneration=a.generation;
     this.halt(id);a.lastSeq=a.receivedSeq=-1;a.lastAppliedTick=0;this.props.forgetPlayer(id);this.gameplayRevision++;return true;}
-  event(type,playerId,data={}){this.events.push({id:`${this.round}:${++this.eventSerial}`,tick:this.tick,playerId,type,...data});if(this.events.length>64)this.events.shift();}
+  event(type,playerId,data={}){this.events.push({id:`${this.round}:${++this.eventSerial}`,tick:this.tick,playerId,type,...data});if(this.events.length>64)this.events.shift();this.gameplayRevision++;}
   updatePolice(){
     if(!this.autoPolice)return;
     const eligible=[...this.players.values()].filter(p=>p.connected&&!p.sim.appearing&&p.arrest.snapshot().state!=='arrested'&&p.wanted.snapshot().level>0);
@@ -158,7 +162,8 @@ export class GameWorld {
         const safe=isTrafficSpawnSafe(this.occupancy(a),this.occupants().filter(o=>o.id!==a.id),this.obstacles,0);
         if(a.appearance.advance(STEP,safe)){sim.appearing=false;this.world.addBody(sim.body);sim.attachDamageListener();this.halt(a.id);}
       }
-      if(a.timed){const c=a.commands.get(this.tick+1);if(c&&a.connected&&!sim.appearing){a.control=c;a.lastSeq=a.lastAppliedTick=this.tick+1;a.lastInputTick=this.tick;}
+      if(a.timed){if(this.tick-(a.packetTick??-Infinity)>=30)this.halt(a.id);
+        const c=a.commands.get(this.tick+1);if(c&&a.connected&&!sim.appearing){a.control=c;a.lastSeq=a.lastAppliedTick=this.tick+1;a.lastInputTick=this.tick;}
         for(const t of a.commands.keys())if(t<=this.tick+1)a.commands.delete(t);}
       if(a.pending&&a.connected&&!sim.appearing){const {seq,...c}=a.pending;a.control=c;a.lastSeq=seq;a.lastAppliedTick=this.tick+1;a.lastInputTick=this.tick;a.pending=null;}
       if(!a.enabled||!a.connected||sim.appearing||a.arrest.snapshot().state==='arrested'||this.tick-a.lastInputTick>=30)this.halt(a.id);

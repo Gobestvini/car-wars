@@ -1,6 +1,6 @@
 # TASK-0099: Подключить онлайн-режим и отображение трёх игроков
 
-- Статус: blocked
+- Статус: ready
 - Приоритет: high
 - Создана: 2026-10-14
 - Обновлена: 2026-10-23
@@ -14,13 +14,13 @@
 
 **Уже реализовано:** src/multiplayer/game.js и room-client.js уже дают 3D город, create/join/invite, три машины, управление keyboard/touch, damage/dents/props, personal respawn и reconnect. Задачи 0107–0109 приняты QA 19 октября.
 
-**Остаётся:** Зависимость TASK-0097 принята; TASK-0098 ещё не завершена. Серверные police/wanted/arrest и DTO уже есть, police отображаются своей моделью; нужен полный online HUD wanted/arrest. Repair принят QA в TASK-0110 и повторён на новом core. Также нужны cancel во время connect/map-loading, полноценный cleanup и матрица минимум двух независимых устройств/браузеров.
+**Остаётся:** Зависимости TASK-0097/0098 приняты независимым QA. Серверные police/wanted/arrest и DTO уже есть, police отображаются своей моделью; нужен полный online HUD wanted/arrest. Repair принят QA в TASK-0110 и повторён на новом core. Также нужны cancel во время connect/map-loading, полноценный cleanup и матрица минимум двух независимых устройств/браузеров.
 
-**Статус `blocked`:** частично реализовано, продолжение и приёмка зависят от перечисленных незавершённых этапов; это не пустой черновик и не готовый релиз.
+**Статус `ready`:** можно выполнять оставшиеся client/UI/lifecycle требования на принятом core/room contract; финальная приёмка0099 ещё предстоит.
 
 Архитектурное уточнение: запрет online solver ниже относится к первоначальному server-only варианту. С 2026-10-18 выбран и реализован non-authoritative client prediction/reconciliation, см. [план](../knowledge/multiplayer-server-plan.md) и [проверки prediction](../knowledge/multiplayer-client-prediction.md). Authority, AI, damage и игровые транзакции остаются серверными. Первоначальный no-go TASK-0096 нельзя автоматически применять к текущему клиенту; его отрицательные измерения сохранены как история, а итоговые budgets всё ещё требуют проверки. Не менять стек и не удалять prediction ради выполнения устаревшего текста.
 
-Обновление после QA0097, 2026-10-23: общий offline/hosted core `src/simulation/{game-world,vehicle-runtime}.js` принят, включая police/wanted/arrest/repair/props causality. Room adapters — `tools/multiplayer-spike/{server,deploy/server}.js`, клиент — `src/multiplayer/{game,room-client,frame-codec,snapshot-buffer,prediction,prediction-world}.js`; прежний `world.js` сохраняется для research harness. Не повторять перенос core; текущие остатки этой задачи сохраняются. [Контракт core](../knowledge/multiplayer-shared-core.md). Автопроверки: `node tools/verify.js --full` и соответствующие `tools/multiplayer-spike/tests/*`; не восстанавливать удалённый Telegram verifier.
+Обновление после QA0097/0098, 2026-10-23: общий offline/hosted core `src/simulation/{game-world,vehicle-runtime}.js` принят, включая police/wanted/arrest/repair/props causality. Room adapters — `tools/multiplayer-spike/{hosted-room,room-clock,server,deploy/server}.js`, клиент — `src/multiplayer/{game,room-client,frame-codec,snapshot-buffer,prediction,prediction-world}.js`; прежний `world.js` сохраняется для research harness. Не повторять перенос core; текущие остатки этой задачи сохраняются. [Контракт core](../knowledge/multiplayer-shared-core.md), [map-ready/build/limits](../knowledge/multiplayer-rooms.md). RoomClient подтверждает карту после async presentation callback и гейтит input до ready; новый wire требует presentation6/build carwars-ws-6. Автопроверки: `node tools/verify.js --full` и соответствующие `tools/multiplayer-spike/tests/*`; не восстанавливать удалённый Telegram verifier.
 
 Прежние пустые отметки критериев означают отсутствие полной приёмки, а не отсутствие всей реализации. Исторические артефакты 18–19 октября перечислены в общей карте; чтение этих отчётов не считается новым запуском тестов или новой QA-приёмкой.
 

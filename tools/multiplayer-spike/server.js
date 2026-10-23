@@ -26,6 +26,7 @@ export class DrivingSpikeRoom extends Room {
     this.buckets = new Map();
     this.accumulator = 0; this.lastTime = performance.now();
     syncState(this.state, this.sim.snapshot());
+    if(options.registerMessages!==false){
     this.onMessage('input', (client, payload) => {
       const now = performance.now(); let bucket = this.buckets.get(client.sessionId);
       if (!bucket || now - bucket.start >= 1000) { bucket = { start: now, count: 0 }; this.buckets.set(client.sessionId, bucket); }
@@ -37,6 +38,7 @@ export class DrivingSpikeRoom extends Room {
     this.onMessage('hello', client => client.send('welcome', this.welcome(client)));
     this.onMessage('full', client => client.send('full', this.sim.snapshot()));
     this.onMessage('*', () => { this.metrics.invalidInputs++; });
+    }
     this.setSimulationInterval(() => this.advance(), 1000 / 60);
   }
   welcome(client) {

@@ -1,7 +1,7 @@
 export const PROTOCOL_VERSION = 1;
-export function validateCommands(payload) {
-  if(!payload || Object.keys(payload).some(k=>!['generation','commands'].includes(k)) ||
-    !Number.isSafeInteger(payload.generation) || payload.generation<1 || !Array.isArray(payload.commands) ||
+export function validateCommands(payload, roundId) {
+  if(!payload || Object.keys(payload).some(k=>!['generation','commands','roundId'].includes(k)) ||
+    (roundId!==undefined && payload.roundId!==roundId) || !Number.isSafeInteger(payload.generation) || payload.generation<1 || !Array.isArray(payload.commands) ||
     !payload.commands.length || payload.commands.length>24)return null;
   let previous=-1;
   for(const c of payload.commands){

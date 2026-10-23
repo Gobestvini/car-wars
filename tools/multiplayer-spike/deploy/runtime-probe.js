@@ -1,3 +1,5 @@
+import {JOIN_OPTIONS} from '../../../src/multiplayer/protocol.js';
+import {prepareRoom} from '../../../src/multiplayer/sdk-handshake.js';
 import { performance } from 'node:perf_hooks';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { Client } from '@colyseus/sdk';
@@ -13,8 +15,8 @@ const sdk=new Client(`http://127.0.0.1:${port}`),clients=[],gaps=[],ackMs=[];
 const sent=new Map(),inside=new Set();let timer,lastPatch,seq=0,measuring=false;
 const percentile=(values,p)=>{const sorted=[...values].sort((a,b)=>a-b);return sorted[Math.min(sorted.length-1,Math.ceil(sorted.length*p)-1)]??null;};
 const join=async id=>{
-  const room=id?await sdk.joinById(id,{protocolVersion:1,presentationVersion:5}):await sdk.create('driving',{protocolVersion:1,presentationVersion:5});
-  room.onMessage('welcome',()=>{});room.onMessage('gameplay',()=>{});room.onMessage('full',()=>{});room.onMessage('frame',()=>{});clients.push(room);return room;
+  const room=id?await sdk.joinById(id,JOIN_OPTIONS):await sdk.create('driving',JOIN_OPTIONS);
+  await prepareRoom(room);clients.push(room);return room;
 };
 try{
   const first=await join();await join(first.roomId);await join(first.roomId);
@@ -34,7 +36,7 @@ try{
   first.onStateChange(state=>{if(!binary)observe(state);});
   first.onMessage('frame',bytes=>{binary=true;observe(decodeFrame(bytes));});
   timer=setInterval(()=>{seq++;const now=performance.now();if(measuring)sent.set(seq,now);
-    for(const [i,client]of clients.entries())client.send('input',{roundId:'round-1',seq,steer:Math.sin(seq/180+i)*.2,throttle:.35,brake:0});
+    for(const [i,client]of clients.entries())client.send('input',{roundId:client.serverRoundId,generation:client.motionFrame?.actors.get(client.sessionId)?.generation??1,seq,steer:Math.sin(seq/180+i)*.2,throttle:.35,brake:0});
     if(sent.size>300)sent.delete(sent.keys().next().value);
   },1000/30);
   await sleep(warmup*1000);

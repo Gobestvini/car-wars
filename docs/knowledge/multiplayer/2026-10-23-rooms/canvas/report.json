@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-23",
+  "node": "v22.23.3",
+  "passed": true,
+  "mode": "legacy fallback Canvas client over actual hosted map-ready",
+  "metrics": "Игроков: 1/3 · Трафик: 103 · Тик: 155",
+  "errors": []
+}

@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-23T21:41:18.563Z",
+  "node": "v22.23.3",
+  "scope": "independent actual SDK loopback authority and event history",
+  "threeControls": [
+    {
+      "id": "fb9juQ4g-",
+      "lastSeq": 15,
+      "appliedTick": 309,
+      "control": {
+        "steer": -0.5,
+        "throttle": 0.3,
+        "brake": 0,
+        "handbrake": false
+      },
+      "moved": 0.5249371303948115
+    },
+    {
+      "id": "pkwDPV3Md",
+      "lastSeq": 15,
+      "appliedTick": 309,
+      "control": {
+        "steer": 0.5,
+        "throttle": 0.8,
+        "brake": 0,
+        "handbrake": false
+      },
+      "moved": 1.4396844495334618
+    },
+    {
+      "id": "4CANHR_EW",
+      "lastSeq": 15,
+      "appliedTick": 309,
+      "control": {
+        "steer": 0,
+        "throttle": -0.6,
+        "brake": 0.1,
+        "handbrake": false
+      },
+      "moved": 0.8831349768448149
+    }
+  ],
+  "events": {
+    "historicalReplay": false,
+    "newEventExactlyOnce": true,
+    "fullResyncNoReplay": true
+  },
+  "full": {
+    "players": 3,
+    "props": 1,
+    "signalTime": 3.1416666666666675,
+    "mapSignature": "b5a3c3bc8155df3780fbeaaecfd4aa85bd59b1bb3728fae59b11ac7bef6daaaa"
+  },
+  "passed": true
+}

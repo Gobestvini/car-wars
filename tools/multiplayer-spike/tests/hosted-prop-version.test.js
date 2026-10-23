@@ -1,3 +1,4 @@
+import {JOIN_OPTIONS} from '../../../src/multiplayer/protocol.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Client } from '@colyseus/sdk';
@@ -9,7 +10,7 @@ test('hosted ghost lifecycle requires the current presentation version',async()=
   let room;
   try{
     await assert.rejects(sdk.create('driving',{protocolVersion:1,presentationVersion:4}),/outdated|reload/i);
-    room=await sdk.create('driving',{protocolVersion:1,presentationVersion:5});
+    room=await sdk.create('driving',JOIN_OPTIONS);
     assert.ok(room.sessionId);
   }finally{if(room)await room.leave();await service.close();}
 });
