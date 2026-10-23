@@ -17,6 +17,8 @@ import { CarDeformation } from '../car-deformation.js';
 import { StreetVisuals } from './street-visuals.js';
 import { RoomClient, roomError, neutralInput } from './room-client.js';
 import { verifyMap } from './map-contract.js';
+import { RepairPickupVisuals } from '../repair-pickup-visuals.js';
+import { createSurfaceHeightSampler } from '../road-surface.js';
 import '../style.css';
 import '../start-screen.css';
 import './style.css';
@@ -68,7 +70,19 @@ export async function startGame(loadingScreen) {
   const stop=()=>{keys.clear();pointer.active=false;pointer.id=null;$('touch-marker').style.display='none';network.stop();};
   const message=text=>{$('online-message').textContent=text;};
   const readOnlyCity={ addStaticBox:()=>null,addStaticConvex:()=>null,removeStaticBox:()=>{} };
-  let streetVisuals=null;
+  let streetVisuals=null,repairVisuals=null,repairRevision=-1;
+  function syncRepairs(plan){
+    const gameplay=network.gameplay;
+    if(!gameplay || gameplay.revision===repairRevision)return;
+    if(plan || !repairVisuals){
+      if(!plan)return;
+      repairVisuals?.dispose();
+      repairVisuals=new RepairPickupVisuals(scene,gameplay.pickups.map(p=>({...p})),createSurfaceHeightSampler(plan));
+    }else for(const p of repairVisuals.pickups){
+      const state=gameplay.pickups.find(s=>s.id===p.id);p.status=state?.status??'consumed';
+    }
+    repairRevision=gameplay.revision;
+  }
   function clearModels(){for(const visual of models.values())disposeVisual(visual);models.clear();followCamera.reset();}
   const network=new RoomClient({
     endpoint:import.meta.env.VITE_GAME_SERVER_URL || undefined,
@@ -86,14 +100,16 @@ export async function startGame(loadingScreen) {
       network.buffer.setMap(plan);
       network.startPrediction(data.map.colliders);
       if(expectedSignature!==data.snapshot.mapSignature){
+        repairVisuals?.dispose();repairVisuals=null;repairRevision=-1;
         city?.dispose();clearModels();streetVisuals=new StreetVisuals();
         city=createCityScene(scene,readOnlyCity,plan,[],{propRegistry:streetVisuals,destructibleTrees:true});
         signals=createTrafficSignals(plan.roadNetwork);expectedSignature=data.snapshot.mapSignature;
       }
+      syncRepairs(plan);
       ready=true;message('Комната готова. Отправьте ссылку друзьям.');
       lobby.hidden=true;toolbar.hidden=false;stop();canvas.focus({preventScroll:true});
     },
-    onLeave(){ready=false;stop();clearModels();lobby.hidden=false;toolbar.hidden=true;setButtons();message('Соединение закрыто. Можно создать комнату или войти снова.');},
+    onLeave(){ready=false;stop();clearModels();repairVisuals?.dispose();repairVisuals=null;repairRevision=-1;lobby.hidden=false;toolbar.hidden=true;setButtons();message('Соединение закрыто. Можно создать комнату или войти снова.');},
   });
   function setButtons(){
     $('online-create').disabled=$('online-join').disabled=busy || Boolean(network.room);
@@ -115,7 +131,7 @@ export async function startGame(loadingScreen) {
   $('online-join').onclick=()=>{const id=$('online-room').value.trim();if(id)void connect(id);else message('Введите код комнаты.');};
   $('online-room').onkeydown=e=>{if(e.key==='Enter')$('online-join').click();};
   $('online-continue').onclick=()=>{if(ready){lobby.hidden=true;stop();canvas.focus({preventScroll:true});}};
-  $('online-leave').onclick=async()=>{await network.leave();ready=false;clearModels();lobby.hidden=false;toolbar.hidden=true;setButtons();message('Вы вышли из комнаты.');};
+  $('online-leave').onclick=async()=>{await network.leave();ready=false;clearModels();repairVisuals?.dispose();repairVisuals=null;repairRevision=-1;lobby.hidden=false;toolbar.hidden=true;setButtons();message('Вы вышли из комнаты.');};
   $('online-share').onclick=()=>{stop();lobby.hidden=false;setButtons();$('online-invite').focus();$('online-invite').select();};
   $('online-invite').onclick=()=>$('online-invite').select();
   $('online-respawn').onclick=()=>{network.respawn();canvas.focus({preventScroll:true});};
@@ -230,7 +246,10 @@ export async function startGame(loadingScreen) {
       if(!models.has(actor.id))models.set(actor.id,makeVisual(actor));
       const visual=models.get(actor.id);applyActor(visual,actor);
       if(visual.player){
-        if(visual.generation!==actor.generation){visual.effects.reset();visual.deformation.restore();visual.dentCount=0;visual.generation=actor.generation;}
+        const repaired=network.gameplay?.players.find(p=>p.id===actor.id)?.repairRevision??0;
+        if(visual.generation!==actor.generation || (visual.repairRevision??0)!==repaired){
+          visual.effects.reset();visual.deformation.restore();visual.dentCount=0;visual.generation=actor.generation;visual.repairRevision=repaired;
+        }
         const dents=actor.dents??[];
         if(dents.length>visual.dentCount){visual.deformation.apply(dents.slice(visual.dentCount));visual.dentCount=dents.length;}
         visual.effects.update({damage:actor.damage,car:visual.group,camera,dt,quality});
@@ -247,6 +266,7 @@ export async function startGame(loadingScreen) {
     sun.position.copy(follow).add(sunOffset);sun.target.position.copy(follow);camera.updateMatrixWorld();updateShadowCoverage(sun,camera);
     if(city&&signals)city.updateSignals(signals,(room?.state?.tick||0)/120,camera,quality);
     if(ready&&network.prediction)streetVisuals?.sync(network.prediction.world.props);
+    if(ready){syncRepairs();repairVisuals?.update(dt);}
     trafficAssets?.animate(now/1000,quality);
     blur.render(scene,camera,{mode:'follow',car:focus});
     const count=actors.filter(a=>a.role==='player'&&a.connected).length;
@@ -283,8 +303,9 @@ export async function startGame(loadingScreen) {
     meshes:models.size,localPhysicsSteps:network.prediction?.metrics.steps??0,prediction:network.prediction?.metrics,
     predictedTick:network.prediction?.world.tick,rtt:network.rtt,citySeed:network.room?.state?.seed}),
     camera:()=>({position:camera.position.toArray(),target:[followCamera.target.x,followCamera.target.y,followCamera.target.z],scale:followCamera.scale,subject:followCamera.subject,fov:camera.fov}),
-    renderer:()=>renderer.info.render};
-  window.addEventListener('pagehide',()=>{disposed=true;cancelAnimationFrame(request);void network.leave();clearModels();city?.dispose();trafficAssets?.dispose();blur.dispose();renderer.dispose();},{once:true});
+    renderer:()=>renderer.info.render,
+    repairs:()=>({state:network.gameplay,visible:repairVisuals?.pickups.filter(p=>p.status==='available').length??0})};
+  window.addEventListener('pagehide',()=>{disposed=true;cancelAnimationFrame(request);void network.leave();clearModels();repairVisuals?.dispose();city?.dispose();trafficAssets?.dispose();blur.dispose();renderer.dispose();},{once:true});
   window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
   return{retry:()=>location.reload()};
 }

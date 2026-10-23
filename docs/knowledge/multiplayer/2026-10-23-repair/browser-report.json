@@ -1,0 +1,889 @@
+{
+  "date": "2026-10-23",
+  "device": "Windows Edge headless WebGL; portrait touch emulation",
+  "errors": [],
+  "before": [
+    {
+      "roomId": "iTG1A00MP",
+      "playerId": "5nKNH7Suc",
+      "ready": true,
+      "repairs": {
+        "state": {
+          "revision": 2,
+          "tick": 215,
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -135,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -157.5,
+              "z": -25,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 85,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": -42.5,
+              "z": -125,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": 25,
+              "z": 65,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -7.5,
+              "z": 75,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 175,
+              "z": -107.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 75,
+              "z": 0,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 115,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": 57.5,
+              "z": 25,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 125,
+              "z": -157.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": 125,
+              "z": -85,
+              "section": "2:0",
+              "status": "available"
+            }
+          ],
+          "players": [
+            {
+              "id": "5nKNH7Suc",
+              "repairRevision": 0
+            },
+            {
+              "id": "jQyE26utv",
+              "repairRevision": 0
+            }
+          ]
+        },
+        "visible": 12
+      },
+      "pickupScale": 1.0000000366526542,
+      "damaged": 0.8,
+      "deformed": 651,
+      "repairRevision": 0,
+      "detached": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "pickup": {
+        "id": 0,
+        "x": -75,
+        "z": -135,
+        "section": "0:0",
+        "status": "available"
+      }
+    },
+    {
+      "roomId": "iTG1A00MP",
+      "playerId": "jQyE26utv",
+      "ready": true,
+      "repairs": {
+        "state": {
+          "revision": 2,
+          "tick": 211,
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -135,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -157.5,
+              "z": -25,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 85,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": -42.5,
+              "z": -125,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": 25,
+              "z": 65,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -7.5,
+              "z": 75,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 175,
+              "z": -107.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 75,
+              "z": 0,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 115,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": 57.5,
+              "z": 25,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 125,
+              "z": -157.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": 125,
+              "z": -85,
+              "section": "2:0",
+              "status": "available"
+            }
+          ],
+          "players": [
+            {
+              "id": "5nKNH7Suc",
+              "repairRevision": 0
+            },
+            {
+              "id": "jQyE26utv",
+              "repairRevision": 0
+            }
+          ]
+        },
+        "visible": 12
+      },
+      "pickupScale": 0.9999999690236798,
+      "damaged": 0.8,
+      "deformed": 651,
+      "repairRevision": 0,
+      "detached": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "pickup": {
+        "id": 0,
+        "x": -75,
+        "z": -135,
+        "section": "0:0",
+        "status": "available"
+      }
+    }
+  ],
+  "after": [
+    {
+      "roomId": "iTG1A00MP",
+      "playerId": "5nKNH7Suc",
+      "ready": true,
+      "repairs": {
+        "state": {
+          "revision": 3,
+          "tick": 319,
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -135,
+              "section": "0:0",
+              "status": "consumed"
+            },
+            {
+              "id": 1,
+              "x": -157.5,
+              "z": -25,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 85,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": -42.5,
+              "z": -125,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": 25,
+              "z": 65,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -7.5,
+              "z": 75,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 175,
+              "z": -107.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 75,
+              "z": 0,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 115,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": 57.5,
+              "z": 25,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 125,
+              "z": -157.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": 125,
+              "z": -85,
+              "section": "2:0",
+              "status": "available"
+            }
+          ],
+          "players": [
+            {
+              "id": "5nKNH7Suc",
+              "repairRevision": 1
+            },
+            {
+              "id": "jQyE26utv",
+              "repairRevision": 0
+            }
+          ]
+        },
+        "visible": 11
+      },
+      "pickupScale": 0,
+      "damaged": 0,
+      "deformed": 0,
+      "repairRevision": 1,
+      "detached": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pickup": {
+        "id": 0,
+        "x": -75,
+        "z": -135,
+        "section": "0:0",
+        "status": "consumed"
+      }
+    },
+    {
+      "roomId": "iTG1A00MP",
+      "playerId": "jQyE26utv",
+      "ready": true,
+      "repairs": {
+        "state": {
+          "revision": 3,
+          "tick": 319,
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -135,
+              "section": "0:0",
+              "status": "consumed"
+            },
+            {
+              "id": 1,
+              "x": -157.5,
+              "z": -25,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 85,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": -42.5,
+              "z": -125,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": 25,
+              "z": 65,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -7.5,
+              "z": 75,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 175,
+              "z": -107.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 75,
+              "z": 0,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 115,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": 57.5,
+              "z": 25,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 125,
+              "z": -157.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": 125,
+              "z": -85,
+              "section": "2:0",
+              "status": "available"
+            }
+          ],
+          "players": [
+            {
+              "id": "5nKNH7Suc",
+              "repairRevision": 1
+            },
+            {
+              "id": "jQyE26utv",
+              "repairRevision": 0
+            }
+          ]
+        },
+        "visible": 11
+      },
+      "pickupScale": 0,
+      "damaged": 0,
+      "deformed": 0,
+      "repairRevision": 1,
+      "detached": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pickup": {
+        "id": 0,
+        "x": -75,
+        "z": -135,
+        "section": "0:0",
+        "status": "consumed"
+      }
+    }
+  ],
+  "lateJoin": {
+    "roomId": "iTG1A00MP",
+    "playerId": "m-TtxxmZA",
+    "ready": true,
+    "repairs": {
+      "state": {
+        "revision": 4,
+        "tick": 336,
+        "pickups": [
+          {
+            "id": 0,
+            "x": -75,
+            "z": -135,
+            "section": "0:0",
+            "status": "consumed"
+          },
+          {
+            "id": 1,
+            "x": -157.5,
+            "z": -25,
+            "section": "0:1",
+            "status": "available"
+          },
+          {
+            "id": 2,
+            "x": -75,
+            "z": 85,
+            "section": "0:2",
+            "status": "available"
+          },
+          {
+            "id": 3,
+            "x": -42.5,
+            "z": -125,
+            "section": "1:0",
+            "status": "available"
+          },
+          {
+            "id": 4,
+            "x": 25,
+            "z": 65,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 5,
+            "x": -7.5,
+            "z": 75,
+            "section": "1:2",
+            "status": "available"
+          },
+          {
+            "id": 6,
+            "x": 175,
+            "z": -107.5,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 7,
+            "x": 75,
+            "z": 0,
+            "section": "2:1",
+            "status": "available"
+          },
+          {
+            "id": 8,
+            "x": 75,
+            "z": 115,
+            "section": "2:2",
+            "status": "available"
+          },
+          {
+            "id": 9,
+            "x": 57.5,
+            "z": 25,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 10,
+            "x": 125,
+            "z": -157.5,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 11,
+            "x": 125,
+            "z": -85,
+            "section": "2:0",
+            "status": "available"
+          }
+        ],
+        "players": [
+          {
+            "id": "5nKNH7Suc",
+            "repairRevision": 1
+          },
+          {
+            "id": "jQyE26utv",
+            "repairRevision": 0
+          },
+          {
+            "id": "m-TtxxmZA",
+            "repairRevision": 0
+          }
+        ]
+      },
+      "visible": 11
+    },
+    "pickupScale": 0,
+    "damaged": 0,
+    "deformed": 0,
+    "repairRevision": 1,
+    "detached": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "pickup": {
+      "id": 0,
+      "x": -75,
+      "z": -135,
+      "section": "0:0",
+      "status": "consumed"
+    }
+  },
+  "reconnect": {
+    "roomId": "iTG1A00MP",
+    "playerId": "5nKNH7Suc",
+    "ready": true,
+    "repairs": {
+      "state": {
+        "revision": 4,
+        "tick": 336,
+        "pickups": [
+          {
+            "id": 0,
+            "x": -75,
+            "z": -135,
+            "section": "0:0",
+            "status": "consumed"
+          },
+          {
+            "id": 1,
+            "x": -157.5,
+            "z": -25,
+            "section": "0:1",
+            "status": "available"
+          },
+          {
+            "id": 2,
+            "x": -75,
+            "z": 85,
+            "section": "0:2",
+            "status": "available"
+          },
+          {
+            "id": 3,
+            "x": -42.5,
+            "z": -125,
+            "section": "1:0",
+            "status": "available"
+          },
+          {
+            "id": 4,
+            "x": 25,
+            "z": 65,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 5,
+            "x": -7.5,
+            "z": 75,
+            "section": "1:2",
+            "status": "available"
+          },
+          {
+            "id": 6,
+            "x": 175,
+            "z": -107.5,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 7,
+            "x": 75,
+            "z": 0,
+            "section": "2:1",
+            "status": "available"
+          },
+          {
+            "id": 8,
+            "x": 75,
+            "z": 115,
+            "section": "2:2",
+            "status": "available"
+          },
+          {
+            "id": 9,
+            "x": 57.5,
+            "z": 25,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 10,
+            "x": 125,
+            "z": -157.5,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 11,
+            "x": 125,
+            "z": -85,
+            "section": "2:0",
+            "status": "available"
+          }
+        ],
+        "players": [
+          {
+            "id": "5nKNH7Suc",
+            "repairRevision": 1
+          },
+          {
+            "id": "jQyE26utv",
+            "repairRevision": 0
+          },
+          {
+            "id": "m-TtxxmZA",
+            "repairRevision": 0
+          }
+        ]
+      },
+      "visible": 11
+    },
+    "pickupScale": 0,
+    "damaged": 0,
+    "deformed": 0,
+    "repairRevision": 1,
+    "detached": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "pickup": {
+      "id": 0,
+      "x": -75,
+      "z": -135,
+      "section": "0:0",
+      "status": "consumed"
+    }
+  },
+  "newRoom": {
+    "roomId": "R2pqQ9Vo0",
+    "playerId": "eVL2qlJzH",
+    "ready": true,
+    "repairs": {
+      "state": {
+        "revision": 1,
+        "tick": 0,
+        "pickups": [
+          {
+            "id": 0,
+            "x": -75,
+            "z": -135,
+            "section": "0:0",
+            "status": "available"
+          },
+          {
+            "id": 1,
+            "x": -157.5,
+            "z": -25,
+            "section": "0:1",
+            "status": "available"
+          },
+          {
+            "id": 2,
+            "x": -75,
+            "z": 85,
+            "section": "0:2",
+            "status": "available"
+          },
+          {
+            "id": 3,
+            "x": -42.5,
+            "z": -125,
+            "section": "1:0",
+            "status": "available"
+          },
+          {
+            "id": 4,
+            "x": 25,
+            "z": 65,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 5,
+            "x": -7.5,
+            "z": 75,
+            "section": "1:2",
+            "status": "available"
+          },
+          {
+            "id": 6,
+            "x": 175,
+            "z": -107.5,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 7,
+            "x": 75,
+            "z": 0,
+            "section": "2:1",
+            "status": "available"
+          },
+          {
+            "id": 8,
+            "x": 75,
+            "z": 115,
+            "section": "2:2",
+            "status": "available"
+          },
+          {
+            "id": 9,
+            "x": 57.5,
+            "z": 25,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 10,
+            "x": 125,
+            "z": -157.5,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 11,
+            "x": 125,
+            "z": -85,
+            "section": "2:0",
+            "status": "available"
+          }
+        ],
+        "players": [
+          {
+            "id": "eVL2qlJzH",
+            "repairRevision": 0
+          }
+        ]
+      },
+      "visible": 12
+    },
+    "pickupScale": 1.0000000165363496,
+    "damaged": 0,
+    "deformed": 0,
+    "repairRevision": 0,
+    "detached": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "pickup": {
+      "id": 0,
+      "x": -75,
+      "z": -135,
+      "section": "0:0",
+      "status": "available"
+    }
+  },
+  "passed": true
+}

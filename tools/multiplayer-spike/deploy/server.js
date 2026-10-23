@@ -93,6 +93,10 @@ class HostedDrivingRoom extends DrivingSpikeRoom {
       state.connected=actor.connected;state.generation=actor.generation;
     }
     if(this.clients.length)this.broadcastBytes('frame',encodeFrame(this.sim.snapshot()),{});
+    if(this.clients.length && this.sentGameplayRevision!==this.sim.gameplayRevision){
+      this.broadcast('gameplay',this.sim.gameplaySnapshot());
+      this.sentGameplayRevision=this.sim.gameplayRevision;
+    }
     this.metrics.snapshotMs.push(performance.now()-begin);
     if(this.metrics.snapshotMs.length>1000)this.metrics.snapshotMs.splice(0,500);
   }

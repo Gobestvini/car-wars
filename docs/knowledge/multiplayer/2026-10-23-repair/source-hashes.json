@@ -1,0 +1,9 @@
+{
+  "tools/multiplayer-spike/world.js": "18d7eadcb96e5375a82f2816ad2a94be8d833e8e05c68e45ba984dca11940811",
+  "tools/multiplayer-spike/deploy/server.js": "fcd2b8aabd463707ccb073f95e5ed585d6be4cef3c62702259bef8376b4b8f93",
+  "src/multiplayer/room-client.js": "4c2b592b8a9dd2e6d6e0ebb6eb919bbcff1da12ccf3602964656b7e604a998d7",
+  "src/multiplayer/game.js": "b8c747e4557b1fd310c542535bfa0f189d3ed090fe320148fd97c2e7e46b83b9",
+  "tests/multiplayer-repair.test.js": "b6cdad9d47b93a31b97d803b2a8d93eb07026bb38aea53f76199c507934a49fb",
+  "tests/multiplayer-repair-browser.cjs": "50698921d2715b30b6ed6c5db18a7e23efa5cace45038d5403447b8fd2efb7a6",
+  "tools/multiplayer-spike/tests/hosted-repair.test.js": "40dccf9ea2c8aba2e8ed3dae268c6d23700d3e28fa007166f81ccc0377f3f798"
+}

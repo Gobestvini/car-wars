@@ -1,0 +1,22 @@
+[
+  {
+    "mode": "detached-only",
+    "passed": true
+  },
+  {
+    "mode": "npc-excluded",
+    "passed": true
+  },
+  {
+    "mode": "different-ticks",
+    "passed": true
+  },
+  {
+    "mode": "swept-crossing",
+    "passed": true
+  },
+  {
+    "mode": "dirty-reliable-state-and-explicit-leave-rejoin",
+    "passed": true
+  }
+]

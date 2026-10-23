@@ -1,0 +1,165 @@
+{
+  "checkedAt": "2026-10-23T12:43:56.809Z",
+  "statuses": [
+    {
+      "id": "TASK-0096",
+      "status": "done"
+    },
+    {
+      "id": "TASK-0097",
+      "status": "in-progress"
+    },
+    {
+      "id": "TASK-0098",
+      "status": "blocked"
+    },
+    {
+      "id": "TASK-0099",
+      "status": "blocked"
+    },
+    {
+      "id": "TASK-0100",
+      "status": "blocked"
+    },
+    {
+      "id": "TASK-0101",
+      "status": "blocked"
+    },
+    {
+      "id": "TASK-0102",
+      "status": "draft"
+    },
+    {
+      "id": "TASK-0103",
+      "status": "draft"
+    },
+    {
+      "id": "TASK-0104",
+      "status": "draft"
+    },
+    {
+      "id": "TASK-0105",
+      "status": "draft"
+    },
+    {
+      "id": "TASK-0106",
+      "status": "done"
+    },
+    {
+      "id": "TASK-0107",
+      "status": "done"
+    },
+    {
+      "id": "TASK-0108",
+      "status": "done"
+    },
+    {
+      "id": "TASK-0109",
+      "status": "done"
+    },
+    {
+      "id": "TASK-0110",
+      "status": "qa-in-progress"
+    }
+  ],
+  "links": [
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "../tasks/TASK-0096-multiplayer-architecture-spike.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "../tasks/TASK-0097-headless-multiplayer-game-world.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "../tasks/TASK-0098-authoritative-three-player-rooms.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "../tasks/TASK-0099-multiplayer-client-and-three-car-render.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "../tasks/TASK-0100-multiplayer-smoothing-and-network-resilience.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "../tasks/TASK-0101-multiplayer-self-host-and-release-validation.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "../tasks/TASK-0102-city-hunt-server-round-and-roles.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "multiplayer-server-plan.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "multiplayer-hosting.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "../../tools/multiplayer-spike/deploy/README.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "multiplayer-client-prediction.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "multiplayer-destruction.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "../tasks/TASK-0107-multiplayer-camera-placement.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "../tasks/TASK-0108-sidewalk-prop-immediate-ghost-fade.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "../tasks/TASK-0109-npc-sidewalk-collision-liveness.md"
+    },
+    {
+      "file": "docs/knowledge/multiplayer-release-readiness.md",
+      "target": "../tasks/TASK-0110-multiplayer-shared-repair.md"
+    },
+    {
+      "file": "docs/tasks/TASK-0110-multiplayer-shared-repair.md",
+      "target": "../knowledge/multiplayer-release-readiness.md"
+    },
+    {
+      "file": "docs/tasks/TASK-0110-multiplayer-shared-repair.md",
+      "target": "../knowledge/multiplayer/2026-10-23-repair/README.md"
+    },
+    {
+      "file": "docs/tasks/TASK-0110-multiplayer-shared-repair.md",
+      "target": "../knowledge/multiplayer/2026-10-23-repair/browser-report.json"
+    },
+    {
+      "file": "docs/tasks/TASK-0110-multiplayer-shared-repair.md",
+      "target": "../knowledge/multiplayer/2026-10-23-repair/source-hashes.json"
+    }
+  ],
+  "hashes": {
+    "tools/multiplayer-spike/world.js": "18d7eadcb96e5375a82f2816ad2a94be8d833e8e05c68e45ba984dca11940811",
+    "tools/multiplayer-spike/deploy/server.js": "fcd2b8aabd463707ccb073f95e5ed585d6be4cef3c62702259bef8376b4b8f93",
+    "src/multiplayer/game.js": "b8c747e4557b1fd310c542535bfa0f189d3ed090fe320148fd97c2e7e46b83b9",
+    "src/multiplayer/room-client.js": "4c2b592b8a9dd2e6d6e0ebb6eb919bbcff1da12ccf3602964656b7e604a998d7",
+    "tests/multiplayer-repair.test.js": "b6cdad9d47b93a31b97d803b2a8d93eb07026bb38aea53f76199c507934a49fb",
+    "tools/multiplayer-spike/tests/hosted-repair.test.js": "40dccf9ea2c8aba2e8ed3dae268c6d23700d3e28fa007166f81ccc0377f3f798",
+    "tests/multiplayer-repair-browser.cjs": "50698921d2715b30b6ed6c5db18a7e23efa5cace45038d5403447b8fd2efb7a6"
+  },
+  "receipt": {
+    "version": 1,
+    "node": "v24.19.0",
+    "ok": true,
+    "fingerprint": "0df871c0d72085c35e11a04bf9655c4bbb98c13d64f47befc618c2b72cf20f93",
+    "tests": 0,
+    "build": 0,
+    "at": "2026-10-23T12:39:32.684Z"
+  }
+}

@@ -14,6 +14,8 @@ import { createTrafficSignals } from '../../src/traffic-signals.js';
 import { drivingPath, pointOnPath, pathProgress, pathTarget, BuildingIndex } from './road-motion.js';
 import { recoverPropContact } from '../../src/traffic-prop-recovery.js';
 import { footprintsOverlap } from '../../src/traffic-spawn.js';
+import { RepairPickupManager } from '../../src/repair-pickups.js';
+import { createSurfaceHeightSampler } from '../../src/road-surface.js';
 
 export { STEP };
 export const heading = q => Math.atan2(2 * (q.x * q.z + q.w * q.y), 1 - 2 * (q.x * q.x + q.y * q.y));
@@ -48,6 +50,9 @@ export class SpikeWorld {
     this.recoveryObstacles=[...this.plan.buildings,...this.plan.boundaryBuildings]
       .map(b=>({x:b.x,z:b.z,halfX:b.width/2,halfZ:b.depth/2}));
     this.players = new Map(); this.npcs = []; this.tick = 0; this.steps = 0; this.contacts = 0;
+    this.repairs = new RepairPickupManager(this.plan, this.plan.boundaryBuildings.map(b => [b.x,b.z,b.width,b.depth]));
+    this.surfaceHeight = createSurfaceHeightSampler(this.plan);
+    this.gameplayRevision = 0;
     this.allPhysical = allPhysical; this.slotCursor = 0;
     this.metrics = { stepMs: [], aiMs: [], physicalCounts: [], transitions: 0 };
     for (let i = 0; i < playerCount; i++) this.addPlayer(`scripted-${i}`);
@@ -79,11 +84,12 @@ export class SpikeWorld {
     const slot = this.spawnSlot(), actor = { id, role: 'player', generation: 1, dents:[], dentGeneration:1, sim: this.makeSim(slot),
       control: neutral(), pending: null, lastSeq: -1, receivedSeq: -1, lastInputTick: this.tick,
       lastAppliedTick: 0, connected: true, commands:new Map(), timed:false };
-    this.players.set(id, actor); return actor;
+    actor.repairRevision = 0;
+    this.players.set(id, actor); this.gameplayRevision++; return actor;
   }
   removePlayer(id) {
     const actor = this.players.get(id); if (!actor) return;
-    this.removeSim(actor.sim); this.players.delete(id);
+    this.removeSim(actor.sim); this.players.delete(id); this.gameplayRevision++;
   }
   removeSim(sim) {
     sim.disposeDamageListener(); this.world.removeBody(sim.body);
@@ -214,6 +220,7 @@ export class SpikeWorld {
   }
   step() {
     const start = performance.now();
+    const before = new Map([...this.players].map(([id,a]) => [id, {x:a.sim.body.position.x,z:a.sim.body.position.z}]));
     for (const actor of this.players.values()) {
       if(actor.timed){
         const command=actor.commands.get(this.tick+1);
@@ -257,6 +264,18 @@ export class SpikeWorld {
       const impacts=actor.sim.drainImpactEvents();
       actor.dents.push(...impacts.filter(e=>e.impact.depth>0).slice(0,32-actor.dents.length));
     }
+    // One solver step, then one stable transaction order for shared pickups.
+    // A healthy/disconnected car cannot consume a pickup ahead of an eligible car.
+    for (const actor of [...this.players.values()].sort((a,b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0)) {
+      const {sim} = actor, p = sim.body.position;
+      const pickup = this.repairs.collectSegment(before.get(actor.id), p, {
+        enabled:actor.connected, damaged:sim.damage>0, detachedWheels:sim.wheels.some(w=>w.detached),
+        bodyY:p.y, expectedBodyY:this.surfaceHeight(p.x,p.z)+.96,
+      });
+      if (pickup && sim.repair()) {
+        actor.dents=[]; actor.repairRevision++; this.gameplayRevision++;
+      }
+    }
     this.tick++;
     this.metrics.stepMs.push(performance.now() - start);
     if (this.tick % 120 === 0) this.metrics.physicalCounts.push(this.npcs.filter(a => a.physical).length);
@@ -277,8 +296,12 @@ export class SpikeWorld {
       serverTime: this.tick * STEP, stepSeconds: STEP, seed: this.plan.seed, roadWidth: this.plan.roadWidth,
       generatorVersion: 'baseline-dc9eb06-working-tree', mapSignature: this.signature,
       players: [...this.players.values()].map(actor), actors: this.npcs.map(actor),
-      signalTime: this.tick * STEP,props:captureStreet(this.props),
-      coverage: 'preview: driving, deformation, wheels and street destruction; no wanted/arrest/pickups/police gameplay' };
+      signalTime: this.tick * STEP,props:captureStreet(this.props),gameplay:this.gameplaySnapshot(),
+      coverage: 'preview: driving, deformation, wheels, street destruction and shared repair; no wanted/arrest/police gameplay' };
+  }
+  gameplaySnapshot() {
+    return {revision:this.gameplayRevision,tick:this.tick,pickups:this.repairs.snapshot().pickups,
+      players:[...this.players.values()].map(a=>({id:a.id,repairRevision:a.repairRevision}))};
   }
   npcDiagnostics() {
     return this.npcs.map(a=>{
