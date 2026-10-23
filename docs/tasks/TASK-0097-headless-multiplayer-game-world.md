@@ -1,6 +1,6 @@
 # TASK-0097: Выделить общий серверный мир физики и AI для трёх игроков
 
-- Статус: in-progress
+- Статус: done
 - Приоритет: high
 - Создана: 2026-10-14
 - Обновлена: 2026-10-23
@@ -10,17 +10,17 @@
 
 ## Актуальная сверка 2026-10-23
 
-Эта сверка имеет приоритет над историческим baseline и будущими путями ниже. Проверены исходники рабочего дерева поверх `5416e88`; чужие локальные изменения не являются завершённой частью этого задания. Общая карта выпуска: [что осталось до сетевого релиза](../knowledge/multiplayer-release-readiness.md).
+Эта сверка имеет приоритет над историческим baseline и будущими путями ниже. Реализация поверх `25bac72`; чужие локальные изменения не входят в результат задания. Общая карта выпуска: [что осталось до сетевого релиза](../knowledge/multiplayer-release-readiness.md).
 
-**Уже реализовано:** Серверный мир уже есть в tools/multiplayer-spike/world.js (SpikeWorld): общий cannon world, 120 Hz, три игрока, union LOD для 102 civilian, карта/коллайдеры и props. Это действующая основа preview, а не ещё не начатый перенос.
+**Реализовано:** `src/simulation/game-world.js` — общий core для offline и HostedDrivingRoom: один solver 120 Hz, до трёх игроков, 102 civilian с union LOD, общие police/props/signals/repair, персональные wanted/arrest/respawn. Чистый vehicle runtime вынесен из `traffic.js`; Three.js находится в visual adapter. Геометрия, manifest props и подпись карты общие с offline scene. Серверный gameplay DTO содержит персональные состояния и назначения полиции; визуальный online HUD остаётся в 0099.
 
-**Остаётся:** Не выделен единый production core для offline/online; остаются серверные police/wanted/arrest, attribution толчков нескольким игрокам и полная gameplay/cleanup приёмка. Общие repair pickups реализованы и приняты независимым QA в TASK-0110 (2026-10-23). Это не завершает 0097.
+**Границы этапа:** общий ремонт из 0110 сохранён. Room lifecycle/map-ready/сетевая защита — остатки 0098; online HUD — 0099; окончательные network/performance/release gates — 0100/0101. Публичный сервер этим этапом не обновляется. Проверки и ограничения — в отчёте ниже и [заметке core](../knowledge/multiplayer-shared-core.md).
 
-**Статус `in-progress`:** активная частично реализованная задача; 0110 принята; дальше общий core и серверные police/wanted/arrest.
+Статус в шапке и INDEX отражает текущую передачу/решение независимого QA. Исполнитель не выставляет `done`.
 
 Архитектурное уточнение: запрет online solver ниже относится к первоначальному server-only варианту. С 2026-10-18 выбран и реализован non-authoritative client prediction/reconciliation, см. [план](../knowledge/multiplayer-server-plan.md) и [проверки prediction](../knowledge/multiplayer-client-prediction.md). Authority, AI, damage и игровые транзакции остаются серверными. Первоначальный no-go TASK-0096 нельзя автоматически применять к текущему клиенту; его отрицательные измерения сохранены как история, а итоговые budgets всё ещё требуют проверки. Не менять стек и не удалять prediction ради выполнения устаревшего текста.
 
-Фактические пути: `tools/multiplayer-spike/world.js`, `server.js`, `deploy/server.js`, `src/multiplayer/{game,room-client,frame-codec,snapshot-buffer,prediction,prediction-world}.js`; предполагаемые `server/`, `src/simulation/` и `src/network/` ниже ещё не созданы. Перенос в production core остаётся требованием 0097, существующее preview поведение надо сохранить. Автопроверки: `node tools/verify.js --full` и соответствующие `tools/multiplayer-spike/tests/*`; не восстанавливать удалённый Telegram verifier.
+Фактические пути: `src/simulation/{game-world,vehicle-runtime,spawn-phase,signal-approaches,segment-aabb}.js`, `src/traffic-visual-adapter.js`, `src/multiplayer/{map-contract,street-world}.js`, существующие `tools/multiplayer-spike/{server,deploy/server}.js`. `world.js` сохраняется как исторический research harness и не используется hosted core. Не создавать параллельный `server/` ради старого имени. Автопроверки: `node tools/verify.js --full` и соответствующие `tools/multiplayer-spike/tests/*`; не восстанавливать удалённый Telegram verifier.
 
 Прежние пустые отметки критериев означают отсутствие полной приёмки, а не отсутствие всей реализации. Исторические артефакты 18–19 октября перечислены в общей карте; чтение этих отчётов не считается новым запуском тестов или новой QA-приёмкой.
 
@@ -79,12 +79,12 @@ Offline adapter сохраняет single-player defaults, камеру, кла�
 
 ## 6. Критерии готовности
 
-- [ ] Headless import и пять минут мира 3+102 NPC работают без THREE/DOM; solver вызван один раз на substep.
-- [ ] Три далёких игрока имеют физические NPC вокруг каждого; NPC между зонами не дублируется и не теряет состояние.
-- [ ] Wanted/арест/repair/respawn индивидуальны, police/props/signals общие; pickup в одном tick ремонтирует одного eligible.
-- [ ] Повторное создание/dispose мира очищает bodies/listeners/таймеры; offline функциональность сохранена.
-- [ ] Обязательные проверки ниже выполнены и записаны фактически; ограничения и невыполненные пункты перечислены.
-- [ ] Отчёт заполнен; после разработки статус ready-for-qa и INDEX синхронизированы. done разрешён только независимому QA.
+- [x] Headless import и пять минут мира 3+102 NPC работают без THREE/DOM; solver вызван один раз на substep.
+- [x] Три далёких игрока имеют физические NPC вокруг каждого; NPC между зонами не дублируется и не теряет состояние.
+- [x] Wanted/арест/repair/respawn индивидуальны, police/props/signals общие; pickup в одном tick ремонтирует одного eligible.
+- [x] Повторное создание/dispose мира очищает bodies/listeners/таймеры; offline функциональность сохранена.
+- [x] Проверки исполнителя записаны фактически; ограничения перечислены. Независимый QA отдельно проверяет достаточность обязательных сценариев.
+- [x] Отчёт заполнен; передача ready-for-qa и INDEX синхронизированы. done разрешён только независимому QA.
 
 ## 7. Проверки
 
@@ -125,9 +125,32 @@ QA повторяет обязательные сценарии независи
 - Исторические проверки: см. ссылки общей карты; не объявлены повторёнными сегодня.
 - Итоговый статус: `in-progress`, 2026-10-23. `done` только после выполнения остатка и независимого QA.
 
+### Реализация общего core, 2026-10-23
+
+- База: `25bac72`, собственный diff задачи; чужие staged/unstaged изменения сохранены. Старый аудит выше описывает состояние до этой реализации.
+- Реализовано: единый `GameWorld`, data-only vehicle runtime с visual adapter, общий collider/props manifest, server-side appearance и simulation-time spawn, registry 1–3 игроков/union LOD, общий police pool до 6, персональные wanted/arrest/props causality/respawn, shared repair. Offline и hosted adapter используют один core. Клиент получает gameplay DTO/полицейские роли и не отправляет authority; online HUD не расширялся до требований 0099.
+- Сохранены offline GLB/колёса, настройки, camera/input, деформации, мигалки, tracks/smoke/repair/retry/new map. `city-scene` связывает визуальные props с core, не создаёт второй набор физических тел.
+- Основные пути и контракты: [заметка общего core](../knowledge/multiplayer-shared-core.md). Реализационные изменения ограничены `src`, релевантными adapters/probes/tests и этой документацией; `game-template` и чужая автоматизация не изменялись исполнителем.
+- Финальный `node tools/verify.js --full`: **419/419 + Vite build**, квитанция `.checks.json` ok=true, fingerprint `a9cad65c2882c80e190459f24daa3ffbb95f6a2eb3b5cb0bd298d404ad294ac9`, Node 24.19.0. Только штатное предупреждение о размере bundle. Предыдущая квитанция была отклонена из-за изменения кода во время проверки; этот финальный запуск выполнен после правок исходников.
+- Targeted core/headless: **12/12**. Root suite также проверяет curb physics, police pursuit/arrest, effects/tracks/smoke и старый traffic API/pools. Fixed-seed visual/headless fixture сравнивает player pose с tolerance .001 м и NPC .01 м; bit-exact обещания для разных платформ нет.
+- Real SDK на закреплённом **Node 22.23.3**: **10/10** (spike, hosted room/prediction/destruction/repair/gameplay). Проверены настоящие сессии, late join, rejected forged wanted/arrest, индивидуальный арест и respawn без reset чужого состояния.
+- Soak **300 simulation seconds**, Node 22.23.3 без no-opt: 36 000 steps/solver calls, 3 players + 102 civilian, 3→6 police, конечные pose/velocity, p95/p99 step 2.161/3.123 мс. Это ускоренная проверка core, не WAN/VPS SLA. [JSON](../knowledge/multiplayer/2026-10-23-core/soak.json).
+- Browser Edge/WebGL: offline desktop/high 1440×900, keyboard/handbrake/следы; portrait/low 390×844, native touch joystick. В обоих appearance/GLB/деформация/отрыв колеса/активный damage smoke/repair/prop violation/wanted/arrest HUD/retry/new seed. Online repair regression на новом core: high/low, late join/reconnect/new room, errors=[]. [Артефакты и команды](../knowledge/multiplayer/2026-10-23-core/README.md).
+- Ограничения: browser fixtures используют операторские постановки машин/повреждения; удержание police на тормозе изолирует проверку FSM от сложности погони. На этой поездке emitted tire smoke=0, визуально подтверждён damage smoke; skid smoke покрывается root tests. Отдельного физического телефона/WAN/нового public deployment нет. Независимый QA должен повторить обязательные сценарии; эти артефакты его не заменяют.
+- Неудачные попытки: transitively imported Three через geometry helper исправлено pure module; missing easing export после extraction исправлен. Pinned seed в harness заменён random для проверки new map. Node 24 дважды завершался без JS stack/output (включая повторный soak), один targeted run получил невоспроизводимый Array.some TypeError; повторный targeted 12/12 и full419 прошли. Причина Node 24 не диагностирована; отдельный optimized Node 22 soak и SDK прошли, версия Docker22 сохранена.
+- Передача: `ready-for-qa`; результат приёмки и все замечания записывает отдельный QA, исполнитель не выставляет done.
+
 ## 11. Отчёт QA
 
-Не проводилась.
+### Независимая приёмка 2026-10-23 — принято
+
+- Проверил отдельный QA-агент с навыком `.agents/skills/qa-tasks/SKILL.md`; без исправления реализации и без вложенных агентов. Ревизия: рабочий diff поверх `25bac72`, включая финальную whitespace-правку `src/simulation/spawn-phase.js`. Чужие локальные правки сохранены.
+- Критерии раздела 6 подтверждены чтением core/adapters/diff и независимыми запусками. Node 22.23.3: targeted core/headless + hosted gameplay/prediction/destruction/repair/room **17/17**; production core soak **300 simulation seconds**, 3+102 civilian, 3→6 police, **36 000 ticks и ровно 36 000 solver calls**, finite pose/velocity. Пределы NPC не снижались. Проверены union LOD, персональный wanted/arrest/props causality/respawn, общий pickup, fixed-seed parity, appearance и 20 dispose cycles.
+- `matchingReceipt` независимо подтвердил финальные **419/419 + Vite build** на текущих неизменённых входах: Node 24.19.0, tests/build=0, `ok=true`, fingerprint `a9cad65c2882c80e190459f24daa3ffbb95f6a2eb3b5cb0bd298d404ad294ac9`. Квитанция повторно использована по разрешению qa-tasks; targeted и soak повторены QA самостоятельно на закреплённом Node 22.
+- Обязательная offline приёмка повторена Edge WebGL: desktop/high 1440×900 и portrait/low 390×844, native keyboard/handbrake и touch joystick. GLB/appearance/колёса, реальный curb wheelSupport y=.15, solver contact со зданием, skid/tracks и active tire smoke, damage/deformation/отрыв колеса/damage smoke/repair, prop→wanted, arrest/HUD, retry/new seed — пройдены на обеих настройках. Финальный дополнительный прогон: high/low active tire smoke 2/1, tracks 88/60, errors=[]. Online browser regression: три клиента, high/low, late join/reconnect/new room, errors=[]. Снимки просмотрены независимо.
+- Команды, JSON, PNG, подробности fixture и неудачные постановки: [QA-отчёт и артефакты](../knowledge/multiplayer/2026-10-23-core/qa/README.md). Недиагностированные выходы Node 24 из отчёта исполнителя не воспроизвелись в QA Node 22; причина не приписывается версии без отдельного исследования.
+- Ограничения: начальные позы/повреждение/скорость задаются оператором; arrest fixture удерживает police тормозом, solver/FSM остаются настоящими. Физического телефона/WAN/нового public deployment нет; соответствующие performance/release утверждения не делаются. Online HUD и полный room lifecycle остаются следующим этапам. Обязательных недоступных проверок этой задачи нет.
+- Решение: **done**. Воспроизводимых дефектов, препятствующих приёмке TASK-0097, не обнаружено; INDEX синхронизирован через queue CLI.
 
 ## Рекомендация модели исполнителя
 

@@ -1,3 +1,4 @@
+import { createGameWorld } from './simulation/game-world.js';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -119,7 +120,21 @@ function renderArrestHud(result = arrest.snapshot()) {
     : result.state === 'arresting' ? `${Math.ceil(result.remainingSeconds)} с — нажмите газ или уезжайте`
       : result.state === 'arrested' ? 'Нажмите R или начните заново' : '';
 }
-const sim = new CarSimulation();
+const damageTestType = new URLSearchParams(location.search).get('damageTest');
+const damageTest = damageTestType !== null;
+const damageTestObstacles = damageTestType === 'wheel' ? [[-1.72, 0.44, 0.3, 0.7, 1.4, -0.45]]
+  : damageTestType === 'side' ? [[-6, 10, 1.2, 14]]
+  : damageTestType === 'rear' ? [[4, -10, 8, 1.2]]
+    : damageTestType === 'front' ? [[-8, 18, 10, 1.2]]
+      : [[-8, 18, 10, 1.2], [-6, 10, 1.2, 14], [4, -10, 8, 1.2]];
+const seedParameter = new URLSearchParams(location.search).get('seed');
+const pinnedSeed = seedParameter !== null && Number.isSafeInteger(Number(seedParameter)) ? Number(seedParameter) : null;
+const randomSeed = () => crypto.getRandomValues(new Uint32Array(1))[0];
+let cityPlan = createCityPlan(pinnedSeed ?? (damageTest ? undefined : randomSeed()), { roadWidth: savedDefaults.roadWidth });
+const gameWorld=createGameWorld({plan:cityPlan,npcCount:0,deferRuntime:true,spawnPhases:false,autoPolice:false,
+  damageObstacles:damageTest?damageTestObstacles:[],disabledRepairs:damageTest});
+const playerActor=gameWorld.addPlayer('player',{spawn:{x:0,y:.96,z:0,yaw:-.45},systems:{wanted,arrest,violations},appearance:false});
+const sim=playerActor.sim;
 Object.assign(sim.tuning, { softness: savedDefaults.softness, grip: savedDefaults.grip, power: savedDefaults.power });
 let renderer;
 try {
@@ -169,20 +184,9 @@ sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.03;
 sun.shadow.radius = 3;
 scene.add(sun, sun.target);
 
-const damageTestType = new URLSearchParams(location.search).get('damageTest');
-const damageTest = damageTestType !== null;
-const damageTestObstacles = damageTestType === 'wheel' ? [[-1.72, 0.44, 0.3, 0.7, 1.4, -0.45]]
-  : damageTestType === 'side' ? [[-6, 10, 1.2, 14]]
-  : damageTestType === 'rear' ? [[4, -10, 8, 1.2]]
-    : damageTestType === 'front' ? [[-8, 18, 10, 1.2]]
-      : [[-8, 18, 10, 1.2], [-6, 10, 1.2, 14], [4, -10, 8, 1.2]];
-const seedParameter = new URLSearchParams(location.search).get('seed');
-const pinnedSeed = seedParameter !== null && Number.isSafeInteger(Number(seedParameter)) ? Number(seedParameter) : null;
-const randomSeed = () => crypto.getRandomValues(new Uint32Array(1))[0];
-let cityPlan = createCityPlan(pinnedSeed ?? (damageTest ? undefined : randomSeed()), { roadWidth: savedDefaults.roadWidth });
 const citySpawnBounds = plan => ({minX:-plan.bounds,maxX:plan.bounds,minZ:-plan.bounds,maxZ:plan.bounds,
   contains:(x,z)=>containsCityPoint(plan,x,z)});
-let cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : [], { destructibleTrees: true });
+let cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : [], { destructibleTrees: true,worldCore:gameWorld });
 let buildingEntries = cityState.entries;
 let buildingOcclusion = cityState.occlusion;
 const spawnObstaclesForPlan = plan => [...[...plan.buildings,...(plan.boundaryBuildings||[])].map(building => ({ x: building.x, z: building.z,
@@ -214,6 +218,7 @@ const policeEffectsPool = new ObjectPool({ capacity: 2, create: () => new CarDam
 const damagePreview = debug ? Number(new URLSearchParams(location.search).get('damagePreview') || 0) : 0;
 const traffic = createVehicleRuntime(scene, THREE, savedDefaults.trafficCount, cityPlan.roadNetwork,
   cityPlan.roadWidth, trafficSpawnObstacles, citySpawnBounds(cityPlan));
+gameWorld.setRuntime(traffic);
 traffic.setStreetProps(cityState.propPhysics);
 traffic.setAppearanceEffects(spawnEffects);
 traffic.registerRole('police', { maxCount: 2, physicalOnly: true,
@@ -239,6 +244,7 @@ const playerVisualSteeringScale = 0.5;
 let modelReady = false;
 let loading = false;
 let bodyDeformation = null;
+let lastRepairRevision=0;
 let playerLights = null;
 let trafficModelsReady = false;
 function disposeModelTrees(roots) {
@@ -393,7 +399,7 @@ const tracks = new TireTracks(scene, 18000, { surfaceHeight: createSurfaceHeight
 tracks.mesh.visible = savedDefaults.trails;
 const tireSmoke = new TireSmoke(scene);
 let pickupSurfaceHeight = createSurfaceHeightSampler(cityPlan);
-let repairPickups = new RepairPickupManager(cityPlan, damageTest ? damageTestObstacles : [], { disabled: damageTest });
+let repairPickups = gameWorld.repairs;
 let repairPickupVisuals = new RepairPickupVisuals(scene, repairPickups.placements, pickupSurfaceHeight);
 
 const pointer = { active: false, id: null, x: 0, y: 0, startX: 0, startY: 0 };
@@ -491,7 +497,7 @@ function getInput() {
 function reset() {
   cancelPlayerAppearance();
   frameIntervals.reset();
-  releasePointer(); keys.clear(); sim.reset(); traffic.reset(); driveDirection = 1;
+  releasePointer(); keys.clear(); gameWorld.reset(); driveDirection = 1;
   violations.reset(); wanted.reset(); arrest.reset(); wantedRenderKey = ''; renderWantedHud();
   cityState.propPhysics?.reset();
   lastArrestHudState = ''; renderArrestHud();
@@ -645,11 +651,12 @@ function rebuildCity(roadWidth, preparedPlan = null) {
   repairPickupVisuals.dispose(); repairPickups = null;
   cityState.dispose();
   cityPlan = nextPlan;
+  gameWorld.setMap(cityPlan,damageTest?damageTestObstacles:[]);
   pickupSurfaceHeight = createSurfaceHeightSampler(cityPlan);
   tracks.setSurfaceHeightSampler(pickupSurfaceHeight);
-  repairPickups = new RepairPickupManager(cityPlan, damageTest ? damageTestObstacles : [], { disabled: damageTest });
+  repairPickups = gameWorld.repairs;
   repairPickupVisuals = new RepairPickupVisuals(scene, repairPickups.placements, pickupSurfaceHeight);
-  cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : [], { destructibleTrees: true });
+  cityState = createCityScene(scene, sim, cityPlan, damageTest ? damageTestObstacles : [], { destructibleTrees: true,worldCore:gameWorld });
   trafficSpawnObstacles = spawnObstaclesForPlan(cityPlan);
   traffic.setRoadNetwork(cityPlan.roadNetwork, cityPlan.roadWidth, trafficSpawnObstacles, citySpawnBounds(cityPlan));
   traffic.setStreetProps(cityState.propPhysics);
@@ -789,24 +796,11 @@ function frame(now) {
     }
     input = getInput();
     const enabled = cameraMode !== 'free' && !sim.appearing;
-    const playerBefore = { x: sim.body.position.x, z: sim.body.position.z };
-    const actorsBefore = traffic.physicalActors();
-    const velocitiesBefore = new Map([[sim.body, { ...sim.body.velocity }],
-      ...actorsBefore.map(actor => [actor.body, { ...actor.body.velocity }])]);
-    cityState.propPhysics?.beforeStep(STEP, [
-      { body: sim.body, player: true }, ...actorsBefore.map(actor => ({ body: actor.body, player: false })),
-    ], enabled);
-    traffic.stepWorld(input, STEP);
-    const propertyEvents = cityState.propPhysics?.afterStep(STEP) || [];
+    playerActor.enabled=enabled;
+    gameWorld.setPlayerInput('player',input);
+    gameWorld.step();
     if (sceneProfile.stages) traffic.accumulateTimings(sceneProfile.stages);
-    const physicalActors = traffic.physicalActors();
-    const observed = violations.update({ dt: STEP, enabled, player: { x: sim.body.position.x, z: sim.body.position.z,
-      heading: Math.atan2(2 * (sim.body.quaternion.x * sim.body.quaternion.z + sim.body.quaternion.w * sim.body.quaternion.y),
-        1 - 2 * (sim.body.quaternion.x ** 2 + sim.body.quaternion.y ** 2)), vx: sim.body.velocity.x,
-      vz: sim.body.velocity.z, body: sim.body }, actors: physicalActors, contacts: sim.world.contacts,
-      velocitiesBefore, approaches: cityState.signalApproaches,
-      phaseAt: approach => trafficSignals.phase(approach.nodeId, approach.fromId, traffic.simulationTime()) });
-    if (enabled) wanted.update(STEP, [...observed,...propertyEvents]);
+    const physicalActors=traffic.physicalActors();
     renderWantedHud();
     const trafficStatus = traffic.status();
     const pendingReason = trafficStatus.insertionReason || '—';
@@ -815,7 +809,7 @@ function frame(now) {
       settings.values.trafficPendingReason = pendingReason;
       settings.pane.refresh();
     }
-    bodyDeformation?.apply(sim.drainImpactEvents());
+    bodyDeformation?.apply(playerActor.lastImpacts??[]);
     const policeIds = new Set(physicalActors.filter(actor => actor.role === 'police').map(actor => actor.id));
     for (const [id, runtime] of policeDamageVisuals) if (!policeIds.has(id)) {
       policeEffectsPool.release(runtime.effectLease); policeDamageVisuals.delete(id);
@@ -838,22 +832,10 @@ function frame(now) {
       if (runtime) runtime.deformation.apply(actor.simulation.drainImpactEvents());
       else actor.simulation.drainImpactEvents();
     }
-    const repaired = repairPickups.collectSegment(playerBefore, { x: sim.body.position.x, z: sim.body.position.z }, {
-      enabled: cameraMode !== 'free' && !sim.appearing && arrest.snapshot().state !== 'arrested',
-      damaged: sim.damage > 0 || sim.wheels.some(wheel => wheel.detached),
-      detachedWheels: sim.wheels.some(wheel => wheel.detached), bodyY: sim.body.position.y,
-      expectedBodyY: pickupSurfaceHeight(sim.body.position.x, sim.body.position.z) + 0.96,
-    });
-    if (repaired && sim.repair()) {
-      bodyDeformation?.restore(); damageEffects.reset();
+    if(lastRepairRevision!==playerActor.repairRevision){
+      lastRepairRevision=playerActor.repairRevision;bodyDeformation?.restore();damageEffects.reset();
     }
-    const playerArrestPose = { x: sim.body.position.x, z: sim.body.position.z,
-      speed: Math.hypot(sim.body.velocity.x, sim.body.velocity.z) };
-    const policeForArrest = physicalActors.map(actor => ({ ...actor,
-      speed: Math.hypot(actor.vx, actor.vz), clearPath: arrestCorridorIsClear(playerArrestPose, actor) }));
-    const arrestResult = arrest.update(STEP, { wantedLevel: wanted.snapshot().level, player: playerArrestPose,
-      police: policeForArrest, enabled: cameraMode !== 'free' && !sim.appearing, damage: sim.damage });
-    renderArrestHud(arrestResult);
+    renderArrestHud(arrest.snapshot());
     const trackSources = [{ id: 'player', role: 'player', wheels: sim.wheels },
       ...physicalActors.filter(actor => actor.role === 'police').map(actor => ({ id: actor.id, role: actor.role,
         wheels: traffic.states.find(state => state.id === actor.id)?.simulation.wheels || [] }))];
@@ -933,6 +915,8 @@ function frame(now) {
 frameRequest = requestAnimationFrame(frame);
 // Read-only diagnostics for browser smoke tests and future handling comparisons.
 window.carLab = {
+  core: () => ({tick:gameWorld.tick,steps:gameWorld.steps,round:gameWorld.round,signature:gameWorld.signature,
+    playerId:playerActor.id,repairRevision:playerActor.repairRevision,events:gameWorld.events.map(e=>({...e}))}),
   startScreen: () => startScreen.snapshot(),
   version: packageInfo.version,
   performance: () => ({ ...metrics, frameIntervals: frameIntervals.snapshot(), dpr: renderer.getPixelRatio(), droppedSeconds: stepper.droppedSeconds, trailSegments: tracks.count }),
@@ -1066,7 +1050,7 @@ window.addEventListener('pagehide', event => {
   policeEffectsPool.dispose(); policeDamageVisuals.clear(); damageEffects.dispose();
   tireSmoke.dispose(); tracks.dispose(); repairPickupVisuals.dispose();
   cancelPlayerAppearance();spawnEffects.dispose();
-  traffic.dispose(); cityState.dispose(); sim.disposeDamageListener();
+  cityState.dispose(); gameWorld.dispose();
   for (const body of [...sim.world.bodies]) sim.world.removeBody(body);
   sim.staticBodies.length = 0;
   disposeModelTrees([car, ...visualWheels.map(({ pivot }) => pivot)]);

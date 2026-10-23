@@ -9,12 +9,14 @@ import { WebSocketTransport } from '@colyseus/ws-transport';
 import { DrivingSpikeRoom } from '../server.js';
 import { encodeFrame } from '../../../src/multiplayer/frame-codec.js';
 import { validateCommands } from '../protocol.js';
+import { createGameWorld } from '../../../src/simulation/game-world.js';
 
 // A small, bounded public preview; the production game is a separate service.
 let activeRooms = 0;
 const maxRooms = 2;
 class HostedDrivingRoom extends DrivingSpikeRoom {
-  onCreate() {
+  createWorld(options) { return createGameWorld(options); }
+  async onCreate() {
     if (activeRooms >= maxRooms) throw new Error('Сервер занят: доступны две комнаты. Попробуйте позже.');
     activeRooms++;
     this.hostedSlot = true;
@@ -23,6 +25,8 @@ class HostedDrivingRoom extends DrivingSpikeRoom {
       const seed=fixed===undefined?randomInt(0,4294967296):Number(fixed);
       if(!Number.isSafeInteger(seed)||seed<0||seed>=4294967296)throw Error('Invalid configured map seed');
       super.onCreate({ npcCount: 102, reconnectSeconds: 15, seed, collisionFixture: false });
+      await this.sim.ready;
+      this.state.signature=this.sim.signature;
       // Hosted clients consume complete binary actor frames. Keep Schema only
       // for room scalars: rewriting its 105 nested pose arrays on every join
       // duplicated motion and caused needless lifecycle patch bursts.
@@ -47,10 +51,7 @@ class HostedDrivingRoom extends DrivingSpikeRoom {
       this.onMessage('respawn', client => {
         const actor = this.sim.players.get(client.sessionId), now = performance.now();
         if (!actor || now - (this.lastRespawn.get(client.sessionId) ?? -Infinity) < 3000) return;
-        const slot = this.sim.spawnSlot();
-        actor.sim.spawn = { x: slot.x, y: .96, z: slot.z, yaw: slot.heading };
-        actor.sim.reset(); actor.generation++; this.sim.halt(client.sessionId);actor.lastSeq=-1;actor.lastAppliedTick=0;
-        actor.control = { steer: 0, throttle: 0, brake: 1 };
+        this.sim.respawn(client.sessionId);
         this.lastRespawn.set(client.sessionId, now);
         client.send('respawned');
       });

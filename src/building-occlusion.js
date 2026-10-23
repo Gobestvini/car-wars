@@ -6,29 +6,10 @@ export function smoothBuildingOpacity(current, target, dt) {
   return current + (target - current) * (1 - Math.exp(-Math.max(0, dt) / (target < current ? .18 : .3)));
 }
 
-function segmentAabbEntry(start, end, bounds) {
-  let minimum = 0;
-  let maximum = 1;
-  for (const axis of ['x', 'y', 'z']) {
-    const origin = start[axis];
-    const delta = end[axis] - origin;
-    if (Math.abs(delta) < 1e-9) {
-      if (origin < bounds.min[axis] || origin > bounds.max[axis]) return null;
-      continue;
-    }
-    let near = (bounds.min[axis] - origin) / delta;
-    let far = (bounds.max[axis] - origin) / delta;
-    if (near > far) [near, far] = [far, near];
-    minimum = Math.max(minimum, near);
-    maximum = Math.min(maximum, far);
-    if (minimum > maximum) return null;
-  }
-  return maximum > 1e-4 && minimum < 1 - 1e-4 ? minimum : null;
-}
 
-export function segmentIntersectsAabb(start, end, bounds) {
-  return segmentAabbEntry(start, end, bounds) !== null;
-}
+
+import { segmentIntersectsAabb, segmentAabbEntry } from './simulation/segment-aabb.js';
+export { segmentIntersectsAabb } from './simulation/segment-aabb.js';
 
 // Sample solid portions of the body, not the empty corners of its footprint.
 // Stop at the near surface: a wall behind the visible car must not count.

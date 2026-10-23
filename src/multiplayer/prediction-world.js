@@ -85,7 +85,7 @@ export class PredictionWorld {
         selected.add(a.id);changed=true;
       }
     }}
-    return new Map([...frame.actors].filter(([id,a])=>a.role==='player'||(a.physical&&selected.has(id))));
+    return new Map([...frame.actors].filter(([id,a])=>!a.appearing&&(a.role==='player'||(a.physical&&selected.has(id)))));
   }
   checkpoint() {
     const checkpoint=new Map([...this.actors].map(([id,{sim,source}])=>[id,{generation:source.generation,

@@ -5,7 +5,7 @@ import { createRoadSurfacePositions, createRoadSurfaceRectangles,
   createRoundedSidewalkLayout, createSidewalkSupportBoxes, createSidewalkSupportPrisms,
   ROAD_SURFACE_HEIGHTS, unionRectangles, subtractSurfaceRectangle } from './road-surface.js';
 import { createSidewalkVisuals } from './sidewalk-visuals.js';
-import { getSignalPosition, getStopLineLayout } from './signal-layout.js';
+import { createSignalApproaches } from './simulation/signal-approaches.js';
 import { createSignalBeam } from './signal-glow.js';
 import { ART, buildingArt } from './art-direction.js';
 import { createCityArt } from './city-art.js';
@@ -15,11 +15,12 @@ import { StreetPropPhysics } from './street-prop-physics.js';
 import { StreetPropFadePool } from './street-prop-fade.js';
 import { createSurfaceHeightSampler } from './road-surface.js';
 
-export function createCityScene(scene, simulation, plan, damageObstacles = [], { propRegistry = null, destructibleTrees = false } = {}) {
+export function createCityScene(scene, simulation, plan, damageObstacles = [], { propRegistry = null, destructibleTrees = false, worldCore = null } = {}) {
   const group = new THREE.Group();
   group.name = 'Procedural City';
   scene.add(group);
   const staticBodies = [];
+  if(worldCore) simulation={addStaticBox:()=>null,addStaticConvex:()=>null,removeStaticBox:()=>{}};
   // The city-wide base plane sits beneath asphalt/sidewalk overlays. A small depth bias
   // preserves that intentional layer order with the free camera's long far plane.
   const pavementMaterial = new THREE.MeshStandardMaterial({ color: ART.ground, roughness: 1,
@@ -85,21 +86,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = [], {
   dashes.instanceMatrix.needsUpdate = true;
   group.add(dashes);
 
-  const approaches = [];
-  for (const edge of plan.roadNetwork.edges) for (const [fromId, nodeId] of [[edge.from, edge.to], [edge.to, edge.from]]) {
-    const node = plan.roadNetwork.intersections.find(item => item.id === nodeId);
-    const from = plan.roadNetwork.intersections.find(item => item.id === fromId);
-    const degree = plan.roadNetwork.edges.reduce((count, item) => count + Number(item.from === nodeId || item.to === nodeId), 0);
-    if (!node || !from || degree < 4) continue;
-    const dx = node.x - from.x, dz = node.z - from.z, length = Math.hypot(dx, dz);
-    const forwardX = dx / length, forwardZ = dz / length, rightX = -forwardZ, rightZ = forwardX;
-    const stopLine = getStopLineLayout(node, { forwardX, forwardZ, rightX, rightZ }, plan.roadWidth);
-    const signalPosition = getSignalPosition(node, { forwardX, forwardZ, rightX, rightZ }, plan.roadWidth, plan.sidewalkWidth);
-    approaches.push({ nodeId, fromId, forwardX, forwardZ, rightX, rightZ, stopX: stopLine.x, stopZ: stopLine.z,
-      stopDistance: stopLine.distanceFromNode, stopLineLength: stopLine.length, stopLineThickness: stopLine.thickness,
-      signalX: signalPosition.x, signalZ: signalPosition.z, signalVisible: true,
-      yaw: Math.atan2(forwardX, forwardZ), signalYaw: Math.atan2(-forwardX, -forwardZ) });
-  }
+  const approaches = createSignalApproaches(plan);
   const poles = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.09, 0.12, 3, 6),
     new THREE.MeshStandardMaterial({ color: '#555b5c', roughness: 0.75 }), approaches.length);
   const housings = new THREE.InstancedMesh(new THREE.BoxGeometry(0.58, 1.5, 0.38),
@@ -214,7 +201,8 @@ export function createCityScene(scene, simulation, plan, damageObstacles = [], {
     signals: approaches.map(({ signalX: x, signalZ: z }) => ({ x, z })) });
 
   // Lightweight scene-only fixtures have no world. Production always owns sim.world.
-  const propPhysics = simulation.world ? new StreetPropPhysics(simulation.world) : propRegistry;
+  const propPhysics = worldCore?.props ?? (simulation.world ? new StreetPropPhysics(simulation.world) : propRegistry);
+  const registerProp=source=>worldCore?worldCore.bindProp(source):propPhysics.register(source);
   const propFade = new StreetPropFadePool(group);
   const surface = createSurfaceHeightSampler(plan,0);
   if (propPhysics) {
@@ -224,14 +212,14 @@ export function createCityScene(scene, simulation, plan, damageObstacles = [], {
       const index = indices[placement.type]++;
       const visual = createPropInstanceVisual(streetProps.batches.filter(batch => batch.userData.propType === placement.type)
         .map(batch => ({batch,index})),source,propFade);
-      propPhysics.register({ ...source,...visual });
+      registerProp({ ...source,...visual });
     }
     approaches.forEach((approach,index) => {
       const source = { id: `signal:${approach.nodeId}:${approach.fromId}`, type: 'signal',
         x: approach.signalX,y: ROAD_SURFACE_HEIGHTS.sidewalk,z: approach.signalZ,yaw: approach.signalYaw };
       const visual = createPropInstanceVisual([{batch:poles,index},{batch:housings,index},
         ...[0,1,2].map(lamp => ({batch:bulbs,index:index*3+lamp}))],source,propFade);
-      propPhysics.register({ ...source,...visual,
+      registerProp({ ...source,...visual,
         onDetach() {
           approach.destroyed = true; approach.signalVisible = false;
           signalBeam.userData.updateBeam(index,approach,'off');
@@ -246,7 +234,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = [], {
     });
     if(destructibleTrees)trees.placements.forEach((tree,index)=>{
       const source={id:`tree:${index}`,type:'tree',x:tree.x,y:surface(tree.x,tree.z),z:tree.z,yaw:0};
-      propPhysics.register({...source,...createPropInstanceVisual([{batch:trees.trunks,index},
+      registerProp({...source,...createPropInstanceVisual([{batch:trees.trunks,index},
         {batch:trees.crownBatches[tree.crownType],index:tree.crownIndex}],source,propFade)});
     });
   }
@@ -272,7 +260,7 @@ export function createCityScene(scene, simulation, plan, damageObstacles = [], {
       signalBeam.userData.prepare(camera, quality);
     },
     dispose() {
-      propPhysics?.dispose();
+      if(!worldCore)propPhysics?.dispose();
       propFade.dispose();
       occlusion.dispose();
       for (const body of staticBodies) simulation.removeStaticBox(body);

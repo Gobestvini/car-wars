@@ -13,11 +13,12 @@ import { validateInput } from './protocol.js';
 Encoder.BUFFER_SIZE = 256 * 1024;
 
 export class DrivingSpikeRoom extends Room {
+  createWorld(options) { return new SpikeWorld(options); }
   onCreate(options = {}) {
     this.maxClients = 3;
     this.reconnectSeconds = options.reconnectSeconds ?? 15;
     this.collisionFixture = options.collisionFixture === true;
-    this.sim = new SpikeWorld({ npcCount: options.npcCount ?? 102, seed: options.seed ?? 20261005 });
+    this.sim = this.createWorld({ npcCount: options.npcCount ?? 102, seed: options.seed ?? 20261005 });
     this.state = new WorldState();
     this.patchRate = 50;
     this.metrics = { schedulerMs: [], snapshotMs: [], encodingMs: [], wireBytes: 0, payloadBytes: 0, frames: 0,

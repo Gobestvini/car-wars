@@ -5,7 +5,7 @@ import { createSurfaceHeightSampler, ROAD_SURFACE_HEIGHTS } from '../road-surfac
 
 // The manifest is generated on the server, signed with the map and checked by
 // clients. Stable array indices are the wire IDs; rendering uses the same IDs.
-export function streetManifest(plan) {
+export function streetManifest(plan,{damageObstacles=[]}={}) {
   const signals=[];
   for(const edge of plan.roadNetwork.edges)for(const [fromId,nodeId]of [[edge.from,edge.to],[edge.to,edge.from]]){
     const node=plan.roadNetwork.intersections.find(n=>n.id===nodeId),from=plan.roadNetwork.intersections.find(n=>n.id===fromId);
@@ -15,8 +15,8 @@ export function streetManifest(plan) {
     signals.push({id:`signal:${nodeId}:${fromId}`,type:'signal',...getSignalPosition(node,{forwardX:fx,forwardZ:fz,rightX:-fz,rightZ:fx},plan.roadWidth,plan.sidewalkWidth),
       y:ROAD_SURFACE_HEIGHTS.sidewalk,yaw:Math.atan2(-fx,-fz)});
   }
-  const trees=createTreePlacements(plan,{signals}),surface=createSurfaceHeightSampler(plan,0);
-  const props=createStreetPropPlacements(plan,{signals,trees});
+  const trees=createTreePlacements(plan,{signals,damageObstacles}),surface=createSurfaceHeightSampler(plan,0);
+  const props=createStreetPropPlacements(plan,{signals,trees,damageObstacles});
   return [...props.map(p=>({id:`${p.type}:${p.id}`,type:p.type,x:p.x,y:surface(p.x,p.z),z:p.z,yaw:p.yaw})),
     ...signals,...trees.map((t,i)=>({id:`tree:${i}`,type:'tree',x:t.x,y:surface(t.x,t.z),z:t.z,yaw:0}))];
 }
@@ -37,7 +37,7 @@ export function captureStreet(physics) {
 export function restoreStreet(physics,states,time) {
   const byIndex=new Map(states.map(s=>[s[0],s]));physics.clock=time;physics.debris=[];
   const changed=new Set([...physics.changedEntries,...states.map(s=>physics.entries[s[0]])]);
-  for(const e of physics.episodes){e.episode=false;e.lastTouch=-Infinity;}
+  for(const e of physics.episodes){e.episode=false;e.lastTouch=-Infinity;e.crimePlayers?.clear();}
   physics.changedEntries.clear();physics.episodes.clear();
   for(const e of changed){
     if(!e)throw Error('Unknown street object');
@@ -51,7 +51,7 @@ export function restoreStreet(physics,states,time) {
       }
       e.state=state;
     }
-    e.episode=false;e.lastTouch=-Infinity;
+    e.episode=false;e.lastTouch=-Infinity;e.crimePlayers?.clear();
     if(state!=='intact')physics.changedEntries.add(e);
     if(state!=='detached')continue;
     physics.world.removeBody(e.body);physics.byBody.delete(e.body);physics.activeIntact.delete(e);e.active=false;

@@ -1,0 +1,7155 @@
+{
+  "date": "2026-10-23",
+  "node": "v22.23.3",
+  "seed": 42,
+  "simulationSeconds": 300,
+  "ticks": 36000,
+  "solverCalls": 36000,
+  "durationMs": 43262.731700000004,
+  "stepP50": 0.9737000000022817,
+  "stepP95": 2.6890999999995984,
+  "stepP99": 4.1721,
+  "samples": [
+    {
+      "seconds": 1,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 673,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 2,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 675,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 3,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 671,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 4,
+      "civilians": 102,
+      "police": 3,
+      "physical": 9,
+      "bodies": 661,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 5,
+      "civilians": 102,
+      "police": 3,
+      "physical": 10,
+      "bodies": 662,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 6,
+      "civilians": 102,
+      "police": 3,
+      "physical": 10,
+      "bodies": 662,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 7,
+      "civilians": 102,
+      "police": 3,
+      "physical": 10,
+      "bodies": 661,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 8,
+      "civilians": 102,
+      "police": 3,
+      "physical": 10,
+      "bodies": 665,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 9,
+      "civilians": 102,
+      "police": 3,
+      "physical": 9,
+      "bodies": 660,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 10,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 671,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 11,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 667,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 12,
+      "civilians": 102,
+      "police": 3,
+      "physical": 10,
+      "bodies": 661,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 13,
+      "civilians": 102,
+      "police": 3,
+      "physical": 9,
+      "bodies": 659,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 14,
+      "civilians": 102,
+      "police": 3,
+      "physical": 10,
+      "bodies": 662,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 15,
+      "civilians": 102,
+      "police": 3,
+      "physical": 9,
+      "bodies": 658,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 16,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 668,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 17,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 672,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 18,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 674,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 19,
+      "civilians": 102,
+      "police": 3,
+      "physical": 10,
+      "bodies": 671,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 20,
+      "civilians": 102,
+      "police": 3,
+      "physical": 10,
+      "bodies": 667,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 21,
+      "civilians": 102,
+      "police": 3,
+      "physical": 9,
+      "bodies": 667,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 22,
+      "civilians": 102,
+      "police": 3,
+      "physical": 10,
+      "bodies": 664,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 23,
+      "civilians": 102,
+      "police": 3,
+      "physical": 10,
+      "bodies": 671,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 24,
+      "civilians": 102,
+      "police": 3,
+      "physical": 8,
+      "bodies": 665,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 25,
+      "civilians": 102,
+      "police": 3,
+      "physical": 10,
+      "bodies": 669,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 26,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 670,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 27,
+      "civilians": 102,
+      "police": 3,
+      "physical": 9,
+      "bodies": 660,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 28,
+      "civilians": 102,
+      "police": 3,
+      "physical": 9,
+      "bodies": 663,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 29,
+      "civilians": 102,
+      "police": 3,
+      "physical": 9,
+      "bodies": 665,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 30,
+      "civilians": 102,
+      "police": 3,
+      "physical": 8,
+      "bodies": 662,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 31,
+      "civilians": 102,
+      "police": 3,
+      "physical": 9,
+      "bodies": 669,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 32,
+      "civilians": 102,
+      "police": 3,
+      "physical": 10,
+      "bodies": 666,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 33,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 663,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 34,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 663,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 35,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 662,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 36,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 670,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 37,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 664,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 38,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 679,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 39,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 670,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 40,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 670,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 41,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 672,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 42,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 662,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 43,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 663,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 44,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 669,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 45,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 666,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 46,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 674,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 47,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 668,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 48,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 669,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 49,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 667,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 50,
+      "civilians": 102,
+      "police": 3,
+      "physical": 16,
+      "bodies": 672,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 51,
+      "civilians": 102,
+      "police": 3,
+      "physical": 16,
+      "bodies": 672,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 52,
+      "civilians": 102,
+      "police": 3,
+      "physical": 16,
+      "bodies": 670,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 53,
+      "civilians": 102,
+      "police": 3,
+      "physical": 16,
+      "bodies": 672,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 54,
+      "civilians": 102,
+      "police": 3,
+      "physical": 17,
+      "bodies": 674,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 55,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 668,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 56,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 666,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 57,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 665,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 58,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 666,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 59,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 667,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 60,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 667,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 61,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 665,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 62,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 670,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 63,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 669,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 64,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 664,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 65,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 664,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 66,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 669,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 67,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 669,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 68,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 673,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 69,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 672,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 70,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 664,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 71,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 670,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 72,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 670,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 73,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 669,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 74,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 668,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 75,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 669,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 76,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 662,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 77,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 663,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 78,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 668,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 79,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 668,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 80,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 669,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 81,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 671,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 82,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 670,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 83,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 665,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 84,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 676,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 85,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 668,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 86,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 671,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 87,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 673,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 88,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 667,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 89,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 666,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 90,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 666,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 91,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 665,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 92,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 666,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 93,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 666,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 94,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 670,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 95,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 672,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 96,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 674,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 97,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 675,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 98,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 675,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 99,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 676,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 100,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 678,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 101,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 676,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 102,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 675,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 103,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 673,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 104,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 676,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 105,
+      "civilians": 102,
+      "police": 3,
+      "physical": 13,
+      "bodies": 671,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 106,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 670,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 107,
+      "civilians": 102,
+      "police": 3,
+      "physical": 12,
+      "bodies": 671,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 108,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 668,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 109,
+      "civilians": 102,
+      "police": 3,
+      "physical": 11,
+      "bodies": 664,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 110,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 671,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 111,
+      "civilians": 102,
+      "police": 3,
+      "physical": 14,
+      "bodies": 668,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 112,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 672,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 113,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 673,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 114,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 670,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 115,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 669,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 116,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 669,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 117,
+      "civilians": 102,
+      "police": 3,
+      "physical": 17,
+      "bodies": 678,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 118,
+      "civilians": 102,
+      "police": 3,
+      "physical": 17,
+      "bodies": 674,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 119,
+      "civilians": 102,
+      "police": 3,
+      "physical": 15,
+      "bodies": 671,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 120,
+      "civilians": 102,
+      "police": 3,
+      "physical": 17,
+      "bodies": 678,
+      "wanted": [
+        0,
+        0,
+        0
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 121,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 688,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        "c",
+        "c",
+        "b",
+        "b",
+        "a",
+        "a"
+      ]
+    },
+    {
+      "seconds": 122,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 682,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        "c",
+        "c",
+        "b",
+        "b",
+        "a",
+        "a"
+      ]
+    },
+    {
+      "seconds": 123,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 678,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        "c",
+        "c",
+        "b",
+        "b",
+        "a",
+        "a"
+      ]
+    },
+    {
+      "seconds": 124,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 684,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "idle"
+      ],
+      "targets": [
+        "c",
+        "c",
+        "b",
+        "b",
+        "a",
+        "a"
+      ]
+    },
+    {
+      "seconds": 125,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 675,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "holding"
+      ],
+      "targets": [
+        "c",
+        "c",
+        "b",
+        "b",
+        "a",
+        "a"
+      ]
+    },
+    {
+      "seconds": 126,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 675,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "holding"
+      ],
+      "targets": [
+        "c",
+        "c",
+        "b",
+        "b",
+        "a",
+        "a"
+      ]
+    },
+    {
+      "seconds": 127,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arresting"
+      ],
+      "targets": [
+        "c",
+        "c",
+        "b",
+        "b",
+        "a",
+        "a"
+      ]
+    },
+    {
+      "seconds": 128,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arresting"
+      ],
+      "targets": [
+        "c",
+        "c",
+        "b",
+        "b",
+        "a",
+        "a"
+      ]
+    },
+    {
+      "seconds": 129,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 670,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arresting"
+      ],
+      "targets": [
+        "c",
+        "c",
+        "b",
+        "b",
+        "a",
+        "a"
+      ]
+    },
+    {
+      "seconds": 130,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arresting"
+      ],
+      "targets": [
+        "c",
+        "c",
+        "b",
+        "b",
+        "a",
+        "a"
+      ]
+    },
+    {
+      "seconds": 131,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 676,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arresting"
+      ],
+      "targets": [
+        "c",
+        "c",
+        "b",
+        "b",
+        "a",
+        "a"
+      ]
+    },
+    {
+      "seconds": 132,
+      "civilians": 102,
+      "police": 6,
+      "physical": 23,
+      "bodies": 683,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "c",
+        "c",
+        "b",
+        "b",
+        "a",
+        "a"
+      ]
+    },
+    {
+      "seconds": 133,
+      "civilians": 102,
+      "police": 6,
+      "physical": 22,
+      "bodies": 680,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 134,
+      "civilians": 102,
+      "police": 6,
+      "physical": 22,
+      "bodies": 683,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 135,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 684,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 136,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 675,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 137,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 678,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 138,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 139,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 675,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 140,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 676,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 141,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 676,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 142,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 143,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 678,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 144,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 145,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 681,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 146,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 675,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 147,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 671,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 148,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 149,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 150,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 671,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 151,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 667,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 152,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 668,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 153,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 668,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 154,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 155,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 156,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 676,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 157,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 676,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 158,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 159,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 160,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 161,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 162,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 163,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 164,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 165,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 166,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 167,
+      "civilians": 102,
+      "police": 6,
+      "physical": 22,
+      "bodies": 678,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 168,
+      "civilians": 102,
+      "police": 6,
+      "physical": 22,
+      "bodies": 678,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 169,
+      "civilians": 102,
+      "police": 6,
+      "physical": 22,
+      "bodies": 675,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 170,
+      "civilians": 102,
+      "police": 6,
+      "physical": 22,
+      "bodies": 677,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 171,
+      "civilians": 102,
+      "police": 6,
+      "physical": 22,
+      "bodies": 677,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 172,
+      "civilians": 102,
+      "police": 6,
+      "physical": 22,
+      "bodies": 675,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 173,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 174,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 175,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 176,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 177,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 178,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 179,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 180,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 676,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 181,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 182,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 183,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 184,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 185,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 186,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 681,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 187,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 188,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 189,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 670,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 190,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 670,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 191,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 670,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 192,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 193,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 194,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 195,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 668,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 196,
+      "civilians": 102,
+      "police": 6,
+      "physical": 17,
+      "bodies": 665,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 197,
+      "civilians": 102,
+      "police": 6,
+      "physical": 17,
+      "bodies": 665,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 198,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 199,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 200,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 201,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 202,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 203,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 667,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 204,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 667,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 205,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 669,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 206,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 669,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 207,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 676,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 208,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 670,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 209,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 669,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 210,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 667,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 211,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 667,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 212,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 213,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 214,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 215,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 675,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 216,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 671,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 217,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 671,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 218,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 671,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 219,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 220,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 221,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 680,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 222,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 675,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 223,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 671,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 224,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 671,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 225,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 670,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 226,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 670,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 227,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 228,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 229,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 668,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 230,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 231,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 232,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 670,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 233,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 670,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 234,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 667,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 235,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 667,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 236,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 669,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 237,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 238,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 239,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 240,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 241,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 242,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 664,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 243,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 668,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 244,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 668,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 245,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 667,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 246,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 668,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 247,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 668,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 248,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 249,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 250,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 251,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 683,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 252,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 679,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 253,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 254,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 255,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 256,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 257,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 258,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 259,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 682,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 260,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 676,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 261,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 262,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 263,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 671,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 264,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 265,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 668,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 266,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 267,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 667,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 268,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 669,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 269,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 669,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 270,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 271,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 272,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 668,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 273,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 274,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 275,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 276,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 277,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 278,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 279,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 666,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 280,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 664,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 281,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 282,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 676,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 283,
+      "civilians": 102,
+      "police": 6,
+      "physical": 22,
+      "bodies": 677,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 284,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 674,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 285,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 286,
+      "civilians": 102,
+      "police": 6,
+      "physical": 20,
+      "bodies": 673,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 287,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 676,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 288,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 676,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 289,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 675,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 290,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 677,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 291,
+      "civilians": 102,
+      "police": 6,
+      "physical": 21,
+      "bodies": 677,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 292,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 293,
+      "civilians": 102,
+      "police": 6,
+      "physical": 19,
+      "bodies": 672,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 294,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 671,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 295,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 671,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 296,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 671,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 297,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 671,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 298,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 667,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 299,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 665,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    },
+    {
+      "seconds": 300,
+      "civilians": 102,
+      "police": 6,
+      "physical": 18,
+      "bodies": 665,
+      "wanted": [
+        3,
+        3,
+        3
+      ],
+      "arrest": [
+        "idle",
+        "idle",
+        "arrested"
+      ],
+      "targets": [
+        "b",
+        "b",
+        "a",
+        "a",
+        null,
+        null
+      ]
+    }
+  ],
+  "scope": "accelerated shared production core; 3 players, 102 civilians, 3 then 6 police; not WAN/render/VPS capacity acceptance"
+}

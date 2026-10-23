@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "node": "v24.19.0",
+  "ok": true,
+  "fingerprint": "a9cad65c2882c80e190459f24daa3ffbb95f6a2eb3b5cb0bd298d404ad294ac9",
+  "tests": 0,
+  "build": 0,
+  "at": "2026-10-23T20:59:56.210Z",
+  "testCount": 419,
+  "scope": "working tree verification, includes unrelated local automation changes; own-only Git commit excludes them"
+}

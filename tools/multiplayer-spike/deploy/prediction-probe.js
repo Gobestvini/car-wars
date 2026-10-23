@@ -14,7 +14,7 @@ if(role==='server'){
   const interval=setInterval(async()=>{
     let id;try{id=JSON.parse(await readFile(`${share}/room.json`,'utf8')).roomId;}catch{return;}
     const room=matchMaker.getLocalRoomById(id);if(!room)return;
-    if(room.sim.players.size===3 && !fixture){
+    if(room.sim.players.size===3 && [...room.sim.players.values()].every(a=>!a.sim.appearing) && !fixture){
       fixture=true;start=performance.now();tick=room.sim.tick;dropped=room.metrics.droppedSeconds;
       [...room.sim.players.values()].forEach((a,i)=>{
         a.sim.spawn={x:i===2?8:0,y:1,z:i===0?-10:i===1?10:0,yaw:i===1?Math.PI:i===2?-Math.PI/2:0};
@@ -26,7 +26,7 @@ if(role==='server'){
     if(start&&performance.now()-start>(seconds-3)*1000){
       clearInterval(interval);const elapsed=(performance.now()-start)/1000;
       const result={role,elapsed,physicsHz:(room.sim.tick-tick)/elapsed,droppedSeconds:room.metrics.droppedSeconds-dropped,
-        contacts,npc:room.sim.npcs.length,players:room.sim.players.size,schedulerP95:percentile(room.metrics.schedulerMs,.95)};
+        contacts,npc:room.sim.runtime.roleCount('civilian'),police:room.sim.runtime.roleCount('police'),players:room.sim.players.size,schedulerP95:percentile(room.metrics.schedulerMs,.95)};
       await writeFile(`${share}/server.json`,JSON.stringify(result));console.log(JSON.stringify(result));
     }
   },20);

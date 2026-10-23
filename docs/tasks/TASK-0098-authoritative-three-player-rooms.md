@@ -1,6 +1,6 @@
 # TASK-0098: Создать authoritative серверные комнаты на трёх игроков
 
-- Статус: blocked
+- Статус: ready
 - Приоритет: high
 - Создана: 2026-10-14
 - Обновлена: 2026-10-23
@@ -10,17 +10,17 @@
 
 ## Актуальная сверка 2026-10-23
 
-Эта сверка имеет приоритет над историческим baseline и будущими путями ниже. Проверены исходники рабочего дерева поверх `5416e88`; чужие локальные изменения не являются завершённой частью этого задания. Общая карта выпуска: [что осталось до сетевого релиза](../knowledge/multiplayer-release-readiness.md).
+Эта сверка имеет приоритет над историческим baseline и будущими путями ниже. Общий core реализован поверх `25bac72` и принят независимым QA TASK-0097 2026-10-23; чужие локальные изменения не входят в её результат. Общая карта выпуска: [что осталось до сетевого релиза](../knowledge/multiplayer-release-readiness.md).
 
 **Уже реализовано:** DrivingSpikeRoom и HostedDrivingRoom уже обеспечивают реальные SDK-сессии, лимит 3, 15 с reconnect, input validation/ack, binary frames, map/version checks и индивидуальный respawn.
 
-**Остаётся:** Зависимость TASK-0097 не завершена: нет полного gameplay DTO и правил. Также нужны map-ready/timeout перед активацией машины, backpressure/slow-reader, adversarial/capacity-race и независимая приёмка полного lifecycle.
+**Остаётся:** Общий GameWorld, police/wanted/arrest/repair и gameplay DTO реализованы и приняты в TASK-0097; повторять их перенос не нужно. Нужны map-ready/timeout перед активацией машины, backpressure/slow-reader, adversarial/capacity-race и независимая приёмка полного lifecycle.
 
-**Статус `blocked`:** частично реализовано, продолжение и приёмка зависят от перечисленных незавершённых этапов; это не пустой черновик и не готовый релиз.
+**Статус `ready`:** зависимости 0096/0097 приняты, можно выполнять перечисленные остатки на существующих core/room adapters. Реализация остатка 0098 и её независимая приёмка предстоят.
 
 Архитектурное уточнение: запрет online solver ниже относится к первоначальному server-only варианту. С 2026-10-18 выбран и реализован non-authoritative client prediction/reconciliation, см. [план](../knowledge/multiplayer-server-plan.md) и [проверки prediction](../knowledge/multiplayer-client-prediction.md). Authority, AI, damage и игровые транзакции остаются серверными. Первоначальный no-go TASK-0096 нельзя автоматически применять к текущему клиенту; его отрицательные измерения сохранены как история, а итоговые budgets всё ещё требуют проверки. Не менять стек и не удалять prediction ради выполнения устаревшего текста.
 
-Фактические пути: `tools/multiplayer-spike/world.js`, `server.js`, `deploy/server.js`, `src/multiplayer/{game,room-client,frame-codec,snapshot-buffer,prediction,prediction-world}.js`; предполагаемые `server/`, `src/simulation/` и `src/network/` ниже ещё не созданы. Перенос в production core остаётся требованием 0097, существующее preview поведение надо сохранить. Автопроверки: `node tools/verify.js --full` и соответствующие `tools/multiplayer-spike/tests/*`; не восстанавливать удалённый Telegram verifier.
+Фактические пути после реализации 0097: `src/simulation/{game-world,vehicle-runtime}.js`, `tools/multiplayer-spike/{server,deploy/server}.js`, `src/multiplayer/{game,room-client,frame-codec,snapshot-buffer,prediction,prediction-world,map-contract,street-world}.js`. Hosted adapter создаёт GameWorld; `tools/multiplayer-spike/world.js` остаётся research harness. Не создавать второй `server/` ради старых имён. Автопроверки: `node tools/verify.js --full` и соответствующие `tools/multiplayer-spike/tests/*`; не восстанавливать удалённый Telegram verifier. [Контракт общего core](../knowledge/multiplayer-shared-core.md), [свежие проверки](../knowledge/multiplayer/2026-10-23-core/README.md).
 
 Прежние пустые отметки критериев означают отсутствие полной приёмки, а не отсутствие всей реализации. Исторические артефакты 18–19 октября перечислены в общей карте; чтение этих отчётов не считается новым запуском тестов или новой QA-приёмкой.
 

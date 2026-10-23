@@ -1,5 +1,15 @@
 # Hosted 3D multiplayer
 
+Source update, 2026-10-23 (TASK-0097; deployment below was not repeated): the
+hosted adapter now creates the same `src/simulation/game-world.js` as offline.
+It includes 102 civilians, up to three players, three baseline/six expanded
+police, personal wanted/arrest/respawn and shared repair/props. Gameplay state is
+server-owned; the complete online wanted/arrest HUD is still TASK-0099. Default
+three-client smoke expects 108 actors; expanded police can bring this to 111.
+The historical live URL and measurements below describe the deployed October 18
+preview, not verification that this source update is running there. Current
+acceptance and remaining release gates: [release readiness](../../../docs/knowledge/multiplayer-release-readiness.md).
+
 Live: **https://api.plusvibegames.com/carwars/** (2026-10-18).
 The deployed root opens the main game's Three.js city, car models, lighting,
 camera and damage effects in online mode. Create a room and send its invitation
@@ -24,9 +34,9 @@ Online supports shared free driving with 102 civilians, three physical players,
 collisions, body deformation, individual respawn, and destructible lamps, bins,
 benches, signals and trees. Server-owned object lifecycles survive late joins and
 reconnects within the room; nearby contacts are predicted locally. Debris fades
-after five simulation seconds, as in offline street-prop physics. Police/wanted/
-arrest and repair pickups remain offline-only. The server remains the bounded research world;
-this integration does not accept the full production multiplayer backlog.
+after five simulation seconds, as in offline street-prop physics. This paragraph
+describes the original preview coverage; see the source update above for the
+shared gameplay core. Full production multiplayer acceptance remains outstanding.
 
 The White Tower VPS runs this as an independent Docker Compose project on the
 existing `tower-edge` network. No host game port is published. Caddy strips

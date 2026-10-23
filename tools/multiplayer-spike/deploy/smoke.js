@@ -12,7 +12,7 @@ async function until(predicate, timeout = 10000) {
   while (!predicate()) { if (Date.now() > deadline) throw Error('Timed out waiting for shared state'); await sleep(25); }
 }
 const state = r => r.motionFrame || r.state;
-const attach = r => { r.onMessage('welcome', () => {}); r.onMessage('full', () => {});
+const attach = r => { r.onMessage('welcome', () => {}); r.onMessage('full', () => {});r.onMessage('gameplay',()=>{});
   r.onMessage('frame',bytes=>{r.motionFrame=decodeFrame(bytes);}); clients.push(r); return r; };
 try {
   const deadline = Date.now() + 15000;
@@ -29,7 +29,7 @@ try {
   const a = attach(await sdk.create('driving', joinOptions));
   const b = attach(await new Client(endpoint).joinById(a.roomId, joinOptions));
   const c = attach(await new Client(endpoint).joinById(a.roomId, joinOptions));
-  await until(() => clients.every(r => state(r).actors?.size === 105));
+  await until(() => clients.every(r => state(r).actors?.size === 108));
   assert.equal(b.state.signature, a.state.signature);
   await assert.rejects(sdk.joinById(a.roomId, joinOptions), /locked|full/i);
   const before = state(a).actors.get(a.sessionId).pose.slice(0, 3);
@@ -56,12 +56,12 @@ try {
   await until(() => state(a).actors.get(identity)?.connected === false);
   const resumed = attach(await sdk.reconnect(token));
   assert.equal(resumed.sessionId, identity);
-  await until(() => state(resumed).actors?.size === 105);
+  await until(() => state(resumed).actors?.size === 108);
   // The hosted service has a hard cap, including rooms created through direct SDK calls.
   const second = attach(await sdk.create('driving', joinOptions));
   await assert.rejects(sdk.create('driving', joinOptions), /занят|две комнаты/);
   assert.notEqual(second.roomId, a.roomId);
-  console.log(JSON.stringify({ ok: true, endpoint, checks: ['3 independent clients', '102 NPC', 'same map', '4th rejected',
+  console.log(JSON.stringify({ ok: true, endpoint, checks: ['3 independent clients', '102 civilians + 3 police', 'same map', '4th rejected',
     'shared movement and applied input', 'reconnect preserves identity', '2-room cap', 'proxy-safe error JSON',
     'authoritative 3D map', 'individual rate-limited respawn'], signature: a.state.signature }));
 } finally {

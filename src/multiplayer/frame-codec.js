@@ -13,7 +13,7 @@ export function encodeFrame(snapshot){
     const id=encoder.encode(actor.id);if(!id.length || id.length>64)throw Error('Invalid actor ID');
     if(![...actor.p,...actor.q,...actor.v,actor.steering,actor.damage].every(Number.isFinite))throw Error('Invalid authoritative motion');
     u8(id.length);bytes.set(id,offset);offset+=id.length;
-    const player=actor.role==='player';u8(Number(player)|Number(actor.connected)<<1|Number(actor.physical)<<2);
+    const player=actor.role==='player';u8(Number(player)|Number(actor.connected)<<1|Number(actor.physical)<<2|Number(actor.role==='police')<<3|Number(Boolean(actor.appearing))<<4);
     u32(actor.generation);i32(actor.lastProcessedInputSeq);actor.p.forEach(f32);actor.q.forEach(v=>i16(v*32767));
     actor.v.forEach(v=>i16(v*100));i16(actor.steering*1000);u16(Math.round(clamp(actor.damage,0,1)*65535));
     (actor.av ?? [0,0,0]).forEach(v=>i16(v*1000));i16((actor.throttle??0)*32767);
@@ -66,7 +66,7 @@ export function decodeFrame(bytes){
       if(wf&2){const data=Array.from({length:10},f32);if(!data.every(Number.isFinite))throw Error('Invalid wheel body');detached[w]={q:data.slice(0,4),v:data.slice(4,7),av:data.slice(7,10)};}
     }
     if(![...pose,...wheels,steering,damage].every(Number.isFinite)||actors.has(id))throw Error('Invalid motion frame');
-    actors.set(id,{id,role:flags&1?'player':'civilian',connected:Boolean(flags&2),physical:Boolean(flags&4),generation,ack,pose,wheels,steering,damage,throttle,control,inputTick,detached,dents});
+    actors.set(id,{id,role:flags&1?'player':flags&8?'police':'civilian',appearing:Boolean(flags&16),connected:Boolean(flags&2),physical:Boolean(flags&4),generation,ack,pose,wheels,steering,damage,throttle,control,inputTick,detached,dents});
   }
   const propCount=u16(),props=[];if(propCount>2048)throw Error('Too many street objects');
   const indices=new Set();

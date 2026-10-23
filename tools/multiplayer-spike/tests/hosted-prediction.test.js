@@ -17,8 +17,10 @@ test('three actual SDK prediction clients collide, respawn independently and rec
         onWelcome:data=>client.startPrediction(data.map.colliders)});
       clients.push(client);const room=await client.connect(id);id=room.roomId;
     }
-    await until(()=>clients.every(c=>c.latestFrame?.actors.size===105));
+    await until(()=>clients.every(c=>c.latestFrame?.actors.size===108));
     const room=matchMaker.getLocalRoomById(id),players=clients.map(c=>room.sim.players.get(c.room.sessionId));
+    await until(()=>players.every(a=>!a.sim.appearing));
+    assert.equal(room.sim.runtime.roleCount('civilian'),102);assert.equal(room.sim.runtime.roleCount('police'),3);
     // Test-only fixture through the in-process room, never a public pose command.
     players.forEach((a,i)=>{
       a.sim.spawn={x:i===2?8:0,y:1,z:i===0?-10:i===1?10:0,yaw:i===1?Math.PI:i===2?-Math.PI/2:0};

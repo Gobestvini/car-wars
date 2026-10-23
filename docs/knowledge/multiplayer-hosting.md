@@ -1,5 +1,11 @@
 # Multiplayer preview on the shared White Tower VPS
 
+Source update 2026-10-23: HostedDrivingRoom now creates the shared offline/headless
+GameWorld with police/wanted/arrest/repair and player-specific causality. This
+change was tested locally; the VPS was not redeployed or rechecked. Historical
+deployment observations below retain their original scope. See [current release
+gates](multiplayer-release-readiness.md) and [core checks](multiplayer-shared-core.md).
+
 Verified 2026-10-18: [deployment runbook](../../tools/multiplayer-spike/deploy/README.md),
 live URL https://api.plusvibegames.com/carwars/.
 

@@ -138,7 +138,7 @@ export async function startGame(loadingScreen) {
   $('online-quality').onclick=()=>{quality=quality==='high'?'low':'high';$('online-quality').textContent=`Качество: ${quality==='high'?'высокое':'лёгкое'}`;resize();canvas.focus({preventScroll:true});};
   function makeVisual(actor){
     if(actor.role!=='player'){
-      const group=makeConceptTrafficCar(trafficAssets,Number(actor.id.split('-').at(-1))||0,'civilian');scene.add(group);
+      const group=makeConceptTrafficCar(trafficAssets,Number(actor.id.split('-').at(-1))||0,actor.role);scene.add(group);
       return{group,player:false};
     }
     const group=new THREE.Group(),model=playerTemplate.model.clone(true);group.add(model);scene.add(group);
@@ -178,6 +178,8 @@ export async function startGame(loadingScreen) {
   }
   const right=new THREE.Vector3(),up=new THREE.Vector3(),direction=new THREE.Vector3();
   function inputFor(actor){
+    const state=network.gameplay?.players.find(p=>p.id===network.room?.sessionId);
+    if(state?.arrest?.state==='arrested'||state?.appearing)return neutralInput();
     if(!ready || !lobby.hidden || document.hidden || !actor)return neutralInput();
     const q=new THREE.Quaternion().fromArray(actor.pose,3),forward=new THREE.Vector3(0,0,1).applyQuaternion(q);
     const signed=(actor.pose[7]||0)*forward.x+(actor.pose[9]||0)*forward.z;

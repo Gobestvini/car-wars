@@ -1,5 +1,5 @@
 import { findRoadRoute } from './traffic-ai.js';
-import { segmentIntersectsAabb } from './building-occlusion.js';
+import { segmentIntersectsAabb } from './simulation/segment-aabb.js';
 
 export const TRAFFIC_EVASION = Object.freeze({ impactSpeed: 1.5, speed: 16,
   minimumDuration: 6, maximumDuration: 20, safeDistance: 60, replanInterval: 3 });

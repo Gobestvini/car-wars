@@ -1,0 +1,727 @@
+{
+  "date": "2026-10-23",
+  "mode": "offline shared core; Edge headless WebGL and touch emulation",
+  "errors": [],
+  "cases": [
+    {
+      "viewport": "1440x900",
+      "quality": "high",
+      "seed": 3549864962,
+      "start": {
+        "core": {
+          "tick": 84,
+          "steps": 84,
+          "round": 1,
+          "signature": "b6ffd265200d4f5ad886950516fef9e934d06a8f205aa2257f48a6fd846c7c1e",
+          "playerId": "player",
+          "repairRevision": 0,
+          "events": []
+        },
+        "model": {
+          "url": "models/player-sedan.glb",
+          "meshes": 5,
+          "triangles": 4140,
+          "textures": 1,
+          "materials": 1,
+          "deformedVertices": 0,
+          "lights": {
+            "headlights": true,
+            "tailLights": true,
+            "reverse": false,
+            "lensVertices": [
+              128,
+              128,
+              96,
+              96
+            ]
+          },
+          "glowDrawCalls": 1
+        },
+        "appearance": {
+          "player": "active",
+          "elapsed": 0.7,
+          "effects": {
+            "capacity": 32,
+            "active": 30,
+            "particles": 40,
+            "rejected": 0
+          }
+        },
+        "police": 1
+      },
+      "driving": {
+        "telemetry": {
+          "position": {
+            "x": -6.649428274810849,
+            "y": 0.8657900943654895,
+            "z": 27.229665783413644
+          },
+          "speed": 1.3515166305487163,
+          "signedSpeed": 0.36656671516027617,
+          "heading": -2.4582236357649045,
+          "roll": 0.019860055648466445,
+          "steer": 0.8294805583647603,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "1",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "trails": 47,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 6,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "high",
+          "budget": 512,
+          "emitters": 6
+        },
+        "core": {
+          "tick": 543,
+          "steps": 543,
+          "round": 1,
+          "signature": "b6ffd265200d4f5ad886950516fef9e934d06a8f205aa2257f48a6fd846c7c1e",
+          "playerId": "player",
+          "repairRevision": 0,
+          "events": []
+        }
+      },
+      "damaged": {
+        "model": {
+          "url": "models/player-sedan.glb",
+          "meshes": 5,
+          "triangles": 4140,
+          "textures": 1,
+          "materials": 1,
+          "deformedVertices": 651,
+          "lights": {
+            "headlights": true,
+            "tailLights": true,
+            "reverse": false,
+            "lensVertices": [
+              128,
+              128,
+              96,
+              96
+            ]
+          },
+          "glowDrawCalls": 1
+        },
+        "wheels": [
+          {
+            "detached": true,
+            "grounded": false
+          },
+          {
+            "detached": false,
+            "grounded": true
+          },
+          {
+            "detached": false,
+            "grounded": true
+          },
+          {
+            "detached": false,
+            "grounded": true
+          }
+        ],
+        "effects": {
+          "stage": "fire",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 1,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -75.00682934139623,
+            1.263469397061551,
+            -111.0444797063179
+          ]
+        }
+      },
+      "repair": {
+        "core": {
+          "tick": 30,
+          "steps": 581,
+          "round": 2,
+          "signature": "b6ffd265200d4f5ad886950516fef9e934d06a8f205aa2257f48a6fd846c7c1e",
+          "playerId": "player",
+          "repairRevision": 1,
+          "events": [
+            {
+              "id": "2:1",
+              "tick": 27,
+              "playerId": "player",
+              "type": "repair",
+              "pickupId": 0
+            }
+          ]
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -107.5,
+              "section": "0:0",
+              "status": "consumed"
+            },
+            {
+              "id": 1,
+              "x": -125,
+              "z": -42.5,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -107.5,
+              "z": 75,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": -7.5,
+              "z": -175,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": 25,
+              "z": -35,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -7.5,
+              "z": 125,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 107.5,
+              "z": -125,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 125,
+              "z": 7.5,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 85,
+              "z": 125,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -15,
+              "z": -75,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": -75,
+              "z": -57.5,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -125,
+              "z": 35,
+              "section": "0:1",
+              "status": "available"
+            }
+          ],
+          "repairs": 1,
+          "unavailableReason": null
+        },
+        "effects": {
+          "stage": "healthy",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 0,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -75.00017230446413,
+            1.3007994264377896,
+            -107.91882770380171
+          ]
+        }
+      },
+      "wanted": {
+        "level": 1,
+        "stars": [
+          "filled",
+          "empty",
+          "empty",
+          "empty",
+          "empty",
+          "empty"
+        ],
+        "pendingStar": null,
+        "warningRemaining": 0,
+        "lastViolation": "property-collision",
+        "lastAcceptedAt": 0.3250000000000002
+      },
+      "arrest": {
+        "state": {
+          "state": "arrested",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [
+            "police-04"
+          ],
+          "cancellationReason": null
+        },
+        "hud": "Арестован",
+        "core": {
+          "tick": 892,
+          "steps": 1443,
+          "round": 2,
+          "signature": "b6ffd265200d4f5ad886950516fef9e934d06a8f205aa2257f48a6fd846c7c1e",
+          "playerId": "player",
+          "repairRevision": 1,
+          "events": [
+            {
+              "id": "2:1",
+              "tick": 27,
+              "playerId": "player",
+              "type": "repair",
+              "pickupId": 0
+            },
+            {
+              "id": "2:2",
+              "tick": 38,
+              "playerId": "player",
+              "type": "property-collision",
+              "propId": "bin:0"
+            },
+            {
+              "id": "2:3",
+              "tick": 888,
+              "playerId": "player",
+              "type": "arrested"
+            }
+          ]
+        }
+      },
+      "newRound": {
+        "seed": 225403703,
+        "core": {
+          "tick": 20,
+          "steps": 1479,
+          "round": 3,
+          "signature": "c729e800c70497cddeeeb10d6a6bfa6f60a17a8ca456830995a77f7e5553874b",
+          "playerId": "player",
+          "repairRevision": 1,
+          "events": []
+        },
+        "wheels": [
+          {
+            "detached": false,
+            "grounded": false
+          },
+          {
+            "detached": false,
+            "grounded": false
+          },
+          {
+            "detached": false,
+            "grounded": false
+          },
+          {
+            "detached": false,
+            "grounded": false
+          }
+        ]
+      }
+    },
+    {
+      "viewport": "390x844",
+      "quality": "low",
+      "seed": 1716792482,
+      "start": {
+        "core": {
+          "tick": 84,
+          "steps": 84,
+          "round": 1,
+          "signature": "50fe4c4406e8cc6dd54ebb7aaa4c514cda9cacb4e3b1835e7404cbd6d642e856",
+          "playerId": "player",
+          "repairRevision": 0,
+          "events": []
+        },
+        "model": {
+          "url": "models/player-sedan.glb",
+          "meshes": 5,
+          "triangles": 4140,
+          "textures": 1,
+          "materials": 1,
+          "deformedVertices": 0,
+          "lights": {
+            "headlights": true,
+            "tailLights": true,
+            "reverse": false,
+            "lensVertices": [
+              128,
+              128,
+              96,
+              96
+            ]
+          },
+          "glowDrawCalls": 1
+        },
+        "appearance": {
+          "player": "active",
+          "elapsed": 0.7,
+          "effects": {
+            "capacity": 32,
+            "active": 30,
+            "particles": 24,
+            "rejected": 0
+          }
+        },
+        "police": 1
+      },
+      "joystick": {
+        "active": true,
+        "startX": 190,
+        "startY": 550,
+        "direction": 1,
+        "x": 0.2873478855663454,
+        "y": -0.9578262852211513,
+        "strength": 1,
+        "knobX": 18.390264676246105,
+        "knobY": -61.30088225415369
+      },
+      "driving": {
+        "telemetry": {
+          "position": {
+            "x": -10.237390553916669,
+            "y": 0.8662912366368122,
+            "z": 7.890961860754834
+          },
+          "speed": 58.38665399213789,
+          "signedSpeed": 16.19398071895451,
+          "heading": -0.9048827090364302,
+          "roll": 0.0002330104210198476,
+          "steer": -0.0022828282959150427,
+          "grounded": 4,
+          "slip": 0,
+          "gear": "2",
+          "damage": 0,
+          "damageState": "healthy",
+          "traction": 1,
+          "lastImpactSpeed": 0
+        },
+        "trails": 0,
+        "smoke": {
+          "emitted": 0,
+          "sourceCount": 6,
+          "limitedSources": 0,
+          "highWater": 0,
+          "active": 0,
+          "capacity": 512,
+          "quality": "low",
+          "budget": 256,
+          "emitters": 6
+        },
+        "core": {
+          "tick": 294,
+          "steps": 294,
+          "round": 1,
+          "signature": "50fe4c4406e8cc6dd54ebb7aaa4c514cda9cacb4e3b1835e7404cbd6d642e856",
+          "playerId": "player",
+          "repairRevision": 0,
+          "events": []
+        }
+      },
+      "damaged": {
+        "model": {
+          "url": "models/player-sedan.glb",
+          "meshes": 5,
+          "triangles": 4140,
+          "textures": 1,
+          "materials": 1,
+          "deformedVertices": 651,
+          "lights": {
+            "headlights": true,
+            "tailLights": true,
+            "reverse": false,
+            "lensVertices": [
+              128,
+              128,
+              96,
+              96
+            ]
+          },
+          "glowDrawCalls": 1
+        },
+        "wheels": [
+          {
+            "detached": true,
+            "grounded": false
+          },
+          {
+            "detached": false,
+            "grounded": true
+          },
+          {
+            "detached": false,
+            "grounded": true
+          },
+          {
+            "detached": false,
+            "grounded": true
+          }
+        ],
+        "effects": {
+          "stage": "fire",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 1,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -175.01659778265804,
+            1.2232141329811979,
+            -96.03765607485602
+          ]
+        }
+      },
+      "repair": {
+        "core": {
+          "tick": 28,
+          "steps": 330,
+          "round": 2,
+          "signature": "50fe4c4406e8cc6dd54ebb7aaa4c514cda9cacb4e3b1835e7404cbd6d642e856",
+          "playerId": "player",
+          "repairRevision": 1,
+          "events": [
+            {
+              "id": "2:1",
+              "tick": 27,
+              "playerId": "player",
+              "type": "repair",
+              "pickupId": 0
+            }
+          ]
+        },
+        "pickups": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -175,
+              "z": -92.5,
+              "section": "0:0",
+              "status": "consumed"
+            },
+            {
+              "id": 1,
+              "x": -107.5,
+              "z": -25,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -125,
+              "z": 92.5,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": 25,
+              "z": -100,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": -35,
+              "z": 25,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": 50,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 142.5,
+              "z": -125,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 175,
+              "z": 50,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 142.5,
+              "z": 75,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": -57.5,
+              "z": 125,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": -135,
+              "z": 25,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": -15,
+              "z": 175,
+              "section": "1:2",
+              "status": "available"
+            }
+          ],
+          "repairs": 1,
+          "unavailableReason": null
+        },
+        "effects": {
+          "stage": "healthy",
+          "exploded": false,
+          "explosions": 0,
+          "terminalTime": 0,
+          "activeSmoke": 0,
+          "activeFire": 0,
+          "capacity": 288,
+          "origin": [
+            -175.0000566152398,
+            1.3061317360068072,
+            -93.05031550485636
+          ]
+        }
+      },
+      "wanted": {
+        "level": 1,
+        "stars": [
+          "filled",
+          "empty",
+          "empty",
+          "empty",
+          "empty",
+          "empty"
+        ],
+        "pendingStar": null,
+        "warningRemaining": 0,
+        "lastViolation": "property-collision",
+        "lastAcceptedAt": 0.2583333333333333
+      },
+      "arrest": {
+        "state": {
+          "state": "arrested",
+          "progress": 0,
+          "remainingSeconds": 5,
+          "holdProgress": 0,
+          "nearbyPoliceIds": [
+            "police-04"
+          ],
+          "cancellationReason": null
+        },
+        "hud": "Арестован",
+        "core": {
+          "tick": 874,
+          "steps": 1176,
+          "round": 2,
+          "signature": "50fe4c4406e8cc6dd54ebb7aaa4c514cda9cacb4e3b1835e7404cbd6d642e856",
+          "playerId": "player",
+          "repairRevision": 1,
+          "events": [
+            {
+              "id": "2:1",
+              "tick": 27,
+              "playerId": "player",
+              "type": "repair",
+              "pickupId": 0
+            },
+            {
+              "id": "2:2",
+              "tick": 30,
+              "playerId": "player",
+              "type": "property-collision",
+              "propId": "bin:1"
+            },
+            {
+              "id": "2:3",
+              "tick": 872,
+              "playerId": "player",
+              "type": "arrested"
+            }
+          ]
+        }
+      },
+      "newRound": {
+        "seed": 125315990,
+        "core": {
+          "tick": 20,
+          "steps": 1202,
+          "round": 3,
+          "signature": "53461cb540245b8a5c92e13678054e016717c9a8741ef8d991f48803442799c6",
+          "playerId": "player",
+          "repairRevision": 1,
+          "events": []
+        },
+        "wheels": [
+          {
+            "detached": false,
+            "grounded": false
+          },
+          {
+            "detached": false,
+            "grounded": false
+          },
+          {
+            "detached": false,
+            "grounded": false
+          },
+          {
+            "detached": false,
+            "grounded": false
+          }
+        ]
+      }
+    }
+  ],
+  "passed": true
+}

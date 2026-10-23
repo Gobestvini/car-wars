@@ -1,0 +1,17 @@
+# TASK-0097: проверки исполнителя, 2026-10-23
+
+База `25bac72`, рабочий diff TASK-0097. [Независимый QA](qa/README.md) принял этап 2026-10-23; его отдельные проверки и ограничения сохранены в `qa/`. Ниже факты исполнителя.
+
+| Проверка | Факт / воспроизведение |
+| --- | --- |
+| Headless + core | `node --test tests/multiplayer-world.test.js tests/headless-import.test.js`: 12/12. Один solver, безопасная appearance, union LOD трёх наблюдателей, сохранение id/damage, police targets/квоты, персональная причинность/wanted/arrest/respawn, гонка repair, паритет visual/headless fixed seed, 20 dispose, столкновение с домом, insertion 30/60/120 FPS, debug collider/placement contract |
+| 300 simulation seconds | `node tests/multiplayer-world-soak.mjs` на официальном Node 22.23.3 без no-opt: [soak.json](soak.json), 36 000 тиков/solver calls, 3 игрока, ровно 102 civilian, 3→6 police; p95 2.161 мс, p99 3.123 мс, время harness 33.9 с. Все snapshot pose/velocity конечны. Это ускоренная проверка core, не эксплуатационный load gate |
+| Real SDK | Node 22 `--test tools/multiplayer-spike/tests/{spike,hosted-room,hosted-prediction,hosted-destruction,hosted-repair,hosted-gameplay}.test.js` (в PowerShell перечислить пути): 10/10. Hosted gameplay использует GameWorld, три сессии, forged wanted/arrest, настоящий arrest FSM, late join и personal respawn |
+| Offline browser | `PLAYWRIGHT_MODULE=<путь Playwright> node tests/game-world-browser.cjs`: [offline/report.json](offline/report.json), 2 случая, passed=true, errors=[]. Edge/WebGL, high 1440×900 с клавиатурой и low 390×844 с native CDP touch. GLB, безопасное появление, управление, следы desktop, деформация 651 vertices, detached wheel, активный damage smoke, swept repair, физический prop offense, полицейская машина/арест HUD, retry/new random map |
+| Online repair regression | `PLAYWRIGHT_MODULE=<путь Playwright> ARTIFACT_DIR=<каталог> node tests/multiplayer-repair-browser.cjs`: [browser-report.json](repair-regression/browser-report.json), desktop/high, portrait/low, late join/reconnect/new room; новый hosted core, errors=[] |
+
+В browser fixtures положение/повреждение/состояние сцены задаются оператором через перехват dev main.js. Arrest удерживает контроллер полицейского на тормозе, но solver, контакт, геометрия и время FSM настоящие. Это проверка правил и отображения, а не оценка сложности погони. В desktop steering/handbrake есть следы; emitted tire smoke в этом конкретном заезде равен нулю, поэтому он не объявлен визуально проверенным по этому артефакту. Damage smoke подтверждён отдельно. Столкновения с бордюром/домом, tire-smoke/tracks и контроллеры дополнительно покрыты root suite.
+
+Скриншоты: `offline/*-{driving,damaged,repaired,arrested}.png`, online — `repair-regression/*.png`. Реальные телефон, WAN, текущий публичный deploy и несколько физических устройств не проверены. Итог root test/build и независимое повторение обязательных сценариев см. в отчётах задачи.
+
+Неудачные попытки: pinned `seed=42` закономерно не меняет карту при retry — harness исправлен на неприкреплённый seed. Первое измерение damage effects сделано до эмиссии — добавлено ожидание реальной частицы. Локальный Node 24 иногда завершался без stack/output; один targeted run получил невоспроизводимый `number 918 is not a function` в `Array.some`, следующий 12/12 прошёл. Поэтому soak и SDK дополнительно выполнены на закреплённом Node 22.23.3; эти случаи не названы исправленными или диагностированными.

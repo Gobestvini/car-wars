@@ -1,0 +1,1338 @@
+{
+  "date": "2026-10-23",
+  "device": "Windows Edge headless WebGL; portrait touch emulation",
+  "errors": [],
+  "before": [
+    {
+      "roomId": "4g_yWzrF1",
+      "playerId": "h_vE6hOu_",
+      "ready": true,
+      "repairs": {
+        "state": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -135,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -157.5,
+              "z": -25,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 85,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": -42.5,
+              "z": -125,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": 25,
+              "z": 65,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -7.5,
+              "z": 75,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 175,
+              "z": -107.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 75,
+              "z": 0,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 115,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": 57.5,
+              "z": 25,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 125,
+              "z": -157.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": 125,
+              "z": -85,
+              "section": "2:0",
+              "status": "available"
+            }
+          ],
+          "players": [
+            {
+              "id": "h_vE6hOu_",
+              "repairRevision": 0,
+              "wanted": {
+                "level": 0,
+                "stars": [
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty"
+                ],
+                "pendingStar": null,
+                "warningRemaining": 0,
+                "lastViolation": null,
+                "lastAcceptedAt": null
+              },
+              "arrest": {
+                "state": "idle",
+                "progress": 0,
+                "remainingSeconds": 5,
+                "holdProgress": 0,
+                "nearbyPoliceIds": [],
+                "cancellationReason": null
+              },
+              "appearing": false
+            },
+            {
+              "id": "8BvnlZplN",
+              "repairRevision": 0,
+              "wanted": {
+                "level": 0,
+                "stars": [
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty"
+                ],
+                "pendingStar": null,
+                "warningRemaining": 0,
+                "lastViolation": null,
+                "lastAcceptedAt": null
+              },
+              "arrest": {
+                "state": "idle",
+                "progress": 0,
+                "remainingSeconds": 5,
+                "holdProgress": 0,
+                "nearbyPoliceIds": [],
+                "cancellationReason": null
+              },
+              "appearing": true
+            }
+          ],
+          "police": [
+            {
+              "id": "police-102",
+              "targetId": null,
+              "state": "idle"
+            },
+            {
+              "id": "police-103",
+              "targetId": null,
+              "state": "pursue"
+            }
+          ],
+          "tick": 234,
+          "revision": 10
+        },
+        "visible": 12
+      },
+      "pickupScale": 0.9999999338813836,
+      "damaged": 0.8,
+      "deformed": 651,
+      "repairRevision": 0,
+      "detached": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "pickup": {
+        "id": 0,
+        "x": -75,
+        "z": -135,
+        "section": "0:0",
+        "status": "available"
+      }
+    },
+    {
+      "roomId": "4g_yWzrF1",
+      "playerId": "8BvnlZplN",
+      "ready": true,
+      "repairs": {
+        "state": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -135,
+              "section": "0:0",
+              "status": "available"
+            },
+            {
+              "id": 1,
+              "x": -157.5,
+              "z": -25,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 85,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": -42.5,
+              "z": -125,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": 25,
+              "z": 65,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -7.5,
+              "z": 75,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 175,
+              "z": -107.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 75,
+              "z": 0,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 115,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": 57.5,
+              "z": 25,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 125,
+              "z": -157.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": 125,
+              "z": -85,
+              "section": "2:0",
+              "status": "available"
+            }
+          ],
+          "players": [
+            {
+              "id": "h_vE6hOu_",
+              "repairRevision": 0,
+              "wanted": {
+                "level": 0,
+                "stars": [
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty"
+                ],
+                "pendingStar": null,
+                "warningRemaining": 0,
+                "lastViolation": null,
+                "lastAcceptedAt": null
+              },
+              "arrest": {
+                "state": "idle",
+                "progress": 0,
+                "remainingSeconds": 5,
+                "holdProgress": 0,
+                "nearbyPoliceIds": [],
+                "cancellationReason": null
+              },
+              "appearing": false
+            },
+            {
+              "id": "8BvnlZplN",
+              "repairRevision": 0,
+              "wanted": {
+                "level": 0,
+                "stars": [
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty"
+                ],
+                "pendingStar": null,
+                "warningRemaining": 0,
+                "lastViolation": null,
+                "lastAcceptedAt": null
+              },
+              "arrest": {
+                "state": "idle",
+                "progress": 0,
+                "remainingSeconds": 5,
+                "holdProgress": 0,
+                "nearbyPoliceIds": [],
+                "cancellationReason": null
+              },
+              "appearing": true
+            }
+          ],
+          "police": [
+            {
+              "id": "police-102",
+              "targetId": null,
+              "state": "idle"
+            },
+            {
+              "id": "police-103",
+              "targetId": null,
+              "state": "pursue"
+            }
+          ],
+          "tick": 234,
+          "revision": 10
+        },
+        "visible": 12
+      },
+      "pickupScale": 1.0000000120904782,
+      "damaged": 0.8,
+      "deformed": 651,
+      "repairRevision": 0,
+      "detached": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "pickup": {
+        "id": 0,
+        "x": -75,
+        "z": -135,
+        "section": "0:0",
+        "status": "available"
+      }
+    }
+  ],
+  "after": [
+    {
+      "roomId": "4g_yWzrF1",
+      "playerId": "h_vE6hOu_",
+      "ready": true,
+      "repairs": {
+        "state": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -135,
+              "section": "0:0",
+              "status": "consumed"
+            },
+            {
+              "id": 1,
+              "x": -157.5,
+              "z": -25,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 85,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": -42.5,
+              "z": -125,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": 25,
+              "z": 65,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -7.5,
+              "z": 75,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 175,
+              "z": -107.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 75,
+              "z": 0,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 115,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": 57.5,
+              "z": 25,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 125,
+              "z": -157.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": 125,
+              "z": -85,
+              "section": "2:0",
+              "status": "available"
+            }
+          ],
+          "players": [
+            {
+              "id": "h_vE6hOu_",
+              "repairRevision": 1,
+              "wanted": {
+                "level": 0,
+                "stars": [
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty"
+                ],
+                "pendingStar": null,
+                "warningRemaining": 0,
+                "lastViolation": null,
+                "lastAcceptedAt": null
+              },
+              "arrest": {
+                "state": "idle",
+                "progress": 0,
+                "remainingSeconds": 5,
+                "holdProgress": 0,
+                "nearbyPoliceIds": [],
+                "cancellationReason": null
+              },
+              "appearing": false
+            },
+            {
+              "id": "8BvnlZplN",
+              "repairRevision": 0,
+              "wanted": {
+                "level": 0,
+                "stars": [
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty"
+                ],
+                "pendingStar": null,
+                "warningRemaining": 0,
+                "lastViolation": null,
+                "lastAcceptedAt": null
+              },
+              "arrest": {
+                "state": "idle",
+                "progress": 0,
+                "remainingSeconds": 5,
+                "holdProgress": 0,
+                "nearbyPoliceIds": [],
+                "cancellationReason": null
+              },
+              "appearing": false
+            }
+          ],
+          "police": [
+            {
+              "id": "police-102",
+              "targetId": null,
+              "state": "idle"
+            },
+            {
+              "id": "police-103",
+              "targetId": null,
+              "state": "idle"
+            }
+          ],
+          "tick": 323,
+          "revision": 14
+        },
+        "visible": 11
+      },
+      "pickupScale": 0,
+      "damaged": 0,
+      "deformed": 0,
+      "repairRevision": 1,
+      "detached": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pickup": {
+        "id": 0,
+        "x": -75,
+        "z": -135,
+        "section": "0:0",
+        "status": "consumed"
+      }
+    },
+    {
+      "roomId": "4g_yWzrF1",
+      "playerId": "8BvnlZplN",
+      "ready": true,
+      "repairs": {
+        "state": {
+          "pickups": [
+            {
+              "id": 0,
+              "x": -75,
+              "z": -135,
+              "section": "0:0",
+              "status": "consumed"
+            },
+            {
+              "id": 1,
+              "x": -157.5,
+              "z": -25,
+              "section": "0:1",
+              "status": "available"
+            },
+            {
+              "id": 2,
+              "x": -75,
+              "z": 85,
+              "section": "0:2",
+              "status": "available"
+            },
+            {
+              "id": 3,
+              "x": -42.5,
+              "z": -125,
+              "section": "1:0",
+              "status": "available"
+            },
+            {
+              "id": 4,
+              "x": 25,
+              "z": 65,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 5,
+              "x": -7.5,
+              "z": 75,
+              "section": "1:2",
+              "status": "available"
+            },
+            {
+              "id": 6,
+              "x": 175,
+              "z": -107.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 7,
+              "x": 75,
+              "z": 0,
+              "section": "2:1",
+              "status": "available"
+            },
+            {
+              "id": 8,
+              "x": 75,
+              "z": 115,
+              "section": "2:2",
+              "status": "available"
+            },
+            {
+              "id": 9,
+              "x": 57.5,
+              "z": 25,
+              "section": "1:1",
+              "status": "available"
+            },
+            {
+              "id": 10,
+              "x": 125,
+              "z": -157.5,
+              "section": "2:0",
+              "status": "available"
+            },
+            {
+              "id": 11,
+              "x": 125,
+              "z": -85,
+              "section": "2:0",
+              "status": "available"
+            }
+          ],
+          "players": [
+            {
+              "id": "h_vE6hOu_",
+              "repairRevision": 1,
+              "wanted": {
+                "level": 0,
+                "stars": [
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty"
+                ],
+                "pendingStar": null,
+                "warningRemaining": 0,
+                "lastViolation": null,
+                "lastAcceptedAt": null
+              },
+              "arrest": {
+                "state": "idle",
+                "progress": 0,
+                "remainingSeconds": 5,
+                "holdProgress": 0,
+                "nearbyPoliceIds": [],
+                "cancellationReason": null
+              },
+              "appearing": false
+            },
+            {
+              "id": "8BvnlZplN",
+              "repairRevision": 0,
+              "wanted": {
+                "level": 0,
+                "stars": [
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty",
+                  "empty"
+                ],
+                "pendingStar": null,
+                "warningRemaining": 0,
+                "lastViolation": null,
+                "lastAcceptedAt": null
+              },
+              "arrest": {
+                "state": "idle",
+                "progress": 0,
+                "remainingSeconds": 5,
+                "holdProgress": 0,
+                "nearbyPoliceIds": [],
+                "cancellationReason": null
+              },
+              "appearing": false
+            }
+          ],
+          "police": [
+            {
+              "id": "police-102",
+              "targetId": null,
+              "state": "idle"
+            },
+            {
+              "id": "police-103",
+              "targetId": null,
+              "state": "idle"
+            }
+          ],
+          "tick": 323,
+          "revision": 14
+        },
+        "visible": 11
+      },
+      "pickupScale": 0,
+      "damaged": 0,
+      "deformed": 0,
+      "repairRevision": 1,
+      "detached": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pickup": {
+        "id": 0,
+        "x": -75,
+        "z": -135,
+        "section": "0:0",
+        "status": "consumed"
+      }
+    }
+  ],
+  "lateJoin": {
+    "roomId": "4g_yWzrF1",
+    "playerId": "Q9z3R8wOL",
+    "ready": true,
+    "repairs": {
+      "state": {
+        "pickups": [
+          {
+            "id": 0,
+            "x": -75,
+            "z": -135,
+            "section": "0:0",
+            "status": "consumed"
+          },
+          {
+            "id": 1,
+            "x": -157.5,
+            "z": -25,
+            "section": "0:1",
+            "status": "available"
+          },
+          {
+            "id": 2,
+            "x": -75,
+            "z": 85,
+            "section": "0:2",
+            "status": "available"
+          },
+          {
+            "id": 3,
+            "x": -42.5,
+            "z": -125,
+            "section": "1:0",
+            "status": "available"
+          },
+          {
+            "id": 4,
+            "x": 25,
+            "z": 65,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 5,
+            "x": -7.5,
+            "z": 75,
+            "section": "1:2",
+            "status": "available"
+          },
+          {
+            "id": 6,
+            "x": 175,
+            "z": -107.5,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 7,
+            "x": 75,
+            "z": 0,
+            "section": "2:1",
+            "status": "available"
+          },
+          {
+            "id": 8,
+            "x": 75,
+            "z": 115,
+            "section": "2:2",
+            "status": "available"
+          },
+          {
+            "id": 9,
+            "x": 57.5,
+            "z": 25,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 10,
+            "x": 125,
+            "z": -157.5,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 11,
+            "x": 125,
+            "z": -85,
+            "section": "2:0",
+            "status": "available"
+          }
+        ],
+        "players": [
+          {
+            "id": "h_vE6hOu_",
+            "repairRevision": 1,
+            "wanted": {
+              "level": 0,
+              "stars": [
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty"
+              ],
+              "pendingStar": null,
+              "warningRemaining": 0,
+              "lastViolation": null,
+              "lastAcceptedAt": null
+            },
+            "arrest": {
+              "state": "idle",
+              "progress": 0,
+              "remainingSeconds": 5,
+              "holdProgress": 0,
+              "nearbyPoliceIds": [],
+              "cancellationReason": null
+            },
+            "appearing": false
+          },
+          {
+            "id": "8BvnlZplN",
+            "repairRevision": 0,
+            "wanted": {
+              "level": 0,
+              "stars": [
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty"
+              ],
+              "pendingStar": null,
+              "warningRemaining": 0,
+              "lastViolation": null,
+              "lastAcceptedAt": null
+            },
+            "arrest": {
+              "state": "idle",
+              "progress": 0,
+              "remainingSeconds": 5,
+              "holdProgress": 0,
+              "nearbyPoliceIds": [],
+              "cancellationReason": null
+            },
+            "appearing": false
+          },
+          {
+            "id": "Q9z3R8wOL",
+            "repairRevision": 0,
+            "wanted": {
+              "level": 0,
+              "stars": [
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty"
+              ],
+              "pendingStar": null,
+              "warningRemaining": 0,
+              "lastViolation": null,
+              "lastAcceptedAt": null
+            },
+            "arrest": {
+              "state": "idle",
+              "progress": 0,
+              "remainingSeconds": 5,
+              "holdProgress": 0,
+              "nearbyPoliceIds": [],
+              "cancellationReason": null
+            },
+            "appearing": true
+          }
+        ],
+        "police": [
+          {
+            "id": "police-102",
+            "targetId": null,
+            "state": "idle"
+          },
+          {
+            "id": "police-103",
+            "targetId": null,
+            "state": "idle"
+          },
+          {
+            "id": "police-104",
+            "targetId": null,
+            "state": "pursue"
+          }
+        ],
+        "tick": 353,
+        "revision": 17
+      },
+      "visible": 11
+    },
+    "pickupScale": 0,
+    "damaged": 0,
+    "deformed": 0,
+    "repairRevision": 1,
+    "detached": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "pickup": {
+      "id": 0,
+      "x": -75,
+      "z": -135,
+      "section": "0:0",
+      "status": "consumed"
+    }
+  },
+  "reconnect": {
+    "roomId": "4g_yWzrF1",
+    "playerId": "h_vE6hOu_",
+    "ready": true,
+    "repairs": {
+      "state": {
+        "pickups": [
+          {
+            "id": 0,
+            "x": -75,
+            "z": -135,
+            "section": "0:0",
+            "status": "consumed"
+          },
+          {
+            "id": 1,
+            "x": -157.5,
+            "z": -25,
+            "section": "0:1",
+            "status": "available"
+          },
+          {
+            "id": 2,
+            "x": -75,
+            "z": 85,
+            "section": "0:2",
+            "status": "available"
+          },
+          {
+            "id": 3,
+            "x": -42.5,
+            "z": -125,
+            "section": "1:0",
+            "status": "available"
+          },
+          {
+            "id": 4,
+            "x": 25,
+            "z": 65,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 5,
+            "x": -7.5,
+            "z": 75,
+            "section": "1:2",
+            "status": "available"
+          },
+          {
+            "id": 6,
+            "x": 175,
+            "z": -107.5,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 7,
+            "x": 75,
+            "z": 0,
+            "section": "2:1",
+            "status": "available"
+          },
+          {
+            "id": 8,
+            "x": 75,
+            "z": 115,
+            "section": "2:2",
+            "status": "available"
+          },
+          {
+            "id": 9,
+            "x": 57.5,
+            "z": 25,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 10,
+            "x": 125,
+            "z": -157.5,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 11,
+            "x": 125,
+            "z": -85,
+            "section": "2:0",
+            "status": "available"
+          }
+        ],
+        "players": [
+          {
+            "id": "h_vE6hOu_",
+            "repairRevision": 1,
+            "wanted": {
+              "level": 0,
+              "stars": [
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty"
+              ],
+              "pendingStar": null,
+              "warningRemaining": 0,
+              "lastViolation": null,
+              "lastAcceptedAt": null
+            },
+            "arrest": {
+              "state": "idle",
+              "progress": 0,
+              "remainingSeconds": 5,
+              "holdProgress": 0,
+              "nearbyPoliceIds": [],
+              "cancellationReason": null
+            },
+            "appearing": false
+          },
+          {
+            "id": "8BvnlZplN",
+            "repairRevision": 0,
+            "wanted": {
+              "level": 0,
+              "stars": [
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty"
+              ],
+              "pendingStar": null,
+              "warningRemaining": 0,
+              "lastViolation": null,
+              "lastAcceptedAt": null
+            },
+            "arrest": {
+              "state": "idle",
+              "progress": 0,
+              "remainingSeconds": 5,
+              "holdProgress": 0,
+              "nearbyPoliceIds": [],
+              "cancellationReason": null
+            },
+            "appearing": false
+          },
+          {
+            "id": "Q9z3R8wOL",
+            "repairRevision": 0,
+            "wanted": {
+              "level": 0,
+              "stars": [
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty"
+              ],
+              "pendingStar": null,
+              "warningRemaining": 0,
+              "lastViolation": null,
+              "lastAcceptedAt": null
+            },
+            "arrest": {
+              "state": "idle",
+              "progress": 0,
+              "remainingSeconds": 5,
+              "holdProgress": 0,
+              "nearbyPoliceIds": [],
+              "cancellationReason": null
+            },
+            "appearing": false
+          }
+        ],
+        "police": [
+          {
+            "id": "police-102",
+            "targetId": null,
+            "state": "idle"
+          },
+          {
+            "id": "police-103",
+            "targetId": null,
+            "state": "idle"
+          },
+          {
+            "id": "police-104",
+            "targetId": null,
+            "state": "idle"
+          }
+        ],
+        "tick": 444,
+        "revision": 19
+      },
+      "visible": 11
+    },
+    "pickupScale": 0,
+    "damaged": 0.012314030670634012,
+    "deformed": 689,
+    "repairRevision": 1,
+    "detached": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "pickup": {
+      "id": 0,
+      "x": -75,
+      "z": -135,
+      "section": "0:0",
+      "status": "consumed"
+    }
+  },
+  "newRoom": {
+    "roomId": "A5HbQjwWp",
+    "playerId": "TEBpeaVAw",
+    "ready": true,
+    "repairs": {
+      "state": {
+        "pickups": [
+          {
+            "id": 0,
+            "x": -75,
+            "z": -135,
+            "section": "0:0",
+            "status": "available"
+          },
+          {
+            "id": 1,
+            "x": -157.5,
+            "z": -25,
+            "section": "0:1",
+            "status": "available"
+          },
+          {
+            "id": 2,
+            "x": -75,
+            "z": 85,
+            "section": "0:2",
+            "status": "available"
+          },
+          {
+            "id": 3,
+            "x": -42.5,
+            "z": -125,
+            "section": "1:0",
+            "status": "available"
+          },
+          {
+            "id": 4,
+            "x": 25,
+            "z": 65,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 5,
+            "x": -7.5,
+            "z": 75,
+            "section": "1:2",
+            "status": "available"
+          },
+          {
+            "id": 6,
+            "x": 175,
+            "z": -107.5,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 7,
+            "x": 75,
+            "z": 0,
+            "section": "2:1",
+            "status": "available"
+          },
+          {
+            "id": 8,
+            "x": 75,
+            "z": 115,
+            "section": "2:2",
+            "status": "available"
+          },
+          {
+            "id": 9,
+            "x": 57.5,
+            "z": 25,
+            "section": "1:1",
+            "status": "available"
+          },
+          {
+            "id": 10,
+            "x": 125,
+            "z": -157.5,
+            "section": "2:0",
+            "status": "available"
+          },
+          {
+            "id": 11,
+            "x": 125,
+            "z": -85,
+            "section": "2:0",
+            "status": "available"
+          }
+        ],
+        "players": [
+          {
+            "id": "TEBpeaVAw",
+            "repairRevision": 0,
+            "wanted": {
+              "level": 0,
+              "stars": [
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty",
+                "empty"
+              ],
+              "pendingStar": null,
+              "warningRemaining": 0,
+              "lastViolation": null,
+              "lastAcceptedAt": null
+            },
+            "arrest": {
+              "state": "idle",
+              "progress": 0,
+              "remainingSeconds": 5,
+              "holdProgress": 0,
+              "nearbyPoliceIds": [],
+              "cancellationReason": null
+            },
+            "appearing": true
+          }
+        ],
+        "police": [
+          {
+            "id": "police-102",
+            "targetId": null,
+            "state": "pursue"
+          }
+        ],
+        "tick": 5,
+        "revision": 5
+      },
+      "visible": 12
+    },
+    "pickupScale": 0.9999999764404532,
+    "damaged": 0,
+    "deformed": 0,
+    "repairRevision": 0,
+    "detached": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "pickup": {
+      "id": 0,
+      "x": -75,
+      "z": -135,
+      "section": "0:0",
+      "status": "available"
+    }
+  },
+  "passed": true
+}

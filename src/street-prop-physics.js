@@ -53,7 +53,9 @@ export class StreetPropPhysics {
     this.debris = [];
     this.events = [];
     this.clock = 0;
-    this.playerPushedUntil = -Infinity;
+    this.pushedPlayers = new Map();
+    Object.defineProperty(this,'playerPushedUntil',{get:()=>this.pushedPlayers.get('player')??-Infinity,
+      set:value=>this.pushedPlayers.set('player',value)});
     this.disposed = false;
     this.material = new C.Material({ friction: .45, restitution: .1 });
     const materials = new Set([...world.bodies.map(body => body.material),...extraMaterials].filter(Boolean));
@@ -77,7 +79,7 @@ export class StreetPropPhysics {
     return body;
   }
   register(source) {
-    const entry = { ...source, index:this.entries.length, state: 'intact', lastTouch: -Infinity, episode: false, destroyedAt: null };
+    const entry = { ...source, index:this.entries.length, state: 'intact', lastTouch: -Infinity, episode: false, crimePlayers:new Map(), destroyedAt: null };
     entry.body = this.makeBody(entry);
     entry.active = true;
     this.activeIntact.add(entry);
@@ -99,12 +101,13 @@ export class StreetPropPhysics {
   }
   offense(entry, speed, actor) {
     if (!actor.player || !this.enabled) return;
-    entry.lastTouch = this.clock;
-    if (entry.episode) return;
+    const playerId=actor.id??'player',continuing=entry.crimePlayers.has(playerId);
+    entry.lastTouch = this.clock;entry.crimePlayers.set(playerId,this.clock);
+    if (continuing) return;
     entry.episode = true;
     this.episodes.add(entry);
-    if (speed + 1e-6 < PROP_CRIME_KMH || this.clock < this.playerPushedUntil) return;
-    this.events.push({ type: 'property-collision', propId: entry.id, propType: entry.type,
+    if (speed + 1e-6 < PROP_CRIME_KMH || this.clock < (this.pushedPlayers.get(playerId)??-Infinity)) return;
+    this.events.push({ type: 'property-collision', playerId, propId: entry.id, propType: entry.type,
       impactSpeedKmh: speed, time: this.clock });
   }
   detach(entry, actor, normal, speed) {
@@ -140,11 +143,11 @@ export class StreetPropPhysics {
       entry.body.aabbNeedsUpdate = true; this.world.addBody(entry.body); this.byBody.set(entry.body,entry);
       entry.active = true; this.activeIntact.add(entry);
     }
-    const player = actors.find(actor => actor.player)?.body;
-    const playerBoxes = player ? boxesOf(player) : [];
-    for (const entry of this.episodes) if (this.clock-entry.lastTouch >= .5) {
-      const nearby = playerBoxes.some(box => entry.boxes.some(prop => sweepPropBox(box,prop,new C.Vec3(),0,.5)));
-      if (!nearby) {entry.episode = false;this.episodes.delete(entry);}
+    const playerBoxes = new Map(actors.filter(a=>a.player).map(a=>[a.id??'player',boxesOf(a.body)]));
+    for (const entry of this.episodes) {
+      for(const [id,touched] of entry.crimePlayers) if(this.clock-touched>=.5 &&
+        !playerBoxes.get(id)?.some(box=>entry.boxes.some(prop=>sweepPropBox(box,prop,new C.Vec3(),0,.5)))) entry.crimePlayers.delete(id);
+      if(!entry.crimePlayers.size){entry.episode=false;this.episodes.delete(entry);}
     }
     for (const actor of actors) {
       if (actor.player && !enabled) continue;
@@ -182,8 +185,8 @@ export class StreetPropPhysics {
       if (toward.lengthSquared() < 1e-10) continue;
       toward.normalize();
       if (nv.dot(toward) > pv.dot(toward) + .1
-        && (Math.hypot(pv.x,pv.z)*3.6 < PROP_CRIME_KMH || this.clock < this.playerPushedUntil))
-        this.playerPushedUntil = this.clock + .5;
+        && (Math.hypot(pv.x,pv.z)*3.6 < PROP_CRIME_KMH || this.clock < (this.pushedPlayers.get(player.id??'player')??-Infinity)))
+        this.pushedPlayers.set(player.id??'player',this.clock+.5);
     }
     // Catch resting/angular contacts that were not covered by translation sweep.
     for (const contact of contacts || []) {
@@ -231,12 +234,12 @@ export class StreetPropPhysics {
         entry.active = true; this.activeIntact.add(entry);
         entry.boxes = boxesOf(entry.body);
       }
-      entry.state = 'intact'; entry.episode = false; entry.lastTouch = -Infinity; entry.destroyedAt = null;
+      entry.state = 'intact'; entry.episode = false; entry.crimePlayers.clear(); entry.lastTouch = -Infinity; entry.destroyedAt = null;
       entry.restore?.();
     }
     this.debris = []; this.events = []; this.clock = 0;
     this.changedEntries.clear(); this.episodes.clear();
-    this.playerPushedUntil = -Infinity;
+    this.pushedPlayers.clear();
     this.actors?.clear(); this.velocities?.clear();
   }
   snapshot() {
@@ -245,6 +248,10 @@ export class StreetPropPhysics {
         x: entry.x,y: entry.y,z: entry.z,yaw: entry.yaw,bodyId: entry.body.id,active: entry.active,
         position: { ...entry.body.position }, remaining: entry.state === 'detached' ? PROP_LIFETIME-this.clock+entry.destroyedAt : null })) };
   }
+  forgetPlayer(id) {
+    this.pushedPlayers.delete(id);
+    for(const entry of this.episodes){entry.crimePlayers.delete(id);if(!entry.crimePlayers.size){entry.episode=false;this.episodes.delete(entry);}}
+  }
   dispose() {
     if (this.disposed) return;
     for (const entry of this.entries) { this.world.removeBody(entry.body); entry.hide?.(); }
@@ -252,6 +259,7 @@ export class StreetPropPhysics {
     this.activeIntact.clear();
     this.changedEntries.clear(); this.episodes.clear();
     this.actors?.clear(); this.velocities?.clear(); this.disposed = true;
+    this.pushedPlayers.clear();
     for (const contact of this.contactMaterials) this.world.removeContactMaterial(contact);
     this.contactMaterials = [];
   }

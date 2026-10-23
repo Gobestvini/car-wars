@@ -30,7 +30,7 @@ export function createArrestSystem(config = {}) {
       clearAttempt(null); arrestedEventPending = false; return snapshot();
     },
     snapshot,
-    update(dt, { wantedLevel = 0, player, police = [], enabled = true, damage = 0 } = {}) {
+    update(dt, { wantedLevel = 0, player, playerId = 'player', police = [], enabled = true, damage = 0 } = {}) {
       if (!finite(dt) || dt < 0) return { ...snapshot(), completed: false };
       if (state === 'arrested') return { ...snapshot(), completed: false };
       if (!enabled) { if (state !== 'idle') clearAttempt('disabled'); return { ...snapshot(), completed: false }; }
@@ -43,7 +43,7 @@ export function createArrestSystem(config = {}) {
 
       const candidates = police.filter(unit => unit && unit.id && unit.role === 'police' && unit.operational !== false
         && (!finite(unit.damage) || unit.damage < 1)
-        && unit.targetId === 'player' && !unit.logical && unit.clearPath !== false
+        && unit.targetId === playerId && !unit.logical && unit.clearPath !== false
         && finite(unit.x) && finite(unit.z) && finite(unit.speed) && unit.speed <= settings.policeSpeed);
       const within = radius => candidates.filter(unit => distance(player, unit) <= radius);
       const nearby = state === 'arresting' ? within(settings.breakRadius) : within(settings.startRadius);

@@ -17,6 +17,7 @@ test('three SDK clients share dents and destroyed props through late join, respa
     await join();await join();
     timer=setInterval(()=>{for(const c of clients)c.prediction?.advance(performance.now(),{steer:0,throttle:0,brake:0});},1000/60);
     const room=matchMaker.getLocalRoomById(roomId),players=[...room.sim.players.values()];
+    await until(()=>players.every(p=>!p.sim.appearing));
     players.forEach((p,i)=>{
       p.sim.spawn={x:0,y:1,z:i?5:-5,yaw:i?Math.PI:0};p.sim.reset();p.generation++;
       p.sim.body.velocity.set(0,0,i?-15:15);room.sim.halt(p.id);
