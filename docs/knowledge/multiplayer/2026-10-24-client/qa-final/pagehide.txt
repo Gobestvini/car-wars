@@ -1,0 +1,18 @@
+@colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+Port 5173 is in use, trying another one...
+file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/core/build/Room.mjs:1013
+      throw new Error("cannot disconnect during onCreate()");
+      ^
+
+Error: cannot disconnect during onCreate()
+    at HostedDrivingRoom.disconnect (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/core/build/Room.mjs:1013:13)
+    at HostedDrivingRoom.fault (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/hosted-room.js:130:158)
+    at HostedDrivingRoom.onBeforePatch (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/hosted-room.js:149:26)
+    at HostedDrivingRoom.broadcastPatch (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/core/build/Room.mjs:834:12)
+    at HostedDrivingRoom.broadcastPatch (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/server.js:93:55)
+    at HostedDrivingRoom.broadcastPatch (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/hosted-room.js:151:41)
+    at Timeout._onTimeout (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/core/build/Room.mjs:258:59)
+    at listOnTimeout (node:internal/timers:585:17)
+    at process.processTimers (node:internal/timers:521:7)
+
+Node.js v22.23.3

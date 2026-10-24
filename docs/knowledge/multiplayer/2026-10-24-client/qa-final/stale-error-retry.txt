@@ -1,0 +1,11 @@
+@colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+{
+  beforeRelease: {
+    phase: 'playing',
+    roomId: '6ssL95zxP',
+    oldRoomId: '8vtA2mfFy',
+    active: true
+  },
+  afterRelease: { phase: 'playing', roomId: '6ssL95zxP', active: true, statuses: [] },
+  defect: false
+}

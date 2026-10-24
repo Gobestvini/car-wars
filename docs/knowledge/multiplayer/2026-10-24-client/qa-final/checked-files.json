@@ -1,0 +1,30 @@
+[
+  {
+    "Path": "C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\src\\multiplayer\\room-client.js",
+    "Hash": "1DF725950C457C361C16D4D82DE0B9F4EA6490899CBE48B27C54CB030B5359BB"
+  },
+  {
+    "Path": "C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\src\\multiplayer\\transfers.js",
+    "Hash": "3EBF2D7B4998E6944D5E746ACF045AABA1B0F442B286383DBDB7452F26640334"
+  },
+  {
+    "Path": "C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\src\\multiplayer\\game.js",
+    "Hash": "29C222C41BC2A39392D789CD60227982DD5469361E3767C7EC4C059429F78DC4"
+  },
+  {
+    "Path": "C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\src\\multiplayer\\hud.js",
+    "Hash": "3EB973F0759489DBA92743CE1D20EB9325C748E99C78C4CDB84619EC2C402FB4"
+  },
+  {
+    "Path": "C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\src\\multiplayer\\style.css",
+    "Hash": "93B45670AB8195FABC5AC51696FD7A19C9E1905ABF17A351F8CB65F924BDB8B0"
+  },
+  {
+    "Path": "C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\multiplayer-client.test.js",
+    "Hash": "36610C9750DC489BAE5F1752996448D950AC8F35FDBBA958D77EC8A65B773186"
+  },
+  {
+    "Path": "C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\multiplayer-client-browser.cjs",
+    "Hash": "D8F8625B2598BF176A79B99DF4F34CF39E2AA966F64CF3FD8673DE717EFED15F"
+  }
+]

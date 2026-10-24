@@ -1,0 +1,15 @@
+{
+  "beforeRelease": {
+    "phase": "playing",
+    "roomId": "6ssL95zxP",
+    "oldRoomId": "8vtA2mfFy",
+    "active": true
+  },
+  "afterRelease": {
+    "phase": "playing",
+    "roomId": "6ssL95zxP",
+    "active": true,
+    "statuses": []
+  },
+  "defect": false
+}

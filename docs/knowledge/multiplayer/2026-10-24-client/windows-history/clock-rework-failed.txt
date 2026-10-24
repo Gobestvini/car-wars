@@ -1,0 +1,110 @@
+TAP version 13
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Subtest: cancel before SDK admission rejects promptly and closes a late room without presentation
+ok 1 - cancel before SDK admission rejects promptly and closes a late room without presentation
+  ---
+  duration_ms: 15.511
+  type: 'test'
+  ...
+# Subtest: tests\\multiplayer-client.test.js
+not ok 1 - tests\\multiplayer-client.test.js
+  ---
+  duration_ms: 2209.9708
+  type: 'test'
+  location: 'C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\multiplayer-client.test.js:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 3221225477
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Error: Game protocol/build/map version outdated; reload the page
+#     at HostedDrivingRoom.onAuth (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/hosted-room.js:65:96)
+#     at HostedDrivingRoom._onJoin (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/core/build/Room.mjs:1105:39)
+#     at connectClientToRoom (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/core/build/Transport.mjs:132:24)
+#     at WebSocketServer.onConnection (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:192:13)
+#     at WebSocketServer.emit (node:events:519:28)
+#     at file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:123:120
+#     at WebSocketServer.completeUpgrade (C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tools\\multiplayer-spike\\node_modules\\ws\\lib\\websocket-server.js:450:5)
+#     at WebSocketServer.handleUpgrade (C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tools\\multiplayer-spike\\node_modules\\ws\\lib\\websocket-server.js:356:10)
+#     at completeUpgrade (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:123:70)
+#     at Server.<anonymous> (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:129:9)
+# Room connection was closed unexpectedly (4002): 
+# Subtest: real map-ready gate, loading timeout, version rejection and atomic last-seat race
+ok 3 - real map-ready gate, loading timeout, version rejection and atomic last-seat race
+  ---
+  duration_ms: 4412.428
+  type: 'test'
+  ...
+# Subtest: authority, applied ack, silence braking, bounded future queue, epochs, durable full state and room isolation
+not ok 4 - authority, applied ack, silence braking, bounded future queue, epochs, durable full state and room isolation
+  ---
+  duration_ms: 10617.9006
+  type: 'test'
+  location: 'C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\multiplayer-room.test.js:26:1'
+  failureType: 'testCodeFailure'
+  error: 'Room fixture timeout'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    until (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tests/helpers/hosted-room.mjs:13:116)
+    runNextTicks (node:internal/process/task_queues:64:5)
+    process.processTimers (node:internal/timers:518:9)
+    async TestContext.<anonymous> (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tests/multiplayer-room.test.js:39:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Max payload size exceeded
+# RangeError: Max payload size exceeded
+#     at Receiver.haveLength (C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tools\\multiplayer-spike\\node_modules\\ws\\lib\\receiver.js:442:28)
+#     at Receiver.getPayloadLength16 (C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tools\\multiplayer-spike\\node_modules\\ws\\lib\\receiver.js:393:10)
+#     at Receiver.startLoop (C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tools\\multiplayer-spike\\node_modules\\ws\\lib\\receiver.js:181:16)
+#     at Receiver._write (C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tools\\multiplayer-spike\\node_modules\\ws\\lib\\receiver.js:117:10)
+#     at writeOrBuffer (node:internal/streams/writable:572:12)
+#     at _write (node:internal/streams/writable:501:10)
+#     at Writable.write (node:internal/streams/writable:510:10)
+#     at Socket.socketOnData (C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tools\\multiplayer-spike\\node_modules\\ws\\lib\\websocket.js:1388:35)
+#     at Socket.emit (node:events:519:28)
+#     at addChunk (node:internal/streams/readable:561:12)
+# Error: Unexpected end of MessagePack data
+#     at endOfMessagePackError (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/msgpackr/unpack.js:697:14)
+#     at read (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/msgpackr/unpack.js:488:36)
+#     at readMap (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/msgpackr/unpack.js:723:18)
+#     at read (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/msgpackr/unpack.js:479:12)
+#     at checkedRead (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/msgpackr/unpack.js:189:13)
+#     at unpack (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/msgpackr/unpack.js:105:10)
+#     at RoomMessages.onData (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/core/build/RoomMessages.mjs:122:49)
+#     at HostedDrivingRoom._onMessage (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/core/build/Room.mjs:1410:23)
+#     at HostedDrivingRoom._onMessage (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/hosted-room.js:104:17)
+#     at WebSocket.emit (node:events:519:28)
+# Subtest: oversized application input, transport overflow and malformed frames cannot stop a healthy peer
+ok 5 - oversized application input, transport overflow and malformed frames cannot stop a healthy peer
+  ---
+  duration_ms: 1710.9869
+  type: 'test'
+  ...
+# ❌ reconnection token invalid or expired. Did you miss .allowReconnection()?
+# 👉 https://docs.colyseus.io/room\#allow-reconnection
+# ❌ reconnection token invalid or expired. Did you miss .allowReconnection()?
+# 👉 https://docs.colyseus.io/room\#allow-reconnection
+# Subtest: reserved reconnect, explicit leave, expired token, isolated faults and complete empty-room cleanup
+ok 6 - reserved reconnect, explicit leave, expired token, isolated faults and complete empty-room cleanup
+  ---
+  duration_ms: 5938.7239
+  type: 'test'
+  ...
+# Subtest: real paused TCP reader is disconnected at the socket budget; another client continues; shutdown warns clients
+ok 7 - real paused TCP reader is disconnected at the socket budget; another client continues; shutdown warns clients
+  ---
+  duration_ms: 1337.7959
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 5
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 27808.3726

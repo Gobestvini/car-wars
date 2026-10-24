@@ -1,0 +1,17 @@
+{
+  "beforeRelease": {
+    "phase": "playing",
+    "roomId": "KnrKMfGJD",
+    "oldRoomId": "ch-DPtMJL",
+    "active": true
+  },
+  "afterRelease": {
+    "phase": "offline-error",
+    "roomId": "KnrKMfGJD",
+    "active": true,
+    "statuses": [
+      "Invalid snapshot transfer"
+    ]
+  },
+  "defect": true
+}

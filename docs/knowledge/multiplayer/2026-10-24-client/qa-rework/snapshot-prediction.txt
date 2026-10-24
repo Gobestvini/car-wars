@@ -1,0 +1,92 @@
+TAP version 13
+# {"rtt":0,"inputToSimulationMs":0,"playerContacts":749,"late":0,"total":609,"maxQueue":11,"corrections":[{"steps":1200,"replaySteps":88,"corrections":0,"maxCorrection":0,"maxReplay":11,"lateFrames":0,"replayMs":6.277200000000221,"confirmedPositionError":0.000008792727455411752,"skippedReconciliations":191},{"steps":1200,"replaySteps":88,"corrections":0,"maxCorrection":0,"maxReplay":11,"lateFrames":0,"replayMs":5.720199999999295,"confirmedPositionError":0.000008217512891125012,"skippedReconciliations":191},{"steps":1200,"replaySteps":88,"corrections":0,"maxCorrection":0,"maxReplay":11,"lateFrames":0,"replayMs":5.268199999999524,"confirmedPositionError":0.000010901505407552802,"skippedReconciliations":191}]}
+# {"rtt":50,"inputToSimulationMs":0,"playerContacts":881,"late":0,"total":609,"maxQueue":15,"corrections":[{"steps":1200,"replaySteps":143,"corrections":0,"maxCorrection":0,"maxReplay":21,"lateFrames":0,"replayMs":9.295900000000074,"confirmedPositionError":0.000004884645198857973,"skippedReconciliations":192},{"steps":1200,"replaySteps":143,"corrections":0,"maxCorrection":0,"maxReplay":21,"lateFrames":0,"replayMs":10.296900000000278,"confirmedPositionError":0.000004575143956702138,"skippedReconciliations":192},{"steps":1200,"replaySteps":143,"corrections":0,"maxCorrection":0,"maxReplay":21,"lateFrames":0,"replayMs":7.107099999999718,"confirmedPositionError":0.000010362247798125172,"skippedReconciliations":192}]}
+# {"rtt":100,"inputToSimulationMs":0,"playerContacts":734,"late":0,"total":609,"maxQueue":18,"corrections":[{"steps":1200,"replaySteps":220,"corrections":1,"maxCorrection":0.05831775685926501,"maxReplay":29,"lateFrames":0,"replayMs":10.501899999999296,"confirmedPositionError":0.00004775490901961217,"skippedReconciliations":190,"lastCorrection":0.05831775685926501},{"steps":1200,"replaySteps":220,"corrections":1,"maxCorrection":0.06215623664627553,"maxReplay":29,"lateFrames":0,"replayMs":12.612900000000081,"confirmedPositionError":0.00003451266408249726,"skippedReconciliations":190,"lastCorrection":0.06215623664627553},{"steps":1200,"replaySteps":220,"corrections":1,"maxCorrection":0.0402337654435566,"maxReplay":29,"lateFrames":0,"replayMs":10.686800000000858,"confirmedPositionError":0.000009119772534653475,"skippedReconciliations":190,"lastCorrection":0.0402337654435566}]}
+# {"rtt":150,"inputToSimulationMs":0,"playerContacts":892,"late":0,"total":609,"maxQueue":21,"corrections":[{"steps":1200,"replaySteps":269,"corrections":1,"maxCorrection":0.0734563455339937,"maxReplay":39,"lateFrames":0,"replayMs":12.413499999999203,"confirmedPositionError":0.000012666920793194104,"skippedReconciliations":191,"lastCorrection":0.0734563455339937},{"steps":1200,"replaySteps":269,"corrections":2,"maxCorrection":0.09028713391856295,"maxReplay":39,"lateFrames":0,"replayMs":12.99409999999989,"confirmedPositionError":0.00001278416815949221,"skippedReconciliations":191,"lastCorrection":0.07348899915590192},{"steps":1200,"replaySteps":269,"corrections":1,"maxCorrection":0.06166060655399954,"maxReplay":39,"lateFrames":0,"replayMs":13.284999999999854,"confirmedPositionError":0.000011763493075668197,"skippedReconciliations":191,"lastCorrection":0.06166060655399954}]}
+# Subtest: sparse contact cache preserves dense Cannon collision motion and damage
+ok 1 - sparse contact cache preserves dense Cannon collision motion and damage
+  ---
+  duration_ms: 369.2537
+  type: 'test'
+  ...
+# Subtest: car restore/replay preserves suspension force inputs and motion, including contact-cache rewind
+ok 2 - car restore/replay preserves suspension force inputs and motion, including contact-cache rewind
+  ---
+  duration_ms: 92.9001
+  type: 'test'
+  ...
+# Subtest: streamed prediction colliders retain full-city contacts within reconciliation tolerance between regions
+ok 3 - streamed prediction colliders retain full-city contacts within reconciliation tolerance between regions
+  ---
+  duration_ms: 770.7134
+  type: 'test'
+  ...
+# Subtest: three predicted players at simulated RTT 0ms steer immediately and share physical impacts
+ok 4 - three predicted players at simulated RTT 0ms steer immediately and share physical impacts
+  ---
+  duration_ms: 564.0016
+  type: 'test'
+  ...
+# Subtest: three predicted players at simulated RTT 50ms steer immediately and share physical impacts
+ok 5 - three predicted players at simulated RTT 50ms steer immediately and share physical impacts
+  ---
+  duration_ms: 558.5127
+  type: 'test'
+  ...
+# Subtest: three predicted players at simulated RTT 100ms steer immediately and share physical impacts
+ok 6 - three predicted players at simulated RTT 100ms steer immediately and share physical impacts
+  ---
+  duration_ms: 533.8374
+  type: 'test'
+  ...
+# Subtest: three predicted players at simulated RTT 150ms steer immediately and share physical impacts
+ok 7 - three predicted players at simulated RTT 150ms steer immediately and share physical impacts
+  ---
+  duration_ms: 553.8095
+  type: 'test'
+  ...
+# Subtest: prediction commands cannot choose dt, poses, invalid generations, unbounded queues or old respawn state
+ok 8 - prediction commands cannot choose dt, poses, invalid generations, unbounded queues or old respawn state
+  ---
+  duration_ms: 52.75
+  type: 'test'
+  ...
+# Subtest: online snapshots copy Schema values and interpolate positions and wheels
+ok 9 - online snapshots copy Schema values and interpolate positions and wheels
+  ---
+  duration_ms: 0.9819
+  type: 'test'
+  ...
+# Subtest: presentation bounds extrapolation, freezes stale state and rejects older ticks
+ok 10 - presentation bounds extrapolation, freezes stale state and rejects older ticks
+  ---
+  duration_ms: 1.0549
+  type: 'test'
+  ...
+# Subtest: respawn generations snap immediately and deleted actors do not linger
+ok 11 - respawn generations snap immediately and deleted actors do not linger
+  ---
+  duration_ms: 0.5845
+  type: 'test'
+  ...
+# Subtest: quaternions follow shortest arc, including opposite representations
+ok 12 - quaternions follow shortest arc, including opposite representations
+  ---
+  duration_ms: 0.0998
+  type: 'test'
+  ...
+# Subtest: online handbrake extends the input whitelist without allowing authority fields
+ok 13 - online handbrake extends the input whitelist without allowing authority fields
+  ---
+  duration_ms: 0.2139
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3605.0459

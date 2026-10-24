@@ -1,0 +1,34 @@
+[
+  {
+    "path": "src/multiplayer/game.js",
+    "sha256": "93A70D27BD2AAFFF6FB3B783EE19399DCE65DD3E7CF51EEDFB9D8A66E07F3D1E"
+  },
+  {
+    "path": "src/multiplayer/hud.js",
+    "sha256": "E8C9CE245A684865004A3C3DCD6E661DA13786DF246DCD10D593E588A087AF53"
+  },
+  {
+    "path": "src/multiplayer/room-client.js",
+    "sha256": "1DF725950C457C361C16D4D82DE0B9F4EA6490899CBE48B27C54CB030B5359BB"
+  },
+  {
+    "path": "src/multiplayer/style.css",
+    "sha256": "93B45670AB8195FABC5AC51696FD7A19C9E1905ABF17A351F8CB65F924BDB8B0"
+  },
+  {
+    "path": "src/multiplayer/transfers.js",
+    "sha256": "3EBF2D7B4998E6944D5E746ACF045AABA1B0F442B286383DBDB7452F26640334"
+  },
+  {
+    "path": "tools/multiplayer-spike/hosted-room.js",
+    "sha256": "5A800975B2A69F878DD7A1EC70C703F65807D3D93AAF3C549282C358B9102A48"
+  },
+  {
+    "path": "tests/multiplayer-client.test.js",
+    "sha256": "125DADF19DF76CCCEE7FB84A887ACE84A3F94B1BDAC11231C857048B34EC5662"
+  },
+  {
+    "path": "tests/multiplayer-client-browser.cjs",
+    "sha256": "D8F8625B2598BF176A79B99DF4F34CF39E2AA966F64CF3FD8673DE717EFED15F"
+  }
+]

@@ -1,26 +1,26 @@
 # До сетевого релиза CarWars
 
-Сверка 2026-10-23: общий core и authoritative комнаты приняты QA, последняя реализация поверх `7f3dc5e`. **Полный сетевой релиз ещё не принят.** Таблица описывает текущую реализацию и остаток требований, не процент готовности. Источник статусов — файлы задач и INDEX.
+Сверка2026-10-24: общий core, authoritative комнаты и online клиент приняты независимым QA; финальный клиентский full437/437+build. **Полный сетевой релиз ещё не принят.** Таблица описывает текущую реализацию и остаток требований. Источник статусов — файлы задач и INDEX.
 
 | Этап | Что уже есть в коде | Что осталось до приёмки |
 | --- | --- | --- |
 | [0096](../tasks/TASK-0096-multiplayer-architecture-spike.md), done | Исследование Colyseus, реальная физика/AI, netem, отрицательные latency результаты; независимый QA 16 октября | Исследование завершено. Его no-go относится к старому server-only варианту, а не к последующей реализации prediction |
 | [0097](../tasks/TASK-0097-headless-multiplayer-game-world.md), done | Единый offline/hosted GameWorld: 120 Hz, до трёх игроков, union LOD/102 civilian, общий police pool до 6, wanted/arrest/repair/props causality по playerId, общая геометрия/подпись, безопасное appearance, simulation-time spawn, gameplay DTO | Независимый QA принял 23 октября: core/SDK17, 300 sim seconds, browser high/low и все обязательные сценарии; подтверждена full419 + build |
 | [0098](../tasks/TASK-0098-authoritative-three-player-rooms.md), done | map-ready/nonce/build/hash, loading без body, атомарные3 места/reservations, bounded input/output/transfers, полный durable DTO/events, deadline scheduling60/20 и120Hz physics, reconnect/leave/shutdown/dispose | Независимый QA принят23 октября:8/8 SDK,11/11 regressions, настоящие5/16с и20cycles, paused TCP reader,3Dhigh/low; matching full427 + build |
-| [0099](../tasks/TASK-0099-multiplayer-client-and-three-car-render.md), ready | Three.js client, create/join/invite, keyboard/joystick, игроки/NPC/damage/wheels/props; QA 0107–0109 | Зависимости приняты; полный online HUD wanted/arrest, cancel подключения, cleanup и итоговая матрица устройств/браузеров |
-| [0100](../tasks/TASK-0100-multiplayer-smoothing-and-network-resilience.md), blocked | Buffer/interpolation, local prediction/ack replay, contacts/static streaming; ARM netem и публичные 3D проверки сохранены | Зависимость 0099; окончательный gameplay/network/browser прогон по 2 минуты на профиль, slow reader/bandwidth cap, stall/hidden/reconnect5/16с, отдельные latency/correction метрики |
+| [0099](../tasks/TASK-0099-multiplayer-client-and-three-car-render.md), done | Персональный wanted/arrest HUD, create/join/invite, cancel/retry/reconnect, neutral menu/freecam/hidden, cleanup listeners/timers/GPU; исправлены5 lifecycle/startup дефектов | QA принят24 октября:23client+6room/server,16Edge+Chrome cases и отдельные reproducer/offline/high-low; final Linux437/437+build. Physical phone/WAN budgets не входят |
+| [0100](../tasks/TASK-0100-multiplayer-smoothing-and-network-resilience.md), ready | Buffer/interpolation, local prediction/ack replay, contacts/static streaming; старые ARM/public3D probes | Привести buffer/clock/epochs к контракту; новая матрица по2мин/RTT0/50/100/150+jitter/loss, input-to-visible/corrections, slow reader/bandwidth cap/stall/hidden/reconnect5/16с |
 | [0101](../tasks/TASK-0101-multiplayer-self-host-and-release-validation.md), blocked | Docker/Compose/Caddy/HTTPS/WSS preview, health, лимит двух комнат, ARM probes/public smoke | Зависимость 0100; origin/readiness/draining/bounded shutdown, lifecycle20, stress300/default102+police/multiroom sizing, финальная приёмка QA |
 | [0102–0105](../tasks/TASK-0102-city-hunt-server-round-and-roles.md), draft | Только дизайн режима «город против трёх гонщиков» | После 0101: серверные роли/раунд → карты/перекрытия → камера/UI города → баланс/нагрузка |
 
 ## Порядок продолжения
 
 1. **TASK-0110 завершена и принята независимым QA 2026-10-23.** Подэтап 0097: общий серверный ремонт, один победитель при гонке, восстановление машины и состояния для всех клиентов. Собственная QA-приёмка не закрывает всю 0097; публичный сервер этим коммитом не обновляется.
-2. **0097 завершена и принята независимым QA:** общий core и серверные police/wanted/arrest проверены с полным составом 102 civilian + 3 базовых/6 активных police. 0098 также принята после серверной/lifecycle приёмки; следующий этап — **0099, ready**.
-3. **0098 завершена:** map-ready, лимиты, actual transport/fault/backpressure и lifecycle проверены. В0099 завершить online HUD персональных правил, cancel/cleanup клиента и проверку нескольких устройств/браузеров. Клиент/сервер нового build обновлять совместно; VPS этим коммитом не обновлялся.
+2. **0097 и0098 завершены независимым QA:** общий core,102civilian/3–6police, map-ready/limits/lifecycle приняты. Их контракты сохраняются.
+3. **0099 завершена24 октября:** HUD/личный respawn, cancel/retry/cleanup и финальная браузерная приёмка прошли. Следующая — **0100, ready**. Source build6 требует совместимого клиента/сервера; старый публичный VPS автоматически не обновлялся.
 4. Повторить 0100 на полном игровом составе. Исторический key-event-to-local-step и частота кадров не являются input-to-visible или измерением реального телефона.
 5. Провести эксплуатационные и нагрузочные проверки 0101, затем независимую QA-приёмку выпуска. После неё начинать режим 3+1.
 
-Незавершённые зависимости блокируют приёмку, но уже существующий preview не нужно реализовывать заново. 0098 теперь `done` по независимому QA, 0099 — `ready`; 0100–0101 остаются `blocked`. Их уже работающие части перечислены выше. Не переводить их в `done` по одной сверке исходников.
+Незавершённые зависимости блокируют приёмку.0097–0099 теперь `done`,0100 — `ready`,0101 — `blocked` до0100. Уже работающие части preview перечислены выше; одной сверки исходников недостаточно для финального релиза.
 
 ## Какой код действует сейчас
 
@@ -43,7 +43,9 @@
 - Новый общий core: [артефакты исполнителя 23 октября](multiplayer/2026-10-23-core/README.md), full419/419 + build, SDK10/10, core12/12, 300 simulation seconds на optimized Node22.23.3, offline high/low и online repair browser. [Независимый QA](multiplayer/2026-10-23-core/qa/README.md) принял 0097: собственные17/17, повторный soak, online regression и high/low с настоящими curb/building contacts, skid smoke/tracks, damage/wheel/repair/wanted/arrest/new map. 0098 позднее принята отдельно; финальная сетевая/эксплуатационная приёмка 0099–0101 не проводилась.
 - [QA0098](multiplayer/2026-10-23-rooms/qa/README.md): собственные8/8,11/11 regressions,5/16с и20cycles, три разных control/ack/movement, event dedup/full resync,3Dhigh/low; подтверждена full427/427+build. [Контракт и проверенные приёмы](multiplayer-rooms.md). Это не WAN/physical-device/VPS sizing gate.
 
-Текущая публичная версия, реальный телефон и многопользовательский матч на нескольких физических устройствах 23 октября не проверялись. Изменения этого этапа не опубликованы на игровом сервере автоматически.
+- [Окончательный QA0099](multiplayer/2026-10-24-client/qa-clock/README.md):23client/snapshot/prediction+6room/server,16Edge+ChromeLAN cases, personal HUD/respawn, cancel scheduled/CONNECTING retry, stale async callbacks, friendlabel churn, cold startup/deadline,10leave/pagehide/offline/high-low. [Linux final437/437+build](multiplayer/2026-10-24-client/linux-clock/README.md),8/8 sourceSHA. Native Windows failures и прежний Linux436/437 сохранены, причиной исправления Windows runtime не объявлены. [Проверенные приёмы клиента](multiplayer-client-lifecycle.md).
+
+Текущая публичная версия, реальный телефон и матч на нескольких физических устройствах24 октября не проверялись. Изменения этого этапа не опубликованы на игровом сервере автоматически.
 
 ## Проверенный приём ведения очереди
 

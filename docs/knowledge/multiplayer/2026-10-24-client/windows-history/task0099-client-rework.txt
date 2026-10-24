@@ -1,0 +1,49 @@
+TAP version 13
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Subtest: cancel before SDK admission rejects promptly and closes a late room without presentation
+ok 1 - cancel before SDK admission rejects promptly and closes a late room without presentation
+  ---
+  duration_ms: 24.9987
+  type: 'test'
+  ...
+# Subtest: cancel map loading suppresses stale map-ready; retry has one session and neutral leave
+ok 2 - cancel map loading suppresses stale map-ready; retry has one session and neutral leave
+  ---
+  duration_ms: 1948.4871
+  type: 'test'
+  ...
+# Subtest: overlapping connection attempts never replace a newer connection
+ok 3 - overlapping connection attempts never replace a newer connection
+  ---
+  duration_ms: 25.597
+  type: 'test'
+  ...
+# Subtest: full/version/offline phases keep retry possible
+ok 4 - full/version/offline phases keep retry possible
+  ---
+  duration_ms: 0.5372
+  type: 'test'
+  ...
+# Subtest: local wanted/arrest HUD and bounded event history never borrow another player state
+ok 5 - local wanted/arrest HUD and bounded event history never borrow another player state
+  ---
+  duration_ms: 0.312
+  type: 'test'
+  ...
+# [Colyseus reconnection]: ⏳ will retry in 1.0 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId 'N_E8SN_n5' with roomId 'OyGV7ON9l'... (attempt 1 of 15)
+# Subtest: cancel reconnect retires a scheduled SDK retry and a connecting socket
+ok 6 - cancel reconnect retires a scheduled SDK retry and a connecting socket
+  ---
+  duration_ms: 2274.6363
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 17843.8411

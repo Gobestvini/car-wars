@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-23T22:10:13.920Z",
+  "browsers": [
+    "Edge",
+    "Chrome"
+  ],
+  "mobile": "390x844 touch emulation, low",
+  "cases": [
+    "independent keyboard/joystick and applied server controls",
+    "player collision/damage replicated"
+  ],
+  "errors": [],
+  "serverEndpoint": "http://192.168.31.185:63598",
+  "joystick": {
+    "steer": -1,
+    "throttle": 1,
+    "brake": 0
+  },
+  "failedStage": "player-ai"
+}

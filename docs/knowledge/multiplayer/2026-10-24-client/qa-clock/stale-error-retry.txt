@@ -1,0 +1,10 @@
+{
+  beforeRelease: {
+    phase: 'playing',
+    roomId: 'N73bDi-Pm',
+    oldRoomId: 'rEah-wDW-',
+    active: true
+  },
+  afterRelease: { phase: 'playing', roomId: 'N73bDi-Pm', active: true, statuses: [] },
+  defect: false
+}

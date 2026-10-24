@@ -1,0 +1,9 @@
+# Final TASK-0099 full verification,2026-10-24
+
+Optimized Node22.23.3 ARM64; `node tools/verify.js --full` without V8 optimization flags. Existing VPS, isolated test container `carwars-qa-task0099-clock-full-20261024`, cpuset0 /1CPU /1536MiB, no published ports or healthcheck; live services unchanged. CPU affinity makes availableParallelism1 and the ordinary test runner serial. This is functional verification, not a performance/capacity measurement.
+
+437/437 tests passed in1171.702s; Vite production build passed in8.95s. `receipt.json`:ok=true/tests=0/build=0, fingerprint0a82af2478bedee603455499d8aa11ee8374da9b3287e911cde06e48d95479c2. All test files discovered by the existing verifier were run. The usual>500kB chunk warning remains.
+
+Immutable base QA image is recorded in `base-image.txt`. It contains the prior complete working export and installed dependencies from committed pinned root/spike manifests, excluding the unrelated uncommitted H3 experiment. Only the eight task source/test files were overlaid; five differ from that earlier baseline (game,hud,room-client,client.test,hosted-room). Other base source stayed unchanged. `source-sha256.txt` was checked in the container before starting; `source-match.json` independently compares all8 files with the current Windows tree after completion. The verifier also checks its full export fingerprint before/after the suite. The stable untracked source-sha256.txt is included in that export fingerprint.
+
+This receipt matches the tested Linux export; it is not copied into the Windows root as a matchingReceipt. Failed prior full runs are preserved in ../linux-final and windows-history and are not passed evidence. Reproduction: build the isolated image described by the task, overlay the same8files before start, remove cached node_modules symlink entries from the temporary Git index, then run the ordinary verifier. Full logs, build, exit code and container state are adjacent.

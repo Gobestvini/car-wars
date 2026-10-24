@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { renderOnlineHud, playerLabel } from './hud.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { createCityScene } from '../city-scene.js';
 import { ART, ART_LIGHT } from '../art-direction.js';
@@ -38,12 +40,14 @@ export async function startGame(loadingScreen) {
     <button id="online-join" type="button">Войти в комнату</button>
     <p id="online-message" role="status" aria-live="polite"></p>
     <label for="online-invite">Ссылка для друзей</label><input id="online-invite" readonly placeholder="Появится после подключения">
+    <button id="online-cancel" type="button" hidden>Отменить подключение</button>
+    <p>Параметры физики, города, транспорта и полиции задаёт сервер.</p>
     <button id="online-continue" type="button" hidden>Продолжить игру</button>
     <button id="online-leave" type="button" hidden>Выйти из комнаты</button>
     <p><a id="online-offline" href="?offline=1">Одиночная игра</a></p></div>`;
   document.body.append(lobby);
   const toolbar=document.createElement('div'); toolbar.id='online-toolbar'; toolbar.hidden=true;
-  toolbar.innerHTML='<button id="online-share" type="button">Пригласить</button><button id="online-respawn" type="button">Вернуть машину</button><button id="online-quality" type="button">Качество: высокое</button>';
+  toolbar.innerHTML='<button id="online-share" type="button">Пригласить</button><button id="online-respawn" type="button">Вернуть машину</button><button id="online-camera" type="button">Свободная камера</button><button id="online-menu" type="button">Меню</button><button id="online-quality" type="button">Качество: высокое</button>';
   document.body.append(toolbar);
   const status=document.createElement('div'); status.id='online-status'; status.setAttribute('role','status'); document.body.append(status);
   const canvas=$('scene');
@@ -53,6 +57,8 @@ export async function startGame(loadingScreen) {
   let quality='high',disposed=false,city=null,signals=null,ready=false,busy=false,lastTime=performance.now(),request=null;
   const scene=new THREE.Scene();scene.background=new THREE.Color(ART.fog);scene.fog=new THREE.Fog(ART.fog,100,260);
   const camera=new THREE.PerspectiveCamera(FOLLOW_CAMERA_FOV,innerWidth/innerHeight,.1,220);
+  const controls=new OrbitControls(camera,canvas);controls.enabled=false;let freeCamera=false;
+  const domEvents=new AbortController();
   const follow=new THREE.Vector3(),followCamera=new FollowCamera(),sunOffset=new THREE.Vector3().fromArray(ART_LIGHT.offset);
   scene.add(new THREE.HemisphereLight(ART_LIGHT.sky,ART_LIGHT.ground,ART_LIGHT.ambient));
   const sun=new THREE.DirectionalLight(ART_LIGHT.sun,ART_LIGHT.intensity);sun.castShadow=true;
@@ -64,10 +70,10 @@ export async function startGame(loadingScreen) {
     camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();blur.setQuality(quality);blur.resize(innerWidth,innerHeight,dpr);
     sun.shadow.mapSize.setScalar(quality==='low'?512:1024);sun.shadow.map?.dispose();sun.shadow.map=null;
   };
-  resize();window.addEventListener('resize',resize);
+  resize();window.addEventListener('resize',resize,{signal:domEvents.signal});
   const models=new Map(),keys=new Set();let playerTemplate,trafficAssets,driveDirection=1,expectedSignature=null,welcomeEpoch=0;
   const pointer={active:false,id:null,startX:0,startY:0,x:0,y:0};
-  const stop=()=>{keys.clear();pointer.active=false;pointer.id=null;$('touch-marker').style.display='none';network.stop();};
+  const stop=()=>{keys.clear();const captured=pointer.id;pointer.active=false;pointer.id=null;if(captured!==null&&canvas.hasPointerCapture(captured))canvas.releasePointerCapture(captured);$('touch-marker').style.display='none';network.stop();};
   const message=text=>{$('online-message').textContent=text;};
   const readOnlyCity={ addStaticBox:()=>null,addStaticConvex:()=>null,removeStaticBox:()=>{} };
   let streetVisuals=null,repairVisuals=null,repairRevision=-1;
@@ -84,9 +90,11 @@ export async function startGame(loadingScreen) {
     repairRevision=gameplay.revision;
   }
   function clearModels(){for(const visual of models.values())disposeVisual(visual);models.clear();followCamera.reset();}
+  function clearPresentation(){++welcomeEpoch;ready=false;clearModels();repairVisuals?.dispose();repairVisuals=null;repairRevision=-1;streetVisuals?.dispose();streetVisuals=null;city?.dispose();city=null;signals=null;expectedSignature=null;freeCamera=false;controls.enabled=false;$('online-camera').textContent='Свободная камера';driveDirection=1;$('speed').textContent='0';renderOnlineHud(document,null,null,false);}
   const network=new RoomClient({
     endpoint:import.meta.env.VITE_GAME_SERVER_URL || undefined,
     onStatus:message,
+    onPhase(phase){ready=phase==='playing';lobby.dataset.phase=phase;if(['connecting','map-loading','reconnecting'].includes(phase))message({connecting:'Подключение к комнате…','map-loading':'Загружаем карту…',reconnecting:'Переподключение… Машина сохранена на 15 секунд.'}[phase]);if(phase==='playing'){lobby.hidden=true;toolbar.hidden=false;}if(phase==='reconnecting'){++welcomeEpoch;stop();lobby.hidden=false;toolbar.hidden=true;}setButtons();},
     async onWelcome(data){
       const epoch=++welcomeEpoch;
       ready=false;network.stop();followCamera.reset();
@@ -95,7 +103,7 @@ export async function startGame(loadingScreen) {
         message('Обновите игру: сервер ещё не поддерживает 3D-карту.');ready=false;void network.leave();return;
       }
       try { plan=await verifyMap(data.map,data.snapshot.mapSignature); }
-      catch(error){if(epoch!==welcomeEpoch || data.roomId!==network.room?.roomId)return;ready=false;await network.leave();lobby.hidden=false;toolbar.hidden=true;setButtons();message(error.message);return;}
+      catch(error){if(epoch!==welcomeEpoch || data.roomId!==network.room?.roomId)return;ready=false;const leaving=network.leave(),departure=network.connectionEpoch;await leaving;if(departure!==network.connectionEpoch||network.room)return;lobby.hidden=false;toolbar.hidden=true;setButtons();message(error.message);return;}
       if(epoch!==welcomeEpoch || data.roomId!==network.room?.roomId)return;
       network.buffer.setMap(plan);
       network.startPrediction(data.map.colliders);
@@ -106,33 +114,40 @@ export async function startGame(loadingScreen) {
         signals=createTrafficSignals(plan.roadNetwork);expectedSignature=data.snapshot.mapSignature;
       }
       syncRepairs(plan);
-      ready=true;message('Комната готова. Отправьте ссылку друзьям.');
-      lobby.hidden=true;toolbar.hidden=false;stop();canvas.focus({preventScroll:true});
+      message('Комната готова. Отправьте ссылку друзьям.');
+      stop();canvas.focus({preventScroll:true});
     },
-    onLeave(){ready=false;stop();clearModels();repairVisuals?.dispose();repairVisuals=null;repairRevision=-1;lobby.hidden=false;toolbar.hidden=true;setButtons();message('Соединение закрыто. Можно создать комнату или войти снова.');},
+    onLeave(){stop();clearPresentation();lobby.hidden=false;toolbar.hidden=true;setButtons();message('Соединение закрыто. Можно создать комнату или войти снова.');},
   });
   function setButtons(){
     $('online-create').disabled=$('online-join').disabled=busy || Boolean(network.room);
-    $('online-continue').hidden=$('online-leave').hidden=!network.room;
+    $('online-cancel').hidden=!['connecting','map-loading','reconnecting'].includes(network.phase);
+    $('online-continue').hidden=!ready; $('online-leave').hidden=!network.room||!$('online-cancel').hidden;
     $('online-room').disabled=busy || Boolean(network.room);
   }
+  let uiAttempt=0;
   async function connect(id){
     if(busy || network.room)return;
     if(id && !/^[a-zA-Z0-9_-]{1,128}$/.test(id)){message('Введите код комнаты из ссылки.');return;}
-    busy=true;setButtons();message('Подключение к комнате…');
+    const attempt=++uiAttempt;busy=true;setButtons();message('Подключение к комнате…');
     try{
-      const room=await network.connect(id);$('online-room').value=room.roomId;
+      const room=await network.connect(id);if(attempt!==uiAttempt)return;$('online-room').value=room.roomId;
       const invite=new URL(location.href);invite.search='';invite.hash='';invite.searchParams.set('online','1');invite.searchParams.set('room',room.roomId);
       $('online-invite').value=invite.href;
-    }catch(error){message(roomError(error));}
-    finally{busy=false;setButtons();}
+    }catch(error){if(attempt===uiAttempt&&error.name!=='AbortError')message(roomError(error));}
+    finally{if(attempt===uiAttempt){busy=false;setButtons();}}
   }
   $('online-create').onclick=()=>connect();
   $('online-join').onclick=()=>{const id=$('online-room').value.trim();if(id)void connect(id);else message('Введите код комнаты.');};
   $('online-room').onkeydown=e=>{if(e.key==='Enter')$('online-join').click();};
   $('online-continue').onclick=()=>{if(ready){lobby.hidden=true;stop();canvas.focus({preventScroll:true});}};
-  $('online-leave').onclick=async()=>{await network.leave();ready=false;clearModels();repairVisuals?.dispose();repairVisuals=null;repairRevision=-1;lobby.hidden=false;toolbar.hidden=true;setButtons();message('Вы вышли из комнаты.');};
+  async function leave(){++uiAttempt;busy=false;void network.leave();clearPresentation();$('online-invite').value='';lobby.hidden=false;toolbar.hidden=true;setButtons();message('Вы вышли из комнаты.');}
+  $('online-leave').onclick=leave;
+  $('online-cancel').onclick=leave;
   $('online-share').onclick=()=>{stop();lobby.hidden=false;setButtons();$('online-invite').focus();$('online-invite').select();};
+  $('online-menu').onclick=$('online-share').onclick;
+  $('online-camera').onclick=()=>{stop();freeCamera=!freeCamera;controls.enabled=freeCamera;if(freeCamera)controls.target.copy(followCamera.target);else followCamera.reset();$('online-camera').textContent=freeCamera?'Камера за машиной':'Свободная камера';};
+  $('arrest-restart').onclick=()=>network.respawn();
   $('online-invite').onclick=()=>$('online-invite').select();
   $('online-respawn').onclick=()=>{network.respawn();canvas.focus({preventScroll:true});};
   $('online-quality').onclick=()=>{quality=quality==='high'?'low':'high';$('online-quality').textContent=`Качество: ${quality==='high'?'высокое':'лёгкое'}`;resize();canvas.focus({preventScroll:true});};
@@ -151,15 +166,16 @@ export async function startGame(loadingScreen) {
       const pivot=new THREE.Group(),spin=new THREE.Group();spin.add(node);pivot.add(spin);scene.add(pivot);return{pivot,spin};
     });
     const labelCanvas=document.createElement('canvas');labelCanvas.width=256;labelCanvas.height=64;
-    const labelCtx=labelCanvas.getContext('2d');labelCtx.fillStyle=actor.id===network.room?.sessionId?'#ffe29c':'#9ddfff';
+    const labelInfo=playerLabel(actor.id,network.room?.sessionId,[...models.values()].map(v=>v.labelNumber));
+    const labelCtx=labelCanvas.getContext('2d');labelCtx.fillStyle=labelInfo.color;
     labelCtx.beginPath();labelCtx.roundRect(0,0,256,64,20);labelCtx.fill();labelCtx.fillStyle='#071c3e';labelCtx.font='bold 28px system-ui';labelCtx.textAlign='center';
-    labelCtx.fillText(actor.id===network.room?.sessionId?'Вы':`Друг ${[...models.values()].filter(v=>v.player).length+1}`,128,43);
+    labelCtx.fillText(labelInfo.text,128,43);
     const texture=new THREE.CanvasTexture(labelCanvas),material=new THREE.SpriteMaterial({map:texture,depthTest:false});
     const label=new THREE.Sprite(material);label.position.y=3;label.scale.set(4.8,1.2,1);group.add(label);
-    return{group,wheels,lights,body,label,texture,deformation,dentCount:0,effects:new CarDamageEffects(scene),generation:actor.generation,player:true};
+    return{group,wheels,lights,body,label,texture,labelNumber:labelInfo.number,labelText:labelInfo.text,deformation,dentCount:0,effects:new CarDamageEffects(scene),generation:actor.generation,player:true};
   }
   function disposeVisual(visual){
-    scene.remove(visual.group);
+    scene.remove(visual.group);if(!visual.player)visual.group.userData.damageableBody?.geometry.dispose();
     if(visual.player){for(const {pivot}of visual.wheels)scene.remove(pivot);visual.effects.dispose();visual.lights.glow.geometry.dispose();visual.lights.glow.material.dispose();visual.body.geometry.dispose();visual.body.material.dispose();visual.label.material.dispose();visual.texture.dispose();}
   }
   function applyActor(visual,actor){
@@ -180,7 +196,7 @@ export async function startGame(loadingScreen) {
   function inputFor(actor){
     const state=network.gameplay?.players.find(p=>p.id===network.room?.sessionId);
     if(state?.arrest?.state==='arrested'||state?.appearing)return neutralInput();
-    if(!ready || !lobby.hidden || document.hidden || !actor)return neutralInput();
+    if(!network.active || !ready || freeCamera || !lobby.hidden || document.hidden || !actor)return neutralInput();
     const q=new THREE.Quaternion().fromArray(actor.pose,3),forward=new THREE.Vector3(0,0,1).applyQuaternion(q);
     const signed=(actor.pose[7]||0)*forward.x+(actor.pose[9]||0)*forward.z;
     if(keys.size){
@@ -199,7 +215,7 @@ export async function startGame(loadingScreen) {
     return{steer:0,throttle:0,brake:.18};
   }
   const down=e=>{
-    if(!ready || !lobby.hidden || pointer.active || (e.pointerType==='mouse' && e.button!==0))return;e.preventDefault();pointer.active=true;pointer.id=e.pointerId;
+    if(freeCamera || !ready || !lobby.hidden || pointer.active || (e.pointerType==='mouse' && e.button!==0))return;e.preventDefault();pointer.active=true;pointer.id=e.pointerId;
     pointer.startX=pointer.x=e.clientX;pointer.startY=pointer.y=e.clientY;canvas.setPointerCapture(e.pointerId);
     const marker=$('touch-marker');marker.style.display='block';marker.style.left=`${e.clientX}px`;marker.style.top=`${e.clientY}px`;
     marker.firstElementChild.style.transform='translate(0px, 0px)';
@@ -210,8 +226,8 @@ export async function startGame(loadingScreen) {
     $('touch-marker').firstElementChild.style.transform=`translate(${stick.knobX}px, ${stick.knobY}px)`;
   }};
   const release=e=>{if(pointer.active && pointer.id===e.pointerId)stop();};
-  canvas.addEventListener('pointerdown',down);canvas.addEventListener('pointermove',move);
-  canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);
+  canvas.addEventListener('pointerdown',down,{signal:domEvents.signal});canvas.addEventListener('pointermove',move,{signal:domEvents.signal});
+  for(const type of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(type,release,{signal:domEvents.signal});
   const keydown=e=>{
     if(['INPUT','TEXTAREA','BUTTON'].includes(e.target.tagName)||!lobby.hidden)return;
     if(e.code.startsWith('Arrow')||e.code==='Space')e.preventDefault();
@@ -219,13 +235,13 @@ export async function startGame(loadingScreen) {
     if(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.code))keys.add(e.code);
   };
   const keyup=e=>keys.delete(e.code);
-  window.addEventListener('keydown',keydown);window.addEventListener('keyup',keyup);window.addEventListener('blur',stop);
-  document.addEventListener('visibilitychange',stop);
+  window.addEventListener('keydown',keydown,{signal:domEvents.signal});window.addEventListener('keyup',keyup,{signal:domEvents.signal});window.addEventListener('blur',stop,{signal:domEvents.signal});
+  document.addEventListener('visibilitychange',stop,{signal:domEvents.signal});
   const limiter=new FrameRateLimiter();let lastRenderedActors=[];
   const frameIntervals=[],debug=new URL(location.href).searchParams.has('netdebug')?document.createElement('output'):null;
   if(debug){debug.id='online-diagnostics';debug.hidden=true;document.body.append(debug);}
   let debugAt=0,lastKeyAt=null;
-  window.addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD'].includes(e.code)&&!e.repeat)lastKeyAt=performance.now();});
+  window.addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD'].includes(e.code)&&!e.repeat)lastKeyAt=performance.now();},{signal:domEvents.signal});
   function frame(now){
     if(disposed)return;request=requestAnimationFrame(frame);if(!limiter.shouldRender(now))return;
     const frameMs=now-lastTime,dt=Math.min(.1,frameMs/1000);lastTime=now;
@@ -260,17 +276,19 @@ export async function startGame(loadingScreen) {
     const focus=own?models.get(own.id).group:null;
     if(focus){
       const speed=Math.hypot(own.pose[7],own.pose[9])*3.6;
-      followCamera.update(focus.position,speed,dt,innerWidth,innerHeight,`${own.id}:${own.generation}`);
+      if(!freeCamera){followCamera.update(focus.position,speed,dt,innerWidth,innerHeight,`${own.id}:${own.generation}`);
       follow.set(focus.position.x,0,focus.position.z);camera.position.copy(followCamera.position);
-      camera.lookAt(followCamera.target.x,followCamera.target.y,followCamera.target.z);$('speed').textContent=String(Math.round(speed));
+      camera.lookAt(followCamera.target.x,followCamera.target.y,followCamera.target.z);}
+      if(freeCamera)controls.update();$('speed').textContent=String(Math.round(speed));
       city?.occlusion.update(camera,focus,dt);
     }else{followCamera.reset();follow.set(0,0,0);camera.position.set(12,22,-20);camera.lookAt(0,0,0);$('speed').textContent='0';}
     sun.position.copy(follow).add(sunOffset);sun.target.position.copy(follow);camera.updateMatrixWorld();updateShadowCoverage(sun,camera);
     if(city&&signals)city.updateSignals(signals,(room?.state?.tick||0)/120,camera,quality);
     if(ready&&network.prediction)streetVisuals?.sync(network.prediction.world.props);
     if(ready){syncRepairs();repairVisuals?.update(dt);}
+    renderOnlineHud(document,network.gameplay,room?.sessionId,ready&&lobby.hidden);
     trafficAssets?.animate(now/1000,quality);
-    blur.render(scene,camera,{mode:'follow',car:focus});
+    blur.render(scene,camera,{mode:freeCamera?'free':'follow',car:focus});
     const count=actors.filter(a=>a.role==='player'&&a.connected).length;
     status.textContent=room?(stale?'Соединение нестабильно. Ожидаем сервер…':`Комната ${room.roomId} · ${count}/3 · WASD / стрелки · R — вернуть машину${own?.damage>.7?' · Машина повреждена':''}`):'';
     if(debug&&now-debugAt>500){
@@ -300,14 +318,14 @@ export async function startGame(loadingScreen) {
   }
   await load();
   // Small read-only diagnostics for acceptance; no client authority setters.
-  window.__multiplayer={snapshot:()=>({roomId:network.room?.roomId,playerId:network.room?.sessionId,ready,
+  window.__multiplayer={snapshot:()=>({roomId:network.room?.roomId,playerId:network.room?.sessionId,ready,phase:network.phase,freeCamera,resources:{models:models.size,city:Boolean(city),prediction:Boolean(network.prediction),inputTimer:Boolean(network.timer),pingTimer:Boolean(network.pingTimer)},
     tick:network.room?.state?.tick,signature:expectedSignature,actors:lastRenderedActors,
     meshes:models.size,localPhysicsSteps:network.prediction?.metrics.steps??0,prediction:network.prediction?.metrics,
     predictedTick:network.prediction?.world.tick,rtt:network.rtt,citySeed:network.room?.state?.seed}),
     camera:()=>({position:camera.position.toArray(),target:[followCamera.target.x,followCamera.target.y,followCamera.target.z],scale:followCamera.scale,subject:followCamera.subject,fov:camera.fov}),
     renderer:()=>renderer.info.render,
     repairs:()=>({state:network.gameplay,visible:repairVisuals?.pickups.filter(p=>p.status==='available').length??0})};
-  window.addEventListener('pagehide',()=>{disposed=true;cancelAnimationFrame(request);void network.leave();clearModels();repairVisuals?.dispose();city?.dispose();trafficAssets?.dispose();blur.dispose();renderer.dispose();},{once:true});
+  window.addEventListener('pagehide',()=>{disposed=true;domEvents.abort();cancelAnimationFrame(request);void network.leave();clearPresentation();controls.dispose();const geometries=new Set(),materials=new Set(),textures=new Set();playerTemplate?.model.traverse(node=>{if(node.geometry)geometries.add(node.geometry);for(const material of [node.material].flat().filter(Boolean)){materials.add(material);for(const value of Object.values(material))if(value?.isTexture)textures.add(value);}});geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());textures.forEach(t=>t.dispose());trafficAssets?.dispose();blur.dispose();renderer.dispose();},{once:true});
   window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
   return{retry:()=>location.reload()};
 }

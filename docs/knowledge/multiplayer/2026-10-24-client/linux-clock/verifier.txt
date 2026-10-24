@@ -1,0 +1,4 @@
+rm 'node_modules'
+rm 'tools/multiplayer-spike/node_modules'
+Тесты и сборка прошли.
+Полные журналы: .check-logs/

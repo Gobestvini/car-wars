@@ -1,0 +1,40 @@
+{ node: 'v22.23.3', parallelism: 1 }
+TAP version 13
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Error: Game protocol/build/map version outdated; reload the page
+#     at HostedDrivingRoom.onAuth (file:///work/tools/multiplayer-spike/hosted-room.js:64:96)
+#     at HostedDrivingRoom._onJoin (file:///app/tools/multiplayer-spike/node_modules/@colyseus/core/build/Room.mjs:1105:39)
+#     at connectClientToRoom (file:///app/tools/multiplayer-spike/node_modules/@colyseus/core/build/Transport.mjs:132:24)
+#     at WebSocketServer.onConnection (file:///app/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:192:13)
+#     at WebSocketServer.emit (node:events:519:28)
+#     at file:///app/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:123:120
+#     at WebSocketServer.completeUpgrade (/app/tools/multiplayer-spike/node_modules/ws/lib/websocket-server.js:450:5)
+#     at WebSocketServer.handleUpgrade (/app/tools/multiplayer-spike/node_modules/ws/lib/websocket-server.js:356:10)
+#     at completeUpgrade (file:///app/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:123:70)
+#     at Server.<anonymous> (file:///app/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:129:9)
+# Room connection was closed unexpectedly (4002): 
+# Subtest: real map-ready gate, loading timeout, version rejection and atomic last-seat race
+not ok 1 - real map-ready gate, loading timeout, version rejection and atomic last-seat race
+  ---
+  duration_ms: 10238.928119
+  type: 'test'
+  location: '/work/tests/multiplayer-room.test.js:5:1'
+  failureType: 'testCodeFailure'
+  error: 'Room fixture timeout'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    until (file:///work/tests/helpers/hosted-room.mjs:13:116)
+    async attach (file:///work/tests/helpers/hosted-room.mjs:30:22)
+    async TestContext.<anonymous> (file:///work/tests/multiplayer-room.test.js:9:13)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11011.261262

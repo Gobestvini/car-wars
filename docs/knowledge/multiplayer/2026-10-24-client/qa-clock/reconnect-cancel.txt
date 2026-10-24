@@ -1,0 +1,14 @@
+[Colyseus reconnection]: ⏳ will retry in 1.0 seconds...
+[Colyseus reconnection]: 🔄 Re-establishing sessionId 'T1-lpYvhb' with roomId 'So7iwMsM0'... (attempt 1 of 15)
+{
+  afterCancel: { phase: 'idle', room: null, oldOpen: false, enabled: false },
+  afterDelay: {
+    phase: 'idle',
+    room: null,
+    oldOpen: false,
+    oldReconnecting: false,
+    serverConnected: false,
+    serverPlayers: 1
+  },
+  defect: false
+}

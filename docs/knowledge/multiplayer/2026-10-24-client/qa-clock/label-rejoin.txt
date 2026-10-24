@@ -1,0 +1,58 @@
+{
+  before: [
+    {
+      id: 'ivlG9sfH0',
+      text: 'Вы',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    },
+    {
+      id: 'Bueblxso2',
+      text: 'Друг 1',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    },
+    {
+      id: 'w3v9O1UTj',
+      text: 'Друг 2',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    }
+  ],
+  middle: [
+    {
+      id: 'ivlG9sfH0',
+      text: 'Вы',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    },
+    {
+      id: 'w3v9O1UTj',
+      text: 'Друг 2',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    }
+  ],
+  after: [
+    {
+      id: 'ivlG9sfH0',
+      text: 'Вы',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    },
+    {
+      id: 'w3v9O1UTj',
+      text: 'Друг 2',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    },
+    {
+      id: '8Xe7Vj93f',
+      text: 'Друг 1',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    }
+  ],
+  errors: [],
+  defect: false
+}

@@ -1,0 +1,37 @@
+Проверки не прошли: not ok 10 - C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\city-boundary.test.js
+  ---
+  duration_ms: 1898.1689
+  type: 'test'
+  location: 'C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\city-boundary.test.js:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 3221225477
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+
+not ok 13 - C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\city-layout.test.js
+  ---
+  duration_ms: 2025.5046
+  type: 'test'
+  location: 'C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\city-layout.test.js:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 3221225477
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+
+not ok 61 - C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\traffic-pooling.test.js
+  ---
+  duration_ms: 16144.3823
+  type: 'test'
+  location: 'C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tests\\traffic-pooling.test.js:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 3221225477
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+
+Полные журналы: .check-logs/

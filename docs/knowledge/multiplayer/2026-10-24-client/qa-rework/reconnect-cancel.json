@@ -1,0 +1,17 @@
+{
+  "afterCancel": {
+    "phase": "idle",
+    "room": null,
+    "oldOpen": false,
+    "enabled": false
+  },
+  "afterDelay": {
+    "phase": "idle",
+    "room": null,
+    "oldOpen": false,
+    "oldReconnecting": false,
+    "serverConnected": false,
+    "serverPlayers": 1
+  },
+  "defect": false
+}

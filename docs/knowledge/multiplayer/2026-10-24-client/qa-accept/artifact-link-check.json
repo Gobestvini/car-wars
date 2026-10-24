@@ -1,0 +1,662 @@
+[
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer-release-readiness.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer-server-plan.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer-client-prediction.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer-shared-core.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer-rooms.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer-server-plan.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/README.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/windows-history/README.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/linux/receipt.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa/checked-files.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa/reconnect-cancel.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa/reconnect-cancel.mjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa/client-test.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa/portrait-arrested.png",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa/pagehide.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa/README.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-rework/checked-files.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-rework/stale-error-retry.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-rework/stale-error-retry.mjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-rework/stale-error-retry-browser.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-rework/stale-error-retry.cjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-rework/stale-error-retry.png",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-final/checked-files.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-final/frozen-source.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-final/label-rejoin.png",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-final/label-rejoin.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-final/label-rejoin.cjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-final/pagehide-first-failure.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-final/pagehide.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-final/offline-playing-high.png",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-final/full-receipt-failed.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-final/full-verifier-failed.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-accept/checked-files.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-accept/frozen-source.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-accept/README.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-accept/label-rejoin.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-accept/label-rejoin.png",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-accept/browser-report.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-accept/offline-playing-high.png",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/linux-final/receipt.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/linux-final/full-tests.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/linux-final/isolated-map-ready-failed.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-accept/startup-clock.mjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-accept/startup-clock.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/tasks/TASK-0099-multiplayer-client-and-three-car-render.md",
+    "target": "../knowledge/multiplayer/2026-10-24-client/qa-accept/startup-clock.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "stale-error-retry.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "stale-error-retry.mjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "stale-error-retry-browser.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "stale-error-retry.cjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "stale-error-retry.png",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "checked-files.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "client-test.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "reconnect-cancel.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "reconnect-cancel.mjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "browser-report.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "browser.cjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "browser.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "pagehide.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "pagehide.cjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "pagehide.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "connecting-cancel.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "connecting-cancel.mjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "snapshot-prediction.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "offline.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "offline.cjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-rework/README.md",
+    "target": "offline-playing-high.png",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "checked-files.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "frozen-source.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "client-snapshot-prediction.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "reconnect-cancel.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "reconnect-cancel.mjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "stale-error-retry.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "stale-error-retry.mjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "stale-error-retry-browser.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "stale-error-retry.cjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "stale-error-retry.png",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "label-rejoin.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "label-rejoin.cjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "label-rejoin.png",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "offline.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "offline.cjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "offline-playing-high.png",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "pagehide-first-failure.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "pagehide.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "browser.cjs",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "browser-first-timeout.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "full-verifier-failed.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-final/README.md",
+    "target": "full-receipt-failed.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-accept/README.md",
+    "target": "../linux-final/receipt.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-accept/README.md",
+    "target": "../linux-final/full-tests.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-accept/README.md",
+    "target": "../linux-final/isolated-map-ready-failed.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-accept/README.md",
+    "target": "startup-clock.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-accept/README.md",
+    "target": "startup-clock.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-accept/README.md",
+    "target": "startup-clock.stderr.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/qa-accept/README.md",
+    "target": "../linux-final/clock-fix-probe-passed.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/README.md",
+    "target": "copied-files.json",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/README.md",
+    "target": "task0099-client-rework.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/README.md",
+    "target": "task0099-client-rework2-affinity.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/README.md",
+    "target": "task0099-client-rework3.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/README.md",
+    "target": "task0099-build.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/README.md",
+    "target": "task0099-server-regressions.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/README.md",
+    "target": "task0099-full-failed.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/README.md",
+    "target": "task0099-full-repeat-failed.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/README.md",
+    "target": "task0099-repeat.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/README.md",
+    "target": "task0099-suite-noopt.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/README.md",
+    "target": "task0099-final-full.txt",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer-client-lifecycle.md",
+    "target": "multiplayer/2026-10-24-client/README.md",
+    "exists": true,
+    "ignoredLog": false
+  },
+  {
+    "source": "docs/knowledge/multiplayer-client-lifecycle.md",
+    "target": "multiplayer/2026-10-24-client/qa/reconnect-cancel.json",
+    "exists": true,
+    "ignoredLog": false
+  }
+]

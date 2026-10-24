@@ -1,0 +1,50 @@
+[
+  {
+    "path": "src/multiplayer/game.js",
+    "exportSha256": "93a70d27bd2aafff6fb3b783ee19399dce65dd3e7cf51eedfb9d8a66e07f3d1e",
+    "windowsSha256": "93a70d27bd2aafff6fb3b783ee19399dce65dd3e7cf51eedfb9d8a66e07f3d1e",
+    "matches": true
+  },
+  {
+    "path": "src/multiplayer/hud.js",
+    "exportSha256": "e8c9ce245a684865004a3c3dcd6e661da13786df246dcd10d593e588a087af53",
+    "windowsSha256": "e8c9ce245a684865004a3c3dcd6e661da13786df246dcd10d593e588a087af53",
+    "matches": true
+  },
+  {
+    "path": "src/multiplayer/room-client.js",
+    "exportSha256": "1df725950c457c361c16d4d82de0b9f4ea6490899cbe48b27c54cb030b5359bb",
+    "windowsSha256": "1df725950c457c361c16d4d82de0b9f4ea6490899cbe48b27c54cb030b5359bb",
+    "matches": true
+  },
+  {
+    "path": "src/multiplayer/style.css",
+    "exportSha256": "93b45670ab8195fabc5ac51696fd7a19c9e1905abf17a351f8cb65f924bdb8b0",
+    "windowsSha256": "93b45670ab8195fabc5ac51696fd7a19c9e1905abf17a351f8cb65f924bdb8b0",
+    "matches": true
+  },
+  {
+    "path": "src/multiplayer/transfers.js",
+    "exportSha256": "3ebf2d7b4998e6944d5e746acf045aaba1b0f442b286383dbdb7452f26640334",
+    "windowsSha256": "3ebf2d7b4998e6944d5e746acf045aaba1b0f442b286383dbdb7452f26640334",
+    "matches": true
+  },
+  {
+    "path": "tools/multiplayer-spike/hosted-room.js",
+    "exportSha256": "30f4e9d9f113e5b5ca46fca884b333199780d1200fac72bece0a1a1a6888f83b",
+    "windowsSha256": "30f4e9d9f113e5b5ca46fca884b333199780d1200fac72bece0a1a1a6888f83b",
+    "matches": true
+  },
+  {
+    "path": "tests/multiplayer-client.test.js",
+    "exportSha256": "eb52f63fd04d080592d0512f164befde0eaeebf4593d4c1d416a2f1daa4fc9f0",
+    "windowsSha256": "eb52f63fd04d080592d0512f164befde0eaeebf4593d4c1d416a2f1daa4fc9f0",
+    "matches": true
+  },
+  {
+    "path": "tests/multiplayer-client-browser.cjs",
+    "exportSha256": "d8f8625b2598bf176a79b99df4f34cf39e2aa966f64cf3fd8673de717efed15f",
+    "windowsSha256": "d8f8625b2598bf176a79b99df4f34cf39e2aa966f64cf3fd8673de717efed15f",
+    "matches": true
+  }
+]

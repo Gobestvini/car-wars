@@ -1,0 +1,62 @@
+[
+  {
+    "source": ".git/task0099-client-rework.log",
+    "artifact": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/task0099-client-rework.txt",
+    "sha256": "6EE02B54ACDEA8694C7FE5D90DC67F04AA354448849E30FC9FFF22E0B6C2B9D1",
+    "matches": true
+  },
+  {
+    "source": ".git/task0099-build.log",
+    "artifact": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/task0099-build.txt",
+    "sha256": "2EF43153EE8F2E846035F3A17C09971BA08DAB03DAFB66A83EF60B3EA36A1F16",
+    "matches": true
+  },
+  {
+    "source": ".git/task0099-full-failed.log",
+    "artifact": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/task0099-full-failed.txt",
+    "sha256": "E74CE8C522E17B820362F0AB7CB589A7BCA99E96F68C81CB4BB972E958EE8BEB",
+    "matches": true
+  },
+  {
+    "source": ".git/task0099-full-repeat-failed.log",
+    "artifact": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/task0099-full-repeat-failed.txt",
+    "sha256": "F48DF6169FEC2306DE503FE2084089D6518F7EF04A741ED87C06A14AD9EEBEE5",
+    "matches": true
+  },
+  {
+    "source": ".git/task0099-repeat.log",
+    "artifact": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/task0099-repeat.txt",
+    "sha256": "1EA760DD5B566D81C0481F601585516D8B5AC33C693A7F4D75763EF23FDD896C",
+    "matches": true
+  },
+  {
+    "source": ".git/task0099-suite-noopt.log",
+    "artifact": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/task0099-suite-noopt.txt",
+    "sha256": "A0325CF32A506BB71521B8D78D90F94B17B19420DEA48E7D67A4E1F4562D2909",
+    "matches": true
+  },
+  {
+    "source": ".git/task0099-client-rework2-affinity.log",
+    "artifact": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/task0099-client-rework2-affinity.txt",
+    "sha256": "EBF0B6D6CB57295983F7B4237447915E88B41A578C76765459EEB74924CEE992",
+    "matches": true
+  },
+  {
+    "source": ".git/task0099-client-rework3.log",
+    "artifact": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/task0099-client-rework3.txt",
+    "sha256": "BC8EF746F0199D9AC07AC0BAA5C787FE78B3906D0E6B355361FA78FF29E7AE1B",
+    "matches": true
+  },
+  {
+    "source": ".git/task0099-server-regressions.log",
+    "artifact": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/task0099-server-regressions.txt",
+    "sha256": "454B62B8202DE448D301EE00C565F90B37D346F451D3FA4B130ED34F87D1ED39",
+    "matches": true
+  },
+  {
+    "source": ".git/task0099-final-full.log",
+    "artifact": "docs/knowledge/multiplayer/2026-10-24-client/windows-history/task0099-final-full.txt",
+    "sha256": "6D74FBF70B3AF7A4DB84556B793F0FD1E06FBFF6199CD48277F1FB11AEE6C0D1",
+    "matches": true
+  }
+]

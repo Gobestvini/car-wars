@@ -1,0 +1,28 @@
+2026-10-24T09:01:40.796Z boot
+2026-10-24T09:01:41.288Z page 1
+2026-10-24T09:01:41.290Z goto 1
+2026-10-24T09:01:43.772Z ready page 1
+2026-10-24T09:01:43.852Z page 2
+2026-10-24T09:01:43.855Z goto 2
+2026-10-24T09:01:44.276Z ready page 2
+2026-10-24T09:01:44.359Z page 3
+2026-10-24T09:01:44.362Z goto 3
+2026-10-24T09:01:44.602Z ready page 3
+2026-10-24T09:01:44.624Z connect
+2026-10-24T09:01:47.520Z drive
+2026-10-24T09:01:49.382Z collision
+2026-10-24T09:01:49.601Z player-ai
+2026-10-24T09:01:49.747Z repair-race
+2026-10-24T09:01:49.856Z props-latejoin
+2026-10-24T09:01:50.650Z signals
+2026-10-24T09:01:50.735Z page 4
+2026-10-24T09:01:50.737Z goto 4
+2026-10-24T09:01:50.994Z ready page 4
+2026-10-24T09:01:51.334Z wanted-arrest
+2026-10-24T09:01:58.899Z menu-camera-hidden
+2026-10-24T09:02:00.411Z reconnect
+2026-10-24T09:02:01.219Z cycles
+2026-10-24T09:02:10.249Z cancel-reconnect
+2026-10-24T09:02:12.801Z cancel
+2026-10-24T09:02:17.854Z offline
+{"passed":true,"cases":["independent keyboard/joystick and applied server controls","player collision/damage replicated","player-AI collision and NPC damage replicated","shared repair race: one winner","durable destroyed prop late join without historical effects","late join restores authoritative detached wheel","three-client traffic signal phases match authoritative tick","fourth full without auto-hop","personal HUD holding/arresting/arrested and personal respawn","menu/free camera/hidden neutral while server advances","reconnect full state","10 leave/join cycles release city/models/prediction/timers","UI cancel reconnect never revives old transport; retry creates fresh room","cancel pending admission does not revive a late room","cancel map loading, then retry","offline starts independently"],"errors":[]}

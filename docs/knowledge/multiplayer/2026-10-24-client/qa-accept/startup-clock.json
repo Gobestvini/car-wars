@@ -1,0 +1,27 @@
+{
+  "mapReadyMs": 1800,
+  "forcedMapReadyDelayMs": 3000,
+  "presentationDelayMs": 500,
+  "events": [
+    {
+      "event": "beginLoad",
+      "at": 7850.0382,
+      "clockAge": 3345
+    },
+    {
+      "event": "eject",
+      "code": 4004,
+      "at": 7855.9156,
+      "sinceLoadMs": 5.87920000000031
+    }
+  ],
+  "createMs": 3331.809,
+  "clockAgeAfterCreateMs": 3332,
+  "loadAt": 7850.0382,
+  "clockAgeAtLoadMs": 3345,
+  "connected": false,
+  "error": "AbortError: Подключение отменено",
+  "phase": "idle",
+  "loadingTimeouts": 1,
+  "defect": true
+}

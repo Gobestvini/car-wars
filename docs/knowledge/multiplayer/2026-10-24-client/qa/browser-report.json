@@ -1,0 +1,161 @@
+{
+  "date": "2026-10-23T22:02:40.615Z",
+  "browsers": [
+    "Edge",
+    "Chrome"
+  ],
+  "mobile": "390x844 touch emulation, low",
+  "cases": [
+    "independent keyboard/joystick and applied server controls",
+    "player collision/damage replicated",
+    "shared repair race: one winner",
+    "durable destroyed prop late join without historical effects",
+    "fourth full without auto-hop",
+    "personal HUD holding/arresting/arrested and personal respawn",
+    "menu/free camera/hidden neutral while server advances",
+    "reconnect full state",
+    "10 leave/join cycles release city/models/prediction/timers",
+    "cancel pending admission does not revive a late room",
+    "cancel map loading, then retry",
+    "offline starts independently"
+  ],
+  "errors": [],
+  "serverEndpoint": "http://192.168.31.185:52011",
+  "joystick": {
+    "steer": -1,
+    "throttle": 1,
+    "brake": 0
+  },
+  "repairWinner": [
+    {
+      "id": "1:1",
+      "tick": 596,
+      "playerId": "Lyhcw8IR2",
+      "type": "repair",
+      "pickupId": 0
+    }
+  ],
+  "mobileArrest": {
+    "banner": {
+      "x": 8,
+      "y": 555,
+      "width": 210,
+      "height": 139
+    },
+    "restart": {
+      "x": 51.6875,
+      "y": 652,
+      "width": 122.625,
+      "height": 31
+    },
+    "toolbar": {
+      "x": 257,
+      "y": 546,
+      "width": 125,
+      "height": 242
+    }
+  },
+  "cleanup": [
+    {
+      "memory": {
+        "geometries": 11,
+        "textures": 12
+      },
+      "models": 0,
+      "transfers": null,
+      "listeners": null,
+      "children": 3
+    },
+    {
+      "memory": {
+        "geometries": 11,
+        "textures": 12
+      },
+      "models": 0,
+      "transfers": null,
+      "listeners": null,
+      "children": 3
+    },
+    {
+      "memory": {
+        "geometries": 11,
+        "textures": 12
+      },
+      "models": 0,
+      "transfers": null,
+      "listeners": null,
+      "children": 3
+    },
+    {
+      "memory": {
+        "geometries": 11,
+        "textures": 12
+      },
+      "models": 0,
+      "transfers": null,
+      "listeners": null,
+      "children": 3
+    },
+    {
+      "memory": {
+        "geometries": 11,
+        "textures": 12
+      },
+      "models": 0,
+      "transfers": null,
+      "listeners": null,
+      "children": 3
+    },
+    {
+      "memory": {
+        "geometries": 11,
+        "textures": 12
+      },
+      "models": 0,
+      "transfers": null,
+      "listeners": null,
+      "children": 3
+    },
+    {
+      "memory": {
+        "geometries": 11,
+        "textures": 12
+      },
+      "models": 0,
+      "transfers": null,
+      "listeners": null,
+      "children": 3
+    },
+    {
+      "memory": {
+        "geometries": 11,
+        "textures": 12
+      },
+      "models": 0,
+      "transfers": null,
+      "listeners": null,
+      "children": 3
+    },
+    {
+      "memory": {
+        "geometries": 11,
+        "textures": 12
+      },
+      "models": 0,
+      "transfers": null,
+      "listeners": null,
+      "children": 3
+    },
+    {
+      "memory": {
+        "geometries": 11,
+        "textures": 12
+      },
+      "models": 0,
+      "transfers": null,
+      "listeners": null,
+      "children": 3
+    }
+  ],
+  "passed": true
+}

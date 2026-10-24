@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "node": "v22.23.3",
+  "ok": false,
+  "fingerprint": "e0c515b0c500d0c518a7ab941773fd5a9c9798a6405f21e87bd9f8ade71561de",
+  "tests": 1,
+  "build": null,
+  "at": "2026-10-23T23:03:44.304Z"
+}

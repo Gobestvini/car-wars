@@ -1,0 +1,161 @@
+TAP version 13
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Subtest: cancel before SDK admission rejects promptly and closes a late room without presentation
+ok 1 - cancel before SDK admission rejects promptly and closes a late room without presentation
+  ---
+  duration_ms: 18.9262
+  type: 'test'
+  ...
+# Subtest: cancel map loading suppresses stale map-ready; retry has one session and neutral leave
+ok 2 - cancel map loading suppresses stale map-ready; retry has one session and neutral leave
+  ---
+  duration_ms: 2002.0751
+  type: 'test'
+  ...
+# Subtest: overlapping connection attempts never replace a newer connection
+ok 3 - overlapping connection attempts never replace a newer connection
+  ---
+  duration_ms: 20.3649
+  type: 'test'
+  ...
+# Subtest: full/version/offline phases keep retry possible
+ok 4 - full/version/offline phases keep retry possible
+  ---
+  duration_ms: 0.4866
+  type: 'test'
+  ...
+# Subtest: local wanted/arrest HUD and bounded event history never borrow another player state
+ok 5 - local wanted/arrest HUD and bounded event history never borrow another player state
+  ---
+  duration_ms: 0.2452
+  type: 'test'
+  ...
+# [Colyseus reconnection]: ⏳ will retry in 1.0 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId 'XwjHglzgF' with roomId 'RyNQ3VWX1'... (attempt 1 of 15)
+# Subtest: cancel reconnect retires a scheduled SDK retry and a connecting socket
+ok 6 - cancel reconnect retires a scheduled SDK retry and a connecting socket
+  ---
+  duration_ms: 2270.4661
+  type: 'test'
+  ...
+# Subtest: old snapshot failure cannot overwrite the phase or status of a fresh room
+ok 7 - old snapshot failure cannot overwrite the phase or status of a fresh room
+  ---
+  duration_ms: 1299.4393
+  type: 'test'
+  ...
+# [Colyseus reconnection]: ⏳ will retry in 0.1 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId 'Y1s_uKIo6' with roomId 'jkl9iqPpv'... (attempt 1 of 15)
+# [Colyseus reconnection]: ✅ reconnection successful!
+# [Colyseus reconnection]: ⏳ will retry in 0.1 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId 'Y1s_uKIo6' with roomId 'jkl9iqPpv'... (attempt 1 of 15)
+# [Colyseus reconnection]: ✅ reconnection successful!
+# Subtest: an older async welcome cannot activate an obsolete map nonce after another drop
+ok 8 - an older async welcome cannot activate an obsolete map nonce after another drop
+  ---
+  duration_ms: 1582.7798
+  type: 'test'
+  ...
+# Subtest: three players keep distinct labels/backgrounds after a friend leaves and a fresh one joins
+ok 9 - three players keep distinct labels/backgrounds after a friend leaves and a fresh one joins
+  ---
+  duration_ms: 0.3078
+  type: 'test'
+  ...
+# Subtest: hosted cold create preserves the full loading deadline after a delayed map without premature callbacks
+ok 10 - hosted cold create preserves the full loading deadline after a delayed map without premature callbacks
+  ---
+  duration_ms: 3261.9492
+  type: 'test'
+  ...
+# {"rtt":0,"inputToSimulationMs":0,"playerContacts":749,"late":0,"total":609,"maxQueue":11,"corrections":[{"steps":1200,"replaySteps":88,"corrections":0,"maxCorrection":0,"maxReplay":11,"lateFrames":0,"replayMs":6.08400000000006,"confirmedPositionError":0.000008792727455411752,"skippedReconciliations":191},{"steps":1200,"replaySteps":88,"corrections":0,"maxCorrection":0,"maxReplay":11,"lateFrames":0,"replayMs":7.790399999999636,"confirmedPositionError":0.000008217512891125012,"skippedReconciliations":191},{"steps":1200,"replaySteps":88,"corrections":0,"maxCorrection":0,"maxReplay":11,"lateFrames":0,"replayMs":5.716099999999869,"confirmedPositionError":0.000010901505407552802,"skippedReconciliations":191}]}
+# {"rtt":50,"inputToSimulationMs":0,"playerContacts":881,"late":0,"total":609,"maxQueue":15,"corrections":[{"steps":1200,"replaySteps":143,"corrections":0,"maxCorrection":0,"maxReplay":21,"lateFrames":0,"replayMs":7.226299999999583,"confirmedPositionError":0.000004884645198857973,"skippedReconciliations":192},{"steps":1200,"replaySteps":143,"corrections":0,"maxCorrection":0,"maxReplay":21,"lateFrames":0,"replayMs":7.494800000000623,"confirmedPositionError":0.000004575143956702138,"skippedReconciliations":192},{"steps":1200,"replaySteps":143,"corrections":0,"maxCorrection":0,"maxReplay":21,"lateFrames":0,"replayMs":8.12220000000002,"confirmedPositionError":0.000010362247798125172,"skippedReconciliations":192}]}
+# {"rtt":100,"inputToSimulationMs":0,"playerContacts":734,"late":0,"total":609,"maxQueue":18,"corrections":[{"steps":1200,"replaySteps":220,"corrections":1,"maxCorrection":0.05831775685926501,"maxReplay":29,"lateFrames":0,"replayMs":12.708200000000033,"confirmedPositionError":0.00004775490901961217,"skippedReconciliations":190,"lastCorrection":0.05831775685926501},{"steps":1200,"replaySteps":220,"corrections":1,"maxCorrection":0.06215623664627553,"maxReplay":29,"lateFrames":0,"replayMs":9.526700000001256,"confirmedPositionError":0.00003451266408249726,"skippedReconciliations":190,"lastCorrection":0.06215623664627553},{"steps":1200,"replaySteps":220,"corrections":1,"maxCorrection":0.0402337654435566,"maxReplay":29,"lateFrames":0,"replayMs":10.333600000000843,"confirmedPositionError":0.000009119772534653475,"skippedReconciliations":190,"lastCorrection":0.0402337654435566}]}
+# {"rtt":150,"inputToSimulationMs":0,"playerContacts":892,"late":0,"total":609,"maxQueue":21,"corrections":[{"steps":1200,"replaySteps":269,"corrections":1,"maxCorrection":0.0734563455339937,"maxReplay":39,"lateFrames":0,"replayMs":14.17759999999953,"confirmedPositionError":0.000012666920793194104,"skippedReconciliations":191,"lastCorrection":0.0734563455339937},{"steps":1200,"replaySteps":269,"corrections":2,"maxCorrection":0.09028713391856295,"maxReplay":39,"lateFrames":0,"replayMs":13.378100000000813,"confirmedPositionError":0.00001278416815949221,"skippedReconciliations":191,"lastCorrection":0.07348899915590192},{"steps":1200,"replaySteps":269,"corrections":1,"maxCorrection":0.06166060655399954,"maxReplay":39,"lateFrames":0,"replayMs":13.109800000000178,"confirmedPositionError":0.000011763493075668197,"skippedReconciliations":191,"lastCorrection":0.06166060655399954}]}
+# Subtest: sparse contact cache preserves dense Cannon collision motion and damage
+ok 11 - sparse contact cache preserves dense Cannon collision motion and damage
+  ---
+  duration_ms: 386.1952
+  type: 'test'
+  ...
+# Subtest: car restore/replay preserves suspension force inputs and motion, including contact-cache rewind
+ok 12 - car restore/replay preserves suspension force inputs and motion, including contact-cache rewind
+  ---
+  duration_ms: 98.5066
+  type: 'test'
+  ...
+# Subtest: streamed prediction colliders retain full-city contacts within reconciliation tolerance between regions
+ok 13 - streamed prediction colliders retain full-city contacts within reconciliation tolerance between regions
+  ---
+  duration_ms: 775.553
+  type: 'test'
+  ...
+# Subtest: three predicted players at simulated RTT 0ms steer immediately and share physical impacts
+ok 14 - three predicted players at simulated RTT 0ms steer immediately and share physical impacts
+  ---
+  duration_ms: 562.438
+  type: 'test'
+  ...
+# Subtest: three predicted players at simulated RTT 50ms steer immediately and share physical impacts
+ok 15 - three predicted players at simulated RTT 50ms steer immediately and share physical impacts
+  ---
+  duration_ms: 567.1708
+  type: 'test'
+  ...
+# Subtest: three predicted players at simulated RTT 100ms steer immediately and share physical impacts
+ok 16 - three predicted players at simulated RTT 100ms steer immediately and share physical impacts
+  ---
+  duration_ms: 543.1878
+  type: 'test'
+  ...
+# Subtest: three predicted players at simulated RTT 150ms steer immediately and share physical impacts
+ok 17 - three predicted players at simulated RTT 150ms steer immediately and share physical impacts
+  ---
+  duration_ms: 553.4267
+  type: 'test'
+  ...
+# Subtest: prediction commands cannot choose dt, poses, invalid generations, unbounded queues or old respawn state
+ok 18 - prediction commands cannot choose dt, poses, invalid generations, unbounded queues or old respawn state
+  ---
+  duration_ms: 54.7382
+  type: 'test'
+  ...
+# Subtest: online snapshots copy Schema values and interpolate positions and wheels
+ok 19 - online snapshots copy Schema values and interpolate positions and wheels
+  ---
+  duration_ms: 1.0021
+  type: 'test'
+  ...
+# Subtest: presentation bounds extrapolation, freezes stale state and rejects older ticks
+ok 20 - presentation bounds extrapolation, freezes stale state and rejects older ticks
+  ---
+  duration_ms: 1.1386
+  type: 'test'
+  ...
+# Subtest: respawn generations snap immediately and deleted actors do not linger
+ok 21 - respawn generations snap immediately and deleted actors do not linger
+  ---
+  duration_ms: 0.5638
+  type: 'test'
+  ...
+# Subtest: quaternions follow shortest arc, including opposite representations
+ok 22 - quaternions follow shortest arc, including opposite representations
+  ---
+  duration_ms: 0.0952
+  type: 'test'
+  ...
+# Subtest: online handbrake extends the input whitelist without allowing authority fields
+ok 23 - online handbrake extends the input whitelist without allowing authority fields
+  ---
+  duration_ms: 0.2152
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 17897.3316

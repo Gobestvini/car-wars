@@ -1,0 +1,149 @@
+TAP version 13
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Subtest: cancel before SDK admission rejects promptly and closes a late room without presentation
+ok 1 - cancel before SDK admission rejects promptly and closes a late room without presentation
+  ---
+  duration_ms: 33.423562
+  type: 'test'
+  ...
+# Subtest: cancel map loading suppresses stale map-ready; retry has one session and neutral leave
+ok 2 - cancel map loading suppresses stale map-ready; retry has one session and neutral leave
+  ---
+  duration_ms: 6313.500346
+  type: 'test'
+  ...
+# Subtest: overlapping connection attempts never replace a newer connection
+ok 3 - overlapping connection attempts never replace a newer connection
+  ---
+  duration_ms: 8.587492
+  type: 'test'
+  ...
+# Subtest: full/version/offline phases keep retry possible
+ok 4 - full/version/offline phases keep retry possible
+  ---
+  duration_ms: 1.816531
+  type: 'test'
+  ...
+# Subtest: local wanted/arrest HUD and bounded event history never borrow another player state
+ok 5 - local wanted/arrest HUD and bounded event history never borrow another player state
+  ---
+  duration_ms: 0.775445
+  type: 'test'
+  ...
+# [Colyseus reconnection]: ⏳ will retry in 1.0 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId 'heHFWRvSD' with roomId 'qadDMrfBW'... (attempt 1 of 15)
+# Subtest: cancel reconnect retires a scheduled SDK retry and a connecting socket
+ok 6 - cancel reconnect retires a scheduled SDK retry and a connecting socket
+  ---
+  duration_ms: 4688.578047
+  type: 'test'
+  ...
+# Subtest: old snapshot failure cannot overwrite the phase or status of a fresh room
+ok 7 - old snapshot failure cannot overwrite the phase or status of a fresh room
+  ---
+  duration_ms: 5934.278389
+  type: 'test'
+  ...
+# [Colyseus reconnection]: ⏳ will retry in 0.1 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId 'X_bJ5vZvY' with roomId 'QUqJyjsfH'... (attempt 1 of 15)
+# [Colyseus reconnection]: ✅ reconnection successful!
+# [Colyseus reconnection]: ⏳ will retry in 0.1 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId 'X_bJ5vZvY' with roomId 'QUqJyjsfH'... (attempt 1 of 15)
+# [Colyseus reconnection]: ✅ reconnection successful!
+# Subtest: an older async welcome cannot activate an obsolete map nonce after another drop
+ok 8 - an older async welcome cannot activate an obsolete map nonce after another drop
+  ---
+  duration_ms: 3822.455365
+  type: 'test'
+  ...
+# Subtest: three players keep distinct labels/backgrounds after a friend leaves and a fresh one joins
+ok 9 - three players keep distinct labels/backgrounds after a friend leaves and a fresh one joins
+  ---
+  duration_ms: 0.861125
+  type: 'test'
+  ...
+# Subtest: hosted cold create preserves the full loading deadline after a delayed map without premature callbacks
+ok 10 - hosted cold create preserves the full loading deadline after a delayed map without premature callbacks
+  ---
+  duration_ms: 4618.475836
+  type: 'test'
+  ...
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Error: Game protocol/build/map version outdated; reload the page
+#     at HostedDrivingRoom.onAuth (file:///work/tools/multiplayer-spike/hosted-room.js:65:96)
+#     at HostedDrivingRoom._onJoin (file:///app/tools/multiplayer-spike/node_modules/@colyseus/core/build/Room.mjs:1105:39)
+#     at connectClientToRoom (file:///app/tools/multiplayer-spike/node_modules/@colyseus/core/build/Transport.mjs:132:24)
+#     at WebSocketServer.onConnection (file:///app/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:192:13)
+#     at WebSocketServer.emit (node:events:519:28)
+#     at file:///app/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:123:120
+#     at WebSocketServer.completeUpgrade (/app/tools/multiplayer-spike/node_modules/ws/lib/websocket-server.js:450:5)
+#     at WebSocketServer.handleUpgrade (/app/tools/multiplayer-spike/node_modules/ws/lib/websocket-server.js:356:10)
+#     at completeUpgrade (file:///app/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:123:70)
+#     at Server.<anonymous> (file:///app/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:129:9)
+# Room connection was closed unexpectedly (4002): 
+# Subtest: real map-ready gate, loading timeout, version rejection and atomic last-seat race
+ok 11 - real map-ready gate, loading timeout, version rejection and atomic last-seat race
+  ---
+  duration_ms: 8634.826892
+  type: 'test'
+  ...
+# Subtest: authority, applied ack, silence braking, bounded future queue, epochs, durable full state and room isolation
+ok 12 - authority, applied ack, silence braking, bounded future queue, epochs, durable full state and room isolation
+  ---
+  duration_ms: 9410.51101
+  type: 'test'
+  ...
+# Max payload size exceeded
+# RangeError: Max payload size exceeded
+#     at Receiver.haveLength (/app/tools/multiplayer-spike/node_modules/ws/lib/receiver.js:442:28)
+#     at Receiver.getPayloadLength16 (/app/tools/multiplayer-spike/node_modules/ws/lib/receiver.js:393:10)
+#     at Receiver.startLoop (/app/tools/multiplayer-spike/node_modules/ws/lib/receiver.js:181:16)
+#     at Receiver._write (/app/tools/multiplayer-spike/node_modules/ws/lib/receiver.js:117:10)
+#     at writeOrBuffer (node:internal/streams/writable:572:12)
+#     at _write (node:internal/streams/writable:501:10)
+#     at Writable.write (node:internal/streams/writable:510:10)
+#     at Socket.socketOnData (/app/tools/multiplayer-spike/node_modules/ws/lib/websocket.js:1388:35)
+#     at Socket.emit (node:events:519:28)
+#     at addChunk (node:internal/streams/readable:561:12)
+# Error: Unexpected end of MessagePack data
+#     at endOfMessagePackError (file:///app/tools/multiplayer-spike/node_modules/msgpackr/unpack.js:697:14)
+#     at read (file:///app/tools/multiplayer-spike/node_modules/msgpackr/unpack.js:488:36)
+#     at readMap (file:///app/tools/multiplayer-spike/node_modules/msgpackr/unpack.js:723:18)
+#     at read (file:///app/tools/multiplayer-spike/node_modules/msgpackr/unpack.js:479:12)
+#     at checkedRead (file:///app/tools/multiplayer-spike/node_modules/msgpackr/unpack.js:189:13)
+#     at unpack (file:///app/tools/multiplayer-spike/node_modules/msgpackr/unpack.js:105:10)
+#     at RoomMessages.onData (file:///app/tools/multiplayer-spike/node_modules/@colyseus/core/build/RoomMessages.mjs:122:49)
+#     at HostedDrivingRoom._onMessage (file:///app/tools/multiplayer-spike/node_modules/@colyseus/core/build/Room.mjs:1410:23)
+#     at HostedDrivingRoom._onMessage (file:///work/tools/multiplayer-spike/hosted-room.js:104:17)
+#     at WebSocket.emit (node:events:519:28)
+# Subtest: oversized application input, transport overflow and malformed frames cannot stop a healthy peer
+ok 13 - oversized application input, transport overflow and malformed frames cannot stop a healthy peer
+  ---
+  duration_ms: 3563.398442
+  type: 'test'
+  ...
+# ❌ reconnection token invalid or expired. Did you miss .allowReconnection()?
+# 👉 https://docs.colyseus.io/room\#allow-reconnection
+# ❌ reconnection token invalid or expired. Did you miss .allowReconnection()?
+# 👉 https://docs.colyseus.io/room\#allow-reconnection
+# Subtest: reserved reconnect, explicit leave, expired token, isolated faults and complete empty-room cleanup
+ok 14 - reserved reconnect, explicit leave, expired token, isolated faults and complete empty-room cleanup
+  ---
+  duration_ms: 11577.692312
+  type: 'test'
+  ...
+# Subtest: real paused TCP reader is disconnected at the socket budget; another client continues; shutdown warns clients
+ok 15 - real paused TCP reader is disconnected at the socket budget; another client continues; shutdown warns clients
+  ---
+  duration_ms: 3016.984817
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 64333.75461

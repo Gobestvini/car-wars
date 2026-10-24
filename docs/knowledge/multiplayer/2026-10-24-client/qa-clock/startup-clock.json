@@ -1,0 +1,24 @@
+{
+  "mapReadyMs": 1800,
+  "forcedMapReadyDelayMs": 3000,
+  "presentationDelayMs": 500,
+  "events": [
+    {
+      "event": "beginLoad",
+      "at": 3540.6646,
+      "clockAge": 9
+    },
+    {
+      "event": "onWelcome",
+      "at": 3912.1352
+    }
+  ],
+  "createMs": 3174.3051,
+  "clockAgeAfterCreateMs": 0,
+  "loadAt": 3540.6646,
+  "clockAgeAtLoadMs": 9,
+  "connected": true,
+  "phase": "playing",
+  "loadingTimeouts": 0,
+  "defect": false
+}

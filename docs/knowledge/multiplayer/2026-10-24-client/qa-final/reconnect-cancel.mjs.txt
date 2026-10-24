@@ -1,0 +1,15 @@
+@colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+[Colyseus reconnection]: ⏳ will retry in 1.0 seconds...
+[Colyseus reconnection]: 🔄 Re-establishing sessionId 'LUkLca6KI' with roomId 'nkhz6bE4w'... (attempt 1 of 15)
+{
+  afterCancel: { phase: 'idle', room: null, oldOpen: false, enabled: false },
+  afterDelay: {
+    phase: 'idle',
+    room: null,
+    oldOpen: false,
+    oldReconnecting: false,
+    serverConnected: false,
+    serverPlayers: 1
+  },
+  defect: false
+}

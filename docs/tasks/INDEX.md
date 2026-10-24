@@ -2,7 +2,7 @@
 
 Статус в файле задачи — источник истины. Обновляй эту таблицу при создании задачи и изменении её состояния.
 
-Сверка сетевой серии 2026-10-23: **core и комнаты приняты, полный сетевой релиз ещё не принят**. [Реализация, остатки и порядок до выпуска](../knowledge/multiplayer-release-readiness.md). TASK-0096 принята как исследование,0110 — общий ремонт;0097 — общий offline/hosted core,0098 — map-ready/лимиты/lifecycle приняты независимым QA. Следующая0099 готова к работе: online HUD wanted/arrest, cancel/cleanup и приёмка клиента;0100–0101 ожидают свои зависимости. Режим города0102–0105 остаётся draft.
+Сверка сетевой серии2026-10-24: **core, комнаты и клиент0099 приняты; полный сетевой релиз ещё не принят**. [Реализация, остатки и порядок до выпуска](../knowledge/multiplayer-release-readiness.md). СледующаяTASK-0100: сглаживание и полная network/browser матрица;0101 ожидает её приёмки. Режим города0102–0105 остаётсяdraft до своей зависимости.
 
 | ID / файл | Название | Статус | Приоритет | Зависимости | Рекомендуемый исполнитель |
 | --- | --- | --- | --- | --- | --- |
@@ -18,8 +18,8 @@
 | [TASK-0096](TASK-0096-multiplayer-architecture-spike.md) | Проверить серверную архитектуру мультиплеера на трёх игроков | done | high | нет | gpt-6.1-sol, high |
 | [TASK-0097](TASK-0097-headless-multiplayer-game-world.md) | Выделить общий серверный мир физики и AI для трёх игроков | done | high | TASK-0096 — требуется done | gpt-6.1-sol, high |
 | [TASK-0098](TASK-0098-authoritative-three-player-rooms.md) | Создать authoritative серверные комнаты на трёх игроков | done | high | TASK-0096 — требуется done; TASK-0097 — требуется done | gpt-6.1-sol, high |
-| [TASK-0099](TASK-0099-multiplayer-client-and-three-car-render.md) | Подключить онлайн-режим и отображение трёх игроков | ready | high | TASK-0097 — требуется done; TASK-0098 — требуется done | gpt-6.1-sol, high |
-| [TASK-0100](TASK-0100-multiplayer-smoothing-and-network-resilience.md) | Обеспечить плавность езды и устойчивость к задержкам сети | blocked | high | TASK-0099 — требуется done | gpt-6.1-sol, high |
+| [TASK-0099](TASK-0099-multiplayer-client-and-three-car-render.md) | Подключить онлайн-режим и отображение трёх игроков | done | high | TASK-0097 — требуется done; TASK-0098 — требуется done | gpt-6.1-sol, high |
+| [TASK-0100](TASK-0100-multiplayer-smoothing-and-network-resilience.md) | Обеспечить плавность езды и устойчивость к задержкам сети | ready | high | TASK-0099 — требуется done | gpt-6.1-sol, high |
 | [TASK-0101](TASK-0101-multiplayer-self-host-and-release-validation.md) | Подготовить запуск игрового сервера и итоговую проверку мультиплеера | blocked | high | TASK-0100 — требуется done | gpt-6.1-sol, high |
 | [TASK-0095](TASK-0095-breakable-sidewalk-props.md) | Физические объекты тротуара, скамейки и розыск за наезд | done | high | нет; TASK-0075 — done; существующий wanted API; последовательно при общих файлах | gpt-6.1-sol, high |
 | [TASK-0093](TASK-0093-normal-house-city-boundary.md) | Обычные дома с узкими зазорами по непроходимой границе карты | done | high | нет; TASK-0090/0091 — done; последовательно с0094 при общих файлах | gpt-6.1-sol, high |

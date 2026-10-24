@@ -1,0 +1,10 @@
+{
+  oldRoomId: 'r7Cntyw_B',
+  newRoomId: 'iuPu_DnnX',
+  beforePhase: 'playing',
+  afterPhase: 'playing',
+  ready: true,
+  active: true,
+  message: 'Комната готова. Отправьте ссылку друзьям.',
+  defect: false
+}

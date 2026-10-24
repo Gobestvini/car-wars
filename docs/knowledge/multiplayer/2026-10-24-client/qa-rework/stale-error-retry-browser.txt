@@ -1,0 +1,11 @@
+@colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+{
+  oldRoomId: 'lQtcYyRM1',
+  newRoomId: 'sOJP4jBIa',
+  beforePhase: 'playing',
+  afterPhase: 'offline-error',
+  ready: false,
+  active: true,
+  message: 'Invalid snapshot transfer',
+  defect: true
+}

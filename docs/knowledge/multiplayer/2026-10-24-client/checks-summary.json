@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-24",
+  "windows": {
+    "node": "v22.23.3",
+    "source": "TASK0099 working source over6fe6491",
+    "optimizedClientAfterRework": {
+      "pass": 6,
+      "fail": 0,
+      "logLocal": ".git/task0099-client-rework.log"
+    },
+    "productionBuild": {
+      "passed": true,
+      "seconds": 1.75,
+      "modules": 149,
+      "logLocal": ".git/task0099-build.log"
+    },
+    "fullOptimized": {
+      "passed": false,
+      "runs": [
+        {
+          "pass": 427,
+          "fail": 2,
+          "cityBoundaryExitCode": 2147483651,
+          "other": "multiplayer-room queue timeout"
+        },
+        {
+          "pass": 427,
+          "fail": 2,
+          "cityBoundaryExitCode": 3221225477,
+          "other": "traffic-pooling RangeError: Invalid array length"
+        }
+      ]
+    },
+    "isolatedBaselineRepeat": {
+      "roomPass": 5,
+      "cityBoundary": "native V8 Check failed: IsHeapObject(), exit2147483651"
+    },
+    "diagnosticNoOpt": {
+      "passed": false,
+      "durationSeconds": 463.175,
+      "cityBoundaryExitCode": 3221225477,
+      "other": "pre-rework client and room timing/timeout failures under deopt/load",
+      "currentSourceReceipt": false
+    },
+    "interpretation": "Cause of native/V8 failures is not established. No optimized full pass on Windows; no-opt is not a solution or performance evidence.",
+    "optimizedClientAfterRework2": {
+      "pass": 8,
+      "fail": 0,
+      "affinity": "CPU0",
+      "optimization": "default, no --no-opt",
+      "logLocal": ".git/task0099-client-rework2-affinity.log"
+    },
+    "optimizedClientAfterRework3": {
+      "pass": 10,
+      "fail": 0,
+      "logLocal": ".git/task0099-client-rework3.log",
+      "optimization": "default Node22.23.3",
+      "affinity": "CPU0"
+    },
+    "serverRegressionsAfterRework3": {
+      "pass": 11,
+      "fail": 0,
+      "seconds": 53.87,
+      "logLocal": ".git/task0099-server-regressions.log"
+    },
+    "fullCpu0PreLabelRepair": {
+      "passed": false,
+      "pass": 425,
+      "fail": 3,
+      "seconds": 277.928,
+      "nativeExit": 3221225477,
+      "files": [
+        "city-boundary.test.js",
+        "city-layout.test.js",
+        "traffic-pooling.test.js"
+      ],
+      "finalCurrentSourceReceipt": false
+    }
+  },
+  "linuxArm64": {
+    "state": "passed pre-QA-0099-2 source",
+    "node": "v22.23.3",
+    "optimized": true,
+    "tests": {
+      "pass": 433,
+      "fail": 0,
+      "seconds": 1104.5
+    },
+    "build": {
+      "passed": true,
+      "seconds": 7.17
+    },
+    "receiptFingerprint": "2d06d847d7610bfd65de3b87003ca2e67a53ce079a513d979230d387c780e103",
+    "container": "isolated verification image, no published ports,1.5CPU/1536MiB",
+    "dependencies": "committed pinned manifests; foreign H3 experiment excluded",
+    "liveServicesChanged": false,
+    "finalCurrentSourceReceipt": false
+  },
+  "linuxFinalBeforeClockRepair": {
+    "pass": 436,
+    "fail": 1,
+    "seconds": 1102.237,
+    "build": "skipped",
+    "failedTest": "real map-ready gate/loading timeout: first attach",
+    "isolatedRepeat": "failed; initialization elapsed charged to newly scheduled SDK timeout",
+    "receipt": "linux-final/receipt.json",
+    "rawTests": "linux-final/full-tests.txt",
+    "currentSourceReceipt": false
+  },
+  "linuxFinalAfterClockRepair": {
+    "state": "passed current frozen source",
+    "node": "v22.23.3",
+    "optimized": true,
+    "cpuset": "0",
+    "availableParallelism": 1,
+    "cpuLimit": 1,
+    "memoryMiB": 1536,
+    "tests": {
+      "pass": 437,
+      "fail": 0,
+      "seconds": 1171.701621
+    },
+    "build": {
+      "passed": true,
+      "seconds": 8.95
+    },
+    "receiptFingerprint": "0a82af2478bedee603455499d8aa11ee8374da9b3287e911cde06e48d95479c2",
+    "receipt": "linux-clock/receipt.json",
+    "sourceMatch": "linux-clock/source-match.json",
+    "finalCurrentSourceReceipt": true,
+    "liveServicesChanged": false
+  },
+  "linuxFocusedAfterClockRepair": {
+    "pass": 15,
+    "fail": 0,
+    "seconds": 64.334,
+    "log": "linux-final/clock-focused-15-passed.txt"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "before": [
+    {
+      "id": "8Uqiq-p4Y",
+      "text": "Вы",
+      "labelBackground": "#ffe29c",
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "4LMxkPX5Z",
+      "text": "Друг 2",
+      "labelBackground": "#9ddfff",
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "A8p3brT2L",
+      "text": "Друг 3",
+      "labelBackground": "#9ddfff",
+      "bodyColor": "ffffff"
+    }
+  ],
+  "middle": [
+    {
+      "id": "8Uqiq-p4Y",
+      "text": "Вы",
+      "labelBackground": "#ffe29c",
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "A8p3brT2L",
+      "text": "Друг 3",
+      "labelBackground": "#9ddfff",
+      "bodyColor": "ffffff"
+    }
+  ],
+  "after": [
+    {
+      "id": "8Uqiq-p4Y",
+      "text": "Вы",
+      "labelBackground": "#ffe29c",
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "A8p3brT2L",
+      "text": "Друг 3",
+      "labelBackground": "#9ddfff",
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "ecqFrndFx",
+      "text": "Друг 3",
+      "labelBackground": "#9ddfff",
+      "bodyColor": "ffffff"
+    }
+  ],
+  "errors": [],
+  "defect": true
+}

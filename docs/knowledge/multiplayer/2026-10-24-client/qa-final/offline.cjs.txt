@@ -1,0 +1,25 @@
+Port 5173 is in use, trying another one...
+{
+  gameServerRunning: false,
+  configuredEndpoint: 'http://127.0.0.1:1',
+  before: {
+    tick: 3,
+    steps: 3,
+    round: 2,
+    signature: '2a81b250313b8fa46accf003d97e8036286ecbeea9927a0ed35f3e86abdd9635',
+    playerId: 'player',
+    repairRevision: 0,
+    events: []
+  },
+  after: {
+    tick: 185,
+    steps: 185,
+    round: 2,
+    signature: '2a81b250313b8fa46accf003d97e8036286ecbeea9927a0ed35f3e86abdd9635',
+    playerId: 'player',
+    repairRevision: 0,
+    events: []
+  },
+  gameServerRequests: [],
+  errors: []
+}

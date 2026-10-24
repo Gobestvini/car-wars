@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-23T21:54:48.415Z",
+  "browsers": [
+    "Edge",
+    "Chrome"
+  ],
+  "mobile": "390x844 touch emulation, low",
+  "cases": [
+    "independent keyboard/joystick and applied server controls",
+    "player collision/damage replicated",
+    "shared repair race: one winner",
+    "durable destroyed prop late join without historical effects",
+    "fourth full without auto-hop",
+    "personal HUD holding/arresting/arrested and personal respawn",
+    "menu/free camera/hidden neutral while server advances",
+    "reconnect full state",
+    "10 leave/join cycles release city/models/prediction/timers",
+    "cancel pending admission does not revive a late room",
+    "cancel map loading, then retry",
+    "offline starts independently"
+  ],
+  "errors": [],
+  "serverEndpoint": "http://192.168.31.185:54504",
+  "joystick": {
+    "steer": -1,
+    "throttle": 1,
+    "brake": 0
+  },
+  "repairWinner": [
+    {
+      "id": "1:1",
+      "tick": 578,
+      "playerId": "MMLhNZwcl",
+      "type": "repair",
+      "pickupId": 0
+    }
+  ],
+  "passed": true
+}

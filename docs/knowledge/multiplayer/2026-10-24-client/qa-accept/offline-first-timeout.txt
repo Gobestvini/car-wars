@@ -1,0 +1,5 @@
+page.waitForFunction: Timeout 30000ms exceeded.
+    at C:\Users\gobes\OneDrive\Документы\CarWars\docs\knowledge\multiplayer\2026-10-24-client\qa-accept\offline.cjs:5:248 {
+  log: [],
+  name: 'TimeoutError'
+}

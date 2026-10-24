@@ -1,0 +1,109 @@
+TAP version 13
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# [Colyseus reconnection]: ⏳ will retry in 0.2 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId '98iFRT5Da' with roomId 'ca0_7I8gm'... (attempt 1 of 15)
+# [Colyseus reconnection]: ✅ reconnection successful!
+# {"threeClients":true,"lateJoin":true,"reconnect":true,"respawn":true,"prop":1,"removed":true}
+# Subtest: three SDK clients share dents and destroyed props through late join, respawn and reconnect
+ok 1 - three SDK clients share dents and destroyed props through late join, respawn and reconnect
+  ---
+  duration_ms: 9630.5655
+  type: 'test'
+  ...
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Subtest: hosted production core replicates personal wanted/arrest, role-safe police and independent respawn
+ok 2 - hosted production core replicates personal wanted/arrest, role-safe police and independent respawn
+  ---
+  duration_ms: 9987.2588
+  type: 'test'
+  ...
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# {"phase":"driving","elapsed":5505.964699999999,"playerContacts":161,"localContacts":489,"corrections":[{"steps":670,"replaySteps":669,"corrections":3,"maxCorrection":0.06756106514663643,"maxReplay":25,"lateFrames":0,"replayMs":167.23999999999296,"confirmedPositionError":0.0005731617877916349,"skippedReconciliations":58,"lastCorrection":0.03201408902432962},{"steps":670,"replaySteps":649,"corrections":3,"maxCorrection":0.05960847430882736,"maxReplay":25,"lateFrames":0,"replayMs":139.6820999999993,"confirmedPositionError":0.00028782645339279085,"skippedReconciliations":58,"lastCorrection":0.05960847430882736},{"steps":670,"replaySteps":667,"corrections":4,"maxCorrection":0.07659767607292459,"maxReplay":25,"lateFrames":0,"replayMs":167.5714999999973,"confirmedPositionError":0.0003725023519706455,"skippedReconciliations":58,"lastCorrection":0.02496325473996991}]}
+# [Colyseus reconnection]: ⏳ will retry in 0.2 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId '-JJBgHSSe' with roomId '9rYi65MsC'... (attempt 1 of 15)
+# [Colyseus reconnection]: ✅ reconnection successful!
+# {"playerContacts":186,"localContacts":564,"frameP95":54.50870000000032,"corrections":[{"steps":670,"replaySteps":669,"corrections":3,"maxCorrection":0.06756106514663643,"maxReplay":25,"lateFrames":0,"replayMs":167.23999999999296,"confirmedPositionError":0.0005731617877916349,"skippedReconciliations":58,"lastCorrection":0.03201408902432962},{"steps":670,"replaySteps":649,"corrections":3,"maxCorrection":0.05960847430882736,"maxReplay":25,"lateFrames":0,"replayMs":139.6820999999993,"confirmedPositionError":0.00028782645339279085,"skippedReconciliations":58,"lastCorrection":0.05960847430882736},{"steps":670,"replaySteps":667,"corrections":4,"maxCorrection":0.07659767607292459,"maxReplay":25,"lateFrames":0,"replayMs":167.5714999999973,"confirmedPositionError":0.0003725023519706455,"skippedReconciliations":58,"lastCorrection":0.02496325473996991}],"reconnect":true,"independentRespawn":true,"statusMessages":["Переподключение… Машина сохранена на 15 секунд.","Соединение восстановлено"]}
+# Subtest: three actual SDK prediction clients collide, respawn independently and recover after reconnect
+ok 3 - three actual SDK prediction clients collide, respawn independently and recover after reconnect
+  ---
+  duration_ms: 9055.3672
+  type: 'test'
+  ...
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Error: Game protocol/build/map version outdated; reload the page
+#     at HostedDrivingRoom.onAuth (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/hosted-room.js:64:96)
+#     at HostedDrivingRoom._onJoin (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/core/build/Room.mjs:1105:39)
+#     at connectClientToRoom (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/core/build/Transport.mjs:132:24)
+#     at WebSocketServer.onConnection (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:192:13)
+#     at WebSocketServer.emit (node:events:519:28)
+#     at file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:123:120
+#     at WebSocketServer.completeUpgrade (C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tools\\multiplayer-spike\\node_modules\\ws\\lib\\websocket-server.js:450:5)
+#     at WebSocketServer.handleUpgrade (C:\\Users\\gobes\\OneDrive\\Документы\\CarWars\\tools\\multiplayer-spike\\node_modules\\ws\\lib\\websocket-server.js:356:10)
+#     at completeUpgrade (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:123:70)
+#     at Server.<anonymous> (file:///C:/Users/gobes/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/CarWars/tools/multiplayer-spike/node_modules/@colyseus/ws-transport/build/WebSocketTransport.mjs:129:9)
+# Room connection was closed unexpectedly (4002): 
+# Subtest: hosted ghost lifecycle requires the current presentation version
+ok 4 - hosted ghost lifecycle requires the current presentation version
+  ---
+  duration_ms: 814.3699
+  type: 'test'
+  ...
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# [Colyseus reconnection]: ⏳ will retry in 0.2 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId '3mC7xTDNn' with roomId 'nMXxDF1Fx'... (attempt 1 of 15)
+# [Colyseus reconnection]: ✅ reconnection successful!
+# Subtest: real SDK clients share server repair, reject forged repair, and recover state on late join/reconnect
+ok 5 - real SDK clients share server repair, reject forged repair, and recover state on late join/reconnect
+  ---
+  duration_ms: 8293.1088
+  type: 'test'
+  ...
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Subtest: switching hosted rooms replaces both the server map and motion actors
+ok 6 - switching hosted rooms replaces both the server map and motion actors
+  ---
+  duration_ms: 3213.9454
+  type: 'test'
+  ...
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Subtest: headless city colliders are deterministic and a building blocks a real CarSimulation
+ok 7 - headless city colliders are deterministic and a building blocks a real CarSimulation
+  ---
+  duration_ms: 435.2191
+  type: 'test'
+  ...
+# Subtest: three cars share one solver and collide; queued input is consumed only by a tick
+ok 8 - three cars share one solver and collide; queued input is consumed only by a tick
+  ---
+  duration_ms: 249.6295
+  type: 'test'
+  ...
+# Subtest: real AI helpers create all requested actors, union-zone physics, finite snapshots
+ok 9 - real AI helpers create all requested actors, union-zone physics, finite snapshots
+  ---
+  duration_ms: 924.6458
+  type: 'test'
+  ...
+# Subtest: input whitelist rejects forged authority, NaN, stale epochs and invalid ranges
+ok 10 - input whitelist rejects forged authority, NaN, stale epochs and invalid ranges
+  ---
+  duration_ms: 0.1614
+  type: 'test'
+  ...
+# ❌ reconnection token invalid or expired. Did you miss .allowReconnection()?
+# 👉 https://docs.colyseus.io/room\#allow-reconnection
+# Subtest: actual Colyseus SDK: capacity, schema, input ack, late join, reserved reconnect, expiry and cleanup
+ok 11 - actual Colyseus SDK: capacity, schema, input ack, late join, reserved reconnect, expiry and cleanup
+  ---
+  duration_ms: 926.2317
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 53870.6166

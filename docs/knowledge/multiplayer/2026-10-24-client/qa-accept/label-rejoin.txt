@@ -1,0 +1,59 @@
+@colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+{
+  before: [
+    {
+      id: 'zeTBhiel8',
+      text: 'Вы',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    },
+    {
+      id: 'DS5lkk55L',
+      text: 'Друг 1',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    },
+    {
+      id: 'NQvXz7usA',
+      text: 'Друг 2',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    }
+  ],
+  middle: [
+    {
+      id: 'zeTBhiel8',
+      text: 'Вы',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    },
+    {
+      id: 'NQvXz7usA',
+      text: 'Друг 2',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    }
+  ],
+  after: [
+    {
+      id: 'zeTBhiel8',
+      text: 'Вы',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    },
+    {
+      id: 'NQvXz7usA',
+      text: 'Друг 2',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    },
+    {
+      id: 'bctghB4lh',
+      text: 'Друг 1',
+      labelBackground: [Array],
+      bodyColor: 'ffffff'
+    }
+  ],
+  errors: [],
+  defect: false
+}

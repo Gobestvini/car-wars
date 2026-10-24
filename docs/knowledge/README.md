@@ -6,6 +6,7 @@
 
 - [Практические правила](playbook.md): цикл игры, физика, управление, камера, ресурсы и производительность.
 - [Общий multiplayer core](multiplayer-shared-core.md): владельцы physics/gameplay, отделение Three.js, персональная причинность, проверки и ограничения TASK-0097.
+- [Online client lifecycle](multiplayer-client-lifecycle.md): отмена запоздалого SDK admission, cleanup подписок/ресурсов и персональный HUD TASK-0099.
 - [Authoritative комнаты](multiplayer-rooms.md): map-ready, ограниченные transfers/input/output, reconnect/cleanup, проверка cadence TASK-0098.
 - [Краткая память агентов](agents/README.md): карта модулей и результаты проверенных задач, актуальность по SHA-256.
 - [Режим города против трёх гонщиков](city-hunt-mode-design.md): проверенный контекст кода, предлагаемые правила и карты; игровой баланс и реализация ещё не проверялись.

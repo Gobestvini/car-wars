@@ -1,0 +1,38 @@
+locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('#menu-play')
+    - locator resolved to <button type="button" id="menu-play" aria-describedby="menu-status">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    55 × waiting for element to be visible, enabled and stable
+       - element is not visible
+     - retrying click action
+       - waiting 500ms
+
+    at C:\Users\gobes\OneDrive\Документы\CarWars\docs\knowledge\multiplayer\2026-10-24-client\qa-rework\offline.cjs:5:240 {
+  log: [
+    "  - waiting for locator('#menu-play')",
+    '    - locator resolved to <button type="button" id="menu-play" aria-describedby="menu-status">…</button>',
+    '  - attempting click action',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is not visible',
+    '    - retrying click action',
+    '    - waiting 20ms',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is not visible',
+    '    - retrying click action',
+    '      - waiting 100ms',
+    '    55 × waiting for element to be visible, enabled and stable',
+    '       - element is not visible',
+    '     - retrying click action',
+    '       - waiting 500ms'
+  ],
+  name: 'TimeoutError'
+}

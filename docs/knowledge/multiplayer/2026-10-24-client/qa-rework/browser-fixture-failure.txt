@@ -1,0 +1,4 @@
+@colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+Error: Client browser fixture timeout
+    at until (C:\Users\gobes\OneDrive\Документы\CarWars\docs\knowledge\multiplayer\2026-10-24-client\qa-rework\browser.cjs:6:96)
+    at async C:\Users\gobes\OneDrive\Документы\CarWars\docs\knowledge\multiplayer\2026-10-24-client\qa-rework\browser.cjs:44:3

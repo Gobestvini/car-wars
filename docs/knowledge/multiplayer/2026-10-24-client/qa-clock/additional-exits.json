@@ -1,0 +1,38 @@
+[
+  {
+    "script": "label-rejoin.cjs",
+    "exitCode": 0,
+    "controller": "Node22.23.3",
+    "at": "2026-10-24T09:03:15.3557909Z"
+  },
+  {
+    "script": "pagehide.cjs",
+    "exitCode": 0,
+    "controller": "Node22.23.3",
+    "at": "2026-10-24T09:03:24.2530657Z"
+  },
+  {
+    "script": "stale-error-retry.cjs",
+    "exitCode": 0,
+    "controller": "Node22.23.3",
+    "at": "2026-10-24T09:03:46.0554667Z"
+  },
+  {
+    "script": "stale-error-retry.mjs",
+    "exitCode": 0,
+    "controller": "Node22.23.3",
+    "at": "2026-10-24T09:03:49.1001966Z"
+  },
+  {
+    "script": "reconnect-cancel.mjs",
+    "exitCode": 0,
+    "controller": "Node22.23.3",
+    "at": "2026-10-24T09:04:05.0612247Z"
+  },
+  {
+    "script": "offline.cjs",
+    "exitCode": 0,
+    "controller": "Node22.23.3",
+    "at": "2026-10-24T09:04:13.4651851Z"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "script": "stale-error-retry.cjs",
+    "at": "2026-10-23T22:31:21.0430259Z",
+    "exit": 0
+  },
+  {
+    "script": "reconnect-cancel.mjs",
+    "at": "2026-10-23T22:31:38.1462813Z",
+    "exit": 0
+  },
+  {
+    "script": "pagehide.cjs",
+    "at": "2026-10-23T22:31:49.0498645Z",
+    "exit": 1
+  },
+  {
+    "script": "offline.cjs",
+    "at": "2026-10-23T22:32:09.4829968Z",
+    "exit": 0
+  }
+]

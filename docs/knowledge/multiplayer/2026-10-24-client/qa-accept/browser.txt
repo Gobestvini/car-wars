@@ -1,0 +1,29 @@
+@colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+2026-10-23T22:41:31.261Z boot
+2026-10-23T22:41:31.717Z page 1
+2026-10-23T22:41:31.719Z goto 1
+2026-10-23T22:41:34.132Z ready page 1
+2026-10-23T22:41:34.209Z page 2
+2026-10-23T22:41:34.210Z goto 2
+2026-10-23T22:41:34.550Z ready page 2
+2026-10-23T22:41:34.612Z page 3
+2026-10-23T22:41:34.613Z goto 3
+2026-10-23T22:41:34.832Z ready page 3
+2026-10-23T22:41:34.847Z connect
+2026-10-23T22:41:37.739Z drive
+2026-10-23T22:41:39.704Z collision
+2026-10-23T22:41:39.873Z player-ai
+2026-10-23T22:41:40.073Z repair-race
+2026-10-23T22:41:40.171Z props-latejoin
+2026-10-23T22:41:40.971Z signals
+2026-10-23T22:41:41.054Z page 4
+2026-10-23T22:41:41.057Z goto 4
+2026-10-23T22:41:41.318Z ready page 4
+2026-10-23T22:41:41.775Z wanted-arrest
+2026-10-23T22:41:49.406Z menu-camera-hidden
+2026-10-23T22:41:50.689Z reconnect
+2026-10-23T22:41:51.372Z cycles
+2026-10-23T22:42:00.690Z cancel-reconnect
+2026-10-23T22:42:03.318Z cancel
+2026-10-23T22:42:08.441Z offline
+{"passed":true,"cases":["independent keyboard/joystick and applied server controls","player collision/damage replicated","player-AI collision and NPC damage replicated","shared repair race: one winner","durable destroyed prop late join without historical effects","late join restores authoritative detached wheel","three-client traffic signal phases match authoritative tick","fourth full without auto-hop","personal HUD holding/arresting/arrested and personal respawn","menu/free camera/hidden neutral while server advances","reconnect full state","10 leave/join cycles release city/models/prediction/timers","UI cancel reconnect never revives old transport; retry creates fresh room","cancel pending admission does not revive a late room","cancel map loading, then retry","offline starts independently"],"errors":[]}

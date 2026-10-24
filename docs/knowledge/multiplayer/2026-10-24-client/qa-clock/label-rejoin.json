@@ -1,0 +1,90 @@
+{
+  "before": [
+    {
+      "id": "ivlG9sfH0",
+      "text": "Вы",
+      "labelBackground": [
+        255,
+        226,
+        156
+      ],
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "Bueblxso2",
+      "text": "Друг 1",
+      "labelBackground": [
+        157,
+        223,
+        255
+      ],
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "w3v9O1UTj",
+      "text": "Друг 2",
+      "labelBackground": [
+        201,
+        244,
+        156
+      ],
+      "bodyColor": "ffffff"
+    }
+  ],
+  "middle": [
+    {
+      "id": "ivlG9sfH0",
+      "text": "Вы",
+      "labelBackground": [
+        255,
+        226,
+        156
+      ],
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "w3v9O1UTj",
+      "text": "Друг 2",
+      "labelBackground": [
+        201,
+        244,
+        156
+      ],
+      "bodyColor": "ffffff"
+    }
+  ],
+  "after": [
+    {
+      "id": "ivlG9sfH0",
+      "text": "Вы",
+      "labelBackground": [
+        255,
+        226,
+        156
+      ],
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "w3v9O1UTj",
+      "text": "Друг 2",
+      "labelBackground": [
+        201,
+        244,
+        156
+      ],
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "8Xe7Vj93f",
+      "text": "Друг 1",
+      "labelBackground": [
+        157,
+        223,
+        255
+      ],
+      "bodyColor": "ffffff"
+    }
+  ],
+  "errors": [],
+  "defect": false
+}

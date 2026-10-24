@@ -1,0 +1,24 @@
+{
+  gameServerRunning: false,
+  configuredEndpoint: 'http://127.0.0.1:1',
+  before: {
+    tick: 5,
+    steps: 5,
+    round: 2,
+    signature: 'a2e96a9a8cdcc34e9dafe47e7e52a4150e6fdad42789268b8ebe3b66c7c56096',
+    playerId: 'player',
+    repairRevision: 0,
+    events: []
+  },
+  after: {
+    tick: 188,
+    steps: 188,
+    round: 2,
+    signature: 'a2e96a9a8cdcc34e9dafe47e7e52a4150e6fdad42789268b8ebe3b66c7c56096',
+    playerId: 'player',
+    repairRevision: 0,
+    events: []
+  },
+  gameServerRequests: [],
+  errors: []
+}

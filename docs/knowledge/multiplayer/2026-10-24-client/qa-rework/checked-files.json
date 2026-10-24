@@ -1,0 +1,38 @@
+[
+  {
+    "path": "src/multiplayer/room-client.js",
+    "sha256": "0c2854cabf0adcdd3dc605e44f2170998a5baa227ad8afd0110be96bf3bf0190"
+  },
+  {
+    "path": "src/multiplayer/game.js",
+    "sha256": "2388db89f0431918a1717523af6a5e42bda4188e5382b447cf788a18abe4eaea"
+  },
+  {
+    "path": "src/multiplayer/transfers.js",
+    "sha256": "3ebf2d7b4998e6944d5e746acf045aaba1b0f442b286383dbdb7452f26640334"
+  },
+  {
+    "path": "src/multiplayer/hud.js",
+    "sha256": "3eb973f0759489dba92743ce1d20eb9325c748e99c78c4cdb84619ec2c402fb4"
+  },
+  {
+    "path": "src/multiplayer/style.css",
+    "sha256": "93b45670ab8195fabc5ac51696fd7a19c9e1905abf17a351f8cb65f924bdb8b0"
+  },
+  {
+    "path": "tests/multiplayer-client.test.js",
+    "sha256": "65b49f4f65c4b6736aaf48a2fe52419f7c796edd4b4854c5dbe17829c16cbfc9"
+  },
+  {
+    "path": "tests/multiplayer-client-browser.cjs",
+    "sha256": "d8f8625b2598bf176a79b99df4f34cf39e2aa966f64cf3fd8673de717efed15f"
+  },
+  {
+    "path": "src/city-boundary.js",
+    "sha256": "e4903413bdc53835243d257e3b9f4dfb6d539857e2e4377cf4625098b752397e"
+  },
+  {
+    "path": "tests/city-boundary.test.js",
+    "sha256": "d0781587c74ba6ca7d5baf8f4bc9c105877a685fb846eb4ad180900ebc28a21d"
+  }
+]

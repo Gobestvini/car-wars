@@ -1,5 +1,5 @@
 .multiplayer-entry { display:block;width:100%;min-height:42px;margin:8px 0 0;border:2px solid #fff3d6;border-radius:12px;background:#143759ed;color:#fff9ec;font:700 16px 'Car Roboto',sans-serif;cursor:pointer; }
-body[data-online="true"] #start-screen,body[data-online="true"] #menu-button,body[data-online="true"] #settings-button,body[data-online="true"] #wanted {display:none!important}
+body[data-online="true"] #start-screen,body[data-online="true"] #menu-button,body[data-online="true"] #settings-button {display:none!important}
 #multiplayer-lobby {position:fixed;z-index:15;inset:0;display:grid;place-items:center;padding:16px;background:#071c3e99;font-family:'Car Roboto',system-ui;color:#fff9ec;overflow:auto}
 #multiplayer-lobby[hidden]{display:none}
 .multiplayer-card{width:min(100%,420px);box-sizing:border-box;padding:24px;border:2px solid #fff3d6;border-radius:24px;background:#143759f5;box-shadow:0 14px 50px #071c3e88;text-align:center}
@@ -15,3 +15,7 @@ body[data-online="true"] #start-screen,body[data-online="true"] #menu-button,bod
 #online-status:empty{display:none}
 #multiplayer-lobby :focus-visible,#online-toolbar :focus-visible,.multiplayer-entry:focus-visible{outline:3px solid #fff;outline-offset:3px}
 @media(max-width:600px){#online-toolbar{top:auto;bottom:calc(56px + env(safe-area-inset-bottom));right:8px;flex-direction:column}#online-toolbar button{padding:8px;font-size:12px}.multiplayer-card{padding:18px}#online-status{font-size:11px;width:80vw}}
+
+body[data-online="true"] #arrest-banner { z-index:7; bottom:calc(170px + env(safe-area-inset-bottom)); }
+body[data-online="true"] #wanted[hidden] {display:none}
+@media(max-width:600px){#online-toolbar{max-width:125px}#online-toolbar button{min-height:38px}body[data-online="true"] #arrest-banner{left:8px;transform:none;width:calc(100vw - 180px);font-size:13px;padding:10px;bottom:150px}}

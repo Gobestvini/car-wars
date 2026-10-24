@@ -22,7 +22,11 @@ export function hostedRoomType(admission,{mapReadyMs=ROOM_LIMITS.mapReadyMs,reco
       try{
         const fixed=process.env.CARWARS_FIXED_SEED,seed=fixed===undefined?randomInt(0,4294967296):Number(fixed);
         if(!Number.isSafeInteger(seed)||seed<0||seed>=4294967296)throw Error('Invalid configured map seed');
-        super.onCreate({npcCount:102,reconnectSeconds,seed,registerMessages:false});await this.sim.ready;
+        super.onCreate({npcCount:102,reconnectSeconds,seed,registerMessages:false});
+        // The base room starts timers synchronously. Stop them before yielding:
+        // hosted state/metrics and the verified map do not exist until ready.
+        this.patchRate=null;this.setSimulationInterval();this._simulationInterval=undefined;
+        await this.sim.ready;
         this.state=new HostedState({tick:0,seed,signature:this.sim.signature,contactCount:0,roundId:this.roundId});
         Object.assign(this.metrics,{slowDrops:0,malformed:0,faults:0,loadingTimeouts:0,queueBytes:0,maxQueueBytes:0,
           schedulerIntervals:[],patchIntervals:[],bodyCount:0,clients:0,loading:0,reserved:0});
@@ -51,7 +55,8 @@ export function hostedRoomType(admission,{mapReadyMs=ROOM_LIMITS.mapReadyMs,reco
           if(!this.rpc(c,'respawn',3000))return;
           if(this.sim.respawn(c.sessionId)){this.lastRespawn.set(c.sessionId,{requestId:p.requestId,at:performance.now()});c.send('respawned',{requestId:p.requestId,generation:actor.generation});}});
         this.onMessage('*',c=>{this.metrics.invalidInputs++;if((c.badMessages=(c.badMessages??0)+1)>40)this.eject(c,4008);});
-        this.patchRate=null;this.setSimulationInterval();this._simulationInterval=undefined;
+        // Cold map preparation must not consume newly admitted loader timers.
+        this.clock.start();this.lastTime=performance.now();this.accumulator=0;
         this.stopScheduler=cadence(60,()=>{this.clock.tick();this.advance();});
         this.stopPatches=cadence(20,()=>this.broadcastPatch());
       }catch(e){admission.rooms.delete(this);this.sim?.dispose();throw e;}

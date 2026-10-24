@@ -1,0 +1,90 @@
+{
+  "before": [
+    {
+      "id": "zeTBhiel8",
+      "text": "Вы",
+      "labelBackground": [
+        255,
+        226,
+        156
+      ],
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "DS5lkk55L",
+      "text": "Друг 1",
+      "labelBackground": [
+        157,
+        223,
+        255
+      ],
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "NQvXz7usA",
+      "text": "Друг 2",
+      "labelBackground": [
+        201,
+        244,
+        156
+      ],
+      "bodyColor": "ffffff"
+    }
+  ],
+  "middle": [
+    {
+      "id": "zeTBhiel8",
+      "text": "Вы",
+      "labelBackground": [
+        255,
+        226,
+        156
+      ],
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "NQvXz7usA",
+      "text": "Друг 2",
+      "labelBackground": [
+        201,
+        244,
+        156
+      ],
+      "bodyColor": "ffffff"
+    }
+  ],
+  "after": [
+    {
+      "id": "zeTBhiel8",
+      "text": "Вы",
+      "labelBackground": [
+        255,
+        226,
+        156
+      ],
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "NQvXz7usA",
+      "text": "Друг 2",
+      "labelBackground": [
+        201,
+        244,
+        156
+      ],
+      "bodyColor": "ffffff"
+    },
+    {
+      "id": "bctghB4lh",
+      "text": "Друг 1",
+      "labelBackground": [
+        157,
+        223,
+        255
+      ],
+      "bodyColor": "ffffff"
+    }
+  ],
+  "errors": [],
+  "defect": false
+}

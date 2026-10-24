@@ -1,0 +1,33 @@
+{
+  "base": "6fe6491cb21fed3db45e50dbf3a7147e6fa557c3",
+  "files": [
+    {
+      "file": "src/multiplayer/game.js",
+      "sha256": "2388db89f0431918a1717523af6a5e42bda4188e5382b447cf788a18abe4eaea"
+    },
+    {
+      "file": "src/multiplayer/room-client.js",
+      "sha256": "1187718f8fa95e2247bec58cb23f8e3265b2d53610e7a07fd52bce07e10bf9e5"
+    },
+    {
+      "file": "src/multiplayer/transfers.js",
+      "sha256": "3ebf2d7b4998e6944d5e746acf045aaba1b0f442b286383dbdb7452f26640334"
+    },
+    {
+      "file": "src/multiplayer/style.css",
+      "sha256": "93b45670ab8195fabc5ac51696fd7a19c9e1905abf17a351f8cb65f924bdb8b0"
+    },
+    {
+      "file": "src/multiplayer/hud.js",
+      "sha256": "3eb973f0759489dba92743ce1d20eb9325c748e99c78c4cdb84619ec2c402fb4"
+    },
+    {
+      "file": "tests/multiplayer-client.test.js",
+      "sha256": "32bb9910010e5e6bbf864f2db7f835826c3a1bff7cd604b8be5e5823327c7abc"
+    },
+    {
+      "file": "tests/multiplayer-client-browser.cjs",
+      "sha256": "d8f8625b2598bf176a79b99df4f34cf39e2aa966f64cf3fd8673de717efed15f"
+    }
+  ]
+}

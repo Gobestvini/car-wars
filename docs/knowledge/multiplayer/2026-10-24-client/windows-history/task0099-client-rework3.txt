@@ -1,0 +1,79 @@
+TAP version 13
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Subtest: cancel before SDK admission rejects promptly and closes a late room without presentation
+ok 1 - cancel before SDK admission rejects promptly and closes a late room without presentation
+  ---
+  duration_ms: 13.817
+  type: 'test'
+  ...
+# Subtest: cancel map loading suppresses stale map-ready; retry has one session and neutral leave
+ok 2 - cancel map loading suppresses stale map-ready; retry has one session and neutral leave
+  ---
+  duration_ms: 2473.2153
+  type: 'test'
+  ...
+# Subtest: overlapping connection attempts never replace a newer connection
+ok 3 - overlapping connection attempts never replace a newer connection
+  ---
+  duration_ms: 38.822
+  type: 'test'
+  ...
+# Subtest: full/version/offline phases keep retry possible
+ok 4 - full/version/offline phases keep retry possible
+  ---
+  duration_ms: 0.5006
+  type: 'test'
+  ...
+# Subtest: local wanted/arrest HUD and bounded event history never borrow another player state
+ok 5 - local wanted/arrest HUD and bounded event history never borrow another player state
+  ---
+  duration_ms: 0.7888
+  type: 'test'
+  ...
+# [Colyseus reconnection]: ⏳ will retry in 1.0 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId 'E8RGqSJKU' with roomId 'nuTksc0Vd'... (attempt 1 of 15)
+# Subtest: cancel reconnect retires a scheduled SDK retry and a connecting socket
+ok 6 - cancel reconnect retires a scheduled SDK retry and a connecting socket
+  ---
+  duration_ms: 2645.1306
+  type: 'test'
+  ...
+# Subtest: old snapshot failure cannot overwrite the phase or status of a fresh room
+ok 7 - old snapshot failure cannot overwrite the phase or status of a fresh room
+  ---
+  duration_ms: 1737.3634
+  type: 'test'
+  ...
+# [Colyseus reconnection]: ⏳ will retry in 0.1 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId 'g83zcJ31B' with roomId 'LyepY0hhd'... (attempt 1 of 15)
+# [Colyseus reconnection]: ✅ reconnection successful!
+# [Colyseus reconnection]: ⏳ will retry in 0.1 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId 'g83zcJ31B' with roomId 'LyepY0hhd'... (attempt 1 of 15)
+# [Colyseus reconnection]: ✅ reconnection successful!
+# Subtest: an older async welcome cannot activate an obsolete map nonce after another drop
+ok 8 - an older async welcome cannot activate an obsolete map nonce after another drop
+  ---
+  duration_ms: 1803.5782
+  type: 'test'
+  ...
+# Subtest: three players keep distinct labels/backgrounds after a friend leaves and a fresh one joins
+ok 9 - three players keep distinct labels/backgrounds after a friend leaves and a fresh one joins
+  ---
+  duration_ms: 0.2951
+  type: 'test'
+  ...
+# Subtest: hosted cold create awaits a delayed map without premature patch/simulation callbacks
+ok 10 - hosted cold create awaits a delayed map without premature patch/simulation callbacks
+  ---
+  duration_ms: 939.3141
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 18948.123

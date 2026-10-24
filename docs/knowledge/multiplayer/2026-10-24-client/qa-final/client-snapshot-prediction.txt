@@ -1,0 +1,149 @@
+TAP version 13
+# @colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+# Subtest: cancel before SDK admission rejects promptly and closes a late room without presentation
+ok 1 - cancel before SDK admission rejects promptly and closes a late room without presentation
+  ---
+  duration_ms: 17.2009
+  type: 'test'
+  ...
+# Subtest: cancel map loading suppresses stale map-ready; retry has one session and neutral leave
+ok 2 - cancel map loading suppresses stale map-ready; retry has one session and neutral leave
+  ---
+  duration_ms: 8511.158
+  type: 'test'
+  ...
+# Subtest: overlapping connection attempts never replace a newer connection
+ok 3 - overlapping connection attempts never replace a newer connection
+  ---
+  duration_ms: 189.9859
+  type: 'test'
+  ...
+# Subtest: full/version/offline phases keep retry possible
+ok 4 - full/version/offline phases keep retry possible
+  ---
+  duration_ms: 0.5405
+  type: 'test'
+  ...
+# Subtest: local wanted/arrest HUD and bounded event history never borrow another player state
+ok 5 - local wanted/arrest HUD and bounded event history never borrow another player state
+  ---
+  duration_ms: 0.3498
+  type: 'test'
+  ...
+# [Colyseus reconnection]: ⏳ will retry in 1.0 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId '3PclNrW6x' with roomId 'MXESvI9tz'... (attempt 1 of 15)
+# Subtest: cancel reconnect retires a scheduled SDK retry and a connecting socket
+ok 6 - cancel reconnect retires a scheduled SDK retry and a connecting socket
+  ---
+  duration_ms: 5550.2333
+  type: 'test'
+  ...
+# Subtest: old snapshot failure cannot overwrite the phase or status of a fresh room
+ok 7 - old snapshot failure cannot overwrite the phase or status of a fresh room
+  ---
+  duration_ms: 3367.5738
+  type: 'test'
+  ...
+# [Colyseus reconnection]: ⏳ will retry in 0.1 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId 'hEAOFIMqh' with roomId 'QNtoYBlDd'... (attempt 1 of 15)
+# [Colyseus reconnection]: ✅ reconnection successful!
+# [Colyseus reconnection]: ⏳ will retry in 0.1 seconds...
+# [Colyseus reconnection]: 🔄 Re-establishing sessionId 'hEAOFIMqh' with roomId 'QNtoYBlDd'... (attempt 1 of 15)
+# [Colyseus reconnection]: ✅ reconnection successful!
+# Subtest: an older async welcome cannot activate an obsolete map nonce after another drop
+ok 8 - an older async welcome cannot activate an obsolete map nonce after another drop
+  ---
+  duration_ms: 3116.2167
+  type: 'test'
+  ...
+# {"rtt":0,"inputToSimulationMs":0,"playerContacts":749,"late":0,"total":609,"maxQueue":11,"corrections":[{"steps":1200,"replaySteps":88,"corrections":0,"maxCorrection":0,"maxReplay":11,"lateFrames":0,"replayMs":22.953300000001036,"confirmedPositionError":0.000008792727455411752,"skippedReconciliations":191},{"steps":1200,"replaySteps":88,"corrections":0,"maxCorrection":0,"maxReplay":11,"lateFrames":0,"replayMs":11.784600000002683,"confirmedPositionError":0.000008217512891125012,"skippedReconciliations":191},{"steps":1200,"replaySteps":88,"corrections":0,"maxCorrection":0,"maxReplay":11,"lateFrames":0,"replayMs":27.5645999999997,"confirmedPositionError":0.000010901505407552802,"skippedReconciliations":191}]}
+# {"rtt":50,"inputToSimulationMs":0,"playerContacts":881,"late":0,"total":609,"maxQueue":15,"corrections":[{"steps":1200,"replaySteps":143,"corrections":0,"maxCorrection":0,"maxReplay":21,"lateFrames":0,"replayMs":6.914699999999357,"confirmedPositionError":0.000004884645198857973,"skippedReconciliations":192},{"steps":1200,"replaySteps":143,"corrections":0,"maxCorrection":0,"maxReplay":21,"lateFrames":0,"replayMs":60.253999999998996,"confirmedPositionError":0.000004575143956702138,"skippedReconciliations":192},{"steps":1200,"replaySteps":143,"corrections":0,"maxCorrection":0,"maxReplay":21,"lateFrames":0,"replayMs":11.400999999998021,"confirmedPositionError":0.000010362247798125172,"skippedReconciliations":192}]}
+# {"rtt":100,"inputToSimulationMs":0,"playerContacts":734,"late":0,"total":609,"maxQueue":18,"corrections":[{"steps":1200,"replaySteps":220,"corrections":1,"maxCorrection":0.05831775685926501,"maxReplay":29,"lateFrames":0,"replayMs":10.054200000000492,"confirmedPositionError":0.00004775490901961217,"skippedReconciliations":190,"lastCorrection":0.05831775685926501},{"steps":1200,"replaySteps":220,"corrections":1,"maxCorrection":0.06215623664627553,"maxReplay":29,"lateFrames":0,"replayMs":18.40520000000288,"confirmedPositionError":0.00003451266408249726,"skippedReconciliations":190,"lastCorrection":0.06215623664627553},{"steps":1200,"replaySteps":220,"corrections":1,"maxCorrection":0.0402337654435566,"maxReplay":29,"lateFrames":0,"replayMs":11.691399999997884,"confirmedPositionError":0.000009119772534653475,"skippedReconciliations":190,"lastCorrection":0.0402337654435566}]}
+# {"rtt":150,"inputToSimulationMs":0,"playerContacts":892,"late":0,"total":609,"maxQueue":21,"corrections":[{"steps":1200,"replaySteps":269,"corrections":1,"maxCorrection":0.0734563455339937,"maxReplay":39,"lateFrames":0,"replayMs":28.473199999978533,"confirmedPositionError":0.000012666920793194104,"skippedReconciliations":191,"lastCorrection":0.0734563455339937},{"steps":1200,"replaySteps":269,"corrections":2,"maxCorrection":0.09028713391856295,"maxReplay":39,"lateFrames":0,"replayMs":4900.394199999995,"confirmedPositionError":0.00001278416815949221,"skippedReconciliations":191,"lastCorrection":0.07348899915590192},{"steps":1200,"replaySteps":269,"corrections":1,"maxCorrection":0.06166060655399954,"maxReplay":39,"lateFrames":0,"replayMs":7065.061500000011,"confirmedPositionError":0.000011763493075668197,"skippedReconciliations":191,"lastCorrection":0.06166060655399954}]}
+# Subtest: sparse contact cache preserves dense Cannon collision motion and damage
+ok 9 - sparse contact cache preserves dense Cannon collision motion and damage
+  ---
+  duration_ms: 1690.6618
+  type: 'test'
+  ...
+# Subtest: car restore/replay preserves suspension force inputs and motion, including contact-cache rewind
+ok 10 - car restore/replay preserves suspension force inputs and motion, including contact-cache rewind
+  ---
+  duration_ms: 189.8829
+  type: 'test'
+  ...
+# Subtest: streamed prediction colliders retain full-city contacts within reconciliation tolerance between regions
+ok 11 - streamed prediction colliders retain full-city contacts within reconciliation tolerance between regions
+  ---
+  duration_ms: 6217.4587
+  type: 'test'
+  ...
+# Subtest: three predicted players at simulated RTT 0ms steer immediately and share physical impacts
+ok 12 - three predicted players at simulated RTT 0ms steer immediately and share physical impacts
+  ---
+  duration_ms: 2431.786
+  type: 'test'
+  ...
+# Subtest: three predicted players at simulated RTT 50ms steer immediately and share physical impacts
+ok 13 - three predicted players at simulated RTT 50ms steer immediately and share physical impacts
+  ---
+  duration_ms: 4784.8791
+  type: 'test'
+  ...
+# Subtest: three predicted players at simulated RTT 100ms steer immediately and share physical impacts
+ok 14 - three predicted players at simulated RTT 100ms steer immediately and share physical impacts
+  ---
+  duration_ms: 30327.7547
+  type: 'test'
+  ...
+# Subtest: three predicted players at simulated RTT 150ms steer immediately and share physical impacts
+ok 15 - three predicted players at simulated RTT 150ms steer immediately and share physical impacts
+  ---
+  duration_ms: 64839.2072
+  type: 'test'
+  ...
+# Subtest: prediction commands cannot choose dt, poses, invalid generations, unbounded queues or old respawn state
+ok 16 - prediction commands cannot choose dt, poses, invalid generations, unbounded queues or old respawn state
+  ---
+  duration_ms: 195.5518
+  type: 'test'
+  ...
+# Subtest: online snapshots copy Schema values and interpolate positions and wheels
+ok 17 - online snapshots copy Schema values and interpolate positions and wheels
+  ---
+  duration_ms: 1.1005
+  type: 'test'
+  ...
+# Subtest: presentation bounds extrapolation, freezes stale state and rejects older ticks
+ok 18 - presentation bounds extrapolation, freezes stale state and rejects older ticks
+  ---
+  duration_ms: 1.6531
+  type: 'test'
+  ...
+# Subtest: respawn generations snap immediately and deleted actors do not linger
+ok 19 - respawn generations snap immediately and deleted actors do not linger
+  ---
+  duration_ms: 0.6536
+  type: 'test'
+  ...
+# Subtest: quaternions follow shortest arc, including opposite representations
+ok 20 - quaternions follow shortest arc, including opposite representations
+  ---
+  duration_ms: 0.1103
+  type: 'test'
+  ...
+# Subtest: online handbrake extends the input whitelist without allowing authority fields
+ok 21 - online handbrake extends the input whitelist without allowing authority fields
+  ---
+  duration_ms: 0.2426
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 140093.8792

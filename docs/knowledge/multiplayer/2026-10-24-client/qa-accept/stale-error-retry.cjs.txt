@@ -1,0 +1,12 @@
+@colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+Port 5173 is in use, trying another one...
+{
+  oldRoomId: 'S7dwYPJTN',
+  newRoomId: 'mSxedn7_h',
+  beforePhase: 'playing',
+  afterPhase: 'playing',
+  ready: true,
+  active: true,
+  message: 'Комната готова. Отправьте ссылку друзьям.',
+  defect: false
+}

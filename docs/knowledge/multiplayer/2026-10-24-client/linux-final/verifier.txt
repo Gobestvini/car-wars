@@ -1,0 +1,19 @@
+rm 'node_modules'
+rm 'tools/multiplayer-spike/node_modules'
+Проверки не прошли: not ok 140 - real map-ready gate, loading timeout, version rejection and atomic last-seat race
+  ---
+  duration_ms: 9703.504655
+  type: 'test'
+  location: '/work/tests/multiplayer-room.test.js:5:1'
+  failureType: 'testCodeFailure'
+  error: 'Room fixture timeout'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    until (file:///work/tests/helpers/hosted-room.mjs:13:116)
+    async attach (file:///work/tests/helpers/hosted-room.mjs:30:22)
+    async TestContext.<anonymous> (file:///work/tests/multiplayer-room.test.js:9:13)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+
+Полные журналы: .check-logs/

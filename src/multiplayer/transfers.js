@@ -3,12 +3,12 @@ import { ROOM_LIMITS } from './protocol.js';
 // Exactly one bounded transfer per socket; TCP preserves order. No partial DTO is applied.
 export function listenSnapshots(room,{welcome=()=>{},full=()=>{},error=()=>{}}={}){
   let active=null;
-  room.onMessage('transfer-start',header=>{
+  const removeStart=room.onMessage('transfer-start',header=>{
     if(!header || !Number.isSafeInteger(header.id) || !['welcome','full'].includes(header.kind) ||
       !Number.isSafeInteger(header.bytes) || header.bytes<1 || header.bytes>ROOM_LIMITS.transferBytes){active=null;error(Error('Invalid snapshot transfer'));return;}
     active={...header,buffer:new Uint8Array(header.bytes),offset:0,index:0,started:performance.now()};
   });
-  room.onMessage('transfer-chunk',bytes=>{
+  const removeChunk=room.onMessage('transfer-chunk',bytes=>{
     try{
       const data=bytes instanceof Uint8Array?bytes:new Uint8Array(bytes),a=active;
       if(!a||data.length<9||data.length>ROOM_LIMITS.chunkBytes+8||performance.now()-a.started>10000)throw Error('Invalid snapshot chunk');
@@ -19,5 +19,7 @@ export function listenSnapshots(room,{welcome=()=>{},full=()=>{},error=()=>{}}={
         Promise.resolve((a.kind==='welcome'?welcome:full)(dto)).catch(error);}
     }catch(e){active=null;error(e);}
   });
-  return ()=>{active=null;};
+  const clear=()=>{active=null;};
+  clear.dispose=()=>{clear();removeStart();removeChunk();};
+  return clear;
 }

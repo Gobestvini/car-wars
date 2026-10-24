@@ -1,0 +1,26 @@
+@colyseus/schema: defineTypes() is deprecated and will be removed in a future release. Use schema() with t.* field builders instead → https://docs.colyseus.io/state/schema
+2026-10-23T22:40:18.091Z boot
+2026-10-23T22:40:18.595Z page 1
+2026-10-23T22:40:18.602Z goto 1
+2026-10-23T22:40:19.499Z ready page 1
+2026-10-23T22:40:19.580Z page 2
+2026-10-23T22:40:19.583Z goto 2
+2026-10-23T22:40:19.933Z ready page 2
+2026-10-23T22:40:19.994Z page 3
+2026-10-23T22:40:19.995Z goto 3
+2026-10-23T22:40:20.216Z ready page 3
+2026-10-23T22:40:20.230Z connect
+2026-10-23T22:40:23.073Z drive
+2026-10-23T22:40:25.035Z collision
+2026-10-23T22:40:25.206Z player-ai
+2026-10-23T22:40:25.404Z repair-race
+2026-10-23T22:40:25.502Z props-latejoin
+2026-10-23T22:40:26.255Z signals
+2026-10-23T22:40:26.328Z page 4
+2026-10-23T22:40:26.329Z goto 4
+2026-10-23T22:40:26.583Z ready page 4
+2026-10-23T22:40:27.058Z wanted-arrest
+2026-10-23T22:40:34.715Z menu-camera-hidden
+2026-10-23T22:40:35.972Z reconnect
+2026-10-23T22:40:36.708Z cycles
+2026-10-23T22:40:46.120Z cancel-reconnect
